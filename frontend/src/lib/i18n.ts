@@ -21,6 +21,7 @@ export const FR = {
     closed: 'Connexion interrompue.',
     reconnect: 'Reconnecter',
     connecting: 'Connexion…',
+    reconnecting: 'Reconnexion…',
   },
 
   solo: {
@@ -127,6 +128,7 @@ export const EN: typeof FR = {
     closed: 'Connection closed.',
     reconnect: 'Reconnect',
     connecting: 'Connecting…',
+    reconnecting: 'Reconnecting…',
   },
 
   solo: {
@@ -233,6 +235,7 @@ export const ES: typeof FR = {
     closed: 'Conexión interrumpida.',
     reconnect: 'Reconectar',
     connecting: 'Conectando…',
+    reconnecting: 'Reconectando…',
   },
 
   solo: {
@@ -339,6 +342,7 @@ export const DE: typeof FR = {
     closed: 'Verbindung unterbrochen.',
     reconnect: 'Neu verbinden',
     connecting: 'Verbinde…',
+    reconnecting: 'Verbinde neu…',
   },
 
   solo: {
@@ -445,6 +449,7 @@ export const PT: typeof FR = {
     closed: 'Conexão interrompida.',
     reconnect: 'Reconectar',
     connecting: 'Conectando…',
+    reconnecting: 'Reconectando…',
   },
 
   solo: {

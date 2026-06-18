@@ -36,16 +36,23 @@
   let ws = $state<WebSocket | null>(null);
   let liveAnnouncement = $state('');
   let copyFeedback = $state('');
-  let wsError = $state('');
+  let isReconnecting = $state(false);
   let kicked = $state(false);
   let myVote = $state('');
+  let reconnectDelay = 1000;
+  let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+  let destroying = false;
 
   function connect(name: string, observer: boolean) {
     if (!browser) return;
     const url = `${PUBLIC_WS_URL}/rooms/${roomId}/ws?name=${encodeURIComponent(name)}&observer=${observer}`;
     const socket = new WebSocket(url);
 
-    socket.onopen = () => { wsError = ''; };
+    socket.onopen = () => {
+      isReconnecting = false;
+      reconnectDelay = 1000;
+      myVote = '';
+    };
 
     socket.onmessage = (event) => {
       const msg = JSON.parse(event.data);
@@ -66,24 +73,30 @@
       }
     };
 
-    socket.onerror = () => { wsError = T.connection.lost; };
-    socket.onclose = () => { if (joined && !kicked) wsError = T.connection.closed; };
+    socket.onerror = () => {};
+
+    socket.onclose = () => {
+      if (destroying || kicked || !joined) return;
+      isReconnecting = true;
+      reconnectTimer = setTimeout(() => {
+        reconnectDelay = Math.min(reconnectDelay * 2, 30000);
+        connect(name, observer);
+      }, reconnectDelay);
+    };
+
     ws = socket;
   }
 
   function send(type: string, payload: string = '') {
-    ws?.send(JSON.stringify({ type, payload }));
+    if (ws?.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ type, payload }));
+    }
   }
 
   function join() {
     if (!nameInput.trim()) return;
     myName = nameInput.trim();
     joined = true;
-    connect(myName, isObserver);
-  }
-
-  function reconnect() {
-    wsError = '';
     connect(myName, isObserver);
   }
 
@@ -110,7 +123,11 @@
   const me = $derived(roomState?.players.find(p => p.id === myId));
   const isSolo = $derived(roomState !== null && roomState.players.length === 1);
 
-  onDestroy(() => ws?.close());
+  onDestroy(() => {
+    destroying = true;
+    if (reconnectTimer) clearTimeout(reconnectTimer);
+    ws?.close();
+  });
 </script>
 
 <svelte:head>
@@ -169,17 +186,15 @@
         </form>
       </section>
 
-    {:else if wsError}
-      <div class="error-state" role="alert">
-        <p class="error">{wsError}</p>
-        <button class="btn btn-secondary" onclick={reconnect}>{T.connection.reconnect}</button>
-      </div>
-
     {:else if !roomState}
-      <p aria-live="polite">{T.connection.connecting}</p>
+      <p aria-live="polite">{isReconnecting ? T.connection.reconnecting : T.connection.connecting}</p>
 
     {:else}
       <h1 class="sr-only">{T.salleLabel} {roomId}</h1>
+
+      {#if isReconnecting}
+        <div class="reconnecting-banner" role="status">{T.connection.reconnecting}</div>
+      {/if}
 
       {#if isSolo}
         <div class="solo-hint" role="status">
@@ -437,6 +452,17 @@
   }
   .panel h2 { font-size: 1rem; margin-bottom: 0.75rem; }
   .empty { font-size: 0.875rem; color: var(--color-text-muted); }
+
+  .reconnecting-banner {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
 
   .solo-hint {
     display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
