@@ -32,7 +32,7 @@ func createRoom(t *testing.T, srv *httptest.Server) string {
 	if err != nil {
 		t.Fatalf("POST /rooms: %v", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	var body struct {
 		ID string `json:"id"`
 	}
@@ -89,7 +89,7 @@ func TestHealth(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	if resp.StatusCode != http.StatusOK {
 		t.Fatalf("expected 200, got %d", resp.StatusCode)
 	}
@@ -112,7 +112,7 @@ func TestCreateRoom_CustomCards(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	var body struct {
 		ID string `json:"id"`
 	}
@@ -133,7 +133,7 @@ func TestWebSocket_NameRequired(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	if resp.StatusCode != http.StatusBadRequest {
 		t.Fatalf("expected 400, got %d", resp.StatusCode)
 	}
