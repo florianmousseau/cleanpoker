@@ -7,12 +7,35 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/florianmousseau/cleanpoker/internal/room"
 	_ "modernc.org/sqlite" // registers the SQLite driver with database/sql
 )
 
 type DB struct {
 	sql *sql.DB
+}
+
+type RoomRecord struct {
+	ID       string
+	Cards    []string
+	State    string
+	Round    int
+	Results  *RecordResults
+	Activity []RecordActivity
+}
+
+type RecordResults struct {
+	Avg  string         `json:"avg"`
+	Mode string         `json:"mode"`
+	Min  string         `json:"min"`
+	Max  string         `json:"max"`
+	Dist map[string]int `json:"dist"`
+}
+
+type RecordActivity struct {
+	Timestamp string `json:"timestamp"`
+	Initiator string `json:"initiator"`
+	Message   string `json:"message"`
+	Target    string `json:"target,omitempty"`
 }
 
 func Open(path string) (*DB, error) {
@@ -44,18 +67,18 @@ func (d *DB) init() error {
 	return err
 }
 
-func (d *DB) Save(snap room.Snapshot) error {
-	cards, err := json.Marshal(snap.Cards)
+func (d *DB) Save(rec RoomRecord) error {
+	cards, err := json.Marshal(rec.Cards)
 	if err != nil {
 		return err
 	}
-	activity, err := json.Marshal(snap.Activity)
+	activity, err := json.Marshal(rec.Activity)
 	if err != nil {
 		return err
 	}
 	var results interface{}
-	if snap.Results != nil {
-		b, err := json.Marshal(snap.Results)
+	if rec.Results != nil {
+		b, err := json.Marshal(rec.Results)
 		if err != nil {
 			return err
 		}
@@ -64,13 +87,13 @@ func (d *DB) Save(snap room.Snapshot) error {
 	_, err = d.sql.Exec(
 		`INSERT OR REPLACE INTO rooms (id, cards, state, round, results, activity, last_activity)
 		 VALUES (?, ?, ?, ?, ?, ?, ?)`,
-		snap.ID, string(cards), string(snap.State), snap.Round,
+		rec.ID, string(cards), rec.State, rec.Round,
 		results, string(activity), time.Now().Unix(),
 	)
 	return err
 }
 
-func (d *DB) LoadAll() ([]room.Snapshot, error) {
+func (d *DB) LoadAll() ([]RoomRecord, error) {
 	rows, err := d.sql.Query(
 		`SELECT id, cards, state, round, results, activity FROM rooms`,
 	)
@@ -79,38 +102,33 @@ func (d *DB) LoadAll() ([]room.Snapshot, error) {
 	}
 	defer func() { _ = rows.Close() }()
 
-	var snaps []room.Snapshot
+	var records []RoomRecord
 	for rows.Next() {
-		var snap room.Snapshot
+		var rec RoomRecord
 		var cardsJSON, activityJSON, stateStr string
 		var resultsJSON sql.NullString
-		if err := rows.Scan(&snap.ID, &cardsJSON, &stateStr, &snap.Round, &resultsJSON, &activityJSON); err != nil {
+		if err := rows.Scan(&rec.ID, &cardsJSON, &stateStr, &rec.Round, &resultsJSON, &activityJSON); err != nil {
 			return nil, err
 		}
-		snap.State = room.State(stateStr)
-		if err := json.Unmarshal([]byte(cardsJSON), &snap.Cards); err != nil {
+		rec.State = stateStr
+		if err := json.Unmarshal([]byte(cardsJSON), &rec.Cards); err != nil {
 			return nil, err
 		}
-		if err := json.Unmarshal([]byte(activityJSON), &snap.Activity); err != nil {
+		if err := json.Unmarshal([]byte(activityJSON), &rec.Activity); err != nil {
 			return nil, err
 		}
-		if snap.Activity == nil {
-			snap.Activity = []room.ActivityEntry{}
+		if rec.Activity == nil {
+			rec.Activity = []RecordActivity{}
 		}
 		if resultsJSON.Valid {
-			snap.Results = &room.Results{}
-			if err := json.Unmarshal([]byte(resultsJSON.String), snap.Results); err != nil {
+			rec.Results = &RecordResults{}
+			if err := json.Unmarshal([]byte(resultsJSON.String), rec.Results); err != nil {
 				return nil, err
 			}
 		}
-		snaps = append(snaps, snap)
+		records = append(records, rec)
 	}
-	return snaps, rows.Err()
-}
-
-func (d *DB) Delete(id string) error {
-	_, err := d.sql.Exec(`DELETE FROM rooms WHERE id = ?`, id)
-	return err
+	return records, rows.Err()
 }
 
 func (d *DB) Cleanup(maxAge time.Duration) error {

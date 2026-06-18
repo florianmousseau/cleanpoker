@@ -1,10 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Browser } from '@playwright/test';
 
 function uid() {
-  return `e2e-multi-${Math.random().toString(36).slice(2, 10)}`;
+  return `e2e-multi-${crypto.randomUUID().slice(0, 8)}`; // NOSONAR
 }
 
-test('two players see each other after joining', async ({ browser }) => {
+async function joinTwoPlayers(browser: Browser) {
   const id = uid();
   const ctx1 = await browser.newContext();
   const ctx2 = await browser.newContext();
@@ -14,11 +14,18 @@ test('two players see each other after joining', async ({ browser }) => {
   await p1.goto(`/${id}`);
   await p1.locator('#name-input').fill('Alice');
   await p1.getByTestId('join-btn').click();
-  await expect(p1.getByTestId('cards-list')).toBeVisible();
 
   await p2.goto(`/${id}`);
   await p2.locator('#name-input').fill('Bob');
   await p2.getByTestId('join-btn').click();
+
+  return { ctx1, ctx2, p1, p2 };
+}
+
+test('two players see each other after joining', async ({ browser }) => {
+  const { ctx1, ctx2, p1, p2 } = await joinTwoPlayers(browser);
+
+  await expect(p1.getByTestId('cards-list')).toBeVisible();
   await expect(p2.getByTestId('cards-list')).toBeVisible();
 
   await expect(p1.locator('td.player-name-cell', { hasText: 'Bob' })).toBeVisible({ timeout: 5000 });
@@ -29,25 +36,13 @@ test('two players see each other after joining', async ({ browser }) => {
 });
 
 test('reveal disabled until all players voted', async ({ browser }) => {
-  const id = uid();
-  const ctx1 = await browser.newContext();
-  const ctx2 = await browser.newContext();
-  const p1 = await ctx1.newPage();
-  const p2 = await ctx2.newPage();
+  const { ctx1, ctx2, p1, p2 } = await joinTwoPlayers(browser);
 
-  await p1.goto(`/${id}`);
-  await p1.locator('#name-input').fill('Alice');
-  await p1.getByTestId('join-btn').click();
-
-  await p2.goto(`/${id}`);
-  await p2.locator('#name-input').fill('Bob');
-  await p2.getByTestId('join-btn').click();
-
-  // Alice votes, Bob hasn't — reveal still disabled
+  // Alice votes, Bob hasn't - reveal still disabled
   await p1.getByTestId('cards-list').getByRole('button').first().click();
   await expect(p1.getByTestId('reveal-btn')).toBeDisabled({ timeout: 3000 });
 
-  // Bob votes — reveal enabled for both
+  // Bob votes - reveal enabled for both
   await p2.getByTestId('cards-list').getByRole('button').nth(1).click();
   await expect(p1.getByTestId('reveal-btn')).toBeEnabled({ timeout: 5000 });
   await expect(p2.getByTestId('reveal-btn')).toBeEnabled({ timeout: 5000 });
@@ -57,19 +52,7 @@ test('reveal disabled until all players voted', async ({ browser }) => {
 });
 
 test('full round: two players vote, reveal, new round', async ({ browser }) => {
-  const id = uid();
-  const ctx1 = await browser.newContext();
-  const ctx2 = await browser.newContext();
-  const p1 = await ctx1.newPage();
-  const p2 = await ctx2.newPage();
-
-  await p1.goto(`/${id}`);
-  await p1.locator('#name-input').fill('Alice');
-  await p1.getByTestId('join-btn').click();
-
-  await p2.goto(`/${id}`);
-  await p2.locator('#name-input').fill('Bob');
-  await p2.getByTestId('join-btn').click();
+  const { ctx1, ctx2, p1, p2 } = await joinTwoPlayers(browser);
 
   await p1.getByTestId('cards-list').getByRole('button').first().click();
   await p2.getByTestId('cards-list').getByRole('button').nth(2).click();

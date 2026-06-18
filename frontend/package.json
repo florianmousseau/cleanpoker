@@ -8,20 +8,39 @@
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "lint": "eslint src/",
+    "size": "size-limit",
     "gen-og": "node -e \"const {Resvg}=require('@resvg/resvg-js'),fs=require('fs');const r=new Resvg(fs.readFileSync('static/og-image.svg','utf-8'),{width:1200,height:630});fs.writeFileSync('static/og-image.png',r.render().asPng());console.log('done')\"",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },
+  "size-limit": [
+    {
+      "name": "Entry JS (critical path)",
+      "path": ".svelte-kit/cloudflare/_app/immutable/entry/*.js",
+      "brotli": true,
+      "gzip": false,
+      "limit": "15 KB"
+    },
+    {
+      "name": "Total JS",
+      "path": ".svelte-kit/cloudflare/_app/immutable/**/*.js",
+      "brotli": true,
+      "gzip": false,
+      "limit": "65 KB"
+    }
+  ],
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.61.0",
     "@resvg/resvg-js": "^2.6.2",
+    "@size-limit/file": "^12.1.0",
     "@sveltejs/adapter-cloudflare": "^4.7.2",
     "@sveltejs/kit": "^2.16.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.0",
     "eslint": "^10.5.0",
     "eslint-plugin-svelte": "^3.19.0",
     "globals": "^17.6.0",
+    "size-limit": "^12.1.0",
     "svelte": "^5.0.0",
     "svelte-check": "^4.0.0",
     "svelte-eslint-parser": "^1.8.0",

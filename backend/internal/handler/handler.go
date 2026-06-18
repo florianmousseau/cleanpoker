@@ -26,14 +26,8 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 		var body struct {
 			Cards []string `json:"cards"`
 		}
-		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
-			body.Cards = room.DefaultCards
-		}
-		if len(body.Cards) == 0 {
-			body.Cards = room.DefaultCards
-		}
-		id := uuid.New().String()[:8]
-		s.GetOrCreate(id, body.Cards)
+		_ = json.NewDecoder(r.Body).Decode(&body)
+		id := s.Create(body.Cards)
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(map[string]string{"id": id}); err != nil {
 			log.Printf("warn: encode response: %v", err)
