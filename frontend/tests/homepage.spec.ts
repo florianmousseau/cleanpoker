@@ -16,6 +16,7 @@ test('fibonacci preset fills correct cards', async ({ page }) => {
 
 test('t-shirt preset fills correct cards', async ({ page }) => {
   await page.goto('/en');
+  await page.waitForLoadState('networkidle');
   const btn = page.getByRole('button', { name: 'T-shirt' });
   await btn.click();
   await expect(btn).toHaveAttribute('aria-pressed', 'true');
