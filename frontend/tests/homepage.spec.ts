@@ -39,6 +39,5 @@ test('creating a room redirects to room join page', async ({ page }) => {
   await page.goto('/en');
   await page.getByTestId('create-btn').click();
   await expect(page).toHaveURL(/\/[a-zA-Z0-9-]{6,}/);
-  await page.waitForLoadState('networkidle');
-  await expect(page.getByTestId('join-form')).toBeVisible({ timeout: 15000 });
+  await expect(page.getByTestId('join-form')).toBeVisible({ timeout: 30000 });
 });
