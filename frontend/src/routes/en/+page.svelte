@@ -145,7 +145,7 @@
         <p class="error" role="alert">{error}</p>
       {/if}
 
-      <button type="submit" class="btn btn-primary btn-lg" disabled={creating || !isValid}>
+      <button type="submit" class="btn btn-primary btn-lg" disabled={creating || !isValid} data-testid="create-btn">
         {creating ? 'Creating…' : 'Create a session'}
       </button>
       <p class="hint">Share the link. That&apos;s it.</p>
