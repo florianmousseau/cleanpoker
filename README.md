@@ -9,17 +9,13 @@
 **[→ Try it at cleanpoker.dev](https://cleanpoker.dev)**
 
 [![CI](https://github.com/florianmousseau/cleanpoker/actions/workflows/deploy.yml/badge.svg)](https://github.com/florianmousseau/cleanpoker/actions/workflows/deploy.yml)
-[![CodeQL](https://github.com/florianmousseau/cleanpoker/actions/workflows/codeql.yml/badge.svg)](https://github.com/florianmousseau/cleanpoker/actions/workflows/codeql.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=florianmousseau_cleanpoker&metric=alert_status)](https://sonarcloud.io/project/overview?id=florianmousseau_cleanpoker)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=florianmousseau_cleanpoker&metric=bugs)](https://sonarcloud.io/project/overview?id=florianmousseau_cleanpoker)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=florianmousseau_cleanpoker&metric=vulnerabilities)](https://sonarcloud.io/project/overview?id=florianmousseau_cleanpoker)
 [![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 [![Accessibility](https://img.shields.io/badge/Lighthouse%20accessibility-100-brightgreen)](https://cleanpoker.dev)
 [![WCAG 2.1 AA](https://img.shields.io/badge/WCAG-2.1%20AA-green)](https://cleanpoker.dev/accessibilite)
 [![Trackers](https://img.shields.io/badge/trackers-0-brightgreen)](https://cleanpoker.dev)
 [![Website Carbon](https://img.shields.io/badge/CO₂-A%2B-brightgreen?logo=leaf)](https://www.websitecarbon.com/website/cleanpoker-dev/)
-[![Green hosting](https://img.shields.io/badge/hosting-green%20energy-brightgreen)](https://www.thegreenwebfoundation.org/)
 [![Languages](https://img.shields.io/badge/languages-FR%20%7C%20EN%20%7C%20ES%20%7C%20DE%20%7C%20PT-blue)](https://cleanpoker.dev)
 
 </div>
