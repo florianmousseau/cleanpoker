@@ -13,20 +13,21 @@ jobs:
     steps:
       - name: Start energy measurement
         uses: green-coding-solutions/eco-ci-energy-estimation@a2305b330063eddbf6fd758bb5a335a87c65d804 # v4
+        continue-on-error: true
         with:
           task: start-measurement
           label: quality
 
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
+      - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: stable
 
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@55c2c1448f86e01eaae002a5a3a9624417608d84 # v6
+        uses: golangci/golangci-lint-action@82606bf257cbaff209d206a39f5134f0cfbfd2ee # v9.2.1
         with:
           working-directory: backend
 
@@ -63,6 +64,7 @@ jobs:
 
       - name: Show energy results
         uses: green-coding-solutions/eco-ci-energy-estimation@a2305b330063eddbf6fd758bb5a335a87c65d804 # v4
+        continue-on-error: true
         with:
           task: display-results
 
@@ -72,7 +74,7 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -104,7 +106,7 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - uses: superfly/flyctl-actions/setup-flyctl@ed8efb33836e8b2096c7fd3ba1c8afe303ebbff1 # master
         name: Setup flyctl
@@ -121,7 +123,7 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Wait for Cloudflare Pages propagation
         run: sleep 45
@@ -129,7 +131,8 @@ jobs:
       - name: Lighthouse audit
         uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # v12
         with:
-          configPath: .lighthouserc.json
+          urls: |
+            https://cleanpoker.dev
+            https://cleanpoker.dev/en
           uploadArtifacts: true
           temporaryPublicStorage: true
-          githubToken: ${{ secrets.GITHUB_TOKEN }}

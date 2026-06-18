@@ -1,0 +1,9 @@
+.git
+.gitignore
+.golangci.yml
+*.md
+*.out
+*.db
+.env
+.env.*
+data/
