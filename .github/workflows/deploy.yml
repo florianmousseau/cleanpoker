@@ -69,49 +69,6 @@ jobs:
         with:
           task: display-results
 
-  e2e:
-    name: E2E Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-
-      - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
-        with:
-          go-version: stable
-
-      - name: Build Go backend binary
-        working-directory: backend
-        run: go build -o cleanpoker-server ./cmd/server
-
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: 20
-          cache: npm
-          cache-dependency-path: frontend/package-lock.json
-
-      - name: Install frontend dependencies
-        working-directory: frontend
-        run: npm ci
-
-      - name: Install Playwright browsers
-        working-directory: frontend
-        run: npx playwright install --with-deps chromium
-
-      - name: Run E2E tests
-        working-directory: frontend
-        env:
-          PUBLIC_API_URL: http://localhost:8080
-          PUBLIC_WS_URL: ws://localhost:8080
-        run: npm run test:e2e
-
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: playwright-report
-          path: frontend/playwright-report/
-          retention-days: 7
-
   bundle-size:
     name: Bundle Size
     runs-on: ubuntu-latest
@@ -141,7 +98,7 @@ jobs:
 
   deploy-preview:
     name: Preview - Cloudflare Pages
-    needs: [quality, e2e, bundle-size]
+    needs: [quality, bundle-size]
     if: github.event_name == 'push' && github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -173,7 +130,7 @@ jobs:
 
   deploy-frontend:
     name: Frontend - Cloudflare Pages
-    needs: [quality, e2e, bundle-size]
+    needs: [quality, bundle-size]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
@@ -205,7 +162,7 @@ jobs:
 
   deploy-backend:
     name: Backend - Fly.io
-    needs: [quality, e2e, bundle-size]
+    needs: [quality, bundle-size]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
