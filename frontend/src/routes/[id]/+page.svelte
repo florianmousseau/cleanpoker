@@ -219,7 +219,7 @@
             </p>
           </div>
           <ul class="cards-list" role="list" aria-label={T.cards.title}>
-            {#each roomState.cards as card}
+            {#each roomState.cards as card (card)}
               <li>
                 <button
                   class="poker-card"
@@ -268,7 +268,7 @@
               </div>
             {/if}
             <div class="dist">
-              {#each Object.entries(roomState.results.dist).sort((a,b) => b[1]-a[1]) as [val, count]}
+              {#each Object.entries(roomState.results.dist).sort((a,b) => b[1]-a[1]) as [val, count] (val)}
                 <div class="dist-row">
                   <span class="dist-val">{val}</span>
                   <div class="dist-bar-wrap">
@@ -399,7 +399,7 @@
                 </tr>
               </thead>
               <tbody>
-                {#each [...roomState.activity].reverse() as entry}
+                {#each [...roomState.activity].reverse() as entry, i (i)}
                   <tr>
                     <td class="log-time">{entry.timestamp}</td>
                     <td>{entry.initiator}</td>

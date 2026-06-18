@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/florianmousseau/cleanpoker/internal/room"
-	_ "modernc.org/sqlite"
+	_ "modernc.org/sqlite" // registers the SQLite driver with database/sql
 )
 
 type DB struct {
@@ -45,14 +45,23 @@ func (d *DB) init() error {
 }
 
 func (d *DB) Save(snap room.Snapshot) error {
-	cards, _ := json.Marshal(snap.Cards)
-	activity, _ := json.Marshal(snap.Activity)
+	cards, err := json.Marshal(snap.Cards)
+	if err != nil {
+		return err
+	}
+	activity, err := json.Marshal(snap.Activity)
+	if err != nil {
+		return err
+	}
 	var results interface{}
 	if snap.Results != nil {
-		b, _ := json.Marshal(snap.Results)
+		b, err := json.Marshal(snap.Results)
+		if err != nil {
+			return err
+		}
 		results = string(b)
 	}
-	_, err := d.sql.Exec(
+	_, err = d.sql.Exec(
 		`INSERT OR REPLACE INTO rooms (id, cards, state, round, results, activity, last_activity)
 		 VALUES (?, ?, ?, ?, ?, ?, ?)`,
 		snap.ID, string(cards), string(snap.State), snap.Round,
@@ -68,7 +77,7 @@ func (d *DB) LoadAll() ([]room.Snapshot, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
+	defer func() { _ = rows.Close() }()
 
 	var snaps []room.Snapshot
 	for rows.Next() {
@@ -79,14 +88,20 @@ func (d *DB) LoadAll() ([]room.Snapshot, error) {
 			return nil, err
 		}
 		snap.State = room.State(stateStr)
-		json.Unmarshal([]byte(cardsJSON), &snap.Cards)
-		json.Unmarshal([]byte(activityJSON), &snap.Activity)
+		if err := json.Unmarshal([]byte(cardsJSON), &snap.Cards); err != nil {
+			return nil, err
+		}
+		if err := json.Unmarshal([]byte(activityJSON), &snap.Activity); err != nil {
+			return nil, err
+		}
 		if snap.Activity == nil {
 			snap.Activity = []room.ActivityEntry{}
 		}
 		if resultsJSON.Valid {
 			snap.Results = &room.Results{}
-			json.Unmarshal([]byte(resultsJSON.String), snap.Results)
+			if err := json.Unmarshal([]byte(resultsJSON.String), snap.Results); err != nil {
+				return nil, err
+			}
 		}
 		snaps = append(snaps, snap)
 	}

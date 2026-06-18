@@ -1,13 +1,15 @@
 import type { Handle } from '@sveltejs/kit';
 
-export const handle: Handle = async ({ event, resolve }) => {
-  const path = event.url.pathname;
-  const lang =
-    path.startsWith('/en') ? 'en' :
-    path.startsWith('/es') ? 'es' :
-    path.startsWith('/de') ? 'de' :
-    path.startsWith('/pt') ? 'pt' : 'fr';
+function detectLang(pathname: string): string {
+  if (pathname.startsWith('/en')) return 'en';
+  if (pathname.startsWith('/es')) return 'es';
+  if (pathname.startsWith('/de')) return 'de';
+  if (pathname.startsWith('/pt')) return 'pt';
+  return 'fr';
+}
 
+export const handle: Handle = async ({ event, resolve }) => {
+  const lang = detectLang(event.url.pathname);
   return resolve(event, {
     transformPageChunk: ({ html }) =>
       html.replace('<html lang="fr">', `<html lang="${lang}">`),
