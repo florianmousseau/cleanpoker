@@ -156,6 +156,7 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
       · <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
+      · <a href="/mentions-legales">Impressum</a>
     </p>
   </footer>
 </div>

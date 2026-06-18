@@ -102,6 +102,7 @@ export const FR = {
   footer: {
     source: 'Code source',
     license: 'Licence MIT',
+    legal: 'Mentions légales',
   },
 };
 
@@ -209,6 +210,7 @@ export const EN: typeof FR = {
   footer: {
     source: 'Source code',
     license: 'MIT License',
+    legal: 'Legal notice',
   },
 };
 
@@ -316,6 +318,7 @@ export const ES: typeof FR = {
   footer: {
     source: 'Código fuente',
     license: 'Licencia MIT',
+    legal: 'Aviso legal',
   },
 };
 
@@ -423,6 +426,7 @@ export const DE: typeof FR = {
   footer: {
     source: 'Quellcode',
     license: 'MIT-Lizenz',
+    legal: 'Impressum',
   },
 };
 
@@ -530,6 +534,7 @@ export const PT: typeof FR = {
   footer: {
     source: 'Código fonte',
     license: 'Licença MIT',
+    legal: 'Aviso legal',
   },
 };
 

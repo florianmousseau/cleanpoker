@@ -418,6 +418,7 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">{T.footer.source}</a>
       · <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">{T.footer.license}</a>
+      · <a href="/mentions-legales">{T.footer.legal}</a>
     </p>
   </footer>
 </div>
