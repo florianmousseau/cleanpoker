@@ -51,7 +51,7 @@
     </p>
 
     <h2>Date de mise à jour</h2>
-    <p>Cette déclaration a été établie en juin 2025.</p>
+    <p>Cette déclaration a été établie en juin 2026.</p>
   </main>
 
   <footer class="footer">
