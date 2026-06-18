@@ -1,4 +1,23 @@
-export const FR = {
+export interface Translation {
+  salleLabel: string;
+  tourLabel: string;
+  copyLink: string;
+  copied: string;
+  kicked: { title: string; back: string };
+  join: { title: string; label: string; observer: string; btn: string };
+  connection: { lost: string; closed: string; reconnect: string; connecting: string; reconnecting: string };
+  solo: { hint: string; invite: string };
+  cards: { title: string; revealedSub: string; votingHint: string; selectedSuffix: (v: string) => string; voteLabel: (c: string) => string };
+  controls: { title: string; clear: string; newRound: string; reveal: string; pending: (n: number) => string };
+  results: { title: string; avg: string; min: string; max: string; none: string };
+  participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string };
+  observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
+  activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
+  live: { newRound: (n: number) => string; revealed: string };
+  footer: { source: string; license: string; legal: string };
+}
+
+export const FR: Translation = {
   salleLabel: 'Salle',
   tourLabel: 'Tour',
   copyLink: 'Copier le lien',
@@ -106,7 +125,7 @@ export const FR = {
   },
 };
 
-export const EN: typeof FR = {
+export const EN: Translation = {
   salleLabel: 'Room',
   tourLabel: 'Round',
   copyLink: 'Copy link',
@@ -214,7 +233,7 @@ export const EN: typeof FR = {
   },
 };
 
-export const ES: typeof FR = {
+export const ES: Translation = {
   salleLabel: 'Sala',
   tourLabel: 'Ronda',
   copyLink: 'Copiar enlace',
@@ -322,7 +341,7 @@ export const ES: typeof FR = {
   },
 };
 
-export const DE: typeof FR = {
+export const DE: Translation = {
   salleLabel: 'Raum',
   tourLabel: 'Runde',
   copyLink: 'Link kopieren',
@@ -430,7 +449,7 @@ export const DE: typeof FR = {
   },
 };
 
-export const PT: typeof FR = {
+export const PT: Translation = {
   salleLabel: 'Sala',
   tourLabel: 'Rodada',
   copyLink: 'Copiar link',
@@ -541,7 +560,7 @@ export const PT: typeof FR = {
 export function translateActivity(
   msg: string,
   target: string,
-  t: typeof FR,
+  t: Translation,
 ): string {
   switch (msg) {
     case 'joined':           return t.activity.joined;

@@ -1,21 +1,11 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { PUBLIC_WS_URL } from '$env/static/public';
-  import { onMount, onDestroy } from 'svelte';
-  import { browser } from '$app/environment';
+  import { onMount } from 'svelte';
   import { lang } from '$lib/lang.svelte';
   import { FR, EN, ES, DE, PT, translateActivity } from '$lib/i18n';
+  import { useRoom } from '$lib/useRoom.svelte';
 
-  type Player = { id: string; name: string; vote: string; observer: boolean };
-  type Results = { avg: string; min: string; max: string; dist: Record<string, number> };
-  type ActivityEntry = { timestamp: string; initiator: string; message: string; target?: string };
-  type RoomState = {
-    id: string; cards: string[];
-    state: 'voting' | 'revealed'; round: number;
-    results: Results | null; players: Player[]; activity: ActivityEntry[];
-  };
-
-  const roomId = $derived(page.params.id);
+  const roomId = $derived(page.params.id ?? '');
   const T = $derived(
     lang.current === 'fr' ? FR :
     lang.current === 'es' ? ES :
@@ -24,92 +14,19 @@
     EN
   );
 
-  let roomState = $state<RoomState | null>(null);
-  let myId = $state('');
-  let myName = $state('');
   let nameInput = $state('');
   let nameInputEl = $state<HTMLInputElement | null>(null);
+  let isObserver = $state(false);
+  let copyFeedback = $state('');
 
   onMount(() => nameInputEl?.focus());
-  let isObserver = $state(false);
-  let joined = $state(false);
-  let ws = $state<WebSocket | null>(null);
-  let liveAnnouncement = $state('');
-  let copyFeedback = $state('');
-  let isReconnecting = $state(false);
-  let kicked = $state(false);
-  let myVote = $state('');
-  let reconnectDelay = 1000;
-  let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
-  let destroying = false;
 
-  function connect(name: string, observer: boolean) {
-    if (!browser) return;
-    const url = `${PUBLIC_WS_URL}/rooms/${roomId}/ws?name=${encodeURIComponent(name)}&observer=${observer}`;
-    const socket = new WebSocket(url);
+  const room = useRoom(() => roomId, () => T);
 
-    socket.onopen = () => {
-      isReconnecting = false;
-      reconnectDelay = 1000;
-      myVote = '';
-    };
-
-    socket.onmessage = (event) => {
-      const msg = JSON.parse(event.data);
-      if (msg.type === 'welcome') {
-        myId = msg.payload.id;
-      } else if (msg.type === 'kicked') {
-        kicked = true;
-        socket.close();
-      } else if (msg.type === 'state') {
-        const prev = roomState;
-        roomState = msg.payload;
-        if (prev?.state === 'revealed' && roomState?.state === 'voting') {
-          myVote = '';
-          liveAnnouncement = T.live.newRound(roomState?.round ?? 0);
-        } else if (prev?.state === 'voting' && roomState?.state === 'revealed') {
-          liveAnnouncement = T.live.revealed;
-        }
-      }
-    };
-
-    socket.onerror = () => {};
-
-    socket.onclose = () => {
-      if (destroying || kicked || !joined) return;
-      isReconnecting = true;
-      reconnectTimer = setTimeout(() => {
-        reconnectDelay = Math.min(reconnectDelay * 2, 30000);
-        connect(name, observer);
-      }, reconnectDelay);
-    };
-
-    ws = socket;
-  }
-
-  function send(type: string, payload: string = '') {
-    if (ws?.readyState === WebSocket.OPEN) {
-      ws.send(JSON.stringify({ type, payload }));
-    }
-  }
-
-  function join() {
+  function handleJoin() {
     if (!nameInput.trim()) return;
-    myName = nameInput.trim();
-    joined = true;
-    connect(myName, isObserver);
+    room.join(nameInput.trim(), isObserver);
   }
-
-  function castVote(card: string) {
-    const newVote = myVote === card ? '' : card;
-    myVote = newVote;
-    send('vote', newVote);
-  }
-
-  function show() { send('show'); }
-  function clear() { myVote = ''; send('clear'); }
-  function kick(targetId: string) { send('kick', targetId); }
-  function toggleObserver(targetId: string) { send('toggleObserver', targetId); }
 
   async function copyLink() {
     await navigator.clipboard.writeText(window.location.href);
@@ -117,17 +34,11 @@
     setTimeout(() => (copyFeedback = ''), 2000);
   }
 
-  const participants = $derived(roomState?.players.filter(p => !p.observer) ?? []);
-  const observers = $derived(roomState?.players.filter(p => p.observer) ?? []);
+  const participants = $derived(room.roomState?.players.filter(p => !p.observer) ?? []);
+  const observers = $derived(room.roomState?.players.filter(p => p.observer) ?? []);
   const allVoted = $derived(participants.length > 0 && participants.every(p => p.vote !== ''));
-  const me = $derived(roomState?.players.find(p => p.id === myId));
-  const isSolo = $derived(roomState !== null && roomState.players.length === 1);
-
-  onDestroy(() => {
-    destroying = true;
-    if (reconnectTimer) clearTimeout(reconnectTimer);
-    ws?.close();
-  });
+  const me = $derived(room.roomState?.players.find(p => p.id === room.myId));
+  const isSolo = $derived(room.roomState !== null && room.roomState.players.length === 1);
 </script>
 
 <svelte:head>
@@ -135,7 +46,7 @@
   <meta name="robots" content="noindex" />
 </svelte:head>
 
-<div aria-live="polite" aria-atomic="true" class="sr-only">{liveAnnouncement}</div>
+<div aria-live="polite" aria-atomic="true" class="sr-only">{room.liveAnnouncement}</div>
 
 <div class="page">
   <header class="header">
@@ -143,8 +54,8 @@
       <a href="/" class="logo" aria-label="CleanPoker, accueil">♠ CleanPoker</a>
       <div class="room-meta">
         <span class="badge-pill">{T.salleLabel} <code>{roomId}</code></span>
-        {#if roomState}
-          <span class="badge-pill">{T.tourLabel} {roomState.round}</span>
+        {#if room.roomState}
+          <span class="badge-pill">{T.tourLabel} {room.roomState.round}</span>
         {/if}
         <button class="btn btn-secondary btn-sm" onclick={copyLink}>{copyFeedback || T.copyLink}</button>
         <select class="lang-select" value={lang.current} onchange={(e) => lang.set(e.currentTarget.value as 'fr'|'en'|'es'|'de'|'pt')} aria-label="Language">
@@ -160,16 +71,16 @@
 
   <main id="main" class="container main">
 
-    {#if kicked}
+    {#if room.kicked}
       <div class="center-msg">
         <h1>{T.kicked.title}</h1>
         <a href="/" class="btn btn-primary">{T.kicked.back}</a>
       </div>
 
-    {:else if !joined}
+    {:else if !room.joined}
       <section class="join-form" aria-labelledby="join-title" data-testid="join-form">
         <h1 id="join-title">{T.join.title}</h1>
-        <form onsubmit={(e) => { e.preventDefault(); join(); }}>
+        <form onsubmit={(e) => { e.preventDefault(); handleJoin(); }}>
           <label for="name-input">{T.join.label}</label>
           <!-- svelte-ignore a11y_autofocus -->
           <input id="name-input" type="text" bind:value={nameInput} bind:this={nameInputEl} maxlength="30"
@@ -186,13 +97,13 @@
         </form>
       </section>
 
-    {:else if !roomState}
-      <p aria-live="polite">{isReconnecting ? T.connection.reconnecting : T.connection.connecting}</p>
+    {:else if !room.roomState}
+      <p aria-live="polite">{room.isReconnecting ? T.connection.reconnecting : T.connection.connecting}</p>
 
     {:else}
       <h1 class="sr-only">{T.salleLabel} {roomId}</h1>
 
-      {#if isReconnecting}
+      {#if room.isReconnecting}
         <div class="reconnecting-banner" role="status">{T.connection.reconnecting}</div>
       {/if}
 
@@ -211,23 +122,23 @@
           <div class="card-header-row">
             <h2 id="cards-title">{T.cards.title}</h2>
             <p class="card-subtitle">
-              {#if roomState.state === 'revealed'}
+              {#if room.roomState.state === 'revealed'}
                 {T.cards.revealedSub}
               {:else}
-                {T.cards.votingHint}{myVote ? T.cards.selectedSuffix(myVote) : ''}.
+                {T.cards.votingHint}{room.myVote ? T.cards.selectedSuffix(room.myVote) : ''}.
               {/if}
             </p>
           </div>
           <ul class="cards-list" role="list" aria-label={T.cards.title} data-testid="cards-list">
-            {#each roomState.cards as card (card)}
+            {#each room.roomState.cards as card (card)}
               <li>
                 <button
                   class="poker-card"
-                  class:selected={myVote === card}
-                  onclick={() => castVote(card)}
-                  aria-pressed={myVote === card}
+                  class:selected={room.myVote === card}
+                  onclick={() => room.castVote(card)}
+                  aria-pressed={room.myVote === card}
                   aria-label={T.cards.voteLabel(card)}
-                  disabled={roomState.state === 'revealed'}
+                  disabled={room.roomState.state === 'revealed'}
                 >
                   {card}
                 </button>
@@ -242,16 +153,16 @@
         <section class="panel" aria-labelledby="controls-title">
           <h2 id="controls-title">{T.controls.title}</h2>
           <div class="controls-btns">
-            <button class="btn btn-secondary btn-block" onclick={clear} data-testid="new-round-btn">
-              {roomState.state === 'revealed' ? T.controls.newRound : T.controls.clear}
+            <button class="btn btn-secondary btn-block" onclick={() => room.clear()} data-testid="new-round-btn">
+              {room.roomState.state === 'revealed' ? T.controls.newRound : T.controls.clear}
             </button>
-            <button class="btn btn-primary btn-block" onclick={show} disabled={!allVoted || roomState.state === 'revealed'}
+            <button class="btn btn-primary btn-block" onclick={() => room.show()} disabled={!allVoted || room.roomState.state === 'revealed'}
               aria-describedby={!allVoted ? 'show-hint' : undefined}
               data-testid="reveal-btn">
               {T.controls.reveal}
             </button>
           </div>
-          {#if !allVoted && roomState.state === 'voting' && participants.length > 0}
+          {#if !allVoted && room.roomState.state === 'voting' && participants.length > 0}
             <p id="show-hint" class="hint">
               {T.controls.pending(participants.filter(p => p.vote === '').length)}
             </p>
@@ -260,17 +171,17 @@
 
         <section class="panel" aria-labelledby="results-title" data-testid="results">
           <h2 id="results-title">{T.results.title}</h2>
-          {#if roomState.results}
+          {#if room.roomState.results}
             <div data-testid="results-data">
-            {#if roomState.results.avg !== '—'}
+            {#if room.roomState.results.avg !== '—'}
               <div class="stats-grid">
-                <div class="stat"><span class="stat-label">{T.results.avg}</span><span class="stat-value">{roomState.results.avg}</span></div>
-                <div class="stat"><span class="stat-label">{T.results.min}</span><span class="stat-value">{roomState.results.min}</span></div>
-                <div class="stat"><span class="stat-label">{T.results.max}</span><span class="stat-value">{roomState.results.max}</span></div>
+                <div class="stat"><span class="stat-label">{T.results.avg}</span><span class="stat-value">{room.roomState.results.avg}</span></div>
+                <div class="stat"><span class="stat-label">{T.results.min}</span><span class="stat-value">{room.roomState.results.min}</span></div>
+                <div class="stat"><span class="stat-label">{T.results.max}</span><span class="stat-value">{room.roomState.results.max}</span></div>
               </div>
             {/if}
             <div class="dist">
-              {#each Object.entries(roomState.results.dist).sort((a,b) => b[1]-a[1]) as [val, count] (val)}
+              {#each Object.entries(room.roomState.results.dist).sort((a,b) => b[1]-a[1]) as [val, count] (val)}
                 <div class="dist-row">
                   <span class="dist-val">{val}</span>
                   <div class="dist-bar-wrap">
@@ -306,15 +217,15 @@
               </thead>
               <tbody>
                 {#each participants as player (player.id)}
-                  <tr class:voted={player.vote !== ''} class:is-me={player.id === myId}>
+                  <tr class:voted={player.vote !== ''} class:is-me={player.id === room.myId}>
                     <td class="voted-icon" aria-hidden="true">{#if player.vote !== ''}✓{/if}</td>
                     <td class="player-name-cell">
                       {player.name}
-                      {#if player.id === myId}<span class="me-tag">{T.participants.me}</span>{/if}
+                      {#if player.id === room.myId}<span class="me-tag">{T.participants.me}</span>{/if}
                       {#if player.vote !== ''}<span class="sr-only">{T.participants.votedSr}</span>{/if}
                     </td>
                     <td class="vote-cell">
-                      {#if roomState.state === 'revealed'}
+                      {#if room.roomState.state === 'revealed'}
                         <span class="vote-revealed">{player.vote || '-'}</span>
                       {:else if player.vote === 'hidden'}
                         <span class="vote-pending">{T.participants.votePending}</span>
@@ -324,14 +235,14 @@
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-switch"
-                        onclick={() => toggleObserver(player.id)}
+                        onclick={() => room.toggleObserver(player.id)}
                         aria-label={T.participants.toObserverLabel(player.name)}>
                         {T.participants.toObserver}
                       </button>
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-kick"
-                        onclick={() => kick(player.id)}
+                        onclick={() => room.kick(player.id)}
                         aria-label={T.participants.kickLabel(player.name)}>
                         {T.participants.kick}
                       </button>
@@ -359,21 +270,21 @@
               </thead>
               <tbody>
                 {#each observers as player (player.id)}
-                  <tr class:is-me={player.id === myId}>
+                  <tr class:is-me={player.id === room.myId}>
                     <td class="player-name-cell">
                       {player.name}
-                      {#if player.id === myId}<span class="me-tag">{T.participants.me}</span>{/if}
+                      {#if player.id === room.myId}<span class="me-tag">{T.participants.me}</span>{/if}
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-switch"
-                        onclick={() => toggleObserver(player.id)}
+                        onclick={() => room.toggleObserver(player.id)}
                         aria-label={T.observers.toParticipantLabel(player.name)}>
                         {T.observers.toParticipant}
                       </button>
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-kick"
-                        onclick={() => kick(player.id)}
+                        onclick={() => room.kick(player.id)}
                         aria-label={T.participants.kickLabel(player.name)}>
                         {T.participants.kick}
                       </button>
@@ -389,7 +300,7 @@
       <!-- Journal d'activité -->
       <section class="panel" aria-labelledby="log-title">
         <h2 id="log-title">{T.activity.title}</h2>
-        {#if roomState.activity.length === 0}
+        {#if room.roomState.activity.length === 0}
           <p class="empty">{T.activity.none}</p>
         {:else}
           <div class="table-wrap">
@@ -402,7 +313,7 @@
                 </tr>
               </thead>
               <tbody>
-                {#each [...roomState.activity].reverse() as entry, i (i)}
+                {#each [...room.roomState.activity].reverse() as entry (`${entry.timestamp}-${entry.initiator}-${entry.message}`)}
                   <tr>
                     <td class="log-time">{entry.timestamp}</td>
                     <td>{entry.initiator}</td>
@@ -476,9 +387,6 @@
     border-radius: var(--radius-lg);
     font-size: 0.875rem; color: var(--color-primary);
   }
-
-  .error-state { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 2rem 0; }
-  .error { color: var(--color-danger); font-weight: 600; }
 
   .join-form { max-width: 24rem; margin: 4rem auto; display: flex; flex-direction: column; gap: 1rem; }
   .join-form form { display: flex; flex-direction: column; gap: 0.75rem; }
