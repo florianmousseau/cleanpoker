@@ -7,7 +7,7 @@ export default defineConfig({
   fullyParallel: false,
   timeout: 30_000,
   retries: CI ? 1 : 0,
-  reporter: CI ? 'github' : 'list',
+  reporter: CI ? [['github'], ['html', { open: 'never' }]] : 'list',
 
   use: {
     baseURL: 'http://localhost:5173',
@@ -20,10 +20,12 @@ export default defineConfig({
 
   webServer: [
     {
-      command: 'go run ./cmd/server',
+      // In CI the binary is pre-built by the workflow to avoid the 40-60s
+      // compilation time of modernc.org/libc exceeding the webServer timeout.
+      command: CI ? './cleanpoker-server' : 'go run ./cmd/server',
       cwd: '../backend',
       port: 8080,
-      timeout: 30_000,
+      timeout: 60_000,
       reuseExistingServer: !CI,
       env: {
         PORT: '8080',
