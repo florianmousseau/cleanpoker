@@ -112,7 +112,7 @@
       <div class="cards-field">
         <label for="cards-input">Karten <span class="label-hint">(kommagetrennt)</span></label>
         <div class="presets" role="group" aria-label="Voreinstellungen">
-          {#each PRESETS as preset}
+          {#each PRESETS as preset (preset.label)}
             <button
               type="button"
               class="preset-btn"
@@ -132,7 +132,7 @@
           spellcheck="false"
         />
         <p id="cards-preview" class="cards-preview" aria-live="polite">
-          {#each cards as card}
+          {#each cards as card (card)}
             <span class="card-chip">{card}</span>
           {/each}
           {#if !isValid}
