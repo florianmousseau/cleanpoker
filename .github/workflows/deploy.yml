@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: Start energy measurement
         uses: green-coding-solutions/eco-ci-energy-estimation@a2305b330063eddbf6fd758bb5a335a87c65d804 # v4
+        continue-on-error: true
         with:
           task: start-measurement
           label: quality
@@ -63,6 +64,7 @@ jobs:
 
       - name: Show energy results
         uses: green-coding-solutions/eco-ci-energy-estimation@a2305b330063eddbf6fd758bb5a335a87c65d804 # v4
+        continue-on-error: true
         with:
           task: display-results
 
