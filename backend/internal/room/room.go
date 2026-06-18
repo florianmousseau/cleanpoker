@@ -71,6 +71,7 @@ type Room struct {
 	direct      chan directMessage
 	subscribe   chan subscription
 	unsubscribe chan string
+	quit        chan struct{}
 
 	onPersist func(Snapshot)
 }
@@ -101,6 +102,7 @@ func New(id string, cards []string) *Room {
 		direct:       make(chan directMessage, 8),
 		subscribe:    make(chan subscription, 8),
 		unsubscribe:  make(chan string, 8),
+		quit:         make(chan struct{}),
 	}
 	go r.run()
 	return r
@@ -118,11 +120,11 @@ func (r *Room) Snapshot() Snapshot {
 	return r.snapshot()
 }
 
-func (r *Room) snapshot() Snapshot {
+func (r *Room) buildSnapshot(masked bool) Snapshot {
 	players := make([]*Player, 0, len(r.players))
 	for _, p := range r.players {
 		cp := *p
-		if r.state == StateVoting && !cp.Observer && cp.Vote != "" {
+		if masked && r.state == StateVoting && !cp.Observer && cp.Vote != "" {
 			cp.Vote = hiddenVote
 		}
 		players = append(players, &cp)
@@ -145,30 +147,8 @@ func (r *Room) snapshot() Snapshot {
 	}
 }
 
-// rawSnapshot returns a snapshot with actual votes (not masked), for persistence only.
-func (r *Room) rawSnapshot() Snapshot {
-	players := make([]*Player, 0, len(r.players))
-	for _, p := range r.players {
-		cp := *p
-		players = append(players, &cp)
-	}
-	activity := make([]ActivityEntry, len(r.activity))
-	copy(activity, r.activity)
-	var results *Results
-	if r.results != nil {
-		cp := *r.results
-		results = &cp
-	}
-	return Snapshot{
-		ID:       r.id,
-		Cards:    r.cards,
-		State:    r.state,
-		Round:    r.round,
-		Results:  results,
-		Players:  players,
-		Activity: activity,
-	}
-}
+func (r *Room) snapshot() Snapshot    { return r.buildSnapshot(true) }
+func (r *Room) rawSnapshot() Snapshot { return r.buildSnapshot(false) }
 
 // Restore creates a Room from a persisted snapshot. Players are not restored
 // (they were all disconnected); they will rejoin via WebSocket.
@@ -185,6 +165,7 @@ func Restore(snap Snapshot) *Room {
 		direct:       make(chan directMessage, 8),
 		subscribe:    make(chan subscription, 8),
 		unsubscribe:  make(chan string, 8),
+		quit:         make(chan struct{}),
 	}
 	if snap.Results != nil {
 		cp := *snap.Results
@@ -192,6 +173,10 @@ func Restore(snap Snapshot) *Room {
 	}
 	go r.run()
 	return r
+}
+
+func (r *Room) Stop() {
+	close(r.quit)
 }
 
 func (r *Room) SetPersistHook(fn func(Snapshot)) {
@@ -344,6 +329,11 @@ func (r *Room) run() {
 	subs := make(map[string]chan Message)
 	for {
 		select {
+		case <-r.quit:
+			for _, ch := range subs {
+				close(ch)
+			}
+			return
 		case s := <-r.subscribe:
 			subs[s.playerID] = s.ch
 		case pid := <-r.unsubscribe:
