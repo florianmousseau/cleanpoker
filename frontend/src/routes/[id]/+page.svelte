@@ -167,7 +167,7 @@
       </div>
 
     {:else if !joined}
-      <section class="join-form" aria-labelledby="join-title">
+      <section class="join-form" aria-labelledby="join-title" data-testid="join-form">
         <h1 id="join-title">{T.join.title}</h1>
         <form onsubmit={(e) => { e.preventDefault(); join(); }}>
           <label for="name-input">{T.join.label}</label>
@@ -177,10 +177,10 @@
             autofocus
             onfocus={(e) => e.currentTarget.select()} />
           <label class="toggle-label">
-            <input type="checkbox" bind:checked={isObserver} />
+            <input type="checkbox" bind:checked={isObserver} data-testid="observer-checkbox" />
             <span>{T.join.observer}</span>
           </label>
-          <button type="submit" class="btn btn-primary" disabled={!nameInput.trim()}>
+          <button type="submit" class="btn btn-primary" disabled={!nameInput.trim()} data-testid="join-btn">
             {T.join.btn}
           </button>
         </form>
@@ -218,7 +218,7 @@
               {/if}
             </p>
           </div>
-          <ul class="cards-list" role="list" aria-label={T.cards.title}>
+          <ul class="cards-list" role="list" aria-label={T.cards.title} data-testid="cards-list">
             {#each roomState.cards as card (card)}
               <li>
                 <button
@@ -242,11 +242,12 @@
         <section class="panel" aria-labelledby="controls-title">
           <h2 id="controls-title">{T.controls.title}</h2>
           <div class="controls-btns">
-            <button class="btn btn-secondary btn-block" onclick={clear}>
+            <button class="btn btn-secondary btn-block" onclick={clear} data-testid="new-round-btn">
               {roomState.state === 'revealed' ? T.controls.newRound : T.controls.clear}
             </button>
             <button class="btn btn-primary btn-block" onclick={show} disabled={!allVoted || roomState.state === 'revealed'}
-              aria-describedby={!allVoted ? 'show-hint' : undefined}>
+              aria-describedby={!allVoted ? 'show-hint' : undefined}
+              data-testid="reveal-btn">
               {T.controls.reveal}
             </button>
           </div>
@@ -257,9 +258,10 @@
           {/if}
         </section>
 
-        <section class="panel" aria-labelledby="results-title">
+        <section class="panel" aria-labelledby="results-title" data-testid="results">
           <h2 id="results-title">{T.results.title}</h2>
           {#if roomState.results}
+            <div data-testid="results-data">
             {#if roomState.results.avg !== '—'}
               <div class="stats-grid">
                 <div class="stat"><span class="stat-label">{T.results.avg}</span><span class="stat-value">{roomState.results.avg}</span></div>
@@ -277,6 +279,7 @@
                   <span class="dist-count">{count}</span>
                 </div>
               {/each}
+            </div>
             </div>
           {:else}
             <p class="no-results">{T.results.none}</p>

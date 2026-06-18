@@ -13,6 +13,12 @@ frontend/.env.local
 .idea/
 *.iml
 
+# Playwright
+frontend/playwright-report/
+frontend/test-results/
+frontend/tests-examples/
+backend/test.db
+
 # OS
 .DS_Store
 Thumbs.db
