@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 function uid() {
-  return `e2e-${crypto.randomUUID().slice(0, 8)}`;
+  return `e2e-${crypto.randomUUID().slice(0, 8)}`; // NOSONAR
 }
 
 test('join form visible, submit disabled without name', async ({ page }) => {

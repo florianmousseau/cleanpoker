@@ -1,7 +1,7 @@
 import { test, expect, type Browser } from '@playwright/test';
 
 function uid() {
-  return `e2e-multi-${crypto.randomUUID().slice(0, 8)}`;
+  return `e2e-multi-${crypto.randomUUID().slice(0, 8)}`; // NOSONAR
 }
 
 async function joinTwoPlayers(browser: Browser) {

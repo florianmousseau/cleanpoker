@@ -54,13 +54,13 @@ jobs:
 
       - name: Go tests
         working-directory: backend
-        run: go test -coverprofile=coverage.out ./... || true
+        run: go test -coverprofile=coverage.out ./...
 
       - name: SonarCloud scan
-        uses: SonarSource/sonarqube-scan-action@2f77a1ec69fb1d595b06f35ab27e97605bdef703 # v5
-        continue-on-error: true
+        uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
 
       - name: Show energy results
         uses: green-coding-solutions/eco-ci-energy-estimation@a2305b330063eddbf6fd758bb5a335a87c65d804 # v4
