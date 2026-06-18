@@ -31,7 +31,7 @@ Most planning poker tools show ads, track users, and weigh megabytes. CleanPoker
 | Ads / freemium upsells | Zero ads, zero monetization |
 | Google Analytics, cookies | Zero trackers, zero cookies |
 | Require account creation | No account, just a link |
-| Heavy JS bundles | < 50 KB page weight |
+| Heavy JS bundles | < 50 KB JS total (brotli) |
 | Accessibility as an afterthought | Lighthouse accessibility **100** |
 
 ## Features
@@ -55,7 +55,7 @@ Most planning poker tools show ads, track users, and weigh megabytes. CleanPoker
 | CO₂ / visit | < 0.1g |
 | Lighthouse Performance | 100 |
 | Lighthouse Accessibility | 100 |
-| Page weight | < 50 KB |
+| Page weight | < 50 KB JS (brotli) |
 | Third-party cookies | 0 |
 | Trackers | 0 |
 
