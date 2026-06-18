@@ -4,6 +4,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [sveltekit()],
 	build: {
-		cssCodeSplit: false,
+		minify: 'terser',
+		terserOptions: {
+			compress: { passes: 3 },
+		},
 	}
 });
