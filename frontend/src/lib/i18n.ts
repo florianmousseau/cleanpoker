@@ -5,10 +5,10 @@ export interface Translation {
   copied: string;
   kicked: { title: string; back: string };
   join: { title: string; label: string; observer: string; btn: string };
-  connection: { lost: string; closed: string; reconnect: string; connecting: string; reconnecting: string };
+  connection: { connecting: string; reconnecting: string };
   solo: { hint: string; invite: string };
   cards: { title: string; revealedSub: string; votingHint: string; selectedSuffix: (v: string) => string; voteLabel: (c: string) => string };
-  controls: { title: string; clear: string; newRound: string; reveal: string; pending: (n: number) => string };
+  controls: { title: string; newRound: string; reveal: string; pending: (n: number) => string };
   results: { title: string; avg: string; min: string; max: string; none: string };
   participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string };
   observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
@@ -36,9 +36,6 @@ export const FR: Translation = {
   },
 
   connection: {
-    lost: 'Connexion perdue.',
-    closed: 'Connexion interrompue.',
-    reconnect: 'Reconnecter',
     connecting: 'Connexion…',
     reconnecting: 'Reconnexion…',
   },
@@ -58,7 +55,6 @@ export const FR: Translation = {
 
   controls: {
     title: 'Tour en cours',
-    clear: 'Nouveau tour',
     newRound: 'Nouveau tour',
     reveal: 'Révéler',
     pending: (n: number) => `${n} participant(s) n'ont pas encore voté.`,
@@ -144,9 +140,6 @@ export const EN: Translation = {
   },
 
   connection: {
-    lost: 'Connection lost.',
-    closed: 'Connection closed.',
-    reconnect: 'Reconnect',
     connecting: 'Connecting…',
     reconnecting: 'Reconnecting…',
   },
@@ -166,7 +159,6 @@ export const EN: Translation = {
 
   controls: {
     title: 'Current round',
-    clear: 'New round',
     newRound: 'New round',
     reveal: 'Reveal',
     pending: (n: number) => `${n} participant(s) haven't voted yet.`,
@@ -252,9 +244,6 @@ export const ES: Translation = {
   },
 
   connection: {
-    lost: 'Conexión perdida.',
-    closed: 'Conexión interrumpida.',
-    reconnect: 'Reconectar',
     connecting: 'Conectando…',
     reconnecting: 'Reconectando…',
   },
@@ -274,7 +263,6 @@ export const ES: Translation = {
 
   controls: {
     title: 'Ronda actual',
-    clear: 'Nueva ronda',
     newRound: 'Nueva ronda',
     reveal: 'Revelar',
     pending: (n: number) => `${n} participante(s) aún no han votado.`,
@@ -360,9 +348,6 @@ export const DE: Translation = {
   },
 
   connection: {
-    lost: 'Verbindung verloren.',
-    closed: 'Verbindung unterbrochen.',
-    reconnect: 'Neu verbinden',
     connecting: 'Verbinde…',
     reconnecting: 'Verbinde neu…',
   },
@@ -382,7 +367,6 @@ export const DE: Translation = {
 
   controls: {
     title: 'Aktuelle Runde',
-    clear: 'Neue Runde',
     newRound: 'Neue Runde',
     reveal: 'Aufdecken',
     pending: (n: number) => `${n} Teilnehmer ${n === 1 ? 'hat' : 'haben'} noch nicht abgestimmt.`,
@@ -468,9 +452,6 @@ export const PT: Translation = {
   },
 
   connection: {
-    lost: 'Conexão perdida.',
-    closed: 'Conexão interrompida.',
-    reconnect: 'Reconectar',
     connecting: 'Conectando…',
     reconnecting: 'Reconectando…',
   },
@@ -490,7 +471,6 @@ export const PT: Translation = {
 
   controls: {
     title: 'Rodada atual',
-    clear: 'Nova rodada',
     newRound: 'Nova rodada',
     reveal: 'Revelar',
     pending: (n: number) => `${n} participante(s) ainda não votaram.`,
