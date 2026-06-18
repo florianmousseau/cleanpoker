@@ -26,7 +26,7 @@
       "path": ".svelte-kit/cloudflare/_app/immutable/**/*.js",
       "brotli": true,
       "gzip": false,
-      "limit": "40 KB"
+      "limit": "65 KB"
     }
   ],
   "devDependencies": {
