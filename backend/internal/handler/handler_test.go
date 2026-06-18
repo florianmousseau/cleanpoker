@@ -52,7 +52,7 @@ func wsConnect(t *testing.T, srv *httptest.Server, roomID, name string) *websock
 	if err != nil {
 		t.Fatalf("websocket dial: %v", err)
 	}
-	t.Cleanup(func() { conn.Close() })
+	t.Cleanup(func() { _ = conn.Close() })
 	return conn
 }
 
@@ -89,6 +89,7 @@ func TestHealth(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
 		t.Fatalf("expected 200, got %d", resp.StatusCode)
 	}
@@ -115,7 +116,9 @@ func TestCreateRoom_CustomCards(t *testing.T) {
 	var body struct {
 		ID string `json:"id"`
 	}
-	json.NewDecoder(resp.Body).Decode(&body)
+	if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
+		t.Fatalf("decode custom cards room: %v", err)
+	}
 	if body.ID == "" {
 		t.Fatal("expected room ID with custom cards")
 	}
@@ -130,6 +133,7 @@ func TestWebSocket_NameRequired(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusBadRequest {
 		t.Fatalf("expected 400, got %d", resp.StatusCode)
 	}
