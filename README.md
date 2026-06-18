@@ -121,13 +121,45 @@ npm run dev
 
 Open `http://localhost:5173`.
 
+## E2E Tests
+
+```bash
+cd frontend
+npm install
+# needs backend running (see "Run locally" above)
+npm run test:e2e        # headless
+npm run test:e2e:ui     # interactive UI
+```
+
+16 tests covering the full user flow: room creation, voting, reveal, new round, observers, multiplayer synchronisation.
+
+## Git Flow
+
+```
+feature/* ──→ develop (PR required, CI must pass)
+                 │
+                 └──→ main (PR required, CI must pass)  ──→ tag vX.Y.Z
+```
+
+- **`main`**: production only — never commit directly, always via PR from `develop`
+- **`develop`**: integration — never commit directly, always via PR from `feature/*`
+- **`feature/*`**: daily work, branch from `develop`, merge back via PR
+
+Both `main` and `develop` have branch protection: PRs required, direct push blocked, CI gates enforced.
+
 ## Deploy
 
 CI/CD via GitHub Actions — auto-deploys on push to `main`, quality gate must pass first.
 
 ```
-quality (lint + SAST + SonarCloud) → deploy-frontend + deploy-backend → lighthouse audit
+Code Quality (golangci-lint + ESLint + SonarCloud)
+E2E Tests (Playwright, 16 tests)
+  → deploy-frontend (Cloudflare Pages)
+  → deploy-backend  (Fly.io)
+  → lighthouse audit
 ```
+
+Preview deploys (Cloudflare Pages) are created automatically for every push to `develop` or any `feature/*` branch.
 
 Required GitHub secrets:
 
