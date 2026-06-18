@@ -1,6 +1,6 @@
 <script lang="ts">
   import { PUBLIC_API_URL } from '$env/static/public';
-  import { goto } from '$app/navigation';
+  import { goto, replaceState } from '$app/navigation';
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
   import { lang } from '$lib/lang.svelte';
@@ -107,7 +107,7 @@
 
   function pushCards(value: string) {
     const safe = value.replace(/&/g, '%26').replace(/=/g, '%3D');
-    history.replaceState(null, '', `?cards=${safe}`);
+    replaceState(`?cards=${safe}`, {});
   }
 
   function parseCards(input: string): string[] {
