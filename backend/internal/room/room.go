@@ -72,8 +72,6 @@ type Room struct {
 	subscribe   chan subscription
 	unsubscribe chan string
 	quit        chan struct{}
-
-	onPersist func(Snapshot)
 }
 
 type subscription struct {
@@ -147,40 +145,10 @@ func (r *Room) buildSnapshot(masked bool) Snapshot {
 	}
 }
 
-func (r *Room) snapshot() Snapshot    { return r.buildSnapshot(true) }
-func (r *Room) rawSnapshot() Snapshot { return r.buildSnapshot(false) }
-
-// Restore creates a Room from a persisted snapshot. Players are not restored
-// (they were all disconnected); they will rejoin via WebSocket.
-func Restore(snap Snapshot) *Room {
-	r := &Room{
-		id:           snap.ID,
-		cards:        snap.Cards,
-		players:      make(map[string]*Player),
-		state:        snap.State,
-		round:        snap.Round,
-		activity:     snap.Activity,
-		lastActivity: time.Now(),
-		broadcast:    make(chan Message, 32),
-		direct:       make(chan directMessage, 8),
-		subscribe:    make(chan subscription, 8),
-		unsubscribe:  make(chan string, 8),
-		quit:         make(chan struct{}),
-	}
-	if snap.Results != nil {
-		cp := *snap.Results
-		r.results = &cp
-	}
-	go r.run()
-	return r
-}
+func (r *Room) snapshot() Snapshot { return r.buildSnapshot(true) }
 
 func (r *Room) Stop() {
 	close(r.quit)
-}
-
-func (r *Room) SetPersistHook(fn func(Snapshot)) {
-	r.onPersist = fn
 }
 
 func (r *Room) nameOf(playerID string) string {
@@ -210,15 +178,8 @@ func (r *Room) mutate(fn func()) {
 	fn()
 	r.lastActivity = time.Now()
 	snap := r.snapshot()
-	var raw Snapshot
-	if r.onPersist != nil {
-		raw = r.rawSnapshot()
-	}
 	r.mu.Unlock()
 	r.broadcast <- Message{Type: "state", Payload: snap}
-	if r.onPersist != nil {
-		r.onPersist(raw)
-	}
 }
 
 func (r *Room) Join(playerID, name string, observer bool) {
