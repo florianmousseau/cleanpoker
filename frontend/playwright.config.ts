@@ -29,7 +29,6 @@ export default defineConfig({
       reuseExistingServer: !CI,
       env: {
         PORT: '8080',
-        DB_PATH: './test.db',
         ALLOWED_ORIGIN: 'http://localhost:5173',
       },
     },
