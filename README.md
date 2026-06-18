@@ -18,6 +18,7 @@
 [![Accessibility](https://img.shields.io/badge/Lighthouse%20accessibility-100-brightgreen)](https://cleanpoker.dev)
 [![WCAG 2.1 AA](https://img.shields.io/badge/WCAG-2.1%20AA-green)](https://cleanpoker.dev/accessibilite)
 [![Trackers](https://img.shields.io/badge/trackers-0-brightgreen)](https://cleanpoker.dev)
+[![Website Carbon](https://img.shields.io/badge/CO₂-A%2B-brightgreen?logo=leaf)](https://www.websitecarbon.com/website/cleanpoker-dev/)
 [![Green hosting](https://img.shields.io/badge/hosting-green%20energy-brightgreen)](https://www.thegreenwebfoundation.org/)
 [![Languages](https://img.shields.io/badge/languages-FR%20%7C%20EN%20%7C%20ES%20%7C%20DE%20%7C%20PT-blue)](https://cleanpoker.dev)
 
