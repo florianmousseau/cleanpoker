@@ -11,6 +11,12 @@ jobs:
     name: Code Quality
     runs-on: ubuntu-latest
     steps:
+      - name: Start energy measurement
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        with:
+          task: start-measurement
+          label: quality
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -54,6 +60,11 @@ jobs:
         continue-on-error: true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Show energy results
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        with:
+          task: display-results
 
   deploy-frontend:
     name: Frontend - Cloudflare Pages
@@ -102,3 +113,21 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: flyctl deploy --remote-only --ha=false
+
+  lighthouse:
+    name: Lighthouse CI
+    needs: deploy-frontend
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait for Cloudflare Pages propagation
+        run: sleep 45
+
+      - name: Lighthouse audit
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: .lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
