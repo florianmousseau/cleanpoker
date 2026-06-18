@@ -71,7 +71,9 @@ func (s *Store) RunCleanup(ttl time.Duration) {
 		}
 		s.mu.Unlock()
 		for _, id := range toDelete {
-			s.db.Delete(id)
+			if err := s.db.Delete(id); err != nil {
+				log.Printf("warn: failed to delete room %s: %v", id, err)
+			}
 		}
 	}
 }

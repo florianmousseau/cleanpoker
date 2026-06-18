@@ -26,14 +26,18 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 		var body struct {
 			Cards []string `json:"cards"`
 		}
-		json.NewDecoder(r.Body).Decode(&body)
+		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+			body.Cards = room.DefaultCards
+		}
 		if len(body.Cards) == 0 {
 			body.Cards = room.DefaultCards
 		}
 		id := uuid.New().String()[:8]
 		s.GetOrCreate(id, body.Cards)
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]string{"id": id})
+		if err := json.NewEncoder(w).Encode(map[string]string{"id": id}); err != nil {
+			log.Printf("warn: encode response: %v", err)
+		}
 	})
 
 	mux.HandleFunc("GET /rooms/{id}/ws", func(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +60,9 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 func handleWS(conn *websocket.Conn, rm *room.Room, playerName string, observer bool) {
 	playerID := uuid.New().String()
 
-	websocket.JSON.Send(conn, room.Message{Type: "welcome", Payload: map[string]string{"id": playerID}})
+	if err := websocket.JSON.Send(conn, room.Message{Type: "welcome", Payload: map[string]string{"id": playerID}}); err != nil {
+		return
+	}
 
 	rm.Join(playerID, playerName, observer)
 	defer rm.Leave(playerID)
@@ -64,7 +70,9 @@ func handleWS(conn *websocket.Conn, rm *room.Room, playerName string, observer b
 	ch := rm.Subscribe(playerID)
 	defer rm.Unsubscribe(playerID)
 
-	websocket.JSON.Send(conn, room.Message{Type: "state", Payload: rm.Snapshot()})
+	if err := websocket.JSON.Send(conn, room.Message{Type: "state", Payload: rm.Snapshot()}); err != nil {
+		return
+	}
 
 	go func() {
 		for msg := range ch {
