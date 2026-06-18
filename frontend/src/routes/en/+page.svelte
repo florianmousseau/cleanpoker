@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-  <title>CleanPoker |Free planning poker, no account needed</title>
+  <title>CleanPoker | Free planning poker, no account needed</title>
   <meta name="description" content="Free collaborative planning poker. Create a session, share the URL, estimate as a team. No account, no tracking. WCAG 2.1 AA accessible." />
   <link rel="canonical" href="https://cleanpoker.dev/en" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev" />
@@ -76,13 +76,13 @@
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://cleanpoker.dev/en" />
-  <meta property="og:title" content="CleanPoker |Free planning poker, no account needed" />
+  <meta property="og:title" content="CleanPoker | Free planning poker, no account needed" />
   <meta property="og:description" content="Create a session, share the URL, estimate as a team. Ready in 30 seconds." />
   <meta property="og:image" content="https://cleanpoker.dev/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CleanPoker |Free planning poker, no account needed" />
+  <meta name="twitter:title" content="CleanPoker | Free planning poker, no account needed" />
   <meta name="twitter:description" content="Create a session, share the URL, estimate as a team. Ready in 30 seconds." />
   <meta name="twitter:image" content="https://cleanpoker.dev/og-image.png" />
   {@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}<\/script>`}

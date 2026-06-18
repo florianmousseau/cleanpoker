@@ -5,7 +5,8 @@ RUN go mod download
 COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o cleanpoker-server ./cmd/server
 
-FROM scratch
+FROM alpine:3.21
+RUN mkdir -p /data
 COPY --from=builder /app/cleanpoker-server /cleanpoker-server
 EXPOSE 8080
 ENTRYPOINT ["/cleanpoker-server"]

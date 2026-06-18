@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/florianmousseau/cleanpoker/internal/db"
 	"github.com/florianmousseau/cleanpoker/internal/handler"
 	"github.com/florianmousseau/cleanpoker/internal/store"
 )
@@ -23,7 +24,18 @@ func main() {
 	}
 	allowedOrigins := strings.Split(rawOrigins, ",")
 
-	roomStore := store.New()
+	dbPath := os.Getenv("DB_PATH")
+	if dbPath == "" {
+		dbPath = "/data/cleanpoker.db"
+	}
+
+	database, err := db.Open(dbPath)
+	if err != nil {
+		log.Fatalf("failed to open database: %v", err)
+	}
+
+	roomStore := store.New(database)
+	roomStore.Load()
 	go roomStore.RunCleanup(24 * time.Hour)
 
 	mux := handler.New(roomStore, allowedOrigins)
