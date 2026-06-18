@@ -61,7 +61,7 @@ func (d *DB) Save(snap room.Snapshot) error {
 		}
 		results = string(b)
 	}
-	_, err := d.sql.Exec(
+	_, err = d.sql.Exec(
 		`INSERT OR REPLACE INTO rooms (id, cards, state, round, results, activity, last_activity)
 		 VALUES (?, ?, ?, ?, ?, ?, ?)`,
 		snap.ID, string(cards), string(snap.State), snap.Round,
