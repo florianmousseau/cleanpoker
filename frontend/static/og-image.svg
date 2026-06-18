@@ -1,0 +1,23 @@
+<svg viewBox="0 0 1200 630" width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <rect width="1200" height="7" fill="#1a6b3c"/>
+  <text x="580" y="520" font-size="600" font-family="serif" fill="#1a6b3c" opacity="0.04" text-anchor="middle">&#9824;</text>
+
+  <text x="80" y="232" font-size="100" font-family="serif" fill="#1a6b3c">&#9824;</text>
+  <text x="210" y="232" font-size="96" font-weight="700" font-family="system-ui,-apple-system,sans-serif" fill="#1a1a1a">CleanPoker</text>
+
+  <text x="80" y="310" font-size="44" font-family="system-ui,-apple-system,sans-serif" fill="#888888">Planning poker</text>
+
+  <text x="80" y="390" font-size="46" font-weight="600" font-family="system-ui,-apple-system,sans-serif" fill="#1a6b3c">create · vote · decide</text>
+
+  <rect x="840" y="160" width="165" height="230" rx="14" fill="white" stroke="#d0d0d0" stroke-width="2" transform="rotate(-9 922 275)"/>
+  <text x="858" y="218" font-size="38" font-weight="700" font-family="system-ui,-apple-system,sans-serif" fill="#bbbbbb" transform="rotate(-9 922 275)">?</text>
+
+  <rect x="910" y="130" width="165" height="230" rx="14" fill="white" stroke="#d0d0d0" stroke-width="2" transform="rotate(2 992 245)"/>
+  <text x="928" y="188" font-size="38" font-weight="700" font-family="system-ui,-apple-system,sans-serif" fill="#1a6b3c" transform="rotate(2 992 245)">8</text>
+  <text x="992" y="268" font-size="56" font-family="serif" fill="#1a6b3c" text-anchor="middle" transform="rotate(2 992 245)">&#9824;</text>
+
+  <rect x="980" y="108" width="165" height="230" rx="14" fill="white" stroke="#1a6b3c" stroke-width="2.5"/>
+  <text x="1000" y="170" font-size="42" font-weight="700" font-family="system-ui,-apple-system,sans-serif" fill="#1a6b3c">13</text>
+  <text x="1062" y="258" font-size="60" font-family="serif" fill="#1a6b3c" text-anchor="middle">&#9824;</text>
+</svg>

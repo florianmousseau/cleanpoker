@@ -1,0 +1,18 @@
+# Go
+backend/cleanpoker-server
+backend/*.exe
+
+# SvelteKit
+frontend/.svelte-kit/
+frontend/build/
+frontend/node_modules/
+frontend/.env
+frontend/.env.local
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,22 @@
+{
+  "name": "cleanpoker",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "gen-og": "node -e \"const {Resvg}=require('@resvg/resvg-js'),fs=require('fs');const r=new Resvg(fs.readFileSync('static/og-image.svg','utf-8'),{width:1200,height:630});fs.writeFileSync('static/og-image.png',r.render().asPng());console.log('done')\""
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@sveltejs/adapter-cloudflare": "^4.7.2",
+    "@sveltejs/kit": "^2.16.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.0",
+    "svelte": "^5.0.0",
+    "svelte-check": "^4.0.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.0"
+  }
+}
