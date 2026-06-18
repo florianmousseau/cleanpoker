@@ -10,8 +10,6 @@
     "lint": "eslint src/",
     "size": "size-limit",
     "gen-og": "node -e \"const {Resvg}=require('@resvg/resvg-js'),fs=require('fs');const r=new Resvg(fs.readFileSync('static/og-image.svg','utf-8'),{width:1200,height:630});fs.writeFileSync('static/og-image.png',r.render().asPng());console.log('done')\"",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
   },
   "size-limit": [
     {
@@ -31,7 +29,6 @@
   ],
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "^1.61.0",
     "@resvg/resvg-js": "^2.6.2",
     "@size-limit/file": "^12.1.0",
     "@sveltejs/adapter-cloudflare": "^4.7.2",
