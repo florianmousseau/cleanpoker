@@ -402,7 +402,7 @@
                 </tr>
               </thead>
               <tbody>
-                {#each [...roomState.activity].reverse() as entry, i (i)}
+                {#each [...roomState.activity].reverse() as entry (`${entry.timestamp}-${entry.initiator}-${entry.message}`)}
                   <tr>
                     <td class="log-time">{entry.timestamp}</td>
                     <td>{entry.initiator}</td>
