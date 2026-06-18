@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/florianmousseau/cleanpoker/internal/room"
-	_ "modernc.org/sqlite"
+	_ "modernc.org/sqlite" // registers the SQLite driver with database/sql
 )
 
 type DB struct {
