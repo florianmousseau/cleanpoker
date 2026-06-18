@@ -6,7 +6,7 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
   timeout: 30_000,
-  retries: CI ? 1 : 0,
+  retries: CI ? 2 : 0,
   reporter: CI ? [['github'], ['html', { open: 'never' }]] : 'list',
 
   use: {

@@ -192,7 +192,7 @@
               type="button"
               class="preset-btn"
               class:active={cardsInput === preset.cards}
-              onclick={() => { cardsInput = preset.cards; pushCards(preset.cards); }}
+              onclick={() => { cardsInput = preset.cards; }}
               aria-pressed={cardsInput === preset.cards}
             >{preset.label}</button>
           {/each}
