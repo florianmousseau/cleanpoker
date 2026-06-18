@@ -21,8 +21,8 @@ test('two players see each other after joining', async ({ browser }) => {
   await p2.getByTestId('join-btn').click();
   await expect(p2.getByTestId('cards-list')).toBeVisible();
 
-  await expect(p1.getByRole('cell', { name: 'Bob' })).toBeVisible({ timeout: 5000 });
-  await expect(p2.getByRole('cell', { name: 'Alice' })).toBeVisible({ timeout: 5000 });
+  await expect(p1.locator('td.player-name-cell', { hasText: 'Bob' })).toBeVisible({ timeout: 5000 });
+  await expect(p2.locator('td.player-name-cell', { hasText: 'Alice' })).toBeVisible({ timeout: 5000 });
 
   await ctx1.close();
   await ctx2.close();
