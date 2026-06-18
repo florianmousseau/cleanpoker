@@ -108,11 +108,6 @@ func (d *DB) LoadAll() ([]room.Snapshot, error) {
 	return snaps, rows.Err()
 }
 
-func (d *DB) Delete(id string) error {
-	_, err := d.sql.Exec(`DELETE FROM rooms WHERE id = ?`, id)
-	return err
-}
-
 func (d *DB) Cleanup(maxAge time.Duration) error {
 	cutoff := time.Now().Add(-maxAge).Unix()
 	_, err := d.sql.Exec(`DELETE FROM rooms WHERE last_activity < ?`, cutoff)

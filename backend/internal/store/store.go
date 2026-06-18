@@ -61,19 +61,15 @@ func (s *Store) RunCleanup(ttl time.Duration) {
 	ticker := time.NewTicker(time.Hour)
 	defer ticker.Stop()
 	for range ticker.C {
-		var toDelete []string
 		s.mu.Lock()
 		for id, r := range s.rooms {
 			if time.Since(r.LastActivity()) > ttl {
 				delete(s.rooms, id)
-				toDelete = append(toDelete, id)
 			}
 		}
 		s.mu.Unlock()
-		for _, id := range toDelete {
-			if err := s.db.Delete(id); err != nil {
-				log.Printf("warn: failed to delete room %s: %v", id, err)
-			}
+		if err := s.db.Cleanup(ttl); err != nil {
+			log.Printf("warn: failed to cleanup db: %v", err)
 		}
 	}
 }
