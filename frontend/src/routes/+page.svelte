@@ -4,7 +4,6 @@
 
 <HomepageTemplate
   locale="fr"
-  redirectOnMount={true}
   pageTitle="CleanPoker | Planning poker gratuit, sans compte"
   metaDesc="Outil de planning poker collaboratif. Créez une session, partagez l'URL, estimez en équipe. Sans compte, sans tracking. Accessible WCAG 2.1 AA."
   canonical="https://cleanpoker.dev"

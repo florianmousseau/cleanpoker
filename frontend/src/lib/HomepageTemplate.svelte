@@ -2,12 +2,10 @@
   import { PUBLIC_API_URL } from '$env/static/public';
   import { goto, replaceState } from '$app/navigation';
   import { browser } from '$app/environment';
-  import { onMount } from 'svelte';
   import { lang } from '$lib/lang.svelte';
 
   interface Props {
     locale: 'fr' | 'en' | 'es' | 'de' | 'pt';
-    redirectOnMount?: boolean;
     pageTitle: string;
     metaDesc: string;
     canonical: string;
@@ -36,7 +34,6 @@
 
   let {
     locale,
-    redirectOnMount = false,
     pageTitle,
     metaDesc,
     canonical,
@@ -80,7 +77,7 @@
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
   });
 
-  const otherLangs = (['fr', 'en', 'es', 'de', 'pt'] as const).filter(l => l !== locale);
+  const allLangs = ['fr', 'en', 'es', 'de', 'pt'] as const;
   const langHref = (l: string) => l === 'fr' ? '/' : `/${l}`;
 
   let cardsInput = $state(
@@ -90,20 +87,6 @@
   );
   let creating = $state(false);
   let error = $state('');
-
-  onMount(() => {
-    if (!redirectOnMount) return;
-    const saved = localStorage.getItem('lang');
-    if (saved === 'en') { goto('/en', { replaceState: true }); return; }
-    if (saved === 'es') { goto('/es', { replaceState: true }); return; }
-    if (saved === 'de') { goto('/de', { replaceState: true }); return; }
-    if (saved === 'pt') { goto('/pt', { replaceState: true }); return; }
-    const bl = navigator.language.toLowerCase();
-    if (bl.startsWith('pt')) { goto('/pt', { replaceState: true }); return; }
-    if (bl.startsWith('es')) { goto('/es', { replaceState: true }); return; }
-    if (bl.startsWith('de')) { goto('/de', { replaceState: true }); return; }
-    if (bl.startsWith('en')) { goto('/en', { replaceState: true }); return; }
-  });
 
   function pushCards(value: string) {
     const safe = value.replace(/&/g, '%26').replace(/=/g, '%3D');
@@ -171,11 +154,6 @@
         <span class="logo" aria-hidden="true">♠</span>
         <span class="logo-text">CleanPoker</span>
       </div>
-      <nav class="lang-nav" aria-label={navAriaLabel}>
-        {#each otherLangs as l (l)}
-          <a href={langHref(l)} class="lang-link" hreflang={l}>{l.toUpperCase()}</a>
-        {/each}
-      </nav>
     </div>
   </header>
 
@@ -228,6 +206,15 @@
   </main>
 
   <footer class="footer container">
+    <nav class="lang-nav" aria-label={navAriaLabel}>
+      {#each allLangs as l (l)}
+        {#if l === locale}
+          <span class="lang-link lang-current" lang={l} aria-current="page">{l.toUpperCase()}</span>
+        {:else}
+          <a href={langHref(l)} class="lang-link" lang={l} hreflang={l} onclick={() => lang.set(l)}>{l.toUpperCase()}</a>
+        {/if}
+      {/each}
+    </nav>
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">{footerSource}</a>
       · <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">{footerLicense}</a>
@@ -244,14 +231,6 @@
   .logo-group { display: flex; align-items: center; gap: 0.5rem; }
   .logo { font-size: 1.5rem; color: var(--color-primary); }
   .logo-text { font-size: 1.25rem; font-weight: 700; }
-  .lang-nav { display: flex; gap: 0.375rem; }
-  .lang-link {
-    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;
-    color: var(--color-text-muted); text-decoration: none;
-    padding: 0.25rem 0.625rem; border: 1px solid var(--color-border);
-    border-radius: 99px; transition: color 0.15s, border-color 0.15s;
-  }
-  .lang-link:hover { color: var(--color-primary); border-color: var(--color-primary); }
 
   .hero {
     flex: 1; display: flex; flex-direction: column;
@@ -293,5 +272,14 @@
   .hint { font-size: 0.875rem; color: var(--color-text-muted); }
   .error { color: var(--color-danger); font-weight: 600; }
 
-  .footer { padding: 1.5rem 1rem; border-top: 1px solid var(--color-border); font-size: 0.875rem; color: var(--color-text-muted); text-align: center; }
+  .footer { padding: 1.5rem 1rem; border-top: 1px solid var(--color-border); font-size: 0.875rem; color: var(--color-text-muted); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+  .lang-nav { display: flex; gap: 0.375rem; flex-wrap: wrap; justify-content: center; }
+  .lang-link {
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;
+    color: var(--color-text-muted); text-decoration: none;
+    padding: 0.25rem 0.625rem; border: 1px solid var(--color-border);
+    border-radius: 99px; transition: color 0.15s, border-color 0.15s;
+  }
+  .lang-link:hover { color: var(--color-primary); border-color: var(--color-primary); }
+  .lang-current { color: var(--color-primary); border-color: var(--color-primary); cursor: default; }
 </style>
