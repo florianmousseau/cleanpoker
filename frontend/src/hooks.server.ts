@@ -32,18 +32,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 		if (saved && LOCALE_SET.has(saved)) {
 			throw redirect(302, `/${saved}`);
 		}
-		if (!saved) {
+		if (saved) {
+			event.cookies.set('lang', 'fr', cookieOpts);
+		} else {
 			const detected = parseAcceptLanguage(event.request.headers.get('accept-language'));
 			if (detected === 'fr') {
-				// browser is French → serve root, persist cookie
 				event.cookies.set('lang', 'fr', cookieOpts);
 			} else {
-				// known non-French lang → redirect; unknown/absent → English default
 				throw redirect(302, `/${detected ?? 'en'}`);
 			}
-		} else {
-			// saved === 'fr' (explicit choice) → serve root
-			event.cookies.set('lang', 'fr', cookieOpts);
 		}
 	}
 
