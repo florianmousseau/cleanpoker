@@ -15,6 +15,7 @@ export interface Translation {
   activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
   live: { newRound: (n: number) => string; revealed: string };
   footer: { source: string; license: string; legal: string };
+  theme: { toDark: string; toLight: string };
 }
 
 export const FR: Translation = {
@@ -119,6 +120,7 @@ export const FR: Translation = {
     license: 'Licence MIT',
     legal: 'Mentions légales',
   },
+  theme: { toDark: 'Passer en mode sombre', toLight: 'Passer en mode clair' },
 };
 
 export const EN: Translation = {
@@ -223,6 +225,7 @@ export const EN: Translation = {
     license: 'MIT License',
     legal: 'Legal notice',
   },
+  theme: { toDark: 'Switch to dark mode', toLight: 'Switch to light mode' },
 };
 
 export const ES: Translation = {
@@ -327,6 +330,7 @@ export const ES: Translation = {
     license: 'Licencia MIT',
     legal: 'Aviso legal',
   },
+  theme: { toDark: 'Cambiar a modo oscuro', toLight: 'Cambiar a modo claro' },
 };
 
 export const DE: Translation = {
@@ -431,6 +435,7 @@ export const DE: Translation = {
     license: 'MIT-Lizenz',
     legal: 'Impressum',
   },
+  theme: { toDark: 'Zum Dunkelmodus wechseln', toLight: 'Zum Hellmodus wechseln' },
 };
 
 export const PT: Translation = {
@@ -535,6 +540,7 @@ export const PT: Translation = {
     license: 'Licença MIT',
     legal: 'Aviso legal',
   },
+  theme: { toDark: 'Mudar para modo escuro', toLight: 'Mudar para modo claro' },
 };
 
 export function translateActivity(
