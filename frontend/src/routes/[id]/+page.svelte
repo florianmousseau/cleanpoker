@@ -154,7 +154,7 @@
           <h2 id="controls-title">{T.controls.title}</h2>
           <div class="controls-btns">
             <button class="btn btn-secondary btn-block" onclick={() => room.clear()} data-testid="new-round-btn">
-              {room.roomState.state === 'revealed' ? T.controls.newRound : T.controls.clear}
+              {T.controls.newRound}
             </button>
             <button class="btn btn-primary btn-block" onclick={() => room.show()} disabled={!allVoted || room.roomState.state === 'revealed'}
               aria-describedby={!allVoted ? 'show-hint' : undefined}
