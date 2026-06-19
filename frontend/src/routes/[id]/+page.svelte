@@ -2,6 +2,7 @@
   import { page } from '$app/state';
   import { onMount } from 'svelte';
   import { lang } from '$lib/lang.svelte';
+  import { theme } from '$lib/theme.svelte';
   import { FR, EN, ES, DE, PT, translateActivity } from '$lib/i18n';
   import { useRoom } from '$lib/useRoom.svelte';
 
@@ -65,6 +66,19 @@
           <option value="de">DE</option>
           <option value="pt">PT</option>
         </select>
+        <button
+          type="button"
+          class="theme-toggle-btn"
+          aria-label={theme.current === 'dark' ? T.theme.toLight : T.theme.toDark}
+          aria-pressed={theme.current === 'dark'}
+          onclick={() => theme.toggle()}
+        >
+          {#if theme.current === 'dark'}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          {:else}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          {/if}
+        </button>
       </div>
     </div>
   </header>
@@ -358,6 +372,14 @@
     cursor: pointer; appearance: none; min-width: 3.5rem; text-align: center;
   }
   .lang-select:hover { border-color: var(--color-primary); color: var(--color-primary); }
+  .theme-toggle-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 2rem; height: 2rem; padding: 0;
+    background: none; border: 1px solid var(--color-border);
+    border-radius: 99px; color: var(--color-text-muted);
+    cursor: pointer; transition: color 0.15s, border-color 0.15s;
+  }
+  .theme-toggle-btn:hover { color: var(--color-primary); border-color: var(--color-primary); }
 
   .main { flex: 1; padding-top: 1.5rem; padding-bottom: 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
 

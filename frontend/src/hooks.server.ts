@@ -49,8 +49,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 		event.cookies.set('lang', locale, cookieOpts);
 	}
 
+	const themeCookie = event.cookies.get('theme');
+	const themeAttr = themeCookie === 'dark' ? ' data-theme="dark"'
+		: themeCookie === 'light' ? ' data-theme="light"'
+		: '';
+
 	return resolve(event, {
 		transformPageChunk: ({ html }) =>
-			html.replace('<html lang="fr">', `<html lang="${locale ?? 'fr'}">`),
+			html.replace('<html lang="fr">', `<html lang="${locale ?? 'fr'}"${themeAttr}>`),
 	});
 };
