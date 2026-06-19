@@ -3,6 +3,7 @@ import { redirect } from '@sveltejs/kit';
 
 const LOCALES = ['en', 'es', 'de', 'pt'] as const;
 type Locale = typeof LOCALES[number];
+const LOCALE_SET = new Set<string>(LOCALES);
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 type AnyLang = Locale | 'fr';
@@ -28,7 +29,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	if (pathname === '/') {
 		const saved = event.cookies.get('lang') as Locale | undefined;
-		if (saved && LOCALES.includes(saved)) {
+		if (saved && LOCALE_SET.has(saved)) {
 			throw redirect(302, `/${saved}`);
 		}
 		if (!saved) {
