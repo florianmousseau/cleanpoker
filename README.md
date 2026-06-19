@@ -31,13 +31,13 @@ Most planning poker tools show ads, track users, and weigh megabytes. CleanPoker
 | Ads / freemium upsells | Zero ads, zero monetization |
 | Google Analytics, cookies | Zero trackers, zero cookies |
 | Require account creation | No account, just a link |
-| Heavy JS bundles | < 50 KB page weight |
+| Heavy JS bundles | < 50 KB JS total (brotli) |
 | Accessibility as an afterthought | Lighthouse accessibility **100** |
 
 ## Features
 
 - **Instant room**: create a session, share the URL, done
-- **Custom card decks**: Fibonacci, T-shirt, 2n, or any values you want
+- **Custom card decks**: Fibonacci, T-shirt, 2ⁿ, or any values you want
 - **Real-time votes**: WebSocket, no polling
 - **Reveal & new round**: smooth flow for sprint planning
 - **Observers**: product owners and stakeholders can watch without voting
@@ -45,8 +45,8 @@ Most planning poker tools show ads, track users, and weigh megabytes. CleanPoker
 - **Full keyboard nav**: tab through everything
 - **Screen reader support**: NVDA, VoiceOver, `aria-live` for real-time updates
 - **5 languages**: FR, EN, ES, DE, PT with browser auto-detection
-- **Persistent rooms**: survive backend restarts, auto-deleted after 24h inactivity
 - **Auto-reconnect**: WebSocket reconnects automatically with exponential backoff
+- **Ephemeral rooms**: in-memory, auto-deleted after 24h of inactivity
 
 ## Goals
 
@@ -55,7 +55,7 @@ Most planning poker tools show ads, track users, and weigh megabytes. CleanPoker
 | CO₂ / visit | < 0.1g |
 | Lighthouse Performance | 100 |
 | Lighthouse Accessibility | 100 |
-| Page weight | < 50 KB |
+| Page weight | < 50 KB JS (brotli) |
 | Third-party cookies | 0 |
 | Trackers | 0 |
 
@@ -65,21 +65,24 @@ Most planning poker tools show ads, track users, and weigh megabytes. CleanPoker
 |---|---|---|
 | Backend | Go + `golang.org/x/net/websocket` | ~15 MB RAM, native binary, no runtime |
 | Frontend | SvelteKit 5 (runes) | SSR, zero virtual DOM, minimal bundle |
+| Storage | In-memory (Go map) | Zero dependencies, rooms auto-expire after 24h |
 | Frontend hosting | Cloudflare Pages | Global CDN, renewable energy |
 | Backend hosting | Fly.io `cdg` Paris | Renewable energy, EU data residency |
-| Database | SQLite (`modernc.org/sqlite`) | Rooms survive deploys, pure Go, no CGO |
 
 ## Quality & Security
 
-Every push to `main` runs a full quality and security pipeline before deploying.
+Every push to `main` runs a quality and security pipeline before deploying.
 
 | Tool | What it checks | Dashboard |
 |---|---|---|
 | **golangci-lint** | Go static analysis (errcheck, staticcheck, govet…) | GitHub Actions |
 | **ESLint** | TypeScript + Svelte code quality | GitHub Actions |
+| **svelte-check** | TypeScript types in Svelte components | GitHub Actions |
+| **Go tests** | Backend unit tests | GitHub Actions |
+| **Bundle Size** | JS bundle stays under size budget | GitHub Actions |
 | **SonarCloud** | Bugs, code smells, security hotspots | [sonarcloud.io →](https://sonarcloud.io/project/overview?id=florianmousseau_cleanpoker) |
 | **CodeQL** | SAST vulnerability scan (Go + TypeScript) | [Security tab →](https://github.com/florianmousseau/cleanpoker/security/code-scanning) |
-| **Lighthouse CI** | Performance, accessibility, SEO, PWA after each deploy | GitHub Actions |
+| **Lighthouse CI** | Performance, accessibility, SEO after each deploy | GitHub Actions |
 | **Dependabot** | Automated dependency updates (npm, Go, Actions) | [Pull requests →](https://github.com/florianmousseau/cleanpoker/pulls) |
 | **Eco-CI** | CI pipeline energy consumption estimate | GitHub Actions summary |
 
@@ -89,7 +92,7 @@ Every push to `main` runs a full quality and security pipeline before deploying.
 - **System fonts**: no Google Fonts download
 - **Vanilla CSS**: no CSS framework (Tailwind, Bootstrap, etc.)
 - **Zero virtual DOM**: SvelteKit compiles to vanilla JS
-- **Minimal runtime**: Go binary ~15 MB RAM, Alpine Docker image
+- **Minimal runtime**: Go binary ~15 MB RAM, no database
 - **Green hosting**: Cloudflare Pages + Fly.io CDG both run on renewable energy
 - **CI energy tracked**: each pipeline run is measured by Eco-CI
 
@@ -109,7 +112,6 @@ Every push to `main` runs a full quality and security pipeline before deploying.
 ```bash
 # Backend
 cd backend
-go mod tidy
 go run ./cmd/server
 
 # Frontend (separate terminal)
@@ -121,24 +123,12 @@ npm run dev
 
 Open `http://localhost:5173`.
 
-## E2E Tests
-
-```bash
-cd frontend
-npm install
-# needs backend running (see "Run locally" above)
-npm run test:e2e        # headless
-npm run test:e2e:ui     # interactive UI
-```
-
-16 tests covering the full user flow: room creation, voting, reveal, new round, observers, multiplayer synchronisation.
-
 ## Git Flow
 
 ```
 feature/* ──→ develop (PR required, CI must pass)
                  │
-                 └──→ main (PR required, CI must pass)  ──→ tag vX.Y.Z
+                 └──→ main (PR required, CI must pass)  ──→ deploy
 ```
 
 - **`main`**: production only — never commit directly, always via PR from `develop`
@@ -152,8 +142,8 @@ Both `main` and `develop` have branch protection: PRs required, direct push bloc
 CI/CD via GitHub Actions — auto-deploys on push to `main`, quality gate must pass first.
 
 ```
-Code Quality (golangci-lint + ESLint + SonarCloud)
-E2E Tests (Playwright, 16 tests)
+Code Quality (golangci-lint + ESLint + svelte-check + Go tests + SonarCloud)
+Bundle Size check
   → deploy-frontend (Cloudflare Pages)
   → deploy-backend  (Fly.io)
   → lighthouse audit
