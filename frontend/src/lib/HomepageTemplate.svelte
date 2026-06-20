@@ -33,6 +33,7 @@
     footerSource: string;
     footerLicense: string;
     footerGreen: string;
+    footerAccessibility: string;
     footerLegal: string;
   }
 
@@ -64,6 +65,7 @@
     footerSource,
     footerLicense,
     footerGreen,
+    footerAccessibility,
     footerLegal,
   }: Props = $props();
 
@@ -231,6 +233,7 @@
     source={footerSource}
     license={footerLicense}
     green={footerGreen}
+    accessibility={footerAccessibility}
     legal={footerLegal}
     {locale}
   />

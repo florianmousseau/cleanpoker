@@ -30,5 +30,6 @@
   footerSource="Código fonte"
   footerLicense="Licença MIT"
   footerGreen="Eco-design"
+  footerAccessibility="Acessibilidade"
   footerLegal="Aviso legal"
 />
