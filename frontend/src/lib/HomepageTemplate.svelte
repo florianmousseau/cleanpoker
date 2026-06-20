@@ -17,6 +17,7 @@
     twitterDesc: string;
     jsonLdUrl: string;
     jsonLdDesc: string;
+    accessibilitySummary: string;
     navAriaLabel: string;
     h1Accent: string;
     lead: string;
@@ -45,6 +46,7 @@
     twitterDesc,
     jsonLdUrl,
     jsonLdDesc,
+    accessibilitySummary,
     navAriaLabel,
     h1Accent,
     lead,
@@ -76,6 +78,17 @@
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+    accessibilityFeature: [
+      'highContrastDisplay',
+      'readingOrder',
+      'structuralNavigation',
+      'alternativeText',
+      'displayTransformability',
+    ],
+    accessibilityHazard: ['noFlashingHazard', 'noMotionSimulationHazard', 'noSoundHazard'],
+    accessibilityControl: ['fullKeyboardControl', 'fullMouseControl', 'fullTouchControl'],
+    accessibilityAPI: 'ARIA',
+    accessibilitySummary,
   });
 
   const allLangs = ['fr', 'en', 'es', 'de', 'pt'] as const;
