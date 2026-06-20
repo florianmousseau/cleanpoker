@@ -8,6 +8,45 @@
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives" />
   <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives" />
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Alternativen zum Planning Poker: T-Shirt-Schätzung, Dot Voting und mehr',
+    url: 'https://cleanpoker.dev/de/alternatives',
+    description: 'Vergleich der Hauptalternativen zum Planning Poker: T-Shirt-Schätzung, Affinity Mapping, Dot Voting und Bucket-System.',
+    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+  })}<\/script>`}
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Was sind die Hauptalternativen zum Planning Poker?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Die Hauptalternativen zu Planning Poker sind: T-Shirt-Größen (XS bis XXL), Affinity Mapping (Gruppierung nach Größe), Dot Voting (Budgetzuteilung) und das Bucket System (Sortierung in vordefinierte Größen-Buckets). Jede tauscht Präzision gegen Geschwindigkeit.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Wann sollte man T-Shirt-Größen statt Planning Poker verwenden?',
+        acceptedAnswer: { '@type': 'Answer', text: 'T-Shirt-Größen verwenden, wenn schnelle Grobschätzungen benötigt werden, wenn mit nicht-technischen Stakeholdern geschätzt wird oder wenn zu Projektbeginn ein großes Backlog gepflegt wird. Zu Planning Poker (Fibonacci) wechseln, wenn Velocity-Tracking über Sprints benötigt wird.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Was ist Affinity Mapping in Agile?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Affinity Mapping ist eine stille, kollaborative Technik, bei der Teammitglieder gleichzeitig Stories in Größen-Buckets (XS bis XL) einordnen. Meinungsverschiedenheiten werden nur für Ausreißer diskutiert. Es ist schneller als Planning Poker für große Backlogs.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Was ist das Bucket System in der agilen Schätzung?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Das Bucket System verwendet vordefinierte numerische Buckets (z.B. 1, 2, 3, 5, 8, 13, 20, 40, 100). Stories werden durch Vergleich mit einer Referenz-Story in Buckets sortiert. Es ist viel schneller als Planning Poker für große Backlogs (50+ Stories).' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Ist Planning Poker immer die beste agile Schätztechnik?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Nein. Planning Poker eignet sich am besten für Sprint-Level-Schätzungen klar definierter Stories in eingespielten Teams. Für große Backlogs, frühe Projektphasen oder nicht-technisches Publikum sind Affinity Mapping oder T-Shirt-Größen schneller und ebenso genau.' },
+      },
+    ],
+  })}<\/script>`}
 </svelte:head>
 
 <div class="page container">

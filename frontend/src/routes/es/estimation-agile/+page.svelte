@@ -8,6 +8,45 @@
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile" />
   <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile" />
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Estimación ágil: story points, velocidad y planificación de sprint',
+    url: 'https://cleanpoker.dev/es/estimation-agile',
+    description: 'Guía completa de estimación ágil: story points, velocidad, planificación de capacidad y errores comunes.',
+    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+  })}<\/script>`}
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '¿Cuál es la diferencia entre story points y horas?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Los story points miden complejidad relativa, no tiempo. Una historia de 5 puntos es aproximadamente el doble de compleja que una de 3 puntos, independientemente de quién la implemente o cuánto tarde. Las horas varían según el desarrollador y el contexto; la complejidad es relativa al equipo y estable.' },
+      },
+      {
+        '@type': 'Question',
+        name: '¿Qué es la velocidad en agile?',
+        acceptedAnswer: { '@type': 'Answer', text: 'La velocidad es la cantidad de story points que un equipo completa por sprint en promedio. Después de 3-5 sprints, la velocidad se estabiliza y se convierte en un input confiable para la planificación de releases y el compromiso de sprint.' },
+      },
+      {
+        '@type': 'Question',
+        name: '¿Debe el equipo estimar bugs y deuda técnica?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Sí. Si un bug requiere un esfuerzo significativo, estímalo. Si el trabajo de deuda técnica está planificado en un sprint, debe estimarse y contarse en la velocidad. Ignorarla produce una velocidad inflada que engaña a la planificación.' },
+      },
+      {
+        '@type': 'Question',
+        name: '¿Cuál es la velocidad correcta del equipo?',
+        acceptedAnswer: { '@type': 'Answer', text: 'No hay una velocidad universalmente correcta. Un equipo de 4 que entrega 30 puntos por sprint no es mejor ni peor que un equipo de 6 que entrega 60 puntos. La velocidad es una métrica interna del equipo para pronosticar, no un benchmark de rendimiento.' },
+      },
+      {
+        '@type': 'Question',
+        name: '¿Cuántos sprints tarda la velocidad en estabilizarse?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Típicamente 3 a 5 sprints. El primer sprint suele ser más bajo mientras el equipo se calibra. En el sprint 4 o 5, el promedio se vuelve suficientemente confiable para pronosticar fechas de release.' },
+      },
+    ],
+  })}<\/script>`}
 </svelte:head>
 
 <div class="page container">

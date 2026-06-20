@@ -8,6 +8,45 @@
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile" />
   <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile" />
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Agile Schätzung: Story Points, Velocity und Sprint-Planung',
+    url: 'https://cleanpoker.dev/de/estimation-agile',
+    description: 'Vollständiger Leitfaden zur agilen Schätzung: Story Points, Velocity, Kapazitätsplanung und häufige Fehler.',
+    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+  })}<\/script>`}
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Was ist der Unterschied zwischen Story Points und Stunden?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Story Points messen relative Komplexität, keine Zeit. Eine 5-Punkte-Story ist ungefähr doppelt so komplex wie eine 3-Punkte-Story, unabhängig davon, wer sie implementiert oder wie lange es dauert. Stunden variieren je nach Entwickler und Kontext; Komplexität ist teamrelativ und stabil.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Was ist Velocity in Agile?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Velocity ist die Anzahl der Story Points, die ein Team pro Sprint im Durchschnitt abschließt. Nach 3-5 Sprints stabilisiert sich die Velocity und wird zu einem zuverlässigen Input für Release-Planung und Sprint-Commitment.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Sollte das Team Bugs und technische Schulden schätzen?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Ja. Wenn ein Bug erheblichen Aufwand erfordert, schätzen Sie ihn. Wenn technische Schuldenarbeit in einem Sprint geplant ist, sollte sie geschätzt und in der Velocity gezählt werden. Sie zu ignorieren erzeugt eine aufgeblähte Velocity, die die Planung irreführt.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Was ist die richtige Team-Velocity?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Es gibt keine universell korrekte Velocity. Ein Team von 4 Personen mit 30 Punkten pro Sprint ist nicht besser oder schlechter als ein Team von 6 mit 60 Punkten. Velocity ist eine interne Teammetrik für Prognosen, kein Leistungsmaßstab.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Wie viele Sprints dauert es, bis sich die Velocity stabilisiert?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Typischerweise 3 bis 5 Sprints. Der erste Sprint ist oft niedriger, da sich das Team kalibriert. Ab Sprint 4 oder 5 wird der Durchschnitt für Release-Datumsprognosen zuverlässig genug.' },
+      },
+    ],
+  })}<\/script>`}
 </svelte:head>
 
 <div class="page container">

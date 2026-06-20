@@ -1,0 +1,47 @@
+# CleanPoker
+
+> Free planning poker for agile teams. No account, no tracking, no ads. Open source.
+
+CleanPoker is a real-time planning poker tool built for Scrum and Kanban teams. It uses WebSockets for instant card reveals, supports Fibonacci and custom scales, and works entirely in the browser with no data stored server-side. The codebase is open source (MIT License).
+
+## Key features
+
+- Real-time sessions: create a room, share the link, vote simultaneously, reveal all at once
+- Fibonacci scale (1, 2, 3, 5, 8, 13, 21, ?) by default, fully customizable
+- No account required, no cookies tracked, no third-party scripts
+- WCAG 2.1 AA accessible, Lighthouse 100/100 performance
+- Available in 5 languages: English, French, Spanish, German, Portuguese
+- Hosted on renewable energy (Cloudflare Pages + Fly.io CDG Paris)
+
+## How planning poker works
+
+Planning poker is a consensus-based agile estimation technique. Each team member holds cards with values from the Fibonacci sequence. For each user story, everyone reveals their card simultaneously to avoid anchoring bias. When estimates diverge, the team discusses until convergence. The goal is not to find the "correct" estimate but to surface hidden complexity and align understanding.
+
+## Why Fibonacci?
+
+The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the larger a task, the less precisely it can be estimated. The increasing gaps between values prevent false precision and force meaningful discussion when team members disagree.
+
+## Content pages
+
+- [Planning poker guide](https://cleanpoker.dev/planning-poker) - How to run a planning poker session, card meanings, best practices
+- [Fibonacci in planning poker](https://cleanpoker.dev/fibonacci) - Why Fibonacci, card selection, scale variants
+- [Agile estimation guide](https://cleanpoker.dev/estimation-agile) - Story points vs hours, velocity, sprint planning, common mistakes
+- [Alternatives to planning poker](https://cleanpoker.dev/alternatives) - T-shirt sizing, affinity mapping, dot voting, bucket system
+- [About CleanPoker](https://cleanpoker.dev/a-propos) - Project philosophy, links to all guides
+
+## Multilingual
+
+All content pages are available in 5 languages with canonical hreflang:
+- English: https://cleanpoker.dev (root)
+- French: https://cleanpoker.dev/fr/
+- Spanish: https://cleanpoker.dev/es/
+- German: https://cleanpoker.dev/de/
+- Portuguese: https://cleanpoker.dev/pt/
+
+## Technical stack
+
+- Frontend: SvelteKit 5 (runes), TypeScript, vanilla CSS
+- Backend: Go, native WebSocket
+- Bundle: under 50 KB JS (brotli compressed)
+- No external dependencies at runtime
+- Source: https://github.com/florianmousseau/cleanpoker
