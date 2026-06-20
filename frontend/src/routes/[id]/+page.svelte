@@ -404,7 +404,8 @@
   }
   .poker-card:hover:not(:disabled) { border-color: var(--color-primary); transform: translateY(-3px); }
   .poker-card.selected { background: var(--color-card-selected); border-color: var(--color-card-border-selected); color: var(--color-primary); transform: translateY(-5px); box-shadow: var(--shadow-md); }
-  .poker-card:disabled { cursor: default; transform: none; }
+  .poker-card:disabled { opacity: 0.65; cursor: default; transform: none; }
+  .poker-card.selected:disabled { opacity: 1; }
 
   .controls-results-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   @media (max-width: 42rem) { .controls-results-row { grid-template-columns: 1fr; } }
