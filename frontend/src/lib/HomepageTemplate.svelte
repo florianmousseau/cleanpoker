@@ -17,6 +17,8 @@
     twitterDesc: string;
     jsonLdUrl: string;
     jsonLdDesc: string;
+    accessibilitySummary: string;
+    keywords: string;
     navAriaLabel: string;
     h1Accent: string;
     lead: string;
@@ -30,6 +32,7 @@
     createError: string;
     footerSource: string;
     footerLicense: string;
+    footerGreen: string;
     footerLegal: string;
   }
 
@@ -45,6 +48,8 @@
     twitterDesc,
     jsonLdUrl,
     jsonLdDesc,
+    accessibilitySummary,
+    keywords,
     navAriaLabel,
     h1Accent,
     lead,
@@ -58,6 +63,7 @@
     createError,
     footerSource,
     footerLicense,
+    footerGreen,
     footerLegal,
   }: Props = $props();
 
@@ -76,6 +82,18 @@
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+    accessibilityFeature: [
+      'highContrastDisplay',
+      'readingOrder',
+      'structuralNavigation',
+      'alternativeText',
+      'displayTransformability',
+    ],
+    accessibilityHazard: ['noFlashingHazard', 'noMotionSimulationHazard', 'noSoundHazard'],
+    accessibilityControl: ['fullKeyboardControl', 'fullMouseControl', 'fullTouchControl'],
+    accessibilityAPI: 'ARIA',
+    accessibilitySummary,
+    keywords,
   });
 
   const allLangs = ['fr', 'en', 'es', 'de', 'pt'] as const;
@@ -127,6 +145,7 @@
 <svelte:head>
   <title>{pageTitle}</title>
   <meta name="description" content={metaDesc} />
+  <meta name="keywords" content={keywords} />
   <link rel="canonical" href={canonical} />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en" />
@@ -211,6 +230,7 @@
     {navAriaLabel}
     source={footerSource}
     license={footerLicense}
+    green={footerGreen}
     legal={footerLegal}
     {locale}
   />
