@@ -64,7 +64,7 @@
     </p>
     <p>
       La propriété clé : <strong>les écarts grandissent avec la valeur</strong>. Entre 1 et 2,
-      l'écart est 1. Entre 13 et 21, il est 8. Ce n'est pas arbitraire — cela reflète la façon
+      l'écart est 1. Entre 13 et 21, il est 8. Ce n'est pas arbitraire, cela reflète la façon
       dont la cognition humaine fonctionne face à l'incertitude.
     </p>
 

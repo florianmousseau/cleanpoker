@@ -56,7 +56,7 @@
       L'estimation ne sert pas à prédire l'avenir. Elle sert à
       <strong>révéler ce que l'équipe ne sait pas encore</strong>. Une bonne session
       d'estimation fait apparaître la complexité cachée, les hypothèses implicites et les
-      dépendances non résolues — avant d'écrire la moindre ligne de code.
+      dépendances non résolues, avant d'écrire la moindre ligne de code.
     </p>
     <p>
       Le chiffre produit est moins précieux que la conversation qui l'a généré.
@@ -64,7 +64,7 @@
 
     <h2>Story points vs. heures : la différence clé</h2>
     <p>
-      Les <strong>heures</strong> mesurent le temps — qui varie selon le développeur, le jour
+      Les <strong>heures</strong> mesurent le temps, qui varie selon le développeur, le jour
       et le contexte. Un senior finit une tâche en 2 heures ; un junior en 8. Ni l'un ni
       l'autre n'a tort ; ils mesurent simplement des choses différentes.
     </p>
@@ -79,7 +79,7 @@
     <p>
       La vélocité est le nombre de story points qu'une équipe complète par sprint en moyenne.
       Elle se calcule en fin de sprint en additionnant les points des stories terminées (pas
-      commencées, pas à moitié faites — uniquement done-done).
+      commencées, pas à moitié faites, uniquement done-done).
     </p>
     <p>
       Après 3 à 5 sprints, la vélocité se stabilise. On peut ensuite l'utiliser pour :
