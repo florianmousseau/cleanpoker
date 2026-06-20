@@ -8,6 +8,45 @@
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives" />
   <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives" />
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Alternativas al planning poker: tallas de camiseta, dot voting y más',
+    url: 'https://cleanpoker.dev/es/alternatives',
+    description: 'Comparativa de las principales alternativas al planning poker: tallas de camiseta, affinity mapping, dot voting y bucket system.',
+    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+  })}<\/script>`}
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: '¿Cuáles son las principales alternativas al planning poker?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Las principales alternativas al planning poker son: tallas de camiseta (XS a XXL), affinity mapping (agrupar historias por tamaño), dot voting (asignación de presupuesto) y el bucket system (clasificar historias en cubos de tamaño predefinidos). Cada una intercambia precisión por velocidad.' },
+      },
+      {
+        '@type': 'Question',
+        name: '¿Cuándo usar tallas de camiseta en lugar de planning poker?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Usa tallas de camiseta cuando necesitas estimaciones rápidas, cuando estimas con partes interesadas no técnicas o cuando refinas un backlog grande al inicio de un proyecto. Cambia a planning poker (Fibonacci) cuando necesites seguimiento de velocidad durante los sprints.' },
+      },
+      {
+        '@type': 'Question',
+        name: '¿Qué es el affinity mapping en agile?',
+        acceptedAnswer: { '@type': 'Answer', text: 'El affinity mapping es una técnica silenciosa y colaborativa donde los miembros del equipo colocan simultáneamente historias en cubos de tamaño (XS a XL). Los desacuerdos se discuten solo para los valores extremos. Es más rápido que el planning poker para backlogs grandes.' },
+      },
+      {
+        '@type': 'Question',
+        name: '¿Qué es el bucket system en estimación ágil?',
+        acceptedAnswer: { '@type': 'Answer', text: 'El bucket system usa cubos numéricos predefinidos (ej. 1, 2, 3, 5, 8, 13, 20, 40, 100). Las historias se clasifican en cubos por comparación con una historia de referencia. Es mucho más rápido que el planning poker para backlogs grandes (50+ historias).' },
+      },
+      {
+        '@type': 'Question',
+        name: '¿Es el planning poker siempre la mejor técnica de estimación ágil?',
+        acceptedAnswer: { '@type': 'Answer', text: 'No. El planning poker es mejor para estimaciones a nivel de sprint de historias bien definidas en equipos establecidos. Para backlogs grandes, proyectos en etapa temprana o audiencias no técnicas, el affinity mapping o las tallas de camiseta son más rápidos e igualmente precisos.' },
+      },
+    ],
+  })}<\/script>`}
 </svelte:head>
 
 <div class="page container">

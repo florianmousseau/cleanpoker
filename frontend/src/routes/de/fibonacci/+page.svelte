@@ -8,6 +8,45 @@
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci" />
   <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci" />
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Fibonacci im Planning Poker: Warum und wie man es verwendet',
+    url: 'https://cleanpoker.dev/de/fibonacci',
+    description: 'Vollständiger Leitfaden zur Fibonacci-Folge in agilen Schätzungen: Psychologie, Kartenauswahl und Skalenvergleich.',
+    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+  })}<\/script>`}
+  {@html `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Warum verwendet Planning Poker Fibonacci-Zahlen?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Fibonacci-Zahlen (1, 2, 3, 5, 8, 13, 21) modellieren wachsende Unsicherheit: Je größer eine Aufgabe, desto ungenauer kann sie geschätzt werden. Die wachsenden Abstände zwischen den Werten zwingen das Team zu einer klaren Positionierung ohne falsche Präzision.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Was bedeutet die ?-Karte im Planning Poker?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Die ?-Karte signalisiert "Ich kann diese Aufgabe nicht schätzen." Es ist ein gesundes Zeichen, dass die Story unklar ist, zu groß oder hat ungelöste Abhängigkeiten. Sie löst eine Klärungsdiskussion aus, bevor geschätzt wird.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Standard-Fibonacci oder modifiziertes Fibonacci verwenden?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Beide funktionieren. Standard-Fibonacci (1-21) eignet sich für die meisten Scrum-Teams. Modifiziertes Fibonacci mit 0, 0,5 und Werten über 21 ist nützlich, wenn sehr kleine Aufgaben oder Epics im gleichen Backlog unterschieden werden müssen.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Gibt es einen richtigen Fibonacci-Wert für eine Aufgabe?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Nein. Story Points sind relativ, nicht absolut. Eine 5 ist ungefähr doppelt so komplex wie eine 3 im gemeinsamen Referenzrahmen des Teams. Das Ziel ist Konsistenz über die Zeit, damit Velocity ein zuverlässiges Planungsinstrument wird.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Wann sollte ein Team von Fibonacci zu T-Shirt-Größen wechseln?',
+        acceptedAnswer: { '@type': 'Answer', text: 'T-Shirt-Größen (XS bis XXL) eignen sich besser für grobe Backlog-Pflege zu Projektbeginn oder für nicht-technische Stakeholder. Sobald das Team Velocity-Tracking benötigt, wechselt es zu Fibonacci Story Points für numerisches Tracking.' },
+      },
+    ],
+  })}<\/script>`}
 </svelte:head>
 
 <div class="page container">
