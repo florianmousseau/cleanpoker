@@ -90,7 +90,7 @@
       positionner clairement</strong> sans prétendre à une précision illusoire.
     </p>
     <p>
-      La carte <strong>?</strong> signifie "je ne sais pas estimer cette tâche" — signal utile
+      La carte <strong>?</strong> signifie "je ne sais pas estimer cette tâche", signal utile
       pour détecter un manque de clarté dans la spécification.
     </p>
 

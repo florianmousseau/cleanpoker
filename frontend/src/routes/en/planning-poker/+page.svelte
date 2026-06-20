@@ -89,7 +89,7 @@
       without pretending to illusory precision.
     </p>
     <p>
-      The <strong>?</strong> card means "I can't estimate this task" — a useful signal to detect
+      The <strong>?</strong> card means "I can't estimate this task", a useful signal to detect
       a lack of clarity in the specification.
     </p>
 

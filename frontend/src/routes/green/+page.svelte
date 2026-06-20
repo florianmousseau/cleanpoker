@@ -33,7 +33,7 @@
     <p>
       <strong>CleanPoker</strong> is built on <strong>responsible technology</strong> principles:
       every technical decision aims to reduce the carbon footprint, eliminate unnecessary dependencies
-      and respect user privacy. This isn't a label added as an afterthought —
+      and respect user privacy. This isn't a label added as an afterthought,
       it's the DNA of the project.
     </p>
 

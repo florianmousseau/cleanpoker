@@ -58,14 +58,14 @@
     <p>
       Agile estimation is often misunderstood. Teams either over-engineer it with spreadsheets
       or dismiss it as inaccurate. This guide explains the principles, the tools, and the
-      common mistakes — so your team can estimate with confidence and plan with clarity.
+      common mistakes, so your team can estimate with confidence and plan with clarity.
     </p>
 
     <h2>Why estimate at all?</h2>
     <p>
       Estimation is not about predicting the future. It is about
       <strong>surfacing what the team does not know</strong>. A good estimation session
-      reveals hidden complexity, unstated assumptions, and unresolved dependencies — before
+      reveals hidden complexity, unstated assumptions, and unresolved dependencies, before
       any code is written.
     </p>
     <p>
@@ -74,7 +74,7 @@
 
     <h2>Story points vs. hours: the key difference</h2>
     <p>
-      <strong>Hours</strong> measure time — which varies by developer, day, and context.
+      <strong>Hours</strong> measure time, which varies by developer, day, and context.
       A senior engineer may finish a task in 2 hours; a junior in 8. Neither estimate is
       wrong; they just measure different things.
     </p>
@@ -93,7 +93,7 @@
     <p>
       Velocity is the number of story points a team completes per sprint on average.
       It is calculated after each sprint by summing the points of all completed stories
-      (not started, not partially done — only done-done).
+      (not started, not partially done, only done-done).
     </p>
     <p>
       After 3–5 sprints, velocity stabilizes. You can then use it to:
@@ -105,7 +105,7 @@
     </ul>
     <p>
       Velocity is a <strong>team metric</strong>, not an individual one. Never compare
-      velocities across teams — scales differ and contexts differ.
+      velocities across teams, scales differ and contexts differ.
     </p>
 
     <h2>Capacity planning in practice</h2>
@@ -161,7 +161,7 @@
     <p>
       Re-estimate a story when its scope changes significantly mid-sprint, or when a new
       technical discovery makes the original estimate obviously wrong. Do not re-estimate
-      simply because the work took longer than expected — that information lives in velocity,
+      simply because the work took longer than expected, that information lives in velocity,
       not in the point value.
     </p>
 
