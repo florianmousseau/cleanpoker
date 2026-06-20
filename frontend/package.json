@@ -20,8 +20,11 @@
       "limit": "15 KB"
     },
     {
-      "name": "Total JS",
-      "path": ".svelte-kit/cloudflare/_app/immutable/**/*.js",
+      "name": "Shared JS (always loaded)",
+      "path": [
+        ".svelte-kit/cloudflare/_app/immutable/entry/*.js",
+        ".svelte-kit/cloudflare/_app/immutable/chunks/*.js"
+      ],
       "brotli": true,
       "gzip": false,
       "limit": "50 KB"

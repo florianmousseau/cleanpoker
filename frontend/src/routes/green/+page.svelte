@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Éco-conception & numérique responsable | CleanPoker</title>
-  <meta name="description" content="Déclaration d'éco-conception de CleanPoker. Bundle JS < 50 Ko, zéro trackers, zéro cookies, hébergement 100 % énergie renouvelable, Lighthouse Performance 100, CO₂ < 0,1 g par visite." />
+  <meta name="description" content="Déclaration d'éco-conception de CleanPoker. JS partagé < 40 Ko brotli, zéro trackers, zéro cookies, hébergement 100 % énergie renouvelable, Lighthouse Performance 100, CO₂ < 0,1 g par visite." />
   <link rel="canonical" href="https://cleanpoker.dev/green" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -37,7 +37,8 @@
         <tr><th>Métrique</th><th>Valeur</th></tr>
       </thead>
       <tbody>
-        <tr><td>Bundle JavaScript (brotli)</td><td><strong>&lt; 50 Ko</strong></td></tr>
+        <tr><td>JS partagé brotli (chargé toujours)</td><td><strong>&lt; 40 Ko</strong></td></tr>
+        <tr><td>JS total brotli (toutes routes)</td><td><strong>&lt; 60 Ko</strong></td></tr>
         <tr><td>CO₂ estimé par visite</td><td><strong>&lt; 0,1 g</strong></td></tr>
         <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
         <tr><td>Lighthouse Accessibilité</td><td><strong>100 / 100</strong></td></tr>
