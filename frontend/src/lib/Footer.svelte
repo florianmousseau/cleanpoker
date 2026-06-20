@@ -7,13 +7,12 @@
     source: string;
     license: string;
     legal: string;
-    green: string;
-    accessibility: string;
+    about: string;
     locale: string;
     onLangChange?: (l: string) => void;
   }
 
-  let { navAriaLabel, source, license, legal, green, accessibility, locale, onLangChange }: Props = $props();
+  let { navAriaLabel, source, license, legal, about, locale, onLangChange }: Props = $props();
 
   const ALL_LANGS = ['fr', 'en', 'es', 'de', 'pt'] as const;
   const langHref = (l: string) => (l === 'fr' ? '/' : `/${l}`);
@@ -76,8 +75,7 @@
   <p>
     <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">{source}</a>
     | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">{license}</a>
-    | <a href="{prefix}/green">{green}</a>
-    | <a href="{prefix}/accessibilite">{accessibility}</a>
+    | <a href="{prefix}/a-propos">{about}</a>
     | <a href="{prefix}/mentions-legales">{legal}</a>
   </p>
 </footer>

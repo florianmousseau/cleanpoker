@@ -29,7 +29,6 @@
   createError="Impossible de créer la salle. Réessaie."
   footerSource="Code source"
   footerLicense="Licence MIT"
-  footerGreen="Éco-conception"
-  footerAccessibility="Accessibilité"
+  footerAbout="À propos"
   footerLegal="Mentions légales"
 />

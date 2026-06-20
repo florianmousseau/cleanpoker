@@ -130,8 +130,7 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
-      | <a href="/green">Éco-conception</a>
-      | <a href="/accessibilite">Accessibilité</a>
+      | <a href="/a-propos">À propos</a>
       | <a href="/mentions-legales">Mentions légales</a>
     </p>
   </footer>
