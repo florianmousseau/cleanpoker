@@ -17,7 +17,7 @@
   accessibilitySummary="Navigation clavier complète (Tab, Entrée, Espace). Compatible avec les lecteurs d'écran NVDA et VoiceOver. Zones aria-live pour les mises à jour en temps réel. Ratio de contraste minimum 4,5:1. Lien d'évitement. Pas d'animation de distraction. Conforme WCAG 2.1 AA."
   keywords="planning poker, scrum, agile, sprint planning, éco-conception, green IT, numérique responsable, zéro trackers, sans cookies, vie privée, RGPD, accessible, WCAG 2.1 AA, lecteur d'écran, navigation clavier, NVDA, VoiceOver, sans compte, hébergement vert, énergie renouvelable, open source, MIT, Lighthouse 100"
   navAriaLabel="Langue"
-  h1Accent="créer · voter · décider"
+  h1Accent="créer, voter, décider"
   lead="Créez une session, partagez l'URL, estimez en équipe. Aucun compte requis."
   cardsLabel="Cartes"
   cardsSepHint="(séparées par des virgules)"

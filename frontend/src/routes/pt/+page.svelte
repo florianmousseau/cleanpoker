@@ -17,7 +17,7 @@
   accessibilitySummary="Navegação completa por teclado (Tab, Enter, Espaço). Compatível com leitores de ecrã NVDA e VoiceOver. Regiões aria-live para atualizações em tempo real. Rácio de contraste mínimo 4,5:1. Hiperligação de salto para o conteúdo. Sem animações perturbadoras. Conformidade WCAG 2.1 AA."
   keywords="planning poker, scrum, agile, sprint planning, eco-concepção, green IT, sustentável, sem rastreadores, sem cookies, privacidade, RGPD, acessível, WCAG 2.1 AA, leitor de ecrã, navegação por teclado, NVDA, VoiceOver, sem conta, alojamento verde, energia renovável, open source, MIT"
   navAriaLabel="Idioma"
-  h1Accent="criar · votar · decidir"
+  h1Accent="criar, votar, decidir"
   lead="Crie uma sessão, partilhe o link, estime em equipa. Pronto em 30 segundos."
   cardsLabel="Cartas"
   cardsSepHint="(separadas por vírgulas)"

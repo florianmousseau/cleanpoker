@@ -5,7 +5,7 @@
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Déclaration d\'accessibilité — CleanPoker',
+    name: 'Déclaration d\'accessibilité : CleanPoker',
     url: 'https://cleanpoker.dev/accessibilite',
     description: 'CleanPoker est un outil de planning poker entièrement accessible aux personnes en situation de handicap. Navigation clavier complète, compatible lecteurs d\'écran NVDA, VoiceOver et JAWS. Conforme WCAG 2.1 AA.',
     isPartOf: {
@@ -24,11 +24,11 @@
   <main id="main">
     <a href="/" class="back-link">← Retour à l'accueil</a>
 
-    <h1>Accessibilité — CleanPoker pour les équipes inclusives</h1>
+    <h1>Accessibilité : CleanPoker pour les équipes inclusives</h1>
 
     <p>
       <strong>CleanPoker</strong> est un outil de planning poker conçu pour être utilisable par tous,
-      y compris les personnes en situation de handicap — utilisateurs de lecteurs d'écran,
+      y compris les personnes en situation de handicap : utilisateurs de lecteurs d'écran,
       personnes naviguant au clavier, personnes malvoyantes ou ayant des troubles moteurs.
       Il est conforme au référentiel <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 niveau AA.
     </p>
@@ -50,9 +50,9 @@
 
     <h2>Compatibilité avec les technologies d'assistance</h2>
     <ul>
-      <li><strong>NVDA</strong> (Windows) — testé avec Firefox</li>
-      <li><strong>VoiceOver</strong> (macOS / iOS) — testé avec Safari</li>
-      <li><strong>JAWS</strong> (Windows) — compatible via HTML sémantique et ARIA</li>
+      <li><strong>NVDA</strong> (Windows) : testé avec Firefox</li>
+      <li><strong>VoiceOver</strong> (macOS / iOS) : testé avec Safari</li>
+      <li><strong>JAWS</strong> (Windows) : compatible via HTML sémantique et ARIA</li>
       <li>Navigation clavier complète : Tab, Maj+Tab, Entrée, Espace, flèches</li>
     </ul>
 
@@ -98,7 +98,7 @@
   <footer class="footer">
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      · <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
     </p>
   </footer>
 </div>

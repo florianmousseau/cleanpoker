@@ -17,7 +17,7 @@
   accessibilitySummary="Fully keyboard navigable (Tab, Enter, Space). Compatible with NVDA and VoiceOver screen readers. aria-live regions for real-time vote updates. Minimum 4.5:1 contrast ratio. Skip link provided. No distracting animations. WCAG 2.1 AA compliant."
   keywords="planning poker, scrum, agile, sprint planning, eco-design, green IT, sustainable, zero trackers, no cookies, privacy, GDPR, accessible, WCAG 2.1 AA, screen reader, keyboard navigation, NVDA, VoiceOver, no account, green hosting, renewable energy, open source, MIT, Lighthouse 100"
   navAriaLabel="Language"
-  h1Accent="create · vote · decide"
+  h1Accent="create, vote, decide"
   lead="Create a session, share the URL, estimate as a team. Ready in 30 seconds."
   cardsLabel="Cards"
   cardsSepHint="(comma-separated)"

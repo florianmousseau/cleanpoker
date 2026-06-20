@@ -17,7 +17,7 @@
   accessibilitySummary="Vollständige Tastaturnavigation (Tab, Eingabe, Leertaste). Kompatibel mit NVDA und VoiceOver Screenreadern. aria-live-Bereiche für Echtzeit-Updates. Mindestkontrastrate 4,5:1. Skip-Link vorhanden. Keine ablenkenden Animationen. WCAG 2.1 AA konform."
   keywords="Planning Poker, Scrum, Agile, Sprint Planning, Ökodesign, Green IT, nachhaltig, keine Tracker, keine Cookies, Datenschutz, DSGVO, barrierefrei, WCAG 2.1 AA, Screenreader, Tastaturnavigation, NVDA, VoiceOver, kein Konto, grünes Hosting, erneuerbare Energie, Open Source, MIT"
   navAriaLabel="Sprache"
-  h1Accent="erstellen · abstimmen · entscheiden"
+  h1Accent="erstellen, abstimmen, entscheiden"
   lead="Session erstellen, Link teilen, gemeinsam schätzen. In 30 Sekunden startklar."
   cardsLabel="Karten"
   cardsSepHint="(kommagetrennt)"

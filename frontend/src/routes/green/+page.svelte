@@ -5,7 +5,7 @@
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Éco-conception — CleanPoker',
+    name: 'Éco-conception : CleanPoker',
     url: 'https://cleanpoker.dev/green',
     description: 'Déclaration d\'éco-conception de CleanPoker. Bundle JS < 50 Ko brotli, zéro trackers, zéro cookies, hébergement 100 % énergie renouvelable, Lighthouse Performance 100, CO₂ < 0,1 g par visite.',
     keywords: 'éco-conception, green IT, numérique responsable, planning poker écologique, zéro trackers, hébergement vert, énergie renouvelable, Lighthouse 100, bundle léger, CO2 faible',
@@ -22,12 +22,12 @@
   <main id="main">
     <a href="/" class="back-link">← Retour à l'accueil</a>
 
-    <h1>Éco-conception — CleanPoker, le numérique responsable</h1>
+    <h1>Éco-conception : CleanPoker, le numérique responsable</h1>
 
     <p>
       <strong>CleanPoker</strong> est conçu selon les principes du <strong>numérique responsable</strong> :
       chaque décision technique vise à réduire l'empreinte carbone, éliminer les dépendances inutiles
-      et respecter la vie privée des utilisateurs. Ce n'est pas un label ajouté après coup —
+      et respecter la vie privée des utilisateurs. Ce n'est pas un label ajouté après coup,
       c'est l'ADN du projet.
     </p>
 
@@ -51,25 +51,25 @@
 
     <h2>Choix techniques pour réduire l'impact</h2>
     <ul>
-      <li><strong>Pas de framework CSS</strong> (Tailwind, Bootstrap…) — CSS vanilla, zéro code mort</li>
-      <li><strong>Pas de polices Google</strong> — polices système uniquement, aucune requête réseau</li>
-      <li><strong>Pas de DOM virtuel</strong> — SvelteKit compile en JavaScript vanilla, bundle minimal</li>
-      <li><strong>Pas de base de données</strong> — sessions en mémoire Go, auto-supprimées après 24 h d'inactivité</li>
-      <li><strong>Pas de scripts tiers</strong> — aucun SDK Analytics, Chat, A/B testing ou autre</li>
-      <li><strong>Compression Brotli</strong> — plus efficace que gzip, activée par défaut sur Cloudflare</li>
-      <li><strong>Backend Go</strong> — binaire natif ~15 Mo RAM, pas de runtime JVM ou Node.js à maintenir</li>
-      <li><strong>WebSocket natif</strong> — pas de polling HTTP, connexion persistante légère</li>
-      <li><strong>Images système</strong> — favicon SVG, pas de PNG lourd, pas de sprite</li>
+      <li><strong>Pas de framework CSS</strong> (Tailwind, Bootstrap...) : CSS vanilla, zéro code mort</li>
+      <li><strong>Pas de polices Google</strong> : polices système uniquement, aucune requête réseau</li>
+      <li><strong>Pas de DOM virtuel</strong> : SvelteKit compile en JavaScript vanilla, bundle minimal</li>
+      <li><strong>Pas de base de données</strong> : sessions en mémoire Go, auto-supprimées après 24 h d'inactivité</li>
+      <li><strong>Pas de scripts tiers</strong> : aucun SDK Analytics, Chat, A/B testing ou autre</li>
+      <li><strong>Compression Brotli</strong> : plus efficace que gzip, activée par défaut sur Cloudflare</li>
+      <li><strong>Backend Go</strong> : binaire natif ~15 Mo RAM, pas de runtime JVM ou Node.js à maintenir</li>
+      <li><strong>WebSocket natif</strong> : pas de polling HTTP, connexion persistante légère</li>
+      <li><strong>Images système</strong> : favicon SVG, pas de PNG lourd, pas de sprite</li>
     </ul>
 
     <h2>Hébergement sur énergie renouvelable</h2>
     <ul>
       <li>
-        <strong>Frontend — Cloudflare Pages</strong> : CDN mondial, certifié 100 % énergie renouvelable.
+        <strong>Frontend : Cloudflare Pages</strong> - CDN mondial, certifié 100 % énergie renouvelable.
         Cloudflare est référencé dans la base The Green Web Foundation.
       </li>
       <li>
-        <strong>Backend — Fly.io CDG (Paris, France)</strong> : hébergeur certifié énergie renouvelable,
+        <strong>Backend : Fly.io CDG (Paris, France)</strong> - hébergeur certifié énergie renouvelable,
         résidence des données en France, latence minimale pour les équipes européennes.
       </li>
     </ul>
@@ -80,7 +80,7 @@
       <li>Pas de publicité, pas de monétisation, pas de freemium</li>
       <li>Pas de cookie tiers (seul Cloudflare peut déposer <code>__cf_bm</code>, cookie de sécurité strictement nécessaire)</li>
       <li>Pas de localStorage contenant des données personnelles (seule la préférence de langue est mémorisée)</li>
-      <li>Pas de polices, icônes ou scripts chargés depuis des CDN tiers (jsDelivr, cdnjs, unpkg…)</li>
+      <li>Pas de polices, icônes ou scripts chargés depuis des CDN tiers (jsDelivr, cdnjs, unpkg...)</li>
       <li>Pas d'email marketing, pas de compte utilisateur, pas de base de données permanente</li>
     </ul>
 
@@ -89,22 +89,22 @@
     <ul>
       <li>
         <a href="https://www.websitecarbon.com/website/cleanpoker-dev/" rel="noopener noreferrer">
-          Website Carbon — empreinte CO₂ de cleanpoker.dev
+          Website Carbon : empreinte CO₂ de cleanpoker.dev
         </a>
       </li>
       <li>
         <a href="https://www.thegreenwebfoundation.org/green-web-check/?url=cleanpoker.dev" rel="noopener noreferrer">
-          The Green Web Foundation — vérifier l'hébergement vert de cleanpoker.dev
+          The Green Web Foundation : vérifier l'hébergement vert de cleanpoker.dev
         </a>
       </li>
       <li>
         <a href="https://sonarcloud.io/project/overview?id=florianmousseau_cleanpoker" rel="noopener noreferrer">
-          SonarCloud — qualité et sécurité du code
+          SonarCloud : qualité et sécurité du code
         </a>
       </li>
       <li>
         <a href="https://github.com/florianmousseau/cleanpoker/actions" rel="noopener noreferrer">
-          GitHub Actions — résultats Lighthouse CI et audit Eco-CI
+          GitHub Actions : résultats Lighthouse CI et audit Eco-CI
         </a>
       </li>
     </ul>
@@ -134,7 +134,7 @@
   <footer class="footer">
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      · <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
     </p>
   </footer>
 </div>

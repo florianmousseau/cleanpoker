@@ -29,7 +29,7 @@ func computeResults(votes map[string]string, cards []string) Results {
 	}
 
 	if len(nums) == 0 {
-		return Results{Avg: "—", Mode: mode, Min: "—", Max: "—", Dist: dist}
+		return Results{Avg: "N/A", Mode: mode, Min: "N/A", Max: "N/A", Dist: dist}
 	}
 
 	sum, min, max := 0.0, nums[0], nums[0]
