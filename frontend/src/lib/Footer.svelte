@@ -31,6 +31,8 @@
       ? (THEME_LABELS[locale]?.toLight ?? 'Light mode')
       : (THEME_LABELS[locale]?.toDark ?? 'Dark mode')
   );
+
+  const prefix = $derived(locale === 'fr' ? '' : `/${locale}`);
 </script>
 
 <footer class="footer container">
@@ -74,9 +76,9 @@
   <p>
     <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">{source}</a>
     | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">{license}</a>
-    | <a href="/green">{green}</a>
-    | <a href="/accessibilite">{accessibility}</a>
-    | <a href="/mentions-legales">{legal}</a>
+    | <a href="{prefix}/green">{green}</a>
+    | <a href="{prefix}/accessibilite">{accessibility}</a>
+    | <a href="{prefix}/mentions-legales">{legal}</a>
   </p>
 </footer>
 

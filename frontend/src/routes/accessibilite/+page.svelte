@@ -2,6 +2,12 @@
   <title>Accessibilité & handicap | CleanPoker planning poker inclusif</title>
   <meta name="description" content="CleanPoker est un outil de planning poker entièrement accessible aux personnes en situation de handicap. Navigation clavier, lecteurs d'écran (NVDA, VoiceOver, JAWS), conformité WCAG 2.1 AA." />
   <link rel="canonical" href="https://cleanpoker.dev/accessibilite" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/accessibilite" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/accessibilite" />
+  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite" />
+  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite" />
+  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite" />
+  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
