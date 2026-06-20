@@ -2,6 +2,12 @@
   <title>Mentions légales & Confidentialité | CleanPoker</title>
   <meta name="description" content="Mentions légales, politique de confidentialité et informations d'hébergement de CleanPoker." />
   <link rel="canonical" href="https://cleanpoker.dev/mentions-legales" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/mentions-legales" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/mentions-legales" />
+  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales" />
+  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales" />
+  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales" />
+  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales" />
   <meta name="robots" content="noindex" />
 </svelte:head>
 
