@@ -167,7 +167,7 @@
           <h2 id="results-title">{T.results.title}</h2>
           {#if room.roomState.results}
             <div data-testid="results-data">
-            {#if room.roomState.results.avg !== '—'}
+            {#if room.roomState.results.avg !== 'N/A'}
               <div class="stats-grid">
                 <div class="stat"><span class="stat-label">{T.results.avg}</span><span class="stat-value">{room.roomState.results.avg}</span></div>
                 <div class="stat"><span class="stat-label">{T.results.min}</span><span class="stat-value">{room.roomState.results.min}</span></div>
@@ -224,7 +224,7 @@
                       {:else if player.vote === 'hidden'}
                         <span class="vote-pending">{T.participants.votePending}</span>
                       {:else}
-                        <span class="vote-empty">·</span>
+                        <span class="vote-empty">-</span>
                       {/if}
                     </td>
                     <td class="col-action">
@@ -327,6 +327,8 @@
     source={T.footer.source}
     license={T.footer.license}
     legal={T.footer.legal}
+    green={T.footer.green}
+    accessibility={T.footer.accessibility}
     locale={lang.current}
     onLangChange={(l) => lang.set(l as 'fr'|'en'|'es'|'de'|'pt')}
   />

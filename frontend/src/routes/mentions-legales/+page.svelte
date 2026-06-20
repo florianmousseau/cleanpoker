@@ -39,7 +39,7 @@
     <!-- ── Données personnelles ── -->
     <h2>Données personnelles (RGPD)</h2>
     <p>
-      <strong>Responsable du traitement :</strong> Florian Mousseau —
+      <strong>Responsable du traitement :</strong> Florian Mousseau,
       <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
     </p>
 
@@ -54,7 +54,7 @@
     <h3>Finalité et base légale</h3>
     <p>
       Le traitement a pour seule finalité la fourniture du service de planning poker collaboratif
-      (base légale : exécution du service demandé par l'utilisateur — art. 6.1.b RGPD).
+      (base légale : exécution du service demandé par l'utilisateur, art. 6.1.b RGPD).
     </p>
 
     <h3>Durée de conservation</h3>
@@ -125,7 +125,10 @@
   <footer class="footer">
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      · <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      | <a href="/green">Éco-conception</a>
+      | <a href="/accessibilite">Accessibilité</a>
+      | <a href="/mentions-legales">Mentions légales</a>
     </p>
   </footer>
 </div>

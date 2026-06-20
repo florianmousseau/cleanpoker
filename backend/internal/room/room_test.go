@@ -322,7 +322,7 @@ func TestComputeResults_NonNumericExcludedFromStats(t *testing.T) {
 func TestComputeResults_AllNonNumeric(t *testing.T) {
 	votes := map[string]string{"Alice": "?", "Bob": "XS"}
 	res := computeResults(votes, []string{"XS", "S", "M", "?"})
-	if res.Avg != "—" || res.Min != "—" || res.Max != "—" {
+	if res.Avg != "N/A" || res.Min != "N/A" || res.Max != "N/A" {
 		t.Fatalf("expected — for all stats with non-numeric votes, got avg=%s min=%s max=%s", res.Avg, res.Min, res.Max)
 	}
 }
@@ -339,7 +339,7 @@ func TestComputeResults_ModeFollowsCardOrder(t *testing.T) {
 
 func TestComputeResults_EmptyVotes(t *testing.T) {
 	res := computeResults(map[string]string{}, []string{"1", "2", "3"})
-	if res.Avg != "—" {
+	if res.Avg != "N/A" {
 		t.Fatalf("expected — for empty votes, got %s", res.Avg)
 	}
 }
