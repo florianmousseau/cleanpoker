@@ -2,8 +2,8 @@
   <title>Öko-Design & verantwortungsvolle Technologie | CleanPoker</title>
   <meta name="description" content="Öko-Design-Erklarung von CleanPoker. JS-Bundle unter 50 KB brotli, null Tracker, null Cookies, 100% erneuerbare Energien, Lighthouse Performance 100, CO2 unter 0,1 g pro Besuch." />
   <link rel="canonical" href="https://cleanpoker.dev/de/green" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/green" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/green" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green" />
@@ -130,8 +130,7 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
-      | <a href="/de/green">Öko-Design</a>
-      | <a href="/de/accessibilite">Barrierefreiheit</a>
+      | <a href="/de/a-propos">Über CleanPoker</a>
       | <a href="/de/mentions-legales">Impressum</a>
     </p>
   </footer>

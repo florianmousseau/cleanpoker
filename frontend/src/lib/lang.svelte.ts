@@ -6,10 +6,10 @@ const LANGS = new Set<Lang>(['fr', 'en', 'es', 'de', 'pt']);
 const MAX_AGE = 60 * 60 * 24 * 365;
 
 function readCookie(): Lang {
-	if (!browser) return 'fr';
+	if (!browser) return 'en';
 	const match = /(?:^|;\s*)lang=([^;]+)/.exec(document.cookie);
 	const v = match?.[1];
-	return LANGS.has(v as Lang) ? (v as Lang) : 'fr';
+	return LANGS.has(v as Lang) ? (v as Lang) : 'en';
 }
 
 function writeCookie(l: Lang) {
