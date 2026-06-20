@@ -32,6 +32,7 @@
     createError: string;
     footerSource: string;
     footerLicense: string;
+    footerGreen: string;
     footerLegal: string;
   }
 
@@ -62,6 +63,7 @@
     createError,
     footerSource,
     footerLicense,
+    footerGreen,
     footerLegal,
   }: Props = $props();
 
@@ -228,6 +230,7 @@
     {navAriaLabel}
     source={footerSource}
     license={footerLicense}
+    green={footerGreen}
     legal={footerLegal}
     {locale}
   />

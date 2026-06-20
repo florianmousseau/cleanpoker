@@ -29,5 +29,6 @@
   createError="Unable to create the room. Please try again."
   footerSource="Source code"
   footerLicense="MIT License"
+  footerGreen="Eco-design"
   footerLegal="Legal notice"
 />

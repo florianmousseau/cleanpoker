@@ -29,5 +29,6 @@
   createError="Session konnte nicht erstellt werden. Bitte erneut versuchen."
   footerSource="Quellcode"
   footerLicense="MIT-Lizenz"
+  footerGreen="Ökodesign"
   footerLegal="Impressum"
 />

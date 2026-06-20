@@ -327,6 +327,7 @@
     source={T.footer.source}
     license={T.footer.license}
     legal={T.footer.legal}
+    green={T.footer.green}
     locale={lang.current}
     onLangChange={(l) => lang.set(l as 'fr'|'en'|'es'|'de'|'pt')}
   />

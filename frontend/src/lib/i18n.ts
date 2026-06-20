@@ -14,7 +14,7 @@ export interface Translation {
   observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
   activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
   live: { newRound: (n: number) => string; revealed: string };
-  footer: { source: string; license: string; legal: string; navAriaLabel: string };
+  footer: { source: string; license: string; legal: string; green: string; navAriaLabel: string };
   theme: { toDark: string; toLight: string };
 }
 
@@ -119,6 +119,7 @@ export const FR: Translation = {
     source: 'Code source',
     license: 'Licence MIT',
     legal: 'Mentions légales',
+    green: 'Éco-conception',
     navAriaLabel: 'Langue',
   },
   theme: { toDark: 'Passer en mode sombre', toLight: 'Passer en mode clair' },
@@ -225,6 +226,7 @@ export const EN: Translation = {
     source: 'Source code',
     license: 'MIT License',
     legal: 'Legal notice',
+    green: 'Eco-design',
     navAriaLabel: 'Language',
   },
   theme: { toDark: 'Switch to dark mode', toLight: 'Switch to light mode' },
@@ -331,6 +333,7 @@ export const ES: Translation = {
     source: 'Código fuente',
     license: 'Licencia MIT',
     legal: 'Aviso legal',
+    green: 'Eco-diseño',
     navAriaLabel: 'Idioma',
   },
   theme: { toDark: 'Cambiar a modo oscuro', toLight: 'Cambiar a modo claro' },
@@ -437,6 +440,7 @@ export const DE: Translation = {
     source: 'Quellcode',
     license: 'MIT-Lizenz',
     legal: 'Impressum',
+    green: 'Ökodesign',
     navAriaLabel: 'Sprache',
   },
   theme: { toDark: 'Zum Dunkelmodus wechseln', toLight: 'Zum Hellmodus wechseln' },
@@ -543,6 +547,7 @@ export const PT: Translation = {
     source: 'Código fonte',
     license: 'Licença MIT',
     legal: 'Aviso legal',
+    green: 'Eco-design',
     navAriaLabel: 'Idioma',
   },
   theme: { toDark: 'Mudar para modo escuro', toLight: 'Mudar para modo claro' },

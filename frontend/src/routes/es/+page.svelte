@@ -29,5 +29,6 @@
   createError="No se pudo crear la sala. Inténtalo de nuevo."
   footerSource="Código fuente"
   footerLicense="Licencia MIT"
+  footerGreen="Eco-diseño"
   footerLegal="Aviso legal"
 />
