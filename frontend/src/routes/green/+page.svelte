@@ -2,6 +2,12 @@
   <title>Éco-conception & numérique responsable | CleanPoker</title>
   <meta name="description" content="Déclaration d'éco-conception de CleanPoker. Bundle JS < 50 Ko brotli, zéro trackers, zéro cookies, hébergement 100 % énergie renouvelable, Lighthouse Performance 100, CO₂ < 0,1 g par visite." />
   <link rel="canonical" href="https://cleanpoker.dev/green" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/green" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/green" />
+  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green" />
+  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green" />
+  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green" />
+  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
