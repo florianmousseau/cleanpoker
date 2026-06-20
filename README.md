@@ -48,7 +48,7 @@ CleanPoker is built for any agile team, with no compromises on ethics, performan
 - **Remote-first distributed teams**: WebSocket real-time, no install, works on any device and OS
 - **Open-source enthusiasts**: MIT license, full source on GitHub, no vendor lock-in
 
-[Accessibility declaration (FR)](https://cleanpoker.dev/accessibilite)
+[Déclaration d'accessibilité](https://cleanpoker.dev/accessibilite)
 
 ## Features
 
