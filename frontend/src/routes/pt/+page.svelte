@@ -4,13 +4,13 @@
 
 <HomepageTemplate
   locale="pt"
-  pageTitle="CleanPoker | Planning poker gratuito · sem rastreadores · WCAG 2.1 AA"
+  pageTitle="CleanPoker | Planning poker gratuito, sem rastreadores, WCAG 2.1 AA"
   metaDesc="Planning poker gratuito, eco-concebido, sem rastreadores, sem cookies. Acessível WCAG 2.1 AA: navegação por teclado, leitores de ecrã (NVDA, VoiceOver). Alojamento verde. Sem conta."
   canonical="https://cleanpoker.dev/pt"
   ogLocale="pt_PT"
-  ogTitle="CleanPoker | Planning poker gratuito · sem rastreadores · WCAG 2.1 AA"
+  ogTitle="CleanPoker | Planning poker gratuito, sem rastreadores, WCAG 2.1 AA"
   ogDesc="Eco-concebido, sem rastreadores, sem publicidade, acessível WCAG 2.1 AA. Crie uma sessão em 30 segundos. Sem conta, alojamento em energia renovável."
-  twitterTitle="CleanPoker | Planning poker gratuito · sem rastreadores · WCAG 2.1 AA"
+  twitterTitle="CleanPoker | Planning poker gratuito, sem rastreadores, WCAG 2.1 AA"
   twitterDesc="Eco-concebido, sem rastreadores, sem publicidade, acessível WCAG 2.1 AA. Crie uma sessão em 30 segundos. Sem conta, alojamento em energia renovável."
   jsonLdUrl="https://cleanpoker.dev/pt"
   jsonLdDesc="Ferramenta gratuita de planning poker colaborativo. Eco-concebida: sem rastreadores, sem cookies, sem publicidade, menos de 50 KB JS, alojamento em energia renovável. Acessível WCAG 2.1 AA: navegação por teclado, leitores de ecrã (NVDA, VoiceOver). Sem conta."
