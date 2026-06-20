@@ -2,8 +2,8 @@
   <title>Planning poker: reglas, Fibonacci y guia practica | CleanPoker</title>
   <meta name="description" content="Que es el planning poker? Reglas, suite de Fibonacci, T-shirt sizing, consejos para estimar historias de usuario en equipo agil. Guia completa gratuita." />
   <link rel="canonical" href="https://cleanpoker.dev/es/planning-poker" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/planning-poker" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/planning-poker" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker" />

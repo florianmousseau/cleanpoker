@@ -147,8 +147,8 @@
   <meta name="description" content={metaDesc} />
   <meta name="keywords" content={keywords} />
   <link rel="canonical" href={canonical} />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt" />

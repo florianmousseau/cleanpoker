@@ -1,9 +1,9 @@
 <svelte:head>
-  <title>À propos de CleanPoker - Planning poker éco-conçu</title>
-  <meta name="description" content="CleanPoker est un outil de planning poker gratuit, éco-conçu, zéro trackers, accessible WCAG 2.1 AA. Découvrez notre démarche, nos engagements et notre guide du planning poker." />
+  <title>About CleanPoker - Eco-designed planning poker</title>
+  <meta name="description" content="CleanPoker is a free, eco-designed planning poker tool. Zero trackers, zero cookies, WCAG 2.1 AA accessible, under 50 KB JS, green hosting. Open source MIT." />
   <link rel="canonical" href="https://cleanpoker.dev/a-propos" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/a-propos" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/a-propos" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos" />
@@ -11,14 +11,14 @@
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'À propos de CleanPoker',
+    name: 'About CleanPoker',
     url: 'https://cleanpoker.dev/a-propos',
-    description: 'CleanPoker est un outil de planning poker gratuit, éco-conçu, zéro trackers, accessible WCAG 2.1 AA.',
+    description: 'CleanPoker is a free, eco-designed planning poker tool. Zero trackers, zero cookies, WCAG 2.1 AA accessible, under 50 KB JS, green hosting.',
     isPartOf: {
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      description: 'Planning poker gratuit, zéro trackers, bundle JS < 50 Ko, hébergement sur énergie renouvelable, WCAG 2.1 AA.',
+      description: 'Free planning poker, zero trackers, JS bundle under 50 KB, green hosting on renewable energy, WCAG 2.1 AA.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
     },
   })}<\/script>`}
@@ -26,52 +26,52 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/" class="back-link">← Retour à l'accueil</a>
+    <a href="/" class="back-link">← Back to home</a>
 
-    <h1>À propos de CleanPoker</h1>
+    <h1>About CleanPoker</h1>
 
     <p>
-      <strong>CleanPoker</strong> est un outil de <strong>planning poker</strong> collaboratif,
-      gratuit et open source. Créez une session en 30 secondes, partagez l'URL avec votre équipe,
-      estimez en temps réel. Sans compte, sans inscription, sans tracker.
+      <strong>CleanPoker</strong> is a free, open-source <strong>planning poker</strong> tool.
+      Create a session in 30 seconds, share the URL with your team, estimate in real time.
+      No account, no sign-up, no tracker.
     </p>
 
     <ul class="facts">
-      <li>Bundle JS <strong>&lt; 50 Ko</strong> (brotli)</li>
-      <li>Lighthouse Performance et Accessibilité : <strong>100 / 100</strong></li>
-      <li>Hébergement 100 % énergie renouvelable (Cloudflare Pages + Fly.io CDG Paris)</li>
-      <li>Zéro trackers, zéro cookies publicitaires, zéro scripts tiers</li>
-      <li>Code source ouvert sous <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licence MIT</a></li>
+      <li>JS bundle <strong>&lt; 50 KB</strong> (brotli)</li>
+      <li>Lighthouse Performance and Accessibility: <strong>100 / 100</strong></li>
+      <li>100% renewable energy hosting (Cloudflare Pages + Fly.io CDG Paris)</li>
+      <li>Zero trackers, zero advertising cookies, zero third-party scripts</li>
+      <li>Open source under <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT licence</a></li>
     </ul>
 
-    <h2>En savoir plus</h2>
+    <h2>Learn more</h2>
 
     <div class="cards-grid">
       <a href="/planning-poker" class="card">
-        <h3>Guide du planning poker</h3>
-        <p>Règles, suite de Fibonacci, comparaison des séquences de cartes, conseils pratiques.</p>
+        <h3>Planning poker guide</h3>
+        <p>Rules, Fibonacci sequence, card comparison, practical tips for agile teams.</p>
       </a>
       <a href="/green" class="card">
-        <h3>Éco-conception</h3>
-        <p>Chiffres clés, choix techniques et hébergement vert : notre déclaration d'impact.</p>
+        <h3>Eco-design</h3>
+        <p>Key metrics, technical choices and green hosting: our environmental statement.</p>
       </a>
       <a href="/accessibilite" class="card">
-        <h3>Accessibilité</h3>
-        <p>Conformité WCAG 2.1 AA, compatibilité lecteurs d'écran, navigation clavier.</p>
+        <h3>Accessibility</h3>
+        <p>WCAG 2.1 AA compliance, screen reader support, keyboard navigation.</p>
       </a>
       <a href="/mentions-legales" class="card">
-        <h3>Mentions légales</h3>
-        <p>RGPD, cookies, hébergement, éditeur du site.</p>
+        <h3>Legal notice</h3>
+        <p>GDPR, cookies, hosting, site publisher.</p>
       </a>
     </div>
   </main>
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
-      | <a href="/a-propos">À propos</a>
-      | <a href="/mentions-legales">Mentions légales</a>
+      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
+      | <a href="/a-propos">About</a>
+      | <a href="/mentions-legales">Legal notice</a>
     </p>
   </footer>
 </div>

@@ -2,8 +2,8 @@
   <title>Sobre o CleanPoker - Planning poker eco-concebido</title>
   <meta name="description" content="CleanPoker e uma ferramenta de planning poker gratuita, eco-concebida, sem rastreadores, acessivel WCAG 2.1 AA, menos de 50 KB JS, alojamento verde. Codigo aberto MIT." />
   <link rel="canonical" href="https://cleanpoker.dev/pt/a-propos" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/a-propos" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/a-propos" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos" />

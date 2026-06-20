@@ -1,9 +1,9 @@
 <svelte:head>
-  <title>Mentions légales & Confidentialité | CleanPoker</title>
-  <meta name="description" content="Mentions légales, politique de confidentialité et informations d'hébergement de CleanPoker." />
+  <title>Legal notice & Privacy policy | CleanPoker</title>
+  <meta name="description" content="Legal notice, privacy policy and hosting information for CleanPoker." />
   <link rel="canonical" href="https://cleanpoker.dev/mentions-legales" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/mentions-legales" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/mentions-legales" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales" />
@@ -13,127 +13,123 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/" class="back-link">← Retour à l'accueil</a>
+    <a href="/" class="back-link">← Back to home</a>
 
-    <h1>Mentions légales & Confidentialité</h1>
+    <h1>Legal notice & Privacy policy</h1>
 
-    <!-- ── Éditeur ── -->
-    <h2>Éditeur du site</h2>
+    <!-- ── Publisher ── -->
+    <h2>Site publisher</h2>
     <p>
-      Ce site est édité à titre personnel par :<br />
-      <strong>Florian Mousseau</strong>, particulier<br />
+      This site is published personally by:<br />
+      <strong>Florian Mousseau</strong>, private individual<br />
       France<br />
-      Contact : <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
+      Contact: <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
     </p>
 
-    <!-- ── Hébergement ── -->
-    <h2>Hébergement</h2>
+    <!-- ── Hosting ── -->
+    <h2>Hosting</h2>
     <p>
       <strong>Interface (frontend)</strong><br />
       Cloudflare, Inc.<br />
-      101 Townsend St, San Francisco, CA 94107, États-Unis<br />
+      101 Townsend St, San Francisco, CA 94107, United States<br />
       <a href="https://www.cloudflare.com" rel="noopener noreferrer">cloudflare.com</a>
     </p>
     <p>
-      <strong>Serveur temps réel (backend)</strong><br />
+      <strong>Real-time server (backend)</strong><br />
       Fly.io, Inc.<br />
-      2261 Market Street #4099, San Francisco, CA 94114, États-Unis<br />
-      Données hébergées en région <strong>Europe (Paris, France)</strong><br />
+      2261 Market Street #4099, San Francisco, CA 94114, United States<br />
+      Data hosted in region <strong>Europe (Paris, France)</strong><br />
       <a href="https://fly.io" rel="noopener noreferrer">fly.io</a>
     </p>
 
-    <!-- ── Données personnelles ── -->
-    <h2>Données personnelles (RGPD)</h2>
+    <!-- ── Personal data ── -->
+    <h2>Personal data (GDPR)</h2>
     <p>
-      <strong>Responsable du traitement :</strong> Florian Mousseau,
+      <strong>Data controller:</strong> Florian Mousseau,
       <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
     </p>
 
-    <h3>Données collectées</h3>
+    <h3>Data collected</h3>
     <p>
-      CleanPoker collecte uniquement le <strong>pseudonyme</strong> que vous saisissez librement
-      pour rejoindre une session. Ce pseudonyme est affiché aux autres participants de la même session.
-      Aucune adresse e-mail, aucun numéro de téléphone, aucune donnée d'identification réelle
-      n'est demandée ni stockée.
+      CleanPoker only collects the <strong>pseudonym</strong> you freely enter
+      to join a session. This pseudonym is displayed to other participants in the same session.
+      No email address, phone number, or real identification data is requested or stored.
     </p>
 
-    <h3>Finalité et base légale</h3>
+    <h3>Purpose and legal basis</h3>
     <p>
-      Le traitement a pour seule finalité la fourniture du service de planning poker collaboratif
-      (base légale : exécution du service demandé par l'utilisateur, art. 6.1.b RGPD).
+      The sole purpose of processing is to provide the collaborative planning poker service
+      (legal basis: performance of the service requested by the user, Art. 6.1.b GDPR).
     </p>
 
-    <h3>Durée de conservation</h3>
+    <h3>Retention period</h3>
     <p>
-      Les sessions et pseudonymes associés sont automatiquement supprimés
-      <strong>24 heures après la dernière activité</strong>. Aucune archive n'est conservée au-delà.
+      Sessions and associated pseudonyms are automatically deleted
+      <strong>24 hours after the last activity</strong>. No archive is retained beyond this.
     </p>
 
-    <h3>Transfert de données</h3>
+    <h3>Data transfers</h3>
     <p>
-      Les données du backend (pseudonymes, activité de vote) sont hébergées
-      <strong>exclusivement en France (Paris)</strong> chez Fly.io.
-      Le frontend est servi via le réseau mondial Cloudflare, qui adhère au
-      <em>EU-US Data Privacy Framework</em> depuis juillet 2023.
+      Backend data (pseudonyms, voting activity) is hosted
+      <strong>exclusively in France (Paris)</strong> at Fly.io.
+      The frontend is served via the global Cloudflare network, which has adhered to the
+      <em>EU-US Data Privacy Framework</em> since July 2023.
     </p>
 
-    <h3>Vos droits</h3>
+    <h3>Your rights</h3>
     <p>
-      Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et d'effacement
-      de vos données. Pour exercer ces droits ou pour toute question :
+      In accordance with the GDPR, you have the right of access, rectification and erasure
+      of your data. To exercise these rights or for any questions:
       <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
     </p>
     <p>
-      Vous pouvez également introduire une réclamation auprès de la
-      <a href="https://www.cnil.fr" rel="noopener noreferrer">CNIL</a>.
+      You may also lodge a complaint with the
+      <a href="https://www.cnil.fr" rel="noopener noreferrer">CNIL</a> (French data protection authority).
     </p>
 
     <!-- ── Cookies & localStorage ── -->
-    <h2>Cookies et stockage local</h2>
+    <h2>Cookies and local storage</h2>
     <p>
-      CleanPoker <strong>n'utilise aucun cookie publicitaire ni outil de tracking</strong>.
+      CleanPoker <strong>does not use any advertising cookies or tracking tools</strong>.
     </p>
     <p>
-      Le site utilise uniquement le <strong>localStorage</strong> de votre navigateur pour mémoriser
-      votre préférence de langue (<code>lang</code>). Ce stockage est strictement fonctionnel,
-      ne contient aucune donnée personnelle et ne nécessite pas de consentement préalable
-      conformément aux lignes directrices de la CNIL.
+      The site uses only your browser's <strong>localStorage</strong> to remember
+      your language preference (<code>lang</code>). This storage is strictly functional,
+      contains no personal data and does not require prior consent.
     </p>
     <p>
-      Cloudflare peut déposer des cookies techniques de sécurité (<code>__cf_bm</code>) strictement
-      nécessaires au bon fonctionnement du service (protection anti-DDoS). Ces cookies sont exemptés
-      de consentement.
-    </p>
-
-    <!-- ── Propriété intellectuelle ── -->
-    <h2>Propriété intellectuelle</h2>
-    <p>
-      Le code source de CleanPoker est publié sous
-      <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licence MIT</a>.
-      Vous êtes libre de le réutiliser, modifier et distribuer dans les conditions de cette licence.
+      Cloudflare may set technical security cookies (<code>__cf_bm</code>) strictly
+      necessary for the service to function (anti-DDoS protection). These cookies are exempt
+      from consent.
     </p>
 
-    <!-- ── Responsabilité ── -->
-    <h2>Limitation de responsabilité</h2>
+    <!-- ── Intellectual property ── -->
+    <h2>Intellectual property</h2>
     <p>
-      CleanPoker est un service gratuit fourni sans garantie. L'éditeur ne pourra être tenu
-      responsable des dommages directs ou indirects résultant de l'utilisation ou de l'indisponibilité
-      du service.
+      The CleanPoker source code is published under the
+      <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT licence</a>.
+      You are free to reuse, modify and distribute it under the terms of this licence.
     </p>
 
-    <h2>Droit applicable</h2>
-    <p>Les présentes mentions sont soumises au droit français. Tout litige relève de la compétence
-    des juridictions françaises.</p>
+    <!-- ── Liability ── -->
+    <h2>Limitation of liability</h2>
+    <p>
+      CleanPoker is a free service provided without warranty. The publisher cannot be held
+      liable for direct or indirect damages resulting from the use or unavailability of the service.
+    </p>
 
-    <p class="updated">Dernière mise à jour : juin 2026</p>
+    <h2>Applicable law</h2>
+    <p>These notices are subject to French law. Any dispute falls within the jurisdiction of French courts.</p>
+
+    <p class="updated">Last updated: June 2026</p>
   </main>
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
-      | <a href="/a-propos">À propos</a>
-      | <a href="/mentions-legales">Mentions légales</a>
+      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT Licence</a>
+      | <a href="/a-propos">About</a>
+      | <a href="/mentions-legales">Legal notice</a>
     </p>
   </footer>
 </div>

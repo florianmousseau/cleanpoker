@@ -1,9 +1,9 @@
 <svelte:head>
-  <title>Planning poker : règles, Fibonacci et guide pratique | CleanPoker</title>
-  <meta name="description" content="Qu'est-ce que le planning poker ? Règles, suite de Fibonacci, T-shirt sizing, conseils pour estimer les user stories en équipe agile. Guide complet gratuit." />
+  <title>Planning poker: rules, Fibonacci and practical guide | CleanPoker</title>
+  <meta name="description" content="What is planning poker? Rules, Fibonacci sequence, T-shirt sizing, tips for estimating user stories as an agile team. Free complete guide." />
   <link rel="canonical" href="https://cleanpoker.dev/planning-poker" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/planning-poker" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/planning-poker" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker" />
@@ -11,9 +11,9 @@
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Planning poker : règles, Fibonacci et guide pratique',
+    name: 'Planning poker: rules, Fibonacci and practical guide',
     url: 'https://cleanpoker.dev/planning-poker',
-    description: 'Guide complet du planning poker : définition, règles, pourquoi Fibonacci, comment l\'utiliser avec CleanPoker.',
+    description: 'Complete guide to planning poker: definition, rules, why Fibonacci, how to use CleanPoker.',
     isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
@@ -22,28 +22,28 @@
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'Qu\'est-ce que le planning poker ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Le planning poker est une technique d\'estimation agile utilisée en Scrum. Chaque membre de l\'équipe choisit secrètement une carte représentant son estimation d\'une user story, puis tous révèlent simultanément. Les divergences provoquent une discussion qui affine l\'estimation collective.' },
+        name: 'What is planning poker?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Planning poker is an agile estimation technique used in Scrum. Each team member secretly chooses a card representing their estimate for a user story, then all reveal simultaneously. Differences spark a discussion that refines the collective estimate.' },
       },
       {
         '@type': 'Question',
-        name: 'Pourquoi utiliser la suite de Fibonacci en planning poker ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'La suite de Fibonacci (1, 2, 3, 5, 8, 13, 21) reflète l\'incertitude croissante : plus une tâche est grande, moins on peut l\'estimer précisément. L\'écart entre les valeurs augmente, ce qui force l\'équipe à se positionner clairement sans sur-précision artificielle.' },
+        name: 'Why use the Fibonacci sequence in planning poker?',
+        acceptedAnswer: { '@type': 'Answer', text: 'The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) reflects growing uncertainty: the larger a task, the less precisely it can be estimated. The gap between values increases, forcing the team to take a clear position without artificial over-precision.' },
       },
       {
         '@type': 'Question',
-        name: 'Quelle est la différence entre points de story et jours ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Les points de story mesurent la complexité relative, pas le temps. Un 5 est environ 2,5 fois plus complexe qu\'un 2, quelle que soit la durée réelle. Cette abstraction permet de comparer des tâches sans se bloquer sur les durées individuelles.' },
+        name: 'What is the difference between story points and days?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Story points measure relative complexity, not time. A 5 is roughly 2.5 times more complex than a 2, regardless of actual duration. This abstraction lets teams compare tasks without getting blocked on individual durations that vary by person and context.' },
       },
       {
         '@type': 'Question',
-        name: 'Qu\'est-ce que le T-shirt sizing ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Le T-shirt sizing (XS, S, M, L, XL, XXL) est une alternative à Fibonacci, utile pour des estimations grossières en début de projet ou pour des équipes non techniques. Moins précis que Fibonacci, il est plus rapide pour trier un backlog.' },
+        name: 'What is T-shirt sizing?',
+        acceptedAnswer: { '@type': 'Answer', text: 'T-shirt sizing (XS, S, M, L, XL, XXL) is an alternative to Fibonacci, useful for rough estimates at the start of a project or for non-technical teams. Less precise than Fibonacci, it is faster for sorting a backlog.' },
       },
       {
         '@type': 'Question',
-        name: 'Comment gérer les divergences dans le planning poker ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Quand les estimations divergent (ex. : un 2 et un 13 dans la même main), demandez aux extrêmes d\'expliquer leur vote. La discussion révèle souvent des hypothèses différentes ou des risques non identifiés. Revotez ensuite jusqu\'à convergence.' },
+        name: 'How to handle estimation disagreements?',
+        acceptedAnswer: { '@type': 'Answer', text: 'When estimates diverge (e.g., a 2 and a 13 in the same hand), ask the extremes to explain their vote. The discussion often reveals different assumptions or unidentified risks. Vote again until convergence.' },
       },
     ],
   })}<\/script>`}
@@ -51,124 +51,121 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/a-propos" class="back-link">← À propos</a>
+    <a href="/a-propos" class="back-link">← About</a>
 
-    <h1>Planning poker : guide complet</h1>
+    <h1>Planning poker: complete guide</h1>
 
     <p>
-      Le <strong>planning poker</strong> est la technique d'estimation la plus utilisée en
-      <strong>Scrum</strong> et en agilité. En 5 minutes, voici tout ce qu'il faut savoir.
+      <strong>Planning poker</strong> is the most widely used estimation technique in
+      <strong>Scrum</strong> and agile. Here is everything you need to know in 5 minutes.
     </p>
 
-    <h2>Qu'est-ce que le planning poker ?</h2>
+    <h2>What is planning poker?</h2>
     <p>
-      Le planning poker (aussi appelé <em>Scrum poker</em>) est une technique d'estimation
-      collaborative où chaque membre de l'équipe choisit <strong>secrètement</strong> une carte
-      représentant sa propre estimation d'une user story ou d'une tâche. Tous révèlent leurs
-      cartes <strong>simultanément</strong>. Les divergences déclenchent une discussion courte,
-      puis l'équipe revote jusqu'à convergence.
+      Planning poker (also called <em>Scrum poker</em>) is a collaborative estimation technique
+      where each team member <strong>secretly</strong> chooses a card representing their estimate
+      of a user story or task. All cards are revealed <strong>simultaneously</strong>. Differences
+      trigger a short discussion, then the team revotes until convergence.
     </p>
     <p>
-      L'objectif n'est pas la précision mais la <strong>discussion</strong> : révéler les
-      hypothèses cachées, les risques non identifiés et les points de désaccord technique.
+      The goal is not precision but <strong>discussion</strong>: uncovering hidden assumptions,
+      unidentified risks and technical disagreements.
     </p>
 
-    <h2>Les règles en 5 étapes</h2>
+    <h2>The rules in 5 steps</h2>
     <ol>
-      <li>Le Product Owner présente une user story ou une tâche.</li>
-      <li>L'équipe pose des questions de clarification.</li>
-      <li>Chaque membre choisit secrètement une carte (sans influencer les autres).</li>
-      <li>Tous révèlent simultanément.</li>
-      <li>Si les estimations convergent : on retient la valeur. Sinon : discussion des extrêmes, puis nouveau vote.</li>
+      <li>The Product Owner presents a user story or task.</li>
+      <li>The team asks clarifying questions.</li>
+      <li>Each member secretly chooses a card (without influencing others).</li>
+      <li>All cards are revealed simultaneously.</li>
+      <li>If estimates converge: keep the value. Otherwise: discuss the extremes, then revote.</li>
     </ol>
 
-    <h2>Pourquoi la suite de Fibonacci ?</h2>
+    <h2>Why the Fibonacci sequence?</h2>
     <p>
-      La suite <strong>1, 2, 3, 5, 8, 13, 21, ?</strong> est la plus répandue car elle modélise
-      l'incertitude croissante : plus une tâche est grande, moins on peut l'estimer finement.
-      L'écart entre les valeurs grandit avec la taille, ce qui <strong>force l'équipe à se
-      positionner clairement</strong> sans prétendre à une précision illusoire.
+      The sequence <strong>1, 2, 3, 5, 8, 13, 21, ?</strong> is the most common because it models
+      growing uncertainty: the larger a task, the less precisely it can be estimated. The gap
+      between values grows with size, which <strong>forces the team to take a clear position</strong>
+      without pretending to illusory precision.
     </p>
     <p>
-      La carte <strong>?</strong> signifie "je ne sais pas estimer cette tâche" — signal utile
-      pour détecter un manque de clarté dans la spécification.
+      The <strong>?</strong> card means "I can't estimate this task" — a useful signal to detect
+      a lack of clarity in the specification.
     </p>
 
-    <h2>Comparaison des séquences de cartes</h2>
+    <h2>Comparison of card sequences</h2>
     <table>
       <thead>
-        <tr><th>Séquence</th><th>Valeurs</th><th>Idéale pour</th></tr>
+        <tr><th>Sequence</th><th>Values</th><th>Best for</th></tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Fibonacci</strong></td>
           <td>1, 2, 3, 5, 8, 13, 21, ?</td>
-          <td>Équipes Scrum expérimentées, estimation en points de story</td>
+          <td>Experienced Scrum teams, story point estimation</td>
         </tr>
         <tr>
           <td><strong>T-shirt</strong></td>
           <td>XS, S, M, L, XL, XXL, ?</td>
-          <td>Estimations grossières, équipes non techniques, tri de backlog</td>
+          <td>Rough estimates, non-technical teams, backlog sorting</td>
         </tr>
         <tr>
-          <td><strong>Puissances de 2</strong></td>
+          <td><strong>Powers of 2</strong></td>
           <td>1, 2, 4, 8, 16, 32, 64, ?</td>
-          <td>Tâches techniques avec doublement de complexité prévisible</td>
+          <td>Technical tasks with predictable doubling of complexity</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>Questions fréquentes</h2>
+    <h2>Frequently asked questions</h2>
 
     <details>
-      <summary>Quelle est la différence entre points de story et jours ?</summary>
+      <summary>What is the difference between story points and days?</summary>
       <p>
-        Les points de story mesurent la <strong>complexité relative</strong>, pas le temps.
-        Un 5 est environ 2,5 fois plus complexe qu'un 2, quelle que soit la durée réelle.
-        Cette abstraction permet de comparer des tâches sans se bloquer sur les durées individuelles,
-        qui varient selon la personne et le contexte.
+        Story points measure <strong>relative complexity</strong>, not time. A 5 is roughly 2.5
+        times more complex than a 2, regardless of actual duration. This abstraction lets teams
+        compare tasks without getting blocked on individual durations, which vary by person and
+        context.
       </p>
     </details>
 
     <details>
-      <summary>Comment gérer les divergences d'estimation ?</summary>
+      <summary>How to handle estimation disagreements?</summary>
       <p>
-        Quand les estimations divergent (par exemple un 2 et un 13 dans la même main),
-        demandez aux personnes ayant voté aux extrêmes d'expliquer leur choix.
-        La discussion révèle souvent des hypothèses différentes ou des risques non identifiés.
-        Revotez ensuite jusqu'à convergence, sans forcer le consensus.
+        When estimates diverge (e.g., a 2 and a 13 in the same hand), ask the people who voted at
+        the extremes to explain their choice. The discussion often reveals different assumptions or
+        unidentified risks. Vote again until convergence, without forcing consensus.
       </p>
     </details>
 
     <details>
-      <summary>Le planning poker fonctionne-t-il pour les équipes distantes ?</summary>
+      <summary>Does planning poker work for remote teams?</summary>
       <p>
-        Oui, c'est précisément pour ça que CleanPoker existe. Créez une session, partagez l'URL,
-        chaque participant vote sur son propre appareil. Les résultats se révèlent en temps réel
-        via WebSocket, sans aucune configuration ni compte à créer.
+        Yes, that is precisely why CleanPoker exists. Create a session, share the URL, each
+        participant votes on their own device. Results are revealed in real time via WebSocket,
+        with no setup or account required.
       </p>
     </details>
 
     <details>
-      <summary>Combien de participants maximum ?</summary>
+      <summary>What is the maximum number of participants?</summary>
       <p>
-        CleanPoker ne pose aucune limite technique. En pratique, au-delà de 10 participants,
-        les discussions deviennent difficiles à gérer. Pour les grandes équipes, préférez
-        plusieurs sessions parallèles ou une estimation en sous-groupes.
+        CleanPoker has no technical limit. In practice, beyond 10 participants, discussions become
+        difficult to manage. For large teams, prefer parallel sessions or sub-group estimation.
       </p>
     </details>
 
     <div class="cta">
-      <a href="/" class="btn">Créer une session gratuite →</a>
+      <a href="/" class="btn">Create a free session →</a>
     </div>
   </main>
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
-      | <a href="/a-propos">À propos</a>
-      | <a href="/mentions-legales">Mentions légales</a>
+      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
+      | <a href="/a-propos">About</a>
+      | <a href="/mentions-legales">Legal notice</a>
     </p>
   </footer>
 </div>

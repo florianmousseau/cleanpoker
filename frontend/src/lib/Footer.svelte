@@ -14,8 +14,8 @@
 
   let { navAriaLabel, source, license, legal, about, locale, onLangChange }: Props = $props();
 
-  const ALL_LANGS = ['fr', 'en', 'es', 'de', 'pt'] as const;
-  const langHref = (l: string) => (l === 'fr' ? '/' : `/${l}`);
+  const ALL_LANGS = ['en', 'fr', 'es', 'de', 'pt'] as const;
+  const langHref = (l: string) => (l === 'en' ? '/' : `/${l}`);
 
   const THEME_LABELS: Record<string, { toDark: string; toLight: string }> = {
     fr: { toDark: 'Passer en mode sombre', toLight: 'Passer en mode clair' },
@@ -31,7 +31,7 @@
       : (THEME_LABELS[locale]?.toDark ?? 'Dark mode')
   );
 
-  const prefix = $derived(locale === 'fr' ? '' : `/${locale}`);
+  const prefix = $derived(locale === 'en' ? '' : `/${locale}`);
 </script>
 
 <footer class="footer container">

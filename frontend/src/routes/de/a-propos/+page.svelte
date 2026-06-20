@@ -2,8 +2,8 @@
   <title>Uber CleanPoker - Okodesigntes Planning Poker</title>
   <meta name="description" content="CleanPoker ist ein kostenloses, okodesigntes Planning-Poker-Tool. Keine Tracker, keine Cookies, WCAG 2.1 AA barrierefrei, unter 50 KB JS, grunens Hosting. Open Source MIT." />
   <link rel="canonical" href="https://cleanpoker.dev/de/a-propos" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/a-propos" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/a-propos" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos" />

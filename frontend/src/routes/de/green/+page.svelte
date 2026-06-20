@@ -2,8 +2,8 @@
   <title>Öko-Design & verantwortungsvolle Technologie | CleanPoker</title>
   <meta name="description" content="Öko-Design-Erklarung von CleanPoker. JS-Bundle unter 50 KB brotli, null Tracker, null Cookies, 100% erneuerbare Energien, Lighthouse Performance 100, CO2 unter 0,1 g pro Besuch." />
   <link rel="canonical" href="https://cleanpoker.dev/de/green" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/green" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/green" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green" />

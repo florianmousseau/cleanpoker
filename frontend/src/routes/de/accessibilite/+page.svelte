@@ -2,8 +2,8 @@
   <title>Barrierefreiheit & Behinderung | CleanPoker inklusives Planning Poker</title>
   <meta name="description" content="CleanPoker ist ein Planning-Poker-Tool, das vollständig für Menschen mit Behinderungen zugänglich ist. Vollständige Tastaturnavigation, Screenreader (NVDA, VoiceOver, JAWS), WCAG 2.1 AA Konformität." />
   <link rel="canonical" href="https://cleanpoker.dev/de/accessibilite" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/accessibilite" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/accessibilite" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite" />
