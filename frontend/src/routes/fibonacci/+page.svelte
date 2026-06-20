@@ -68,7 +68,7 @@
     </p>
     <p>
       The key property is that <strong>gaps grow with the size of the number</strong>. Between 1
-      and 2, the gap is 1. Between 13 and 21, it is 8. This is not arbitrary — it reflects how
+      and 2, the gap is 1. Between 13 and 21, it is 8. This is not arbitrary, it reflects how
       human cognition works when estimating uncertainty.
     </p>
 
@@ -168,7 +168,7 @@
       <p>
         Start with standard (1, 2, 3, 5, 8, 13, 21). Add 0 and 0.5 only if your team regularly
         debates whether a task is "almost nothing." Add values above 21 only if you estimate epics
-        alongside sprint stories. Adding complexity rarely helps — simplicity keeps velocity reliable.
+        alongside sprint stories. Adding complexity rarely helps, simplicity keeps velocity reliable.
       </p>
     </details>
 

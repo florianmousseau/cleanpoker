@@ -120,7 +120,7 @@
     <p>
       In affinity mapping, team members simultaneously (and silently) move story cards into
       size buckets: XS, S, M, L, XL. Once everyone has placed their cards, the team discusses
-      only the stories where members disagreed — not every story.
+      only the stories where members disagreed, not every story.
     </p>
     <p>
       <strong>Strength</strong>: Scales to large backlogs (20–50 stories) in a single session.
@@ -151,7 +151,7 @@
     <p>
       Dot voting (also called cumulative voting or budget allocation) gives each participant
       a fixed number of votes to distribute across stories. It is primarily a
-      <strong>prioritization</strong> tool, not an estimation one — it reveals what the team
+      <strong>prioritization</strong> tool, not an estimation one, it reveals what the team
       values, not how much effort each item requires.
     </p>
     <p>
