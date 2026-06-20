@@ -36,15 +36,17 @@ Most planning poker tools show ads, track users, and weigh megabytes. CleanPoker
 
 ## Who is it for?
 
-CleanPoker is built for any agile team that wants a fast, honest planning poker tool — with no compromises on accessibility:
+CleanPoker is built for any agile team — with no compromises on ethics, performance or inclusion:
 
+- **Eco-conscious teams**: < 50 KB JS (brotli), zero third-party scripts, hosted on renewable energy, CO₂ < 0.1g/visit
+- **Privacy-first teams**: zero trackers, zero cookies, zero analytics — nothing leaves your browser except the WebSocket to the game server
 - **Teams with members with disabilities**: fully keyboard navigable, screen reader compatible (NVDA, VoiceOver, JAWS), no motion hazard
 - **Blind and visually impaired users**: semantic HTML5, `aria-live` regions announce vote results in real time, all interactive elements have explicit labels
 - **Keyboard-only users**: complete Tab / Shift+Tab / Enter / Space navigation, no mouse required at any step
 - **Users sensitive to motion**: respects `prefers-reduced-motion`, zero auto-playing animations
 - **Low-vision users**: minimum 4.5:1 contrast ratio, `rem` units so browser zoom works correctly up to 200%
 - **Remote-first distributed teams**: WebSocket real-time, no install, works on any device and OS
-- **Privacy-conscious teams**: zero trackers, zero cookies, zero third-party scripts, EU data residency
+- **Open-source enthusiasts**: MIT license, full source on GitHub, no vendor lock-in
 
 [→ Accessibility declaration (FR)](https://cleanpoker.dev/accessibilite)
 

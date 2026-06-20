@@ -18,6 +18,7 @@
     jsonLdUrl: string;
     jsonLdDesc: string;
     accessibilitySummary: string;
+    keywords: string;
     navAriaLabel: string;
     h1Accent: string;
     lead: string;
@@ -47,6 +48,7 @@
     jsonLdUrl,
     jsonLdDesc,
     accessibilitySummary,
+    keywords,
     navAriaLabel,
     h1Accent,
     lead,
@@ -89,6 +91,7 @@
     accessibilityControl: ['fullKeyboardControl', 'fullMouseControl', 'fullTouchControl'],
     accessibilityAPI: 'ARIA',
     accessibilitySummary,
+    keywords,
   });
 
   const allLangs = ['fr', 'en', 'es', 'de', 'pt'] as const;
@@ -140,6 +143,7 @@
 <svelte:head>
   <title>{pageTitle}</title>
   <meta name="description" content={metaDesc} />
+  <meta name="keywords" content={keywords} />
   <link rel="canonical" href={canonical} />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en" />
