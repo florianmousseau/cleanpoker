@@ -238,7 +238,7 @@
   .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.9rem; }
   h1 { margin-bottom: 1.5rem; }
   h2 { margin-top: 2rem; margin-bottom: 0.75rem; }
-  p, li { line-height: 1.7; }
+  p { line-height: 1.7; }
   table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.5rem 0; }
   th, td { padding: 0.5rem 0.75rem; border: 1px solid var(--color-border); text-align: left; }
   th { background: var(--color-surface); font-weight: 700; }
