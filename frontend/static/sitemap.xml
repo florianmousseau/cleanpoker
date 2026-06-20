@@ -1,54 +1,518 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
   <url>
     <loc>https://cleanpoker.dev/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/en</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en"/>
+    <loc>https://cleanpoker.dev/fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cleanpoker.dev/es</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cleanpoker.dev/de</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cleanpoker.dev/pt</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Planning poker guide -->
+  <url>
+    <loc>https://cleanpoker.dev/planning-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/fr/planning-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/es/planning-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/de/planning-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/pt/planning-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Fibonacci -->
+  <url>
+    <loc>https://cleanpoker.dev/fibonacci</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/fr/fibonacci</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/es/fibonacci</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/de/fibonacci</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/pt/fibonacci</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Agile estimation -->
+  <url>
+    <loc>https://cleanpoker.dev/estimation-agile</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/fr/estimation-agile</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/es/estimation-agile</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/de/estimation-agile</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/pt/estimation-agile</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Alternatives -->
+  <url>
+    <loc>https://cleanpoker.dev/alternatives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/fr/alternatives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/es/alternatives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/de/alternatives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/pt/alternatives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://cleanpoker.dev/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/fr/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/es/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/de/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/pt/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Green / Eco-design -->
+  <url>
+    <loc>https://cleanpoker.dev/green</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/fr/green</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/es/green</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/de/green</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/pt/green</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Accessibility -->
+  <url>
+    <loc>https://cleanpoker.dev/accessibilite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/fr/accessibilite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/es/accessibilite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/de/accessibilite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/pt/accessibilite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Legal notice -->
+  <url>
+    <loc>https://cleanpoker.dev/mentions-legales</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/fr/mentions-legales</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/es/mentions-legales</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/de/mentions-legales</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://cleanpoker.dev/pt/mentions-legales</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>
