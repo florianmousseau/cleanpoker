@@ -17,6 +17,7 @@
   --color-primary-text: #ffffff;
   --color-accent: #2d9e6b;
   --color-card: #ffffff;
+  --color-card-face: #ffffff;
   --color-card-selected: #e6f4ed;
   --color-card-border-selected: #1a6b3c;
   --color-danger: #b91c1c;
@@ -63,7 +64,8 @@
   --color-primary-hover: #2d9e6b;
   --color-primary-text: #0d1117;
   --color-card: #161b22;
-  --color-card-selected: #1a2d24;
+  --color-card-face: #21262d;
+  --color-card-selected: #1c3a2a;
   --color-card-border-selected: #3fb68b;
   --color-danger: #f85149;
   --color-success: #3fb68b;

@@ -2,7 +2,7 @@
   import { page } from '$app/state';
   import { onMount } from 'svelte';
   import { lang } from '$lib/lang.svelte';
-  import { theme } from '$lib/theme.svelte';
+  import Footer from '$lib/Footer.svelte';
   import { FR, EN, ES, DE, PT, translateActivity } from '$lib/i18n';
   import { useRoom } from '$lib/useRoom.svelte';
 
@@ -59,26 +59,6 @@
           <span class="badge-pill">{T.tourLabel} {room.roomState.round}</span>
         {/if}
         <button class="btn btn-secondary btn-sm" onclick={copyLink}>{copyFeedback || T.copyLink}</button>
-        <select class="lang-select" value={lang.current} onchange={(e) => lang.set(e.currentTarget.value as 'fr'|'en'|'es'|'de'|'pt')} aria-label="Language">
-          <option value="fr">FR</option>
-          <option value="en">EN</option>
-          <option value="es">ES</option>
-          <option value="de">DE</option>
-          <option value="pt">PT</option>
-        </select>
-        <button
-          type="button"
-          class="theme-toggle-btn"
-          aria-label={theme.current === 'dark' ? T.theme.toLight : T.theme.toDark}
-          aria-pressed={theme.current === 'dark'}
-          onclick={() => theme.toggle()}
-        >
-          {#if theme.current === 'dark'}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          {:else}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          {/if}
-        </button>
       </div>
     </div>
   </header>
@@ -342,13 +322,14 @@
     {/if}
   </main>
 
-  <footer class="footer">
-    <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">{T.footer.source}</a>
-      · <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">{T.footer.license}</a>
-      · <a href="/mentions-legales">{T.footer.legal}</a>
-    </p>
-  </footer>
+  <Footer
+    navAriaLabel={T.footer.navAriaLabel}
+    source={T.footer.source}
+    license={T.footer.license}
+    legal={T.footer.legal}
+    locale={lang.current}
+    onLangChange={(l) => lang.set(l as 'fr'|'en'|'es'|'de'|'pt')}
+  />
 </div>
 
 <style>
@@ -365,22 +346,6 @@
   }
   .badge-pill code { font-family: var(--font-mono); }
   .btn-sm { padding: 0.25rem 0.75rem; font-size: 0.8rem; min-height: 0; }
-  .lang-select {
-    font-size: 0.8rem; font-weight: 700; font-family: inherit;
-    padding: 0.25rem 0.5rem; border: 1px solid var(--color-border);
-    border-radius: 99px; background: transparent; color: var(--color-text-muted);
-    cursor: pointer; appearance: none; min-width: 3.5rem; text-align: center;
-  }
-  .lang-select:hover { border-color: var(--color-primary); color: var(--color-primary); }
-  .theme-toggle-btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 2rem; height: 2rem; padding: 0;
-    background: none; border: 1px solid var(--color-border);
-    border-radius: 99px; color: var(--color-text-muted);
-    cursor: pointer; transition: color 0.15s, border-color 0.15s;
-  }
-  .theme-toggle-btn:hover { color: var(--color-primary); border-color: var(--color-primary); }
-
   .main { flex: 1; padding-top: 1.5rem; padding-bottom: 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
 
   .panel {
@@ -430,15 +395,16 @@
   .poker-card {
     width: 3.5rem; height: 5rem;
     font-size: 1.25rem; font-weight: 700; font-family: inherit;
-    background: var(--color-bg); border: 2px solid var(--color-border);
+    background: var(--color-card-face); border: 2px solid var(--color-border);
+    color: var(--color-text);
     border-radius: var(--radius); cursor: pointer;
     transition: border-color 0.15s, background 0.15s, transform 0.1s;
     display: flex; align-items: center; justify-content: center;
     box-shadow: var(--shadow);
   }
   .poker-card:hover:not(:disabled) { border-color: var(--color-primary); transform: translateY(-3px); }
-  .poker-card.selected { background: var(--color-card-selected); border-color: var(--color-card-border-selected); transform: translateY(-5px); box-shadow: var(--shadow-md); }
-  .poker-card:disabled { opacity: 0.5; cursor: default; transform: none; }
+  .poker-card.selected { background: var(--color-card-selected); border-color: var(--color-card-border-selected); color: var(--color-primary); transform: translateY(-5px); box-shadow: var(--shadow-md); }
+  .poker-card:disabled { cursor: default; transform: none; }
 
   .controls-results-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   @media (max-width: 42rem) { .controls-results-row { grid-template-columns: 1fr; } }
@@ -504,5 +470,5 @@
 
   .center-msg { text-align: center; padding: 4rem 0; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
 
-  .footer { padding: 1.25rem 1rem; border-top: 1px solid var(--color-border); font-size: 0.8rem; color: var(--color-text-muted); max-width: 60rem; margin: 0 auto; width: 100%; }
+
 </style>
