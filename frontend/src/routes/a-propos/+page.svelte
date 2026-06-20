@@ -63,6 +63,18 @@
         <h3>Legal notice</h3>
         <p>GDPR, cookies, hosting, site publisher.</p>
       </a>
+      <a href="/fibonacci" class="card">
+        <h3>Fibonacci in planning poker</h3>
+        <p>Why Fibonacci, the ? card, standard vs. modified scale, and how to pick your card.</p>
+      </a>
+      <a href="/estimation-agile" class="card">
+        <h3>Agile estimation</h3>
+        <p>Story points vs. hours, velocity, capacity planning, and the most common mistakes.</p>
+      </a>
+      <a href="/alternatives" class="card">
+        <h3>Alternatives to planning poker</h3>
+        <p>T-shirt sizing, affinity mapping, bucket system: when to use each technique.</p>
+      </a>
     </div>
   </main>
 

@@ -1,7 +1,7 @@
 <svelte:head>
   <title>À propos de CleanPoker - Planning poker éco-conçu</title>
   <meta name="description" content="CleanPoker est un outil de planning poker gratuit, éco-conçu, zéro trackers, accessible WCAG 2.1 AA. Découvrez notre démarche, nos engagements et notre guide du planning poker." />
-  <link rel="canonical" href="https://cleanpoker.dev/a-propos" />
+  <link rel="canonical" href="https://cleanpoker.dev/fr/a-propos" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos" />
@@ -62,6 +62,18 @@
       <a href="/fr/mentions-legales" class="card">
         <h3>Mentions légales</h3>
         <p>RGPD, cookies, hébergement, éditeur du site.</p>
+      </a>
+      <a href="/fr/fibonacci" class="card">
+        <h3>Fibonacci en planning poker</h3>
+        <p>Pourquoi Fibonacci, la carte ?, échelle standard vs. modifiée, et comment choisir sa carte.</p>
+      </a>
+      <a href="/fr/estimation-agile" class="card">
+        <h3>Estimation agile</h3>
+        <p>Story points vs. heures, vélocité, planification de capacité et erreurs courantes.</p>
+      </a>
+      <a href="/fr/alternatives" class="card">
+        <h3>Alternatives au planning poker</h3>
+        <p>Tailles de T-shirt, affinity mapping, bucket system : quelle technique selon le contexte.</p>
       </a>
     </div>
   </main>
