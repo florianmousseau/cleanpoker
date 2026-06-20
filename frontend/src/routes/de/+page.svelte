@@ -30,5 +30,6 @@
   footerSource="Quellcode"
   footerLicense="MIT-Lizenz"
   footerGreen="Ökodesign"
+  footerAccessibility="Barrierefreiheit"
   footerLegal="Impressum"
 />

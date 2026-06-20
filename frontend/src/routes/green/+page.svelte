@@ -109,17 +109,6 @@
       </li>
     </ul>
 
-    <h2>Comment s'inscrire sur The Green Web Foundation</h2>
-    <p>
-      The Green Web Foundation maintient une base de données d'hébergeurs verts.
-      Pour faire reconnaître cleanpoker.dev officiellement, il suffit de
-      <a href="https://www.thegreenwebfoundation.org/for-hosting-providers/" rel="noopener noreferrer">
-        soumettre les preuves d'hébergement vert
-      </a>
-      sur leur site. Cloudflare Pages et Fly.io étant déjà référencés, la vérification
-      de cleanpoker.dev devrait être rapide.
-    </p>
-
     <h2>Amélioration continue</h2>
     <p>
       L'empreinte numérique est auditée à chaque déploiement via Lighthouse CI et Eco-CI
