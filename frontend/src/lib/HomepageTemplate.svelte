@@ -97,7 +97,7 @@
   });
 
   const allLangs = ['fr', 'en', 'es', 'de', 'pt'] as const;
-  const langHref = (l: string) => l === 'fr' ? '/' : `/${l}`;
+  const langHref = (l: string) => l === 'en' ? '/' : `/${l}`;
 
 
   let cardsInput = $state(
@@ -171,10 +171,10 @@
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <div class="logo-group">
+      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label="CleanPoker, accueil">
         <span class="logo" aria-hidden="true">♠</span>
         <span class="logo-text">CleanPoker</span>
-      </div>
+      </a>
     </div>
   </header>
 
@@ -241,7 +241,7 @@
 
   .header { padding: 1rem 0; border-bottom: 1px solid var(--color-border); }
   .header-inner { display: flex; align-items: center; justify-content: space-between; }
-  .logo-group { display: flex; align-items: center; gap: 0.5rem; }
+  .logo-group { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
   .logo { font-size: 1.5rem; color: var(--color-primary); }
   .logo-text { font-size: 1.25rem; font-weight: 700; }
 
