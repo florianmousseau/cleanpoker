@@ -1,61 +1,55 @@
 import type { Handle } from '@sveltejs/kit';
-import { redirect } from '@sveltejs/kit';
 
-const LOCALES = ['en', 'es', 'de', 'pt'] as const;
+const LOCALES = ['fr', 'es', 'de', 'pt'] as const;
 type Locale = typeof LOCALES[number];
-const LOCALE_SET = new Set<string>(LOCALES);
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
-type AnyLang = Locale | 'fr';
+/**
+ * Cloudflare Pages applies static/_headers to static assets only, never to the
+ * responses this worker produces, so pages would otherwise ship with none of
+ * them. Keep this table and static/_headers in sync.
+ */
+const SECURITY_HEADERS: Record<string, string> = {
+	'X-Content-Type-Options': 'nosniff',
+	'X-Frame-Options': 'DENY',
+	'Cross-Origin-Opener-Policy': 'same-origin',
+	'Referrer-Policy': 'strict-origin-when-cross-origin',
+	'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=()',
+	'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
+	'Content-Security-Policy': [
+		"default-src 'self'",
+		"connect-src 'self' https://cleanpoker-backend.fly.dev wss://cleanpoker-backend.fly.dev",
+		"script-src 'self' 'unsafe-inline'",
+		"style-src 'self' 'unsafe-inline'",
+		"img-src 'self' data:",
+		"font-src 'self'",
+		"object-src 'none'",
+		"base-uri 'self'",
+		"frame-ancestors 'none'"
+	].join('; ')
+};
 
-function parseAcceptLanguage(header: string | null): AnyLang | null {
-	if (!header) return null;
-	const primary = header.split(',')[0].split(';')[0].trim().toLowerCase();
-	if (primary.startsWith('fr')) return 'fr';
-	if (primary.startsWith('pt')) return 'pt';
-	if (primary.startsWith('es')) return 'es';
-	if (primary.startsWith('de')) return 'de';
-	if (primary.startsWith('en')) return 'en';
-	return null;
-}
-
-function routeLocale(pathname: string): Locale | null {
-	return LOCALES.find((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`)) ?? null;
+function routeLocale(pathname: string): Locale | 'en' {
+	const match = LOCALES.find((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
+	return match ?? 'en';
 }
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const { pathname } = event.url;
-	const cookieOpts = { path: '/', maxAge: COOKIE_MAX_AGE, sameSite: 'lax' as const, httpOnly: false };
-
-	if (pathname === '/') {
-		const saved = event.cookies.get('lang') as Locale | undefined;
-		if (saved && LOCALE_SET.has(saved)) {
-			throw redirect(302, `/${saved}`);
-		}
-		if (saved) {
-			event.cookies.set('lang', 'fr', cookieOpts);
-		} else {
-			const detected = parseAcceptLanguage(event.request.headers.get('accept-language'));
-			if (detected === 'fr') {
-				event.cookies.set('lang', 'fr', cookieOpts);
-			} else {
-				throw redirect(302, `/${detected ?? 'en'}`);
-			}
-		}
-	}
-
-	const locale = routeLocale(pathname);
-	if (locale) {
-		event.cookies.set('lang', locale, cookieOpts);
-	}
+	const locale = routeLocale(event.url.pathname);
 
 	const themeCookie = event.cookies.get('theme');
 	const themeAttr = themeCookie === 'dark' ? ' data-theme="dark"'
 		: themeCookie === 'light' ? ' data-theme="light"'
 		: '';
 
-	return resolve(event, {
+	const response = await resolve(event, {
 		transformPageChunk: ({ html }) =>
-			html.replace('<html lang="fr">', `<html lang="${locale ?? 'fr'}"${themeAttr}>`),
+			html.replace('<html lang="fr">', `<html lang="${locale}"${themeAttr}>`),
 	});
+
+	for (const [header, value] of Object.entries(SECURITY_HEADERS)) {
+		response.headers.set(header, value);
+	}
+
+	return response;
 };
+
