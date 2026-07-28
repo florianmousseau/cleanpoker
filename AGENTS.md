@@ -31,10 +31,11 @@
 ## Invariants à ne pas casser
 
 - **En-têtes de sécurité** : ils sont posés dans `frontend/src/hooks.server.ts`.
-  Cloudflare Pages n'applique `frontend/static/_headers` qu'aux fichiers
-  statiques, jamais aux réponses du worker SvelteKit, donc les pages HTML n'en
-  reçoivent aucun si on les retire des hooks. Les deux fichiers doivent rester
-  synchronisés.
+  Cloudflare Pages n'applique `frontend/_headers` qu'aux fichiers statiques,
+  jamais aux réponses du worker SvelteKit, donc les pages HTML n'en reçoivent
+  aucun si on les retire des hooks. Les deux fichiers doivent rester
+  synchronisés. Depuis `adapter-cloudflare` 7, ce fichier vit à la racine du
+  projet et non plus dans `static/` : le build échoue s'il y retourne.
 - **Version de Go** : `backend/go.mod` fait foi. La CI la lit avec
   `go-version-file` et le `Dockerfile` doit être épinglé sur la même version
   patch. Ne pas revenir à un tag flottant : la CI testerait autre chose que ce
