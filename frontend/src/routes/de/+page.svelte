@@ -29,7 +29,6 @@
   createError="Session konnte nicht erstellt werden. Bitte erneut versuchen."
   footerSource="Quellcode"
   footerLicense="MIT-Lizenz"
-  footerGreen="Ökodesign"
-  footerAccessibility="Barrierefreiheit"
+  footerAbout="Über CleanPoker"
   footerLegal="Impressum"
 />

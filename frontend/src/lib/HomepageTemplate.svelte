@@ -32,8 +32,7 @@
     createError: string;
     footerSource: string;
     footerLicense: string;
-    footerGreen: string;
-    footerAccessibility: string;
+    footerAbout: string;
     footerLegal: string;
   }
 
@@ -64,8 +63,7 @@
     createError,
     footerSource,
     footerLicense,
-    footerGreen,
-    footerAccessibility,
+    footerAbout,
     footerLegal,
   }: Props = $props();
 
@@ -97,10 +95,6 @@
     accessibilitySummary,
     keywords,
   });
-
-  const allLangs = ['fr', 'en', 'es', 'de', 'pt'] as const;
-  const langHref = (l: string) => l === 'fr' ? '/' : `/${l}`;
-
 
   let cardsInput = $state(
     browser
@@ -149,8 +143,8 @@
   <meta name="description" content={metaDesc} />
   <meta name="keywords" content={keywords} />
   <link rel="canonical" href={canonical} />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt" />
@@ -173,10 +167,10 @@
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <div class="logo-group">
+      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label="CleanPoker, accueil">
         <span class="logo" aria-hidden="true">♠</span>
         <span class="logo-text">CleanPoker</span>
-      </div>
+      </a>
     </div>
   </header>
 
@@ -232,8 +226,7 @@
     {navAriaLabel}
     source={footerSource}
     license={footerLicense}
-    green={footerGreen}
-    accessibility={footerAccessibility}
+    about={footerAbout}
     legal={footerLegal}
     {locale}
   />
@@ -244,7 +237,7 @@
 
   .header { padding: 1rem 0; border-bottom: 1px solid var(--color-border); }
   .header-inner { display: flex; align-items: center; justify-content: space-between; }
-  .logo-group { display: flex; align-items: center; gap: 0.5rem; }
+  .logo-group { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
   .logo { font-size: 1.5rem; color: var(--color-primary); }
   .logo-text { font-size: 1.25rem; font-weight: 700; }
 

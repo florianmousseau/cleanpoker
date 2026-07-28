@@ -2,8 +2,8 @@
   <title>Aviso legal & Politica de privacidade | CleanPoker</title>
   <meta name="description" content="Aviso legal, politica de privacidade e informacoes de alojamento do CleanPoker." />
   <link rel="canonical" href="https://cleanpoker.dev/pt/mentions-legales" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/mentions-legales" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/mentions-legales" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales" />
@@ -130,8 +130,7 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Código fonte</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licença MIT</a>
-      | <a href="/pt/green">Eco-design</a>
-      | <a href="/pt/accessibilite">Acessibilidade</a>
+      | <a href="/pt/a-propos">Sobre</a>
       | <a href="/pt/mentions-legales">Aviso legal</a>
     </p>
   </footer>

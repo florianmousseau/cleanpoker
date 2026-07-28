@@ -2,8 +2,8 @@
   <title>Accesibilidad & discapacidad | CleanPoker planning poker inclusivo</title>
   <meta name="description" content="CleanPoker es una herramienta de planning poker totalmente accesible para personas con discapacidad. Navegación por teclado, lectores de pantalla (NVDA, VoiceOver, JAWS), conformidad WCAG 2.1 AA." />
   <link rel="canonical" href="https://cleanpoker.dev/es/accessibilite" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/accessibilite" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/accessibilite" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite" />
@@ -105,8 +105,7 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Código fuente</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licencia MIT</a>
-      | <a href="/es/green">Eco-diseño</a>
-      | <a href="/es/accessibilite">Accesibilidad</a>
+      | <a href="/es/a-propos">Acerca de</a>
       | <a href="/es/mentions-legales">Aviso legal</a>
     </p>
   </footer>
