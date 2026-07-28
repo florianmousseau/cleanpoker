@@ -4,9 +4,9 @@ const LOCALES = ['fr', 'es', 'de', 'pt'] as const;
 type Locale = typeof LOCALES[number];
 
 /**
- * Cloudflare Pages applies static/_headers to static assets only, never to the
+ * Cloudflare Pages applies _headers to static assets only, never to the
  * responses this worker produces, so pages would otherwise ship with none of
- * them. Keep this table and static/_headers in sync.
+ * them. Keep this table and the _headers file in sync.
  */
 const SECURITY_HEADERS: Record<string, string> = {
 	'X-Content-Type-Options': 'nosniff',
