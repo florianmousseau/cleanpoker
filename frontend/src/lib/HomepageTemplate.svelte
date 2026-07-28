@@ -96,10 +96,6 @@
     keywords,
   });
 
-  const allLangs = ['fr', 'en', 'es', 'de', 'pt'] as const;
-  const langHref = (l: string) => l === 'en' ? '/' : `/${l}`;
-
-
   let cardsInput = $state(
     browser
       ? (new URLSearchParams(window.location.search).get('cards') ?? '1,2,3,5,8,13,21,?')
