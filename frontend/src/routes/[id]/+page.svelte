@@ -40,6 +40,13 @@
   const allVoted = $derived(participants.length > 0 && participants.every(p => p.vote !== ''));
   const me = $derived(room.roomState?.players.find(p => p.id === room.myId));
   const isSolo = $derived(room.roomState !== null && room.roomState.players.length === 1);
+  const homeHref = $derived(
+    lang.current === 'fr' ? '/fr' :
+    lang.current === 'es' ? '/es' :
+    lang.current === 'de' ? '/de' :
+    lang.current === 'pt' ? '/pt' :
+    '/'
+  );
 </script>
 
 <svelte:head>
@@ -52,7 +59,7 @@
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <a href="/" class="logo" aria-label="CleanPoker, accueil">♠ CleanPoker</a>
+      <a href={homeHref} class="logo" aria-label="CleanPoker, accueil">♠ CleanPoker</a>
       <div class="room-meta">
         <span class="badge-pill">{T.salleLabel} <code>{roomId}</code></span>
         {#if room.roomState}
@@ -327,8 +334,7 @@
     source={T.footer.source}
     license={T.footer.license}
     legal={T.footer.legal}
-    green={T.footer.green}
-    accessibility={T.footer.accessibility}
+    about={T.footer.about}
     locale={lang.current}
     onLangChange={(l) => lang.set(l as 'fr'|'en'|'es'|'de'|'pt')}
   />

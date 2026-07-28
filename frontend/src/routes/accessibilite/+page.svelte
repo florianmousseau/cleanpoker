@@ -1,9 +1,9 @@
 <svelte:head>
-  <title>Accessibilité & handicap | CleanPoker planning poker inclusif</title>
-  <meta name="description" content="CleanPoker est un outil de planning poker entièrement accessible aux personnes en situation de handicap. Navigation clavier, lecteurs d'écran (NVDA, VoiceOver, JAWS), conformité WCAG 2.1 AA." />
+  <title>Accessibility & disability | CleanPoker inclusive planning poker</title>
+  <meta name="description" content="CleanPoker is a planning poker tool fully accessible to people with disabilities. Full keyboard navigation, screen readers (NVDA, VoiceOver, JAWS), WCAG 2.1 AA compliance." />
   <link rel="canonical" href="https://cleanpoker.dev/accessibilite" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/accessibilite" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/accessibilite" />
+  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite" />
   <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite" />
   <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite" />
@@ -11,9 +11,9 @@
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Déclaration d\'accessibilité : CleanPoker',
+    name: 'Accessibility declaration: CleanPoker',
     url: 'https://cleanpoker.dev/accessibilite',
-    description: 'CleanPoker est un outil de planning poker entièrement accessible aux personnes en situation de handicap. Navigation clavier complète, compatible lecteurs d\'écran NVDA, VoiceOver et JAWS. Conforme WCAG 2.1 AA.',
+    description: 'CleanPoker is a planning poker tool fully accessible to people with disabilities. Full keyboard navigation, compatible with NVDA, VoiceOver and JAWS screen readers. WCAG 2.1 AA compliant.',
     isPartOf: {
       '@type': 'WebApplication',
       name: 'CleanPoker',
@@ -28,86 +28,85 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/" class="back-link">← Retour à l'accueil</a>
+    <a href="/" class="back-link">← Back to home</a>
 
-    <h1>Accessibilité : CleanPoker pour les équipes inclusives</h1>
+    <h1>Accessibility: CleanPoker for inclusive teams</h1>
 
     <p>
-      <strong>CleanPoker</strong> est un outil de planning poker conçu pour être utilisable par tous,
-      y compris les personnes en situation de handicap : utilisateurs de lecteurs d'écran,
-      personnes naviguant au clavier, personnes malvoyantes ou ayant des troubles moteurs.
-      Il est conforme au référentiel <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 niveau AA.
+      <strong>CleanPoker</strong> is a planning poker tool designed to be usable by everyone,
+      including people with disabilities: screen reader users, keyboard-only users,
+      people with low vision or motor impairments.
+      It conforms to the <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 Level AA guidelines.
     </p>
 
-    <h2>Pour qui ?</h2>
-    <p>CleanPoker est adapté aux :</p>
+    <h2>Who is it for?</h2>
+    <p>CleanPoker is suitable for:</p>
     <ul>
-      <li>Personnes aveugles ou malvoyantes utilisant un lecteur d'écran (NVDA, VoiceOver, JAWS)</li>
-      <li>Personnes ayant des troubles moteurs naviguant exclusivement au clavier</li>
-      <li>Personnes sensibles aux animations (épilepsie, troubles vestibulaires)</li>
-      <li>Personnes utilisant un zoom navigateur jusqu'à 200 %</li>
-      <li>Équipes agiles souhaitant inclure des membres en situation de handicap</li>
+      <li>Blind or visually impaired people using a screen reader (NVDA, VoiceOver, JAWS)</li>
+      <li>People with motor impairments who navigate exclusively with a keyboard</li>
+      <li>People sensitive to animations (epilepsy, vestibular disorders)</li>
+      <li>People using browser zoom up to 200%</li>
+      <li>Agile teams wishing to include members with disabilities</li>
     </ul>
 
-    <h2>État de conformité</h2>
-    <p>CleanPoker est <strong>en conformité partielle</strong> avec les critères WCAG 2.1 AA.
-    L'accessibilité a été intégrée dès la conception, pas ajoutée après coup.
-    Le score Lighthouse Accessibilité est de <strong>100/100</strong>.</p>
+    <h2>Conformance status</h2>
+    <p>CleanPoker is <strong>partially conformant</strong> with WCAG 2.1 AA criteria.
+    Accessibility was integrated from the design stage, not added afterwards.
+    The Lighthouse Accessibility score is <strong>100/100</strong>.</p>
 
-    <h2>Compatibilité avec les technologies d'assistance</h2>
+    <h2>Compatibility with assistive technologies</h2>
     <ul>
-      <li><strong>NVDA</strong> (Windows) : testé avec Firefox</li>
-      <li><strong>VoiceOver</strong> (macOS / iOS) : testé avec Safari</li>
-      <li><strong>JAWS</strong> (Windows) : compatible via HTML sémantique et ARIA</li>
-      <li>Navigation clavier complète : Tab, Maj+Tab, Entrée, Espace, flèches</li>
+      <li><strong>NVDA</strong> (Windows): tested with Firefox</li>
+      <li><strong>VoiceOver</strong> (macOS / iOS): tested with Safari</li>
+      <li><strong>JAWS</strong> (Windows): compatible via semantic HTML and ARIA</li>
+      <li>Full keyboard navigation: Tab, Shift+Tab, Enter, Space, arrow keys</li>
     </ul>
 
-    <h2>Mesures techniques mises en œuvre</h2>
+    <h2>Technical measures implemented</h2>
     <ul>
-      <li>Lien d'évitement ("Aller au contenu principal") en début de page</li>
-      <li>Navigation clavier complète (Tab, Entrée, Espace)</li>
-      <li>Zones <code>aria-live="polite"</code> pour les mises à jour de votes en temps réel</li>
-      <li>États <code>aria-pressed</code> sur les cartes de vote</li>
-      <li>Contrastes respectant le ratio 4,5:1 minimum</li>
-      <li>Pas de <code>user-scalable=no</code> (zoom navigateur libre)</li>
-      <li>Prise en charge de <code>prefers-reduced-motion</code> (pas d'animation imposée)</li>
-      <li>Prise en charge du mode sombre (<code>prefers-color-scheme</code>)</li>
-      <li>HTML5 sémantique : <code>&lt;button&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;table&gt;</code></li>
-      <li>Unités <code>rem</code> : le zoom navigateur fonctionne correctement</li>
-      <li>Boutons et liens avec labels explicites (<code>aria-label</code>)</li>
+      <li>Skip link ("Skip to main content") at the top of the page</li>
+      <li>Full keyboard navigation (Tab, Enter, Space)</li>
+      <li><code>aria-live="polite"</code> regions for real-time vote updates</li>
+      <li><code>aria-pressed</code> states on voting cards</li>
+      <li>Contrast ratios meeting the 4.5:1 minimum</li>
+      <li>No <code>user-scalable=no</code> (free browser zoom)</li>
+      <li><code>prefers-reduced-motion</code> support (no forced animations)</li>
+      <li>Dark mode support (<code>prefers-color-scheme</code>)</li>
+      <li>Semantic HTML5: <code>&lt;button&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;table&gt;</code></li>
+      <li><code>rem</code> units: browser zoom works correctly</li>
+      <li>Buttons and links with explicit labels (<code>aria-label</code>)</li>
     </ul>
 
-    <h2>Technologies utilisées</h2>
+    <h2>Technologies used</h2>
     <ul>
-      <li>HTML5 sémantique</li>
-      <li>CSS avec unités <code>rem</code> (zoom respecté)</li>
+      <li>Semantic HTML5</li>
+      <li>CSS with <code>rem</code> units (zoom respected)</li>
       <li>JavaScript (SvelteKit)</li>
-      <li>WebSocket pour le temps réel</li>
-      <li>WAI-ARIA pour les composants interactifs</li>
+      <li>WebSocket for real-time</li>
+      <li>WAI-ARIA for interactive components</li>
     </ul>
 
-    <h2>Limitations connues</h2>
-    <p>Aucune limitation majeure identifiée à ce jour. Ce site est activement maintenu et audité régulièrement.</p>
+    <h2>Known limitations</h2>
+    <p>No major limitations identified to date. This site is actively maintained and regularly audited.</p>
 
-    <h2>Signaler un problème</h2>
+    <h2>Report a problem</h2>
     <p>
-      Pour signaler un problème d'accessibilité ou suggérer une amélioration :
+      To report an accessibility issue or suggest an improvement:
       <a href="https://github.com/florianmousseau/cleanpoker/issues" rel="noopener noreferrer">
-        ouvrir une issue GitHub
+        open a GitHub issue
       </a>
     </p>
 
-    <h2>Date de mise à jour</h2>
-    <p>Cette déclaration a été établie en juin 2026.</p>
+    <h2>Last updated</h2>
+    <p>This declaration was established in June 2026.</p>
   </main>
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
-      | <a href="/green">Éco-conception</a>
-      | <a href="/accessibilite">Accessibilité</a>
-      | <a href="/mentions-legales">Mentions légales</a>
+      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT Licence</a>
+      | <a href="/a-propos">About</a>
+      | <a href="/mentions-legales">Legal notice</a>
     </p>
   </footer>
 </div>
