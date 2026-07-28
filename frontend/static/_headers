@@ -1,3 +1,6 @@
+# Static assets only. Cloudflare Pages does not apply this file to responses
+# built by the SvelteKit worker, so pages are covered by src/hooks.server.ts.
+# Keep both in sync.
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
