@@ -6,6 +6,12 @@ updates:
       interval: weekly
     open-pull-requests-limit: 5
     labels: [dependencies, frontend]
+    groups:
+      # One lockfile, so one pull request: separate ones only force a rebase
+      # and a fresh CI run on every sibling.
+      frontend:
+        patterns: ["*"]
+        update-types: [minor, patch]
 
   - package-ecosystem: gomod
     directory: /backend
@@ -13,6 +19,10 @@ updates:
       interval: weekly
     open-pull-requests-limit: 5
     labels: [dependencies, backend]
+    groups:
+      backend:
+        patterns: ["*"]
+        update-types: [minor, patch]
 
   - package-ecosystem: docker
     directory: /backend
@@ -25,3 +35,9 @@ updates:
     schedule:
       interval: monthly
     labels: [dependencies, ci]
+    groups:
+      # codeql-action/init, autobuild and analyze must always move together:
+      # a mixed pair fails the analysis with "unable to automatically build
+      # your code". Grouping every action keeps that guarantee.
+      actions:
+        patterns: ["*"]
