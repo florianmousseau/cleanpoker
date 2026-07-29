@@ -23,7 +23,7 @@
       {
         "@type": "Question",
         "name": "Quelle est la différence entre les story points et les heures ?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Les story points mesurent la complexité relative, pas le temps. Une story à 5 points est environ deux fois plus complexe que une story à 3 points. Les heures varient selon le développeur ; la complexité relative est stable." },
+        "acceptedAnswer": { "@type": "Answer", "text": "Les story points mesurent l'effort relatif, pas le temps. L'effort combine le volume de travail, l'incertitude et la complexité : une tâche simple mais très volumineuse peut peser plus lourd qu'une petite tâche délicate. Les heures varient selon le développeur ; l'effort relatif est propre à l'équipe et stable." },
       },
       {
         "@type": "Question",
@@ -69,10 +69,13 @@
       l'autre n'a tort ; ils mesurent simplement des choses différentes.
     </p>
     <p>
-      Les <strong>story points</strong> mesurent la <em>complexité relative</em> dans
-      l'expérience partagée de l'équipe. Une story à 5 points est environ deux fois plus
-      complexe qu'une story à 3 points, peu importe qui la réalise. Cette abstraction rend
-      la vélocité stable et comparable d'un sprint à l'autre.
+      Les <strong>story points</strong> mesurent l'<em>effort relatif</em> dans
+      l'expérience partagée de l'équipe. L'effort combine trois choses : le volume de
+      travail, l'incertitude et la complexité. La complexité seule n'y suffit pas - une
+      tâche simple mais très volumineuse peut peser plus lourd qu'une petite tâche
+      délicate. L'échelle reste relative : un 5 est nettement plus gros qu'un 3, sans
+      prétendre à un rapport exact. Cette abstraction rend la vélocité stable et
+      comparable d'un sprint à l'autre.
     </p>
 
     <h2>Comment fonctionne la vélocité</h2>
@@ -109,9 +112,10 @@
     <details>
       <summary>Quelle est la différence entre story points et heures ?</summary>
       <p>
-        Les story points mesurent la complexité relative, pas le temps. Une story à 5 points
-        est environ deux fois plus complexe qu'une story à 3 points, indépendamment de qui la
-        réalise. Les heures varient ; la complexité relative est stable.
+        Les story points mesurent l'effort relatif, pas le temps. L'effort combine le volume
+        de travail, l'incertitude et la complexité : une tâche simple mais très volumineuse
+        peut peser plus lourd qu'une petite tâche délicate. Les heures varient selon le
+        développeur ; l'effort relatif est propre à l'équipe et stable.
       </p>
     </details>
 

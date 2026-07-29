@@ -38,7 +38,7 @@
       {
         '@type': 'Question',
         name: 'Is there a correct Fibonacci value for a given task?',
-        acceptedAnswer: { '@type': 'Answer', text: 'No. Story points are relative, not absolute. A 5 is roughly twice as complex as a 3 within the team shared reference frame. The goal is consistency over time so velocity becomes a reliable planning tool.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'No. Story points are relative, not absolute. What matters is consistency within the team shared reference frame: a 5 today should feel like a 5 in six months. The goal is consistency over time so velocity becomes a reliable planning tool.' },
       },
       {
         '@type': 'Question',
