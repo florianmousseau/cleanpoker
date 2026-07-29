@@ -38,7 +38,7 @@
       {
         '@type': 'Question',
         name: 'Gibt es einen richtigen Fibonacci-Wert für eine Aufgabe?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Nein. Story Points sind relativ, nicht absolut. Eine 5 ist ungefähr doppelt so komplex wie eine 3 im gemeinsamen Referenzrahmen des Teams. Das Ziel ist Konsistenz über die Zeit, damit Velocity ein zuverlässiges Planungsinstrument wird.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Nein. Story Points sind relativ, nicht absolut. Entscheidend ist die Konsistenz im gemeinsamen Referenzrahmen des Teams: eine 5 heute soll sich wie eine 5 in sechs Monaten anfühlen. Das Ziel ist Konsistenz über die Zeit, damit Velocity ein zuverlässiges Planungsinstrument wird.' },
       },
       {
         '@type': 'Question',

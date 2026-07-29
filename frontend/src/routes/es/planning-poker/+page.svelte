@@ -25,7 +25,7 @@
       {
         '@type': 'Question',
         name: 'Cual es la diferencia entre puntos de historia y dias?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Los puntos de historia miden la complejidad relativa, no el tiempo. Un 5 es aproximadamente 2,5 veces mas complejo que un 2, independientemente de la duracion real. Esta abstraccion permite comparar tareas sin quedarse bloqueado en las duraciones individuales.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Los puntos de historia miden el esfuerzo relativo, no el tiempo: el volumen de trabajo, la incertidumbre y la complejidad tomados juntos. La escala es relativa, asi que un 5 es claramente mayor que un 2 sin pretender una proporcion exacta. Esta abstraccion permite comparar tareas sin quedarse bloqueado en las duraciones individuales.' },
       },
     ],
   })}<\/script>`}
@@ -97,10 +97,11 @@
     <details>
       <summary>Cual es la diferencia entre puntos de historia y dias?</summary>
       <p>
-        Los puntos de historia miden la <strong>complejidad relativa</strong>, no el tiempo.
-        Un 5 es aproximadamente 2,5 veces mas complejo que un 2, independientemente de la
-        duracion real. Esta abstraccion permite comparar tareas sin quedarse bloqueado en
-        las duraciones individuales.
+        Los puntos de historia miden el <strong>esfuerzo relativo</strong>, no el tiempo: el
+        volumen de trabajo, la incertidumbre y la complejidad tomados juntos. La escala es
+        relativa - un 5 es claramente mayor que un 2, sin pretender una proporcion exacta.
+        Esta abstraccion permite comparar tareas sin quedarse bloqueado en las duraciones
+        individuales.
       </p>
     </details>
 

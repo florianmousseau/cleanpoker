@@ -23,7 +23,7 @@
       {
         '@type': 'Question',
         name: 'Qual é a diferença entre story points e horas?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Os story points medem complexidade relativa, não tempo. Uma história de 5 pontos é aproximadamente o dobro de complexa que uma de 3 pontos, independentemente de quem a implementa ou quanto tempo leva. As horas variam por desenvolvedor e contexto; a complexidade é relativa à equipe e estável.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Os story points medem esforço relativo, não tempo. O esforço combina o volume de trabalho, a incerteza e a complexidade de uma história: uma tarefa simples mas muito volumosa pode pesar mais do que uma pequena e delicada. As horas variam por desenvolvedor e contexto; o esforço relativo é próprio da equipe e estável.' },
       },
       {
         '@type': 'Question',
@@ -63,10 +63,12 @@
 
     <h2>Story points vs. horas</h2>
     <p>
-      Os <strong>story points</strong> medem a complexidade relativa dentro da equipe.
-      Uma história de 5 pontos é aproximadamente o dobro em complexidade de uma de 3 pontos,
-      independentemente de quem a implementa. As horas variam; a complexidade relativa
-      é estável.
+      Os <strong>story points</strong> medem o esforço relativo dentro da equipe. O esforço
+      combina três coisas: o volume de trabalho, a incerteza e a complexidade. A complexidade
+      sozinha não basta - uma tarefa simples mas muito volumosa pode pesar mais do que uma
+      pequena e delicada. A escala permanece relativa: um 5 é claramente maior que um 3, sem
+      afirmar uma proporção exata. As horas variam; o esforço relativo é próprio da equipe
+      e estável.
     </p>
 
     <h2>Como a velocidade funciona</h2>
@@ -94,9 +96,10 @@
     <details>
       <summary>Qual é a diferença entre story points e horas?</summary>
       <p>
-        Story points medem complexidade relativa, não tempo. Uma história de 5 pontos é
-        aproximadamente o dobro em complexidade de uma de 3 pontos, independentemente do
-        desenvolvedor.
+        Story points medem esforço relativo, não tempo. O esforço combina o volume de
+        trabalho, a incerteza e a complexidade: uma tarefa simples mas muito volumosa pode
+        pesar mais do que uma pequena e delicada. As horas variam por desenvolvedor; o
+        esforço relativo é próprio da equipe e estável.
       </p>
     </details>
 

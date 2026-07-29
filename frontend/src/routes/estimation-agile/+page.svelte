@@ -23,7 +23,7 @@
       {
         '@type': 'Question',
         name: 'What is the difference between story points and hours?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Story points measure relative complexity, not time. A 5-point story is roughly twice as complex as a 3-point story, regardless of who implements it or how long it takes. Hours vary by developer and context; complexity is team-relative and stable.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Story points measure relative effort, not time. Effort combines the volume of work, the uncertainty and the complexity of a story: a simple but very large task can outweigh a small tricky one. Hours vary by developer and context; relative effort is team-relative and stable.' },
       },
       {
         '@type': 'Question',
@@ -79,9 +79,11 @@
       wrong; they just measure different things.
     </p>
     <p>
-      <strong>Story points</strong> measure <em>relative complexity</em> within the team's
-      shared experience. A 5-point story is roughly twice as complex as a 3-point story,
-      regardless of who implements it. This abstraction makes velocity a stable and
+      <strong>Story points</strong> measure <em>relative effort</em> within the team's
+      shared experience. Effort combines three things: the volume of work, the uncertainty,
+      and the complexity. Complexity alone is not enough - a simple but very large task can
+      outweigh a small tricky one. The scale stays relative: a 5 is clearly bigger than a 3
+      without claiming an exact multiple of it. This abstraction makes velocity a stable and
       comparable metric across sprints.
     </p>
     <p>
@@ -170,9 +172,9 @@
     <details>
       <summary>What is the difference between story points and hours?</summary>
       <p>
-        Story points measure relative complexity, not time. A 5-point story is roughly twice as
-        complex as a 3-point story, regardless of who implements it or how long it takes. Hours
-        vary by developer and context; complexity is team-relative and stable.
+        Story points measure relative effort, not time. Effort combines the volume of work, the
+        uncertainty and the complexity: a simple but very large task can outweigh a small tricky
+        one. Hours vary by developer and context; relative effort is team-relative and stable.
       </p>
     </details>
 

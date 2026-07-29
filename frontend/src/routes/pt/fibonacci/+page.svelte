@@ -38,7 +38,7 @@
       {
         '@type': 'Question',
         name: 'Existe um valor Fibonacci correto para uma determinada tarefa?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Não. Os story points são relativos, não absolutos. Um 5 é aproximadamente o dobro de complexo que um 3 dentro do quadro de referência compartilhado da equipe. O objetivo é a consistência ao longo do tempo para que a velocidade seja uma ferramenta de planejamento confiável.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Não. Os story points são relativos, não absolutos. O que importa é a consistência dentro do quadro de referência compartilhado da equipe: um 5 hoje deve parecer um 5 em seis meses. O objetivo é a consistência ao longo do tempo para que a velocidade seja uma ferramenta de planejamento confiável.' },
       },
       {
         '@type': 'Question',
