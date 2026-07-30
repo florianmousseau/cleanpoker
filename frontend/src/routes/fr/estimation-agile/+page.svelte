@@ -28,7 +28,7 @@
       {
         "@type": "Question",
         "name": "Définition de la vélocité en agile",
-        "acceptedAnswer": { "@type": "Answer", "text": "La vélocité est le nombre de story points complétés par sprint en moyenne. Après 3 à 5 sprints, elle se stabilise et devient un outil fiable pour la planification de release et engagement de sprint." },
+        "acceptedAnswer": { "@type": "Answer", "text": "La vélocité est le nombre de story points complétés par sprint en moyenne. Après 3 à 5 sprints, elle se stabilise et devient un outil fiable pour la planification de release et la prévision de sprint." },
       },
       {
         "@type": "Question",
@@ -89,7 +89,7 @@
     </p>
     <ul>
       <li>Prévoir en combien de sprints une release sera livrée.</li>
-      <li>Définir un engagement de sprint soutenable.</li>
+      <li>Définir une prévision de sprint soutenable.</li>
       <li>Détecter les changements de capacité (nouveau membre, congés, astreintes).</li>
     </ul>
 
@@ -124,7 +124,7 @@
       <p>
         La vélocité est le nombre de story points complétés par sprint en moyenne. Après 3 à 5
         sprints, elle se stabilise et devient un outil fiable pour la planification de release
-        et l'engagement de sprint.
+        et la prévision de sprint.
       </p>
     </details>
 

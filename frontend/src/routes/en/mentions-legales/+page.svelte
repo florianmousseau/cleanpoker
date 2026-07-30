@@ -87,15 +87,16 @@
       <a href="https://www.cnil.fr" rel="noopener noreferrer">CNIL</a> (French data protection authority).
     </p>
 
-    <!-- ── Cookies & localStorage ── -->
-    <h2>Cookies and local storage</h2>
+    <!-- ── Cookies ── -->
+    <h2>Cookies</h2>
     <p>
       CleanPoker <strong>does not use any advertising cookies or tracking tools</strong>.
     </p>
     <p>
-      The site uses only your browser's <strong>localStorage</strong> to remember
-      your language preference (<code>lang</code>). This storage is strictly functional,
-      contains no personal data and does not require prior consent.
+      The site sets two functional cookies in your browser, to remember your language
+      preference (<code>lang</code>) and your light or dark theme (<code>theme</code>),
+      kept for one year. They are strictly functional, contain no personal data and do
+      not require prior consent.
     </p>
     <p>
       Cloudflare may set technical security cookies (<code>__cf_bm</code>) strictly

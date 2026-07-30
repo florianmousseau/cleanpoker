@@ -85,7 +85,7 @@
       <li>Kein Google Analytics oder andere Verhaltens-Tracking-Tools</li>
       <li>Keine Werbung, keine Monetarisierung, kein Freemium</li>
       <li>Keine Drittanbieter-Cookies (nur Cloudflare kann <code>__cf_bm</code> setzen, ein unbedingt erforderliches Sicherheits-Cookie)</li>
-      <li>Kein localStorage mit persönlichen Daten (nur die Sprachpräferenz wird gespeichert)</li>
+      <li>Keine personenbezogenen Daten in Ihrem Browser (nur Ihre Sprach- und Design-Einstellungen)</li>
       <li>Keine Schriften, Icons oder Skripte von Drittanbieter-CDNs (jsDelivr, cdnjs, unpkg...)</li>
       <li>Kein E-Mail-Marketing, keine Benutzerkonten, keine permanente Datenbank</li>
     </ul>
@@ -117,9 +117,10 @@
 
     <h2>Kontinuierliche Verbesserung</h2>
     <p>
-      Der digitale Fußabdruck wird bei jedem Deployment über Lighthouse CI und Eco-CI
-      (misst den Energieverbrauch der CI-Pipeline) geprüft.
-      Jede Performance-Regression blockiert das Produktions-Deployment.
+      Die Größe des JS-Bundles wird bei jeder Änderung geprüft und blockiert das Deployment,
+      wenn sie das Limit überschreitet. Die Lighthouse-Scores und der Energieverbrauch der
+      Pipeline (Eco-CI) werden bei jedem Deployment gemessen und in den CI-Ergebnissen
+      veröffentlicht.
     </p>
 
     <h2>Datum der Aktualisierung</h2>
