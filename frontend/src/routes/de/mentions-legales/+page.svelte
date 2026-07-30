@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Impressum & Datenschutz | CleanPoker</title>
-  <meta name="description" content="Impressum, Datenschutzerklarung und Hosting-Informationen fur CleanPoker." />
+  <meta name="description" content="Impressum, Datenschutzerklärung und Hosting-Informationen für CleanPoker." />
   <link rel="canonical" href="https://cleanpoker.dev/de/mentions-legales" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales" />

@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Planning poker: reglas, Fibonacci y guia practica | CleanPoker</title>
-  <meta name="description" content="Que es el planning poker? Reglas, suite de Fibonacci, T-shirt sizing, consejos para estimar historias de usuario en equipo agil. Guia completa gratuita." />
+  <title>Planning poker: reglas, Fibonacci y guía práctica | CleanPoker</title>
+  <meta name="description" content="¿Qué es el planning poker? Reglas, suite de Fibonacci, T-shirt sizing, consejos para estimar historias de usuario en equipo ágil. Guía completa gratuita." />
   <link rel="canonical" href="https://cleanpoker.dev/es/planning-poker" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
@@ -14,18 +14,18 @@
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'Que es el planning poker?',
-        acceptedAnswer: { '@type': 'Answer', text: 'El planning poker es una tecnica de estimacion agil usada en Scrum. Cada miembro del equipo elige secretamente una carta con su estimacion de una historia de usuario, luego todos la revelan simultaneamente. Las diferencias provocan una discusion que afina la estimacion colectiva.' },
+        name: '¿Qué es el planning poker?',
+        acceptedAnswer: { '@type': 'Answer', text: 'El planning poker es una técnica de estimación ágil usada en Scrum. Cada miembro del equipo elige secretamente una carta con su estimación de una historia de usuario, luego todos la revelan simultáneamente. Las diferencias provocan una discusión que afina la estimación colectiva.' },
       },
       {
         '@type': 'Question',
-        name: 'Por que usar la serie de Fibonacci en el planning poker?',
-        acceptedAnswer: { '@type': 'Answer', text: 'La serie de Fibonacci (1, 2, 3, 5, 8, 13, 21) refleja la incertidumbre creciente: cuanto mas grande es una tarea, menos precisamente se puede estimar. La diferencia entre los valores aumenta, lo que obliga al equipo a posicionarse claramente sin una sobre-precision artificial.' },
+        name: '¿Por qué usar la serie de Fibonacci en el planning poker?',
+        acceptedAnswer: { '@type': 'Answer', text: 'La serie de Fibonacci (1, 2, 3, 5, 8, 13, 21) refleja la incertidumbre creciente: cuanto más grande es una tarea, menos precisamente se puede estimar. La diferencia entre los valores aumenta, lo que obliga al equipo a posicionarse claramente sin una sobre-precisión artificial.' },
       },
       {
         '@type': 'Question',
-        name: 'Cual es la diferencia entre puntos de historia y dias?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Los puntos de historia miden el esfuerzo relativo, no el tiempo: el volumen de trabajo, la incertidumbre y la complejidad tomados juntos. La escala es relativa, asi que un 5 es claramente mayor que un 2 sin pretender una proporcion exacta. Esta abstraccion permite comparar tareas sin quedarse bloqueado en las duraciones individuales.' },
+        name: '¿Cuál es la diferencia entre puntos de historia y días?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Los puntos de historia miden el esfuerzo relativo, no el tiempo: el volumen de trabajo, la incertidumbre y la complejidad tomados juntos. La escala es relativa, así que un 5 es claramente mayor que un 2 sin pretender una proporción exacta. Esta abstracción permite comparar tareas sin quedarse bloqueado en las duraciones individuales.' },
       },
     ],
   })}<\/script>`}
@@ -35,40 +35,40 @@
   <main id="main">
     <a href="/es/a-propos" class="back-link">← Acerca de</a>
 
-    <h1>Planning poker: guia completa</h1>
+    <h1>Planning poker: guía completa</h1>
 
     <p>
-      El <strong>planning poker</strong> es la tecnica de estimacion mas utilizada en
-      <strong>Scrum</strong> y en agilidad. En 5 minutos, aqui esta todo lo que necesitas saber.
+      El <strong>planning poker</strong> es la técnica de estimación más utilizada en
+      <strong>Scrum</strong> y en agilidad. En 5 minutos, aquí está todo lo que necesitas saber.
     </p>
 
-    <h2>Que es el planning poker?</h2>
+    <h2>¿Qué es el planning poker?</h2>
     <p>
-      El planning poker (tambien llamado <em>Scrum poker</em>) es una tecnica de estimacion
+      El planning poker (también llamado <em>Scrum poker</em>) es una técnica de estimación
       colaborativa donde cada miembro del equipo elige <strong>secretamente</strong> una carta
-      con su estimacion de una historia de usuario o tarea. Todos revelan sus cartas
-      <strong>simultaneamente</strong>. Las diferencias desencadenan una discusion corta,
+      con su estimación de una historia de usuario o tarea. Todos revelan sus cartas
+      <strong>simultáneamente</strong>. Las diferencias desencadenan una discusión corta,
       luego el equipo vuelve a votar hasta la convergencia.
     </p>
 
     <h2>Las reglas en 5 pasos</h2>
     <ol>
       <li>El Product Owner presenta una historia de usuario o tarea.</li>
-      <li>El equipo hace preguntas de clarificacion.</li>
-      <li>Cada miembro elige secretamente una carta (sin influenciar a los demas).</li>
-      <li>Todos revelan simultaneamente.</li>
-      <li>Si las estimaciones convergen: se retiene el valor. Si no: discusion de los extremos, luego nuevo voto.</li>
+      <li>El equipo hace preguntas de clarificación.</li>
+      <li>Cada miembro elige secretamente una carta (sin influenciar a los demás).</li>
+      <li>Todos revelan simultáneamente.</li>
+      <li>Si las estimaciones convergen: se retiene el valor. Si no: discusión de los extremos, luego nuevo voto.</li>
     </ol>
 
-    <h2>Por que la suite de Fibonacci?</h2>
+    <h2>¿Por qué la suite de Fibonacci?</h2>
     <p>
-      La suite <strong>1, 2, 3, 5, 8, 13, 21, ?</strong> es la mas extendida porque modela
-      la incertidumbre creciente: cuanto mas grande es una tarea, menos se puede estimar con
-      precision. La diferencia entre los valores crece con el tamano, lo que
-      <strong>obliga al equipo a posicionarse claramente</strong> sin pretender una precision ilusoria.
+      La suite <strong>1, 2, 3, 5, 8, 13, 21, ?</strong> es la más extendida porque modela
+      la incertidumbre creciente: cuanto más grande es una tarea, menos se puede estimar con
+      precisión. La diferencia entre los valores crece con el tamaño, lo que
+      <strong>obliga al equipo a posicionarse claramente</strong> sin pretender una precisión ilusoria.
     </p>
 
-    <h2>Comparacion de secuencias de cartas</h2>
+    <h2>Comparación de secuencias de cartas</h2>
     <table>
       <thead>
         <tr><th>Secuencia</th><th>Valores</th><th>Ideal para</th></tr>
@@ -77,17 +77,17 @@
         <tr>
           <td><strong>Fibonacci</strong></td>
           <td>1, 2, 3, 5, 8, 13, 21, ?</td>
-          <td>Equipos Scrum con experiencia, estimacion en puntos de historia</td>
+          <td>Equipos Scrum con experiencia, estimación en puntos de historia</td>
         </tr>
         <tr>
           <td><strong>T-shirt</strong></td>
           <td>XS, S, M, L, XL, XXL, ?</td>
-          <td>Estimaciones aproximadas, equipos no tecnicos, clasificacion de backlog</td>
+          <td>Estimaciones aproximadas, equipos no técnicos, clasificación de backlog</td>
         </tr>
         <tr>
           <td><strong>Potencias de 2</strong></td>
           <td>1, 2, 4, 8, 16, 32, 64, ?</td>
-          <td>Tareas tecnicas con duplicacion de complejidad previsible</td>
+          <td>Tareas técnicas con duplicación de complejidad previsible</td>
         </tr>
       </tbody>
     </table>
@@ -95,43 +95,43 @@
     <h2>Preguntas frecuentes</h2>
 
     <details>
-      <summary>Cual es la diferencia entre puntos de historia y dias?</summary>
+      <summary>¿Cuál es la diferencia entre puntos de historia y días?</summary>
       <p>
         Los puntos de historia miden el <strong>esfuerzo relativo</strong>, no el tiempo: el
         volumen de trabajo, la incertidumbre y la complejidad tomados juntos. La escala es
-        relativa - un 5 es claramente mayor que un 2, sin pretender una proporcion exacta.
-        Esta abstraccion permite comparar tareas sin quedarse bloqueado en las duraciones
+        relativa - un 5 es claramente mayor que un 2, sin pretender una proporción exacta.
+        Esta abstracción permite comparar tareas sin quedarse bloqueado en las duraciones
         individuales.
       </p>
     </details>
 
     <details>
-      <summary>Como gestionar las divergencias de estimacion?</summary>
+      <summary>¿Cómo gestionar las divergencias de estimación?</summary>
       <p>
         Cuando las estimaciones divergen (por ejemplo, un 2 y un 13 en la misma mano),
-        pide a las personas que votaron en los extremos que expliquen su eleccion.
-        La discusion a menudo revela diferentes hipotesis o riesgos no identificados.
+        pide a las personas que votaron en los extremos que expliquen su elección.
+        La discusión a menudo revela diferentes hipótesis o riesgos no identificados.
         Vuelve a votar hasta la convergencia.
       </p>
     </details>
 
     <details>
-      <summary>El planning poker funciona para equipos remotos?</summary>
+      <summary>¿El planning poker funciona para equipos remotos?</summary>
       <p>
-        Si, precisamente para eso existe CleanPoker. Crea una sesion, comparte la URL,
+        Sí, precisamente para eso existe CleanPoker. Crea una sesión, comparte la URL,
         cada participante vota desde su propio dispositivo. Los resultados se revelan en
-        tiempo real via WebSocket, sin ninguna configuracion ni cuenta que crear.
+        tiempo real via WebSocket, sin ninguna configuración ni cuenta que crear.
       </p>
     </details>
 
     <div class="cta">
-      <a href="/es" class="btn">Crear una sesion gratuita →</a>
+      <a href="/es" class="btn">Crear una sesión gratuita →</a>
     </div>
   </main>
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Codigo fuente</a>
+      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Código fuente</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licencia MIT</a>
       | <a href="/es/a-propos">Acerca de</a>
       | <a href="/es/mentions-legales">Aviso legal</a>

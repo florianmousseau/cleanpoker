@@ -24,7 +24,7 @@
   presetsAriaLabel="Presets"
   minCardsError="Minimum 2 cards"
   createBtnLabel="Create a session"
-  creatingLabel="Creating…"
+  creatingLabel="Creating..."
   hintText="Share the link. That's it."
   createError="Unable to create the room. Please try again."
   footerSource="Source code"
