@@ -2,7 +2,7 @@
 
 > Free planning poker for agile teams. No account, no tracking, no ads. Open source.
 
-CleanPoker is a real-time planning poker tool built for Scrum and Kanban teams. It uses WebSockets for instant card reveals, supports Fibonacci and custom scales, and works entirely in the browser with no data stored server-side. The codebase is open source (MIT License).
+CleanPoker is a real-time planning poker tool built for Scrum and Kanban teams. It uses WebSockets for instant card reveals, supports Fibonacci and custom scales, and keeps no database: a session lives in the server memory and is deleted 24 hours after its last activity. The codebase is open source (MIT License).
 
 ## Key features
 

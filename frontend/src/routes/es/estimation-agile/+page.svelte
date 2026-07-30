@@ -28,7 +28,7 @@
       {
         '@type': 'Question',
         name: '¿Qué es la velocidad en agile?',
-        acceptedAnswer: { '@type': 'Answer', text: 'La velocidad es la cantidad de story points que un equipo completa por sprint en promedio. Después de 3-5 sprints, la velocidad se estabiliza y se convierte en un input confiable para la planificación de releases y el compromiso de sprint.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'La velocidad es la cantidad de story points que un equipo completa por sprint en promedio. Después de 3-5 sprints, la velocidad se estabiliza y se convierte en un input confiable para la planificación de releases y la previsión de sprint.' },
       },
       {
         '@type': 'Question',
@@ -75,7 +75,7 @@
     <p>
       La velocidad es el número de story points que un equipo completa por sprint en promedio.
       Después de 3 a 5 sprints se estabiliza y se convierte en una herramienta fiable para
-      planificar releases y compromisos de sprint.
+      planificar releases y previsiones de sprint.
     </p>
 
     <h2>Errores comunes de estimación</h2>

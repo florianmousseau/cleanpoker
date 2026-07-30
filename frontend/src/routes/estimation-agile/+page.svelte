@@ -28,7 +28,7 @@
       {
         '@type': 'Question',
         name: 'What is velocity in agile?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Velocity is the number of story points a team completes per sprint on average. After 3-5 sprints, velocity stabilizes and becomes a reliable input for release planning and sprint commitment.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Velocity is the number of story points a team completes per sprint on average. After 3-5 sprints, velocity stabilizes and becomes a reliable input for release planning and sprint forecasting.' },
       },
       {
         '@type': 'Question',
@@ -102,7 +102,7 @@
     </p>
     <ul>
       <li>Forecast how many sprints a release will take.</li>
-      <li>Set a sustainable sprint commitment.</li>
+      <li>Set a sustainable sprint forecast.</li>
       <li>Detect capacity changes (new team member, vacation, on-call duty).</li>
     </ul>
     <p>
@@ -122,7 +122,7 @@
     <p>
       A simple formula: <strong>planned velocity = average velocity × (available days / full sprint days)</strong>.
       If the team averages 40 points over a 10-day sprint but two developers are out for 2 days
-      each, reduce commitment proportionally rather than guessing.
+      each, reduce the forecast proportionally rather than guessing.
     </p>
 
     <h2>The most common estimation mistakes</h2>
@@ -183,7 +183,7 @@
       <p>
         Velocity is the number of story points a team completes per sprint on average. After 3–5
         sprints, velocity stabilizes and becomes a reliable input for release planning and sprint
-        commitment.
+        forecasting.
       </p>
     </details>
 

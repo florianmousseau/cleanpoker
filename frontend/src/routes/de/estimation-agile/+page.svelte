@@ -28,7 +28,7 @@
       {
         '@type': 'Question',
         name: 'Was ist Velocity in Agile?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Velocity ist die Anzahl der Story Points, die ein Team pro Sprint im Durchschnitt abschließt. Nach 3-5 Sprints stabilisiert sich die Velocity und wird zu einem zuverlässigen Input für Release-Planung und Sprint-Commitment.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Velocity ist die Anzahl der Story Points, die ein Team pro Sprint im Durchschnitt abschließt. Nach 3-5 Sprints stabilisiert sich die Velocity und wird zu einem zuverlässigen Input für Release-Planung und Sprint-Prognose.' },
       },
       {
         '@type': 'Question',
@@ -76,7 +76,7 @@
     <p>
       Velocity ist die durchschnittliche Anzahl von Story Points, die ein Team pro Sprint
       abschliesst. Nach 3 bis 5 Sprints stabilisiert sie sich und wird zum zuverlässigen
-      Werkzeug für Release-Planung und Sprint-Commitment.
+      Werkzeug für Release-Planung und Sprint-Prognose.
     </p>
 
     <h2>Häufige Schätzfehler</h2>

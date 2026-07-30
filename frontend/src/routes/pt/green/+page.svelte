@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Eco-design & tecnologia responsavel | CleanPoker</title>
-  <meta name="description" content="Declaracao de eco-design do CleanPoker. Bundle JS abaixo de 50 KB brotli, zero rastreadores, zero cookies, alojamento 100% energia renovavel, Lighthouse Performance 100, CO2 abaixo de 0,1 g por visita." />
+  <meta name="description" content="Declaracao de eco-design do CleanPoker. Bundle JS abaixo de 50 KB brotli, zero rastreadores, zero cookies publicitarios, alojamento 100% energia renovavel, Lighthouse Performance 100, CO2 abaixo de 0,1 g por visita." />
   <link rel="canonical" href="https://cleanpoker.dev/pt/green" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green" />
@@ -13,7 +13,7 @@
     '@type': 'WebPage',
     name: 'Eco-design: CleanPoker',
     url: 'https://cleanpoker.dev/pt/green',
-    description: 'Declaração de eco-design do CleanPoker. Bundle JS abaixo de 50 KB brotli, zero rastreadores, zero cookies, alojamento 100% energia renovável, Lighthouse Performance 100, CO2 abaixo de 0,1 g por visita.',
+    description: 'Declaração de eco-design do CleanPoker. Bundle JS abaixo de 50 KB brotli, zero rastreadores, zero cookies publicitários, alojamento 100% energia renovável, Lighthouse Performance 100, CO2 abaixo de 0,1 g por visita.',
     keywords: 'eco-design, green IT, tecnologia responsável, planning poker ecológico, zero rastreadores, alojamento verde, energia renovável, Lighthouse 100, bundle leve, baixo CO2',
     isPartOf: {
       '@type': 'WebApplication',
@@ -85,7 +85,7 @@
       <li>Sem Google Analytics nem qualquer ferramenta de rastreamento comportamental</li>
       <li>Sem publicidade, sem monetização, sem freemium</li>
       <li>Sem cookies de terceiros (apenas o Cloudflare pode depositar <code>__cf_bm</code>, um cookie de segurança estritamente necessário)</li>
-      <li>Sem localStorage com dados pessoais (apenas a preferência de idioma é guardada)</li>
+      <li>Sem dados pessoais guardados no seu navegador (apenas as suas preferências de idioma e tema)</li>
       <li>Sem fontes, ícones ou scripts carregados de CDNs de terceiros (jsDelivr, cdnjs, unpkg...)</li>
       <li>Sem email marketing, sem contas de utilizador, sem base de dados permanente</li>
     </ul>
@@ -117,9 +117,9 @@
 
     <h2>Melhoria contínua</h2>
     <p>
-      A pegada digital é auditada a cada deployment via Lighthouse CI e Eco-CI
-      (mede o consumo energético do pipeline de CI).
-      Qualquer regressão de performance bloqueia o deployment em produção.
+      O tamanho do bundle JS é verificado a cada mudança e bloqueia o deployment se exceder
+      o limite. As pontuações Lighthouse e o consumo energético do pipeline (Eco-CI) são
+      medidos a cada deployment e publicados nos resultados da CI.
     </p>
 
     <h2>Data de atualização</h2>
