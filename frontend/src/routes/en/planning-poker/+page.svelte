@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'What is the difference between story points and days?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Story points measure relative complexity, not time. A 5 is roughly 2.5 times more complex than a 2, regardless of actual duration. This abstraction lets teams compare tasks without getting blocked on individual durations that vary by person and context.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Story points measure relative effort, not time: the volume of work, the uncertainty and the complexity taken together. The scale is relative, so a 5 is clearly bigger than a 2 without claiming an exact multiple of it. This abstraction lets teams compare tasks without getting blocked on individual durations that vary by person and context.' },
       },
       {
         '@type': 'Question',
@@ -122,10 +122,11 @@
     <details>
       <summary>What is the difference between story points and days?</summary>
       <p>
-        Story points measure <strong>relative complexity</strong>, not time. A 5 is roughly 2.5
-        times more complex than a 2, regardless of actual duration. This abstraction lets teams
-        compare tasks without getting blocked on individual durations, which vary by person and
-        context.
+        Story points measure <strong>relative effort</strong>, not time: the volume of work,
+        the uncertainty and the complexity taken together. The scale is relative - a 5 is
+        clearly bigger than a 2, without claiming an exact multiple of it. This abstraction
+        lets teams compare tasks without getting blocked on individual durations, which vary
+        by person and context.
       </p>
     </details>
 

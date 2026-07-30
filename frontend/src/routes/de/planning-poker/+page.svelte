@@ -25,7 +25,7 @@
       {
         '@type': 'Question',
         name: 'Was ist der Unterschied zwischen Story Points und Tagen?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Story Points messen relative Komplexitat, nicht Zeit. Eine 5 ist etwa 2,5-mal komplexer als eine 2, unabhangig von der tatsachlichen Dauer. Diese Abstraktion ermoglicht den Vergleich von Aufgaben, ohne sich auf individuelle Dauern zu versteifen.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Story Points messen relativen Aufwand, nicht Zeit: den Umfang der Arbeit, die Unsicherheit und die Komplexitat zusammengenommen. Die Skala ist relativ, eine 5 ist also deutlich grosser als eine 2, ohne ein exaktes Vielfaches zu behaupten. Diese Abstraktion ermoglicht den Vergleich von Aufgaben, ohne sich auf individuelle Dauern zu versteifen.' },
       },
     ],
   })}<\/script>`}
@@ -97,9 +97,11 @@
     <details>
       <summary>Was ist der Unterschied zwischen Story Points und Tagen?</summary>
       <p>
-        Story Points messen <strong>relative Komplexitat</strong>, nicht Zeit. Eine 5 ist etwa
-        2,5-mal komplexer als eine 2, unabhangig von der tatsachlichen Dauer. Diese Abstraktion
-        ermoglicht den Vergleich von Aufgaben, ohne sich auf individuelle Dauern zu versteifen.
+        Story Points messen <strong>relativen Aufwand</strong>, nicht Zeit: den Umfang der
+        Arbeit, die Unsicherheit und die Komplexitat zusammengenommen. Die Skala ist relativ -
+        eine 5 ist deutlich grosser als eine 2, ohne ein exaktes Vielfaches zu behaupten. Diese
+        Abstraktion ermoglicht den Vergleich von Aufgaben, ohne sich auf individuelle Dauern zu
+        versteifen.
       </p>
     </details>
 

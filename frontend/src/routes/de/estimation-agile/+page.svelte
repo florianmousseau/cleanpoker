@@ -23,12 +23,12 @@
       {
         '@type': 'Question',
         name: 'Was ist der Unterschied zwischen Story Points und Stunden?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Story Points messen relative Komplexität, keine Zeit. Eine 5-Punkte-Story ist ungefähr doppelt so komplex wie eine 3-Punkte-Story, unabhängig davon, wer sie implementiert oder wie lange es dauert. Stunden variieren je nach Entwickler und Kontext; Komplexität ist teamrelativ und stabil.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Story Points messen relativen Aufwand, keine Zeit. Aufwand verbindet den Umfang der Arbeit, die Unsicherheit und die Komplexität einer Story: eine einfache, aber sehr umfangreiche Aufgabe kann schwerer wiegen als eine kleine, knifflige. Stunden variieren je nach Entwickler und Kontext; relativer Aufwand ist teamspezifisch und stabil.' },
       },
       {
         '@type': 'Question',
         name: 'Was ist Velocity in Agile?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Velocity ist die Anzahl der Story Points, die ein Team pro Sprint im Durchschnitt abschließt. Nach 3-5 Sprints stabilisiert sich die Velocity und wird zu einem zuverlässigen Input für Release-Planung und Sprint-Commitment.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Velocity ist die Anzahl der Story Points, die ein Team pro Sprint im Durchschnitt abschließt. Nach 3-5 Sprints stabilisiert sich die Velocity und wird zu einem zuverlässigen Input für Release-Planung und Sprint-Prognose.' },
       },
       {
         '@type': 'Question',
@@ -64,16 +64,19 @@
 
     <h2>Story Points vs. Stunden</h2>
     <p>
-      <strong>Story Points</strong> messen relative Komplexität innerhalb des Teams.
-      Eine 5-Punkte-Story ist ungefähr doppelt so komplex wie eine 3-Punkte-Story,
-      unabhängig davon, wer sie umsetzt. Stunden variieren; relative Komplexität ist stabil.
+      <strong>Story Points</strong> messen relativen Aufwand innerhalb des Teams. Aufwand
+      verbindet drei Dinge: den Umfang der Arbeit, die Unsicherheit und die Komplexität.
+      Komplexität allein genügt nicht - eine einfache, aber sehr umfangreiche Aufgabe kann
+      schwerer wiegen als eine kleine, knifflige. Die Skala bleibt relativ: eine 5 ist
+      deutlich größer als eine 3, ohne ein exaktes Vielfaches zu behaupten. Stunden
+      variieren; relativer Aufwand ist teamspezifisch und stabil.
     </p>
 
     <h2>Wie Velocity funktioniert</h2>
     <p>
       Velocity ist die durchschnittliche Anzahl von Story Points, die ein Team pro Sprint
       abschliesst. Nach 3 bis 5 Sprints stabilisiert sie sich und wird zum zuverlässigen
-      Werkzeug für Release-Planung und Sprint-Commitment.
+      Werkzeug für Release-Planung und Sprint-Prognose.
     </p>
 
     <h2>Häufige Schätzfehler</h2>
@@ -94,8 +97,10 @@
     <details>
       <summary>Was ist der Unterschied zwischen Story Points und Stunden?</summary>
       <p>
-        Story Points messen relative Komplexität, nicht Zeit. Eine 5-Punkte-Story ist
-        ungefähr doppelt so komplex wie eine 3-Punkte-Story, unabhängig vom Entwickler.
+        Story Points messen relativen Aufwand, nicht Zeit. Aufwand verbindet den Umfang der
+        Arbeit, die Unsicherheit und die Komplexität: eine einfache, aber sehr umfangreiche
+        Aufgabe kann schwerer wiegen als eine kleine, knifflige. Stunden variieren je nach
+        Entwickler; relativer Aufwand ist teamspezifisch und stabil.
       </p>
     </details>
 
