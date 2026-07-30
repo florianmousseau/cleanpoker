@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Planning Poker: Regeln, Fibonacci und praktischer Leitfaden | CleanPoker</title>
-  <meta name="description" content="Was ist Planning Poker? Regeln, Fibonacci-Folge, T-Shirt-Sizing, Tipps zur Schatzung von User Stories im agilen Team. Vollstandiger kostenloser Leitfaden." />
+  <meta name="description" content="Was ist Planning Poker? Regeln, Fibonacci-Folge, T-Shirt-Sizing, Tipps zur Schätzung von User Stories im agilen Team. Vollständiger kostenloser Leitfaden." />
   <link rel="canonical" href="https://cleanpoker.dev/de/planning-poker" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
@@ -15,17 +15,17 @@
       {
         '@type': 'Question',
         name: 'Was ist Planning Poker?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Planning Poker ist eine agile Schatzungstechnik, die in Scrum verwendet wird. Jedes Teammitglied wahlt heimlich eine Karte, die seine Schatzung einer User Story darstellt, dann werden alle gleichzeitig aufgedeckt. Die Unterschiede fuhren zu einer Diskussion, die die kollektive Schatzung verfeinert.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Planning Poker ist eine agile Schätzungstechnik, die in Scrum verwendet wird. Jedes Teammitglied wählt heimlich eine Karte, die seine Schätzung einer User Story darstellt, dann werden alle gleichzeitig aufgedeckt. Die Unterschiede führen zu einer Diskussion, die die kollektive Schätzung verfeinert.' },
       },
       {
         '@type': 'Question',
         name: 'Warum die Fibonacci-Folge beim Planning Poker verwenden?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Die Fibonacci-Folge (1, 2, 3, 5, 8, 13, 21) spiegelt wachsende Unsicherheit wider: Je grosser eine Aufgabe, desto weniger genau kann sie geschatzt werden. Der Abstand zwischen den Werten wachst, was das Team zwingt, sich klar zu positionieren.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Die Fibonacci-Folge (1, 2, 3, 5, 8, 13, 21) spiegelt wachsende Unsicherheit wider: Je größer eine Aufgabe, desto weniger genau kann sie geschätzt werden. Der Abstand zwischen den Werten wächst, was das Team zwingt, sich klar zu positionieren.' },
       },
       {
         '@type': 'Question',
         name: 'Was ist der Unterschied zwischen Story Points und Tagen?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Story Points messen relativen Aufwand, nicht Zeit: den Umfang der Arbeit, die Unsicherheit und die Komplexitat zusammengenommen. Die Skala ist relativ, eine 5 ist also deutlich grosser als eine 2, ohne ein exaktes Vielfaches zu behaupten. Diese Abstraktion ermoglicht den Vergleich von Aufgaben, ohne sich auf individuelle Dauern zu versteifen.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Story Points messen relativen Aufwand, nicht Zeit: den Umfang der Arbeit, die Unsicherheit und die Komplexität zusammengenommen. Die Skala ist relativ, eine 5 ist also deutlich größer als eine 2, ohne ein exaktes Vielfaches zu behaupten. Diese Abstraktion ermöglicht den Vergleich von Aufgaben, ohne sich auf individuelle Dauern zu versteifen.' },
       },
     ],
   })}<\/script>`}
@@ -33,94 +33,94 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/de/a-propos" class="back-link">← Uber CleanPoker</a>
+    <a href="/de/a-propos" class="back-link">← Über CleanPoker</a>
 
-    <h1>Planning Poker: vollstandiger Leitfaden</h1>
+    <h1>Planning Poker: vollständiger Leitfaden</h1>
 
     <p>
-      <strong>Planning Poker</strong> ist die am weitesten verbreitete Schatzungstechnik in
-      <strong>Scrum</strong> und Agilitat. In 5 Minuten alles, was du wissen musst.
+      <strong>Planning Poker</strong> ist die am weitesten verbreitete Schätzungstechnik in
+      <strong>Scrum</strong> und Agilität. In 5 Minuten alles, was du wissen musst.
     </p>
 
     <h2>Was ist Planning Poker?</h2>
     <p>
-      Planning Poker (auch <em>Scrum Poker</em> genannt) ist eine kollaborative Schatzungstechnik,
-      bei der jedes Teammitglied <strong>heimlich</strong> eine Karte mit seiner Schatzung einer
-      User Story oder Aufgabe wahlt. Alle decken ihre Karten <strong>gleichzeitig</strong> auf.
-      Unterschiede fuhren zu einer kurzen Diskussion, dann stimmt das Team erneut ab bis zur
+      Planning Poker (auch <em>Scrum Poker</em> genannt) ist eine kollaborative Schätzungstechnik,
+      bei der jedes Teammitglied <strong>heimlich</strong> eine Karte mit seiner Schätzung einer
+      User Story oder Aufgabe wählt. Alle decken ihre Karten <strong>gleichzeitig</strong> auf.
+      Unterschiede führen zu einer kurzen Diskussion, dann stimmt das Team erneut ab bis zur
       Konvergenz.
     </p>
 
     <h2>Die Regeln in 5 Schritten</h2>
     <ol>
       <li>Der Product Owner stellt eine User Story oder Aufgabe vor.</li>
-      <li>Das Team stellt Klarungsfragen.</li>
-      <li>Jedes Mitglied wahlt heimlich eine Karte (ohne andere zu beeinflussen).</li>
+      <li>Das Team stellt Klärungsfragen.</li>
+      <li>Jedes Mitglied wählt heimlich eine Karte (ohne andere zu beeinflussen).</li>
       <li>Alle decken gleichzeitig auf.</li>
-      <li>Konvergieren die Schatzungen: Wert ubernehmen. Sonst: Extreme diskutieren, dann neu abstimmen.</li>
+      <li>Konvergieren die Schätzungen: Wert übernehmen. Sonst: Extreme diskutieren, dann neu abstimmen.</li>
     </ol>
 
     <h2>Warum die Fibonacci-Folge?</h2>
     <p>
-      Die Folge <strong>1, 2, 3, 5, 8, 13, 21, ?</strong> ist die am haufigsten verwendete,
-      da sie wachsende Unsicherheit modelliert: Je grosser eine Aufgabe, desto weniger genau
-      kann sie geschatzt werden. Der Abstand zwischen den Werten wachst mit der Grosse, was das
-      Team <strong>zwingt, sich klar zu positionieren</strong> ohne illusorische Prazision.
+      Die Folge <strong>1, 2, 3, 5, 8, 13, 21, ?</strong> ist die am häufigsten verwendete,
+      da sie wachsende Unsicherheit modelliert: Je größer eine Aufgabe, desto weniger genau
+      kann sie geschätzt werden. Der Abstand zwischen den Werten wächst mit der Größe, was das
+      Team <strong>zwingt, sich klar zu positionieren</strong> ohne illusorische Präzision.
     </p>
 
     <h2>Vergleich der Kartenfolgen</h2>
     <table>
       <thead>
-        <tr><th>Folge</th><th>Werte</th><th>Ideal fur</th></tr>
+        <tr><th>Folge</th><th>Werte</th><th>Ideal für</th></tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Fibonacci</strong></td>
           <td>1, 2, 3, 5, 8, 13, 21, ?</td>
-          <td>Erfahrene Scrum-Teams, Story-Point-Schatzung</td>
+          <td>Erfahrene Scrum-Teams, Story-Point-Schätzung</td>
         </tr>
         <tr>
           <td><strong>T-Shirt</strong></td>
           <td>XS, S, M, L, XL, XXL, ?</td>
-          <td>Grobe Schatzungen, nicht-technische Teams, Backlog-Sortierung</td>
+          <td>Grobe Schätzungen, nicht-technische Teams, Backlog-Sortierung</td>
         </tr>
         <tr>
           <td><strong>Zweierpotenzen</strong></td>
           <td>1, 2, 4, 8, 16, 32, 64, ?</td>
-          <td>Technische Aufgaben mit vorhersehbarer Komplexitatsverdoppelung</td>
+          <td>Technische Aufgaben mit vorhersehbarer Komplexitätsverdoppelung</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>Haufig gestellte Fragen</h2>
+    <h2>Häufig gestellte Fragen</h2>
 
     <details>
       <summary>Was ist der Unterschied zwischen Story Points und Tagen?</summary>
       <p>
         Story Points messen <strong>relativen Aufwand</strong>, nicht Zeit: den Umfang der
-        Arbeit, die Unsicherheit und die Komplexitat zusammengenommen. Die Skala ist relativ -
-        eine 5 ist deutlich grosser als eine 2, ohne ein exaktes Vielfaches zu behaupten. Diese
-        Abstraktion ermoglicht den Vergleich von Aufgaben, ohne sich auf individuelle Dauern zu
+        Arbeit, die Unsicherheit und die Komplexität zusammengenommen. Die Skala ist relativ -
+        eine 5 ist deutlich größer als eine 2, ohne ein exaktes Vielfaches zu behaupten. Diese
+        Abstraktion ermöglicht den Vergleich von Aufgaben, ohne sich auf individuelle Dauern zu
         versteifen.
       </p>
     </details>
 
     <details>
-      <summary>Wie geht man mit Schatzungsunterschieden um?</summary>
+      <summary>Wie geht man mit Schätzungsunterschieden um?</summary>
       <p>
-        Wenn die Schatzungen divergieren (z.B. eine 2 und eine 13 in derselben Runde), bitte die
-        Personen, die an den Extremen gestimmt haben, ihre Wahl zu erklaren. Die Diskussion
+        Wenn die Schätzungen divergieren (z.B. eine 2 und eine 13 in derselben Runde), bitte die
+        Personen, die an den Extremen gestimmt haben, ihre Wahl zu erklären. Die Diskussion
         offenbart oft unterschiedliche Annahmen oder nicht identifizierte Risiken. Stimme
         erneut ab bis zur Konvergenz.
       </p>
     </details>
 
     <details>
-      <summary>Funktioniert Planning Poker fur Remote-Teams?</summary>
+      <summary>Funktioniert Planning Poker für Remote-Teams?</summary>
       <p>
-        Ja, genau dafur gibt es CleanPoker. Erstelle eine Session, teile die URL, jeder
-        Teilnehmer stimmt auf seinem eigenen Gerat ab. Die Ergebnisse werden in Echtzeit
-        uber WebSocket enthullt, ohne Konfiguration oder Konto.
+        Ja, genau dafür gibt es CleanPoker. Erstelle eine Session, teile die URL, jeder
+        Teilnehmer stimmt auf seinem eigenen Gerät ab. Die Ergebnisse werden in Echtzeit
+        über WebSocket enthüllt, ohne Konfiguration oder Konto.
       </p>
     </details>
 
@@ -133,7 +133,7 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
-      | <a href="/de/a-propos">Uber CleanPoker</a>
+      | <a href="/de/a-propos">Über CleanPoker</a>
       | <a href="/de/mentions-legales">Impressum</a>
     </p>
   </footer>

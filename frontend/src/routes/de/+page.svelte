@@ -24,7 +24,7 @@
   presetsAriaLabel="Voreinstellungen"
   minCardsError="Mindestens 2 Karten"
   createBtnLabel="Session erstellen"
-  creatingLabel="Erstelle…"
+  creatingLabel="Erstelle..."
   hintText="Link teilen. Fertig."
   createError="Session konnte nicht erstellt werden. Bitte erneut versuchen."
   footerSource="Quellcode"

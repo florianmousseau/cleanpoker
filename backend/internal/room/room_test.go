@@ -328,7 +328,7 @@ func TestComputeResults_AllNonNumeric(t *testing.T) {
 }
 
 func TestComputeResults_ModeFollowsCardOrder(t *testing.T) {
-	// 2 votes for "3", 2 votes for "5" — "3" comes first in card order
+	// 2 votes for "3", 2 votes for "5" - "3" comes first in card order
 	votes := map[string]string{"Alice": "3", "Bob": "3", "Carol": "5", "Dave": "5"}
 	cards := []string{"1", "2", "3", "5", "8"}
 	res := computeResults(votes, cards)

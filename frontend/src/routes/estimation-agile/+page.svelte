@@ -98,7 +98,7 @@
       (not started, not partially done, only done-done).
     </p>
     <p>
-      After 3–5 sprints, velocity stabilizes. You can then use it to:
+      After 3-5 sprints, velocity stabilizes. You can then use it to:
     </p>
     <ul>
       <li>Forecast how many sprints a release will take.</li>
@@ -181,7 +181,7 @@
     <details>
       <summary>What is velocity in agile?</summary>
       <p>
-        Velocity is the number of story points a team completes per sprint on average. After 3–5
+        Velocity is the number of story points a team completes per sprint on average. After 3-5
         sprints, velocity stabilizes and becomes a reliable input for release planning and sprint
         forecasting.
       </p>
