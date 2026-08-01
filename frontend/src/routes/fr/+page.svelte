@@ -31,4 +31,5 @@
   footerLicense="Licence MIT"
   footerAbout="À propos"
   footerLegal="Mentions légales"
+  footerPrivacy="Confidentialité"
 />

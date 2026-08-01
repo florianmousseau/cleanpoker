@@ -43,7 +43,7 @@
     </p>
 
     <!-- ── Datos personales ── -->
-    <h2>Datos personales (RGPD)</h2>
+    <h2 id="confidentialite">Datos personales (RGPD)</h2>
     <p>
       <strong>Responsable del tratamiento:</strong> Florian Mousseau,
       <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
@@ -133,6 +133,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licencia MIT</a>
       | <a href="/es/a-propos">Acerca de</a>
       | <a href="/es/mentions-legales">Aviso legal</a>
+      | <a href="/es/mentions-legales#confidentialite">Privacidad</a>
     </p>
   </footer>
 </div>

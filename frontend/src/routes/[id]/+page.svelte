@@ -334,6 +334,7 @@
     source={T.footer.source}
     license={T.footer.license}
     legal={T.footer.legal}
+    privacy={T.footer.privacy}
     about={T.footer.about}
     locale={lang.current}
     onLangChange={(l) => lang.set(l as 'fr'|'en'|'es'|'de'|'pt')}

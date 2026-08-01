@@ -31,4 +31,5 @@
   footerLicense="MIT-Lizenz"
   footerAbout="Über CleanPoker"
   footerLegal="Impressum"
+  footerPrivacy="Datenschutz"
 />

@@ -33,6 +33,19 @@ function routeLocale(pathname: string): Locale | 'en' {
 	return match ?? 'en';
 }
 
+/**
+ * The skip link lives in app.html, outside any component, so it is the one
+ * string the Svelte translations cannot reach. Translate it here, where the
+ * locale is already known.
+ */
+const SKIP_LINK: Record<Locale | 'en', string> = {
+	en: 'Skip to main content',
+	fr: 'Aller au contenu principal',
+	es: 'Ir al contenido principal',
+	de: 'Zum Hauptinhalt springen',
+	pt: 'Ir para o conteúdo principal'
+};
+
 export const handle: Handle = async ({ event, resolve }) => {
 	const locale = routeLocale(event.url.pathname);
 
@@ -43,7 +56,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const response = await resolve(event, {
 		transformPageChunk: ({ html }) =>
-			html.replace('<html lang="fr">', `<html lang="${locale}"${themeAttr}>`),
+			html
+				.replace('<html lang="fr">', `<html lang="${locale}"${themeAttr}>`)
+				.replace(
+					'class="skip-link">Aller au contenu principal</a>',
+					`class="skip-link">${SKIP_LINK[locale]}</a>`
+				),
 	});
 
 	for (const [header, value] of Object.entries(SECURITY_HEADERS)) {
