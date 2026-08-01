@@ -31,4 +31,5 @@
   footerLicense="MIT License"
   footerAbout="About"
   footerLegal="Legal notice"
+  footerPrivacy="Privacy"
 />

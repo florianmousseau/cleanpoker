@@ -14,7 +14,7 @@ export interface Translation {
   observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
   activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
   live: { newRound: (n: number) => string; revealed: string };
-  footer: { source: string; license: string; legal: string; about: string; navAriaLabel: string };
+  footer: { source: string; license: string; legal: string; privacy: string; about: string; navAriaLabel: string };
   theme: { toDark: string; toLight: string };
 }
 
@@ -119,6 +119,7 @@ export const FR: Translation = {
     source: 'Code source',
     license: 'Licence MIT',
     legal: 'Mentions légales',
+    privacy: 'Confidentialité',
     about: 'À propos',
     navAriaLabel: 'Langue',
   },
@@ -226,6 +227,7 @@ export const EN: Translation = {
     source: 'Source code',
     license: 'MIT License',
     legal: 'Legal notice',
+    privacy: 'Privacy',
     about: 'About',
     navAriaLabel: 'Language',
   },
@@ -333,6 +335,7 @@ export const ES: Translation = {
     source: 'Código fuente',
     license: 'Licencia MIT',
     legal: 'Aviso legal',
+    privacy: 'Privacidad',
     about: 'Acerca de',
     navAriaLabel: 'Idioma',
   },
@@ -440,6 +443,7 @@ export const DE: Translation = {
     source: 'Quellcode',
     license: 'MIT-Lizenz',
     legal: 'Impressum',
+    privacy: 'Datenschutz',
     about: 'Über uns',
     navAriaLabel: 'Sprache',
   },
@@ -547,6 +551,7 @@ export const PT: Translation = {
     source: 'Código fonte',
     license: 'Licença MIT',
     legal: 'Aviso legal',
+    privacy: 'Privacidade',
     about: 'Sobre',
     navAriaLabel: 'Idioma',
   },
