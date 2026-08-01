@@ -43,7 +43,7 @@
     </p>
 
     <!-- ── Personenbezogene Daten ── -->
-    <h2>Personenbezogene Daten (DSGVO)</h2>
+    <h2 id="confidentialite">Personenbezogene Daten (DSGVO)</h2>
     <p>
       <strong>Verantwortlicher:</strong> Florian Mousseau,
       <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
@@ -133,6 +133,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
       | <a href="/de/a-propos">Über CleanPoker</a>
       | <a href="/de/mentions-legales">Impressum</a>
+      | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>
     </p>
   </footer>
 </div>

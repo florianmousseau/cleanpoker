@@ -43,7 +43,7 @@
     </p>
 
     <!-- ── Personal data ── -->
-    <h2>Personal data (GDPR)</h2>
+    <h2 id="confidentialite">Personal data (GDPR)</h2>
     <p>
       <strong>Data controller:</strong> Florian Mousseau,
       <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
@@ -131,6 +131,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT Licence</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
+      | <a href="/mentions-legales#confidentialite">Privacy</a>
     </p>
   </footer>
 </div>
