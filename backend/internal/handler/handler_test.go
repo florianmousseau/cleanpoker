@@ -139,7 +139,7 @@ func TestWebSocket_NameRequired(t *testing.T) {
 	}
 }
 
-// --- Happy path: full vote → show → clear cycle ---
+// --- Happy path: full vote -> show -> clear cycle ---
 
 func TestHappyPath_VoteShowClear(t *testing.T) {
 	srv := newTestServer(t)

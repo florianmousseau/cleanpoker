@@ -18,7 +18,7 @@
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      description: 'Planning poker gratuito, sin rastreadores, bundle JS menos de 50 KB, alojamiento en energia renovable, WCAG 2.1 AA.',
+      description: 'Planning poker gratuito, sin rastreadores, bundle JS menos de 50 KB, alojamiento en energía renovable, WCAG 2.1 AA.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
     },
   })}<\/script>`}
@@ -32,32 +32,32 @@
 
     <p>
       <strong>CleanPoker</strong> es una herramienta de <strong>planning poker</strong> colaborativa,
-      gratuita y de codigo abierto. Crea una sesion en 30 segundos, comparte la URL con tu equipo
+      gratuita y de código abierto. Crea una sesión en 30 segundos, comparte la URL con tu equipo
       y estima en tiempo real. Sin cuenta, sin registro, sin rastreadores.
     </p>
 
     <ul class="facts">
       <li>Bundle JS <strong>&lt; 50 KB</strong> (brotli)</li>
       <li>Lighthouse Rendimiento y Accesibilidad: <strong>100 / 100</strong></li>
-      <li>Alojamiento 100% energia renovable (Cloudflare Pages + Fly.io CDG Paris)</li>
+      <li>Alojamiento 100% energía renovable (Cloudflare Pages + Fly.io CDG Paris)</li>
       <li>Sin rastreadores, sin cookies publicitarias, sin scripts de terceros</li>
-      <li>Codigo abierto bajo <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licencia MIT</a></li>
+      <li>Código abierto bajo <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licencia MIT</a></li>
     </ul>
 
-    <h2>Saber mas</h2>
+    <h2>Saber más</h2>
 
     <div class="cards-grid">
       <a href="/es/planning-poker" class="card">
-        <h3>Guia de planning poker</h3>
-        <p>Reglas, suite de Fibonacci, comparacion de secuencias de cartas, consejos practicos.</p>
+        <h3>Guía de planning poker</h3>
+        <p>Reglas, suite de Fibonacci, comparación de secuencias de cartas, consejos prácticos.</p>
       </a>
       <a href="/es/green" class="card">
-        <h3>Eco-diseno</h3>
-        <p>Cifras clave, decisiones tecnicas y alojamiento verde: nuestra declaracion de impacto.</p>
+        <h3>Eco-diseño</h3>
+        <p>Cifras clave, decisiones técnicas y alojamiento verde: nuestra declaración de impacto.</p>
       </a>
       <a href="/es/accessibilite" class="card">
         <h3>Accesibilidad</h3>
-        <p>Conformidad WCAG 2.1 AA, compatibilidad con lectores de pantalla, navegacion por teclado.</p>
+        <p>Conformidad WCAG 2.1 AA, compatibilidad con lectores de pantalla, navegación por teclado.</p>
       </a>
       <a href="/es/mentions-legales" class="card">
         <h3>Aviso legal</h3>
@@ -68,7 +68,7 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Codigo fuente</a>
+      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Código fuente</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licencia MIT</a>
       | <a href="/es/a-propos">Acerca de</a>
       | <a href="/es/mentions-legales">Aviso legal</a>

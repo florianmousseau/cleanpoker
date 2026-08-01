@@ -51,7 +51,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/de/a-propos" class="back-link">← Uber uns</a>
+    <a href="/de/a-propos" class="back-link">← Über uns</a>
 
     <h1>Fibonacci im Planning Poker</h1>
 
@@ -62,7 +62,7 @@
 
     <h2>Was ist die Fibonacci-Folge?</h2>
     <p>
-      Die Fibonacci-Folge ist <strong>1, 1, 2, 3, 5, 8, 13, 21, 34…</strong> wobei jede Zahl
+      Die Fibonacci-Folge ist <strong>1, 1, 2, 3, 5, 8, 13, 21, 34...</strong> wobei jede Zahl
       die Summe der beiden vorherigen ist. Im Planning Poker wird typischerweise
       <strong>1, 2, 3, 5, 8, 13, 21</strong> plus eine <strong>?</strong>-Karte verwendet.
     </p>
@@ -125,7 +125,7 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
-      | <a href="/de/a-propos">Uber uns</a>
+      | <a href="/de/a-propos">Über uns</a>
       | <a href="/de/mentions-legales">Impressum</a>
     </p>
   </footer>

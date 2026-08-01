@@ -123,7 +123,7 @@
       only the stories where members disagreed, not every story.
     </p>
     <p>
-      <strong>Strength</strong>: Scales to large backlogs (20–50 stories) in a single session.
+      <strong>Strength</strong>: Scales to large backlogs (20-50 stories) in a single session.
       The silent phase prevents anchoring and social pressure.
     </p>
     <p>
@@ -139,7 +139,7 @@
       individual estimation.
     </p>
     <p>
-      <strong>Strength</strong>: A team can sort 50–200 stories in under two hours.
+      <strong>Strength</strong>: A team can sort 50-200 stories in under two hours.
       Comparison-based sorting is cognitively easier than absolute estimation.
     </p>
     <p>

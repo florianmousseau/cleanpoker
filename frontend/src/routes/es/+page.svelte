@@ -24,7 +24,7 @@
   presetsAriaLabel="Preajustes"
   minCardsError="Mínimo 2 cartas"
   createBtnLabel="Crear una sesión"
-  creatingLabel="Creando…"
+  creatingLabel="Creando..."
   hintText="Comparte el enlace. Es todo."
   createError="No se pudo crear la sala. Inténtalo de nuevo."
   footerSource="Código fuente"

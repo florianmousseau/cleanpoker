@@ -37,8 +37,8 @@ export const FR: Translation = {
   },
 
   connection: {
-    connecting: 'Connexion…',
-    reconnecting: 'Reconnexion…',
+    connecting: 'Connexion...',
+    reconnecting: 'Reconnexion...',
   },
 
   solo: {
@@ -144,8 +144,8 @@ export const EN: Translation = {
   },
 
   connection: {
-    connecting: 'Connecting…',
-    reconnecting: 'Reconnecting…',
+    connecting: 'Connecting...',
+    reconnecting: 'Reconnecting...',
   },
 
   solo: {
@@ -251,8 +251,8 @@ export const ES: Translation = {
   },
 
   connection: {
-    connecting: 'Conectando…',
-    reconnecting: 'Reconectando…',
+    connecting: 'Conectando...',
+    reconnecting: 'Reconectando...',
   },
 
   solo: {
@@ -358,8 +358,8 @@ export const DE: Translation = {
   },
 
   connection: {
-    connecting: 'Verbinde…',
-    reconnecting: 'Verbinde neu…',
+    connecting: 'Verbinde...',
+    reconnecting: 'Verbinde neu...',
   },
 
   solo: {
@@ -465,8 +465,8 @@ export const PT: Translation = {
   },
 
   connection: {
-    connecting: 'Conectando…',
-    reconnecting: 'Reconectando…',
+    connecting: 'Conectando...',
+    reconnecting: 'Reconectando...',
   },
 
   solo: {

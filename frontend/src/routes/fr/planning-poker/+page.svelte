@@ -160,7 +160,7 @@
     </details>
 
     <div class="cta">
-      <a href="/" class="btn">Créer une session gratuite →</a>
+      <a href="/fr" class="btn">Créer une session gratuite →</a>
     </div>
   </main>
 

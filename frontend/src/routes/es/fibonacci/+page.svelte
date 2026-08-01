@@ -62,7 +62,7 @@
 
     <h2>¿Qué es la secuencia de Fibonacci?</h2>
     <p>
-      La secuencia de Fibonacci es <strong>1, 1, 2, 3, 5, 8, 13, 21, 34…</strong> donde cada
+      La secuencia de Fibonacci es <strong>1, 1, 2, 3, 5, 8, 13, 21, 34...</strong> donde cada
       número es la suma de los dos anteriores. En planning poker se usa típicamente
       <strong>1, 2, 3, 5, 8, 13, 21</strong> más la carta <strong>?</strong>.
     </p>
