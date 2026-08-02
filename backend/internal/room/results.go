@@ -7,7 +7,9 @@ import (
 
 // computeResults calcule avg, mode, min, max sur les votes numériques.
 // Les votes non numériques ("?", "XS"...) sont ignorés dans avg/min/max mais comptés dans mode/dist.
-func computeResults(votes map[string]string, cards []string) Results {
+// votes est une liste et non une table indexée par joueur : deux participants
+// peuvent porter le même nom, et leurs deux voix doivent compter.
+func computeResults(votes []string, cards []string) Results {
 	dist := map[string]int{}
 	var nums []float64
 
