@@ -94,6 +94,12 @@
       O CleanPoker <strong>não utiliza cookies publicitários nem ferramentas de rastreamento</strong>.
     </p>
     <p>
+      O servidor de jogo mantém dois contadores anónimos, o número de sessões criadas e o
+      número de chegadas. Não contêm qualquer identificador, pseudónimo ou nome de sala, nada
+      é escrito em disco, e voltam a zero sempre que o servidor reinicia. Qualquer pessoa os
+      pode ler em <code>/stats</code> do servidor de jogo.
+    </p>
+    <p>
       O site deposita dois cookies funcionais no seu navegador, para memorizar a sua
       preferência de idioma (<code>lang</code>) e o seu tema claro ou escuro (<code>theme</code>),
       conservados durante um ano. São estritamente funcionais, não contêm dados pessoais e

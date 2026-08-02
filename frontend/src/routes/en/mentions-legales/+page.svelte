@@ -93,6 +93,12 @@
       CleanPoker <strong>does not use any advertising cookies or tracking tools</strong>.
     </p>
     <p>
+      The game server keeps two anonymous counters, the number of sessions created and the
+      number of arrivals. They hold no identifier, no pseudonym and no room name, nothing is
+      written to disk, and they restart from zero every time the server restarts. Anyone can
+      read them at <code>/stats</code> on the game server.
+    </p>
+    <p>
       The site sets two functional cookies in your browser, to remember your language
       preference (<code>lang</code>) and your light or dark theme (<code>theme</code>),
       kept for one year. They are strictly functional, contain no personal data and do
