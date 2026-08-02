@@ -285,7 +285,7 @@ func TestActivityLog_CappedAt20(t *testing.T) {
 // --- Results calculation ---
 
 func TestComputeResults_NumericVotes(t *testing.T) {
-	votes := map[string]string{"Alice": "2", "Bob": "4", "Carol": "6"}
+	votes := []string{"2", "4", "6"}
 	cards := []string{"1", "2", "3", "4", "5", "6", "8", "13"}
 	res := computeResults(votes, cards)
 	if res.Avg != "4" {
@@ -300,7 +300,7 @@ func TestComputeResults_NumericVotes(t *testing.T) {
 }
 
 func TestComputeResults_DecimalAvg(t *testing.T) {
-	votes := map[string]string{"Alice": "1", "Bob": "2"}
+	votes := []string{"1", "2"}
 	res := computeResults(votes, []string{"1", "2"})
 	if res.Avg != "1.5" {
 		t.Fatalf("expected avg 1.5, got %s", res.Avg)
@@ -308,7 +308,7 @@ func TestComputeResults_DecimalAvg(t *testing.T) {
 }
 
 func TestComputeResults_NonNumericExcludedFromStats(t *testing.T) {
-	votes := map[string]string{"Alice": "?", "Bob": "3"}
+	votes := []string{"?", "3"}
 	cards := []string{"1", "2", "3", "?"}
 	res := computeResults(votes, cards)
 	if res.Avg != "3" {
@@ -320,7 +320,7 @@ func TestComputeResults_NonNumericExcludedFromStats(t *testing.T) {
 }
 
 func TestComputeResults_AllNonNumeric(t *testing.T) {
-	votes := map[string]string{"Alice": "?", "Bob": "XS"}
+	votes := []string{"?", "XS"}
 	res := computeResults(votes, []string{"XS", "S", "M", "?"})
 	if res.Avg != "N/A" || res.Min != "N/A" || res.Max != "N/A" {
 		t.Fatalf("expected N/A for all stats with non-numeric votes, got avg=%s min=%s max=%s", res.Avg, res.Min, res.Max)
@@ -329,7 +329,7 @@ func TestComputeResults_AllNonNumeric(t *testing.T) {
 
 func TestComputeResults_ModeFollowsCardOrder(t *testing.T) {
 	// 2 votes for "3", 2 votes for "5" - "3" comes first in card order
-	votes := map[string]string{"Alice": "3", "Bob": "3", "Carol": "5", "Dave": "5"}
+	votes := []string{"3", "3", "5", "5"}
 	cards := []string{"1", "2", "3", "5", "8"}
 	res := computeResults(votes, cards)
 	if res.Mode != "3" {
@@ -338,8 +338,67 @@ func TestComputeResults_ModeFollowsCardOrder(t *testing.T) {
 }
 
 func TestComputeResults_EmptyVotes(t *testing.T) {
-	res := computeResults(map[string]string{}, []string{"1", "2", "3"})
+	res := computeResults(nil, []string{"1", "2", "3"})
 	if res.Avg != "N/A" {
 		t.Fatalf("expected N/A for empty votes, got %s", res.Avg)
+	}
+}
+
+func TestComputeResults_CountsEveryIdenticalVote(t *testing.T) {
+	res := computeResults([]string{"5", "5", "5"}, []string{"1", "3", "5"})
+	if res.Dist["5"] != 3 {
+		t.Fatalf("expected the 3 votes for card 5 to be counted, got %d", res.Dist["5"])
+	}
+}
+
+// --- Same-named participants ---
+//
+// Nothing makes player names unique: two teammates can share a first name, and
+// a reconnect leaves behind a second player carrying the same one. Every voice
+// must still count, and the estimate must not depend on which one is seen last.
+
+func TestShow_CountsBothVotesOfSameNamedPlayers(t *testing.T) {
+	r := newTestRoom([]string{"1", "2", "3", "5", "8"})
+	defer r.Stop()
+	r.Join("p1", "Alex", false)
+	r.Join("p2", "Alex", false)
+	r.Join("p3", "Bob", false)
+	r.CastVote("p1", "1")
+	r.CastVote("p2", "8")
+	r.CastVote("p3", "3")
+	r.Show("p1")
+
+	res := snap(r).Results
+	counted := 0
+	for _, c := range res.Dist {
+		counted += c
+	}
+	if counted != 3 {
+		t.Fatalf("expected the 3 cast votes to be counted, got %d (dist %v)", counted, res.Dist)
+	}
+	if res.Avg != "4" {
+		t.Fatalf("expected avg 4 over votes 1, 8 and 3, got %s", res.Avg)
+	}
+	if res.Min != "1" {
+		t.Fatalf("expected min 1, got %s", res.Min)
+	}
+}
+
+func TestShow_SameNamedPlayersGiveStableResults(t *testing.T) {
+	// Indexing votes by player name let Go's randomized map iteration decide
+	// which duplicate survived, so the same round could reveal a different
+	// average each time it was replayed.
+	for i := 0; i < 50; i++ {
+		r := newTestRoom([]string{"1", "2", "3", "5", "8"})
+		r.Join("p1", "Alex", false)
+		r.Join("p2", "Alex", false)
+		r.CastVote("p1", "1")
+		r.CastVote("p2", "8")
+		r.Show("p1")
+		avg := snap(r).Results.Avg
+		r.Stop()
+		if avg != "4.5" {
+			t.Fatalf("reveal %d: expected a stable avg of 4.5, got %s", i, avg)
+		}
 	}
 }

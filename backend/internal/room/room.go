@@ -220,10 +220,10 @@ func (r *Room) CastVote(playerID, vote string) {
 func (r *Room) Show(initiatorID string) {
 	r.mutate(func() {
 		r.state = StateRevealed
-		votes := map[string]string{}
+		votes := make([]string, 0, len(r.players))
 		for _, p := range r.players {
 			if !p.Observer && p.Vote != "" {
-				votes[p.Name] = p.Vote
+				votes = append(votes, p.Vote)
 			}
 		}
 		res := computeResults(votes, r.cards)
