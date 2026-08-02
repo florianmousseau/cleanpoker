@@ -93,6 +93,12 @@
       CleanPoker <strong>verwendet keine Werbe-Cookies oder Tracking-Tools</strong>.
     </p>
     <p>
+      Der Spielserver führt zwei anonyme Zähler, die Anzahl der erstellten Sitzungen und die
+      Anzahl der Beitritte. Sie enthalten keine Kennung, kein Pseudonym und keinen Raumnamen,
+      nichts wird auf die Festplatte geschrieben, und sie beginnen bei jedem Neustart des
+      Servers wieder bei null. Jeder kann sie unter <code>/stats</code> des Spielservers lesen.
+    </p>
+    <p>
       Die Website setzt zwei funktionale Cookies in Ihrem Browser, um Ihre Sprachpräferenz
       (<code>lang</code>) und Ihr helles oder dunkles Design (<code>theme</code>) zu speichern,
       ein Jahr lang aufbewahrt. Sie sind rein funktional, enthalten keine personenbezogenen
