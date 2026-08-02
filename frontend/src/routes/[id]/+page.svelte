@@ -19,6 +19,8 @@
   let nameInputEl = $state<HTMLInputElement | null>(null);
   let isObserver = $state(false);
   let copyFeedback = $state('');
+  let inviteFeedback = $state('');
+  let promoDismissed = $state(false);
 
   onMount(() => nameInputEl?.focus());
 
@@ -35,11 +37,27 @@
     setTimeout(() => (copyFeedback = ''), 2000);
   }
 
+  // The invite lands in a team chat, where a bare URL says nothing. The sentence
+  // names the product and answers the "do I need an account" question upfront.
+  async function copyInvite() {
+    await navigator.clipboard.writeText(T.share.inviteMessage(window.location.href));
+    inviteFeedback = T.copied;
+    setTimeout(() => (inviteFeedback = ''), 2000);
+  }
+
   const participants = $derived(room.roomState?.players.filter(p => !p.observer) ?? []);
   const observers = $derived(room.roomState?.players.filter(p => p.observer) ?? []);
   const allVoted = $derived(participants.length > 0 && participants.every(p => p.vote !== ''));
   const me = $derived(room.roomState?.players.find(p => p.id === room.myId));
   const isSolo = $derived(room.roomState !== null && room.roomState.players.length === 1);
+  // Most people meet CleanPoker as someone else's guest and never see the home
+  // page. The reveal is the one moment they are looking at the result rather
+  // than at a card, so that is where they get told they can host their own.
+  const showPromo = $derived(
+    !promoDismissed &&
+    room.roomState?.state === 'revealed' &&
+    room.roomState.players.length > 1
+  );
   const homeHref = $derived(
     lang.current === 'fr' ? '/fr' :
     lang.current === 'es' ? '/es' :
@@ -52,6 +70,19 @@
 <svelte:head>
   <title>{T.salleLabel} {roomId} | CleanPoker</title>
   <meta name="robots" content="noindex" />
+  <!-- This URL is the only one anyone ever shares, and it lands in a team chat.
+       The card is what the whole channel sees, so it says what CleanPoker is
+       and never echoes the room id. noindex keeps it out of search all the same. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CleanPoker" />
+  <meta property="og:title" content={T.share.ogTitle} />
+  <meta property="og:description" content={T.share.ogDesc} />
+  <meta property="og:image" content="https://cleanpoker.dev/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={T.share.ogTitle} />
+  <meta name="twitter:description" content={T.share.ogDesc} />
 </svelte:head>
 
 <div aria-live="polite" aria-atomic="true" class="sr-only">{room.liveAnnouncement}</div>
@@ -111,8 +142,8 @@
       {#if isSolo}
         <div class="solo-hint" role="status">
           <span>{T.solo.hint}</span>
-          <button class="btn btn-secondary btn-sm" onclick={copyLink}>
-            {copyFeedback || T.solo.invite}
+          <button class="btn btn-secondary btn-sm" onclick={copyInvite}>
+            {inviteFeedback || T.solo.invite}
           </button>
         </div>
       {/if}
@@ -198,6 +229,16 @@
           {/if}
         </section>
       </div>
+
+      {#if showPromo}
+        <aside class="promo" data-testid="promo">
+          <p class="promo-lead">{T.promo.lead}</p>
+          <div class="promo-actions">
+            <a class="btn btn-secondary btn-sm" href={homeHref}>{T.promo.cta}</a>
+            <button class="promo-close" onclick={() => (promoDismissed = true)}>{T.promo.close}</button>
+          </div>
+        </aside>
+      {/if}
 
       <!-- Participants -->
       <section class="panel" aria-labelledby="participants-title">
@@ -383,6 +424,22 @@
     border-radius: var(--radius-lg);
     font-size: 0.875rem; color: var(--color-primary);
   }
+
+  .promo {
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+  }
+  .promo-lead { margin: 0; color: var(--color-text-muted); }
+  .promo-actions { display: flex; align-items: center; gap: 0.75rem; }
+  .promo-close {
+    background: none; border: none; padding: 0.25rem;
+    font: inherit; color: var(--color-text-muted); cursor: pointer;
+    text-decoration: underline;
+  }
+  .promo-close:hover { color: var(--color-text); }
 
   .join-form { max-width: 24rem; margin: 4rem auto; display: flex; flex-direction: column; gap: 1rem; }
   .join-form form { display: flex; flex-direction: column; gap: 0.75rem; }
