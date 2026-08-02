@@ -38,7 +38,7 @@
       {
         '@type': 'Question',
         name: 'Is there a correct Fibonacci value for a given task?',
-        acceptedAnswer: { '@type': 'Answer', text: 'No. Story points are relative, not absolute. A 5 is roughly twice as complex as a 3 within the team shared reference frame. The goal is consistency over time so velocity becomes a reliable planning tool.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'No. Story points are relative, not absolute. What matters is consistency within the team shared reference frame: a 5 today should feel like a 5 in six months. The goal is consistency over time so velocity becomes a reliable planning tool.' },
       },
       {
         '@type': 'Question',
@@ -62,7 +62,7 @@
 
     <h2>What is the Fibonacci sequence?</h2>
     <p>
-      The Fibonacci sequence is <strong>1, 1, 2, 3, 5, 8, 13, 21, 34…</strong> where each number
+      The Fibonacci sequence is <strong>1, 1, 2, 3, 5, 8, 13, 21, 34...</strong> where each number
       is the sum of the two preceding ones. In planning poker, the sequence is typically shortened
       to <strong>1, 2, 3, 5, 8, 13, 21</strong> plus a <strong>?</strong> card.
     </p>
@@ -72,7 +72,7 @@
       human cognition works when estimating uncertainty.
     </p>
 
-    <h2>Why Fibonacci instead of 1–10?</h2>
+    <h2>Why Fibonacci instead of 1-10?</h2>
     <p>
       A linear scale (1, 2, 3, 4, 5, 6, 7, 8, 9, 10) creates a false sense of precision. Is a
       task a 6 or a 7? Teams spend time debating distinctions that carry no real information.
@@ -84,7 +84,7 @@
     </p>
     <p>
       Psychologists call this <em>subitizing</em>: humans can reliably distinguish small quantities
-      at a glance, but lose accuracy quickly beyond 5–7 items. Fibonacci aligns the scale with this
+      at a glance, but lose accuracy quickly beyond 5-7 items. Fibonacci aligns the scale with this
       cognitive limit.
     </p>
 
@@ -201,6 +201,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
+      | <a href="/mentions-legales#confidentialite">Privacy</a>
     </p>
   </footer>
 </div>

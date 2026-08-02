@@ -58,7 +58,7 @@
 
     <h2>Qu'est-ce que la suite de Fibonacci ?</h2>
     <p>
-      La suite de Fibonacci est <strong>1, 1, 2, 3, 5, 8, 13, 21, 34…</strong> où chaque nombre
+      La suite de Fibonacci est <strong>1, 1, 2, 3, 5, 8, 13, 21, 34...</strong> où chaque nombre
       est la somme des deux précédents. En planning poker, la suite est généralement réduite à
       <strong>1, 2, 3, 5, 8, 13, 21</strong> plus une carte <strong>?</strong>.
     </p>
@@ -177,6 +177,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
       | <a href="/fr/a-propos">À propos</a>
       | <a href="/fr/mentions-legales">Mentions légales</a>
+      | <a href="/fr/mentions-legales#confidentialite">Confidentialité</a>
     </p>
   </footer>
 </div>

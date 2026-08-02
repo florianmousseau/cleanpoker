@@ -7,6 +7,8 @@ export interface Translation {
   join: { title: string; label: string; observer: string; btn: string };
   connection: { connecting: string; reconnecting: string };
   solo: { hint: string; invite: string };
+  share: { ogTitle: string; ogDesc: string; inviteMessage: (url: string) => string };
+  promo: { lead: string; cta: string; close: string };
   cards: { title: string; revealedSub: string; votingHint: string; selectedSuffix: (v: string) => string; voteLabel: (c: string) => string };
   controls: { title: string; newRound: string; reveal: string; pending: (n: number) => string };
   results: { title: string; avg: string; min: string; max: string; none: string };
@@ -14,7 +16,7 @@ export interface Translation {
   observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
   activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
   live: { newRound: (n: number) => string; revealed: string };
-  footer: { source: string; license: string; legal: string; about: string; navAriaLabel: string };
+  footer: { source: string; license: string; legal: string; privacy: string; about: string; navAriaLabel: string };
   theme: { toDark: string; toLight: string };
 }
 
@@ -37,13 +39,25 @@ export const FR: Translation = {
   },
 
   connection: {
-    connecting: 'Connexion…',
-    reconnecting: 'Reconnexion…',
+    connecting: 'Connexion...',
+    reconnecting: 'Reconnexion...',
   },
 
   solo: {
     hint: 'Tu es seul(e) dans cette salle.',
     invite: 'Inviter des coéquipiers →',
+  },
+
+  share: {
+    ogTitle: 'Planning poker, sans compte ni traceur',
+    ogDesc: "Rejoins la session d'estimation. Aucun compte à créer, aucun traceur, aucune publicité.",
+    inviteMessage: (url: string) => `Estimation en planning poker, on vote ici : ${url}\nAucun compte à créer.`,
+  },
+
+  promo: {
+    lead: 'CleanPoker est libre et gratuit, sans compte, sans traceur et sans publicité.',
+    cta: 'Créer ta propre salle',
+    close: 'Fermer',
   },
 
   cards: {
@@ -119,6 +133,7 @@ export const FR: Translation = {
     source: 'Code source',
     license: 'Licence MIT',
     legal: 'Mentions légales',
+    privacy: 'Confidentialité',
     about: 'À propos',
     navAriaLabel: 'Langue',
   },
@@ -144,13 +159,25 @@ export const EN: Translation = {
   },
 
   connection: {
-    connecting: 'Connecting…',
-    reconnecting: 'Reconnecting…',
+    connecting: 'Connecting...',
+    reconnecting: 'Reconnecting...',
   },
 
   solo: {
     hint: 'You are alone in this room.',
     invite: 'Invite teammates →',
+  },
+
+  share: {
+    ogTitle: 'Planning poker, no account, no tracking',
+    ogDesc: 'Join the estimation session. No account to create, no trackers, no ads.',
+    inviteMessage: (url: string) => `Planning poker estimation, we vote here: ${url}\nNo account needed.`,
+  },
+
+  promo: {
+    lead: 'CleanPoker is free, with no account, no trackers and no ads.',
+    cta: 'Create your own room',
+    close: 'Close',
   },
 
   cards: {
@@ -226,6 +253,7 @@ export const EN: Translation = {
     source: 'Source code',
     license: 'MIT License',
     legal: 'Legal notice',
+    privacy: 'Privacy',
     about: 'About',
     navAriaLabel: 'Language',
   },
@@ -251,13 +279,25 @@ export const ES: Translation = {
   },
 
   connection: {
-    connecting: 'Conectando…',
-    reconnecting: 'Reconectando…',
+    connecting: 'Conectando...',
+    reconnecting: 'Reconectando...',
   },
 
   solo: {
     hint: 'Estás solo en esta sala.',
     invite: 'Invitar al equipo →',
+  },
+
+  share: {
+    ogTitle: 'Planning poker, sin cuenta ni rastreadores',
+    ogDesc: 'Únete a la sesión de estimación. Sin cuenta, sin rastreadores, sin anuncios.',
+    inviteMessage: (url: string) => `Estimación en planning poker, votamos aquí: ${url}\nSin cuenta.`,
+  },
+
+  promo: {
+    lead: 'CleanPoker es libre y gratuito, sin cuenta, sin rastreadores y sin anuncios.',
+    cta: 'Crea tu propia sala',
+    close: 'Cerrar',
   },
 
   cards: {
@@ -333,6 +373,7 @@ export const ES: Translation = {
     source: 'Código fuente',
     license: 'Licencia MIT',
     legal: 'Aviso legal',
+    privacy: 'Privacidad',
     about: 'Acerca de',
     navAriaLabel: 'Idioma',
   },
@@ -358,13 +399,25 @@ export const DE: Translation = {
   },
 
   connection: {
-    connecting: 'Verbinde…',
-    reconnecting: 'Verbinde neu…',
+    connecting: 'Verbinde...',
+    reconnecting: 'Verbinde neu...',
   },
 
   solo: {
     hint: 'Du bist allein in diesem Raum.',
     invite: 'Team einladen →',
+  },
+
+  share: {
+    ogTitle: 'Planning Poker, ohne Konto und ohne Tracker',
+    ogDesc: 'Tritt der Schätzrunde bei. Kein Konto, keine Tracker, keine Werbung.',
+    inviteMessage: (url: string) => `Planning-Poker-Schätzung, wir stimmen hier ab: ${url}\nKein Konto nötig.`,
+  },
+
+  promo: {
+    lead: 'CleanPoker ist frei und kostenlos, ohne Konto, ohne Tracker und ohne Werbung.',
+    cta: 'Eigenen Raum erstellen',
+    close: 'Schließen',
   },
 
   cards: {
@@ -440,6 +493,7 @@ export const DE: Translation = {
     source: 'Quellcode',
     license: 'MIT-Lizenz',
     legal: 'Impressum',
+    privacy: 'Datenschutz',
     about: 'Über uns',
     navAriaLabel: 'Sprache',
   },
@@ -465,13 +519,25 @@ export const PT: Translation = {
   },
 
   connection: {
-    connecting: 'Conectando…',
-    reconnecting: 'Reconectando…',
+    connecting: 'Conectando...',
+    reconnecting: 'Reconectando...',
   },
 
   solo: {
     hint: 'Você está sozinho nesta sala.',
     invite: 'Convidar a equipe →',
+  },
+
+  share: {
+    ogTitle: 'Planning poker, sem conta e sem rastreadores',
+    ogDesc: 'Entre na sessão de estimativa. Sem conta, sem rastreadores, sem anúncios.',
+    inviteMessage: (url: string) => `Estimativa em planning poker, votamos aqui: ${url}\nSem conta.`,
+  },
+
+  promo: {
+    lead: 'CleanPoker é livre e gratuito, sem conta, sem rastreadores e sem anúncios.',
+    cta: 'Crie a sua própria sala',
+    close: 'Fechar',
   },
 
   cards: {
@@ -547,6 +613,7 @@ export const PT: Translation = {
     source: 'Código fonte',
     license: 'Licença MIT',
     legal: 'Aviso legal',
+    privacy: 'Privacidade',
     about: 'Sobre',
     navAriaLabel: 'Idioma',
   },

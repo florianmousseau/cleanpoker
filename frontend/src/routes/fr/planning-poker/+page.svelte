@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Quelle est la différence entre points de story et jours ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Les points de story mesurent la complexité relative, pas le temps. Un 5 est environ 2,5 fois plus complexe qu\'un 2, quelle que soit la durée réelle. Cette abstraction permet de comparer des tâches sans se bloquer sur les durées individuelles.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Les points de story mesurent l\'effort relatif, pas le temps : le volume de travail, l\'incertitude et la complexité pris ensemble. L\'échelle est relative, donc un 5 est nettement plus gros qu\'un 2 sans prétendre à un rapport exact. Cette abstraction permet de comparer des tâches sans se bloquer sur les durées individuelles.' },
       },
       {
         '@type': 'Question',
@@ -123,10 +123,11 @@
     <details>
       <summary>Quelle est la différence entre points de story et jours ?</summary>
       <p>
-        Les points de story mesurent la <strong>complexité relative</strong>, pas le temps.
-        Un 5 est environ 2,5 fois plus complexe qu'un 2, quelle que soit la durée réelle.
-        Cette abstraction permet de comparer des tâches sans se bloquer sur les durées individuelles,
-        qui varient selon la personne et le contexte.
+        Les points de story mesurent l'<strong>effort relatif</strong>, pas le temps : le
+        volume de travail, l'incertitude et la complexité pris ensemble. L'échelle est
+        relative - un 5 est nettement plus gros qu'un 2, sans prétendre à un rapport exact.
+        Cette abstraction permet de comparer des tâches sans se bloquer sur les durées
+        individuelles, qui varient selon la personne et le contexte.
       </p>
     </details>
 
@@ -159,7 +160,7 @@
     </details>
 
     <div class="cta">
-      <a href="/" class="btn">Créer une session gratuite →</a>
+      <a href="/fr" class="btn">Créer une session gratuite →</a>
     </div>
   </main>
 
@@ -169,6 +170,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
       | <a href="/fr/a-propos">À propos</a>
       | <a href="/fr/mentions-legales">Mentions légales</a>
+      | <a href="/fr/mentions-legales#confidentialite">Confidentialité</a>
     </p>
   </footer>
 </div>

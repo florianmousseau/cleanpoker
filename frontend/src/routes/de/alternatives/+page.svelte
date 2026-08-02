@@ -51,7 +51,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/de/a-propos" class="back-link">← Uber uns</a>
+    <a href="/de/a-propos" class="back-link">← Über uns</a>
 
     <h1>Alternativen zum Planning Poker</h1>
 
@@ -92,8 +92,9 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
-      | <a href="/de/a-propos">Uber uns</a>
+      | <a href="/de/a-propos">Über uns</a>
       | <a href="/de/mentions-legales">Impressum</a>
+      | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>
     </p>
   </footer>
 </div>

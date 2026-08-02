@@ -43,7 +43,7 @@
     </p>
 
     <!-- ── Données personnelles ── -->
-    <h2>Données personnelles (RGPD)</h2>
+    <h2 id="confidentialite">Données personnelles (RGPD)</h2>
     <p>
       <strong>Responsable du traitement :</strong> Florian Mousseau,
       <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
@@ -88,16 +88,23 @@
       <a href="https://www.cnil.fr" rel="noopener noreferrer">CNIL</a>.
     </p>
 
-    <!-- ── Cookies & localStorage ── -->
-    <h2>Cookies et stockage local</h2>
+    <!-- ── Cookies ── -->
+    <h2>Cookies</h2>
     <p>
       CleanPoker <strong>n'utilise aucun cookie publicitaire ni outil de tracking</strong>.
     </p>
     <p>
-      Le site utilise uniquement le <strong>localStorage</strong> de votre navigateur pour mémoriser
-      votre préférence de langue (<code>lang</code>). Ce stockage est strictement fonctionnel,
-      ne contient aucune donnée personnelle et ne nécessite pas de consentement préalable
-      conformément aux lignes directrices de la CNIL.
+      Le serveur de jeu tient deux compteurs anonymes, le nombre de sessions créées et le
+      nombre d'arrivées. Ils ne contiennent aucun identifiant, aucun pseudonyme et aucun nom
+      de salle, rien n'est écrit sur disque, et ils repartent de zéro à chaque redémarrage du
+      serveur. Tout le monde peut les lire sur <code>/stats</code> du serveur de jeu.
+    </p>
+    <p>
+      Le site dépose deux cookies fonctionnels dans votre navigateur, pour mémoriser votre
+      préférence de langue (<code>lang</code>) et votre thème clair ou sombre (<code>theme</code>),
+      conservés un an. Ils sont strictement fonctionnels, ne contiennent aucune donnée
+      personnelle et ne nécessitent pas de consentement préalable conformément aux lignes
+      directrices de la CNIL.
     </p>
     <p>
       Cloudflare peut déposer des cookies techniques de sécurité (<code>__cf_bm</code>) strictement
@@ -134,6 +141,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
       | <a href="/fr/a-propos">À propos</a>
       | <a href="/fr/mentions-legales">Mentions légales</a>
+      | <a href="/fr/mentions-legales#confidentialite">Confidentialité</a>
     </p>
   </footer>
 </div>

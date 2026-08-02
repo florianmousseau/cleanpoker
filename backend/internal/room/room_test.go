@@ -323,12 +323,12 @@ func TestComputeResults_AllNonNumeric(t *testing.T) {
 	votes := map[string]string{"Alice": "?", "Bob": "XS"}
 	res := computeResults(votes, []string{"XS", "S", "M", "?"})
 	if res.Avg != "N/A" || res.Min != "N/A" || res.Max != "N/A" {
-		t.Fatalf("expected — for all stats with non-numeric votes, got avg=%s min=%s max=%s", res.Avg, res.Min, res.Max)
+		t.Fatalf("expected N/A for all stats with non-numeric votes, got avg=%s min=%s max=%s", res.Avg, res.Min, res.Max)
 	}
 }
 
 func TestComputeResults_ModeFollowsCardOrder(t *testing.T) {
-	// 2 votes for "3", 2 votes for "5" — "3" comes first in card order
+	// 2 votes for "3", 2 votes for "5" - "3" comes first in card order
 	votes := map[string]string{"Alice": "3", "Bob": "3", "Carol": "5", "Dave": "5"}
 	cards := []string{"1", "2", "3", "5", "8"}
 	res := computeResults(votes, cards)
@@ -340,6 +340,6 @@ func TestComputeResults_ModeFollowsCardOrder(t *testing.T) {
 func TestComputeResults_EmptyVotes(t *testing.T) {
 	res := computeResults(map[string]string{}, []string{"1", "2", "3"})
 	if res.Avg != "N/A" {
-		t.Fatalf("expected — for empty votes, got %s", res.Avg)
+		t.Fatalf("expected N/A for empty votes, got %s", res.Avg)
 	}
 }

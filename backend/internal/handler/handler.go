@@ -22,6 +22,13 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 		w.WriteHeader(http.StatusOK)
 	})
 
+	mux.HandleFunc("GET /stats", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		if err := json.NewEncoder(w).Encode(s.Usage()); err != nil {
+			log.Printf("warn: encode stats: %v", err)
+		}
+	})
+
 	mux.HandleFunc("POST /rooms", func(w http.ResponseWriter, r *http.Request) {
 		var body struct {
 			Cards []string `json:"cards"`
@@ -44,14 +51,14 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 		}
 		rm := s.GetOrCreate(roomID, nil)
 		websocket.Handler(func(conn *websocket.Conn) {
-			handleWS(conn, rm, playerName, observer)
+			handleWS(conn, rm, s.RecordJoin, playerName, observer)
 		}).ServeHTTP(w, r)
 	})
 
 	return cors(allowed, mux)
 }
 
-func handleWS(conn *websocket.Conn, rm *room.Room, playerName string, observer bool) {
+func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), playerName string, observer bool) {
 	playerID := uuid.New().String()
 
 	if err := websocket.JSON.Send(conn, room.Message{Type: "welcome", Payload: map[string]string{"id": playerID}}); err != nil {
@@ -59,6 +66,7 @@ func handleWS(conn *websocket.Conn, rm *room.Room, playerName string, observer b
 	}
 
 	rm.Join(playerID, playerName, observer)
+	recordJoin()
 	defer rm.Leave(playerID)
 
 	ch := rm.Subscribe(playerID)

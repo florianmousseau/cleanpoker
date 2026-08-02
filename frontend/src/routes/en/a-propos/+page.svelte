@@ -1,6 +1,6 @@
 <svelte:head>
   <title>About CleanPoker - Eco-designed planning poker</title>
-  <meta name="description" content="CleanPoker is a free, eco-designed planning poker tool. Zero trackers, zero cookies, WCAG 2.1 AA accessible, under 50 KB JS, green hosting. Open source MIT." />
+  <meta name="description" content="CleanPoker is a free, eco-designed planning poker tool. Zero trackers, zero advertising cookies, WCAG 2.1 AA accessible, under 50 KB JS, green hosting. Open source MIT." />
   <link rel="canonical" href="https://cleanpoker.dev/en/a-propos" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/a-propos" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/a-propos" />
@@ -13,7 +13,7 @@
     '@type': 'WebPage',
     name: 'About CleanPoker',
     url: 'https://cleanpoker.dev/en/a-propos',
-    description: 'CleanPoker is a free, eco-designed planning poker tool. Zero trackers, zero cookies, WCAG 2.1 AA accessible, under 50 KB JS, green hosting.',
+    description: 'CleanPoker is a free, eco-designed planning poker tool. Zero trackers, zero advertising cookies, WCAG 2.1 AA accessible, under 50 KB JS, green hosting.',
     isPartOf: {
       '@type': 'WebApplication',
       name: 'CleanPoker',
@@ -72,6 +72,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/en/a-propos">About</a>
       | <a href="/en/mentions-legales">Legal notice</a>
+      | <a href="/en/mentions-legales#confidentialite">Privacy</a>
     </p>
   </footer>
 </div>

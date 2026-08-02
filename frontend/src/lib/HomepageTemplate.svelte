@@ -34,6 +34,7 @@
     footerLicense: string;
     footerAbout: string;
     footerLegal: string;
+    footerPrivacy: string;
   }
 
   let {
@@ -65,6 +66,7 @@
     footerLicense,
     footerAbout,
     footerLegal,
+    footerPrivacy,
   }: Props = $props();
 
   const PRESETS = [
@@ -228,6 +230,7 @@
     license={footerLicense}
     about={footerAbout}
     legal={footerLegal}
+    privacy={footerPrivacy}
     {locale}
   />
 </div>

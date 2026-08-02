@@ -23,12 +23,12 @@
       {
         '@type': 'Question',
         name: 'What is the difference between story points and hours?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Story points measure relative complexity, not time. A 5-point story is roughly twice as complex as a 3-point story, regardless of who implements it or how long it takes. Hours vary by developer and context; complexity is team-relative and stable.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Story points measure relative effort, not time. Effort combines the volume of work, the uncertainty and the complexity of a story: a simple but very large task can outweigh a small tricky one. Hours vary by developer and context; relative effort is team-relative and stable.' },
       },
       {
         '@type': 'Question',
         name: 'What is velocity in agile?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Velocity is the number of story points a team completes per sprint on average. After 3-5 sprints, velocity stabilizes and becomes a reliable input for release planning and sprint commitment.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Velocity is the number of story points a team completes per sprint on average. After 3-5 sprints, velocity stabilizes and becomes a reliable input for release planning and sprint forecasting.' },
       },
       {
         '@type': 'Question',
@@ -79,9 +79,11 @@
       wrong; they just measure different things.
     </p>
     <p>
-      <strong>Story points</strong> measure <em>relative complexity</em> within the team's
-      shared experience. A 5-point story is roughly twice as complex as a 3-point story,
-      regardless of who implements it. This abstraction makes velocity a stable and
+      <strong>Story points</strong> measure <em>relative effort</em> within the team's
+      shared experience. Effort combines three things: the volume of work, the uncertainty,
+      and the complexity. Complexity alone is not enough - a simple but very large task can
+      outweigh a small tricky one. The scale stays relative: a 5 is clearly bigger than a 3
+      without claiming an exact multiple of it. This abstraction makes velocity a stable and
       comparable metric across sprints.
     </p>
     <p>
@@ -96,11 +98,11 @@
       (not started, not partially done, only done-done).
     </p>
     <p>
-      After 3–5 sprints, velocity stabilizes. You can then use it to:
+      After 3-5 sprints, velocity stabilizes. You can then use it to:
     </p>
     <ul>
       <li>Forecast how many sprints a release will take.</li>
-      <li>Set a sustainable sprint commitment.</li>
+      <li>Set a sustainable sprint forecast.</li>
       <li>Detect capacity changes (new team member, vacation, on-call duty).</li>
     </ul>
     <p>
@@ -120,7 +122,7 @@
     <p>
       A simple formula: <strong>planned velocity = average velocity × (available days / full sprint days)</strong>.
       If the team averages 40 points over a 10-day sprint but two developers are out for 2 days
-      each, reduce commitment proportionally rather than guessing.
+      each, reduce the forecast proportionally rather than guessing.
     </p>
 
     <h2>The most common estimation mistakes</h2>
@@ -170,18 +172,18 @@
     <details>
       <summary>What is the difference between story points and hours?</summary>
       <p>
-        Story points measure relative complexity, not time. A 5-point story is roughly twice as
-        complex as a 3-point story, regardless of who implements it or how long it takes. Hours
-        vary by developer and context; complexity is team-relative and stable.
+        Story points measure relative effort, not time. Effort combines the volume of work, the
+        uncertainty and the complexity: a simple but very large task can outweigh a small tricky
+        one. Hours vary by developer and context; relative effort is team-relative and stable.
       </p>
     </details>
 
     <details>
       <summary>What is velocity in agile?</summary>
       <p>
-        Velocity is the number of story points a team completes per sprint on average. After 3–5
+        Velocity is the number of story points a team completes per sprint on average. After 3-5
         sprints, velocity stabilizes and becomes a reliable input for release planning and sprint
-        commitment.
+        forecasting.
       </p>
     </details>
 
@@ -222,6 +224,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
+      | <a href="/mentions-legales#confidentialite">Privacy</a>
     </p>
   </footer>
 </div>

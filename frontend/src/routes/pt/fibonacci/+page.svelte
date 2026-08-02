@@ -38,7 +38,7 @@
       {
         '@type': 'Question',
         name: 'Existe um valor Fibonacci correto para uma determinada tarefa?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Não. Os story points são relativos, não absolutos. Um 5 é aproximadamente o dobro de complexo que um 3 dentro do quadro de referência compartilhado da equipe. O objetivo é a consistência ao longo do tempo para que a velocidade seja uma ferramenta de planejamento confiável.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Não. Os story points são relativos, não absolutos. O que importa é a consistência dentro do quadro de referência compartilhado da equipe: um 5 hoje deve parecer um 5 em seis meses. O objetivo é a consistência ao longo do tempo para que a velocidade seja uma ferramenta de planejamento confiável.' },
       },
       {
         '@type': 'Question',
@@ -62,7 +62,7 @@
 
     <h2>O que é a sequência de Fibonacci?</h2>
     <p>
-      A sequência de Fibonacci é <strong>1, 1, 2, 3, 5, 8, 13, 21, 34…</strong> onde cada
+      A sequência de Fibonacci é <strong>1, 1, 2, 3, 5, 8, 13, 21, 34...</strong> onde cada
       número é a soma dos dois anteriores. No planning poker usa-se tipicamente
       <strong>1, 2, 3, 5, 8, 13, 21</strong> mais a carta <strong>?</strong>.
     </p>
@@ -128,6 +128,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licença MIT</a>
       | <a href="/pt/a-propos">Sobre</a>
       | <a href="/pt/mentions-legales">Aviso legal</a>
+      | <a href="/pt/mentions-legales#confidentialite">Privacidade</a>
     </p>
   </footer>
 </div>

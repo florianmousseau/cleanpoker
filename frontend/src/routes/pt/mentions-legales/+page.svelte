@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Aviso legal & Politica de privacidade | CleanPoker</title>
-  <meta name="description" content="Aviso legal, politica de privacidade e informacoes de alojamento do CleanPoker." />
+  <title>Aviso legal & Política de privacidade | CleanPoker</title>
+  <meta name="description" content="Aviso legal, política de privacidade e informações de alojamento do CleanPoker." />
   <link rel="canonical" href="https://cleanpoker.dev/pt/mentions-legales" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales" />
@@ -43,7 +43,7 @@
     </p>
 
     <!-- ── Dados pessoais ── -->
-    <h2>Dados pessoais (RGPD)</h2>
+    <h2 id="confidentialite">Dados pessoais (RGPD)</h2>
     <p>
       <strong>Responsável pelo tratamento:</strong> Florian Mousseau,
       <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
@@ -88,15 +88,22 @@
       <a href="https://www.cnil.fr" rel="noopener noreferrer">CNIL</a> (autoridade francesa de proteção de dados).
     </p>
 
-    <!-- ── Cookies & localStorage ── -->
-    <h2>Cookies e armazenamento local</h2>
+    <!-- ── Cookies ── -->
+    <h2>Cookies</h2>
     <p>
       O CleanPoker <strong>não utiliza cookies publicitários nem ferramentas de rastreamento</strong>.
     </p>
     <p>
-      O site utiliza apenas o <strong>localStorage</strong> do seu navegador para memorizar
-      a sua preferência de idioma (<code>lang</code>). Este armazenamento é estritamente funcional,
-      não contém dados pessoais e não requer consentimento prévio.
+      O servidor de jogo mantém dois contadores anónimos, o número de sessões criadas e o
+      número de chegadas. Não contêm qualquer identificador, pseudónimo ou nome de sala, nada
+      é escrito em disco, e voltam a zero sempre que o servidor reinicia. Qualquer pessoa os
+      pode ler em <code>/stats</code> do servidor de jogo.
+    </p>
+    <p>
+      O site deposita dois cookies funcionais no seu navegador, para memorizar a sua
+      preferência de idioma (<code>lang</code>) e o seu tema claro ou escuro (<code>theme</code>),
+      conservados durante um ano. São estritamente funcionais, não contêm dados pessoais e
+      não requerem consentimento prévio.
     </p>
     <p>
       O Cloudflare pode depositar cookies técnicos de segurança (<code>__cf_bm</code>) estritamente
@@ -132,6 +139,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licença MIT</a>
       | <a href="/pt/a-propos">Sobre</a>
       | <a href="/pt/mentions-legales">Aviso legal</a>
+      | <a href="/pt/mentions-legales#confidentialite">Privacidade</a>
     </p>
   </footer>
 </div>

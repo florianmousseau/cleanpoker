@@ -43,7 +43,7 @@
     </p>
 
     <!-- ── Datos personales ── -->
-    <h2>Datos personales (RGPD)</h2>
+    <h2 id="confidentialite">Datos personales (RGPD)</h2>
     <p>
       <strong>Responsable del tratamiento:</strong> Florian Mousseau,
       <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
@@ -88,15 +88,22 @@
       <a href="https://www.cnil.fr" rel="noopener noreferrer">CNIL</a> (autoridad francesa de protección de datos).
     </p>
 
-    <!-- ── Cookies & localStorage ── -->
-    <h2>Cookies y almacenamiento local</h2>
+    <!-- ── Cookies ── -->
+    <h2>Cookies</h2>
     <p>
       CleanPoker <strong>no utiliza ninguna cookie publicitaria ni herramienta de seguimiento</strong>.
     </p>
     <p>
-      El sitio utiliza únicamente el <strong>localStorage</strong> de su navegador para recordar
-      su preferencia de idioma (<code>lang</code>). Este almacenamiento es estrictamente funcional,
-      no contiene datos personales y no requiere consentimiento previo.
+      El servidor de juego mantiene dos contadores anónimos, el número de sesiones creadas y
+      el número de llegadas. No contienen ningún identificador, ningún seudónimo y ningún
+      nombre de sala, nada se escribe en disco, y vuelven a cero cada vez que el servidor se
+      reinicia. Cualquiera puede leerlos en <code>/stats</code> del servidor de juego.
+    </p>
+    <p>
+      El sitio deposita dos cookies funcionales en su navegador, para recordar su preferencia
+      de idioma (<code>lang</code>) y su tema claro u oscuro (<code>theme</code>), conservadas
+      un año. Son estrictamente funcionales, no contienen datos personales y no requieren
+      consentimiento previo.
     </p>
     <p>
       Cloudflare puede depositar cookies técnicas de seguridad (<code>__cf_bm</code>) estrictamente
@@ -132,6 +139,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licencia MIT</a>
       | <a href="/es/a-propos">Acerca de</a>
       | <a href="/es/mentions-legales">Aviso legal</a>
+      | <a href="/es/mentions-legales#confidentialite">Privacidad</a>
     </p>
   </footer>
 </div>

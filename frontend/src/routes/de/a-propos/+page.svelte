@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Uber CleanPoker - Okodesigntes Planning Poker</title>
-  <meta name="description" content="CleanPoker ist ein kostenloses, okodesigntes Planning-Poker-Tool. Keine Tracker, keine Cookies, WCAG 2.1 AA barrierefrei, unter 50 KB JS, grunens Hosting. Open Source MIT." />
+  <title>Über CleanPoker - Ökodesigntes Planning Poker</title>
+  <meta name="description" content="CleanPoker ist ein kostenloses, ökodesigntes Planning-Poker-Tool. Keine Tracker, keine Werbe-Cookies, WCAG 2.1 AA barrierefrei, unter 50 KB JS, grünes Hosting. Open Source MIT." />
   <link rel="canonical" href="https://cleanpoker.dev/de/a-propos" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos" />
@@ -11,9 +11,9 @@
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Uber CleanPoker',
+    name: 'Über CleanPoker',
     url: 'https://cleanpoker.dev/de/a-propos',
-    description: 'CleanPoker ist ein kostenloses, okodesigntes Planning-Poker-Tool. Keine Tracker, keine Cookies, WCAG 2.1 AA barrierefrei.',
+    description: 'CleanPoker ist ein kostenloses, ökodesigntes Planning-Poker-Tool. Keine Tracker, keine Werbe-Cookies, WCAG 2.1 AA barrierefrei.',
     isPartOf: {
       '@type': 'WebApplication',
       name: 'CleanPoker',
@@ -28,11 +28,11 @@
   <main id="main">
     <a href="/de" class="back-link">← Zur Startseite</a>
 
-    <h1>Uber CleanPoker</h1>
+    <h1>Über CleanPoker</h1>
 
     <p>
       <strong>CleanPoker</strong> ist ein kostenloses, quelloffenes <strong>Planning-Poker</strong>-Tool.
-      Erstelle eine Session in 30 Sekunden, teile die URL mit deinem Team und schatze in Echtzeit.
+      Erstelle eine Session in 30 Sekunden, teile die URL mit deinem Team und schätze in Echtzeit.
       Kein Konto, keine Registrierung, keine Tracker.
     </p>
 
@@ -49,15 +49,15 @@
     <div class="cards-grid">
       <a href="/de/planning-poker" class="card">
         <h3>Planning-Poker-Leitfaden</h3>
-        <p>Regeln, Fibonacci-Folge, Kartenvergleich, praktische Tipps fur agile Teams.</p>
+        <p>Regeln, Fibonacci-Folge, Kartenvergleich, praktische Tipps für agile Teams.</p>
       </a>
       <a href="/de/green" class="card">
-        <h3>Okodesign</h3>
-        <p>Kennzahlen, technische Entscheidungen und grunes Hosting: unsere Umwelterklarung.</p>
+        <h3>Ökodesign</h3>
+        <p>Kennzahlen, technische Entscheidungen und grünes Hosting: unsere Umwelterklärung.</p>
       </a>
       <a href="/de/accessibilite" class="card">
         <h3>Barrierefreiheit</h3>
-        <p>WCAG 2.1 AA Konformitat, Screenreader-Kompatibilitat, Tastaturnavigation.</p>
+        <p>WCAG 2.1 AA Konformität, Screenreader-Kompatibilität, Tastaturnavigation.</p>
       </a>
       <a href="/de/mentions-legales" class="card">
         <h3>Impressum</h3>
@@ -70,8 +70,9 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
-      | <a href="/de/a-propos">Uber CleanPoker</a>
+      | <a href="/de/a-propos">Über CleanPoker</a>
       | <a href="/de/mentions-legales">Impressum</a>
+      | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>
     </p>
   </footer>
 </div>

@@ -38,7 +38,7 @@
       {
         '@type': 'Question',
         name: 'Gibt es einen richtigen Fibonacci-Wert für eine Aufgabe?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Nein. Story Points sind relativ, nicht absolut. Eine 5 ist ungefähr doppelt so komplex wie eine 3 im gemeinsamen Referenzrahmen des Teams. Das Ziel ist Konsistenz über die Zeit, damit Velocity ein zuverlässiges Planungsinstrument wird.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Nein. Story Points sind relativ, nicht absolut. Entscheidend ist die Konsistenz im gemeinsamen Referenzrahmen des Teams: eine 5 heute soll sich wie eine 5 in sechs Monaten anfühlen. Das Ziel ist Konsistenz über die Zeit, damit Velocity ein zuverlässiges Planungsinstrument wird.' },
       },
       {
         '@type': 'Question',
@@ -51,7 +51,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/de/a-propos" class="back-link">← Uber uns</a>
+    <a href="/de/a-propos" class="back-link">← Über uns</a>
 
     <h1>Fibonacci im Planning Poker</h1>
 
@@ -62,7 +62,7 @@
 
     <h2>Was ist die Fibonacci-Folge?</h2>
     <p>
-      Die Fibonacci-Folge ist <strong>1, 1, 2, 3, 5, 8, 13, 21, 34…</strong> wobei jede Zahl
+      Die Fibonacci-Folge ist <strong>1, 1, 2, 3, 5, 8, 13, 21, 34...</strong> wobei jede Zahl
       die Summe der beiden vorherigen ist. Im Planning Poker wird typischerweise
       <strong>1, 2, 3, 5, 8, 13, 21</strong> plus eine <strong>?</strong>-Karte verwendet.
     </p>
@@ -125,8 +125,9 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
-      | <a href="/de/a-propos">Uber uns</a>
+      | <a href="/de/a-propos">Über uns</a>
       | <a href="/de/mentions-legales">Impressum</a>
+      | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>
     </p>
   </footer>
 </div>

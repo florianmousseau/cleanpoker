@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Eco-design & responsible technology | CleanPoker</title>
-  <meta name="description" content="CleanPoker eco-design declaration. JS bundle under 50 KB brotli, zero trackers, zero cookies, 100% renewable energy hosting, Lighthouse Performance 100, CO2 under 0.1 g per visit." />
+  <meta name="description" content="CleanPoker eco-design declaration. JS bundle under 50 KB brotli, zero trackers, zero advertising cookies, 100% renewable energy hosting, Lighthouse Performance 100, CO2 under 0.1 g per visit." />
   <link rel="canonical" href="https://cleanpoker.dev/en/green" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/green" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/en/green" />
@@ -13,7 +13,7 @@
     '@type': 'WebPage',
     name: 'Eco-design: CleanPoker',
     url: 'https://cleanpoker.dev/en/green',
-    description: 'CleanPoker eco-design declaration. JS bundle under 50 KB brotli, zero trackers, zero cookies, 100% renewable energy hosting, Lighthouse Performance 100, CO2 under 0.1 g per visit.',
+    description: 'CleanPoker eco-design declaration. JS bundle under 50 KB brotli, zero trackers, zero advertising cookies, 100% renewable energy hosting, Lighthouse Performance 100, CO2 under 0.1 g per visit.',
     keywords: 'eco-design, green IT, responsible technology, planning poker eco-friendly, zero trackers, green hosting, renewable energy, Lighthouse 100, lightweight bundle, low CO2',
     isPartOf: {
       '@type': 'WebApplication',
@@ -85,7 +85,7 @@
       <li>No Google Analytics or any behavioral tracking tool</li>
       <li>No advertising, no monetisation, no freemium</li>
       <li>No third-party cookies (only Cloudflare may set <code>__cf_bm</code>, a strictly necessary security cookie)</li>
-      <li>No localStorage containing personal data (only language preference is stored)</li>
+      <li>No personal data stored in your browser (only your language and theme preferences)</li>
       <li>No fonts, icons or scripts loaded from third-party CDNs (jsDelivr, cdnjs, unpkg...)</li>
       <li>No email marketing, no user accounts, no permanent database</li>
     </ul>
@@ -117,9 +117,9 @@
 
     <h2>Continuous improvement</h2>
     <p>
-      The digital footprint is audited at every deployment via Lighthouse CI and Eco-CI
-      (measures CI pipeline energy consumption).
-      Any performance regression blocks the production deployment.
+      The JS bundle size is checked on every change and blocks the deployment if it exceeds
+      the limit. Lighthouse scores and the pipeline energy consumption (Eco-CI) are measured
+      at every deployment and published in the CI results.
     </p>
 
     <h2>Last updated</h2>
@@ -132,6 +132,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT Licence</a>
       | <a href="/en/a-propos">About</a>
       | <a href="/en/mentions-legales">Legal notice</a>
+      | <a href="/en/mentions-legales#confidentialite">Privacy</a>
     </p>
   </footer>
 </div>

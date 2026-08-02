@@ -23,12 +23,12 @@
       {
         '@type': 'Question',
         name: 'Qual é a diferença entre story points e horas?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Os story points medem complexidade relativa, não tempo. Uma história de 5 pontos é aproximadamente o dobro de complexa que uma de 3 pontos, independentemente de quem a implementa ou quanto tempo leva. As horas variam por desenvolvedor e contexto; a complexidade é relativa à equipe e estável.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Os story points medem esforço relativo, não tempo. O esforço combina o volume de trabalho, a incerteza e a complexidade de uma história: uma tarefa simples mas muito volumosa pode pesar mais do que uma pequena e delicada. As horas variam por desenvolvedor e contexto; o esforço relativo é próprio da equipe e estável.' },
       },
       {
         '@type': 'Question',
         name: 'O que é velocidade em agile?',
-        acceptedAnswer: { '@type': 'Answer', text: 'A velocidade é o número de story points que uma equipe conclui por sprint em média. Após 3-5 sprints, a velocidade se estabiliza e se torna um input confiável para o planejamento de releases e o comprometimento de sprint.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'A velocidade é o número de story points que uma equipe conclui por sprint em média. Após 3-5 sprints, a velocidade se estabiliza e se torna um input confiável para o planejamento de releases e a previsão de sprint.' },
       },
       {
         '@type': 'Question',
@@ -63,17 +63,19 @@
 
     <h2>Story points vs. horas</h2>
     <p>
-      Os <strong>story points</strong> medem a complexidade relativa dentro da equipe.
-      Uma história de 5 pontos é aproximadamente o dobro em complexidade de uma de 3 pontos,
-      independentemente de quem a implementa. As horas variam; a complexidade relativa
-      é estável.
+      Os <strong>story points</strong> medem o esforço relativo dentro da equipe. O esforço
+      combina três coisas: o volume de trabalho, a incerteza e a complexidade. A complexidade
+      sozinha não basta - uma tarefa simples mas muito volumosa pode pesar mais do que uma
+      pequena e delicada. A escala permanece relativa: um 5 é claramente maior que um 3, sem
+      afirmar uma proporção exata. As horas variam; o esforço relativo é próprio da equipe
+      e estável.
     </p>
 
     <h2>Como a velocidade funciona</h2>
     <p>
       A velocidade é o número de story points que uma equipe conclui por sprint em média.
       Após 3 a 5 sprints ela se estabiliza e se torna uma ferramenta confiável para
-      planejamento de releases e compromisso de sprint.
+      planejamento de releases e previsão de sprint.
     </p>
 
     <h2>Erros comuns de estimativa</h2>
@@ -94,9 +96,10 @@
     <details>
       <summary>Qual é a diferença entre story points e horas?</summary>
       <p>
-        Story points medem complexidade relativa, não tempo. Uma história de 5 pontos é
-        aproximadamente o dobro em complexidade de uma de 3 pontos, independentemente do
-        desenvolvedor.
+        Story points medem esforço relativo, não tempo. O esforço combina o volume de
+        trabalho, a incerteza e a complexidade: uma tarefa simples mas muito volumosa pode
+        pesar mais do que uma pequena e delicada. As horas variam por desenvolvedor; o
+        esforço relativo é próprio da equipe e estável.
       </p>
     </details>
 
@@ -120,6 +123,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licença MIT</a>
       | <a href="/pt/a-propos">Sobre</a>
       | <a href="/pt/mentions-legales">Aviso legal</a>
+      | <a href="/pt/mentions-legales#confidentialite">Privacidade</a>
     </p>
   </footer>
 </div>

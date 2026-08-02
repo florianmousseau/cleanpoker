@@ -107,6 +107,7 @@
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licencia MIT</a>
       | <a href="/es/a-propos">Acerca de</a>
       | <a href="/es/mentions-legales">Aviso legal</a>
+      | <a href="/es/mentions-legales#confidentialite">Privacidad</a>
     </p>
   </footer>
 </div>
