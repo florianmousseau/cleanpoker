@@ -95,6 +95,75 @@ func TestHealth(t *testing.T) {
 	}
 }
 
+// --- Usage counters ---
+
+func getStats(t *testing.T, srv *httptest.Server) store.Usage {
+	t.Helper()
+	resp, err := http.Get(srv.URL + "/stats")
+	if err != nil {
+		t.Fatalf("GET /stats: %v", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("expected 200, got %d", resp.StatusCode)
+	}
+	var usage store.Usage
+	if err := json.NewDecoder(resp.Body).Decode(&usage); err != nil {
+		t.Fatalf("decode stats: %v", err)
+	}
+	return usage
+}
+
+func TestStats_EmptyServerCountsNothing(t *testing.T) {
+	srv := newTestServer(t)
+	usage := getStats(t, srv)
+	if usage.RoomsCreated != 0 || usage.ParticipantsJoined != 0 || usage.ActiveRooms != 0 {
+		t.Fatalf("expected an idle server to count nothing, got %+v", usage)
+	}
+	if usage.Since.IsZero() {
+		t.Fatal("expected the counters to say from when they count")
+	}
+}
+
+// The ratio this endpoint exists for: how many people one created room brings in.
+func TestStats_CountsRoomsAndEveryArrival(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	for _, name := range []string{"amandine", "bruno", "chloe"} {
+		conn := wsConnect(t, srv, id, name)
+		recv(t, conn) // welcome
+		recv(t, conn) // state, sent after the arrival is counted
+	}
+
+	usage := getStats(t, srv)
+	if usage.RoomsCreated != 1 {
+		t.Fatalf("expected 1 room created, got %d", usage.RoomsCreated)
+	}
+	if usage.ParticipantsJoined != 3 {
+		t.Fatalf("expected 3 arrivals, got %d", usage.ParticipantsJoined)
+	}
+	if usage.ActiveRooms != 1 {
+		t.Fatalf("expected 1 active room, got %d", usage.ActiveRooms)
+	}
+}
+
+func TestStats_ObserversCountAsArrivals(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	u := "ws" + strings.TrimPrefix(srv.URL, "http") + "/rooms/" + id + "/ws?name=po&observer=true"
+	conn, err := websocket.Dial(u, "", "http://test")
+	if err != nil {
+		t.Fatalf("websocket dial: %v", err)
+	}
+	defer func() { _ = conn.Close() }()
+	recv(t, conn)
+	recv(t, conn)
+
+	if got := getStats(t, srv).ParticipantsJoined; got != 1 {
+		t.Fatalf("expected the observer to count as an arrival, got %d", got)
+	}
+}
+
 // --- Room creation ---
 
 func TestCreateRoom_ReturnsID(t *testing.T) {
