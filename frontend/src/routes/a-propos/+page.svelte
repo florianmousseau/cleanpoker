@@ -32,7 +32,7 @@
 
     <p>
       <strong>CleanPoker</strong> is a free, open-source <strong>planning poker</strong> tool.
-      Create a session in 30 seconds, share the URL with your team, estimate in real time.
+      Create a session in one click, share the URL with your team, estimate in real time.
       No account, no sign-up, no tracker.
     </p>
 

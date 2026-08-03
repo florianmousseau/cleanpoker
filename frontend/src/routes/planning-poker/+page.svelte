@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Planning poker: rules, Fibonacci and practical guide | CleanPoker</title>
-  <meta name="description" content="What is planning poker? Rules, Fibonacci sequence, T-shirt sizing, tips for estimating user stories as an agile team. Free complete guide." />
+  <meta name="description" content="What is planning poker? The rules in 5 steps, the Fibonacci sequence, how long a session takes, remote and asynchronous estimation, and the mistakes that skew estimates. Free complete guide." />
   <link rel="canonical" href="https://cleanpoker.dev/planning-poker" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
@@ -13,7 +13,7 @@
     '@type': 'WebPage',
     name: 'Planning poker: rules, Fibonacci and practical guide',
     url: 'https://cleanpoker.dev/planning-poker',
-    description: 'Complete guide to planning poker: definition, rules, why Fibonacci, how to use CleanPoker.',
+    description: 'Complete guide to planning poker: definition, rules, why Fibonacci, session length, remote and asynchronous estimation, how to use CleanPoker.',
     isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
@@ -44,6 +44,16 @@
         '@type': 'Question',
         name: 'How to handle estimation disagreements?',
         acceptedAnswer: { '@type': 'Answer', text: 'When estimates diverge (e.g., a 2 and a 13 in the same hand), ask the extremes to explain their vote. The discussion often reveals different assumptions or unidentified risks. Vote again until convergence.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'How long does a planning poker session take?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Budget 2 to 5 minutes per user story: a minute of presentation, one round of voting, and discussion only when the cards disagree. A one-hour refinement session covers 12 to 20 stories. Past 90 minutes estimate quality drops, so split it into two sessions.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can planning poker be done asynchronously?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes, but you lose the point of it. Asynchronous voting gives you a number, while the value of the technique lies in the discussion the gaps trigger. A common compromise: vote asynchronously on the stories everyone agrees on, and keep a short synchronous session for the ones where estimates diverge.' },
       },
     ],
   })}<\/script>`}
@@ -81,6 +91,19 @@
       <li>If estimates converge: keep the value. Otherwise: discuss the extremes, then revote.</li>
     </ol>
 
+    <h2>How long does a session take?</h2>
+    <p>
+      Budget <strong>2 to 5 minutes per user story</strong>: a minute of presentation, one round
+      of voting, and discussion only when the cards disagree. A one-hour refinement session
+      therefore covers 12 to 20 stories, which is more than enough to feed a two-week sprint.
+    </p>
+    <p>
+      Past <strong>90 minutes</strong>, estimate quality drops: fatigue pushes people to vote like
+      their neighbour just to get it over with. Two 45-minute sessions beat one two-hour session.
+      If a single story eats more than ten minutes, the problem is no longer estimation but
+      framing: send it back to the backlog to be split.
+    </p>
+
     <h2>Why the Fibonacci sequence?</h2>
     <p>
       The sequence <strong>1, 2, 3, 5, 8, 13, 21, ?</strong> is the most common because it models
@@ -116,6 +139,57 @@
         </tr>
       </tbody>
     </table>
+
+    <h2>Planning poker for remote teams</h2>
+    <p>
+      In a room, the secrecy of the vote comes from the gesture: everyone lays a card face down.
+      Remotely, you need a tool that keeps votes hidden until the reveal, otherwise the first
+      number spoken on the call anchors the whole team. That is the one indispensable job of an
+      online planning poker tool, and it requires no account, no install and no integration.
+    </p>
+    <p>
+      Three things worth checking before picking one: do votes stay masked until the reveal, does
+      a participant who drops off get back into the session, and what happens to session content
+      once the meeting ends. On that last point, the only answer that commits to nothing is that
+      there is nothing to keep.
+    </p>
+
+    <h2>Asynchronous planning poker</h2>
+    <p>
+      Letting everyone vote on their own time, over two days, is tempting when time zones barely
+      overlap. You get a number, but you lose what makes the technique worth doing:
+      <strong>the discussion the gaps trigger</strong>. An estimate nobody argued about has
+      surfaced no risk.
+    </p>
+    <p>
+      The compromise that works: one asynchronous round to sort, then a short synchronous session
+      for the stories where cards disagree. In practice that is a third of the backlog, and the
+      meeting drops to twenty minutes.
+    </p>
+
+    <h2>Four mistakes that skew estimates</h2>
+    <ol>
+      <li>
+        <strong>The most senior person votes first.</strong> The moment a number is said out loud
+        before the reveal, everyone else lines up behind it. Simultaneous voting is not stagecraft,
+        it is the entire mechanism.
+      </li>
+      <li>
+        <strong>Converting points into days.</strong> "One point equals half a day" cancels the
+        benefit of a relative scale and turns the estimate into a delivery commitment. Points
+        compare stories to each other, they do not fill a calendar.
+      </li>
+      <li>
+        <strong>Forcing consensus.</strong> A persistent disagreement is information: it signals a
+        story that is misunderstood or badly split. Averaging it away removes the signal without
+        fixing the problem.
+      </li>
+      <li>
+        <strong>Estimating without the person who will do the work.</strong> An estimate produced
+        by a subgroup commits people who were not there. It is the most common reason planned
+        velocity and actual velocity drift apart.
+      </li>
+    </ol>
 
     <h2>Frequently asked questions</h2>
 
@@ -159,6 +233,14 @@
     <div class="cta">
       <a href="/" class="btn">Create a free session →</a>
     </div>
+
+    <p class="related">
+      See also:
+      <a href="/planning-poker-tools">how to choose a planning poker tool</a>,
+      <a href="/planning-poker-gdpr">planning poker and GDPR</a>,
+      <a href="/fibonacci">the Fibonacci sequence in detail</a>,
+      <a href="/alternatives">alternatives to the technique</a>.
+    </p>
   </main>
 
   <footer class="footer">
@@ -257,6 +339,12 @@
   }
 
   .btn:hover { opacity: 0.85; }
+
+  .related {
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
 
   .footer {
     padding: 1.5rem 0;

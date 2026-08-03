@@ -20,6 +20,12 @@
     accessibilitySummary: string;
     keywords: string;
     navAriaLabel: string;
+    /**
+     * The first line of the H1 was hardcoded to "Planning poker" for every
+     * locale. French says it the other way round, and that inverted form is
+     * what people actually type into Google, so each locale names its own.
+     */
+    h1Main: string;
     h1Accent: string;
     lead: string;
     cardsLabel: string;
@@ -52,6 +58,7 @@
     accessibilitySummary,
     keywords,
     navAriaLabel,
+    h1Main,
     h1Accent,
     lead,
     cardsLabel,
@@ -177,7 +184,7 @@
   </header>
 
   <main id="main" class="hero container">
-    <h1>Planning poker<br /><span class="accent">{h1Accent}</span></h1>
+    <h1>{h1Main}<br /><span class="accent">{h1Accent}</span></h1>
     <p class="lead">{lead}</p>
 
     <form class="create-form" onsubmit={(e) => { e.preventDefault(); createRoom(); }}>

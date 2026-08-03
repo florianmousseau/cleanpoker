@@ -34,6 +34,15 @@ function routeLocale(pathname: string): Locale | 'en' {
 }
 
 /**
+ * English lives at the root, not under /en. Six routes used to exist purely to
+ * 301 away from it, each a +page.server.ts next to an unreachable +page.svelte.
+ * One rule replaces the twelve files and covers the paths they missed: /en/
+ * alternatives, /en/fibonacci and /en/estimation-agile had no redirect route
+ * and fell through to /[id], which treats an unknown segment as a room id.
+ */
+const EN_PREFIX = /^\/en(?=\/|$)/;
+
+/**
  * The skip link lives in app.html, outside any component, so it is the one
  * string the Svelte translations cannot reach. Translate it here, where the
  * locale is already known.
@@ -47,6 +56,14 @@ const SKIP_LINK: Record<Locale | 'en', string> = {
 };
 
 export const handle: Handle = async ({ event, resolve }) => {
+	if (EN_PREFIX.test(event.url.pathname)) {
+		const target = event.url.pathname.replace(EN_PREFIX, '') || '/';
+		return new Response(null, {
+			status: 301,
+			headers: { location: `${target}${event.url.search}` }
+		});
+	}
+
 	const locale = routeLocale(event.url.pathname);
 
 	const themeCookie = event.cookies.get('theme');
