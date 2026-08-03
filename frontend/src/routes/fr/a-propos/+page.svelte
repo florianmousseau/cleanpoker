@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>À propos de CleanPoker - Planning poker éco-conçu</title>
+  <title>À propos de CleanPoker, un poker planning éco-conçu</title>
   <meta name="description" content="CleanPoker est un outil de planning poker gratuit, éco-conçu, zéro trackers, accessible WCAG 2.1 AA. Découvrez notre démarche, nos engagements et notre guide du planning poker." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/a-propos" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />

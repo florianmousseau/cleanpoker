@@ -1,7 +1,7 @@
 <svelte:head>
-  <title>Planning poker : règles, Fibonacci et guide pratique | CleanPoker</title>
-  <meta name="description" content="Qu'est-ce que le planning poker ? Règles, suite de Fibonacci, T-shirt sizing, conseils pour estimer les user stories en équipe agile. Guide complet gratuit." />
-  <link rel="canonical" href="https://cleanpoker.dev/planning-poker" />
+  <title>Poker planning : règles, Fibonacci et guide pratique | CleanPoker</title>
+  <meta name="description" content="Qu'est-ce que le poker planning ? Règles en 5 étapes, suite de Fibonacci, durée d'une session, à distance et en asynchrone, erreurs qui faussent les estimations. Guide complet et gratuit." />
+  <link rel="canonical" href="https://cleanpoker.dev/fr/planning-poker" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker" />
@@ -11,9 +11,9 @@
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Planning poker : règles, Fibonacci et guide pratique',
+    name: 'Poker planning : règles, Fibonacci et guide pratique',
     url: 'https://cleanpoker.dev/fr/planning-poker',
-    description: 'Guide complet du planning poker : définition, règles, pourquoi Fibonacci, comment l\'utiliser avec CleanPoker.',
+    description: 'Guide complet du poker planning : définition, règles, pourquoi Fibonacci, durée d\'une session, à distance et en asynchrone, comment l\'utiliser avec CleanPoker.',
     isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
@@ -22,12 +22,12 @@
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'Qu\'est-ce que le planning poker ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Le planning poker est une technique d\'estimation agile utilisée en Scrum. Chaque membre de l\'équipe choisit secrètement une carte représentant son estimation d\'une user story, puis tous révèlent simultanément. Les divergences provoquent une discussion qui affine l\'estimation collective.' },
+        name: 'Qu\'est-ce que le poker planning ?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Le poker planning est une technique d\'estimation agile utilisée en Scrum. Chaque membre de l\'équipe choisit secrètement une carte représentant son estimation d\'une user story, puis tous révèlent simultanément. Les divergences provoquent une discussion qui affine l\'estimation collective.' },
       },
       {
         '@type': 'Question',
-        name: 'Pourquoi utiliser la suite de Fibonacci en planning poker ?',
+        name: 'Pourquoi utiliser la suite de Fibonacci en poker planning ?',
         acceptedAnswer: { '@type': 'Answer', text: 'La suite de Fibonacci (1, 2, 3, 5, 8, 13, 21) reflète l\'incertitude croissante : plus une tâche est grande, moins on peut l\'estimer précisément. L\'écart entre les valeurs augmente, ce qui force l\'équipe à se positionner clairement sans sur-précision artificielle.' },
       },
       {
@@ -42,8 +42,23 @@
       },
       {
         '@type': 'Question',
-        name: 'Comment gérer les divergences dans le planning poker ?',
+        name: 'Comment gérer les divergences dans le poker planning ?',
         acceptedAnswer: { '@type': 'Answer', text: 'Quand les estimations divergent (ex. : un 2 et un 13 dans la même main), demandez aux extrêmes d\'expliquer leur vote. La discussion révèle souvent des hypothèses différentes ou des risques non identifiés. Revotez ensuite jusqu\'à convergence.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Combien de temps dure une session de poker planning ?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Comptez 2 à 5 minutes par user story : une minute de présentation, un tour de vote, et la discussion seulement en cas de divergence. Une séance d\'affinage d\'une heure couvre donc 12 à 20 stories. Au-delà de 90 minutes, la qualité des estimations chute et il vaut mieux couper en deux séances.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Dit-on poker planning ou planning poker ?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Les deux désignent la même technique. « Planning poker » est la forme d\'origine, employée par James Grenning en 2002 puis popularisée par Mike Cohn. « Poker planning » est l\'inversion passée dans l\'usage courant en France, au point d\'être la forme la plus tapée dans les moteurs de recherche par les équipes francophones. Aucune des deux n\'est fautive.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Peut-on faire du poker planning en asynchrone ?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Oui, mais on y perd l\'essentiel. Le vote asynchrone donne un chiffre, alors que la valeur de la technique tient dans la discussion déclenchée par les écarts. Un compromis courant : vote asynchrone sur les stories consensuelles, séance synchrone courte réservée aux seules stories où les estimations divergent.' },
       },
     ],
   })}<\/script>`}
@@ -53,20 +68,26 @@
   <main id="main">
     <a href="/fr/a-propos" class="back-link">← À propos</a>
 
-    <h1>Planning poker : guide complet</h1>
+    <h1>Poker planning : le guide complet</h1>
 
     <p>
-      Le <strong>planning poker</strong> est la technique d'estimation la plus utilisée en
+      Le <strong>poker planning</strong> est la technique d'estimation la plus utilisée en
       <strong>Scrum</strong> et en agilité. En 5 minutes, voici tout ce qu'il faut savoir.
     </p>
 
-    <h2>Qu'est-ce que le planning poker ?</h2>
+    <h2>Qu'est-ce que le poker planning ?</h2>
     <p>
-      Le planning poker (aussi appelé <em>Scrum poker</em>) est une technique d'estimation
-      collaborative où chaque membre de l'équipe choisit <strong>secrètement</strong> une carte
-      représentant sa propre estimation d'une user story ou d'une tâche. Tous révèlent leurs
-      cartes <strong>simultanément</strong>. Les divergences déclenchent une discussion courte,
-      puis l'équipe revote jusqu'à convergence.
+      Le poker planning (aussi écrit <em>planning poker</em>, ou <em>Scrum poker</em>) est une
+      technique d'estimation collaborative où chaque membre de l'équipe choisit
+      <strong>secrètement</strong> une carte représentant sa propre estimation d'une user story
+      ou d'une tâche. Tous révèlent leurs cartes <strong>simultanément</strong>. Les divergences
+      déclenchent une discussion courte, puis l'équipe revote jusqu'à convergence.
+    </p>
+    <p>
+      La technique est décrite par James Grenning en 2002, puis popularisée par Mike Cohn.
+      L'ordre des deux mots n'a aucune importance : <em>planning poker</em> est la forme
+      d'origine, <em>poker planning</em> l'inversion passée dans l'usage courant des équipes
+      francophones. Elles désignent exactement la même chose.
     </p>
     <p>
       L'objectif n'est pas la précision mais la <strong>discussion</strong> : révéler les
@@ -81,6 +102,20 @@
       <li>Tous révèlent simultanément.</li>
       <li>Si les estimations convergent : on retient la valeur. Sinon : discussion des extrêmes, puis nouveau vote.</li>
     </ol>
+
+    <h2>Combien de temps dure une session ?</h2>
+    <p>
+      Comptez <strong>2 à 5 minutes par user story</strong> : une minute de présentation, un tour
+      de vote, et de la discussion seulement quand les cartes divergent. Une séance d'affinage
+      d'une heure couvre donc 12 à 20 stories, ce qui suffit largement à alimenter un sprint de
+      deux semaines.
+    </p>
+    <p>
+      Au-delà de <strong>90 minutes</strong>, la qualité des estimations chute : la fatigue pousse
+      l'équipe à voter comme le voisin pour en finir. Mieux vaut deux séances de 45 minutes qu'une
+      de deux heures. Si une seule story consomme plus de dix minutes, ce n'est plus un problème
+      d'estimation mais de cadrage : elle retourne au backlog pour être découpée.
+    </p>
 
     <h2>Pourquoi la suite de Fibonacci ?</h2>
     <p>
@@ -118,6 +153,58 @@
       </tbody>
     </table>
 
+    <h2>Le poker planning à distance</h2>
+    <p>
+      En présentiel, le secret du vote tient au geste : chacun pose sa carte face cachée. À
+      distance, il faut un outil qui garde les votes invisibles jusqu'à la révélation, sinon le
+      premier chiffre annoncé sur le canal vocal ancre toute l'équipe. C'est le seul rôle
+      indispensable d'un outil de poker planning en ligne, et il ne demande ni compte, ni
+      installation, ni intégration.
+    </p>
+    <p>
+      Trois points à vérifier avant d'en choisir un : les votes restent-ils masqués jusqu'au
+      dévoilement, un participant qui perd sa connexion retrouve-t-il la session, et que devient
+      le contenu des sessions une fois la réunion finie. Sur ce dernier point, la seule réponse
+      qui n'engage à rien, c'est qu'il n'y ait rien à conserver.
+    </p>
+
+    <h2>Le poker planning en asynchrone</h2>
+    <p>
+      Faire voter l'équipe chacun de son côté, sur deux jours, est tentant quand les fuseaux
+      horaires ne se recouvrent pas. Le résultat est un chiffre, mais on perd ce qui fait la
+      valeur de la technique : <strong>la discussion déclenchée par les écarts</strong>. Une
+      estimation sur laquelle personne n'a débattu n'a fait émerger aucun risque.
+    </p>
+    <p>
+      Le compromis qui fonctionne : un tour asynchrone pour trier, puis une séance synchrone
+      courte réservée aux seules stories où les cartes divergent. En pratique, c'est un tiers du
+      backlog, et la réunion tombe à vingt minutes.
+    </p>
+
+    <h2>Quatre erreurs qui faussent les estimations</h2>
+    <ol>
+      <li>
+        <strong>Le plus gradé vote en premier.</strong> Dès qu'un chiffre est prononcé à voix
+        haute avant le dévoilement, les autres s'y alignent. Le vote simultané n'est pas un
+        détail de mise en scène, c'est tout le dispositif.
+      </li>
+      <li>
+        <strong>Convertir les points en jours.</strong> « Un point égale une demi-journée »
+        annule le bénéfice de l'échelle relative et transforme l'estimation en engagement de
+        délai. Les points servent à comparer des stories entre elles, pas à remplir un planning.
+      </li>
+      <li>
+        <strong>Chercher le consensus à tout prix.</strong> Un désaccord persistant est une
+        information : il signale une story mal comprise ou mal découpée. La forcer vers une
+        moyenne fait disparaître le signal sans régler le problème.
+      </li>
+      <li>
+        <strong>Estimer sans la personne qui fera le travail.</strong> Une estimation produite
+        par un sous-groupe engage ceux qui n'y étaient pas. C'est la raison la plus fréquente
+        d'un écart entre la vélocité prévue et la vélocité constatée.
+      </li>
+    </ol>
+
     <h2>Questions fréquentes</h2>
 
     <details>
@@ -142,7 +229,7 @@
     </details>
 
     <details>
-      <summary>Le planning poker fonctionne-t-il pour les équipes distantes ?</summary>
+      <summary>Le poker planning fonctionne-t-il pour les équipes distantes ?</summary>
       <p>
         Oui, c'est précisément pour ça que CleanPoker existe. Créez une session, partagez l'URL,
         chaque participant vote sur son propre appareil. Les résultats se révèlent en temps réel
@@ -162,6 +249,14 @@
     <div class="cta">
       <a href="/fr" class="btn">Créer une session gratuite →</a>
     </div>
+
+    <p class="related">
+      À lire aussi :
+      <a href="/fr/comparatif-outils">comment choisir un outil de poker planning</a>,
+      <a href="/fr/poker-planning-rgpd">poker planning et RGPD</a>,
+      <a href="/fr/fibonacci">la suite de Fibonacci en détail</a>,
+      <a href="/fr/alternatives">les alternatives à la technique</a>.
+    </p>
   </main>
 
   <footer class="footer">
@@ -260,6 +355,12 @@
   }
 
   .btn:hover { opacity: 0.85; }
+
+  .related {
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
 
   .footer {
     padding: 1.5rem 0;

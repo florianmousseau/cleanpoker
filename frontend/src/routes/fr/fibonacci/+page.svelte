@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>Fibonacci en planning poker : pourquoi et comment l'utiliser | CleanPoker</title>
+  <title>Fibonacci en poker planning : pourquoi et comment l'utiliser | CleanPoker</title>
   <meta name="description" content="Pourquoi les équipes agiles utilisent-elles la suite de Fibonacci en planning poker ? Psychologie, choix des cartes et comparaison avec d'autres échelles." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/fibonacci" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci" />

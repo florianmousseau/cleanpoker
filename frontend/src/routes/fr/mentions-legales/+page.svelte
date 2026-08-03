@@ -1,7 +1,7 @@
 <svelte:head>
   <title>Mentions légales & Confidentialité | CleanPoker</title>
   <meta name="description" content="Mentions légales, politique de confidentialité et informations d'hébergement de CleanPoker." />
-  <link rel="canonical" href="https://cleanpoker.dev/mentions-legales" />
+  <link rel="canonical" href="https://cleanpoker.dev/fr/mentions-legales" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales" />
   <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales" />
