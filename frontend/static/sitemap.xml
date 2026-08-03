@@ -459,60 +459,39 @@
   </url>
 
   <!-- Legal notice -->
+
+  <!-- Privacy and tool-choice guides, English and French only -->
   <url>
-    <loc>https://cleanpoker.dev/mentions-legales</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales"/>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://cleanpoker.dev/planning-poker-gdpr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-gdpr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/poker-planning-rgpd"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-gdpr"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr/mentions-legales</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales"/>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://cleanpoker.dev/fr/poker-planning-rgpd</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-gdpr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/poker-planning-rgpd"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-gdpr"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/es/mentions-legales</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales"/>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://cleanpoker.dev/planning-poker-tools</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-tools"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/comparatif-outils"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-tools"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/de/mentions-legales</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales"/>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://cleanpoker.dev/pt/mentions-legales</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales"/>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://cleanpoker.dev/fr/comparatif-outils</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-tools"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/comparatif-outils"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-tools"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>

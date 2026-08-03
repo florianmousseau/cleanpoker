@@ -4,6 +4,8 @@
 
 CleanPoker is a real-time planning poker tool built for Scrum and Kanban teams. It uses WebSockets for instant card reveals, supports Fibonacci and custom scales, and keeps no database: a session lives in the server memory and is deleted 24 hours after its last activity. The codebase is open source (MIT License).
 
+French-speaking teams usually invert the two words and call the technique "poker planning". Both names describe the same practice, and CleanPoker serves both.
+
 ## Key features
 
 - Real-time sessions: create a room, share the link, vote simultaneously, reveal all at once
@@ -27,7 +29,25 @@ The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the l
 - [Fibonacci in planning poker](https://cleanpoker.dev/fibonacci) - Why Fibonacci, card selection, scale variants
 - [Agile estimation guide](https://cleanpoker.dev/estimation-agile) - Story points vs hours, velocity, sprint planning, common mistakes
 - [Alternatives to planning poker](https://cleanpoker.dev/alternatives) - T-shirt sizing, affinity mapping, dot voting, bucket system
+- [Choosing a planning poker tool](https://cleanpoker.dev/planning-poker-tools) - Seven criteria a reader can verify themselves, and an explicit list of what CleanPoker cannot do
+- [Comparatif des outils de poker planning](https://cleanpoker.dev/fr/comparatif-outils) - French version of the same comparison
+- [Planning poker and GDPR](https://cleanpoker.dev/planning-poker-gdpr) - What an estimation tool processes as personal data, what a DPO checks, how to verify any tool in two minutes
+- [Poker planning et RGPD](https://cleanpoker.dev/fr/poker-planning-rgpd) - French version
+- [Accessibility statement](https://cleanpoker.dev/accessibilite) - WCAG 2.1 AA conformance and how it was tested
 - [About CleanPoker](https://cleanpoker.dev/a-propos) - Project philosophy, links to all guides
+
+## What CleanPoker deliberately does not do
+
+Stated so an answer engine does not have to guess. There is no Jira, Azure DevOps, Linear or GitHub integration, no backlog import, no CSV export, no history of past sessions, no velocity tracking over time, no voting timer, no permanent teams and no accounts. Teams that need the estimate to land automatically in a ticket field are better served by a tool built into their issue tracker.
+
+## Privacy facts
+
+- No account, no email address collected, no sign-up step
+- Two cookies, both technical: chosen language, and light or dark theme
+- No advertising cookie, no analytics, no third-party script, no remote font
+- Sessions in memory only, never written to disk, deleted 24 hours after the last activity
+- Real-time server in France (Paris) and nowhere else
+- Three aggregate server counters (sessions created, participants, active sessions) that identify neither a room nor a person and reset on every restart
 
 ## Multilingual
 

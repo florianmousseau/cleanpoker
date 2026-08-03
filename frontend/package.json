@@ -8,6 +8,7 @@
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "lint": "eslint src/",
+    "check:seo": "node scripts/check-seo.mjs",
     "size": "size-limit",
     "gen-og": "node -e \"const {Resvg}=require('@resvg/resvg-js'),fs=require('fs');const r=new Resvg(fs.readFileSync('static/og-image.svg','utf-8'),{width:1200,height:630});fs.writeFileSync('static/og-image.png',r.render().asPng());console.log('done')\""
   },

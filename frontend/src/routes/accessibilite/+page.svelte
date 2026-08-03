@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>Accessibility & disability | CleanPoker inclusive planning poker</title>
+  <title>Accessible planning poker: WCAG 2.1 AA and screen readers | CleanPoker</title>
   <meta name="description" content="CleanPoker is a planning poker tool fully accessible to people with disabilities. Full keyboard navigation, screen readers (NVDA, VoiceOver, JAWS), WCAG 2.1 AA compliance." />
   <link rel="canonical" href="https://cleanpoker.dev/accessibilite" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite" />

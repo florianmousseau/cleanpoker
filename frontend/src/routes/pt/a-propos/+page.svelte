@@ -32,7 +32,7 @@
 
     <p>
       O <strong>CleanPoker</strong> é uma ferramenta de <strong>planning poker</strong> colaborativa,
-      gratuita e de código aberto. Crie uma sessão em 30 segundos, partilhe o URL com a sua equipa
+      gratuita e de código aberto. Crie uma sessão num clique, partilhe o URL com a sua equipa
       e estime em tempo real. Sem conta, sem registo, sem rastreadores.
     </p>
 

@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>Alternatives au planning poker : tailles de T-shirt, dot voting et plus | CleanPoker</title>
+  <title>Alternatives au poker planning : T-shirt sizing, dot voting et plus | CleanPoker</title>
   <meta name="description" content="Comparatif des meilleures alternatives au planning poker : tailles de T-shirt, affinity mapping, dot voting, bucket system. Quelle technique choisir ?" />
   <link rel="canonical" href="https://cleanpoker.dev/fr/alternatives" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives" />
