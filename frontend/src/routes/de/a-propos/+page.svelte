@@ -32,7 +32,7 @@
 
     <p>
       <strong>CleanPoker</strong> ist ein kostenloses, quelloffenes <strong>Planning-Poker</strong>-Tool.
-      Erstelle eine Session in 30 Sekunden, teile die URL mit deinem Team und schätze in Echtzeit.
+      Erstelle eine Session mit einem Klick, teile die URL mit deinem Team und schätze in Echtzeit.
       Kein Konto, keine Registrierung, keine Tracker.
     </p>
 
