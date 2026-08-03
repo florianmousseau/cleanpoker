@@ -143,3 +143,20 @@ installés depuis des années : la viser comme objectif à court terme mène à 
 constat d'échec sur un travail qui a pourtant produit ses effets ailleurs.
 
 Le prochain relevé se fait dans Search Console, contre le tableau du haut.
+
+## Le contrôle qui empêche la rechute
+
+`frontend/scripts/check-seo.mjs`, lancé par `npm run check:seo` et par le job
+Code Quality, refuse trois régressions :
+
+- une balise `title` réintroduite dans `app.html` ;
+- une route qui n'en pose aucune ;
+- un `rel="canonical"` qui ne désigne pas le chemin de la page.
+
+Les trois sont exactement ce qui a coûté l'indexation. Une règle que rien ne
+mesure n'est qu'un souhait, et celle-ci était écrite nulle part.
+
+`sonar-project.properties` neutralise `Web:PageWithoutTitleCheck` sur le seul
+`app.html` : un analyseur HTML statique ne voit pas l'injection au moment du
+rendu, et remettre la balise reproduirait le défaut. Le contrôle ci-dessus prend
+le relais.
