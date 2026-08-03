@@ -58,11 +58,10 @@ Quatre défauts mesurés dans le code, qui expliquent une partie de l'écart ent
    cherche, et elle sert la position de l'outil. Le trancher demande une
    décision éditoriale, pas une correction.
 
-Un contrôle utile, à relancer après toute modification des en-têtes :
-
-```bash
-cd frontend/src/routes && for f in $(find . -name "+page.svelte" | sort); do can=$(grep -o 'rel="canonical" href="[^"]*"' "$f" | sed 's|.*cleanpoker.dev||;s|"||'); path=$(echo "$f" | sed 's|^\.||;s|/+page.svelte$||'); [ -z "$can" ] && continue; [ "$can" = "$path" ] || echo "DIVERGENT $f : canonical=$can chemin=$path"; done
-```
+Aucun de ces quatre défauts n'est rattrapable à la relecture : ils vivent dans
+des balises que personne ne regarde et qu'aucun compilateur ne vérifie. D'où le
+contrôle décrit en fin de document, qui les refuse désormais en intégration
+continue.
 
 ## Ce qui reste à Florian
 
