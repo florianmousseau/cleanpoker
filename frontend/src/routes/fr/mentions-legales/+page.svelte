@@ -23,7 +23,7 @@
       Ce site est édité à titre personnel par :<br />
       <strong>Florian Mousseau</strong>, particulier<br />
       France<br />
-      Contact : <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
+      Contact : <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
     </p>
 
     <!-- ── Hébergement ── -->
@@ -46,7 +46,7 @@
     <h2 id="confidentialite">Données personnelles (RGPD)</h2>
     <p>
       <strong>Responsable du traitement :</strong> Florian Mousseau,
-      <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
+      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
     </p>
 
     <h3>Données collectées</h3>
@@ -81,7 +81,7 @@
     <p>
       Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et d'effacement
       de vos données. Pour exercer ces droits ou pour toute question :
-      <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
+      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
     </p>
     <p>
       Vous pouvez également introduire une réclamation auprès de la
