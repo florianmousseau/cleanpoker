@@ -81,7 +81,7 @@ Le sitemap n'a pas été relu depuis le 21 juin. Après la mise en production :
 
 Textes prêts à coller, à ajuster s'il préfère sa propre voix.
 
-**AlternativeTo** (`alternativeto.net`) — s'inscrire, puis proposer CleanPoker
+**AlternativeTo** (`alternativeto.net`) - s'inscrire, puis proposer CleanPoker
 comme alternative à Planning Poker Online, PlanITpoker et Kollabe. Champ
 description, 300 caractères environ :
 
@@ -90,7 +90,7 @@ description, 300 caractères environ :
 > tier. Sessions live in memory and are deleted after 24 hours. WCAG 2.1 AA
 > accessible, under 50 KB of JavaScript, MIT licence.
 
-**European Alternatives** (`european-alternatives.eu`) — formulaire de
+**European Alternatives** (`european-alternatives.eu`) - formulaire de
 proposition. L'argument décisif y est l'hébergement, à mettre en avant :
 
 > CleanPoker is a free planning poker tool for agile teams, hosted in Paris,
@@ -99,14 +99,14 @@ proposition. L'argument décisif y est l'hébergement, à mettre en avant :
 > deleted 24 hours after the last activity. Interface in French, English,
 > Spanish, German and Portuguese. Open source, MIT licence.
 
-**Listes GitHub `awesome-*`** — ouvrir une pull request sur `awesome-scrum`,
+**Listes GitHub `awesome-*`** - ouvrir une pull request sur `awesome-scrum`,
 `awesome-agile` et `awesome-selfhosted`. Une ligne, au format de la liste :
 
 > - [CleanPoker](https://cleanpoker.dev) - Planning poker with no account, no
 >   tracker and no paid tier. Sessions are ephemeral, WCAG 2.1 AA, MIT licence.
 >   ([Source Code](https://github.com/florianmousseau/cleanpoker)) `MIT` `Go/JS`
 
-**Sujets du dépôt GitHub** — les dépôts remontent bien dans les résultats, et
+**Sujets du dépôt GitHub** - les dépôts remontent bien dans les résultats, et
 les sujets pilotent la découverte interne à GitHub. Une commande :
 
 ```bash
