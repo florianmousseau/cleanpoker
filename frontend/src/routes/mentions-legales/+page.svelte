@@ -23,7 +23,7 @@
       This site is published personally by:<br />
       <strong>Florian Mousseau</strong>, private individual<br />
       France<br />
-      Contact: <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
+      Contact: <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
     </p>
 
     <!-- ── Hosting ── -->
@@ -46,7 +46,7 @@
     <h2 id="confidentialite">Personal data (GDPR)</h2>
     <p>
       <strong>Data controller:</strong> Florian Mousseau,
-      <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
+      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
     </p>
 
     <h3>Data collected</h3>
@@ -80,7 +80,7 @@
     <p>
       In accordance with the GDPR, you have the right of access, rectification and erasure
       of your data. To exercise these rights or for any questions:
-      <a href="mailto:florian.mousseau@gmail.com">florian.mousseau@gmail.com</a>
+      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
     </p>
     <p>
       You may also lodge a complaint with the
