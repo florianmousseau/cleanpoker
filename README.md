@@ -14,7 +14,7 @@
 
 [![Accessibility](https://img.shields.io/badge/Lighthouse%20accessibility-100-brightgreen)](https://cleanpoker.dev)
 [![WCAG 2.1 AA](https://img.shields.io/badge/WCAG-2.1%20AA-green)](https://cleanpoker.dev/accessibilite)
-[![Trackers](https://img.shields.io/badge/trackers-0-brightgreen)](https://cleanpoker.dev)
+[![Behavioural tracking](https://img.shields.io/badge/behavioural%20tracking-0-brightgreen)](https://cleanpoker.dev/green)
 [![Website Carbon](https://img.shields.io/badge/CO2-A%2B-brightgreen?logo=leaf)](https://www.websitecarbon.com/website/cleanpoker-dev/)
 [![Languages](https://img.shields.io/badge/languages-FR%20%7C%20EN%20%7C%20ES%20%7C%20DE%20%7C%20PT-blue)](https://cleanpoker.dev)
 
@@ -29,7 +29,7 @@ Most planning poker tools show ads, track users, and weigh megabytes. CleanPoker
 | What others do | CleanPoker |
 |---|---|
 | Ads / freemium upsells | Zero ads, zero monetization |
-| Google Analytics, cookies | Zero trackers, zero cookies |
+| Google Analytics, ad cookies | No behavioural tracking, no ad cookies |
 | Require account creation | No account, just a link |
 | Heavy JS bundles | < 50 KB JS total (brotli) |
 | Accessibility as an afterthought | Lighthouse accessibility **100** |
@@ -38,8 +38,8 @@ Most planning poker tools show ads, track users, and weigh megabytes. CleanPoker
 
 CleanPoker is built for any agile team, with no compromises on ethics, performance or inclusion:
 
-- **Eco-conscious teams**: < 50 KB JS (brotli), zero third-party scripts, hosted on renewable energy, CO2 < 0.1g/visit
-- **Privacy-first teams**: zero trackers, zero cookies, zero analytics, nothing leaves your browser except the WebSocket to the game server
+- **Eco-conscious teams**: < 50 KB JS (brotli), one third-party script (a cookieless page counter), hosted on renewable energy, CO2 < 0.1g/visit
+- **Privacy-first teams**: no behavioural tracking, no advertising cookies, nothing leaves your browser except the WebSocket to the game server and one cookieless page view
 - **Teams with members with disabilities**: fully keyboard navigable, screen reader compatible (NVDA, VoiceOver, JAWS), no motion hazard
 - **Blind and visually impaired users**: semantic HTML5, `aria-live` regions announce vote results in real time, all interactive elements have explicit labels
 - **Keyboard-only users**: complete Tab / Shift+Tab / Enter / Space navigation, no mouse required at any step
@@ -73,7 +73,7 @@ CleanPoker is built for any agile team, with no compromises on ethics, performan
 | Lighthouse Accessibility | 100 |
 | Page weight | < 50 KB JS (brotli) |
 | Third-party cookies | 0 |
-| Trackers | 0 |
+| Behavioural tracking | 0 |
 
 ## Stack
 
@@ -104,7 +104,7 @@ Every push to `main` runs a quality and security pipeline before deploying.
 
 ## Green IT
 
-- **Zero trackers**: no Google Analytics, no third-party scripts, no cookies
+- **No behavioural tracking**: no Google Analytics, no advertising cookie, no visitor identifier. Page views are counted with Cloudflare Web Analytics, which sets no cookie and reads nothing on the device.
 - **System fonts**: no Google Fonts download
 - **Vanilla CSS**: no CSS framework (Tailwind, Bootstrap, etc.)
 - **Zero virtual DOM**: SvelteKit compiles to vanilla JS

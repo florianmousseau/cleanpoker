@@ -19,7 +19,7 @@
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      sustainabilityNote: 'Alojado en energía renovable (Cloudflare Pages + Fly.io CDG París). Bundle JS menor de 50 KB brotli. Sin scripts de terceros. CO2 menor de 0,1 g por visita.',
+      sustainabilityNote: 'Alojado en energía renovable (Cloudflare Pages + Fly.io CDG París). Bundle JS menor de 50 KB brotli. Un único script de terceros, un contador de páginas vistas sin cookies. CO2 menor de 0,1 g por visita.',
     },
   })}<\/script>`}
 </svelte:head>
@@ -47,8 +47,8 @@
         <tr><td>CO₂ estimado por visita</td><td><strong>&lt; 0,1 g</strong></td></tr>
         <tr><td>Lighthouse Rendimiento</td><td><strong>100 / 100</strong></td></tr>
         <tr><td>Lighthouse Accesibilidad</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Solicitudes a terceros</td><td><strong>0</strong></td></tr>
-        <tr><td>Rastreadores / analíticas</td><td><strong>0</strong></td></tr>
+        <tr><td>Solicitudes a terceros</td><td><strong>1</strong> (el contador de páginas vistas)</td></tr>
+        <tr><td>Seguimiento comportamental</td><td><strong>0</strong> (el contador no crea ningún identificador)</td></tr>
         <tr><td>Cookies publicitarias</td><td><strong>0</strong></td></tr>
         <tr><td>Fuentes de Google cargadas</td><td><strong>0</strong></td></tr>
         <tr><td>RAM del servidor</td><td><strong>~15 MB</strong> (binario Go)</td></tr>
@@ -61,7 +61,7 @@
       <li><strong>Sin Google Fonts</strong>: fuentes del sistema únicamente, sin solicitudes de red</li>
       <li><strong>Sin DOM virtual</strong>: SvelteKit compila a JavaScript vanilla, bundle mínimo</li>
       <li><strong>Sin base de datos</strong>: sesiones en memoria Go, auto-eliminadas tras 24h de inactividad</li>
-      <li><strong>Sin scripts de terceros</strong>: sin SDK de Analytics, Chat, A/B testing u otros</li>
+      <li><strong>Un único script de terceros</strong>: un contador de páginas vistas sin cookies, y ningún SDK de Analytics, Chat o A/B testing</li>
       <li><strong>Compresión Brotli</strong>: más eficiente que gzip, activada por defecto en Cloudflare</li>
       <li><strong>Backend Go</strong>: binario nativo ~15 MB RAM, sin JVM ni Node.js que mantener</li>
       <li><strong>WebSocket nativo</strong>: sin polling HTTP, conexión persistente ligera</li>

@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Über CleanPoker - Ökodesigntes Planning Poker</title>
-  <meta name="description" content="CleanPoker ist ein kostenloses, ökodesigntes Planning-Poker-Tool. Keine Tracker, keine Werbe-Cookies, WCAG 2.1 AA barrierefrei, unter 50 KB JS, grünes Hosting. Open Source MIT." />
+  <meta name="description" content="CleanPoker ist ein kostenloses, ökodesigntes Planning-Poker-Tool. Kein verhaltensbasiertes Tracking, keine Werbe-Cookies, WCAG 2.1 AA barrierefrei, unter 50 KB JS, grünes Hosting. Open Source MIT." />
   <link rel="canonical" href="https://cleanpoker.dev/de/a-propos" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos" />
@@ -13,12 +13,12 @@
     '@type': 'WebPage',
     name: 'Über CleanPoker',
     url: 'https://cleanpoker.dev/de/a-propos',
-    description: 'CleanPoker ist ein kostenloses, ökodesigntes Planning-Poker-Tool. Keine Tracker, keine Werbe-Cookies, WCAG 2.1 AA barrierefrei.',
+    description: 'CleanPoker ist ein kostenloses, ökodesigntes Planning-Poker-Tool. Kein verhaltensbasiertes Tracking, keine Werbe-Cookies, WCAG 2.1 AA barrierefrei.',
     isPartOf: {
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      description: 'Kostenloses Planning Poker, keine Tracker, JS-Bundle unter 50 KB, gruenes Hosting mit erneuerbarer Energie, WCAG 2.1 AA.',
+      description: 'Kostenloses Planning Poker, kein verhaltensbasiertes Tracking, JS-Bundle unter 50 KB, gruenes Hosting mit erneuerbarer Energie, WCAG 2.1 AA.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
     },
   })}<\/script>`}
@@ -33,14 +33,14 @@
     <p>
       <strong>CleanPoker</strong> ist ein kostenloses, quelloffenes <strong>Planning-Poker</strong>-Tool.
       Erstelle eine Session mit einem Klick, teile die URL mit deinem Team und schätze in Echtzeit.
-      Kein Konto, keine Registrierung, keine Tracker.
+      Kein Konto, keine Registrierung, kein verhaltensbasiertes Tracking.
     </p>
 
     <ul class="facts">
       <li>JS-Bundle <strong>&lt; 50 KB</strong> (brotli)</li>
       <li>Lighthouse Performance und Barrierefreiheit: <strong>100 / 100</strong></li>
       <li>100% erneuerbare Energie Hosting (Cloudflare Pages + Fly.io CDG Paris)</li>
-      <li>Keine Tracker, keine Werbe-Cookies, keine Drittanbieter-Skripte</li>
+      <li>Kein verhaltensbasiertes Tracking, keine Werbe-Cookies, ein cookieloser Seitenzähler</li>
       <li>Open Source unter <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a></li>
     </ul>
 
