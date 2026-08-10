@@ -71,7 +71,7 @@
       Une régie publicitaire, un outil d'analyse ou une police distante voient chaque visite, et
       pour un employeur européen, chacun est un transfert à documenter.
       <strong>À vérifier</strong> : outils de développement du navigateur, onglet Réseau, rechargez.
-      Chaque domaine qui n'est pas celui du site est un tiers.
+      Chaque domaine qui n'est pas celui du site est un tiers. Faites-le ici et vous en trouverez un : le compteur de pages vues nommé sur la page d'éco-conception, qui ne pose aucun cookie et ne fabrique aucun identifiant.
     </p>
 
     <h2>4. L'accessibilité réelle, pas la mention</h2>
@@ -118,7 +118,7 @@
       <tbody>
         <tr><td>Mur de paiement</td><td>Aucun. Pas de version payante, pas de limite de participants, pas de quota de sessions.</td></tr>
         <tr><td>Sessions après la réunion</td><td>En mémoire vive, jamais écrites sur disque, supprimées 24 h après la dernière activité.</td></tr>
-        <tr><td>Scripts tiers</td><td>Aucun. Deux cookies techniques : langue et thème.</td></tr>
+        <tr><td>Scripts tiers</td><td>Un seul, le compteur de pages vues. Deux cookies techniques : langue et thème.</td></tr>
         <tr><td>Accessibilité</td><td>WCAG 2.1 AA, navigation clavier complète, NVDA et VoiceOver, Lighthouse accessibilité 100.</td></tr>
         <tr><td>Poids</td><td>Moins de 50 Ko de JavaScript partagé, compression brotli, mesuré à chaque intégration continue.</td></tr>
         <tr><td>Perte de connexion</td><td>Reconnexion automatique du WebSocket, avec temporisation exponentielle.</td></tr>

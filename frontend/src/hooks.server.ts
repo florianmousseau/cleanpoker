@@ -17,8 +17,8 @@ const SECURITY_HEADERS: Record<string, string> = {
 	'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
 	'Content-Security-Policy': [
 		"default-src 'self'",
-		"connect-src 'self' https://cleanpoker-backend.fly.dev wss://cleanpoker-backend.fly.dev",
-		"script-src 'self' 'unsafe-inline'",
+		"connect-src 'self' https://cleanpoker-backend.fly.dev wss://cleanpoker-backend.fly.dev cloudflareinsights.com",
+		"script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com/beacon.min.js",
 		"style-src 'self' 'unsafe-inline'",
 		"img-src 'self' data:",
 		"font-src 'self'",

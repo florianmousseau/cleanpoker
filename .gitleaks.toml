@@ -1,0 +1,26 @@
+# The one string in this repo that looks like a secret and is not.
+#
+# The page counter carries a site token, and that token is public by
+# construction: it is served in the HTML of every page to every reader, which
+# is the only way the measurement can work. It names the site and grants
+# nothing. gitleaks sees thirty-two hex characters next to the word "token" and
+# recognises a generic API key, which is the right reflex on the wrong string.
+#
+# Allowed by its exact VALUE, not by its shape and not by its path: the day
+# thirty-two other hex characters appear here, including in `app.html` right
+# beside this one, the scan goes red anyway. `frontend/scripts/mesure.mjs`
+# keeps the value below equal to the one the shell actually serves, so this
+# allowance cannot outlive the token it was written for.
+#
+# `[allowlist]` and not `[[allowlists]]`: recent versions read the array form
+# and the 8.24.3 that the gitleaks action installs IGNORES IT SILENTLY - same
+# config, green locally, red in CI, and nothing in the output naming the
+# skipped section. Measured on quivad on 2026-08-06. The singular form works in
+# both, so every repo in the portfolio uses it.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Cloudflare Web Analytics site token, served in every page by design"
+regexes = ['''403b694eecc348d28a4e889e6421623f''']

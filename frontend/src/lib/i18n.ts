@@ -50,7 +50,7 @@ export const FR: Translation = {
 
   share: {
     ogTitle: 'Planning poker, sans compte ni traceur',
-    ogDesc: "Rejoins la session d'estimation. Aucun compte à créer, aucun traceur, aucune publicité.",
+    ogDesc: "Rejoins la session d'estimation. Aucun compte à créer, aucun suivi comportemental, aucune publicité.",
     inviteMessage: (url: string) => `Estimation en planning poker, on vote ici : ${url}\nAucun compte à créer.`,
   },
 
@@ -169,13 +169,13 @@ export const EN: Translation = {
   },
 
   share: {
-    ogTitle: 'Planning poker, no account, no tracking',
-    ogDesc: 'Join the estimation session. No account to create, no trackers, no ads.',
+    ogTitle: 'Planning poker, no account, no behavioural tracking',
+    ogDesc: 'Join the estimation session. No account to create, no behavioural tracking, no ads.',
     inviteMessage: (url: string) => `Planning poker estimation, we vote here: ${url}\nNo account needed.`,
   },
 
   promo: {
-    lead: 'CleanPoker is free, with no account, no trackers and no ads.',
+    lead: 'CleanPoker is free, with no account, no behavioural tracking and no ads.',
     cta: 'Create your own room',
     close: 'Close',
   },
@@ -289,13 +289,13 @@ export const ES: Translation = {
   },
 
   share: {
-    ogTitle: 'Planning poker, sin cuenta ni rastreadores',
-    ogDesc: 'Únete a la sesión de estimación. Sin cuenta, sin rastreadores, sin anuncios.',
+    ogTitle: 'Planning poker, sin cuenta ni seguimiento comportamental',
+    ogDesc: 'Únete a la sesión de estimación. Sin cuenta, sin seguimiento comportamental, sin anuncios.',
     inviteMessage: (url: string) => `Estimación en planning poker, votamos aquí: ${url}\nSin cuenta.`,
   },
 
   promo: {
-    lead: 'CleanPoker es libre y gratuito, sin cuenta, sin rastreadores y sin anuncios.',
+    lead: 'CleanPoker es libre y gratuito, sin cuenta, sin seguimiento comportamental y sin anuncios.',
     cta: 'Crea tu propia sala',
     close: 'Cerrar',
   },
@@ -409,13 +409,13 @@ export const DE: Translation = {
   },
 
   share: {
-    ogTitle: 'Planning Poker, ohne Konto und ohne Tracker',
-    ogDesc: 'Tritt der Schätzrunde bei. Kein Konto, keine Tracker, keine Werbung.',
+    ogTitle: 'Planning Poker, ohne Konto und ohne verhaltensbasiertes Tracking',
+    ogDesc: 'Tritt der Schätzrunde bei. Kein Konto, kein verhaltensbasiertes Tracking, keine Werbung.',
     inviteMessage: (url: string) => `Planning-Poker-Schätzung, wir stimmen hier ab: ${url}\nKein Konto nötig.`,
   },
 
   promo: {
-    lead: 'CleanPoker ist frei und kostenlos, ohne Konto, ohne Tracker und ohne Werbung.',
+    lead: 'CleanPoker ist frei und kostenlos, ohne Konto, ohne verhaltensbasiertes Tracking und ohne Werbung.',
     cta: 'Eigenen Raum erstellen',
     close: 'Schließen',
   },
@@ -529,13 +529,13 @@ export const PT: Translation = {
   },
 
   share: {
-    ogTitle: 'Planning poker, sem conta e sem rastreadores',
-    ogDesc: 'Entre na sessão de estimativa. Sem conta, sem rastreadores, sem anúncios.',
+    ogTitle: 'Planning poker, sem conta e sem rastreio comportamental',
+    ogDesc: 'Entre na sessão de estimativa. Sem conta, sem rastreio comportamental, sem anúncios.',
     inviteMessage: (url: string) => `Estimativa em planning poker, votamos aqui: ${url}\nSem conta.`,
   },
 
   promo: {
-    lead: 'CleanPoker é livre e gratuito, sem conta, sem rastreadores e sem anúncios.',
+    lead: 'CleanPoker é livre e gratuito, sem conta, sem rastreio comportamental e sem anúncios.',
     cta: 'Crie a sua própria sala',
     close: 'Fechar',
   },

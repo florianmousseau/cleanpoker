@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Eco-design & responsible technology | CleanPoker</title>
-  <meta name="description" content="CleanPoker eco-design declaration. JS bundle under 50 KB brotli, zero trackers, zero advertising cookies, 100% renewable energy hosting, Lighthouse Performance 100, CO2 under 0.1 g per visit." />
+  <meta name="description" content="CleanPoker eco-design declaration. JS bundle under 50 KB brotli, no behavioural tracking, no advertising cookies, 100% renewable energy hosting, Lighthouse Performance 100, CO2 under 0.1 g per visit." />
   <link rel="canonical" href="https://cleanpoker.dev/green" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green" />
@@ -13,13 +13,13 @@
     '@type': 'WebPage',
     name: 'Eco-design: CleanPoker',
     url: 'https://cleanpoker.dev/green',
-    description: 'CleanPoker eco-design declaration. JS bundle under 50 KB brotli, zero trackers, zero advertising cookies, 100% renewable energy hosting, Lighthouse Performance 100, CO2 under 0.1 g per visit.',
-    keywords: 'eco-design, green IT, responsible technology, planning poker eco-friendly, zero trackers, green hosting, renewable energy, Lighthouse 100, lightweight bundle, low CO2',
+    description: 'CleanPoker eco-design declaration. JS bundle under 50 KB brotli, no behavioural tracking, no advertising cookies, 100% renewable energy hosting, Lighthouse Performance 100, CO2 under 0.1 g per visit.',
+    keywords: 'eco-design, green IT, responsible technology, planning poker eco-friendly, no behavioural tracking, green hosting, renewable energy, Lighthouse 100, lightweight bundle, low CO2',
     isPartOf: {
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      sustainabilityNote: 'Hosted on renewable energy (Cloudflare Pages + Fly.io CDG Paris). JS bundle under 50 KB brotli. No third-party scripts. CO2 under 0.1 g per visit.',
+      sustainabilityNote: 'Hosted on renewable energy (Cloudflare Pages + Fly.io CDG Paris). JS bundle under 50 KB brotli. One third-party script, a cookieless page counter. CO2 under 0.1 g per visit.',
     },
   })}<\/script>`}
 </svelte:head>
@@ -47,8 +47,8 @@
         <tr><td>Estimated CO₂ per visit</td><td><strong>&lt; 0.1 g</strong></td></tr>
         <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
         <tr><td>Lighthouse Accessibility</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Third-party requests</td><td><strong>0</strong></td></tr>
-        <tr><td>Trackers / analytics</td><td><strong>0</strong></td></tr>
+        <tr><td>Third-party requests</td><td><strong>1</strong> (the page counter)</td></tr>
+        <tr><td>Behavioural tracking</td><td><strong>0</strong> (the counter builds no visitor identifier)</td></tr>
         <tr><td>Advertising cookies</td><td><strong>0</strong></td></tr>
         <tr><td>Google Fonts loaded</td><td><strong>0</strong></td></tr>
         <tr><td>Backend RAM</td><td><strong>~15 MB</strong> (Go binary)</td></tr>
@@ -61,7 +61,7 @@
       <li><strong>No Google Fonts</strong>: system fonts only, no network requests</li>
       <li><strong>No virtual DOM</strong>: SvelteKit compiles to vanilla JavaScript, minimal bundle</li>
       <li><strong>No database</strong>: Go in-memory sessions, auto-deleted after 24h of inactivity</li>
-      <li><strong>No third-party scripts</strong>: no Analytics SDK, Chat, A/B testing or similar</li>
+      <li><strong>One third-party script</strong>: a cookieless page counter, and no Analytics SDK, Chat or A/B testing</li>
       <li><strong>Brotli compression</strong>: more efficient than gzip, enabled by default on Cloudflare</li>
       <li><strong>Go backend</strong>: native binary ~15 MB RAM, no JVM or Node.js runtime to maintain</li>
       <li><strong>Native WebSocket</strong>: no HTTP polling, lightweight persistent connection</li>
@@ -86,7 +86,7 @@
       <li>No advertising, no monetisation, no freemium</li>
       <li>No third-party cookies (only Cloudflare may set <code>__cf_bm</code>, a strictly necessary security cookie)</li>
       <li>No personal data stored in your browser (only your language and theme preferences)</li>
-      <li>No fonts, icons or scripts loaded from third-party CDNs (jsDelivr, cdnjs, unpkg...)</li>
+      <li>No fonts or icons loaded from third-party CDNs (jsDelivr, cdnjs, unpkg...)</li>
       <li>No email marketing, no user accounts, no permanent database</li>
     </ul>
 

@@ -1,6 +1,6 @@
 <svelte:head>
   <title>About CleanPoker - Eco-designed planning poker</title>
-  <meta name="description" content="CleanPoker is a free, eco-designed planning poker tool. Zero trackers, zero advertising cookies, WCAG 2.1 AA accessible, under 50 KB JS, green hosting. Open source MIT." />
+  <meta name="description" content="CleanPoker is a free, eco-designed planning poker tool. No behavioural tracking, no advertising cookies, WCAG 2.1 AA accessible, under 50 KB JS, green hosting. Open source MIT." />
   <link rel="canonical" href="https://cleanpoker.dev/a-propos" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos" />
@@ -13,12 +13,12 @@
     '@type': 'WebPage',
     name: 'About CleanPoker',
     url: 'https://cleanpoker.dev/a-propos',
-    description: 'CleanPoker is a free, eco-designed planning poker tool. Zero trackers, zero advertising cookies, WCAG 2.1 AA accessible, under 50 KB JS, green hosting.',
+    description: 'CleanPoker is a free, eco-designed planning poker tool. No behavioural tracking, no advertising cookies, WCAG 2.1 AA accessible, under 50 KB JS, green hosting.',
     isPartOf: {
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      description: 'Free planning poker, zero trackers, JS bundle under 50 KB, green hosting on renewable energy, WCAG 2.1 AA.',
+      description: 'Free planning poker, no behavioural tracking, JS bundle under 50 KB, green hosting on renewable energy, WCAG 2.1 AA.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
     },
   })}<\/script>`}
@@ -33,14 +33,14 @@
     <p>
       <strong>CleanPoker</strong> is a free, open-source <strong>planning poker</strong> tool.
       Create a session in one click, share the URL with your team, estimate in real time.
-      No account, no sign-up, no tracker.
+      No account, no sign-up, no behavioural tracking.
     </p>
 
     <ul class="facts">
       <li>JS bundle <strong>&lt; 50 KB</strong> (brotli)</li>
       <li>Lighthouse Performance and Accessibility: <strong>100 / 100</strong></li>
       <li>100% renewable energy hosting (Cloudflare Pages + Fly.io CDG Paris)</li>
-      <li>Zero trackers, zero advertising cookies, zero third-party scripts</li>
+      <li>No behavioural tracking, no advertising cookies, one cookieless page counter</li>
       <li>Open source under <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT licence</a></li>
     </ul>
 

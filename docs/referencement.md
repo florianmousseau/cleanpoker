@@ -86,7 +86,7 @@ comme alternative à Planning Poker Online, PlanITpoker et Kollabe. Champ
 description, 300 caractères environ :
 
 > Free and open source planning poker for agile teams. Create a session, share
-> the URL, estimate together. No account, no ads, no third-party script, no paid
+> the URL, estimate together. No account, no ads, no advertising cookie, no paid
 > tier. Sessions live in memory and are deleted after 24 hours. WCAG 2.1 AA
 > accessible, under 50 KB of JavaScript, MIT licence.
 
@@ -94,16 +94,18 @@ description, 300 caractères environ :
 proposition. L'argument décisif y est l'hébergement, à mettre en avant :
 
 > CleanPoker is a free planning poker tool for agile teams, hosted in Paris,
-> France. No account, no advertising cookie, no analytics and no third-party
-> script: nothing leaves the European Union. Sessions are held in memory and
-> deleted 24 hours after the last activity. Interface in French, English,
-> Spanish, German and Portuguese. Open source, MIT licence.
+> France. No account, no advertising cookie and no ad network. The only
+> third-party script is a cookieless page counter, which builds no visitor
+> identifier. Session content never leaves the European Union: it is held in
+> memory on the Paris server and deleted 24 hours after the last activity.
+> Interface in French, English, Spanish, German and Portuguese. Open source,
+> MIT licence.
 
 **Listes GitHub `awesome-*`** - ouvrir une pull request sur `awesome-scrum`,
 `awesome-agile` et `awesome-selfhosted`. Une ligne, au format de la liste :
 
 > - [CleanPoker](https://cleanpoker.dev) - Planning poker with no account, no
->   tracker and no paid tier. Sessions are ephemeral, WCAG 2.1 AA, MIT licence.
+>   behavioural tracking and no paid tier. Sessions are ephemeral, WCAG 2.1 AA, MIT licence.
 >   ([Source Code](https://github.com/florianmousseau/cleanpoker)) `MIT` `Go/JS`
 
 **Sujets du dépôt GitHub** - les dépôts remontent bien dans les résultats, et

@@ -22,14 +22,44 @@
 
 ## Philosophie du projet
 
-- Zéro trackers, zéro cookies publicitaires, zéro scripts tiers
+- Aucun suivi comportemental, aucun cookie publicitaire, un compteur de pages vues sans cookie
 - Bundle JS < 50 Ko (brotli), mesuré par `npm run size` sur le JS partagé
 - Lighthouse Performance et Accessibilité : 100/100
 - WCAG 2.1 AA
 - Hébergement sur énergie renouvelable
 
+## La mesure d'audience, et ce qu'elle a coûté
+
+Depuis le 2026-08-11, sur décision de Florian pour tout le portefeuille, le site
+compte ses pages vues avec Cloudflare Web Analytics : un compteur dédié, aucun
+cookie, aucun identifiant de visiteur, aucune IP conservée, donc aucune bannière
+de consentement à ajouter.
+
+Ce produit vendait « zéro trackers » plus fort que les autres : un badge public
+`trackers-0` dans le README, une ligne `Trackers / analytics : 0` dans le
+tableau d'éco-conception des cinq langues, et une page qui reproche aux autres
+outils de charger un fournisseur d'analytics. Rien n'a été adouci : les phrases
+devenues fausses ont été retirées, et remplacées par des phrases plus étroites
+et vraies (« aucun suivi comportemental », « un seul script tiers »).
+
+**Ne réécris jamais « zéro trackers », « no third-party scripts », « sin
+rastreadores », « sem rastreadores » ni « keine Tracker »**, dans aucune des
+cinq langues, nulle part : page, meta, JSON-LD, mots-clés, `llms.txt`, README ou
+commentaire. `npm run mesure` balaie TOUS les fichiers livrés et refuse ces
+tournures tant que la balise est servie. Il ne lit pas une liste de fichiers
+mais l'arbre entier, précisément pour attraper la page que quelqu'un écrira le
+mois prochain avec le vieux vocabulaire.
+
+Ce qui reste vrai et se vend toujours : aucun cookie publicitaire, aucun compte,
+pas de tracking comportemental, moins de 50 Ko de JS, et le contenu des sessions
+qui vit en mémoire et ne quitte pas Paris.
+
 ## Invariants à ne pas casser
 
+- **La balise du compteur est dans DEUX politiques** : `frontend/_headers` pour
+  les fichiers statiques et `frontend/src/hooks.server.ts` pour les pages du
+  worker. Une balise autorisée dans l'une et pas l'autre donne une page qui ne
+  compte rien en silence. `npm run mesure` tient les deux égales.
 - **En-têtes de sécurité** : ils sont posés dans `frontend/src/hooks.server.ts`.
   Cloudflare Pages n'applique `frontend/_headers` qu'aux fichiers statiques,
   jamais aux réponses du worker SvelteKit, donc les pages HTML n'en reçoivent

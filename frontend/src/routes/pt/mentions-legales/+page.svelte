@@ -91,7 +91,17 @@
     <!-- ── Cookies ── -->
     <h2>Cookies</h2>
     <p>
-      O CleanPoker <strong>não utiliza cookies publicitários nem ferramentas de rastreamento</strong>.
+      O CleanPoker <strong>não utiliza cookies publicitários nem qualquer ferramenta que siga um visitante</strong>.
+    </p>
+    <p>
+      As páginas vistas são contadas com <strong>Cloudflare Web Analytics</strong>. Esta ferramenta
+      não coloca qualquer cookie, não lê nem escreve nada no seu dispositivo e não cria qualquer
+      identificador de visitante, pelo que não o pode seguir de uma visita para outra nem para
+      outro site. Regista a página, a ligação por onde chegou, o país, o tipo de dispositivo e o
+      navegador; o seu endereço IP serve para determinar esse país no momento do pedido e não é
+      conservado. É por isso que nada aqui lhe pede consentimento: o consentimento aplica-se à
+      leitura ou escrita de informação no seu dispositivo, e esta medição não faz nem uma coisa
+      nem outra.
     </p>
     <p>
       O servidor de jogo mantém dois contadores anónimos, o número de sessões criadas e o

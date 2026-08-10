@@ -90,7 +90,17 @@
     <!-- ── Cookies ── -->
     <h2>Cookies</h2>
     <p>
-      CleanPoker <strong>verwendet keine Werbe-Cookies oder Tracking-Tools</strong>.
+      CleanPoker <strong>verwendet keine Werbe-Cookies und kein Werkzeug, das Besucher verfolgt</strong>.
+    </p>
+    <p>
+      Seitenaufrufe werden mit <strong>Cloudflare Web Analytics</strong> gezählt. Das Werkzeug
+      setzt kein Cookie, liest und schreibt nichts auf Ihrem Gerät und erzeugt keine
+      Besucherkennung, kann Ihnen also weder von Besuch zu Besuch noch auf andere Websites folgen.
+      Erfasst werden die Seite, der Link, über den Sie gekommen sind, das Land, der Gerätetyp und
+      der Browser; Ihre IP-Adresse dient nur dazu, dieses Land im Moment der Anfrage zu bestimmen,
+      und wird nicht gespeichert. Deshalb fragt hier nichts nach Ihrer Einwilligung: die
+      Einwilligung knüpft an das Lesen oder Schreiben auf dem Endgerät an, und diese Messung tut
+      weder das eine noch das andere.
     </p>
     <p>
       Der Spielserver führt zwei anonyme Zähler, die Anzahl der erstellten Sitzungen und die

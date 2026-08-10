@@ -168,7 +168,7 @@
     </p>
     <p>
       Use CleanPoker when you need a fast, privacy-respecting planning poker session with
-      no setup, no account, and no trackers.
+      no setup, no account, and no behavioural tracking.
     </p>
 
     <h2>Frequently asked questions</h2>

@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Éco-conception & numérique responsable | CleanPoker</title>
-  <meta name="description" content="Déclaration d'éco-conception de CleanPoker. Bundle JS < 50 Ko brotli, zéro trackers, zéro cookie publicitaire, hébergement 100 % énergie renouvelable, Lighthouse Performance 100, CO₂ < 0,1 g par visite." />
+  <meta name="description" content="Déclaration d'éco-conception de CleanPoker. Bundle JS < 50 Ko brotli, aucun suivi comportemental, zéro cookie publicitaire, hébergement 100 % énergie renouvelable, Lighthouse Performance 100, CO₂ < 0,1 g par visite." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/green" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green" />
@@ -13,8 +13,8 @@
     '@type': 'WebPage',
     name: 'Éco-conception : CleanPoker',
     url: 'https://cleanpoker.dev/fr/green',
-    description: 'Déclaration d\'éco-conception de CleanPoker. Bundle JS < 50 Ko brotli, zéro trackers, zéro cookie publicitaire, hébergement 100 % énergie renouvelable, Lighthouse Performance 100, CO₂ < 0,1 g par visite.',
-    keywords: 'éco-conception, green IT, numérique responsable, planning poker écologique, zéro trackers, hébergement vert, énergie renouvelable, Lighthouse 100, bundle léger, CO2 faible',
+    description: 'Déclaration d\'éco-conception de CleanPoker. Bundle JS < 50 Ko brotli, aucun suivi comportemental, zéro cookie publicitaire, hébergement 100 % énergie renouvelable, Lighthouse Performance 100, CO₂ < 0,1 g par visite.',
+    keywords: 'éco-conception, green IT, numérique responsable, planning poker écologique, sans suivi comportemental, hébergement vert, énergie renouvelable, Lighthouse 100, bundle léger, CO2 faible',
     isPartOf: {
       '@type': 'WebApplication',
       name: 'CleanPoker',
@@ -47,8 +47,8 @@
         <tr><td>CO₂ estimé par visite</td><td><strong>&lt; 0,1 g</strong></td></tr>
         <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
         <tr><td>Lighthouse Accessibilité</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Requêtes vers des tiers</td><td><strong>0</strong></td></tr>
-        <tr><td>Trackers / analytics</td><td><strong>0</strong></td></tr>
+        <tr><td>Requêtes vers des tiers</td><td><strong>1</strong> (le compteur de pages vues)</td></tr>
+        <tr><td>Suivi comportemental</td><td><strong>0</strong> (le compteur ne fabrique aucun identifiant)</td></tr>
         <tr><td>Cookies publicitaires</td><td><strong>0</strong></td></tr>
         <tr><td>Polices Google chargées</td><td><strong>0</strong></td></tr>
         <tr><td>RAM backend</td><td><strong>~15 Mo</strong> (binaire Go)</td></tr>
@@ -61,7 +61,7 @@
       <li><strong>Pas de polices Google</strong> : polices système uniquement, aucune requête réseau</li>
       <li><strong>Pas de DOM virtuel</strong> : SvelteKit compile en JavaScript vanilla, bundle minimal</li>
       <li><strong>Pas de base de données</strong> : sessions en mémoire Go, auto-supprimées après 24 h d'inactivité</li>
-      <li><strong>Pas de scripts tiers</strong> : aucun SDK Analytics, Chat, A/B testing ou autre</li>
+      <li><strong>Un seul script tiers</strong> : un compteur de pages vues sans cookie, et aucun SDK Analytics, Chat ou A/B testing</li>
       <li><strong>Compression Brotli</strong> : plus efficace que gzip, activée par défaut sur Cloudflare</li>
       <li><strong>Backend Go</strong> : binaire natif ~15 Mo RAM, pas de runtime JVM ou Node.js à maintenir</li>
       <li><strong>WebSocket natif</strong> : pas de polling HTTP, connexion persistante légère</li>
