@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/florianmousseau/cleanpoker/internal/room"
 	"github.com/florianmousseau/cleanpoker/internal/store"
@@ -19,14 +20,11 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
+		writeJSON(w, healthOf(s))
 	})
 
 	mux.HandleFunc("GET /stats", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		if err := json.NewEncoder(w).Encode(s.Usage()); err != nil {
-			log.Printf("warn: encode stats: %v", err)
-		}
+		writeJSON(w, s.Usage())
 	})
 
 	mux.HandleFunc("POST /rooms", func(w http.ResponseWriter, r *http.Request) {
@@ -34,11 +32,7 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 			Cards []string `json:"cards"`
 		}
 		_ = json.NewDecoder(r.Body).Decode(&body)
-		id := s.Create(body.Cards)
-		w.Header().Set("Content-Type", "application/json")
-		if err := json.NewEncoder(w).Encode(map[string]string{"id": id}); err != nil {
-			log.Printf("warn: encode response: %v", err)
-		}
+		writeJSON(w, map[string]string{"id": s.Create(body.Cards)})
 	})
 
 	mux.HandleFunc("GET /rooms/{id}/ws", func(w http.ResponseWriter, r *http.Request) {
@@ -56,6 +50,32 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 	})
 
 	return cors(allowed, mux)
+}
+
+// health is what a monitor reads. The status code alone already says the
+// process answers, so the body carries what a code cannot: uptime. A machine
+// that auto-stops when idle answers every probe with an uptime of zero, which
+// looks identical to a healthy service until you read that number.
+type health struct {
+	Status        string `json:"status"`
+	UptimeSeconds int64  `json:"uptimeSeconds"`
+}
+
+func healthOf(s *store.Store) health {
+	return health{
+		Status:        "ok",
+		UptimeSeconds: int64(time.Since(s.Usage().Since).Seconds()),
+	}
+}
+
+// writeJSON answers with a JSON body. An empty 200 reads as no answer at all
+// to a probe that parses what it gets, which is how the health route went
+// unnoticed as broken while returning 200.
+func writeJSON(w http.ResponseWriter, v any) {
+	w.Header().Set("Content-Type", "application/json")
+	if err := json.NewEncoder(w).Encode(v); err != nil {
+		log.Printf("warn: encode response: %v", err)
+	}
 }
 
 func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), playerName string, observer bool) {
