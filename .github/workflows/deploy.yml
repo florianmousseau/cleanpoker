@@ -59,6 +59,13 @@ jobs:
         working-directory: frontend
         run: npm run check:seo
 
+      # The shell, BOTH security policies and the five legal pages have to say
+      # the same thing about the page counter. Nothing else in a build would
+      # notice a legal sentence, or a five-language sales claim, going false.
+      - name: Measurement matches what the pages claim
+        working-directory: frontend
+        run: npm run mesure
+
       - name: Go tests
         working-directory: backend
         run: go test -coverprofile=coverage.out ./...

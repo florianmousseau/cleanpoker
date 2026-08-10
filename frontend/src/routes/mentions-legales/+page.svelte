@@ -90,7 +90,16 @@
     <!-- ── Cookies ── -->
     <h2>Cookies</h2>
     <p>
-      CleanPoker <strong>does not use any advertising cookies or tracking tools</strong>.
+      CleanPoker <strong>does not use any advertising cookie, and no tool that follows a visitor</strong>.
+    </p>
+    <p>
+      Page views are counted with <strong>Cloudflare Web Analytics</strong>. It sets no cookie,
+      reads and writes nothing on your device, and builds no visitor identifier, so it cannot
+      follow you from one visit to the next or on to another site. It records the page, the link
+      you arrived by, the country, the device type and the browser; your IP address is used to
+      derive that country at the moment of the request and is not retained. This is why nothing
+      here asks for your consent: consent attaches to reading or writing information on your
+      device, and this measurement does neither.
     </p>
     <p>
       The game server keeps two anonymous counters, the number of sessions created and the

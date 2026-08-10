@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Öko-Design & verantwortungsvolle Technologie | CleanPoker</title>
-  <meta name="description" content="Öko-Design-Erklärung von CleanPoker. JS-Bundle unter 50 KB brotli, null Tracker, null Cookies, 100% erneuerbare Energien, Lighthouse Performance 100, CO2 unter 0,1 g pro Besuch." />
+  <meta name="description" content="Öko-Design-Erklärung von CleanPoker. JS-Bundle unter 50 KB brotli, kein verhaltensbasiertes Tracking, keine Werbe-Cookies, 100% erneuerbare Energien, Lighthouse Performance 100, CO2 unter 0,1 g pro Besuch." />
   <link rel="canonical" href="https://cleanpoker.dev/de/green" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green" />
@@ -13,13 +13,13 @@
     '@type': 'WebPage',
     name: 'Öko-Design: CleanPoker',
     url: 'https://cleanpoker.dev/de/green',
-    description: 'Öko-Design-Erklärung von CleanPoker. JS-Bundle unter 50 KB brotli, null Tracker, null Cookies, 100% erneuerbare Energien, Lighthouse Performance 100, CO2 unter 0,1 g pro Besuch.',
-    keywords: 'Öko-Design, Green IT, verantwortungsvolle Technologie, Planning Poker umweltfreundlich, null Tracker, grünes Hosting, erneuerbare Energien, Lighthouse 100, leichtes Bundle, geringes CO2',
+    description: 'Öko-Design-Erklärung von CleanPoker. JS-Bundle unter 50 KB brotli, kein verhaltensbasiertes Tracking, keine Werbe-Cookies, 100% erneuerbare Energien, Lighthouse Performance 100, CO2 unter 0,1 g pro Besuch.',
+    keywords: 'Öko-Design, Green IT, verantwortungsvolle Technologie, Planning Poker umweltfreundlich, kein verhaltensbasiertes Tracking, grünes Hosting, erneuerbare Energien, Lighthouse 100, leichtes Bundle, geringes CO2',
     isPartOf: {
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      sustainabilityNote: 'Auf erneuerbaren Energien gehostet (Cloudflare Pages + Fly.io CDG Paris). JS-Bundle unter 50 KB brotli. Keine Drittanbieter-Skripte. CO2 unter 0,1 g pro Besuch.',
+      sustainabilityNote: 'Auf erneuerbaren Energien gehostet (Cloudflare Pages + Fly.io CDG Paris). JS-Bundle unter 50 KB brotli. Ein cookieloser Seitenzähler als einziges Drittanbieter-Skript. CO2 unter 0,1 g pro Besuch.',
     },
   })}<\/script>`}
 </svelte:head>
@@ -47,8 +47,8 @@
         <tr><td>Geschätztes CO₂ pro Besuch</td><td><strong>&lt; 0,1 g</strong></td></tr>
         <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
         <tr><td>Lighthouse Barrierefreiheit</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Anfragen an Dritte</td><td><strong>0</strong></td></tr>
-        <tr><td>Tracker / Analysen</td><td><strong>0</strong></td></tr>
+        <tr><td>Anfragen an Dritte</td><td><strong>1</strong> (der Seitenzähler)</td></tr>
+        <tr><td>Verhaltensbasiertes Tracking</td><td><strong>0</strong> (der Zähler erzeugt keine Besucherkennung)</td></tr>
         <tr><td>Werbe-Cookies</td><td><strong>0</strong></td></tr>
         <tr><td>Geladene Google Fonts</td><td><strong>0</strong></td></tr>
         <tr><td>Backend-RAM</td><td><strong>~15 MB</strong> (Go-Binärdatei)</td></tr>
@@ -61,7 +61,7 @@
       <li><strong>Keine Google Fonts</strong>: nur Systemschriften, keine Netzwerkanfragen</li>
       <li><strong>Kein virtuelles DOM</strong>: SvelteKit kompiliert zu Vanilla JavaScript, minimales Bundle</li>
       <li><strong>Keine Datenbank</strong>: Go-In-Memory-Sitzungen, nach 24h Inaktivität automatisch gelöscht</li>
-      <li><strong>Keine Drittanbieter-Skripte</strong>: kein Analytics-SDK, Chat, A/B-Tests oder ähnliches</li>
+      <li><strong>Ein Drittanbieter-Skript</strong>: ein cookieloser Seitenzähler, und kein Analytics-SDK, Chat oder A/B-Tests</li>
       <li><strong>Brotli-Komprimierung</strong>: effizienter als gzip, standardmäßig auf Cloudflare aktiviert</li>
       <li><strong>Go-Backend</strong>: native Binärdatei ~15 MB RAM, keine JVM oder Node.js zu warten</li>
       <li><strong>Natives WebSocket</strong>: kein HTTP-Polling, leichte persistente Verbindung</li>
@@ -86,7 +86,7 @@
       <li>Keine Werbung, keine Monetarisierung, kein Freemium</li>
       <li>Keine Drittanbieter-Cookies (nur Cloudflare kann <code>__cf_bm</code> setzen, ein unbedingt erforderliches Sicherheits-Cookie)</li>
       <li>Keine personenbezogenen Daten in Ihrem Browser (nur Ihre Sprach- und Design-Einstellungen)</li>
-      <li>Keine Schriften, Icons oder Skripte von Drittanbieter-CDNs (jsDelivr, cdnjs, unpkg...)</li>
+      <li>Keine Schriften oder Icons von Drittanbieter-CDNs (jsDelivr, cdnjs, unpkg...)</li>
       <li>Kein E-Mail-Marketing, keine Benutzerkonten, keine permanente Datenbank</li>
     </ul>
 

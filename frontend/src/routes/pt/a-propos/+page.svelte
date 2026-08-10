@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Sobre o CleanPoker - Planning poker eco-concebido</title>
-  <meta name="description" content="CleanPoker é uma ferramenta de planning poker gratuita, eco-concebida, sem rastreadores, acessível WCAG 2.1 AA, menos de 50 KB JS, alojamento verde. Código aberto MIT." />
+  <meta name="description" content="CleanPoker é uma ferramenta de planning poker gratuita, eco-concebida, sem rastreio comportamental, acessível WCAG 2.1 AA, menos de 50 KB JS, alojamento verde. Código aberto MIT." />
   <link rel="canonical" href="https://cleanpoker.dev/pt/a-propos" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos" />
@@ -13,12 +13,12 @@
     '@type': 'WebPage',
     name: 'Sobre o CleanPoker',
     url: 'https://cleanpoker.dev/pt/a-propos',
-    description: 'CleanPoker é uma ferramenta de planning poker gratuita, eco-concebida, sem rastreadores, acessível WCAG 2.1 AA.',
+    description: 'CleanPoker é uma ferramenta de planning poker gratuita, eco-concebida, sem rastreio comportamental, acessível WCAG 2.1 AA.',
     isPartOf: {
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      description: 'Planning poker gratuito, sem rastreadores, bundle JS inferior a 50 KB, alojamento em energia renovável, WCAG 2.1 AA.',
+      description: 'Planning poker gratuito, sem rastreio comportamental, bundle JS inferior a 50 KB, alojamento em energia renovável, WCAG 2.1 AA.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
     },
   })}<\/script>`}
@@ -33,14 +33,14 @@
     <p>
       O <strong>CleanPoker</strong> é uma ferramenta de <strong>planning poker</strong> colaborativa,
       gratuita e de código aberto. Crie uma sessão num clique, partilhe o URL com a sua equipa
-      e estime em tempo real. Sem conta, sem registo, sem rastreadores.
+      e estime em tempo real. Sem conta, sem registo, sem rastreio comportamental.
     </p>
 
     <ul class="facts">
       <li>Bundle JS <strong>&lt; 50 KB</strong> (brotli)</li>
       <li>Lighthouse Desempenho e Acessibilidade: <strong>100 / 100</strong></li>
       <li>Alojamento 100% energia renovável (Cloudflare Pages + Fly.io CDG Paris)</li>
-      <li>Sem rastreadores, sem cookies publicitários, sem scripts de terceiros</li>
+      <li>Sem rastreio comportamental, sem cookies publicitários, um contador de páginas vistas sem cookies</li>
       <li>Código aberto sob <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licença MIT</a></li>
     </ul>
 
