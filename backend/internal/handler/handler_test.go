@@ -93,6 +93,22 @@ func TestHealth(t *testing.T) {
 	if resp.StatusCode != http.StatusOK {
 		t.Fatalf("expected 200, got %d", resp.StatusCode)
 	}
+	if got := resp.Header.Get("Content-Type"); got != "application/json" {
+		t.Fatalf("expected a JSON content type, got %q", got)
+	}
+	var body struct {
+		Status        string `json:"status"`
+		UptimeSeconds *int64 `json:"uptimeSeconds"`
+	}
+	if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
+		t.Fatalf("decode health: %v", err)
+	}
+	if body.Status != "ok" {
+		t.Fatalf("expected status ok, got %q", body.Status)
+	}
+	if body.UptimeSeconds == nil {
+		t.Fatal("expected an uptime, got none")
+	}
 }
 
 // --- Usage counters ---
