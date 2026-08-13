@@ -9,8 +9,14 @@
 # Allowed by its exact VALUE, not by its shape and not by its path: the day
 # thirty-two other hex characters appear here, including in `app.html` right
 # beside this one, the scan goes red anyway. `frontend/scripts/mesure.mjs`
-# keeps the value below equal to the one the shell actually serves, so this
-# allowance cannot outlive the token it was written for.
+# keeps the FIRST value below equal to the one the shell actually serves, so
+# this allowance cannot outlive the token it was written for.
+#
+# THE ONES AFTER IT ARE RETIRED TOKENS, and they have to stay: the scan reads
+# the whole history, and a token dropped from this file is still written in the
+# commits that carried it. Removing it turns a repository red with nothing new
+# to hide. Each retired line carries its date and its reason, otherwise the
+# list becomes a dumping ground.
 #
 # `[allowlist]` and not `[[allowlists]]`: recent versions read the array form
 # and the 8.24.3 that the gitleaks action installs IGNORES IT SILENTLY - same
@@ -23,4 +29,10 @@ useDefault = true
 
 [allowlist]
 description = "Cloudflare Web Analytics site token, served in every page by design"
-regexes = ['''403b694eecc348d28a4e889e6421623f''']
+regexes = [
+  # Served today.
+  '''d19c937236c74c41948f5d9977cada6d''',
+  # Retired on 2026-08-13: it was the counter's `site_tag` and not its
+  # `site_token`, so the site never counted a thing.
+  '''403b694eecc348d28a4e889e6421623f''',
+]
