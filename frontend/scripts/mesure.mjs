@@ -61,19 +61,32 @@ require_(
 	'_headers lets the page view out, and nothing else'
 );
 
-// Une balise sans jeton repond 200 et ne compte rien, sur toutes les pages,
-// aussi longtemps que personne n'ouvre le tableau de bord.
+// A beacon with no token answers 200 and counts nothing, on every page, for as
+// long as nobody opens the dashboard to notice.
+//
+// WHAT THIS CHECK CANNOT SEE, and what cost two days of measuring nothing: a
+// `site_tag` has exactly the same shape as a `site_token`, and it was the
+// former that got copied into the shell. The beacon loads, the policy allows
+// it, no console says a word - and the beacon's POST answers with a CORS error
+// because the token does not exist. Only the RUM data tells. So the token is
+// copied from the `snippet` returned by
+// `GET /accounts/<account>/rum/site_info/list`, never from a create response
+// read wrong.
 require_(
 	/"token":\s*"[0-9a-f]{32}"/.test(shell) === measured,
 	'the shell carries a real site token, because an empty one counts in silence'
 );
+// The FIRST value in the allowlist is the one being served; the ones below it
+// are retired tokens that cannot be dropped, because the scan reads the whole
+// history. Comparing against the first keeps the original rule: an allowance
+// does not outlive the token it was written for.
 require_(
 	(() => {
 		const served = /"token":\s*"([0-9a-f]{32})"/.exec(shell)?.[1];
 		const allowed = /'''([0-9a-f]{32})'''/.exec(lire('../.gitleaks.toml'))?.[1];
 		return served === allowed;
 	})(),
-	'gitleaks allows exactly the token the shell serves, and no other'
+	'gitleaks allows the token the shell serves at the top of the list'
 );
 
 // --- les cinq pages legales, et les deux surfaces lues par des machines ---
