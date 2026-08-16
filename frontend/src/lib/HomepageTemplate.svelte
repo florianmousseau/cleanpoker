@@ -3,6 +3,7 @@
   import { goto, replaceState } from '$app/navigation';
   import { browser } from '$app/environment';
   import { lang } from '$lib/lang.svelte';
+  import { parseCards } from '$lib/cards';
   import Footer from '$lib/Footer.svelte';
 
   interface Props {
@@ -118,10 +119,6 @@
     replaceState(`?cards=${safe}`, {});
   }
 
-  function parseCards(input: string): string[] {
-    return input.split(',').map(s => s.trim()).filter(s => s.length > 0);
-  }
-
   const cards = $derived(parseCards(cardsInput));
   const isValid = $derived(cards.length >= 2);
 
@@ -211,7 +208,9 @@
           spellcheck="false"
         />
         <p id="cards-preview" class="cards-preview" aria-live="polite">
-          {#each cards as card (card)}
+          <!-- Keyed by position, never by label: a duplicate key throws
+               each_key_duplicate and freezes the whole page. -->
+          {#each cards as card, i (i)}
             <span class="card-chip">{card}</span>
           {/each}
           {#if !isValid}

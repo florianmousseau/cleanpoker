@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { applyLangAttribute } from '$lib/html-lang';
 
 export type Lang = 'fr' | 'en' | 'es' | 'de' | 'pt';
 
@@ -22,6 +23,9 @@ export const lang = {
 	get current(): Lang { return _lang; },
 	set(l: Lang) {
 		_lang = l;
-		if (browser) writeCookie(l);
+		if (browser) {
+			writeCookie(l);
+			applyLangAttribute(document, l);
+		}
 	},
 };
