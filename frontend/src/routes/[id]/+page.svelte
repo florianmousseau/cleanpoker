@@ -162,7 +162,11 @@
             </p>
           </div>
           <ul class="cards-list" role="list" aria-label={T.cards.title} data-testid="cards-list">
-            {#each room.roomState.cards as card (card)}
+            <!-- Keyed by position, never by label: rooms created before the
+                 home page deduplicated still carry repeated cards, and a
+                 duplicate key throws each_key_duplicate, which leaves every
+                 arriving player stuck on "Connecting...". -->
+            {#each room.roomState.cards as card, i (i)}
               <li>
                 <button
                   class="poker-card"
@@ -355,7 +359,12 @@
                 </tr>
               </thead>
               <tbody>
-                {#each [...room.roomState.activity].reverse() as entry (`${entry.timestamp}-${entry.initiator}-${entry.message}`)}
+                <!-- Keyed by position, never by content: timestamps are cut to
+                     the second, so two identical events in the same second
+                     (a double-clicked "new round", a vote changed twice) used
+                     to collide and throw each_key_duplicate, poisoning the room
+                     for every player who arrived afterwards. -->
+                {#each [...room.roomState.activity].reverse() as entry, i (i)}
                   <tr>
                     <td class="log-time">{entry.timestamp}</td>
                     <td>{entry.initiator}</td>
