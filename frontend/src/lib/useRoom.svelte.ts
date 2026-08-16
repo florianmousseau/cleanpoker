@@ -2,6 +2,7 @@ import { browser } from '$app/environment';
 import { PUBLIC_WS_URL } from '$env/static/public';
 import { onDestroy } from 'svelte';
 import type { Translation } from '$lib/i18n';
+import { transitionOf } from '$lib/room-transition';
 
 export type Player = { id: string; name: string; vote: string; observer: boolean };
 export type Results = { avg: string; min: string; max: string; dist: Record<string, number> };
@@ -46,10 +47,11 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
       } else if (msg.type === 'state') {
         const prev = roomState;
         roomState = msg.payload;
-        if (prev?.state === 'revealed' && roomState?.state === 'voting') {
+        const change = transitionOf(prev, msg.payload);
+        if (change?.kind === 'newRound') {
           myVote = '';
-          liveAnnouncement = T.live.newRound(roomState?.round ?? 0);
-        } else if (prev?.state === 'voting' && roomState?.state === 'revealed') {
+          liveAnnouncement = T.live.newRound(change.round);
+        } else if (change?.kind === 'revealed') {
           liveAnnouncement = T.live.revealed;
         }
       }
