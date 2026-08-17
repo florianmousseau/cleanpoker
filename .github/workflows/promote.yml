@@ -1,0 +1,198 @@
+name: promote
+
+# La release en UN dispatch : c'est le bouton « Mettre en prod » du cockpit.
+#
+# Il coupe `release/vX.Y.Z` depuis `develop`, date l'entree du CHANGELOG, ouvre
+# la PR vers `main`, attend la gate, la fusionne en merge commit, puis reporte
+# `main` dans `develop`. Les deux PR ont une branche JETABLE pour source : une
+# PR dont la source est `develop` supprime `develop` au merge
+# (`delete_branch_on_merge`), et l'ecosysteme l'a deja paye deux fois - voir
+# `docs/gitflow.md`.
+#
+# PIEGE STRUCTURANT : un push fait avec `GITHUB_TOKEN` ne declenche AUCUN
+# workflow. Fusionner la release ici ne deploie donc rien, et la prod servirait
+# l'ancien build sous une CI verte. La derniere etape rattrape ca en dispatchant
+# `ci.yml` sur `main` - `workflow_dispatch` est la seule exception documentee a
+# cette regle, avec `repository_dispatch`.
+
+on:
+  workflow_dispatch:
+    inputs:
+      niveau:
+        description: Quel chiffre monte, quand la version n'est pas donnee.
+        required: false
+        default: patch
+        type: choice
+        options: [patch, minor, major]
+      version:
+        description: Version exacte, sans le v (ex 0.12.3). Prime sur le niveau.
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write # dispatcher ci.yml sur main apres le merge
+
+concurrency:
+  group: promote
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    name: develop -> main
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: develop
+
+      - name: Refuse an empty release
+        run: |
+          git fetch origin main develop --quiet
+          count=$(git rev-list --count origin/main..origin/develop)
+          echo "commits ahead of main: $count"
+          if [ "$count" -eq 0 ]; then
+            echo "::error::develop carries nothing that main does not already have." >&2
+            exit 1
+          fi
+
+      - name: Resolve the version
+        id: v
+        run: |
+          asked="${{ inputs.version }}"
+          if [ -n "$asked" ]; then
+            echo "version=$asked" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Le dernier numero publie est le premier `## [x.y.z]` du CHANGELOG.
+          last=$(grep -m1 -oE '^## \[[0-9]+\.[0-9]+\.[0-9]+\]' CHANGELOG.md 2>/dev/null | tr -d '#[] ' || true)
+          [ -z "$last" ] && last="0.0.0"
+          major=${last%%.*}
+          rest=${last#*.}
+          minor=${rest%%.*}
+          patch=${rest##*.}
+          case "${{ inputs.niveau }}" in
+            major) major=$((major + 1)); minor=0; patch=0 ;;
+            minor) minor=$((minor + 1)); patch=0 ;;
+            *)     patch=$((patch + 1)) ;;
+          esac
+          echo "version=$major.$minor.$patch" >> "$GITHUB_OUTPUT"
+
+      - name: Cut the release branch
+        run: |
+          git config user.name 'Florian Mousseau'
+          git config user.email 'florian.mousseau@gmail.com'
+          git checkout -B "release/v${{ steps.v.outputs.version }}" origin/develop
+
+      - name: Write the changelog entry
+        run: |
+          version="${{ steps.v.outputs.version }}"
+          today=$(date -u +%Y-%m-%d)
+          [ -f CHANGELOG.md ] || printf '# Changelog\n\n' > CHANGELOG.md
+
+          # Ce que la version embarque, dans les mots des commits de develop.
+          # Un `## [Unreleased]` deja redige gagne : il est ecrit pour un
+          # lecteur, la liste ci-dessous ne l'est que pour un mainteneur.
+          git log --no-merges --format='%s' origin/main..origin/develop \
+            | grep -vE '^(chore|ci|build|test|style)(\(|:)' \
+            | sed 's/^/- /' > generated-notes.md || true
+          [ -s generated-notes.md ] || echo "- Corrections internes." > generated-notes.md
+
+          if grep -q '^## \[Unreleased\]' CHANGELOG.md; then
+            awk -v v="$version" -v d="$today" \
+              '{ sub(/^## \[Unreleased\].*$/, "## [" v "] - " d); print }' \
+              CHANGELOG.md > CHANGELOG.new
+          else
+            # Ancre sur la premiere section VERSIONNEE : une entete non datee
+            # posee a la main garde ainsi sa place au-dessus.
+            awk -v v="$version" -v d="$today" -v f=generated-notes.md '
+              BEGIN { done = 0 }
+              /^## \[[0-9]/ && !done {
+                print "## [" v "] - " d
+                print ""
+                while ((getline line < f) > 0) print line
+                print ""
+                done = 1
+              }
+              { print }
+              END {
+                if (!done) {
+                  print ""
+                  print "## [" v "] - " d
+                  print ""
+                  while ((getline line < f) > 0) print line
+                }
+              }
+            ' CHANGELOG.md > CHANGELOG.new
+          fi
+          mv CHANGELOG.new CHANGELOG.md
+
+      - name: Open the release pull request
+        id: pr
+        run: |
+          version="${{ steps.v.outputs.version }}"
+          branch="release/v$version"
+          git add CHANGELOG.md
+          git commit -m "chore(release): v$version"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "release: v$version" --body-file generated-notes.md
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for the gate
+        # La gate verte avant de pousser en prod ne se negocie pas. Une PR sans
+        # AUCUN check n'est pas un echec ici (Actions peut etre bloque, le
+        # workflow absent) mais elle se DIT, au lieu de passer pour verte.
+        run: |
+          branch="${{ steps.pr.outputs.branch }}"
+          sleep 20 # laisser les checks s'enregistrer
+          if ! gh pr checks "$branch" >/dev/null 2>&1; then
+            echo "::warning::Aucun check sur la PR de release - fusion sans gate."
+            echo "gate=absente" >> "$GITHUB_ENV"
+            exit 0
+          fi
+          gh pr checks "$branch" --watch --fail-fast --interval 15
+          echo "gate=verte" >> "$GITHUB_ENV"
+
+      - name: Merge the release
+        run: |
+          version="${{ steps.v.outputs.version }}"
+          gh pr merge "${{ steps.pr.outputs.branch }}" --merge --subject "release: v$version"
+
+      - name: Back-merge main into develop
+        # Jamais une PR dont la source est `main` : elle serait supprimee au
+        # merge. La branche jetable porte le report.
+        run: |
+          version="${{ steps.v.outputs.version }}"
+          branch="backmerge/v$version"
+          git fetch origin main develop --quiet
+          if [ -z "$(git rev-list origin/develop..origin/main)" ]; then
+            echo "develop already carries main; nothing to back-merge."
+            exit 0
+          fi
+          git checkout -B "$branch" origin/main
+          git push origin "$branch"
+          gh pr create --base develop --head "$branch" \
+            --title "chore: back-merge main after v$version" \
+            --body "Report of the release commit into develop."
+          gh pr merge "$branch" --merge
+
+      - name: Deploy the release
+        # Le merge ci-dessus est fait par GITHUB_TOKEN : il ne declenche rien.
+        # Ce dispatch est le SEUL chemin vers la prod, et il n'est pas optionnel.
+        run: gh workflow run deploy.yml --ref main
+
+      - name: Say what went out
+        run: |
+          {
+            echo "### v${{ steps.v.outputs.version }} en prod"
+            echo ""
+            echo "Gate : ${gate:-inconnue}"
+            echo ""
+            cat generated-notes.md
+          } >> "$GITHUB_STEP_SUMMARY"
