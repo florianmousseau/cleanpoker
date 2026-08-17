@@ -51,6 +51,12 @@ jobs:
           fetch-depth: 0
           ref: develop
 
+      # Le node du depot, pas celui du runner : c'est lui qui installera le
+      # formateur plus bas.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
       - name: Refuse an empty release
         run: |
           git fetch origin main develop --quiet
@@ -157,10 +163,19 @@ jobs:
         # des fichiers etrangers dans le commit de release.
         run: |
           node -e "const f='CHANGELOG.md',fs=require('fs');fs.writeFileSync(f,fs.readFileSync(f,'utf8').replace(/\n{3,}/g,'\n\n').replace(/\s*$/,'\n'))"
-          version=$(node -e "try{const p=require('./package.json');const v=(p.devDependencies||{}).prettier||(p.dependencies||{}).prettier||'';console.log(String(v).replace(/^[^0-9]*/,''))}catch{console.log('')}")
-          if [ -n "$version" ]; then
-            echo "prettier $version, celui du depot"
-            npx --yes "prettier@$version" --write CHANGELOG.md
+
+          # Le formateur du depot, installe AVEC ses dependances : une config
+          # prettier peut declarer des plugins (`prettier-plugin-astro`), et un
+          # `npx prettier@<version>` isole meurt sur `Cannot find package` -
+          # mesure sur rendita au premier essai.
+          #
+          # Et l'echec du formateur n'arrete PAS la release : c'est la gate de
+          # la PR qui juge, et elle juge mieux. Un outil de confort qui bloque
+          # la livraison est un outil qui coute plus qu'il ne rend.
+          if [ -f package-lock.json ] && node -e "const p=require('./package.json');process.exit(((p.devDependencies||{}).prettier||(p.dependencies||{}).prettier)?0:1)" 2>/dev/null; then
+            npm ci --prefer-offline --no-audit --no-fund >/dev/null 2>&1 &&
+              npx prettier --write CHANGELOG.md ||
+              echo "::warning::prettier n a pas pu tourner ; la gate de la PR de release tranchera"
           else
             echo "pas de prettier dans ce depot : la normalisation suffit"
           fi
