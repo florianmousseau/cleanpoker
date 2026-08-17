@@ -172,9 +172,13 @@ jobs:
           # Et l'echec du formateur n'arrete PAS la release : c'est la gate de
           # la PR qui juge, et elle juge mieux. Un outil de confort qui bloque
           # la livraison est un outil qui coute plus qu'il ne rend.
+          # `--ignore-scripts` a l'installation, et le binaire du depot appele
+          # DIRECTEMENT plutot que par `npx` : on ne veut que resoudre des
+          # plugins, pas executer les scripts de cycle de vie de tout l'arbre de
+          # dependances ni laisser un outil s'installer a la volee.
           if [ -f package-lock.json ] && node -e "const p=require('./package.json');process.exit(((p.devDependencies||{}).prettier||(p.dependencies||{}).prettier)?0:1)" 2>/dev/null; then
-            npm ci --prefer-offline --no-audit --no-fund >/dev/null 2>&1 &&
-              npx prettier --write CHANGELOG.md ||
+            npm ci --ignore-scripts --prefer-offline --no-audit --no-fund >/dev/null 2>&1 &&
+              ./node_modules/.bin/prettier --write CHANGELOG.md ||
               echo "::warning::prettier n a pas pu tourner ; la gate de la PR de release tranchera"
           else
             echo "pas de prettier dans ce depot : la normalisation suffit"
