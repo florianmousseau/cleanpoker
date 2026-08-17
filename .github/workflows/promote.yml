@@ -142,8 +142,36 @@ jobs:
           fi
           mv CHANGELOG.new CHANGELOG.md
 
+      - name: Make the changelog pass the repository's own gate
+        # Mesure du 2026-08-17, premier passage reel : la PR de release part
+        # ROUGE sur un fichier que ce workflow vient d'ecrire lui-meme. Deux
+        # lignes vides la ou prettier en veut une, parce que l'entete fraiche
+        # se termine deja par un saut. Un workflow qui casse la gate qu'il doit
+        # ensuite attendre ne finit jamais.
+        #
+        # La normalisation d'abord, parce qu'elle est deterministe et gratuite ;
+        # prettier ensuite, seulement s'il est dans les dependances, et A LA
+        # VERSION DU DEPOT - deux majeurs de prettier ne formatent pas pareil,
+        # et on reglerait un rouge en en posant un autre. Il ne touche QUE le
+        # CHANGELOG : un `npm run format` reecrirait tout le depot et mettrait
+        # des fichiers etrangers dans le commit de release.
+        run: |
+          node -e "const f='CHANGELOG.md',fs=require('fs');fs.writeFileSync(f,fs.readFileSync(f,'utf8').replace(/\n{3,}/g,'\n\n').replace(/\s*$/,'\n'))"
+          version=$(node -e "try{const p=require('./package.json');const v=(p.devDependencies||{}).prettier||(p.dependencies||{}).prettier||'';console.log(String(v).replace(/^[^0-9]*/,''))}catch{console.log('')}")
+          if [ -n "$version" ]; then
+            echo "prettier $version, celui du depot"
+            npx --yes "prettier@$version" --write CHANGELOG.md
+          else
+            echo "pas de prettier dans ce depot : la normalisation suffit"
+          fi
+
       - name: Open the release pull request
         id: pr
+        # `gh pr create` echoue depuis un workflow tant que « Allow GitHub
+        # Actions to create and approve pull requests » est decoche - au niveau
+        # du DEPOT et, pour un depot d'organisation, au niveau de l'ORG, qui
+        # gagne. Aucun `permissions:` ne contourne ce reglage, et le message
+        # (`createPullRequest`) ne dit pas ou aller le cocher.
         env:
           VERSION: ${{ steps.v.outputs.version }}
         run: |
