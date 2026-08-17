@@ -63,8 +63,14 @@ jobs:
 
       - name: Resolve the version
         id: v
+        # Les entrees passent par l'ENVIRONNEMENT et jamais par une
+        # interpolation dans le script : `${{ inputs.version }}` ecrit tel quel
+        # dans un `run:` laisse qui declenche le workflow y injecter du shell.
+        env:
+          ASKED: ${{ inputs.version }}
+          NIVEAU: ${{ inputs.niveau }}
         run: |
-          asked="${{ inputs.version }}"
+          asked="$ASKED"
           if [ -n "$asked" ]; then
             echo "version=$asked" >> "$GITHUB_OUTPUT"
             exit 0
@@ -76,7 +82,7 @@ jobs:
           rest=${last#*.}
           minor=${rest%%.*}
           patch=${rest##*.}
-          case "${{ inputs.niveau }}" in
+          case "$NIVEAU" in
             major) major=$((major + 1)); minor=0; patch=0 ;;
             minor) minor=$((minor + 1)); patch=0 ;;
             *)     patch=$((patch + 1)) ;;
@@ -84,14 +90,18 @@ jobs:
           echo "version=$major.$minor.$patch" >> "$GITHUB_OUTPUT"
 
       - name: Cut the release branch
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
         run: |
           git config user.name 'Florian Mousseau'
           git config user.email 'florian.mousseau@gmail.com'
-          git checkout -B "release/v${{ steps.v.outputs.version }}" origin/develop
+          git checkout -B "release/v$VERSION" origin/develop
 
       - name: Write the changelog entry
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
         run: |
-          version="${{ steps.v.outputs.version }}"
+          version="$VERSION"
           today=$(date -u +%Y-%m-%d)
           [ -f CHANGELOG.md ] || printf '# Changelog\n\n' > CHANGELOG.md
 
@@ -134,8 +144,10 @@ jobs:
 
       - name: Open the release pull request
         id: pr
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
         run: |
-          version="${{ steps.v.outputs.version }}"
+          version="$VERSION"
           branch="release/v$version"
           git add CHANGELOG.md
           git commit -m "chore(release): v$version"
@@ -148,8 +160,10 @@ jobs:
         # La gate verte avant de pousser en prod ne se negocie pas. Une PR sans
         # AUCUN check n'est pas un echec ici (Actions peut etre bloque, le
         # workflow absent) mais elle se DIT, au lieu de passer pour verte.
+        env:
+          BRANCH: ${{ steps.pr.outputs.branch }}
         run: |
-          branch="${{ steps.pr.outputs.branch }}"
+          branch="$BRANCH"
           sleep 20 # laisser les checks s'enregistrer
           if ! gh pr checks "$branch" >/dev/null 2>&1; then
             echo "::warning::Aucun check sur la PR de release - fusion sans gate."
@@ -160,15 +174,20 @@ jobs:
           echo "gate=verte" >> "$GITHUB_ENV"
 
       - name: Merge the release
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
+          BRANCH: ${{ steps.pr.outputs.branch }}
         run: |
-          version="${{ steps.v.outputs.version }}"
-          gh pr merge "${{ steps.pr.outputs.branch }}" --merge --subject "release: v$version"
+          version="$VERSION"
+          gh pr merge "$BRANCH" --merge --subject "release: v$version"
 
       - name: Back-merge main into develop
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
         # Jamais une PR dont la source est `main` : elle serait supprimee au
         # merge. La branche jetable porte le report.
         run: |
-          version="${{ steps.v.outputs.version }}"
+          version="$VERSION"
           branch="backmerge/v$version"
           git fetch origin main develop --quiet
           if [ -z "$(git rev-list origin/develop..origin/main)" ]; then
@@ -188,9 +207,11 @@ jobs:
         run: gh workflow run deploy.yml --ref main
 
       - name: Say what went out
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
         run: |
           {
-            echo "### v${{ steps.v.outputs.version }} en prod"
+            echo "### v$VERSION en prod"
             echo ""
             echo "Gate : ${gate:-inconnue}"
             echo ""
