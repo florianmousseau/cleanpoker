@@ -73,3 +73,44 @@ qui vit en mémoire et ne quitte pas Paris.
 - **Route `/[id]`** : elle capte toute URL inconnue à la racine, ce qui est
   voulu (les salons vivent là). Elle est en `noindex`, ne pas l'enlever sous
   peine d'exposer une infinité d'URLs indexables.
+
+## Un deux-points ne commence jamais une ligne francaise
+
+En francais, une ponctuation double se soude au mot qui la precede par une espace
+insecable. Avec une espace ordinaire, le retour a la ligne l'envoie seule en tete
+de la ligne suivante, et c'est ce qu'on lit sur un telephone. Meme geste pour
+`?`, `!`, `;` et les deux chevrons - l'ouvrant reste sinon seul en fin de ligne.
+
+`frontend/src/typographie.test.ts` le refuse et tourne dans `npm test`, donc dans
+la CI. Il prouve d'abord son propre detecteur : en JavaScript `\s` matche
+l'insecable, donc un controle ecrit avec `\s` passerait au vert en ne mesurant
+rien.
+
+**Le perimetre est le francais et lui seul.** Le site sert cinq langues, et dans
+les quatre autres l'espace devant un deux-points n'existe pas. Sont lus
+`src/routes/fr`, le bloc `FR` de `src/lib/i18n.ts` et `src/routes/+error.svelte`,
+seul ecran francais qu'aucun dictionnaire ne traduit.
+
+**L'insecable ne s'ecrit jamais en clair dans une source** : posee litteralement,
+elle est indiscernable d'une espace ordinaire a la relecture. La forme depend de
+l'endroit, et chaque ligne du tableau a ete mesuree sur le build :
+
+| Endroit                             | Forme                            |
+| ----------------------------------- | -------------------------------- |
+| texte d'un `.svelte`                | `Texte&nbsp;: suite`             |
+| PROP d'un composant                 | `h1Main="Texte&nbsp;:"`          |
+| chaine JavaScript ou TypeScript     | `'Texte\u00A0: suite'`      |
+| JSON-LD d'un `{@html}`              | rien, espace ordinaire           |
+
+La deuxieme ligne est celle qui surprend : **Svelte decode l'entite dans la prop
+d'un composant**, contrairement a Astro qui sert `&amp;nbsp;` en clair. Mesure
+sur `.svelte-kit/output/server` le 2026-08-20, pas deduite.
+
+La quatrieme est un refus motive. Chaque page francaise construit son graphe dans
+un `{@html `...`}` du `<svelte:head>` : une chaine JavaScript passee a
+`JSON.stringify`, puis injectee dans un `<script type="application/ld+json">`.
+Un navigateur ne decode aucune entite a l'interieur d'un `script`, donc `&nbsp;`
+y serait servi en clair au robot qui lit le graphe. Et souder ces chaines ne
+repare rien : le JSON-LD est une donnee servie a une machine, pas du texte qui se
+coupe a la largeur d'un ecran. La copie visible des memes phrases, elle, est
+soudee, et c'est celle que la regle vise.

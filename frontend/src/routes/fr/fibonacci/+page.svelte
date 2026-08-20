@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Fibonacci en poker planning : pourquoi et comment l'utiliser | CleanPoker</title>
-  <meta name="description" content="Pourquoi les équipes agiles utilisent-elles la suite de Fibonacci en planning poker ? Psychologie, choix des cartes et comparaison avec d'autres échelles." />
+  <title>Fibonacci en poker planning&nbsp;: pourquoi et comment l'utiliser | CleanPoker</title>
+  <meta name="description" content="Pourquoi les équipes agiles utilisent-elles la suite de Fibonacci en planning poker&nbsp;? Psychologie, choix des cartes et comparaison avec d'autres échelles." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/fibonacci" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci" />
@@ -56,34 +56,34 @@
       la bonne échelle selon leur contexte.
     </p>
 
-    <h2>Qu'est-ce que la suite de Fibonacci ?</h2>
+    <h2>Qu'est-ce que la suite de Fibonacci&nbsp;?</h2>
     <p>
       La suite de Fibonacci est <strong>1, 1, 2, 3, 5, 8, 13, 21, 34...</strong> où chaque nombre
       est la somme des deux précédents. En planning poker, la suite est généralement réduite à
       <strong>1, 2, 3, 5, 8, 13, 21</strong> plus une carte <strong>?</strong>.
     </p>
     <p>
-      La propriété clé : <strong>les écarts grandissent avec la valeur</strong>. Entre 1 et 2,
+      La propriété clé&nbsp;: <strong>les écarts grandissent avec la valeur</strong>. Entre 1 et 2,
       l'écart est 1. Entre 13 et 21, il est 8. Ce n'est pas arbitraire, cela reflète la façon
       dont la cognition humaine fonctionne face à l'incertitude.
     </p>
 
-    <h2>Pourquoi Fibonacci plutôt que 1 à 10 ?</h2>
+    <h2>Pourquoi Fibonacci plutôt que 1 à 10&nbsp;?</h2>
     <p>
       Une échelle linéaire (1, 2, 3, 4, 5, 6, 7, 8, 9, 10) crée une fausse précision. Cette
-      tâche est-elle un 6 ou un 7 ? Les équipes perdent du temps sur des distinctions sans
+      tâche est-elle un 6 ou un 7&nbsp;? Les équipes perdent du temps sur des distinctions sans
       valeur informationnelle réelle.
     </p>
     <p>
-      Avec Fibonacci, le choix est toujours plus grossier : est-ce un 5 ou un 8 ? C'est une
+      Avec Fibonacci, le choix est toujours plus grossier&nbsp;: est-ce un 5 ou un 8&nbsp;? C'est une
       différence significative. <strong>La granularité forcée évite la paralysie d'analyse</strong>
       et pousse vers la discussion plutôt que l'arithmétique de points.
     </p>
 
-    <h2>La carte ? : un signal sous-utilisé</h2>
+    <h2>La carte&nbsp;?&nbsp;: un signal sous-utilisé</h2>
     <p>
-      La carte <strong>?</strong> est l'une des plus précieuses du jeu. Elle signifie :
-      "Je ne peux pas estimer cette story." Raisons valides :
+      La carte <strong>?</strong> est l'une des plus précieuses du jeu. Elle signifie&nbsp;:
+      "Je ne peux pas estimer cette story." Raisons valides&nbsp;:
     </p>
     <ul>
       <li>Les critères d'acceptation ne sont pas clairs.</li>
@@ -104,17 +104,17 @@
       <tbody>
         <tr>
           <td><strong>Standard</strong></td>
-          <td>1, 2, 3, 5, 8, 13, 21, ?</td>
+          <td>1, 2, 3, 5, 8, 13, 21,&nbsp;?</td>
           <td>La plupart des équipes Scrum, estimation au sprint</td>
         </tr>
         <tr>
           <td><strong>Modifié</strong></td>
-          <td>0, 0,5, 1, 2, 3, 5, 8, 13, 20, 40, 100, ?</td>
+          <td>0, 0,5, 1, 2, 3, 5, 8, 13, 20, 40, 100,&nbsp;?</td>
           <td>Équipes avec très petites tâches et grandes épopées dans le même backlog</td>
         </tr>
         <tr>
           <td><strong>Puissances de 2</strong></td>
-          <td>1, 2, 4, 8, 16, 32, 64, ?</td>
+          <td>1, 2, 4, 8, 16, 32, 64,&nbsp;?</td>
           <td>Équipes techniques où la complexité double de façon prévisible</td>
         </tr>
       </tbody>
@@ -123,32 +123,32 @@
     <h2>Comment choisir sa carte</h2>
     <p>
       Les bons estimateurs pensent en tâches de référence. Avant votre première session,
-      identifiez 2 ou 3 stories ancres que l'équipe connaît bien : une clairement à 1, une à 5,
+      identifiez 2 ou 3 stories ancres que l'équipe connaît bien&nbsp;: une clairement à 1, une à 5,
       une à 13. Chaque nouvelle story est comparée à ces ancres plutôt qu'estimée isolément.
     </p>
 
     <h2>Questions fréquentes</h2>
 
     <details>
-      <summary>Pourquoi le planning poker utilise-t-il les nombres de Fibonacci ?</summary>
+      <summary>Pourquoi le planning poker utilise-t-il les nombres de Fibonacci&nbsp;?</summary>
       <p>
-        Les nombres de Fibonacci modélisent l'incertitude croissante : plus une tâche est
+        Les nombres de Fibonacci modélisent l'incertitude croissante&nbsp;: plus une tâche est
         grande, moins on peut l'estimer précisément. L'écart croissant entre les valeurs force
         l'équipe à prendre position sans prétendre à une fausse précision.
       </p>
     </details>
 
     <details>
-      <summary>Que signifie la carte ? en planning poker ?</summary>
+      <summary>Que signifie la carte&nbsp;? en planning poker&nbsp;?</summary>
       <p>
-        La carte ? signale "je ne peux pas estimer cette tâche". C'est un indicateur sain que
+        La carte&nbsp;? signale "je ne peux pas estimer cette tâche". C'est un indicateur sain que
         la story manque de clarté, est trop grande, ou comporte des dépendances non résolues.
         Elle déclenche une discussion de clarification avant tout chiffrage.
       </p>
     </details>
 
     <details>
-      <summary>Faut-il utiliser Fibonacci standard ou modifié ?</summary>
+      <summary>Faut-il utiliser Fibonacci standard ou modifié&nbsp;?</summary>
       <p>
         Commencez avec le standard (1, 2, 3, 5, 8, 13, 21). Ajoutez 0 et 0,5 seulement si
         votre équipe débat régulièrement pour savoir si une tâche est "quasi-rien". Ajoutez des
@@ -158,10 +158,10 @@
     </details>
 
     <details>
-      <summary>Existe-t-il une valeur Fibonacci correcte pour une tâche donnée ?</summary>
+      <summary>Existe-t-il une valeur Fibonacci correcte pour une tâche donnée&nbsp;?</summary>
       <p>
         Non. Les story points sont relatifs au référentiel de votre équipe, pas au temps réel.
-        Ce qui importe, c'est la cohérence : un 5 aujourd'hui doit sembler aussi complexe qu'un 5
+        Ce qui importe, c'est la cohérence&nbsp;: un 5 aujourd'hui doit sembler aussi complexe qu'un 5
         dans six mois. C'est cette cohérence qui rend la vélocité utile pour la planification.
       </p>
     </details>

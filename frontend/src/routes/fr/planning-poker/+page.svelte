@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Poker planning : règles, Fibonacci et guide pratique | CleanPoker</title>
-  <meta name="description" content="Qu'est-ce que le poker planning ? Règles en 5 étapes, suite de Fibonacci, durée d'une session, à distance et en asynchrone, erreurs qui faussent les estimations. Guide complet et gratuit." />
+  <title>Poker planning&nbsp;: règles, Fibonacci et guide pratique | CleanPoker</title>
+  <meta name="description" content="Qu'est-ce que le poker planning&nbsp;? Règles en 5 étapes, suite de Fibonacci, durée d'une session, à distance et en asynchrone, erreurs qui faussent les estimations. Guide complet et gratuit." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/planning-poker" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
@@ -68,14 +68,14 @@
   <main id="main">
     <a href="/fr/a-propos" class="back-link">← À propos</a>
 
-    <h1>Poker planning : le guide complet</h1>
+    <h1>Poker planning&nbsp;: le guide complet</h1>
 
     <p>
       Le <strong>poker planning</strong> est la technique d'estimation la plus utilisée en
       <strong>Scrum</strong> et en agilité. En 5 minutes, voici tout ce qu'il faut savoir.
     </p>
 
-    <h2>Qu'est-ce que le poker planning ?</h2>
+    <h2>Qu'est-ce que le poker planning&nbsp;?</h2>
     <p>
       Le poker planning (aussi écrit <em>planning poker</em>, ou <em>Scrum poker</em>) est une
       technique d'estimation collaborative où chaque membre de l'équipe choisit
@@ -85,12 +85,12 @@
     </p>
     <p>
       La technique est décrite par James Grenning en 2002, puis popularisée par Mike Cohn.
-      L'ordre des deux mots n'a aucune importance : <em>planning poker</em> est la forme
+      L'ordre des deux mots n'a aucune importance&nbsp;: <em>planning poker</em> est la forme
       d'origine, <em>poker planning</em> l'inversion passée dans l'usage courant des équipes
       francophones. Elles désignent exactement la même chose.
     </p>
     <p>
-      L'objectif n'est pas la précision mais la <strong>discussion</strong> : révéler les
+      L'objectif n'est pas la précision mais la <strong>discussion</strong>&nbsp;: révéler les
       hypothèses cachées, les risques non identifiés et les points de désaccord technique.
     </p>
 
@@ -100,27 +100,27 @@
       <li>L'équipe pose des questions de clarification.</li>
       <li>Chaque membre choisit secrètement une carte (sans influencer les autres).</li>
       <li>Tous révèlent simultanément.</li>
-      <li>Si les estimations convergent : on retient la valeur. Sinon : discussion des extrêmes, puis nouveau vote.</li>
+      <li>Si les estimations convergent&nbsp;: on retient la valeur. Sinon&nbsp;: discussion des extrêmes, puis nouveau vote.</li>
     </ol>
 
-    <h2>Combien de temps dure une session ?</h2>
+    <h2>Combien de temps dure une session&nbsp;?</h2>
     <p>
-      Comptez <strong>2 à 5 minutes par user story</strong> : une minute de présentation, un tour
+      Comptez <strong>2 à 5 minutes par user story</strong>&nbsp;: une minute de présentation, un tour
       de vote, et de la discussion seulement quand les cartes divergent. Une séance d'affinage
       d'une heure couvre donc 12 à 20 stories, ce qui suffit largement à alimenter un sprint de
       deux semaines.
     </p>
     <p>
-      Au-delà de <strong>90 minutes</strong>, la qualité des estimations chute : la fatigue pousse
+      Au-delà de <strong>90 minutes</strong>, la qualité des estimations chute&nbsp;: la fatigue pousse
       l'équipe à voter comme le voisin pour en finir. Mieux vaut deux séances de 45 minutes qu'une
       de deux heures. Si une seule story consomme plus de dix minutes, ce n'est plus un problème
-      d'estimation mais de cadrage : elle retourne au backlog pour être découpée.
+      d'estimation mais de cadrage&nbsp;: elle retourne au backlog pour être découpée.
     </p>
 
-    <h2>Pourquoi la suite de Fibonacci ?</h2>
+    <h2>Pourquoi la suite de Fibonacci&nbsp;?</h2>
     <p>
-      La suite <strong>1, 2, 3, 5, 8, 13, 21, ?</strong> est la plus répandue car elle modélise
-      l'incertitude croissante : plus une tâche est grande, moins on peut l'estimer finement.
+      La suite <strong>1, 2, 3, 5, 8, 13, 21,&nbsp;?</strong> est la plus répandue car elle modélise
+      l'incertitude croissante&nbsp;: plus une tâche est grande, moins on peut l'estimer finement.
       L'écart entre les valeurs grandit avec la taille, ce qui <strong>force l'équipe à se
       positionner clairement</strong> sans prétendre à une précision illusoire.
     </p>
@@ -137,17 +137,17 @@
       <tbody>
         <tr>
           <td><strong>Fibonacci</strong></td>
-          <td>1, 2, 3, 5, 8, 13, 21, ?</td>
+          <td>1, 2, 3, 5, 8, 13, 21,&nbsp;?</td>
           <td>Équipes Scrum expérimentées, estimation en points de story</td>
         </tr>
         <tr>
           <td><strong>T-shirt</strong></td>
-          <td>XS, S, M, L, XL, XXL, ?</td>
+          <td>XS, S, M, L, XL, XXL,&nbsp;?</td>
           <td>Estimations grossières, équipes non techniques, tri de backlog</td>
         </tr>
         <tr>
           <td><strong>Puissances de 2</strong></td>
-          <td>1, 2, 4, 8, 16, 32, 64, ?</td>
+          <td>1, 2, 4, 8, 16, 32, 64,&nbsp;?</td>
           <td>Tâches techniques avec doublement de complexité prévisible</td>
         </tr>
       </tbody>
@@ -155,14 +155,14 @@
 
     <h2>Le poker planning à distance</h2>
     <p>
-      En présentiel, le secret du vote tient au geste : chacun pose sa carte face cachée. À
+      En présentiel, le secret du vote tient au geste&nbsp;: chacun pose sa carte face cachée. À
       distance, il faut un outil qui garde les votes invisibles jusqu'à la révélation, sinon le
       premier chiffre annoncé sur le canal vocal ancre toute l'équipe. C'est le seul rôle
       indispensable d'un outil de poker planning en ligne, et il ne demande ni compte, ni
       installation, ni intégration.
     </p>
     <p>
-      Trois points à vérifier avant d'en choisir un : les votes restent-ils masqués jusqu'au
+      Trois points à vérifier avant d'en choisir un&nbsp;: les votes restent-ils masqués jusqu'au
       dévoilement, un participant qui perd sa connexion retrouve-t-il la session, et que devient
       le contenu des sessions une fois la réunion finie. Sur ce dernier point, la seule réponse
       qui n'engage à rien, c'est qu'il n'y ait rien à conserver.
@@ -172,11 +172,11 @@
     <p>
       Faire voter l'équipe chacun de son côté, sur deux jours, est tentant quand les fuseaux
       horaires ne se recouvrent pas. Le résultat est un chiffre, mais on perd ce qui fait la
-      valeur de la technique : <strong>la discussion déclenchée par les écarts</strong>. Une
+      valeur de la technique&nbsp;: <strong>la discussion déclenchée par les écarts</strong>. Une
       estimation sur laquelle personne n'a débattu n'a fait émerger aucun risque.
     </p>
     <p>
-      Le compromis qui fonctionne : un tour asynchrone pour trier, puis une séance synchrone
+      Le compromis qui fonctionne&nbsp;: un tour asynchrone pour trier, puis une séance synchrone
       courte réservée aux seules stories où les cartes divergent. En pratique, c'est un tiers du
       backlog, et la réunion tombe à vingt minutes.
     </p>
@@ -189,13 +189,13 @@
         détail de mise en scène, c'est tout le dispositif.
       </li>
       <li>
-        <strong>Convertir les points en jours.</strong> « Un point égale une demi-journée »
+        <strong>Convertir les points en jours.</strong> «&nbsp;Un point égale une demi-journée&nbsp;»
         annule le bénéfice de l'échelle relative et transforme l'estimation en engagement de
         délai. Les points servent à comparer des stories entre elles, pas à remplir un planning.
       </li>
       <li>
         <strong>Chercher le consensus à tout prix.</strong> Un désaccord persistant est une
-        information : il signale une story mal comprise ou mal découpée. La forcer vers une
+        information&nbsp;: il signale une story mal comprise ou mal découpée. La forcer vers une
         moyenne fait disparaître le signal sans régler le problème.
       </li>
       <li>
@@ -208,9 +208,9 @@
     <h2>Questions fréquentes</h2>
 
     <details>
-      <summary>Quelle est la différence entre points de story et jours ?</summary>
+      <summary>Quelle est la différence entre points de story et jours&nbsp;?</summary>
       <p>
-        Les points de story mesurent l'<strong>effort relatif</strong>, pas le temps : le
+        Les points de story mesurent l'<strong>effort relatif</strong>, pas le temps&nbsp;: le
         volume de travail, l'incertitude et la complexité pris ensemble. L'échelle est
         relative - un 5 est nettement plus gros qu'un 2, sans prétendre à un rapport exact.
         Cette abstraction permet de comparer des tâches sans se bloquer sur les durées
@@ -219,7 +219,7 @@
     </details>
 
     <details>
-      <summary>Comment gérer les divergences d'estimation ?</summary>
+      <summary>Comment gérer les divergences d'estimation&nbsp;?</summary>
       <p>
         Quand les estimations divergent (par exemple un 2 et un 13 dans la même main),
         demandez aux personnes ayant voté aux extrêmes d'expliquer leur choix.
@@ -229,7 +229,7 @@
     </details>
 
     <details>
-      <summary>Le poker planning fonctionne-t-il pour les équipes distantes ?</summary>
+      <summary>Le poker planning fonctionne-t-il pour les équipes distantes&nbsp;?</summary>
       <p>
         Oui, c'est précisément pour ça que CleanPoker existe. Créez une session, partagez l'URL,
         chaque participant vote sur son propre appareil. Les résultats se révèlent en temps réel
@@ -238,7 +238,7 @@
     </details>
 
     <details>
-      <summary>Combien de participants maximum ?</summary>
+      <summary>Combien de participants maximum&nbsp;?</summary>
       <p>
         CleanPoker ne pose aucune limite technique. En pratique, au-delà de 10 participants,
         les discussions deviennent difficiles à gérer. Pour les grandes équipes, préférez
@@ -251,7 +251,7 @@
     </div>
 
     <p class="related">
-      À lire aussi :
+      À lire aussi&nbsp;:
       <a href="/fr/comparatif-outils">comment choisir un outil de poker planning</a>,
       <a href="/fr/poker-planning-rgpd">poker planning et RGPD</a>,
       <a href="/fr/fibonacci">la suite de Fibonacci en détail</a>,
