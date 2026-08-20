@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Comparatif des outils de poker planning : 7 critères qui comptent | CleanPoker</title>
-  <meta name="description" content="Comment choisir un outil de poker planning en ligne : les 7 critères à vérifier soi-même, ce que CleanPoker fait, ce qu'il ne fait pas, et quand un autre outil est le bon choix." />
+  <title>Comparatif des outils de poker planning&nbsp;: 7 critères qui comptent | CleanPoker</title>
+  <meta name="description" content="Comment choisir un outil de poker planning en ligne&nbsp;: les 7 critères à vérifier soi-même, ce que CleanPoker fait, ce qu'il ne fait pas, et quand un autre outil est le bon choix." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/comparatif-outils" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/comparatif-outils" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-tools" />
@@ -40,10 +40,10 @@
   <main id="main">
     <a href="/fr/planning-poker" class="back-link">← Guide du poker planning</a>
 
-    <h1>Comparatif des outils de poker planning : les 7 critères qui comptent</h1>
+    <h1>Comparatif des outils de poker planning&nbsp;: les 7 critères qui comptent</h1>
 
     <p class="lead">
-      Tous les outils de poker planning en ligne annoncent la même chose : gratuit, sans
+      Tous les outils de poker planning en ligne annoncent la même chose&nbsp;: gratuit, sans
       inscription, en temps réel. Ces trois promesses ne trient rien. Voici les sept critères qui
       séparent réellement les outils, tous vérifiables en quelques minutes, sans nous croire sur
       parole.
@@ -51,10 +51,10 @@
 
     <h2>1. À quel moment apparaît le mur de paiement</h2>
     <p>
-      C'est le premier grief dans les avis négatifs des outils agiles en général : le prix arrive
-      une fois le travail saisi. Un outil peut être « gratuit » et bloquer au sixième participant,
-      à la troisième session du mois, ou au moment d'exporter. <strong>À vérifier</strong> : cherchez
-      une page tarifs. Si elle existe, lisez la colonne gratuite en entier ; si elle n'existe pas,
+      C'est le premier grief dans les avis négatifs des outils agiles en général&nbsp;: le prix arrive
+      une fois le travail saisi. Un outil peut être «&nbsp;gratuit&nbsp;» et bloquer au sixième participant,
+      à la troisième session du mois, ou au moment d'exporter. <strong>À vérifier</strong>&nbsp;: cherchez
+      une page tarifs. Si elle existe, lisez la colonne gratuite en entier&nbsp;; si elle n'existe pas,
       la question est de savoir de quoi vit le service.
     </p>
 
@@ -62,7 +62,7 @@
     <p>
       Un titre de user story nomme régulièrement un client. Selon l'outil, ce texte disparaît à la
       fermeture, vit quelques heures, ou reste indéfiniment dans un historique consultable.
-      <strong>À vérifier</strong> : fermez la session, rouvrez son URL le lendemain. Si le contenu
+      <strong>À vérifier</strong>&nbsp;: fermez la session, rouvrez son URL le lendemain. Si le contenu
       est toujours là, il est stocké, et la durée de conservation doit figurer quelque part.
     </p>
 
@@ -70,8 +70,8 @@
     <p>
       Une régie publicitaire, un outil d'analyse ou une police distante voient chaque visite, et
       pour un employeur européen, chacun est un transfert à documenter.
-      <strong>À vérifier</strong> : outils de développement du navigateur, onglet Réseau, rechargez.
-      Chaque domaine qui n'est pas celui du site est un tiers. Faites-le ici et vous en trouverez un : le compteur de pages vues nommé sur la page d'éco-conception, qui ne pose aucun cookie et ne fabrique aucun identifiant.
+      <strong>À vérifier</strong>&nbsp;: outils de développement du navigateur, onglet Réseau, rechargez.
+      Chaque domaine qui n'est pas celui du site est un tiers. Faites-le ici et vous en trouverez un&nbsp;: le compteur de pages vues nommé sur la page d'éco-conception, qui ne pose aucun cookie et ne fabrique aucun identifiant.
     </p>
 
     <h2>4. L'accessibilité réelle, pas la mention</h2>
@@ -80,7 +80,7 @@
       problème d'équipe avant d'être un problème de conformité. Depuis juin 2025, la directive
       européenne sur l'accessibilité élargit par ailleurs l'obligation à de nombreux services
       numériques privés, et le secteur public français y est soumis depuis longtemps.
-      <strong>À vérifier</strong> : rangez la souris, faites un tour complet au clavier avec
+      <strong>À vérifier</strong>&nbsp;: rangez la souris, faites un tour complet au clavier avec
       <kbd>Tab</kbd> et <kbd>Entrée</kbd>. Si vous ne pouvez pas voter sans souris, la réponse est
       donnée.
     </p>
@@ -90,15 +90,15 @@
       Un outil dont la seule fonction est d'afficher des cartes n'a besoin ni de plusieurs
       mégaoctets de JavaScript, ni de trois secondes de démarrage. Le poids se paie en connexion
       mobile, en salle de réunion saturée, et en émissions.
-      <strong>À vérifier</strong> : onglet Réseau, colonne des tailles transférées, en bas de la
+      <strong>À vérifier</strong>&nbsp;: onglet Réseau, colonne des tailles transférées, en bas de la
       fenêtre.
     </p>
 
     <h2>6. Ce qui se passe quand quelqu'un perd sa connexion</h2>
     <p>
-      C'est le défaut le plus courant et le moins visible sur une page d'accueil : un participant
-      dont le wifi saute doit-il rejoindre la session à la main, et son vote survit-il ?
-      <strong>À vérifier</strong> : coupez le réseau vingt secondes en pleine session, rebranchez.
+      C'est le défaut le plus courant et le moins visible sur une page d'accueil&nbsp;: un participant
+      dont le wifi saute doit-il rejoindre la session à la main, et son vote survit-il&nbsp;?
+      <strong>À vérifier</strong>&nbsp;: coupez le réseau vingt secondes en pleine session, rebranchez.
     </p>
 
     <h2>7. Le code est-il vérifiable</h2>
@@ -106,7 +106,7 @@
       Un dépôt public ne garantit pas que le code publié est celui qui tourne, mais son absence
       rend toute affirmation invérifiable. C'est la différence entre une promesse et un fait
       contrôlable.
-      <strong>À vérifier</strong> : cherchez un lien vers le dépôt, et regardez la date du dernier
+      <strong>À vérifier</strong>&nbsp;: cherchez un lien vers le dépôt, et regardez la date du dernier
       commit.
     </p>
 
@@ -118,7 +118,7 @@
       <tbody>
         <tr><td>Mur de paiement</td><td>Aucun. Pas de version payante, pas de limite de participants, pas de quota de sessions.</td></tr>
         <tr><td>Sessions après la réunion</td><td>En mémoire vive, jamais écrites sur disque, supprimées 24 h après la dernière activité.</td></tr>
-        <tr><td>Scripts tiers</td><td>Un seul, le compteur de pages vues. Deux cookies techniques : langue et thème.</td></tr>
+        <tr><td>Scripts tiers</td><td>Un seul, le compteur de pages vues. Deux cookies techniques&nbsp;: langue et thème.</td></tr>
         <tr><td>Accessibilité</td><td>WCAG 2.1 AA, navigation clavier complète, NVDA et VoiceOver, Lighthouse accessibilité 100.</td></tr>
         <tr><td>Poids</td><td>Moins de 50 Ko de JavaScript partagé, compression brotli, mesuré à chaque intégration continue.</td></tr>
         <tr><td>Perte de connexion</td><td>Reconnexion automatique du WebSocket, avec temporisation exponentielle.</td></tr>
@@ -129,16 +129,16 @@
     <h2>Ce que CleanPoker ne sait pas faire</h2>
     <p>
       La liste est courte et volontaire, mais elle est disqualifiante pour certaines équipes. Autant
-      le savoir avant d'ouvrir l'outil qu'après :
+      le savoir avant d'ouvrir l'outil qu'après&nbsp;:
     </p>
     <ul>
-      <li><strong>Aucune intégration</strong> Jira, Azure DevOps, Linear ou GitHub : les stories se présentent à la voix.</li>
+      <li><strong>Aucune intégration</strong> Jira, Azure DevOps, Linear ou GitHub&nbsp;: les stories se présentent à la voix.</li>
       <li><strong>Aucun import de backlog</strong>, et donc aucun export CSV des résultats.</li>
       <li><strong>Aucun historique</strong> des sessions passées, aucun suivi de vélocité dans le temps. C'est la contrepartie directe du point 2.</li>
       <li><strong>Aucun minuteur</strong> de vote, aucune équipe permanente, aucun compte.</li>
     </ul>
     <p>
-      Si l'estimation doit atterrir automatiquement dans le champ « story points » d'un ticket, un
+      Si l'estimation doit atterrir automatiquement dans le champ «&nbsp;story points&nbsp;» d'un ticket, un
       outil intégré au gestionnaire de tickets fait le travail et CleanPoker non. Si la réunion a
       seulement besoin que les votes restent cachés jusqu'au dévoilement, l'intégration coûte plus
       cher qu'elle ne rapporte.
@@ -149,7 +149,7 @@
       Pour comparer par vous-même, les alternatives les plus courantes sont Planning Poker Online,
       PlanITpoker, Scrum Poker Online, Kollabe, TeamRetro et Planning Poker Live. Plusieurs sont
       d'excellents produits, mieux dotés que celui-ci sur les intégrations. Appliquez-leur les sept
-      vérifications ci-dessus plutôt que nos affirmations ou les leurs : elles se font en dix
+      vérifications ci-dessus plutôt que nos affirmations ou les leurs&nbsp;: elles se font en dix
       minutes et elles tranchent.
     </p>
 
@@ -158,7 +158,7 @@
     </div>
 
     <p class="related">
-      À lire aussi :
+      À lire aussi&nbsp;:
       <a href="/fr/planning-poker">le guide du poker planning</a>,
       <a href="/fr/poker-planning-rgpd">poker planning et RGPD</a>,
       <a href="/fr/alternatives">les alternatives à la technique elle-même</a>.

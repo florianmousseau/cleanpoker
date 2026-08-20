@@ -20,10 +20,10 @@
     <!-- ── Éditeur ── -->
     <h2>Éditeur du site</h2>
     <p>
-      Ce site est édité à titre personnel par :<br />
+      Ce site est édité à titre personnel par&nbsp;:<br />
       <strong>Florian Mousseau</strong>, particulier<br />
       France<br />
-      Contact : <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      Contact&nbsp;: <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
     </p>
 
     <!-- ── Hébergement ── -->
@@ -45,7 +45,7 @@
     <!-- ── Données personnelles ── -->
     <h2 id="confidentialite">Données personnelles (RGPD)</h2>
     <p>
-      <strong>Responsable du traitement :</strong> Florian Mousseau,
+      <strong>Responsable du traitement&nbsp;:</strong> Florian Mousseau,
       <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
     </p>
 
@@ -60,7 +60,7 @@
     <h3>Finalité et base légale</h3>
     <p>
       Le traitement a pour seule finalité la fourniture du service de planning poker collaboratif
-      (base légale : exécution du service demandé par l'utilisateur, art. 6.1.b RGPD).
+      (base légale&nbsp;: exécution du service demandé par l'utilisateur, art. 6.1.b RGPD).
     </p>
 
     <h3>Durée de conservation</h3>
@@ -80,7 +80,7 @@
     <h3>Vos droits</h3>
     <p>
       Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et d'effacement
-      de vos données. Pour exercer ces droits ou pour toute question :
+      de vos données. Pour exercer ces droits ou pour toute question&nbsp;:
       <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
     </p>
     <p>
@@ -96,11 +96,11 @@
     <p>
       Les pages vues sont comptées avec <strong>Cloudflare Web Analytics</strong>. Cet outil ne
       dépose aucun cookie, ne lit ni n'écrit rien sur votre appareil et ne fabrique aucun
-      identifiant de visiteur : il ne peut donc vous suivre ni d'une visite à l'autre, ni vers un
+      identifiant de visiteur&nbsp;: il ne peut donc vous suivre ni d'une visite à l'autre, ni vers un
       autre site. Il enregistre la page consultée, le lien par lequel vous êtes arrivé, le pays,
-      le type d'appareil et le navigateur ; votre adresse IP sert à déterminer ce pays au moment
+      le type d'appareil et le navigateur&nbsp;; votre adresse IP sert à déterminer ce pays au moment
       de la requête et n'est pas conservée. C'est pourquoi rien ne vous demande votre
-      consentement : le consentement de l'article 82 de la loi Informatique et Libertés porte sur
+      consentement&nbsp;: le consentement de l'article 82 de la loi Informatique et Libertés porte sur
       la lecture ou l'écriture d'informations dans votre terminal, et cette mesure ne fait ni
       l'une ni l'autre.
     </p>
@@ -143,7 +143,7 @@
     <p>Les présentes mentions sont soumises au droit français. Tout litige relève de la compétence
     des juridictions françaises.</p>
 
-    <p class="updated">Dernière mise à jour : juin 2026</p>
+    <p class="updated">Dernière mise à jour&nbsp;: juin 2026</p>
   </main>
 
   <footer class="footer">

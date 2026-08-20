@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>Poker planning accessible : WCAG 2.1 AA et lecteurs d'écran | CleanPoker</title>
+  <title>Poker planning accessible&nbsp;: WCAG 2.1 AA et lecteurs d'écran | CleanPoker</title>
   <meta name="description" content="CleanPoker est un outil de planning poker entièrement accessible aux personnes en situation de handicap. Navigation clavier, lecteurs d'écran (NVDA, VoiceOver, JAWS), conformité WCAG 2.1 AA." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/accessibilite" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite" />
@@ -30,17 +30,17 @@
   <main id="main">
     <a href="/fr" class="back-link">← Retour à l'accueil</a>
 
-    <h1>Accessibilité : CleanPoker pour les équipes inclusives</h1>
+    <h1>Accessibilité&nbsp;: CleanPoker pour les équipes inclusives</h1>
 
     <p>
       <strong>CleanPoker</strong> est un outil de planning poker conçu pour être utilisable par tous,
-      y compris les personnes en situation de handicap : utilisateurs de lecteurs d'écran,
+      y compris les personnes en situation de handicap&nbsp;: utilisateurs de lecteurs d'écran,
       personnes naviguant au clavier, personnes malvoyantes ou ayant des troubles moteurs.
       Il est conforme au référentiel <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 niveau AA.
     </p>
 
-    <h2>Pour qui ?</h2>
-    <p>CleanPoker est adapté aux :</p>
+    <h2>Pour qui&nbsp;?</h2>
+    <p>CleanPoker est adapté aux&nbsp;:</p>
     <ul>
       <li>Personnes aveugles ou malvoyantes utilisant un lecteur d'écran (NVDA, VoiceOver, JAWS)</li>
       <li>Personnes ayant des troubles moteurs naviguant exclusivement au clavier</li>
@@ -56,10 +56,10 @@
 
     <h2>Compatibilité avec les technologies d'assistance</h2>
     <ul>
-      <li><strong>NVDA</strong> (Windows) : testé avec Firefox</li>
-      <li><strong>VoiceOver</strong> (macOS / iOS) : testé avec Safari</li>
-      <li><strong>JAWS</strong> (Windows) : compatible via HTML sémantique et ARIA</li>
-      <li>Navigation clavier complète : Tab, Maj+Tab, Entrée, Espace, flèches</li>
+      <li><strong>NVDA</strong> (Windows)&nbsp;: testé avec Firefox</li>
+      <li><strong>VoiceOver</strong> (macOS / iOS)&nbsp;: testé avec Safari</li>
+      <li><strong>JAWS</strong> (Windows)&nbsp;: compatible via HTML sémantique et ARIA</li>
+      <li>Navigation clavier complète&nbsp;: Tab, Maj+Tab, Entrée, Espace, flèches</li>
     </ul>
 
     <h2>Mesures techniques mises en œuvre</h2>
@@ -72,8 +72,8 @@
       <li>Pas de <code>user-scalable=no</code> (zoom navigateur libre)</li>
       <li>Prise en charge de <code>prefers-reduced-motion</code> (pas d'animation imposée)</li>
       <li>Prise en charge du mode sombre (<code>prefers-color-scheme</code>)</li>
-      <li>HTML5 sémantique : <code>&lt;button&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;table&gt;</code></li>
-      <li>Unités <code>rem</code> : le zoom navigateur fonctionne correctement</li>
+      <li>HTML5 sémantique&nbsp;: <code>&lt;button&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;table&gt;</code></li>
+      <li>Unités <code>rem</code>&nbsp;: le zoom navigateur fonctionne correctement</li>
       <li>Boutons et liens avec labels explicites (<code>aria-label</code>)</li>
     </ul>
 
@@ -91,7 +91,7 @@
 
     <h2>Signaler un problème</h2>
     <p>
-      Pour signaler un problème d'accessibilité ou suggérer une amélioration :
+      Pour signaler un problème d'accessibilité ou suggérer une amélioration&nbsp;:
       <a href="https://github.com/florianmousseau/cleanpoker/issues" rel="noopener noreferrer">
         ouvrir une issue GitHub
       </a>
