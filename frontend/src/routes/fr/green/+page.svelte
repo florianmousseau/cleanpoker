@@ -28,10 +28,10 @@
   <main id="main">
     <a href="/fr" class="back-link">← Retour à l'accueil</a>
 
-    <h1>Éco-conception : CleanPoker, le numérique responsable</h1>
+    <h1>Éco-conception&nbsp;: CleanPoker, le numérique responsable</h1>
 
     <p>
-      <strong>CleanPoker</strong> est conçu selon les principes du <strong>numérique responsable</strong> :
+      <strong>CleanPoker</strong> est conçu selon les principes du <strong>numérique responsable</strong>&nbsp;:
       chaque décision technique vise à réduire l'empreinte carbone, éliminer les dépendances inutiles
       et respecter la vie privée des utilisateurs. Ce n'est pas un label ajouté après coup,
       c'est l'ADN du projet.
@@ -57,25 +57,25 @@
 
     <h2>Choix techniques pour réduire l'impact</h2>
     <ul>
-      <li><strong>Pas de framework CSS</strong> (Tailwind, Bootstrap...) : CSS vanilla, zéro code mort</li>
-      <li><strong>Pas de polices Google</strong> : polices système uniquement, aucune requête réseau</li>
-      <li><strong>Pas de DOM virtuel</strong> : SvelteKit compile en JavaScript vanilla, bundle minimal</li>
-      <li><strong>Pas de base de données</strong> : sessions en mémoire Go, auto-supprimées après 24 h d'inactivité</li>
-      <li><strong>Un seul script tiers</strong> : un compteur de pages vues sans cookie, et aucun SDK Analytics, Chat ou A/B testing</li>
-      <li><strong>Compression Brotli</strong> : plus efficace que gzip, activée par défaut sur Cloudflare</li>
-      <li><strong>Backend Go</strong> : binaire natif ~15 Mo RAM, pas de runtime JVM ou Node.js à maintenir</li>
-      <li><strong>WebSocket natif</strong> : pas de polling HTTP, connexion persistante légère</li>
-      <li><strong>Images système</strong> : favicon SVG, pas de PNG lourd, pas de sprite</li>
+      <li><strong>Pas de framework CSS</strong> (Tailwind, Bootstrap...)&nbsp;: CSS vanilla, zéro code mort</li>
+      <li><strong>Pas de polices Google</strong>&nbsp;: polices système uniquement, aucune requête réseau</li>
+      <li><strong>Pas de DOM virtuel</strong>&nbsp;: SvelteKit compile en JavaScript vanilla, bundle minimal</li>
+      <li><strong>Pas de base de données</strong>&nbsp;: sessions en mémoire Go, auto-supprimées après 24 h d'inactivité</li>
+      <li><strong>Un seul script tiers</strong>&nbsp;: un compteur de pages vues sans cookie, et aucun SDK Analytics, Chat ou A/B testing</li>
+      <li><strong>Compression Brotli</strong>&nbsp;: plus efficace que gzip, activée par défaut sur Cloudflare</li>
+      <li><strong>Backend Go</strong>&nbsp;: binaire natif ~15 Mo RAM, pas de runtime JVM ou Node.js à maintenir</li>
+      <li><strong>WebSocket natif</strong>&nbsp;: pas de polling HTTP, connexion persistante légère</li>
+      <li><strong>Images système</strong>&nbsp;: favicon SVG, pas de PNG lourd, pas de sprite</li>
     </ul>
 
     <h2>Hébergement sur énergie renouvelable</h2>
     <ul>
       <li>
-        <strong>Frontend : Cloudflare Pages</strong> - CDN mondial, certifié 100 % énergie renouvelable.
+        <strong>Frontend&nbsp;: Cloudflare Pages</strong> - CDN mondial, certifié 100 % énergie renouvelable.
         Cloudflare est référencé dans la base The Green Web Foundation.
       </li>
       <li>
-        <strong>Backend : Fly.io CDG (Paris, France)</strong> - hébergeur certifié énergie renouvelable,
+        <strong>Backend&nbsp;: Fly.io CDG (Paris, France)</strong> - hébergeur certifié énergie renouvelable,
         résidence des données en France, latence minimale pour les équipes européennes.
       </li>
     </ul>
@@ -91,26 +91,26 @@
     </ul>
 
     <h2>Vérification externe</h2>
-    <p>Ces outils indépendants permettent de vérifier les engagements ci-dessus :</p>
+    <p>Ces outils indépendants permettent de vérifier les engagements ci-dessus&nbsp;:</p>
     <ul>
       <li>
         <a href="https://www.websitecarbon.com/website/cleanpoker-dev/" rel="noopener noreferrer">
-          Website Carbon : empreinte CO₂ de cleanpoker.dev
+          Website Carbon&nbsp;: empreinte CO₂ de cleanpoker.dev
         </a>
       </li>
       <li>
         <a href="https://www.thegreenwebfoundation.org/green-web-check/?url=cleanpoker.dev" rel="noopener noreferrer">
-          The Green Web Foundation : vérifier l'hébergement vert de cleanpoker.dev
+          The Green Web Foundation&nbsp;: vérifier l'hébergement vert de cleanpoker.dev
         </a>
       </li>
       <li>
         <a href="https://sonarcloud.io/project/overview?id=florianmousseau_cleanpoker" rel="noopener noreferrer">
-          SonarCloud : qualité et sécurité du code
+          SonarCloud&nbsp;: qualité et sécurité du code
         </a>
       </li>
       <li>
         <a href="https://github.com/florianmousseau/cleanpoker/actions" rel="noopener noreferrer">
-          GitHub Actions : résultats Lighthouse CI et audit Eco-CI
+          GitHub Actions&nbsp;: résultats Lighthouse CI et audit Eco-CI
         </a>
       </li>
     </ul>

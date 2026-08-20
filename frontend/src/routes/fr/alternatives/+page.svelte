@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Alternatives au poker planning : T-shirt sizing, dot voting et plus | CleanPoker</title>
-  <meta name="description" content="Comparatif des meilleures alternatives au planning poker : tailles de T-shirt, affinity mapping, dot voting, bucket system. Quelle technique choisir ?" />
+  <title>Alternatives au poker planning&nbsp;: T-shirt sizing, dot voting et plus | CleanPoker</title>
+  <meta name="description" content="Comparatif des meilleures alternatives au planning poker&nbsp;: tailles de T-shirt, affinity mapping, dot voting, bucket system. Quelle technique choisir&nbsp;?" />
   <link rel="canonical" href="https://cleanpoker.dev/fr/alternatives" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives" />
@@ -72,11 +72,11 @@
       techniques et non-techniques.
     </p>
     <p>
-      <strong>Force</strong> : Rapides, non intimidantes. Idéales pour le sizing initial
+      <strong>Force</strong>&nbsp;: Rapides, non intimidantes. Idéales pour le sizing initial
       d'un backlog en début de projet.
     </p>
     <p>
-      <strong>Faiblesse</strong> : Non convertibles directement en vélocité numérique. Si vous
+      <strong>Faiblesse</strong>&nbsp;: Non convertibles directement en vélocité numérique. Si vous
       devez prévoir des dates de release, il faudra mapper les tailles en story points ou
       passer au planning poker Fibonacci.
     </p>
@@ -84,46 +84,46 @@
     <h2>Affinity mapping</h2>
     <p>
       Dans l'affinity mapping, les membres de l'équipe déplacent simultanément (et en
-      silence) des cartes de stories dans des seaux de taille : XS, S, M, L, XL. L'équipe
+      silence) des cartes de stories dans des seaux de taille&nbsp;: XS, S, M, L, XL. L'équipe
       ne discute ensuite que des stories où les membres ont divergé.
     </p>
     <p>
-      <strong>Force</strong> : S'adapte à de grands backlogs (20 à 50 stories) en une
+      <strong>Force</strong>&nbsp;: S'adapte à de grands backlogs (20 à 50 stories) en une
       seule session. La phase silencieuse prévient l'ancrage et la pression sociale.
     </p>
     <p>
-      <strong>Faiblesse</strong> : Moins précis que le planning poker pour les stories
+      <strong>Faiblesse</strong>&nbsp;: Moins précis que le planning poker pour les stories
       complexes.
     </p>
 
     <h2>Le bucket system</h2>
     <p>
       Le bucket system est conçu pour les très grands backlogs. Des seaux numériques sont
-      définis en avance (ex. : 1, 2, 3, 5, 8, 13, 20, 40, 100). Les membres trient les
+      définis en avance (ex.&nbsp;: 1, 2, 3, 5, 8, 13, 20, 40, 100). Les membres trient les
       stories par comparaison avec une story de référence plutôt que par estimation
       individuelle.
     </p>
     <p>
-      <strong>Force</strong> : Une équipe peut trier 50 à 200 stories en moins de deux heures.
+      <strong>Force</strong>&nbsp;: Une équipe peut trier 50 à 200 stories en moins de deux heures.
     </p>
     <p>
-      <strong>Faiblesse</strong> : Les premiers choix de seaux influencent tous les placements
+      <strong>Faiblesse</strong>&nbsp;: Les premiers choix de seaux influencent tous les placements
       suivants. Calibrez soigneusement les stories de référence.
     </p>
 
     <h2>Questions fréquentes</h2>
 
     <details>
-      <summary>Quelles sont les principales alternatives au planning poker ?</summary>
+      <summary>Quelles sont les principales alternatives au planning poker&nbsp;?</summary>
       <p>
-        Les principales alternatives sont : les tailles de T-shirt (XS à XXL), l'affinity
+        Les principales alternatives sont&nbsp;: les tailles de T-shirt (XS à XXL), l'affinity
         mapping, le dot voting et le bucket system. Chacune sacrifie un peu de précision
         pour gagner en vitesse.
       </p>
     </details>
 
     <details>
-      <summary>Quand utiliser les tailles de T-shirt plutôt que le planning poker ?</summary>
+      <summary>Quand utiliser les tailles de T-shirt plutôt que le planning poker&nbsp;?</summary>
       <p>
         Utilisez les tailles de T-shirt pour des estimations rapides, avec des parties
         prenantes non techniques, ou pour affiner un grand backlog en début de projet.
@@ -132,7 +132,7 @@
     </details>
 
     <details>
-      <summary>Le planning poker est-il toujours la meilleure technique ?</summary>
+      <summary>Le planning poker est-il toujours la meilleure technique&nbsp;?</summary>
       <p>
         Non. Le planning poker est idéal pour l'estimation au sprint de stories bien définies
         dans des équipes établies. Pour les grands backlogs ou les parties prenantes non

@@ -38,7 +38,7 @@
 
     <ul class="facts">
       <li>Bundle JS <strong>&lt; 50 Ko</strong> (brotli)</li>
-      <li>Lighthouse Performance et Accessibilité : <strong>100 / 100</strong></li>
+      <li>Lighthouse Performance et Accessibilité&nbsp;: <strong>100 / 100</strong></li>
       <li>Hébergement 100 % énergie renouvelable (Cloudflare Pages + Fly.io CDG Paris)</li>
       <li>Aucun suivi comportemental, aucun cookie publicitaire, un compteur de pages vues sans cookie</li>
       <li>Code source ouvert sous <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licence MIT</a></li>
@@ -53,7 +53,7 @@
       </a>
       <a href="/fr/green" class="card">
         <h3>Éco-conception</h3>
-        <p>Chiffres clés, choix techniques et hébergement vert : notre déclaration d'impact.</p>
+        <p>Chiffres clés, choix techniques et hébergement vert&nbsp;: notre déclaration d'impact.</p>
       </a>
       <a href="/fr/accessibilite" class="card">
         <h3>Accessibilité</h3>
@@ -65,7 +65,7 @@
       </a>
       <a href="/fr/fibonacci" class="card">
         <h3>Fibonacci en planning poker</h3>
-        <p>Pourquoi Fibonacci, la carte ?, échelle standard vs. modifiée, et comment choisir sa carte.</p>
+        <p>Pourquoi Fibonacci, la carte&nbsp;?, échelle standard vs. modifiée, et comment choisir sa carte.</p>
       </a>
       <a href="/fr/estimation-agile" class="card">
         <h3>Estimation agile</h3>
@@ -73,7 +73,7 @@
       </a>
       <a href="/fr/alternatives" class="card">
         <h3>Alternatives au planning poker</h3>
-        <p>Tailles de T-shirt, affinity mapping, bucket system : quelle technique selon le contexte.</p>
+        <p>Tailles de T-shirt, affinity mapping, bucket system&nbsp;: quelle technique selon le contexte.</p>
       </a>
     </div>
   </main>

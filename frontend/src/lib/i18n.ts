@@ -24,7 +24,7 @@ export const FR: Translation = {
   salleLabel: 'Salle',
   tourLabel: 'Tour',
   copyLink: 'Copier le lien',
-  copied: 'Copié !',
+  copied: 'Copié\u00A0!',
 
   kicked: {
     title: 'Vous avez été expulsé',
@@ -51,7 +51,7 @@ export const FR: Translation = {
   share: {
     ogTitle: 'Planning poker, sans compte ni traceur',
     ogDesc: "Rejoins la session d'estimation. Aucun compte à créer, aucun suivi comportemental, aucune publicité.",
-    inviteMessage: (url: string) => `Estimation en planning poker, on vote ici : ${url}\nAucun compte à créer.`,
+    inviteMessage: (url: string) => `Estimation en planning poker, on vote ici\u00A0: ${url}\nAucun compte à créer.`,
   },
 
   promo: {

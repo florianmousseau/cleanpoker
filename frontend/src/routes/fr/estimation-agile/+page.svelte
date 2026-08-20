@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Estimation agile : story points, vélocité et planification de sprint | CleanPoker</title>
-  <meta name="description" content="Guide complet de l'estimation agile : story points vs heures, fonctionnement de la vélocité, planification de capacité et erreurs courantes à éviter." />
+  <title>Estimation agile&nbsp;: story points, vélocité et planification de sprint | CleanPoker</title>
+  <meta name="description" content="Guide complet de l'estimation agile&nbsp;: story points vs heures, fonctionnement de la vélocité, planification de capacité et erreurs courantes à éviter." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/estimation-agile" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile" />
@@ -43,7 +43,7 @@
   <main id="main">
     <a href="/fr/a-propos" class="back-link">← À propos</a>
 
-    <h1>Estimation agile : guide complet</h1>
+    <h1>Estimation agile&nbsp;: guide complet</h1>
 
     <p>
       L'estimation agile est souvent mal comprise. Certaines équipes la sur-ingénièrent avec
@@ -51,7 +51,7 @@
       principes, les outils et les erreurs courantes.
     </p>
 
-    <h2>Pourquoi estimer ?</h2>
+    <h2>Pourquoi estimer&nbsp;?</h2>
     <p>
       L'estimation ne sert pas à prédire l'avenir. Elle sert à
       <strong>révéler ce que l'équipe ne sait pas encore</strong>. Une bonne session
@@ -62,18 +62,18 @@
       Le chiffre produit est moins précieux que la conversation qui l'a généré.
     </p>
 
-    <h2>Story points vs. heures : la différence clé</h2>
+    <h2>Story points vs. heures&nbsp;: la différence clé</h2>
     <p>
       Les <strong>heures</strong> mesurent le temps, qui varie selon le développeur, le jour
-      et le contexte. Un senior finit une tâche en 2 heures ; un junior en 8. Ni l'un ni
-      l'autre n'a tort ; ils mesurent simplement des choses différentes.
+      et le contexte. Un senior finit une tâche en 2 heures&nbsp;; un junior en 8. Ni l'un ni
+      l'autre n'a tort&nbsp;; ils mesurent simplement des choses différentes.
     </p>
     <p>
       Les <strong>story points</strong> mesurent l'<em>effort relatif</em> dans
-      l'expérience partagée de l'équipe. L'effort combine trois choses : le volume de
+      l'expérience partagée de l'équipe. L'effort combine trois choses&nbsp;: le volume de
       travail, l'incertitude et la complexité. La complexité seule n'y suffit pas - une
       tâche simple mais très volumineuse peut peser plus lourd qu'une petite tâche
-      délicate. L'échelle reste relative : un 5 est nettement plus gros qu'un 3, sans
+      délicate. L'échelle reste relative&nbsp;: un 5 est nettement plus gros qu'un 3, sans
       prétendre à un rapport exact. Cette abstraction rend la vélocité stable et
       comparable d'un sprint à l'autre.
     </p>
@@ -85,7 +85,7 @@
       commencées, pas à moitié faites, uniquement done-done).
     </p>
     <p>
-      Après 3 à 5 sprints, la vélocité se stabilise. On peut ensuite l'utiliser pour :
+      Après 3 à 5 sprints, la vélocité se stabilise. On peut ensuite l'utiliser pour&nbsp;:
     </p>
     <ul>
       <li>Prévoir en combien de sprints une release sera livrée.</li>
@@ -110,17 +110,17 @@
     <h2>Questions fréquentes</h2>
 
     <details>
-      <summary>Quelle est la différence entre story points et heures ?</summary>
+      <summary>Quelle est la différence entre story points et heures&nbsp;?</summary>
       <p>
         Les story points mesurent l'effort relatif, pas le temps. L'effort combine le volume
-        de travail, l'incertitude et la complexité : une tâche simple mais très volumineuse
+        de travail, l'incertitude et la complexité&nbsp;: une tâche simple mais très volumineuse
         peut peser plus lourd qu'une petite tâche délicate. Les heures varient selon le
-        développeur ; l'effort relatif est propre à l'équipe et stable.
+        développeur&nbsp;; l'effort relatif est propre à l'équipe et stable.
       </p>
     </details>
 
     <details>
-      <summary>Qu'est-ce que la vélocité en agile ?</summary>
+      <summary>Qu'est-ce que la vélocité en agile&nbsp;?</summary>
       <p>
         La vélocité est le nombre de story points complétés par sprint en moyenne. Après 3 à 5
         sprints, elle se stabilise et devient un outil fiable pour la planification de release
@@ -129,7 +129,7 @@
     </details>
 
     <details>
-      <summary>Faut-il estimer les bugs et la dette technique ?</summary>
+      <summary>Faut-il estimer les bugs et la dette technique&nbsp;?</summary>
       <p>
         Oui. Si un bug demande un effort significatif, estimez-le. Si du travail de dette
         technique est planifié dans un sprint, estimez-le et comptez-le dans la vélocité.
@@ -138,7 +138,7 @@
     </details>
 
     <details>
-      <summary>Combien de sprints faut-il pour que la vélocité se stabilise ?</summary>
+      <summary>Combien de sprints faut-il pour que la vélocité se stabilise&nbsp;?</summary>
       <p>
         En général 3 à 5 sprints. Le premier sprint est souvent plus bas, car l'équipe calibre
         son estimation. À partir du 4e ou 5e sprint, la moyenne est suffisamment fiable pour

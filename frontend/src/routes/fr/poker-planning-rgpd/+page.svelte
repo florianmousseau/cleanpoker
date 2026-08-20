@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Poker planning et RGPD : où vont les données de vos sessions | CleanPoker</title>
-  <meta name="description" content="Un outil de poker planning traite-t-il des données personnelles ? Ce qu'un DPO regarde, comment vérifier vous-même en deux minutes, et pourquoi CleanPoker n'a ni compte, ni cookie, ni base de données de sessions." />
+  <title>Poker planning et RGPD&nbsp;: où vont les données de vos sessions | CleanPoker</title>
+  <meta name="description" content="Un outil de poker planning traite-t-il des données personnelles&nbsp;? Ce qu'un DPO regarde, comment vérifier vous-même en deux minutes, et pourquoi CleanPoker n'a ni compte, ni cookie, ni base de données de sessions." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/poker-planning-rgpd" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/poker-planning-rgpd" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-gdpr" />
@@ -45,7 +45,7 @@
   <main id="main">
     <a href="/fr/planning-poker" class="back-link">← Guide du poker planning</a>
 
-    <h1>Poker planning et RGPD : où vont les données de vos sessions</h1>
+    <h1>Poker planning et RGPD&nbsp;: où vont les données de vos sessions</h1>
 
     <p class="lead">
       La question arrive rarement de l'équipe agile. Elle arrive du DPO, six mois plus tard, au
@@ -56,7 +56,7 @@
     <h2>Ce qu'un outil de poker planning traite, même quand il dit ne rien collecter</h2>
     <p>
       Une session d'estimation paraît anodine. Elle produit pourtant, sans qu'on y pense, plusieurs
-      catégories de données que le RGPD qualifie de personnelles :
+      catégories de données que le RGPD qualifie de personnelles&nbsp;:
     </p>
     <ul>
       <li>
@@ -79,7 +79,7 @@
       </li>
     </ul>
     <p>
-      La bonne question n'est donc pas « cet outil collecte-t-il des données ». C'est
+      La bonne question n'est donc pas «&nbsp;cet outil collecte-t-il des données&nbsp;». C'est
       <strong>combien de temps il les garde, où, et qui d'autre les voit</strong>.
     </p>
 
@@ -96,8 +96,8 @@
         transfert. Elle n'est pas insoluble, elle est simplement rarement documentée.
       </li>
       <li>
-        <strong>Les durées de conservation.</strong> « Nous conservons vos données le temps
-        nécessaire » n'est pas une durée. Un registre de traitement demande un chiffre.
+        <strong>Les durées de conservation.</strong> «&nbsp;Nous conservons vos données le temps
+        nécessaire&nbsp;» n'est pas une durée. Un registre de traitement demande un chiffre.
       </li>
     </ol>
 
@@ -129,8 +129,8 @@
       </thead>
       <tbody>
         <tr><td>Compte utilisateur</td><td>Aucun. Ni e-mail, ni mot de passe, ni profil.</td></tr>
-        <tr><td>Cookies</td><td>Deux, techniques : la langue et le thème. Aucun cookie publicitaire, aucun cookie de mesure.</td></tr>
-        <tr><td>Scripts tiers</td><td>Un seul : Cloudflare Web Analytics, un compteur de pages vues sans cookie. Pas de police distante, pas de CDN externe.</td></tr>
+        <tr><td>Cookies</td><td>Deux, techniques&nbsp;: la langue et le thème. Aucun cookie publicitaire, aucun cookie de mesure.</td></tr>
+        <tr><td>Scripts tiers</td><td>Un seul&nbsp;: Cloudflare Web Analytics, un compteur de pages vues sans cookie. Pas de police distante, pas de CDN externe.</td></tr>
         <tr><td>Conservation des sessions</td><td>En mémoire vive uniquement, jamais écrites sur disque. Supprimées 24 heures après la dernière activité.</td></tr>
         <tr><td>Hébergement</td><td>Serveur temps réel exclusivement en France (Paris), pages servies par un réseau de diffusion sur énergie renouvelable.</td></tr>
         <tr><td>Mesure d'audience</td><td>Aucune, ni côté navigateur, ni par page vue. Le serveur tient trois compteurs agrégés (sessions créées, participants, sessions actives) qui n'identifient ni une salle ni une personne et repartent de zéro à chaque redémarrage.</td></tr>
@@ -138,7 +138,7 @@
       </tbody>
     </table>
     <p>
-      Cela ne fait pas disparaître le RGPD : un pseudo saisi reste une donnée, et un serveur voit
+      Cela ne fait pas disparaître le RGPD&nbsp;: un pseudo saisi reste une donnée, et un serveur voit
       une adresse IP. Cela réduit la surface à ce qui est strictement nécessaire pour que le vote
       fonctionne, et rend la réponse au DPO courte et vérifiable. Le détail figure dans les
       <a href="/fr/mentions-legales#confidentialite">mentions légales</a>.
@@ -147,7 +147,7 @@
     <h2>Ce que la vie privée ne remplace pas</h2>
     <p>
       Un outil qui ne collecte rien mais qui rate son travail ne sert à rien. Le rôle d'un outil de
-      poker planning tient en une ligne : garder les votes invisibles jusqu'à la révélation, pour
+      poker planning tient en une ligne&nbsp;: garder les votes invisibles jusqu'à la révélation, pour
       que le premier chiffre annoncé n'ancre pas toute l'équipe. Le reste, y compris cette page,
       est une conséquence.
     </p>
@@ -157,7 +157,7 @@
     </div>
 
     <p class="related">
-      À lire aussi :
+      À lire aussi&nbsp;:
       <a href="/fr/planning-poker">le guide du poker planning</a>,
       <a href="/fr/comparatif-outils">comment choisir un outil</a>,
       <a href="/fr/accessibilite">la déclaration d'accessibilité</a>.
