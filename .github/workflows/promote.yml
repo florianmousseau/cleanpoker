@@ -9,30 +9,33 @@ name: promote
 # supprime `develop` au merge (`delete_branch_on_merge`), et l'ecosysteme l'a
 # deja paye deux fois - voir `docs/gitflow.md`.
 #
-# PIEGE STRUCTURANT : un evenement produit par `GITHUB_TOKEN` ne declenche AUCUN
-# workflow. Ni un push, ni la pull request ouverte plus bas. Les deux moities de
-# ce fichier le paient, et pas au meme endroit.
+# PIEGE STRUCTURANT : la PR de release est ouverte par `github-actions[bot]`, et
+# tout ce qui suit en decoule. Les deux moities de ce fichier le paient, et pas
+# au meme endroit.
 #
-# Cote PR : `deploy.yml` part sur `pull_request`, donc il ne partira JAMAIS sur
-# la PR de release ouverte ici. Mesure du 2026-08-20, run 32321459524 : l'etape
-# qui attendait la gate a dormi 20 s, n'a trouve aucun check, annonce
-# `Aucun check sur la PR de release - fusion sans gate`, puis l'etape suivante a
-# echoue sur `the base branch policy prohibits the merge`. Ce n'etait pas un
-# alea de timing : `main` exige les contextes `Code Quality` et `Bundle Size`
-# (`enforce_admins` compris), et aucun des deux ne pouvait s'enregistrer. Une
-# heure d'attente n'y aurait rien change - LA RELEASE ETAIT STRUCTURELLEMENT
-# IMPOSSIBLE, et ce fichier annoncait une gate qu'il ne jouait pas.
+# Cote PR : les runs `pull_request` de cette PR naissent en `action_required` et
+# ne publient AUCUN check run tant que personne ne les approuve. La cause est
+# `fork-pr-contributor-approval = first_time_contributors` sur ce depot : le
+# robot y compte comme un contributeur inconnu. Or `main` exige les contextes
+# `Code Quality` et `Bundle Size`, `enforce_admins` compris. Deux releases sont
+# mortes la-dessus sur `the base branch policy prohibits the merge` - runs
+# 32321459524 (2026-08-20) et 32537955578 (2026-08-22) - et la premiere version
+# de ce fichier annoncait en plus une gate qu'elle ne jouait pas : elle dormait
+# 20 s, ne trouvait aucun check, le DISAIT, et fusionnait quand meme.
 #
-# La gate est donc DISPATCHEE sur `release/vX.Y.Z`, puis attendue par son id de
-# run : les deux check runs se posent alors sur le commit de release, ce qui
-# satisfait la protection de branche ET prouve le contenu qui part.
+# Une gate DISPATCHEE sur `release/vX.Y.Z` a ete essayee et ne suffit pas : ses
+# check runs se posent bien sur le commit, mais la protection de branche lit le
+# rollup DE LA PR, et une check suite de `workflow_dispatch` n'y figure pas
+# (mesure sur la PR #162 : `Code Quality` et `Bundle Size` verts sur le SHA,
+# rollup de la PR vide, `mergeStateStatus` BLOCKED). L'etape ci-dessous approuve
+# donc les runs en attente, puis attend les checks DE LA PR - ceux que la
+# protection lit, et ceux qu'un humain regarderait.
 #
-# Cote push : fusionner la release ne deploie rien non plus, et la prod
-# servirait l'ancien build sous une CI verte. L'avant-derniere etape rattrape ca
-# en dispatchant `deploy.yml` sur `main`.
-#
-# `workflow_dispatch` est la seule exception documentee a cette regle, avec
-# `repository_dispatch` : c'est pourquoi les deux rattrapages passent par la.
+# Cote push : un merge fait par `GITHUB_TOKEN` ne declenche aucun workflow, donc
+# fusionner la release ne deploie rien et la prod servirait l'ancien build sous
+# une CI verte. L'avant-derniere etape rattrape ca en dispatchant `deploy.yml`
+# sur `main` - `workflow_dispatch` est la seule exception documentee a cette
+# regle, avec `repository_dispatch`.
 
 on:
   workflow_dispatch:
@@ -240,55 +243,50 @@ jobs:
             --title "release: v$version" --body-file generated-notes.md
           echo "branch=$branch" >> "$GITHUB_OUTPUT"
 
-      - name: Run the gate on the release branch
-        # LA gate de la release, et elle ne se negocie pas. Elle ne peut PAS
-        # venir de la PR ouverte ci-dessus : `deploy.yml` se declenche sur
-        # `pull_request`, et une PR ouverte par `GITHUB_TOKEN` ne declenche rien
-        # (voir l'entete). Attendre les checks de cette PR, c'est attendre un
-        # check qui ne s'enregistrera jamais - la version precedente de cette
-        # etape dormait 20 s, ne trouvait rien, le DISAIT, et fusionnait quand
-        # meme, ce que la protection de `main` refusait ensuite.
+      - name: Wait for the gate
+        # LA gate de la release, et elle ne se negocie pas. Les runs
+        # `pull_request` de cette PR existent mais dorment en `action_required`
+        # (voir l'entete) : on les LIBERE, puis on attend leur verdict. Sans
+        # l'approbation, aucun check run n'est publie, `gh pr checks` ne trouve
+        # rien, et la protection de `main` refuse ensuite le merge.
         #
-        # `--ref "$branch"` fait tourner le `deploy.yml` DE LA RELEASE sur le
-        # contenu DE LA RELEASE, CHANGELOG fraichement ecrit compris, et pose
-        # `Code Quality` et `Bundle Size` sur le commit que la PR fusionnera.
-        #
-        # `gh workflow run` ne rend aucun identifiant et le dispatch n'est pas
-        # synchrone, d'ou la boucle. La branche vient d'etre creee et n'a recu
-        # aucun autre evenement : le seul run de `deploy.yml` en
-        # `workflow_dispatch` sur elle est forcement le notre.
+        # Une absence de check n'est PAS un feu vert : elle sort en 1 avec sa
+        # raison, la ou la premiere version de cette etape la degradait en
+        # avertissement et fusionnait quand meme.
         env:
           BRANCH: ${{ steps.pr.outputs.branch }}
         run: |
           branch="$BRANCH"
-          gh workflow run deploy.yml --ref "$branch"
 
-          run_id=""
-          for _ in $(seq 1 30); do
+          # Les runs mettent quelques secondes a apparaitre apres l'ouverture
+          # de la PR ; sans cette attente il n'y a rien a approuver.
+          approuves=0
+          for _ in $(seq 1 12); do
             sleep 5
-            run_id=$(gh run list --workflow=deploy.yml --branch "$branch" \
-              --event workflow_dispatch --limit 1 --json databaseId \
-              --jq '.[0].databaseId // empty')
-            if [ -n "$run_id" ]; then break; fi
+            for id in $(gh run list --branch "$branch" --event pull_request --limit 20 \
+              --json databaseId,status --jq '.[] | select(.status == "action_required") | .databaseId'); do
+              if gh api --method POST "repos/$GITHUB_REPOSITORY/actions/runs/$id/approve" >/dev/null 2>&1; then
+                approuves=$((approuves + 1))
+              fi
+            done
+            if [ "$approuves" -gt 0 ]; then break; fi
           done
-          if [ -z "$run_id" ]; then
-            echo "::error::deploy.yml n a pas demarre sur $branch : release arretee avant le merge." >&2
+          echo "runs liberes de l attente d approbation : $approuves"
+
+          if ! gh pr checks "$branch" >/dev/null 2>&1; then
+            echo "::error::Aucun check sur la PR de release. Si des runs restent en action_required, les approuver puis relancer promote." >&2
             exit 1
           fi
 
-          url=$(gh run view "$run_id" --json url --jq .url)
-          echo "gate lancee : $url"
-
-          # `--exit-status` : un run rouge sort en 1, et le job s'arrete ICI,
+          # `--fail-fast` : un check rouge sort en 1, et le job s'arrete ICI,
           # avant le merge. C'est tout l'objet de cette etape - `main` reste
           # alors intacte et la prod continue de servir la version precedente.
-          gh run watch "$run_id" --exit-status --interval 15
-          echo "gate=verte ($url)" >> "$GITHUB_ENV"
+          gh pr checks "$branch" --watch --fail-fast --interval 15
+          echo "gate=verte" >> "$GITHUB_ENV"
 
       - name: Merge the release
-        # Cette PR n'a AUCUN check a elle, et n'en aura jamais (voir l'entete).
-        # Ce qui autorise ce merge est le run de l'etape precedente, vert sur le
-        # meme commit ; ne jamais lire l'absence de check ici comme un feu vert.
+        # Ce qui autorise ce merge est le verdict de l'etape precedente, pris
+        # sur les checks DE LA PR - ceux que la protection de `main` lit.
         env:
           VERSION: ${{ steps.v.outputs.version }}
           BRANCH: ${{ steps.pr.outputs.branch }}

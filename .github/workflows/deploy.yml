@@ -120,11 +120,9 @@ jobs:
   deploy-preview:
     name: Preview - Cloudflare Pages
     needs: [quality, bundle-size]
-    # `release/*` est exclue : `promote.yml` y dispatche ce workflow pour POSER
-    # la gate sur le commit de release, pas pour publier une previsualisation.
-    # Sans cette clause, chaque release deposerait un deploiement Pages sous un
-    # nom de branche qui disparait a la fusion, et la release attendrait ce
-    # deploiement pour rien.
+    # `release/*` est exclue : un dispatch a la main sur une branche de release
+    # sert a rejouer la gate, jamais a publier une previsualisation sous un nom
+    # de branche qui disparait a la fusion.
     if: github.event_name != 'pull_request' && github.ref_name != 'main' && !startsWith(github.ref_name, 'release/')
     runs-on: ubuntu-latest
     timeout-minutes: 5
