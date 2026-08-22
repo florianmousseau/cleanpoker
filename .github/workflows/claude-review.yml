@@ -45,7 +45,18 @@ jobs:
   review:
     name: review
     needs: [config]
-    if: needs.config.outputs.can_review == 'true' && github.event.pull_request.draft == false
+    # `release/*` est ecartee, et ce n'est pas un confort. La PR de release est
+    # ouverte par `github-actions[bot]`, et l'action REFUSE un run initie par un
+    # robot : « Workflow initiated by non-human actor: github-actions (type:
+    # Bot) » (mesure du 2026-08-22, run 32537967966). Le check `review` etait
+    # donc ROUGE sur toute release, sans avoir lu une ligne du diff - un rouge
+    # qui ne parle pas du code est pire qu'un check absent, parce qu'il apprend
+    # a passer outre. La reponse n'est PAS d'ouvrir `allowed_bots` : ce fichier
+    # nourrit un agent porteur d'un jeton avec du texte que l'auteur de la PR
+    # controle, et l'invariant 1 ci-dessus tient a ce que la porte reste
+    # etroite. Une PR de release ne porte qu'une entree de CHANGELOG ; le code,
+    # lui, a ete revu sur son chemin vers `develop`.
+    if: needs.config.outputs.can_review == 'true' && github.event.pull_request.draft == false && !startsWith(github.head_ref, 'release/')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:

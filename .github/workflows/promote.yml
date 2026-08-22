@@ -3,17 +3,39 @@ name: promote
 # La release en UN dispatch : c'est le bouton « Mettre en prod » du cockpit.
 #
 # Il coupe `release/vX.Y.Z` depuis `develop`, date l'entree du CHANGELOG, ouvre
-# la PR vers `main`, attend la gate, la fusionne en merge commit, puis reporte
-# `main` dans `develop`. Les deux PR ont une branche JETABLE pour source : une
-# PR dont la source est `develop` supprime `develop` au merge
-# (`delete_branch_on_merge`), et l'ecosysteme l'a deja paye deux fois - voir
-# `docs/gitflow.md`.
+# la PR vers `main`, joue la gate du depot SUR la branche de release, fusionne
+# la PR une fois cette gate verte, puis reporte `main` dans `develop`. Les deux
+# PR ont une branche JETABLE pour source : une PR dont la source est `develop`
+# supprime `develop` au merge (`delete_branch_on_merge`), et l'ecosysteme l'a
+# deja paye deux fois - voir `docs/gitflow.md`.
 #
-# PIEGE STRUCTURANT : un push fait avec `GITHUB_TOKEN` ne declenche AUCUN
-# workflow. Fusionner la release ici ne deploie donc rien, et la prod servirait
-# l'ancien build sous une CI verte. La derniere etape rattrape ca en dispatchant
-# `ci.yml` sur `main` - `workflow_dispatch` est la seule exception documentee a
-# cette regle, avec `repository_dispatch`.
+# PIEGE STRUCTURANT : la PR de release est ouverte par `github-actions[bot]`, et
+# tout ce qui suit en decoule. Les deux moities de ce fichier le paient, et pas
+# au meme endroit.
+#
+# Cote PR : les runs `pull_request` de cette PR naissent en `action_required` et
+# ne publient AUCUN check run tant que personne ne les approuve. La cause est
+# `fork-pr-contributor-approval = first_time_contributors` sur ce depot : le
+# robot y compte comme un contributeur inconnu. Or `main` exige les contextes
+# `Code Quality` et `Bundle Size`, `enforce_admins` compris. Deux releases sont
+# mortes la-dessus sur `the base branch policy prohibits the merge` - runs
+# 32321459524 (2026-08-20) et 32537955578 (2026-08-22) - et la premiere version
+# de ce fichier annoncait en plus une gate qu'elle ne jouait pas : elle dormait
+# 20 s, ne trouvait aucun check, le DISAIT, et fusionnait quand meme.
+#
+# Une gate DISPATCHEE sur `release/vX.Y.Z` a ete essayee et ne suffit pas : ses
+# check runs se posent bien sur le commit, mais la protection de branche lit le
+# rollup DE LA PR, et une check suite de `workflow_dispatch` n'y figure pas
+# (mesure sur la PR #162 : `Code Quality` et `Bundle Size` verts sur le SHA,
+# rollup de la PR vide, `mergeStateStatus` BLOCKED). L'etape ci-dessous approuve
+# donc les runs en attente, puis attend les checks DE LA PR - ceux que la
+# protection lit, et ceux qu'un humain regarderait.
+#
+# Cote push : un merge fait par `GITHUB_TOKEN` ne declenche aucun workflow, donc
+# fusionner la release ne deploie rien et la prod servirait l'ancien build sous
+# une CI verte. L'avant-derniere etape rattrape ca en dispatchant `deploy.yml`
+# sur `main` - `workflow_dispatch` est la seule exception documentee a cette
+# regle, avec `repository_dispatch`.
 
 on:
   workflow_dispatch:
@@ -32,7 +54,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  actions: write # dispatcher ci.yml sur main apres le merge
+  actions: write # dispatcher deploy.yml sur la release, puis sur main
 
 concurrency:
   group: promote
@@ -42,7 +64,10 @@ jobs:
   promote:
     name: develop -> main
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # L'attente de la gate est desormais reelle, la ou elle rendait la main en
+    # 20 s : `deploy.yml` construit le front et le back, et 30 min ne laissaient
+    # plus de marge pour le merge, le back-merge et le dispatch final.
+    timeout-minutes: 45
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
@@ -64,6 +89,21 @@ jobs:
           echo "commits ahead of main: $count"
           if [ "$count" -eq 0 ]; then
             echo "::error::develop carries nothing that main does not already have." >&2
+            exit 1
+          fi
+
+      - name: Refuse a develop that is behind main
+        # `main` est protegee avec `strict: true` : une branche qui n'est pas a
+        # jour avec elle ne peut PAS etre fusionnee, quelle que soit la couleur
+        # de la gate. Une release coupee sur une `develop` en retard part donc
+        # droit dans un refus de politique de branche, apres avoir consomme le
+        # numero de version et laisse une branche derriere elle. Le back-merge
+        # se fait AVANT, pas apres l'echec.
+        run: |
+          behind=$(git rev-list --count origin/develop..origin/main)
+          echo "commits on main that develop lacks: $behind"
+          if [ "$behind" -ne 0 ]; then
+            echo "::error::develop is $behind commit(s) behind main. Back-merge main into develop first." >&2
             exit 1
           fi
 
@@ -169,8 +209,8 @@ jobs:
           # `npx prettier@<version>` isole meurt sur `Cannot find package` -
           # mesure sur rendita au premier essai.
           #
-          # Et l'echec du formateur n'arrete PAS la release : c'est la gate de
-          # la PR qui juge, et elle juge mieux. Un outil de confort qui bloque
+          # Et l'echec du formateur n'arrete PAS la release : c'est la gate
+          # dispatchee plus bas qui juge, et elle juge mieux. Un outil de confort qui bloque
           # la livraison est un outil qui coute plus qu'il ne rend.
           # `--ignore-scripts` a l'installation, et le binaire du depot appele
           # DIRECTEMENT plutot que par `npx` : on ne veut que resoudre des
@@ -179,7 +219,7 @@ jobs:
           if [ -f package-lock.json ] && node -e "const p=require('./package.json');process.exit(((p.devDependencies||{}).prettier||(p.dependencies||{}).prettier)?0:1)" 2>/dev/null; then
             npm ci --ignore-scripts --prefer-offline --no-audit --no-fund >/dev/null 2>&1 &&
               ./node_modules/.bin/prettier --write CHANGELOG.md ||
-              echo "::warning::prettier n a pas pu tourner ; la gate de la PR de release tranchera"
+              echo "::warning::prettier n a pas pu tourner ; la gate de la release tranchera"
           else
             echo "pas de prettier dans ce depot : la normalisation suffit"
           fi
@@ -204,23 +244,49 @@ jobs:
           echo "branch=$branch" >> "$GITHUB_OUTPUT"
 
       - name: Wait for the gate
-        # La gate verte avant de pousser en prod ne se negocie pas. Une PR sans
-        # AUCUN check n'est pas un echec ici (Actions peut etre bloque, le
-        # workflow absent) mais elle se DIT, au lieu de passer pour verte.
+        # LA gate de la release, et elle ne se negocie pas. Les runs
+        # `pull_request` de cette PR existent mais dorment en `action_required`
+        # (voir l'entete) : on les LIBERE, puis on attend leur verdict. Sans
+        # l'approbation, aucun check run n'est publie, `gh pr checks` ne trouve
+        # rien, et la protection de `main` refuse ensuite le merge.
+        #
+        # Une absence de check n'est PAS un feu vert : elle sort en 1 avec sa
+        # raison, la ou la premiere version de cette etape la degradait en
+        # avertissement et fusionnait quand meme.
         env:
           BRANCH: ${{ steps.pr.outputs.branch }}
         run: |
           branch="$BRANCH"
-          sleep 20 # laisser les checks s'enregistrer
+
+          # Les runs mettent quelques secondes a apparaitre apres l'ouverture
+          # de la PR ; sans cette attente il n'y a rien a approuver.
+          approuves=0
+          for _ in $(seq 1 12); do
+            sleep 5
+            for id in $(gh run list --branch "$branch" --event pull_request --limit 20 \
+              --json databaseId,status --jq '.[] | select(.status == "action_required") | .databaseId'); do
+              if gh api --method POST "repos/$GITHUB_REPOSITORY/actions/runs/$id/approve" >/dev/null 2>&1; then
+                approuves=$((approuves + 1))
+              fi
+            done
+            if [ "$approuves" -gt 0 ]; then break; fi
+          done
+          echo "runs liberes de l attente d approbation : $approuves"
+
           if ! gh pr checks "$branch" >/dev/null 2>&1; then
-            echo "::warning::Aucun check sur la PR de release - fusion sans gate."
-            echo "gate=absente" >> "$GITHUB_ENV"
-            exit 0
+            echo "::error::Aucun check sur la PR de release. Si des runs restent en action_required, les approuver puis relancer promote." >&2
+            exit 1
           fi
+
+          # `--fail-fast` : un check rouge sort en 1, et le job s'arrete ICI,
+          # avant le merge. C'est tout l'objet de cette etape - `main` reste
+          # alors intacte et la prod continue de servir la version precedente.
           gh pr checks "$branch" --watch --fail-fast --interval 15
           echo "gate=verte" >> "$GITHUB_ENV"
 
       - name: Merge the release
+        # Ce qui autorise ce merge est le verdict de l'etape precedente, pris
+        # sur les checks DE LA PR - ceux que la protection de `main` lit.
         env:
           VERSION: ${{ steps.v.outputs.version }}
           BRANCH: ${{ steps.pr.outputs.branch }}
