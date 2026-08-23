@@ -49,11 +49,30 @@ const ANTISLASH = String.fromCharCode(92);
  * ou le masque laisse un trou entre le mot et le signe : `<strong>Gras</strong> :`
  * et `{valeur} :`.
  */
-const FERMANT = new RegExp(`${ESPACE}[:;?!»]`);
+const FERMANT = new RegExp(`${ESPACE}[:;?!»%]`);
 const OUVRANT = new RegExp(`«${ESPACE}`);
 
+/*
+ * Le POURCENT est du meme regime, et il a coute ailleurs : `100 %` et `200 %`
+ * vivaient sous cette garde verte parce qu elle ne connaissait que la
+ * ponctuation. Le signe se detache exactement pareil, et il suit toujours un
+ * chiffre - donc une ligne qui commence par `%` a perdu son nombre.
+ *
+ * L anglais, lui, colle son pourcent (`72.45%`) : cette forme n a pas d espace
+ * du tout et ne peut donc pas rougir.
+ */
+
+/*
+ * Un signe qui OUVRE une ligne de SOURCE est la meme faute ecrite autrement :
+ * le retour a la ligne d une source HTML est rendu comme une espace ordinaire,
+ * donc un signe pose seul en tete de ligne s affiche colle a l espace de la
+ * ligne d avant. Le `»` fermant en est le cas le plus courant, quand le
+ * formateur rejoint un paragraphe.
+ */
+const OUVRE_LA_LIGNE = new RegExp(`^[${ESPACE}\\t]*[:;?!»%](${ESPACE}|$)`);
+
 function estFautif(ligne: string): boolean {
-  return FERMANT.test(ligne) || OUVRANT.test(ligne);
+  return FERMANT.test(ligne) || OUVRANT.test(ligne) || OUVRE_LA_LIGNE.test(ligne);
 }
 
 /*
@@ -321,6 +340,12 @@ describe('le detecteur de ponctuation decollee', () => {
     ['le chevron ouvrant', estFautif('Un outil « gratuit ».'), true],
     ['les deux chevrons soudes', estFautif(`Un outil «${INSECABLE}gratuit${INSECABLE}».`), false],
     ["l heure, qui n est pas une ponctuation double", estFautif('Rendez-vous a 12:30.'), false],
+    ['le pourcent detache', estFautif('Hebergement 100 % renouvelable.'), true],
+    ['le pourcent soude', estFautif(`Hebergement 100${INSECABLE}% renouvelable.`), false],
+    ["le pourcent anglais, colle, qui est la forme JUSTE", estFautif('72.45% of the total.'), false],
+    ['le signe qui OUVRE une ligne de source', estFautif('  : la suite de la phrase'), true],
+    ['le pourcent qui OUVRE une ligne de source', estFautif('% de couverture'), true],
+    ["le deux-points colle, qui n ouvre rien", estFautif(':root { color: red; }'), false],
     [
       'la balise entre le mot et le signe',
       estFautif(masqueBalisage('<p><strong>Force</strong> : rapide</p>')),

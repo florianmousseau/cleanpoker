@@ -409,7 +409,7 @@
 
   .panel {
     background: var(--color-card); border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg); padding: 1.25rem;
+    border-radius: var(--radius-lg); padding: min(1.25rem, 20px);
   }
   .panel h2 { font-size: 1rem; margin-bottom: 0.75rem; }
   .empty { font-size: 0.875rem; color: var(--color-text-muted); }
@@ -418,7 +418,7 @@
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    padding: 0.5rem 1rem;
+    padding: 0.5rem min(1rem, 16px);
     font-size: 0.85rem;
     color: var(--color-text-muted);
     text-align: center;
@@ -427,7 +427,7 @@
 
   .solo-hint {
     display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem min(1rem, 16px);
     background: var(--color-card-selected);
     border: 1px solid var(--color-card-border-selected);
     border-radius: var(--radius-lg);
@@ -436,7 +436,7 @@
 
   .promo {
     display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem min(1rem, 16px);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     font-size: 0.875rem;
@@ -462,7 +462,7 @@
   .toggle-label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; }
   .toggle-label input { accent-color: var(--color-primary); }
 
-  .card-section { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; }
+  .card-section { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: min(1.25rem, 20px); }
   .card-header-row { margin-bottom: 0.875rem; }
   .card-header-row h2 { font-size: 1rem; margin-bottom: 0.25rem; }
   .card-subtitle { font-size: 0.8rem; color: var(--color-text-muted); }
@@ -482,14 +482,14 @@
   .poker-card:disabled { opacity: 0.65; cursor: default; transform: none; }
   .poker-card.selected:disabled { opacity: 1; }
 
-  .controls-results-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  @media (max-width: 42rem) { .controls-results-row { grid-template-columns: 1fr; } }
+  .controls-results-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem; }
+  @media (max-width: 42rem) { .controls-results-row { grid-template-columns: minmax(0, 1fr); } }
 
-  .controls-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 0.625rem; margin-bottom: 0.5rem; }
+  .controls-btns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.625rem; margin-bottom: 0.5rem; }
   .btn-block { width: 100%; justify-content: center; }
   .hint { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem; }
 
-  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.625rem; margin-bottom: 1rem; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.625rem; margin-bottom: 1rem; }
   .stat { display: flex; flex-direction: column; align-items: center; gap: 0.125rem; padding: 0.625rem; background: var(--color-surface); border-radius: var(--radius); border: 1px solid var(--color-border); }
   .stat-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); }
   .stat-value { font-size: 1.375rem; font-weight: 700; color: var(--color-primary); }
@@ -531,8 +531,12 @@
     padding: 0.3rem 0.75rem; font-size: 0.8rem; font-family: inherit; font-weight: 600;
     border-radius: var(--radius); cursor: pointer; border: 2px solid transparent;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
-    min-height: 2rem; white-space: nowrap;
+    min-height: 2rem;
   }
+  /* Les deux `nowrap` sont portes par le selecteur descendant de `.table-wrap`,
+     qui defile : le libelle le plus long y fixe la largeur de la boite, jamais
+     celle du document. */
+  .table-wrap .action-btn { white-space: nowrap; }
   .action-btn:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
   .action-btn-switch { background: var(--color-surface); color: var(--color-text); border-color: var(--color-border); }
   .action-btn-switch:hover { background: var(--color-primary); color: white; border-color: var(--color-primary); }
@@ -542,7 +546,8 @@
   .log-table thead th { font-size: 0.78rem; color: var(--color-text-muted); font-weight: 600; }
   .log-table tbody tr:nth-child(even) { background: var(--color-surface); }
   .log-table tbody tr:last-child td { border-bottom: none; }
-  .log-time { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-muted); white-space: nowrap; }
+  .log-time { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-muted); }
+  .table-wrap .log-time { white-space: nowrap; }
 
   .center-msg { text-align: center; padding: 4rem 0; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
 

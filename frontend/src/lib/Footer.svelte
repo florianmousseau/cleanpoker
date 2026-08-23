@@ -83,7 +83,7 @@
 </footer>
 
 <style>
-  .footer { padding: 1.5rem 1rem; border-top: 1px solid var(--color-border); font-size: 0.875rem; color: var(--color-text-muted); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+  .footer { padding: 1.5rem min(1rem, 16px); border-top: 1px solid var(--color-border); font-size: 0.875rem; color: var(--color-text-muted); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
   .footer-controls { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
   .lang-nav { display: flex; gap: 0.375rem; flex-wrap: wrap; justify-content: center; }
   .lang-link {

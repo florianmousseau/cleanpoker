@@ -273,7 +273,7 @@
   p, li { line-height: 1.7; }
 
   ol {
-    padding-left: 1.5rem;
+    padding-left: min(1.5rem, 24px);
     display: flex;
     flex-direction: column;
     gap: 0.375rem;
@@ -304,7 +304,7 @@
   details {
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    padding: 0.75rem 1rem;
+    padding: 0.75rem min(1rem, 16px);
     margin-bottom: 0.5rem;
   }
 
@@ -328,7 +328,7 @@
 
   .btn {
     display: inline-block;
-    padding: 0.875rem 2rem;
+    padding: 0.875rem min(2rem, 32px);
     background: var(--color-primary);
     color: #fff;
     border-radius: var(--radius-lg);

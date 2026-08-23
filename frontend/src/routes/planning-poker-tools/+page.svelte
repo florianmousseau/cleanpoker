@@ -190,7 +190,7 @@
   .lead { font-size: 1.05rem; color: var(--color-text-muted); }
 
   ul {
-    padding-left: 1.5rem;
+    padding-left: min(1.5rem, 24px);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -234,7 +234,7 @@
 
   .btn {
     display: inline-block;
-    padding: 0.875rem 2rem;
+    padding: 0.875rem min(2rem, 32px);
     background: var(--color-primary);
     color: #fff;
     border-radius: var(--radius-lg);

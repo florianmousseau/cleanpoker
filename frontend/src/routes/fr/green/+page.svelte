@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Éco-conception & numérique responsable | CleanPoker</title>
-  <meta name="description" content="Déclaration d'éco-conception de CleanPoker. Bundle JS < 50 Ko brotli, aucun suivi comportemental, zéro cookie publicitaire, hébergement 100 % énergie renouvelable, Lighthouse Performance 100, CO₂ < 0,1 g par visite." />
+  <meta name="description" content="Déclaration d'éco-conception de CleanPoker. Bundle JS < 50 Ko brotli, aucun suivi comportemental, zéro cookie publicitaire, hébergement 100&nbsp;% énergie renouvelable, Lighthouse Performance 100, CO₂ < 0,1 g par visite." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/green" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green" />
@@ -71,7 +71,7 @@
     <h2>Hébergement sur énergie renouvelable</h2>
     <ul>
       <li>
-        <strong>Frontend&nbsp;: Cloudflare Pages</strong> - CDN mondial, certifié 100 % énergie renouvelable.
+        <strong>Frontend&nbsp;: Cloudflare Pages</strong> - CDN mondial, certifié 100&nbsp;% énergie renouvelable.
         Cloudflare est référencé dans la base The Green Web Foundation.
       </li>
       <li>
@@ -156,7 +156,7 @@
   p, li { line-height: 1.7; }
 
   ul {
-    padding-left: 1.5rem;
+    padding-left: min(1.5rem, 24px);
     display: flex;
     flex-direction: column;
     gap: 0.375rem;

@@ -109,12 +109,12 @@
   th, td { padding: 0.5rem 0.75rem; border: 1px solid var(--color-border); text-align: left; }
   th { background: var(--color-surface); font-weight: 700; }
   tr:nth-child(even) td { background: var(--color-surface); }
-  details { border: 1px solid var(--color-border); border-radius: var(--radius); padding: 0.75rem 1rem; margin-bottom: 0.5rem; }
+  details { border: 1px solid var(--color-border); border-radius: var(--radius); padding: 0.75rem min(1rem, 16px); margin-bottom: 0.5rem; }
   details[open] { background: var(--color-surface); }
   summary { font-weight: 600; cursor: pointer; font-size: 0.95rem; }
   details p { margin: 0.75rem 0 0; font-size: 0.9rem; }
   .cta { margin-top: 2.5rem; text-align: center; }
-  .btn { display: inline-block; padding: 0.875rem 2rem; background: var(--color-primary); color: #fff; border-radius: var(--radius-lg); text-decoration: none; font-weight: 700; font-size: 1rem; transition: opacity 0.15s; }
+  .btn { display: inline-block; padding: 0.875rem min(2rem, 32px); background: var(--color-primary); color: #fff; border-radius: var(--radius-lg); text-decoration: none; font-weight: 700; font-size: 1rem; transition: opacity 0.15s; }
   .btn:hover { opacity: 0.85; }
   .footer { padding: 1.5rem 0; margin-top: 3rem; border-top: 1px solid var(--color-border); font-size: 0.875rem; color: var(--color-text-muted); }
 </style>
