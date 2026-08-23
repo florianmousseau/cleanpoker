@@ -132,7 +132,7 @@
   p, li { line-height: 1.7; }
 
   ul {
-    padding-left: 1.5rem;
+    padding-left: min(1.5rem, 24px);
     display: flex;
     flex-direction: column;
     gap: 0.375rem;

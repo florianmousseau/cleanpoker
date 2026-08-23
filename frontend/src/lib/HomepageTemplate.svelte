@@ -245,7 +245,7 @@
   .page { display: flex; flex-direction: column; min-height: 100dvh; }
 
   .header { padding: 1rem 0; border-bottom: 1px solid var(--color-border); }
-  .header-inner { display: flex; align-items: center; justify-content: space-between; }
+  .header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; }
   .logo-group { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
   .logo { font-size: 1.5rem; color: var(--color-primary); }
   .logo-text { font-size: 1.25rem; font-weight: 700; }
@@ -286,7 +286,7 @@
   .card-chip { font-size: 0.78rem; font-weight: 700; padding: 0.15rem 0.5rem; background: var(--color-card-selected); color: var(--color-primary); border-radius: 99px; border: 1px solid var(--color-card-border-selected); }
   .cards-error { font-size: 0.78rem; color: var(--color-danger); }
 
-  .btn-lg { padding: 0.875rem 2.5rem; font-size: 1.125rem; border-radius: var(--radius-lg); }
+  .btn-lg { padding: 0.875rem min(2.5rem, 40px); font-size: 1.125rem; border-radius: var(--radius-lg); }
   .hint { font-size: 0.875rem; color: var(--color-text-muted); }
   .error { color: var(--color-danger); font-weight: 600; }
 

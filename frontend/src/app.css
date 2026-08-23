@@ -86,7 +86,11 @@ body {
   color: var(--color-text);
   background: var(--color-bg);
   min-height: 100dvh;
-  overflow-x: hidden;
+  /* Ce qui n a pas de regle : un mot plus long que la ligne ne coupe que ce qui
+     deborderait, et ne touche pas la min-content, donc aucun ecran large ne bouge.
+     `overflow-x: hidden` etait la avant : il CLIPPAIT le debordement au lieu de le
+     reparer, et `scrollWidth` cessait alors de dire la verite. */
+  overflow-wrap: break-word;
 }
 
 /* ===== Accessibilité ===== */
@@ -94,7 +98,7 @@ body {
   position: absolute;
   top: -3rem;
   left: 1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem min(1rem, 16px);
   background: var(--color-primary);
   color: var(--color-primary-text);
   border-radius: var(--radius);
@@ -141,7 +145,7 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
+  padding: 0.625rem min(1.25rem, 20px);
   font-size: 1rem;
   font-family: inherit;
   font-weight: 600;
@@ -195,7 +199,7 @@ a:hover {
   width: 100%;
   max-width: 60rem;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 min(1rem, 16px);
 }
 
 .sr-only {
