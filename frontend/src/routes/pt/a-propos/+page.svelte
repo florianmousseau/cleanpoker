@@ -95,9 +95,9 @@
   h1 { margin-bottom: 1.5rem; }
   h2 { margin-top: 2rem; margin-bottom: 1rem; }
   p, li { line-height: 1.7; }
-  .facts { padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.375rem; margin-bottom: 0.75rem; }
-  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: 1rem; }
-  .card { display: block; padding: 1.25rem 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius); text-decoration: none; color: inherit; transition: border-color 0.15s, background 0.15s; }
+  .facts { padding-left: min(1.5rem, 24px); display: flex; flex-direction: column; gap: 0.375rem; margin-bottom: 0.75rem; }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr)); gap: 1rem; }
+  .card { display: block; padding: 1.25rem min(1.5rem, 24px); border: 1px solid var(--color-border); border-radius: var(--radius); text-decoration: none; color: inherit; transition: border-color 0.15s, background 0.15s; }
   .card:hover { border-color: var(--color-primary); background: var(--color-surface); }
   .card h3 { margin: 0 0 0.5rem; font-size: 1rem; color: var(--color-primary); }
   .card p { margin: 0; font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.5; }

@@ -64,6 +64,13 @@ jobs:
         working-directory: frontend
         run: npm run check:seo
 
+      # Nothing pushes the page past a 320 px screen once the reader enlarges
+      # the text. This repo has no `gate` script - the CI replays the commands
+      # one by one - so the check has to be a step here or it never runs.
+      - name: Narrow screen reflow
+        working-directory: frontend
+        run: npm run check:reflow
+
       # The shell, BOTH security policies and the five legal pages have to say
       # the same thing about the page counter. Nothing else in a build would
       # notice a legal sentence, or a five-language sales claim, going false.

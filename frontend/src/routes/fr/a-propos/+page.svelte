@@ -39,7 +39,7 @@
     <ul class="facts">
       <li>Bundle JS <strong>&lt; 50 Ko</strong> (brotli)</li>
       <li>Lighthouse Performance et Accessibilité&nbsp;: <strong>100 / 100</strong></li>
-      <li>Hébergement 100 % énergie renouvelable (Cloudflare Pages + Fly.io CDG Paris)</li>
+      <li>Hébergement 100&nbsp;% énergie renouvelable (Cloudflare Pages + Fly.io CDG Paris)</li>
       <li>Aucun suivi comportemental, aucun cookie publicitaire, un compteur de pages vues sans cookie</li>
       <li>Code source ouvert sous <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licence MIT</a></li>
     </ul>
@@ -108,7 +108,7 @@
   p, li { line-height: 1.7; }
 
   .facts {
-    padding-left: 1.5rem;
+    padding-left: min(1.5rem, 24px);
     display: flex;
     flex-direction: column;
     gap: 0.375rem;
@@ -117,13 +117,13 @@
 
   .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
     gap: 1rem;
   }
 
   .card {
     display: block;
-    padding: 1.25rem 1.5rem;
+    padding: 1.25rem min(1.5rem, 24px);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
     text-decoration: none;
