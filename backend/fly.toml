@@ -19,6 +19,15 @@ primary_region = "cdg"
   size = "shared-cpu-1x"
   memory = "256mb"
 
-[mounts]
-  source = "cleanpoker_data"
-  destination = "/data"
+# Pas de `[mounts]`, et c'est une panne de production qui l'a tranche.
+#
+# Le 2026-08-23, deux deploiements Fly se sont suivis a vingt secondes : le
+# second n'a pas pu replacer la machine et a rendu, huit fois de suite,
+# `insufficient resources to create new machine with existing volume
+# 'vol_r68mo93lpqwoe0j4'`. Un volume EPINGLE la machine sur l'hote qui le porte ;
+# quand cet hote n'a plus de place, l'application ne redemarre nulle part.
+#
+# Or aucun code n'ecrit dans `/data` : les salons et les compteurs vivent en
+# memoire (`internal/store/store.go`) et repartent de zero au redemarrage. Le
+# montage ne portait donc aucune donnee, seulement la contrainte de placement.
+# Le volume lui-meme n'est pas supprime, il n'est plus monte.

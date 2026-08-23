@@ -264,6 +264,42 @@ function bodyGuards(css) {
 			'`body` carries `overflow-x: hidden`, which hides an overflow instead of fixing it - the text is then cut off with no way to reach it'
 		);
 	}
+	// A table is the one box `break-word` cannot help: its minimum width is the
+	// SUM of its columns' min-contents, and `break-word` never lowers a
+	// min-content. Measured in production the 2026-08-23, with every rem margin
+	// already capped, the comparison pages still ran 417 px past a 320 px screen
+	// and the culprit was a `th` or a `td` every time. So every table scrolls
+	// inside its own box - see `tablesOutsideAScroller` for the other half.
+	const wrap = rulesOf(css).find(
+		(r) => r.selector === '.table-wrap' && /overflow-x:\s*auto/.test(r.body)
+	);
+	if (!wrap) {
+		out.push(
+			'no `.table-wrap { overflow-x: auto }` in app.css, so a table keeps the width of its widest cell and carries the page past the screen'
+		);
+	}
+	return out;
+}
+
+/**
+ * Every `<table>` of the site, and whether something scrolls around it.
+ *
+ * The rule above only says the class exists; this says it is USED. `anywhere` on
+ * the cells was tried first, on the live pages: it brings the six faulty ones to
+ * zero and BREAKS a weld doing it - Chrome wraps on the no-break space of
+ * `XXL,\u00A0?`. Repairing an overflow by breaking a weld does not count.
+ */
+function tablesOutsideAScroller() {
+	const out = [];
+	for (const file of walk(SRC)) {
+		if (!file.endsWith('.svelte')) continue;
+		const source = readFileSync(file, 'utf8');
+		for (const m of source.matchAll(/<table\b/g)) {
+			const before = source.slice(0, m.index);
+			if (/<div class="table-wrap">\s*$/.test(before)) continue;
+			out.push(relative(SRC, file).split(sep).join('/'));
+		}
+	}
 	return out;
 }
 
@@ -352,10 +388,14 @@ if (check('.z { padding: 0.6rem 0.5rem; }').length)
 	proofs.push('wrongly flags a padding below 1rem');
 if (check('@media (min-width: 640px) { .z { white-space: nowrap; } }').length)
 	proofs.push('wrongly flags a nowrap that only applies above 640px');
+const SOUND_BODY = 'body { overflow-wrap: break-word; } .table-wrap { overflow-x: auto; }';
 if (!bodyGuards('body { overflow-x: hidden; }').length)
 	proofs.push('misses a body without overflow-wrap');
-if (bodyGuards('body { overflow-wrap: break-word; }').length)
-	proofs.push('wrongly flags a sound body rule');
+if (bodyGuards(SOUND_BODY).length) proofs.push('wrongly flags a sound body rule');
+if (!bodyGuards('body { overflow-wrap: break-word; }').length)
+	proofs.push('misses a missing `.table-wrap` rule');
+if (!bodyGuards('body { overflow-wrap: break-word; } .table-wrap { overflow: hidden; }').length)
+	proofs.push('takes any `.table-wrap` rule for one that scrolls');
 
 const found = sheets();
 if (found.length < MIN_SHEETS) {
@@ -380,6 +420,9 @@ if (proofs.length) {
 const global = found.find((s) => s.file.endsWith(`app.css`));
 const faults = found.flatMap(faultsIn);
 const netFaults = global ? bodyGuards(global.css) : ['app.css was not read'];
+for (const file of tablesOutsideAScroller()) {
+	netFaults.push(`${file}: a <table> with nothing scrolling around it - wrap it in a \`.table-wrap\``);
+}
 
 if (faults.length || netFaults.length) {
 	console.error(

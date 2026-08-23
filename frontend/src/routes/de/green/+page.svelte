@@ -38,22 +38,24 @@
     </p>
 
     <h2>Kennzahlen</h2>
-    <table>
-      <thead>
-        <tr><th>Metrik</th><th>Wert</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Gemeinsames JS-Bundle (brotli, CI-validiert)</td><td><strong>&lt; 50 KB</strong></td></tr>
-        <tr><td>Geschätztes CO₂ pro Besuch</td><td><strong>&lt; 0,1 g</strong></td></tr>
-        <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Lighthouse Barrierefreiheit</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Anfragen an Dritte</td><td><strong>1</strong> (der Seitenzähler)</td></tr>
-        <tr><td>Verhaltensbasiertes Tracking</td><td><strong>0</strong> (der Zähler erzeugt keine Besucherkennung)</td></tr>
-        <tr><td>Werbe-Cookies</td><td><strong>0</strong></td></tr>
-        <tr><td>Geladene Google Fonts</td><td><strong>0</strong></td></tr>
-        <tr><td>Backend-RAM</td><td><strong>~15 MB</strong> (Go-Binärdatei)</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metrik</th><th>Wert</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Gemeinsames JS-Bundle (brotli, CI-validiert)</td><td><strong>&lt; 50 KB</strong></td></tr>
+          <tr><td>Geschätztes CO₂ pro Besuch</td><td><strong>&lt; 0,1 g</strong></td></tr>
+          <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
+          <tr><td>Lighthouse Barrierefreiheit</td><td><strong>100 / 100</strong></td></tr>
+          <tr><td>Anfragen an Dritte</td><td><strong>1</strong> (der Seitenzähler)</td></tr>
+          <tr><td>Verhaltensbasiertes Tracking</td><td><strong>0</strong> (der Zähler erzeugt keine Besucherkennung)</td></tr>
+          <tr><td>Werbe-Cookies</td><td><strong>0</strong></td></tr>
+          <tr><td>Geladene Google Fonts</td><td><strong>0</strong></td></tr>
+          <tr><td>Backend-RAM</td><td><strong>~15 MB</strong> (Go-Binärdatei)</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Technische Entscheidungen zur Reduzierung des Impacts</h2>
     <ul>

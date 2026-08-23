@@ -79,17 +79,19 @@
     </p>
 
     <h2>Errores comunes de estimación</h2>
-    <table>
-      <thead>
-        <tr><th>Error</th><th>Por qué perjudica</th><th>Corrección</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Estimar en horas</td><td>Se ancla en velocidad individual, no en complejidad</td><td>Cambiar a story points relativos</td></tr>
-        <tr><td>Anclarse en el primer voto</td><td>Elimina la estimación independiente</td><td>Revelar siempre simultáneamente</td></tr>
-        <tr><td>Ignorar bugs en la estimación</td><td>Infla la velocidad y engaña la planificación</td><td>Estimar bugs que requieran esfuerzo real</td></tr>
-        <tr><td>Comparar velocidades entre equipos</td><td>Escalas y contextos diferentes</td><td>La velocidad es solo una métrica interna</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Error</th><th>Por qué perjudica</th><th>Corrección</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Estimar en horas</td><td>Se ancla en velocidad individual, no en complejidad</td><td>Cambiar a story points relativos</td></tr>
+          <tr><td>Anclarse en el primer voto</td><td>Elimina la estimación independiente</td><td>Revelar siempre simultáneamente</td></tr>
+          <tr><td>Ignorar bugs en la estimación</td><td>Infla la velocidad y engaña la planificación</td><td>Estimar bugs que requieran esfuerzo real</td></tr>
+          <tr><td>Comparar velocidades entre equipos</td><td>Escalas y contextos diferentes</td><td>La velocidad es solo una métrica interna</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Preguntas frecuentes</h2>
 

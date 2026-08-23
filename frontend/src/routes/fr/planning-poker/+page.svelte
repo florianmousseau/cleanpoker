@@ -130,28 +130,30 @@
     </p>
 
     <h2>Comparaison des séquences de cartes</h2>
-    <table>
-      <thead>
-        <tr><th>Séquence</th><th>Valeurs</th><th>Idéale pour</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Fibonacci</strong></td>
-          <td>1, 2, 3, 5, 8, 13, 21,&nbsp;?</td>
-          <td>Équipes Scrum expérimentées, estimation en points de story</td>
-        </tr>
-        <tr>
-          <td><strong>T-shirt</strong></td>
-          <td>XS, S, M, L, XL, XXL,&nbsp;?</td>
-          <td>Estimations grossières, équipes non techniques, tri de backlog</td>
-        </tr>
-        <tr>
-          <td><strong>Puissances de 2</strong></td>
-          <td>1, 2, 4, 8, 16, 32, 64,&nbsp;?</td>
-          <td>Tâches techniques avec doublement de complexité prévisible</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Séquence</th><th>Valeurs</th><th>Idéale pour</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fibonacci</strong></td>
+            <td>1, 2, 3, 5, 8, 13, 21,&nbsp;?</td>
+            <td>Équipes Scrum expérimentées, estimation en points de story</td>
+          </tr>
+          <tr>
+            <td><strong>T-shirt</strong></td>
+            <td>XS, S, M, L, XL, XXL,&nbsp;?</td>
+            <td>Estimations grossières, équipes non techniques, tri de backlog</td>
+          </tr>
+          <tr>
+            <td><strong>Puissances de 2</strong></td>
+            <td>1, 2, 4, 8, 16, 32, 64,&nbsp;?</td>
+            <td>Tâches techniques avec doublement de complexité prévisible</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Le poker planning à distance</h2>
     <p>

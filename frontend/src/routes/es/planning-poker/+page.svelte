@@ -69,28 +69,30 @@
     </p>
 
     <h2>Comparación de secuencias de cartas</h2>
-    <table>
-      <thead>
-        <tr><th>Secuencia</th><th>Valores</th><th>Ideal para</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Fibonacci</strong></td>
-          <td>1, 2, 3, 5, 8, 13, 21, ?</td>
-          <td>Equipos Scrum con experiencia, estimación en puntos de historia</td>
-        </tr>
-        <tr>
-          <td><strong>T-shirt</strong></td>
-          <td>XS, S, M, L, XL, XXL, ?</td>
-          <td>Estimaciones aproximadas, equipos no técnicos, clasificación de backlog</td>
-        </tr>
-        <tr>
-          <td><strong>Potencias de 2</strong></td>
-          <td>1, 2, 4, 8, 16, 32, 64, ?</td>
-          <td>Tareas técnicas con duplicación de complejidad previsible</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Secuencia</th><th>Valores</th><th>Ideal para</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fibonacci</strong></td>
+            <td>1, 2, 3, 5, 8, 13, 21, ?</td>
+            <td>Equipos Scrum con experiencia, estimación en puntos de historia</td>
+          </tr>
+          <tr>
+            <td><strong>T-shirt</strong></td>
+            <td>XS, S, M, L, XL, XXL, ?</td>
+            <td>Estimaciones aproximadas, equipos no técnicos, clasificación de backlog</td>
+          </tr>
+          <tr>
+            <td><strong>Potencias de 2</strong></td>
+            <td>1, 2, 4, 8, 16, 32, 64, ?</td>
+            <td>Tareas técnicas con duplicación de complejidad previsible</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Preguntas frecuentes</h2>
 
