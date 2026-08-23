@@ -38,22 +38,24 @@
     </p>
 
     <h2>Key figures</h2>
-    <table>
-      <thead>
-        <tr><th>Metric</th><th>Value</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Shared JS bundle (brotli, CI-validated)</td><td><strong>&lt; 50 KB</strong></td></tr>
-        <tr><td>Estimated CO₂ per visit</td><td><strong>&lt; 0.1 g</strong></td></tr>
-        <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Lighthouse Accessibility</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Third-party requests</td><td><strong>1</strong> (the page counter)</td></tr>
-        <tr><td>Behavioural tracking</td><td><strong>0</strong> (the counter builds no visitor identifier)</td></tr>
-        <tr><td>Advertising cookies</td><td><strong>0</strong></td></tr>
-        <tr><td>Google Fonts loaded</td><td><strong>0</strong></td></tr>
-        <tr><td>Backend RAM</td><td><strong>~15 MB</strong> (Go binary)</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Shared JS bundle (brotli, CI-validated)</td><td><strong>&lt; 50 KB</strong></td></tr>
+          <tr><td>Estimated CO₂ per visit</td><td><strong>&lt; 0.1 g</strong></td></tr>
+          <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
+          <tr><td>Lighthouse Accessibility</td><td><strong>100 / 100</strong></td></tr>
+          <tr><td>Third-party requests</td><td><strong>1</strong> (the page counter)</td></tr>
+          <tr><td>Behavioural tracking</td><td><strong>0</strong> (the counter builds no visitor identifier)</td></tr>
+          <tr><td>Advertising cookies</td><td><strong>0</strong></td></tr>
+          <tr><td>Google Fonts loaded</td><td><strong>0</strong></td></tr>
+          <tr><td>Backend RAM</td><td><strong>~15 MB</strong> (Go binary)</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Technical choices to reduce impact</h2>
     <ul>

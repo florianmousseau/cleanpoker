@@ -69,28 +69,30 @@
     </p>
 
     <h2>Vergleich der Kartenfolgen</h2>
-    <table>
-      <thead>
-        <tr><th>Folge</th><th>Werte</th><th>Ideal für</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Fibonacci</strong></td>
-          <td>1, 2, 3, 5, 8, 13, 21, ?</td>
-          <td>Erfahrene Scrum-Teams, Story-Point-Schätzung</td>
-        </tr>
-        <tr>
-          <td><strong>T-Shirt</strong></td>
-          <td>XS, S, M, L, XL, XXL, ?</td>
-          <td>Grobe Schätzungen, nicht-technische Teams, Backlog-Sortierung</td>
-        </tr>
-        <tr>
-          <td><strong>Zweierpotenzen</strong></td>
-          <td>1, 2, 4, 8, 16, 32, 64, ?</td>
-          <td>Technische Aufgaben mit vorhersehbarer Komplexitätsverdoppelung</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Folge</th><th>Werte</th><th>Ideal für</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fibonacci</strong></td>
+            <td>1, 2, 3, 5, 8, 13, 21, ?</td>
+            <td>Erfahrene Scrum-Teams, Story-Point-Schätzung</td>
+          </tr>
+          <tr>
+            <td><strong>T-Shirt</strong></td>
+            <td>XS, S, M, L, XL, XXL, ?</td>
+            <td>Grobe Schätzungen, nicht-technische Teams, Backlog-Sortierung</td>
+          </tr>
+          <tr>
+            <td><strong>Zweierpotenzen</strong></td>
+            <td>1, 2, 4, 8, 16, 32, 64, ?</td>
+            <td>Technische Aufgaben mit vorhersehbarer Komplexitätsverdoppelung</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Häufig gestellte Fragen</h2>
 

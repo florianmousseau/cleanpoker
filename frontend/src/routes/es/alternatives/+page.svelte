@@ -58,18 +58,20 @@
     <p>El planning poker no es la única forma de estimar. Según el tamaño de tu equipo, la profundidad del backlog y tus objetivos, otra técnica puede ser más rápida e igualmente efectiva.</p>
 
     <h2>Técnica</h2>
-    <table>
-      <thead>
-        <tr><th>Técnica</th><th>Velocidad</th><th>Precisión</th><th>Ideal para</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Planning poker</strong></td><td>Medio</td><td>Alta</td><td>Estimación de sprint de historias bien definidas</td></tr>
-        <tr><td><strong>Tallas de camiseta</strong></td><td>Rápido</td><td>Baja-media</td><td>Grooming rápido, partes interesadas no técnicas</td></tr>
-        <tr><td><strong>Affinity mapping</strong></td><td>Muy rápido</td><td>Media</td><td>Backlogs grandes (20+ historias)</td></tr>
-        <tr><td><strong>Bucket system</strong></td><td>Muy rápido</td><td>Media</td><td>Backlogs muy grandes (50+ historias)</td></tr>
-        <tr><td><strong>Dot voting</strong></td><td>Rápido</td><td>Baja</td><td>Priorización, no estimación</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Técnica</th><th>Velocidad</th><th>Precisión</th><th>Ideal para</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Planning poker</strong></td><td>Medio</td><td>Alta</td><td>Estimación de sprint de historias bien definidas</td></tr>
+          <tr><td><strong>Tallas de camiseta</strong></td><td>Rápido</td><td>Baja-media</td><td>Grooming rápido, partes interesadas no técnicas</td></tr>
+          <tr><td><strong>Affinity mapping</strong></td><td>Muy rápido</td><td>Media</td><td>Backlogs grandes (20+ historias)</td></tr>
+          <tr><td><strong>Bucket system</strong></td><td>Muy rápido</td><td>Media</td><td>Backlogs muy grandes (50+ historias)</td></tr>
+          <tr><td><strong>Dot voting</strong></td><td>Rápido</td><td>Baja</td><td>Priorización, no estimación</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>FAQ</h2>
 

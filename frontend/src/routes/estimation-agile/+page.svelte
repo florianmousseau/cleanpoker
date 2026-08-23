@@ -126,38 +126,40 @@
     </p>
 
     <h2>The most common estimation mistakes</h2>
-    <table>
-      <thead>
-        <tr><th>Mistake</th><th>Why it hurts</th><th>Fix</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Estimating in hours</td>
-          <td>Anchors to individual speed, not team complexity</td>
-          <td>Switch to relative story points</td>
-        </tr>
-        <tr>
-          <td>Anchoring on the first vote revealed</td>
-          <td>Kills independent estimation</td>
-          <td>Always reveal cards simultaneously</td>
-        </tr>
-        <tr>
-          <td>Forcing consensus on outliers</td>
-          <td>Suppresses valid risk signals</td>
-          <td>Ask outliers to explain; revote after discussion</td>
-        </tr>
-        <tr>
-          <td>Skipping estimation for bugs</td>
-          <td>Inflates velocity, misleads planning</td>
-          <td>Estimate bugs that take meaningful effort</td>
-        </tr>
-        <tr>
-          <td>Comparing team velocities</td>
-          <td>Different scales, contexts, team sizes</td>
-          <td>Velocity is an internal forecasting tool only</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Mistake</th><th>Why it hurts</th><th>Fix</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Estimating in hours</td>
+            <td>Anchors to individual speed, not team complexity</td>
+            <td>Switch to relative story points</td>
+          </tr>
+          <tr>
+            <td>Anchoring on the first vote revealed</td>
+            <td>Kills independent estimation</td>
+            <td>Always reveal cards simultaneously</td>
+          </tr>
+          <tr>
+            <td>Forcing consensus on outliers</td>
+            <td>Suppresses valid risk signals</td>
+            <td>Ask outliers to explain; revote after discussion</td>
+          </tr>
+          <tr>
+            <td>Skipping estimation for bugs</td>
+            <td>Inflates velocity, misleads planning</td>
+            <td>Estimate bugs that take meaningful effort</td>
+          </tr>
+          <tr>
+            <td>Comparing team velocities</td>
+            <td>Different scales, contexts, team sizes</td>
+            <td>Velocity is an internal forecasting tool only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>When to re-estimate</h2>
     <p>

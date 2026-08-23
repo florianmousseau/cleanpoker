@@ -86,16 +86,18 @@
     </p>
 
     <h2>Standard- vs. modifiziertes Fibonacci</h2>
-    <table>
-      <thead>
-        <tr><th>Skala</th><th>Werte</th><th>Am besten für</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Standard</strong></td><td>1, 2, 3, 5, 8, 13, 21, ?</td><td>Die meisten Scrum-Teams</td></tr>
-        <tr><td><strong>Modifiziert</strong></td><td>0, 0,5, 1, 2, 3, 5, 8, 13, 20, 40, 100, ?</td><td>Teams mit sehr kleinen Tasks und Epics im gleichen Backlog</td></tr>
-        <tr><td><strong>Zweierpotenzen</strong></td><td>1, 2, 4, 8, 16, 32, 64, ?</td><td>Technische Teams mit vorhersehbarer Komplexitätsverdopplung</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Skala</th><th>Werte</th><th>Am besten für</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Standard</strong></td><td>1, 2, 3, 5, 8, 13, 21, ?</td><td>Die meisten Scrum-Teams</td></tr>
+          <tr><td><strong>Modifiziert</strong></td><td>0, 0,5, 1, 2, 3, 5, 8, 13, 20, 40, 100, ?</td><td>Teams mit sehr kleinen Tasks und Epics im gleichen Backlog</td></tr>
+          <tr><td><strong>Zweierpotenzen</strong></td><td>1, 2, 4, 8, 16, 32, 64, ?</td><td>Technische Teams mit vorhersehbarer Komplexitätsverdopplung</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Häufig gestellte Fragen</h2>
 

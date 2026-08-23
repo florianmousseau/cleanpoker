@@ -97,28 +97,30 @@
     </p>
 
     <h2>Fibonacci standard vs. modifié</h2>
-    <table>
-      <thead>
-        <tr><th>Échelle</th><th>Valeurs</th><th>Idéal pour</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Standard</strong></td>
-          <td>1, 2, 3, 5, 8, 13, 21,&nbsp;?</td>
-          <td>La plupart des équipes Scrum, estimation au sprint</td>
-        </tr>
-        <tr>
-          <td><strong>Modifié</strong></td>
-          <td>0, 0,5, 1, 2, 3, 5, 8, 13, 20, 40, 100,&nbsp;?</td>
-          <td>Équipes avec très petites tâches et grandes épopées dans le même backlog</td>
-        </tr>
-        <tr>
-          <td><strong>Puissances de 2</strong></td>
-          <td>1, 2, 4, 8, 16, 32, 64,&nbsp;?</td>
-          <td>Équipes techniques où la complexité double de façon prévisible</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Échelle</th><th>Valeurs</th><th>Idéal pour</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Standard</strong></td>
+            <td>1, 2, 3, 5, 8, 13, 21,&nbsp;?</td>
+            <td>La plupart des équipes Scrum, estimation au sprint</td>
+          </tr>
+          <tr>
+            <td><strong>Modifié</strong></td>
+            <td>0, 0,5, 1, 2, 3, 5, 8, 13, 20, 40, 100,&nbsp;?</td>
+            <td>Équipes avec très petites tâches et grandes épopées dans le même backlog</td>
+          </tr>
+          <tr>
+            <td><strong>Puissances de 2</strong></td>
+            <td>1, 2, 4, 8, 16, 32, 64,&nbsp;?</td>
+            <td>Équipes techniques où la complexité double de façon prévisible</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Comment choisir sa carte</h2>
     <p>

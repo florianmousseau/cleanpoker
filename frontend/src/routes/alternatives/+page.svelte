@@ -62,43 +62,45 @@
     </p>
 
     <h2>Quick comparison</h2>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Speed</th><th>Precision</th><th>Best for</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Planning poker</strong></td>
-          <td>Medium</td>
-          <td>High</td>
-          <td>Sprint-level estimation of well-defined stories</td>
-        </tr>
-        <tr>
-          <td><strong>T-shirt sizing</strong></td>
-          <td>Fast</td>
-          <td>Low-medium</td>
-          <td>Rough backlog grooming, non-technical stakeholders</td>
-        </tr>
-        <tr>
-          <td><strong>Affinity mapping</strong></td>
-          <td>Very fast</td>
-          <td>Medium</td>
-          <td>Large backlogs (20+ stories), discovery phase</td>
-        </tr>
-        <tr>
-          <td><strong>Bucket system</strong></td>
-          <td>Very fast</td>
-          <td>Medium</td>
-          <td>Very large backlogs (50+ stories)</td>
-        </tr>
-        <tr>
-          <td><strong>Dot voting</strong></td>
-          <td>Fast</td>
-          <td>Low</td>
-          <td>Prioritization, not estimation</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Technique</th><th>Speed</th><th>Precision</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Planning poker</strong></td>
+            <td>Medium</td>
+            <td>High</td>
+            <td>Sprint-level estimation of well-defined stories</td>
+          </tr>
+          <tr>
+            <td><strong>T-shirt sizing</strong></td>
+            <td>Fast</td>
+            <td>Low-medium</td>
+            <td>Rough backlog grooming, non-technical stakeholders</td>
+          </tr>
+          <tr>
+            <td><strong>Affinity mapping</strong></td>
+            <td>Very fast</td>
+            <td>Medium</td>
+            <td>Large backlogs (20+ stories), discovery phase</td>
+          </tr>
+          <tr>
+            <td><strong>Bucket system</strong></td>
+            <td>Very fast</td>
+            <td>Medium</td>
+            <td>Very large backlogs (50+ stories)</td>
+          </tr>
+          <tr>
+            <td><strong>Dot voting</strong></td>
+            <td>Fast</td>
+            <td>Low</td>
+            <td>Prioritization, not estimation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>T-shirt sizing</h2>
     <p>
