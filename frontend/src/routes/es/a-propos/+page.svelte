@@ -63,6 +63,18 @@
         <h3>Aviso legal</h3>
         <p>RGPD, cookies, alojamiento, editor del sitio.</p>
       </a>
+      <a href="/es/fibonacci" class="card">
+        <h3>Fibonacci en planning poker</h3>
+        <p>Psicología, selección de cartas y comparación con otras escalas.</p>
+      </a>
+      <a href="/es/estimation-agile" class="card">
+        <h3>Estimación ágil</h3>
+        <p>Story points vs horas, cómo funciona la velocidad, planificación de capacidad y errores comunes.</p>
+      </a>
+      <a href="/es/alternatives" class="card">
+        <h3>Alternativas al planning poker</h3>
+        <p>Tallas de camiseta, affinity mapping, dot voting y bucket system.</p>
+      </a>
     </div>
   </main>
 
