@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.4] - 2026-08-23
+
+- fix(ui): every table scrolls in its own box, and the backend stops being pinned to one host
+- fix(seo): link the de, es and pt content pages from their about page (#164)
+
 ## [0.0.3] - 2026-08-23
 
 - fix(ui): nothing pushes a page past a 320 px screen, and the percent sign joins the typography guard
