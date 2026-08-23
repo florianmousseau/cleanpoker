@@ -111,20 +111,22 @@
     </p>
 
     <h2>Le périmètre exact de CleanPoker</h2>
-    <table>
-      <thead>
-        <tr><th>Critère</th><th>CleanPoker</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Mur de paiement</td><td>Aucun. Pas de version payante, pas de limite de participants, pas de quota de sessions.</td></tr>
-        <tr><td>Sessions après la réunion</td><td>En mémoire vive, jamais écrites sur disque, supprimées 24 h après la dernière activité.</td></tr>
-        <tr><td>Scripts tiers</td><td>Un seul, le compteur de pages vues. Deux cookies techniques&nbsp;: langue et thème.</td></tr>
-        <tr><td>Accessibilité</td><td>WCAG 2.1 AA, navigation clavier complète, NVDA et VoiceOver, Lighthouse accessibilité 100.</td></tr>
-        <tr><td>Poids</td><td>Moins de 50 Ko de JavaScript partagé, compression brotli, mesuré à chaque intégration continue.</td></tr>
-        <tr><td>Perte de connexion</td><td>Reconnexion automatique du WebSocket, avec temporisation exponentielle.</td></tr>
-        <tr><td>Code</td><td>Public, licence MIT.</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Critère</th><th>CleanPoker</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mur de paiement</td><td>Aucun. Pas de version payante, pas de limite de participants, pas de quota de sessions.</td></tr>
+          <tr><td>Sessions après la réunion</td><td>En mémoire vive, jamais écrites sur disque, supprimées 24 h après la dernière activité.</td></tr>
+          <tr><td>Scripts tiers</td><td>Un seul, le compteur de pages vues. Deux cookies techniques&nbsp;: langue et thème.</td></tr>
+          <tr><td>Accessibilité</td><td>WCAG 2.1 AA, navigation clavier complète, NVDA et VoiceOver, Lighthouse accessibilité 100.</td></tr>
+          <tr><td>Poids</td><td>Moins de 50 Ko de JavaScript partagé, compression brotli, mesuré à chaque intégration continue.</td></tr>
+          <tr><td>Perte de connexion</td><td>Reconnexion automatique du WebSocket, avec temporisation exponentielle.</td></tr>
+          <tr><td>Code</td><td>Public, licence MIT.</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Ce que CleanPoker ne sait pas faire</h2>
     <p>

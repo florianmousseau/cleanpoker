@@ -105,28 +105,30 @@
     </p>
 
     <h2>Standard vs. modified Fibonacci</h2>
-    <table>
-      <thead>
-        <tr><th>Scale</th><th>Values</th><th>Best for</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Standard</strong></td>
-          <td>1, 2, 3, 5, 8, 13, 21, ?</td>
-          <td>Most Scrum teams, sprint-level estimation</td>
-        </tr>
-        <tr>
-          <td><strong>Modified</strong></td>
-          <td>0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100, ?</td>
-          <td>Teams with very small tasks or large epics in the same backlog</td>
-        </tr>
-        <tr>
-          <td><strong>Powers of 2</strong></td>
-          <td>1, 2, 4, 8, 16, 32, 64, ?</td>
-          <td>Technical teams where complexity doubles predictably</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Scale</th><th>Values</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Standard</strong></td>
+            <td>1, 2, 3, 5, 8, 13, 21, ?</td>
+            <td>Most Scrum teams, sprint-level estimation</td>
+          </tr>
+          <tr>
+            <td><strong>Modified</strong></td>
+            <td>0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100, ?</td>
+            <td>Teams with very small tasks or large epics in the same backlog</td>
+          </tr>
+          <tr>
+            <td><strong>Powers of 2</strong></td>
+            <td>1, 2, 4, 8, 16, 32, 64, ?</td>
+            <td>Technical teams where complexity doubles predictably</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>How to pick your card</h2>
     <p>

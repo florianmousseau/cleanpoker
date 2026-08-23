@@ -38,22 +38,24 @@
     </p>
 
     <h2>Chiffres clés</h2>
-    <table>
-      <thead>
-        <tr><th>Métrique</th><th>Valeur</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Bundle JS partagé (brotli, validé CI)</td><td><strong>&lt; 50 Ko</strong></td></tr>
-        <tr><td>CO₂ estimé par visite</td><td><strong>&lt; 0,1 g</strong></td></tr>
-        <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Lighthouse Accessibilité</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Requêtes vers des tiers</td><td><strong>1</strong> (le compteur de pages vues)</td></tr>
-        <tr><td>Suivi comportemental</td><td><strong>0</strong> (le compteur ne fabrique aucun identifiant)</td></tr>
-        <tr><td>Cookies publicitaires</td><td><strong>0</strong></td></tr>
-        <tr><td>Polices Google chargées</td><td><strong>0</strong></td></tr>
-        <tr><td>RAM backend</td><td><strong>~15 Mo</strong> (binaire Go)</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Métrique</th><th>Valeur</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Bundle JS partagé (brotli, validé CI)</td><td><strong>&lt; 50 Ko</strong></td></tr>
+          <tr><td>CO₂ estimé par visite</td><td><strong>&lt; 0,1 g</strong></td></tr>
+          <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
+          <tr><td>Lighthouse Accessibilité</td><td><strong>100 / 100</strong></td></tr>
+          <tr><td>Requêtes vers des tiers</td><td><strong>1</strong> (le compteur de pages vues)</td></tr>
+          <tr><td>Suivi comportemental</td><td><strong>0</strong> (le compteur ne fabrique aucun identifiant)</td></tr>
+          <tr><td>Cookies publicitaires</td><td><strong>0</strong></td></tr>
+          <tr><td>Polices Google chargées</td><td><strong>0</strong></td></tr>
+          <tr><td>RAM backend</td><td><strong>~15 Mo</strong> (binaire Go)</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Choix techniques pour réduire l'impact</h2>
     <ul>

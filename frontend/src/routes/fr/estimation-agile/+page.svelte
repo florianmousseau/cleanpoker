@@ -94,18 +94,20 @@
     </ul>
 
     <h2>Les erreurs d'estimation les plus courantes</h2>
-    <table>
-      <thead>
-        <tr><th>Erreur</th><th>Pourquoi ça nuit</th><th>Correction</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Estimer en heures</td><td>Ancre sur la vitesse individuelle, pas la complexité</td><td>Passer aux story points relatifs</td></tr>
-        <tr><td>S'ancrer sur le premier vote révélé</td><td>Tue l'estimation indépendante</td><td>Révéler toujours simultanément</td></tr>
-        <tr><td>Forcer le consensus sur les outliers</td><td>Supprime des signaux de risque valides</td><td>Demander aux outliers d'expliquer, puis revoter</td></tr>
-        <tr><td>Ignorer les bugs dans l'estimation</td><td>Gonfle la vélocité, trompe la planification</td><td>Estimer les bugs qui demandent un effort réel</td></tr>
-        <tr><td>Comparer les vélocités entre équipes</td><td>Échelles et contextes différents</td><td>La vélocité est un outil interne uniquement</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Erreur</th><th>Pourquoi ça nuit</th><th>Correction</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Estimer en heures</td><td>Ancre sur la vitesse individuelle, pas la complexité</td><td>Passer aux story points relatifs</td></tr>
+          <tr><td>S'ancrer sur le premier vote révélé</td><td>Tue l'estimation indépendante</td><td>Révéler toujours simultanément</td></tr>
+          <tr><td>Forcer le consensus sur les outliers</td><td>Supprime des signaux de risque valides</td><td>Demander aux outliers d'expliquer, puis revoter</td></tr>
+          <tr><td>Ignorer les bugs dans l'estimation</td><td>Gonfle la vélocité, trompe la planification</td><td>Estimer les bugs qui demandent un effort réel</td></tr>
+          <tr><td>Comparer les vélocités entre équipes</td><td>Échelles et contextes différents</td><td>La vélocité est un outil interne uniquement</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Questions fréquentes</h2>
 

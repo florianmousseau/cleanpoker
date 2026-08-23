@@ -202,6 +202,23 @@ a:hover {
   padding: 0 min(1rem, 16px);
 }
 
+/*
+ * La largeur minimale d'un tableau est la SOMME des min-content de ses colonnes,
+ * et `overflow-wrap: break-word` ne descend pas la min-content - c'est meme ce
+ * qui le rend sans danger sur un ecran large. Mesure du 2026-08-23, en
+ * production et apres toutes les marges plafonnees : les comparatifs tenaient
+ * encore 417 px hors d'un ecran de 320 en texte agrandi, et le coupable etait a
+ * chaque fois un `th` ou un `td`.
+ *
+ * `overflow-wrap: anywhere` sur les cellules descend bien la min-content, et il
+ * a ete essaye D'ABORD, sur les pages en ligne : il ramene les six a zero et
+ * CASSE une soudure au passage - Chrome coupe la ligne sur l'insecable de
+ * « XXL, ? ». Reparer un debordement en cassant une soudure ne compte pas. Le
+ * tableau defile donc dans sa propre boite, comme il le fait deja dans l'ecran
+ * de salle.
+ */
+.table-wrap { overflow-x: auto; }
+
 .sr-only {
   position: absolute;
   width: 1px;

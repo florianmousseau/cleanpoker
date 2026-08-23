@@ -122,20 +122,22 @@
     </ol>
 
     <h2>Where CleanPoker stands</h2>
-    <table>
-      <thead>
-        <tr><th>Question</th><th>Answer</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>User account</td><td>None. No email, no password, no profile.</td></tr>
-        <tr><td>Cookies</td><td>Two, both technical: language and theme. No advertising cookie, no measurement cookie.</td></tr>
-        <tr><td>Third-party scripts</td><td>One: Cloudflare Web Analytics, a cookieless page counter. No remote fonts, no external CDN.</td></tr>
-        <tr><td>Session retention</td><td>In memory only, never written to disk. Deleted 24 hours after the last activity.</td></tr>
-        <tr><td>Hosting</td><td>Real-time server in France (Paris) and nowhere else, pages served by a renewable-powered delivery network.</td></tr>
-        <tr><td>Audience measurement</td><td>None, neither in the browser nor per page view. The server keeps three aggregate counters (sessions created, participants, active sessions) that identify neither a room nor a person, and reset to zero on every restart.</td></tr>
-        <tr><td>Verifiable</td><td>The source is public under the MIT licence. The three checks above apply to this page too.</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Question</th><th>Answer</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>User account</td><td>None. No email, no password, no profile.</td></tr>
+          <tr><td>Cookies</td><td>Two, both technical: language and theme. No advertising cookie, no measurement cookie.</td></tr>
+          <tr><td>Third-party scripts</td><td>One: Cloudflare Web Analytics, a cookieless page counter. No remote fonts, no external CDN.</td></tr>
+          <tr><td>Session retention</td><td>In memory only, never written to disk. Deleted 24 hours after the last activity.</td></tr>
+          <tr><td>Hosting</td><td>Real-time server in France (Paris) and nowhere else, pages served by a renewable-powered delivery network.</td></tr>
+          <tr><td>Audience measurement</td><td>None, neither in the browser nor per page view. The server keeps three aggregate counters (sessions created, participants, active sessions) that identify neither a room nor a person, and reset to zero on every restart.</td></tr>
+          <tr><td>Verifiable</td><td>The source is public under the MIT licence. The three checks above apply to this page too.</td></tr>
+        </tbody>
+      </table>
+    </div>
     <p>
       This does not make the GDPR go away: a typed nickname is still data, and a server still sees
       an IP address. It shrinks the surface to what the vote strictly requires, and makes the answer

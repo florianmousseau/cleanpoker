@@ -63,6 +63,18 @@
         <h3>Impressum</h3>
         <p>DSGVO, Cookies, Hosting, Seitenbetreiber.</p>
       </a>
+      <a href="/de/fibonacci" class="card">
+        <h3>Fibonacci im Planning Poker</h3>
+        <p>Warum verwenden agile Teams die Fibonacci-Folge im Planning Poker? Psychologie, Kartenauswahl und Vergleich mit anderen Skalen.</p>
+      </a>
+      <a href="/de/estimation-agile" class="card">
+        <h3>Agile Schätzung</h3>
+        <p>Story Points vs. Stunden, Velocity, Kapazitätsplanung und häufige Fehler.</p>
+      </a>
+      <a href="/de/alternatives" class="card">
+        <h3>Alternativen zum Planning Poker</h3>
+        <p>T-Shirt-Schätzung, Affinity Mapping, Dot Voting und Bucket-System.</p>
+      </a>
     </div>
   </main>
 

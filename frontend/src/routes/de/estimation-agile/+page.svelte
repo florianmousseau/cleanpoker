@@ -80,17 +80,19 @@
     </p>
 
     <h2>Häufige Schätzfehler</h2>
-    <table>
-      <thead>
-        <tr><th>Fehler</th><th>Warum es schadet</th><th>Lösung</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>In Stunden schätzen</td><td>Ankert an individueller Geschwindigkeit</td><td>Zu relativen Story Points wechseln</td></tr>
-        <tr><td>Am ersten Schätzwert verankern</td><td>Verhindert unabhängige Schätzung</td><td>Karten immer gleichzeitig aufdecken</td></tr>
-        <tr><td>Bugs bei der Schätzung ignorieren</td><td>Bläht Velocity auf</td><td>Bugs schätzen die echten Aufwand erfordern</td></tr>
-        <tr><td>Velocities zwischen Teams vergleichen</td><td>Unterschiedliche Skalen und Kontexte</td><td>Velocity ist nur eine interne Kennzahl</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Fehler</th><th>Warum es schadet</th><th>Lösung</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>In Stunden schätzen</td><td>Ankert an individueller Geschwindigkeit</td><td>Zu relativen Story Points wechseln</td></tr>
+          <tr><td>Am ersten Schätzwert verankern</td><td>Verhindert unabhängige Schätzung</td><td>Karten immer gleichzeitig aufdecken</td></tr>
+          <tr><td>Bugs bei der Schätzung ignorieren</td><td>Bläht Velocity auf</td><td>Bugs schätzen die echten Aufwand erfordern</td></tr>
+          <tr><td>Velocities zwischen Teams vergleichen</td><td>Unterschiedliche Skalen und Kontexte</td><td>Velocity ist nur eine interne Kennzahl</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Häufig gestellte Fragen</h2>
 

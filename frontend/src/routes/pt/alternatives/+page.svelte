@@ -58,18 +58,20 @@
     <p>O planning poker não é a única forma de estimar. Dependendo do tamanho da equipe, da profundidade do backlog e dos objetivos, outra técnica pode ser mais rápida e igualmente eficaz.</p>
 
     <h2>Técnica</h2>
-    <table>
-      <thead>
-        <tr><th>Técnica</th><th>Velocidade</th><th>Precisão</th><th>Ideal para</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Planning poker</strong></td><td>Médio</td><td>Alta</td><td>Estimativa de sprint de histórias bem definidas</td></tr>
-        <tr><td><strong>Estimativas de camiseta</strong></td><td>Rápido</td><td>Baixa-média</td><td>Grooming rápido do backlog, stakeholders não técnicos</td></tr>
-        <tr><td><strong>Affinity mapping</strong></td><td>Muito rápido</td><td>Média</td><td>Backlogs grandes (20+ histórias)</td></tr>
-        <tr><td><strong>Bucket system</strong></td><td>Muito rápido</td><td>Média</td><td>Backlogs muito grandes (50+ histórias)</td></tr>
-        <tr><td><strong>Dot voting</strong></td><td>Rápido</td><td>Baixa</td><td>Priorização, não estimativa</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Técnica</th><th>Velocidade</th><th>Precisão</th><th>Ideal para</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Planning poker</strong></td><td>Médio</td><td>Alta</td><td>Estimativa de sprint de histórias bem definidas</td></tr>
+          <tr><td><strong>Estimativas de camiseta</strong></td><td>Rápido</td><td>Baixa-média</td><td>Grooming rápido do backlog, stakeholders não técnicos</td></tr>
+          <tr><td><strong>Affinity mapping</strong></td><td>Muito rápido</td><td>Média</td><td>Backlogs grandes (20+ histórias)</td></tr>
+          <tr><td><strong>Bucket system</strong></td><td>Muito rápido</td><td>Média</td><td>Backlogs muito grandes (50+ histórias)</td></tr>
+          <tr><td><strong>Dot voting</strong></td><td>Rápido</td><td>Baixa</td><td>Priorização, não estimativa</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>FAQ</h2>
 

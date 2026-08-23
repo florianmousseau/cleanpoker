@@ -58,18 +58,20 @@
     <p>Planning Poker ist nicht die einzige Möglichkeit zur Schätzung. Je nach Teamgrösse, Backlog-Tiefe und Zielen kann eine andere Technik schneller und genauso effektiv sein.</p>
 
     <h2>Technik</h2>
-    <table>
-      <thead>
-        <tr><th>Technik</th><th>Geschwindigkeit</th><th>Präzision</th><th>Am besten für</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Planning Poker</strong></td><td>Mittel</td><td>Hoch</td><td>Sprint-Schätzung gut definierter Stories</td></tr>
-        <tr><td><strong>T-Shirt-Schätzung</strong></td><td>Schnell</td><td>Niedrig-mittel</td><td>Grobes Backlog-Grooming, nicht-technische Stakeholder</td></tr>
-        <tr><td><strong>Affinity Mapping</strong></td><td>Sehr schnell</td><td>Mittel</td><td>Grosse Backlogs (20+ Stories)</td></tr>
-        <tr><td><strong>Bucket-System</strong></td><td>Sehr schnell</td><td>Mittel</td><td>Sehr grosse Backlogs (50+ Stories)</td></tr>
-        <tr><td><strong>Dot Voting</strong></td><td>Schnell</td><td>Niedrig</td><td>Priorisierung, nicht Schätzung</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Technik</th><th>Geschwindigkeit</th><th>Präzision</th><th>Am besten für</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Planning Poker</strong></td><td>Mittel</td><td>Hoch</td><td>Sprint-Schätzung gut definierter Stories</td></tr>
+          <tr><td><strong>T-Shirt-Schätzung</strong></td><td>Schnell</td><td>Niedrig-mittel</td><td>Grobes Backlog-Grooming, nicht-technische Stakeholder</td></tr>
+          <tr><td><strong>Affinity Mapping</strong></td><td>Sehr schnell</td><td>Mittel</td><td>Grosse Backlogs (20+ Stories)</td></tr>
+          <tr><td><strong>Bucket-System</strong></td><td>Sehr schnell</td><td>Mittel</td><td>Sehr grosse Backlogs (50+ Stories)</td></tr>
+          <tr><td><strong>Dot Voting</strong></td><td>Schnell</td><td>Niedrig</td><td>Priorisierung, nicht Schätzung</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>FAQ</h2>
 

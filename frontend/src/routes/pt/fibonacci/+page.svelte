@@ -86,16 +86,18 @@
     </p>
 
     <h2>Fibonacci padrão vs. modificado</h2>
-    <table>
-      <thead>
-        <tr><th>Escala</th><th>Valores</th><th>Ideal para</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Padrão</strong></td><td>1, 2, 3, 5, 8, 13, 21, ?</td><td>A maioria das equipes Scrum</td></tr>
-        <tr><td><strong>Modificado</strong></td><td>0, 0,5, 1, 2, 3, 5, 8, 13, 20, 40, 100, ?</td><td>Equipes com tarefas muito pequenas e epics no mesmo backlog</td></tr>
-        <tr><td><strong>Potências de 2</strong></td><td>1, 2, 4, 8, 16, 32, 64, ?</td><td>Equipes técnicas com complexidade previsível</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Escala</th><th>Valores</th><th>Ideal para</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Padrão</strong></td><td>1, 2, 3, 5, 8, 13, 21, ?</td><td>A maioria das equipes Scrum</td></tr>
+          <tr><td><strong>Modificado</strong></td><td>0, 0,5, 1, 2, 3, 5, 8, 13, 20, 40, 100, ?</td><td>Equipes com tarefas muito pequenas e epics no mesmo backlog</td></tr>
+          <tr><td><strong>Potências de 2</strong></td><td>1, 2, 4, 8, 16, 32, 64, ?</td><td>Equipes técnicas com complexidade previsível</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Perguntas frequentes</h2>
 

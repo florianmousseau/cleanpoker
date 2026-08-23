@@ -52,18 +52,20 @@
     </p>
 
     <h2>Comparaison rapide</h2>
-    <table>
-      <thead>
-        <tr><th>Technique</th><th>Rapidité</th><th>Précision</th><th>Idéal pour</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Planning poker</strong></td><td>Moyen</td><td>Élevée</td><td>Estimation au sprint de stories bien définies</td></tr>
-        <tr><td><strong>Tailles de T-shirt</strong></td><td>Rapide</td><td>Faible-moyen</td><td>Affinage grossier du backlog, parties prenantes non techniques</td></tr>
-        <tr><td><strong>Affinity mapping</strong></td><td>Très rapide</td><td>Moyen</td><td>Grands backlogs (20+ stories), phase de découverte</td></tr>
-        <tr><td><strong>Bucket system</strong></td><td>Très rapide</td><td>Moyen</td><td>Très grands backlogs (50+ stories)</td></tr>
-        <tr><td><strong>Dot voting</strong></td><td>Rapide</td><td>Faible</td><td>Priorisation, pas estimation</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Technique</th><th>Rapidité</th><th>Précision</th><th>Idéal pour</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Planning poker</strong></td><td>Moyen</td><td>Élevée</td><td>Estimation au sprint de stories bien définies</td></tr>
+          <tr><td><strong>Tailles de T-shirt</strong></td><td>Rapide</td><td>Faible-moyen</td><td>Affinage grossier du backlog, parties prenantes non techniques</td></tr>
+          <tr><td><strong>Affinity mapping</strong></td><td>Très rapide</td><td>Moyen</td><td>Grands backlogs (20+ stories), phase de découverte</td></tr>
+          <tr><td><strong>Bucket system</strong></td><td>Très rapide</td><td>Moyen</td><td>Très grands backlogs (50+ stories)</td></tr>
+          <tr><td><strong>Dot voting</strong></td><td>Rapide</td><td>Faible</td><td>Priorisation, pas estimation</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Tailles de T-shirt</h2>
     <p>

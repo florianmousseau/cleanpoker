@@ -38,22 +38,24 @@
     </p>
 
     <h2>Números-chave</h2>
-    <table>
-      <thead>
-        <tr><th>Métrica</th><th>Valor</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Bundle JS partilhado (brotli, validado por CI)</td><td><strong>&lt; 50 KB</strong></td></tr>
-        <tr><td>CO₂ estimado por visita</td><td><strong>&lt; 0,1 g</strong></td></tr>
-        <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Lighthouse Acessibilidade</td><td><strong>100 / 100</strong></td></tr>
-        <tr><td>Pedidos a terceiros</td><td><strong>1</strong> (o contador de páginas vistas)</td></tr>
-        <tr><td>Rastreio comportamental</td><td><strong>0</strong> (o contador não cria qualquer identificador)</td></tr>
-        <tr><td>Cookies publicitários</td><td><strong>0</strong></td></tr>
-        <tr><td>Google Fonts carregadas</td><td><strong>0</strong></td></tr>
-        <tr><td>RAM do servidor</td><td><strong>~15 MB</strong> (binário Go)</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Métrica</th><th>Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Bundle JS partilhado (brotli, validado por CI)</td><td><strong>&lt; 50 KB</strong></td></tr>
+          <tr><td>CO₂ estimado por visita</td><td><strong>&lt; 0,1 g</strong></td></tr>
+          <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
+          <tr><td>Lighthouse Acessibilidade</td><td><strong>100 / 100</strong></td></tr>
+          <tr><td>Pedidos a terceiros</td><td><strong>1</strong> (o contador de páginas vistas)</td></tr>
+          <tr><td>Rastreio comportamental</td><td><strong>0</strong> (o contador não cria qualquer identificador)</td></tr>
+          <tr><td>Cookies publicitários</td><td><strong>0</strong></td></tr>
+          <tr><td>Google Fonts carregadas</td><td><strong>0</strong></td></tr>
+          <tr><td>RAM do servidor</td><td><strong>~15 MB</strong> (binário Go)</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>Escolhas técnicas para reduzir o impacto</h2>
     <ul>

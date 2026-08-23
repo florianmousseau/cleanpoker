@@ -106,20 +106,22 @@
     </p>
 
     <h2>Exactly what CleanPoker covers</h2>
-    <table>
-      <thead>
-        <tr><th>Criterion</th><th>CleanPoker</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Paywall</td><td>None. No paid tier, no participant cap, no session quota.</td></tr>
-        <tr><td>Sessions after the meeting</td><td>In memory only, never written to disk, deleted 24 hours after the last activity.</td></tr>
-        <tr><td>Third-party scripts</td><td>None. Two technical cookies: language and theme.</td></tr>
-        <tr><td>Accessibility</td><td>WCAG 2.1 AA, full keyboard navigation, NVDA and VoiceOver, Lighthouse accessibility 100.</td></tr>
-        <tr><td>Weight</td><td>Under 50 KB of shared JavaScript, brotli compressed, measured on every CI run.</td></tr>
-        <tr><td>Dropped connection</td><td>Automatic WebSocket reconnect with exponential backoff.</td></tr>
-        <tr><td>Source</td><td>Public, MIT licence.</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Criterion</th><th>CleanPoker</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Paywall</td><td>None. No paid tier, no participant cap, no session quota.</td></tr>
+          <tr><td>Sessions after the meeting</td><td>In memory only, never written to disk, deleted 24 hours after the last activity.</td></tr>
+          <tr><td>Third-party scripts</td><td>None. Two technical cookies: language and theme.</td></tr>
+          <tr><td>Accessibility</td><td>WCAG 2.1 AA, full keyboard navigation, NVDA and VoiceOver, Lighthouse accessibility 100.</td></tr>
+          <tr><td>Weight</td><td>Under 50 KB of shared JavaScript, brotli compressed, measured on every CI run.</td></tr>
+          <tr><td>Dropped connection</td><td>Automatic WebSocket reconnect with exponential backoff.</td></tr>
+          <tr><td>Source</td><td>Public, MIT licence.</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <h2>What CleanPoker cannot do</h2>
     <p>
