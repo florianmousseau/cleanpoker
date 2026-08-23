@@ -4,6 +4,7 @@
 
 - fix(ui): every table scrolls in its own box, and the backend stops being pinned to one host
 - fix(seo): link the de, es and pt content pages from their about page (#164)
+- fix(ci): go.mod carries the patch version the Dockerfile builds with
 
 ## [0.0.3] - 2026-08-23
 
