@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.3] - 2026-08-23
+
+- fix(ui): nothing pushes a page past a 320 px screen, and the percent sign joins the typography guard
+
 ## [0.0.2] - 2026-08-21
 
 - fix(ci): run the release gate instead of announcing it (#161)
