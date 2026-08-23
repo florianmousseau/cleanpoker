@@ -45,7 +45,7 @@
       <li>Personnes aveugles ou malvoyantes utilisant un lecteur d'écran (NVDA, VoiceOver, JAWS)</li>
       <li>Personnes ayant des troubles moteurs naviguant exclusivement au clavier</li>
       <li>Personnes sensibles aux animations (épilepsie, troubles vestibulaires)</li>
-      <li>Personnes utilisant un zoom navigateur jusqu'à 200 %</li>
+      <li>Personnes utilisant un zoom navigateur jusqu'à 200&nbsp;%</li>
       <li>Équipes agiles souhaitant inclure des membres en situation de handicap</li>
     </ul>
 
@@ -139,7 +139,7 @@
   }
 
   ul {
-    padding-left: 1.5rem;
+    padding-left: min(1.5rem, 24px);
     display: flex;
     flex-direction: column;
     gap: 0.375rem;
