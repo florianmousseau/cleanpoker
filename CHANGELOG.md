@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.5] - 2026-08-24
+
+- feat: no measurement script, and the two-sided sentence that replaces it
+- docs(agents): the narrow-screen gate and the percent sign, with what neither can see
+
 ## [0.0.4] - 2026-08-23
 
 - fix(ui): every table scrolls in its own box, and the backend stops being pinned to one host

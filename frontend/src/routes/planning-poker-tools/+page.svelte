@@ -30,7 +30,7 @@
       {
         '@type': 'Question',
         name: 'How do I check whether a planning poker tool tracks users?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Open the browser developer tools, Network tab, and reload the page: every domain that is not the site itself is a third party. Run it here and you get one: the page counter named on the eco-design page, which sets no cookie and builds no visitor identifier. The Application tab shows cookies and local storage. The check takes two minutes and beats any promise printed on a homepage.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Open the browser developer tools, Network tab, and reload the page: every domain that is not the site itself is a third party. Run it here and you get none. The Application tab shows cookies and local storage. The check takes two minutes and beats any promise printed on a homepage.' },
       },
     ],
   })}<\/script>`}
@@ -70,7 +70,7 @@
       An ad network, an analytics vendor or a remote font sees every visit, and for a European
       employer each one is a transfer to document.
       <strong>How to check</strong>: browser developer tools, Network tab, reload. Every domain that
-      is not the site itself is a third party. Run it here and you get one: the page counter named on the eco-design page, which sets no cookie and builds no visitor identifier.
+      is not the site itself is a third party. Run it here and you get none.
     </p>
 
     <h2>4. Real accessibility, not the badge</h2>

@@ -131,10 +131,10 @@
         <tbody>
           <tr><td>Compte utilisateur</td><td>Aucun. Ni e-mail, ni mot de passe, ni profil.</td></tr>
           <tr><td>Cookies</td><td>Deux, techniques&nbsp;: la langue et le thème. Aucun cookie publicitaire, aucun cookie de mesure.</td></tr>
-          <tr><td>Scripts tiers</td><td>Un seul&nbsp;: Cloudflare Web Analytics, un compteur de pages vues sans cookie. Pas de police distante, pas de CDN externe.</td></tr>
+          <tr><td>Scripts tiers</td><td>Aucun. Pas de script de mesure, pas de police distante, pas de CDN externe.</td></tr>
           <tr><td>Conservation des sessions</td><td>En mémoire vive uniquement, jamais écrites sur disque. Supprimées 24 heures après la dernière activité.</td></tr>
           <tr><td>Hébergement</td><td>Serveur temps réel exclusivement en France (Paris), pages servies par un réseau de diffusion sur énergie renouvelable.</td></tr>
-          <tr><td>Mesure d'audience</td><td>Aucune, ni côté navigateur, ni par page vue. Le serveur tient trois compteurs agrégés (sessions créées, participants, sessions actives) qui n'identifient ni une salle ni une personne et repartent de zéro à chaque redémarrage.</td></tr>
+          <tr><td>Mesure d'audience</td><td>Aucun script, aucun cookie, aucun identifiant sur votre appareil. Comme pour tout site, l'hébergeur compte les requêtes qu'il sert. Le serveur de jeu tient trois compteurs agrégés (sessions créées, participants, sessions actives) qui n'identifient ni une salle ni une personne et repartent de zéro à chaque redémarrage.</td></tr>
           <tr><td>Vérifiable</td><td>Le code est public et sous licence MIT. Les trois vérifications ci-dessus s'appliquent aussi à cette page.</td></tr>
         </tbody>
       </table>

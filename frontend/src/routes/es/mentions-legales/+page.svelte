@@ -94,14 +94,13 @@
       CleanPoker <strong>no utiliza ninguna cookie publicitaria ni ninguna herramienta que siga a un visitante</strong>.
     </p>
     <p>
-      Las páginas vistas se cuentan con <strong>Cloudflare Web Analytics</strong>. Esta herramienta
-      no deposita ninguna cookie, no lee ni escribe nada en su dispositivo y no crea ningún
-      identificador de visitante, por lo que no puede seguirle ni de una visita a otra ni hacia
-      otro sitio. Registra la página, el enlace por el que ha llegado, el país, el tipo de
-      dispositivo y el navegador; su dirección IP sirve para determinar ese país en el momento de
-      la solicitud y no se conserva. Por eso nada aquí le pide su consentimiento: el
-      consentimiento se aplica a la lectura o escritura de información en su dispositivo, y esta
-      medición no hace ni lo uno ni lo otro.
+      <strong>Ningún script mide su visita</strong>: no se carga ninguna herramienta de medición,
+      no se deposita ninguna cookie con ese fin y no se escribe ningún identificador de visitante
+      en su dispositivo. Como en cualquier sitio web, el proveedor que sirve estas páginas,
+      Cloudflare, registra las solicitudes que responde, la página, el país, el navegador y la
+      dirección IP en el momento de la solicitud, para entregar y proteger el servicio. Por eso
+      nada aquí le pide su consentimiento: el consentimiento se aplica a la lectura o escritura de
+      información en su dispositivo, y ninguna página hace ni lo uno ni lo otro.
     </p>
     <p>
       El servidor de juego mantiene dos contadores anónimos, el número de sesiones creadas y

@@ -19,7 +19,7 @@
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      sustainabilityNote: 'Hosted on renewable energy (Cloudflare Pages + Fly.io CDG Paris). JS bundle under 50 KB brotli. One third-party script, a cookieless page counter. CO2 under 0.1 g per visit.',
+      sustainabilityNote: 'Hosted on renewable energy (Cloudflare Pages + Fly.io CDG Paris). JS bundle under 50 KB brotli. No third-party script. CO2 under 0.1 g per visit.',
     },
   })}<\/script>`}
 </svelte:head>
@@ -48,8 +48,9 @@
           <tr><td>Estimated CO₂ per visit</td><td><strong>&lt; 0.1 g</strong></td></tr>
           <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
           <tr><td>Lighthouse Accessibility</td><td><strong>100 / 100</strong></td></tr>
-          <tr><td>Third-party requests</td><td><strong>1</strong> (the page counter)</td></tr>
-          <tr><td>Behavioural tracking</td><td><strong>0</strong> (the counter builds no visitor identifier)</td></tr>
+          <tr><td>Third-party requests</td><td><strong>0</strong></td></tr>
+          <tr><td>Trackers, analytics scripts</td><td><strong>0</strong></td></tr>
+          <tr><td>Requests counted by the host</td><td><strong>yes</strong> (Cloudflare, as for any site, server-side)</td></tr>
           <tr><td>Advertising cookies</td><td><strong>0</strong></td></tr>
           <tr><td>Google Fonts loaded</td><td><strong>0</strong></td></tr>
           <tr><td>Backend RAM</td><td><strong>~15 MB</strong> (Go binary)</td></tr>
@@ -63,7 +64,7 @@
       <li><strong>No Google Fonts</strong>: system fonts only, no network requests</li>
       <li><strong>No virtual DOM</strong>: SvelteKit compiles to vanilla JavaScript, minimal bundle</li>
       <li><strong>No database</strong>: Go in-memory sessions, auto-deleted after 24h of inactivity</li>
-      <li><strong>One third-party script</strong>: a cookieless page counter, and no Analytics SDK, Chat or A/B testing</li>
+      <li><strong>No third-party script</strong>: no Analytics SDK, no Chat, no A/B testing</li>
       <li><strong>Brotli compression</strong>: more efficient than gzip, enabled by default on Cloudflare</li>
       <li><strong>Go backend</strong>: native binary ~15 MB RAM, no JVM or Node.js runtime to maintain</li>
       <li><strong>Native WebSocket</strong>: no HTTP polling, lightweight persistent connection</li>
