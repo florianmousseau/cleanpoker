@@ -19,7 +19,7 @@
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      sustainabilityNote: 'Alojado em energia renovável (Cloudflare Pages + Fly.io CDG Paris). Bundle JS abaixo de 50 KB brotli. Um único script de terceiros, um contador de páginas vistas sem cookies. CO2 abaixo de 0,1 g por visita.',
+      sustainabilityNote: 'Alojado em energia renovável (Cloudflare Pages + Fly.io CDG Paris). Bundle JS abaixo de 50 KB brotli. Nenhum script de terceiros. CO2 abaixo de 0,1 g por visita.',
     },
   })}<\/script>`}
 </svelte:head>
@@ -48,8 +48,9 @@
           <tr><td>CO₂ estimado por visita</td><td><strong>&lt; 0,1 g</strong></td></tr>
           <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
           <tr><td>Lighthouse Acessibilidade</td><td><strong>100 / 100</strong></td></tr>
-          <tr><td>Pedidos a terceiros</td><td><strong>1</strong> (o contador de páginas vistas)</td></tr>
-          <tr><td>Rastreio comportamental</td><td><strong>0</strong> (o contador não cria qualquer identificador)</td></tr>
+          <tr><td>Pedidos a terceiros</td><td><strong>0</strong></td></tr>
+          <tr><td>Rastreadores, scripts de medição</td><td><strong>0</strong></td></tr>
+          <tr><td>Pedidos contados pelo alojamento</td><td><strong>sim</strong> (Cloudflare, como em qualquer site, do lado do servidor)</td></tr>
           <tr><td>Cookies publicitários</td><td><strong>0</strong></td></tr>
           <tr><td>Google Fonts carregadas</td><td><strong>0</strong></td></tr>
           <tr><td>RAM do servidor</td><td><strong>~15 MB</strong> (binário Go)</td></tr>
@@ -63,7 +64,7 @@
       <li><strong>Sem Google Fonts</strong>: apenas fontes do sistema, sem pedidos de rede</li>
       <li><strong>Sem DOM virtual</strong>: SvelteKit compila para JavaScript vanilla, bundle mínimo</li>
       <li><strong>Sem base de dados</strong>: sessões em memória Go, eliminadas automaticamente após 24h de inatividade</li>
-      <li><strong>Um único script de terceiros</strong>: um contador de páginas vistas sem cookies, e nenhum SDK de Analytics, Chat ou A/B testing</li>
+      <li><strong>Nenhum script de terceiros</strong>: nenhum SDK de Analytics, Chat ou A/B testing</li>
       <li><strong>Compressão Brotli</strong>: mais eficiente que gzip, ativada por defeito no Cloudflare</li>
       <li><strong>Backend Go</strong>: binário nativo ~15 MB RAM, sem JVM ou Node.js para manter</li>
       <li><strong>WebSocket nativo</strong>: sem polling HTTP, ligação persistente leve</li>

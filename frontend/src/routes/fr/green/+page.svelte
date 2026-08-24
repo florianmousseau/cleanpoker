@@ -48,8 +48,9 @@
           <tr><td>CO₂ estimé par visite</td><td><strong>&lt; 0,1 g</strong></td></tr>
           <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
           <tr><td>Lighthouse Accessibilité</td><td><strong>100 / 100</strong></td></tr>
-          <tr><td>Requêtes vers des tiers</td><td><strong>1</strong> (le compteur de pages vues)</td></tr>
-          <tr><td>Suivi comportemental</td><td><strong>0</strong> (le compteur ne fabrique aucun identifiant)</td></tr>
+          <tr><td>Requêtes vers des tiers</td><td><strong>0</strong></td></tr>
+          <tr><td>Traceurs, scripts de mesure</td><td><strong>0</strong></td></tr>
+          <tr><td>Requêtes comptées par l'hébergeur</td><td><strong>oui</strong> (Cloudflare, comme pour tout site, côté serveur)</td></tr>
           <tr><td>Cookies publicitaires</td><td><strong>0</strong></td></tr>
           <tr><td>Polices Google chargées</td><td><strong>0</strong></td></tr>
           <tr><td>RAM backend</td><td><strong>~15 Mo</strong> (binaire Go)</td></tr>
@@ -63,7 +64,7 @@
       <li><strong>Pas de polices Google</strong>&nbsp;: polices système uniquement, aucune requête réseau</li>
       <li><strong>Pas de DOM virtuel</strong>&nbsp;: SvelteKit compile en JavaScript vanilla, bundle minimal</li>
       <li><strong>Pas de base de données</strong>&nbsp;: sessions en mémoire Go, auto-supprimées après 24 h d'inactivité</li>
-      <li><strong>Un seul script tiers</strong>&nbsp;: un compteur de pages vues sans cookie, et aucun SDK Analytics, Chat ou A/B testing</li>
+      <li><strong>Aucun script tiers</strong>&nbsp;: aucun SDK Analytics, Chat ou A/B testing</li>
       <li><strong>Compression Brotli</strong>&nbsp;: plus efficace que gzip, activée par défaut sur Cloudflare</li>
       <li><strong>Backend Go</strong>&nbsp;: binaire natif ~15 Mo RAM, pas de runtime JVM ou Node.js à maintenir</li>
       <li><strong>WebSocket natif</strong>&nbsp;: pas de polling HTTP, connexion persistante légère</li>
