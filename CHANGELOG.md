@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.6] - 2026-08-24
+
+- fix(legal): name the second processor, the real-time server at Fly.io
+- fix(legal): name the host's role as a processor, in the five languages
+
 ## [0.0.5] - 2026-08-24
 
 - feat: no measurement script, and the two-sided sentence that replaces it
