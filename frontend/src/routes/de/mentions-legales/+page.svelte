@@ -97,7 +97,8 @@
       dafür kein Cookie gesetzt und keine Besucherkennung auf Ihrem Gerät gespeichert. Wie bei
       jeder Website protokolliert der Hoster dieser Seiten, Cloudflare, die Anfragen, die er
       beantwortet, die Seite, das Land, den Browser und die IP-Adresse im Moment der Anfrage, um
-      den Dienst auszuliefern und zu schützen. Deshalb fragt hier nichts nach Ihrer Einwilligung:
+      den Dienst als Auftragsverarbeiter auszuliefern und zu schützen. Der Echtzeit-Spielserver
+      bei Fly.io protokolliert seine eigenen Verbindungen ebenso. Deshalb fragt hier nichts nach Ihrer Einwilligung:
       die Einwilligung knüpft an das Lesen oder Schreiben auf dem Endgerät an, und keine Seite tut
       hier das eine oder das andere.
     </p>

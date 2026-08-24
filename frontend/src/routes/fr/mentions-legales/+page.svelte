@@ -98,7 +98,8 @@
       aucun cookie n'est déposé à cette fin et aucun identifiant de visiteur n'est écrit sur votre
       appareil. Comme pour tout site web, l'hébergeur qui sert ces pages, Cloudflare, enregistre
       les requêtes auxquelles il répond, la page, le pays, le navigateur et l'adresse IP au moment
-      de la requête, pour délivrer et protéger le service. C'est pourquoi rien ne vous demande
+      de la requête, pour délivrer et protéger le service, en qualité de sous-traitant. Le serveur de jeu temps
+      réel, hébergé chez Fly.io, journalise ses propres connexions de la même façon. C'est pourquoi rien ne vous demande
       votre consentement&nbsp;: le consentement de l'article 82 de la loi Informatique et Libertés
       porte sur la lecture ou l'écriture d'informations dans votre terminal, et aucune page n'en
       fait ni l'une ni l'autre.
