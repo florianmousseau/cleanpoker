@@ -98,7 +98,8 @@
       no se deposita ninguna cookie con ese fin y no se escribe ningún identificador de visitante
       en su dispositivo. Como en cualquier sitio web, el proveedor que sirve estas páginas,
       Cloudflare, registra las solicitudes que responde, la página, el país, el navegador y la
-      dirección IP en el momento de la solicitud, para entregar y proteger el servicio, en calidad de encargado del tratamiento. Por eso
+      dirección IP en el momento de la solicitud, para entregar y proteger el servicio, en calidad de encargado del tratamiento. El servidor
+      de juego en tiempo real, alojado en Fly.io, registra sus propias conexiones del mismo modo. Por eso
       nada aquí le pide su consentimiento: el consentimiento se aplica a la lectura o escritura de
       información en su dispositivo, y ninguna página hace ni lo uno ni lo otro.
     </p>

@@ -97,7 +97,8 @@
       is set for that purpose, and no visitor identifier is written to your device. Like every
       website, the host that serves these pages, Cloudflare, records the requests it answers, the
       page, the country, the browser and the IP address at the moment of the request, in order to
-      deliver and protect the service, as a processor. This is why nothing here asks for your consent: consent
+      deliver and protect the service, as a processor. The real-time game server, hosted at
+      Fly.io, logs its own connections in the same way. This is why nothing here asks for your consent: consent
       attaches to reading or writing information on your device, and no page here does either.
     </p>
     <p>

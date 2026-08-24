@@ -98,7 +98,8 @@
       medição, não é colocado qualquer cookie para esse fim e não é escrito qualquer identificador
       de visitante no seu dispositivo. Como em qualquer site, o alojamento que serve estas
       páginas, a Cloudflare, regista os pedidos a que responde, a página, o país, o navegador e o
-      endereço IP no momento do pedido, para entregar e proteger o serviço, na qualidade de subcontratante. É por isso que nada
+      endereço IP no momento do pedido, para entregar e proteger o serviço, na qualidade de subcontratante. O servidor de jogo em
+      tempo real, alojado na Fly.io, regista as suas próprias ligações da mesma forma. É por isso que nada
       aqui lhe pede consentimento: o consentimento aplica-se à leitura ou escrita de informação no
       seu dispositivo, e nenhuma página faz uma coisa nem outra.
     </p>
