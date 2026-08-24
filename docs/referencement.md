@@ -94,9 +94,9 @@ description, 300 caractères environ :
 proposition. L'argument décisif y est l'hébergement, à mettre en avant :
 
 > CleanPoker is a free planning poker tool for agile teams, hosted in Paris,
-> France. No account, no advertising cookie and no ad network. The only
-> third-party script is a cookieless page counter, which builds no visitor
-> identifier. Session content never leaves the European Union: it is held in
+> France. No account, no advertising cookie, no ad network and no third-party
+> script at all. Session content never leaves the European Union: it is held in
+> memory on the Paris server and deleted 24 hours after the last activity.
 > memory on the Paris server and deleted 24 hours after the last activity.
 > Interface in French, English, Spanish, German and Portuguese. Open source,
 > MIT licence.
@@ -105,7 +105,7 @@ proposition. L'argument décisif y est l'hébergement, à mettre en avant :
 `awesome-agile` et `awesome-selfhosted`. Une ligne, au format de la liste :
 
 > - [CleanPoker](https://cleanpoker.dev) - Planning poker with no account, no
->   behavioural tracking and no paid tier. Sessions are ephemeral, WCAG 2.1 AA, MIT licence.
+>   tracker and no paid tier. Sessions are ephemeral, WCAG 2.1 AA, MIT licence.
 >   ([Source Code](https://github.com/florianmousseau/cleanpoker)) `MIT` `Go/JS`
 
 **Sujets du dépôt GitHub** - les dépôts remontent bien dans les résultats, et

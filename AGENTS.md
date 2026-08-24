@@ -22,44 +22,49 @@
 
 ## Philosophie du projet
 
-- Aucun suivi comportemental, aucun cookie publicitaire, un compteur de pages vues sans cookie
+- Aucun traceur, aucun cookie publicitaire, aucun script tiers
 - Bundle JS < 50 Ko (brotli), mesuré par `npm run size` sur le JS partagé
 - Lighthouse Performance et Accessibilité : 100/100
 - WCAG 2.1 AA
 - Hébergement sur énergie renouvelable
 
-## La mesure d'audience, et ce qu'elle a coûté
+## La mesure d'audience : aucun script, et la phrase qui va avec
 
-Depuis le 2026-08-11, sur décision de Florian pour tout le portefeuille, le site
-compte ses pages vues avec Cloudflare Web Analytics : un compteur dédié, aucun
-cookie, aucun identifiant de visiteur, aucune IP conservée, donc aucune bannière
-de consentement à ajouter.
+Le 2026-08-24, sur décision de Florian pour tout le portefeuille (direction
+D-042), le script de mesure a quitté toutes les pages. Aucune balise, aucun
+cookie de mesure, aucun identifiant de visiteur, aucun script tiers.
 
-Ce produit vendait « zéro trackers » plus fort que les autres : un badge public
-`trackers-0` dans le README, une ligne `Trackers / analytics : 0` dans le
-tableau d'éco-conception des cinq langues, et une page qui reproche aux autres
-outils de charger un fournisseur d'analytics. Rien n'a été adouci : les phrases
-devenues fausses ont été retirées, et remplacées par des phrases plus étroites
-et vraies (« aucun suivi comportemental », « un seul script tiers »).
+**Ce que ça n'autorise PAS à écrire : « ce site ne mesure rien ».** Cloudflare
+compte toujours les requêtes au niveau du réseau, pour ce site comme pour tous
+ceux qu'il sert, et c'est ce comptage que lit le cockpit. La phrase juste dit
+les DEUX moitiés : aucun script, aucun cookie, aucun identifiant déposé sur
+l'appareil, ET un comptage des requêtes par l'hébergeur, comme pour tout site.
+Une moitié seule est un mensonge, dans un sens ou dans l'autre, et les deux ont
+déjà été payés ici : la promesse trop large le 2026-08-11, quand la balise est
+arrivée sur un produit qui vendait « zéro trackers » en cinq langues, et le
+défaut inverse le jour où on l'a retirée.
 
-**Ne réécris jamais « zéro trackers », « no third-party scripts », « sin
-rastreadores », « sem rastreadores » ni « keine Tracker »**, dans aucune des
-cinq langues, nulle part : page, meta, JSON-LD, mots-clés, `llms.txt`, README ou
-commentaire. `npm run mesure` balaie TOUS les fichiers livrés et refuse ces
-tournures tant que la balise est servie. Il ne lit pas une liste de fichiers
-mais l'arbre entier, précisément pour attraper la page que quelqu'un écrira le
-mois prochain avec le vieux vocabulaire.
+Le badge public `trackers-0` est revenu, parce qu'aucun traceur ne touche plus
+le lecteur. Il n'est défendable que tant que la nuance est écrite à côté de lui,
+et `npm run mesure` refuse le badge sans sa phrase.
+
+**Ne réécris jamais « aucune mesure », « nothing is measured », « no analytics
+of any kind », « ninguna medición », « nenhuma medição » ni « keine Messung »**,
+dans aucune des cinq langues, nulle part : page, meta, JSON-LD, mots-clés,
+`llms.txt`, README ou commentaire. `npm run mesure` balaie TOUS les fichiers
+livrés, pas une liste de fichiers, précisément pour attraper la page que
+quelqu'un écrira le mois prochain avec le vocabulaire d'à côté.
 
 Ce qui reste vrai et se vend toujours : aucun cookie publicitaire, aucun compte,
-pas de tracking comportemental, moins de 50 Ko de JS, et le contenu des sessions
-qui vit en mémoire et ne quitte pas Paris.
+aucun script tiers, moins de 50 Ko de JS, et le contenu des sessions qui vit en
+mémoire et ne quitte pas Paris.
 
 ## Invariants à ne pas casser
 
-- **La balise du compteur est dans DEUX politiques** : `frontend/_headers` pour
+- **La politique de sécurité est dans DEUX fichiers** : `frontend/_headers` pour
   les fichiers statiques et `frontend/src/hooks.server.ts` pour les pages du
-  worker. Une balise autorisée dans l'une et pas l'autre donne une page qui ne
-  compte rien en silence. `npm run mesure` tient les deux égales.
+  worker. Une permission rouverte dans l'un et pas l'autre est une porte que
+  personne ne surveille. `npm run mesure` tient les deux fermées et égales.
 - **En-têtes de sécurité** : ils sont posés dans `frontend/src/hooks.server.ts`.
   Cloudflare Pages n'applique `frontend/_headers` qu'aux fichiers statiques,
   jamais aux réponses du worker SvelteKit, donc les pages HTML n'en reçoivent

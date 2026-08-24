@@ -1,34 +1,40 @@
 /*
- * THE MEASUREMENT, THE POLICY AND THE CLAIMS, KEPT EQUAL TO ONE ANOTHER.
+ * NO MEASUREMENT SCRIPT, AND NO PAGE THAT OVERSELLS IT.
  *
  *     npm run mesure
  *
- * Until 2026-08-11 this site sold "zero trackers" in five languages: a public
- * badge in the README, a row reading `Trackers / analytics: 0` in the
- * eco-design table, and a comparison page that reproached other planning poker
- * tools for loading an analytics vendor. Florian decided to count anyway, for
- * the whole portfolio, and the cost was never one sentence - it was seventy,
- * spread over five languages and a dozen SEO pages.
+ * This guard was written on 2026-08-11 to stop the pages denying a beacon that
+ * was being served. On 2026-08-24 Florian removed the beacon from the whole
+ * portfolio, so it is TURNED AROUND: it now refuses the beacon coming back, and
+ * refuses any page naming a tool that is gone.
  *
- * That spread is the whole reason this file exists, and why it scans EVERY
- * shipped file rather than a named list. A sixth page written next month, in
- * any of the five languages, would carry the old boast by habit - the phrases
- * below are the product's own vocabulary - and nothing else would notice.
+ * WHY IT IS NOT SIMPLY THE OLD FILE WITH THE BOOLEAN FLIPPED. Dropping the
+ * script does not make "this site measures nothing" true. Cloudflare counts the
+ * requests it answers at the edge, for every site it serves, and that count is
+ * what the cockpit now reads. So the sentence that is allowed says BOTH halves:
+ * no script, no cookie, no identifier on the device - AND a request count by
+ * the host, like any site. The badge went back to `trackers-0` because no
+ * tracker touches the reader any more; it is only defensible while the nuance
+ * sits beside it, which is why the nuance is checked here and not trusted.
  *
- * It holds the equality in BOTH directions: ship the beacon and no page may
- * claim zero third parties; drop it and both policies must close the permission
- * again and the legal pages stop naming a tool that is gone.
+ * The opposite defect was paid on 2026-08-11, when the beacon arrived on a site
+ * promising zero trackers in five languages, and cost seventy strings to
+ * repair. Both defects are the same one: a page and the bytes disagreeing.
+ *
+ * It scans EVERY shipped file rather than a named list. A sixth page written
+ * next month, in any of the five languages, would carry the old wording by
+ * habit - it is the product's own vocabulary - and nothing else would notice.
  *
  * TWO POLICIES, and that is not a duplicate. Cloudflare Pages applies _headers
  * to static assets only, never to the responses the SvelteKit worker produces,
- * so the HTML pages take their headers from hooks.server.ts. A beacon allowed
- * in one and not the other is a page that silently fails to count, or a policy
- * that lies about what it permits.
+ * so the HTML pages take their headers from hooks.server.ts. A permission left
+ * open in one of them is a door nobody watches.
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const BEACON = 'https://static.cloudflareinsights.com/beacon.min.js';
+const VENDOR = 'cloudflareinsights';
+const TOOL = 'Cloudflare Web Analytics';
 const lire = (chemin) => readFileSync(chemin, 'utf8');
 
 const shell = lire('src/app.html');
@@ -37,108 +43,147 @@ const headers = lire('_headers');
 const llms = lire('static/llms.txt');
 const readme = lire('../README.md');
 
-const measured = shell.includes(BEACON);
 const faults = [];
 const require_ = (condition, phrase) => {
 	if (!condition) faults.push(phrase);
 };
 
-// --- les deux politiques, tenues egales entre elles et a la coquille ---
+// --- rien ne charge, et les deux politiques sont refermees ---
+require_(!shell.includes(VENDOR), 'src/app.html loads a measurement script again');
 require_(
-	hooks.includes(`"script-src 'self' 'unsafe-inline' ${BEACON}"`) === measured,
-	`hooks.server.ts names the beacon while the shell loads it (shell: ${measured})`
+	hooks.includes(`"script-src 'self' 'unsafe-inline'"`) && !hooks.includes(VENDOR),
+	'hooks.server.ts allows a script it has no reason to allow'
 );
 require_(
-	headers.includes(`script-src 'self' 'unsafe-inline' ${BEACON};`) === measured,
-	'_headers names the beacon too, or the static half of the site disagrees'
+	headers.includes(`script-src 'self' 'unsafe-inline';`) && !headers.includes(VENDOR),
+	'_headers allows a script it has no reason to allow, and the static half of the site disagrees'
 );
 require_(
-	hooks.includes('wss://cleanpoker-backend.fly.dev cloudflareinsights.com') === measured,
-	'hooks.server.ts lets the page view out, and nothing else'
+	hooks.includes(`"connect-src 'self' https://cleanpoker-backend.fly.dev wss://cleanpoker-backend.fly.dev"`),
+	'hooks.server.ts lets the page reach the game server, and nothing else'
 );
 require_(
-	headers.includes('wss://cleanpoker-backend.fly.dev cloudflareinsights.com;') === measured,
-	'_headers lets the page view out, and nothing else'
+	headers.includes(
+		`connect-src 'self' https://cleanpoker-backend.fly.dev wss://cleanpoker-backend.fly.dev;`
+	),
+	'_headers lets the page reach the game server, and nothing else'
 );
 
-// A beacon with no token answers 200 and counts nothing, on every page, for as
-// long as nobody opens the dashboard to notice.
+// A token in the shell is the other way the beacon comes back: the script tag
+// can be rebuilt around it in one line.
+require_(
+	!/"token":\s*"[0-9a-f]{32}"/.test(shell),
+	'the shell carries a site token again, which is a beacon waiting for its tag'
+);
+// The retired tokens STAY in .gitleaks.toml: a full-history scan still finds
+// them in the commits that carried them, so dropping the allowance turns the
+// repository red with nothing new to hide. What must not come back is a token
+// declared as served.
+require_(
+	!lire('../.gitleaks.toml').includes('# Served today.'),
+	'.gitleaks.toml declares a token as served while no page serves one'
+);
+
+// --- la nuance, exigee la ou la promesse est faite ---
 //
-// WHAT THIS CHECK CANNOT SEE, and what cost two days of measuring nothing: a
-// `site_tag` has exactly the same shape as a `site_token`, and it was the
-// former that got copied into the shell. The beacon loads, the policy allows
-// it, no console says a word - and the beacon's POST answers with a CORS error
-// because the token does not exist. Only the RUM data tells. So the token is
-// copied from the `snippet` returned by
-// `GET /accounts/<account>/rum/site_info/list`, never from a create response
-// read wrong.
-require_(
-	/"token":\s*"[0-9a-f]{32}"/.test(shell) === measured,
-	'the shell carries a real site token, because an empty one counts in silence'
-);
-// The FIRST value in the allowlist is the one being served; the ones below it
-// are retired tokens that cannot be dropped, because the scan reads the whole
-// history. Comparing against the first keeps the original rule: an allowance
-// does not outlive the token it was written for.
-require_(
-	(() => {
-		const served = /"token":\s*"([0-9a-f]{32})"/.exec(shell)?.[1];
-		const allowed = /'''([0-9a-f]{32})'''/.exec(lire('../.gitleaks.toml'))?.[1];
-		return served === allowed;
-	})(),
-	'gitleaks allows the token the shell serves at the top of the list'
-);
-
-// --- les cinq pages legales, et les deux surfaces lues par des machines ---
-const LEGALES = ['', 'fr/', 'de/', 'es/', 'pt/'].map(
-	(l) => `src/routes/${l}mentions-legales/+page.svelte`
-);
-for (const page of LEGALES) {
+// Chacune de ces phrases dit les DEUX moities. Elles sont verifiees une par
+// une, et pas par mot-cle : une formulation voisine qui ne garderait que la
+// premiere moitie est exactement le mensonge qu'on repare.
+const flat = (texte) => texte.replace(/\s+/g, ' ');
+const NUANCE = [
+	['../README.md', readme, 'the host that serves the pages counts the requests it answers'],
+	['static/llms.txt', llms, 'The host that serves the pages counts the requests it answers'],
+	[
+		'src/routes/green/+page.svelte',
+		null,
+		'<tr><td>Requests counted by the host</td><td><strong>yes</strong>'
+	],
+	[
+		'src/routes/fr/green/+page.svelte',
+		null,
+		"<tr><td>Requêtes comptées par l'hébergeur</td><td><strong>oui</strong>"
+	],
+	[
+		'src/routes/de/green/+page.svelte',
+		null,
+		'<tr><td>Vom Hoster gezählte Anfragen</td><td><strong>ja</strong>'
+	],
+	[
+		'src/routes/es/green/+page.svelte',
+		null,
+		'<tr><td>Solicitudes contadas por el proveedor</td><td><strong>sí</strong>'
+	],
+	[
+		'src/routes/pt/green/+page.svelte',
+		null,
+		'<tr><td>Pedidos contados pelo alojamento</td><td><strong>sim</strong>'
+	],
+	[
+		'src/routes/mentions-legales/+page.svelte',
+		null,
+		'the host that serves these pages, Cloudflare, records the requests it answers'
+	],
+	[
+		'src/routes/fr/mentions-legales/+page.svelte',
+		null,
+		"l'hébergeur qui sert ces pages, Cloudflare, enregistre les requêtes auxquelles il répond"
+	],
+	[
+		'src/routes/de/mentions-legales/+page.svelte',
+		null,
+		'protokolliert der Hoster dieser Seiten, Cloudflare, die Anfragen, die er beantwortet'
+	],
+	[
+		'src/routes/es/mentions-legales/+page.svelte',
+		null,
+		'el proveedor que sirve estas páginas, Cloudflare, registra las solicitudes que responde'
+	],
+	[
+		'src/routes/pt/mentions-legales/+page.svelte',
+		null,
+		'o alojamento que serve estas páginas, a Cloudflare, regista os pedidos a que responde'
+	]
+];
+for (const [ou, deja, phrase] of NUANCE) {
 	require_(
-		lire(page).includes('Cloudflare Web Analytics') === measured,
-		`${page} names the tool while the measurement exists`
+		flat(deja ?? lire(ou)).includes(phrase),
+		`${ou} no longer says the host counts requests, and the claim beside it needs that half`
 	);
 }
 require_(
-	llms.includes('Cloudflare Web Analytics') === measured,
-	'llms.txt names the tool, because that is what answer engines read'
-);
-require_(
-	readme.includes('Cloudflare Web Analytics') === measured,
-	'the README names the tool where its badge used to promise the opposite'
-);
-require_(
-	readme.includes('badge/trackers-0') === !measured,
-	'the public trackers-0 badge is gone while the site counts'
+	readme.includes('badge/trackers-0'),
+	'the trackers-0 badge is the promise this product is sold on, and it is true again'
 );
 
 // --- le vocabulaire interdit, dans les cinq langues, PARTOUT ---
 //
-// Balaye tous les fichiers livres plutot qu'une liste nommee : ces tournures
-// sont le vocabulaire maison du produit, et la prochaine page les reprendra par
-// habitude. Une liste de fichiers ne verrait pas la page suivante.
+// Ce ne sont PAS les anciennes tournures de 2026-08-11 : « zero trackers » est
+// redevenu vrai et le badge est revenu avec. Ce qui reste faux, et le restera
+// tant que Cloudflare sert ces pages, c'est de nier TOUTE mesure. Un lecteur
+// qui lit « ce site ne mesure rien » et trouve un compteur d'audience dans le
+// cockpit a ete trompe, meme si aucun octet n'a touche son appareil.
 const INTERDITES = [
-	'zero trackers',
-	'Zero trackers',
-	'no trackers',
-	'no third-party script',
-	'No third-party script',
-	'trackers-0',
-	'zéro trackers',
-	'Zéro trackers',
-	'sans trackers',
-	'sans tracker.',
-	'Pas de scripts tiers',
-	'sin rastreadores',
-	'Sin rastreadores',
-	'Sin scripts de terceros',
-	'sem rastreadores',
-	'Sem rastreadores',
-	'Sem scripts de terceiros',
-	'keine Tracker',
-	'Keine Tracker',
-	'null Tracker',
-	'Keine Drittanbieter-Skripte'
+	VENDOR,
+	TOOL,
+	'no measurement at all',
+	'nothing is measured',
+	'we measure nothing',
+	'no analytics of any kind',
+	'zero analytics',
+	'measures nothing',
+	'aucune mesure',
+	'ne mesure rien',
+	'ne mesurons rien',
+	'zéro analytics',
+	'keine Messung',
+	'misst nichts',
+	'messen nichts',
+	'ninguna medición',
+	'no mide nada',
+	'no medimos nada',
+	'nenhuma medição',
+	'não mede nada',
+	'não medimos nada'
 ];
 
 const livres = [];
@@ -147,7 +192,7 @@ const parcourir = (dir) => {
 		if (['node_modules', 'build', '.svelte-kit'].includes(e)) continue;
 		const p = join(dir, e);
 		if (statSync(p).isDirectory()) parcourir(p);
-		else if (/\.(svelte|ts|txt|md)$/.test(e)) livres.push(p);
+		else if (/\.(svelte|ts|txt|md|html)$/.test(e)) livres.push(p);
 	}
 };
 parcourir('src');
@@ -162,21 +207,16 @@ parcourir('src');
 // doit bien vivre quelque part.
 livres.push('static/llms.txt', '../README.md', '../docs/referencement.md');
 
-if (measured) {
-	for (const chemin of livres) {
-		const texte = lire(chemin);
-		for (const phrase of INTERDITES) {
-			if (texte.includes(phrase)) {
-				faults.push(`${chemin.replaceAll('\\', '/')} still claims "${phrase}"`);
-			}
+for (const chemin of livres) {
+	const texte = lire(chemin);
+	for (const phrase of INTERDITES) {
+		if (texte.includes(phrase)) {
+			faults.push(`${chemin.replaceAll('\\', '/')} still says "${phrase}"`);
 		}
 	}
 }
 
 // --- et ce qui reste vrai, verifie sans condition ---
-//
-// Ce sont les phrases que le produit vend vraiment, et aucune ne depend du
-// compteur : il part a l'ouverture d'une page et ne touche pas une session.
 require_(
 	lire('src/routes/green/+page.svelte').includes(
 		'No Google Analytics or any behavioral tracking tool'
@@ -184,23 +224,21 @@ require_(
 	'the eco-design page still rules out behavioural tracking'
 );
 require_(
-	lire(LEGALES[1]).includes('rien n&apos;est écrit sur disque') ||
-		lire(LEGALES[1]).includes("rien n'est écrit sur disque"),
+	lire('src/routes/fr/mentions-legales/+page.svelte').includes('rien n&apos;est écrit sur disque') ||
+		lire('src/routes/fr/mentions-legales/+page.svelte').includes("rien n'est écrit sur disque"),
 	'the French legal page still says nothing is written to disk'
 );
 
 if (faults.length) {
-	console.error('The measurement and what the site says about it have drifted apart:\n');
+	console.error('The bytes and what the site says about them have drifted apart:\n');
 	for (const f of faults) console.error(`  - ${f}`);
 	console.error(
-		'\nEither a page is claiming something the shell no longer does, or the shell\n' +
-			'is doing something the pages still deny. Both are the same defect.'
+		'\nEither a script came back that no page declares, or a page is claiming\n' +
+			'more silence than this site can honestly promise. Both are the same defect.'
 	);
 	process.exit(1);
 }
 
 console.log(
-	measured
-		? `Measurement declared: both policies, ${LEGALES.length} legal pages, llms.txt and the README agree with the shell.`
-		: 'No measurement: both policies closed, and no page claims one.'
+	'No measurement script: both policies closed, no page names a tool, and the host-side count is stated where the promise is made.'
 );

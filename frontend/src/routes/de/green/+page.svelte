@@ -19,7 +19,7 @@
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      sustainabilityNote: 'Auf erneuerbaren Energien gehostet (Cloudflare Pages + Fly.io CDG Paris). JS-Bundle unter 50 KB brotli. Ein cookieloser Seitenzähler als einziges Drittanbieter-Skript. CO2 unter 0,1 g pro Besuch.',
+      sustainabilityNote: 'Auf erneuerbaren Energien gehostet (Cloudflare Pages + Fly.io CDG Paris). JS-Bundle unter 50 KB brotli. Keine Drittanbieter-Skripte. CO2 unter 0,1 g pro Besuch.',
     },
   })}<\/script>`}
 </svelte:head>
@@ -48,8 +48,9 @@
           <tr><td>Geschätztes CO₂ pro Besuch</td><td><strong>&lt; 0,1 g</strong></td></tr>
           <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
           <tr><td>Lighthouse Barrierefreiheit</td><td><strong>100 / 100</strong></td></tr>
-          <tr><td>Anfragen an Dritte</td><td><strong>1</strong> (der Seitenzähler)</td></tr>
-          <tr><td>Verhaltensbasiertes Tracking</td><td><strong>0</strong> (der Zähler erzeugt keine Besucherkennung)</td></tr>
+          <tr><td>Anfragen an Dritte</td><td><strong>0</strong></td></tr>
+          <tr><td>Tracker, Mess-Skripte</td><td><strong>0</strong></td></tr>
+          <tr><td>Vom Hoster gezählte Anfragen</td><td><strong>ja</strong> (Cloudflare, wie bei jeder Website, serverseitig)</td></tr>
           <tr><td>Werbe-Cookies</td><td><strong>0</strong></td></tr>
           <tr><td>Geladene Google Fonts</td><td><strong>0</strong></td></tr>
           <tr><td>Backend-RAM</td><td><strong>~15 MB</strong> (Go-Binärdatei)</td></tr>
@@ -63,7 +64,7 @@
       <li><strong>Keine Google Fonts</strong>: nur Systemschriften, keine Netzwerkanfragen</li>
       <li><strong>Kein virtuelles DOM</strong>: SvelteKit kompiliert zu Vanilla JavaScript, minimales Bundle</li>
       <li><strong>Keine Datenbank</strong>: Go-In-Memory-Sitzungen, nach 24h Inaktivität automatisch gelöscht</li>
-      <li><strong>Ein Drittanbieter-Skript</strong>: ein cookieloser Seitenzähler, und kein Analytics-SDK, Chat oder A/B-Tests</li>
+      <li><strong>Keine Drittanbieter-Skripte</strong>: kein Analytics-SDK, kein Chat, keine A/B-Tests</li>
       <li><strong>Brotli-Komprimierung</strong>: effizienter als gzip, standardmäßig auf Cloudflare aktiviert</li>
       <li><strong>Go-Backend</strong>: native Binärdatei ~15 MB RAM, keine JVM oder Node.js zu warten</li>
       <li><strong>Natives WebSocket</strong>: kein HTTP-Polling, leichte persistente Verbindung</li>
