@@ -2,10 +2,13 @@ package handler_test
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/florianmousseau/cleanpoker/internal/handler"
 	"github.com/florianmousseau/cleanpoker/internal/room"
@@ -289,5 +292,35 @@ func TestHappyPath_VoteShowClear(t *testing.T) {
 	}
 	if snap.Players[0].Vote != "" {
 		t.Fatalf("expected empty vote after clear, got %q", snap.Players[0].Vote)
+	}
+}
+
+// One arrival, one state. This is what made TestHappyPath_VoteShowClear
+// intermittent on CI: the client used to get a directly sent snapshot AND,
+// depending on which queued message the room loop picked first, the broadcast
+// of its own arrival. Every later read was then one message behind, and the
+// vote assertion read the pre-vote snapshot. A duplicate here is silent in the
+// browser, which is why it survived until a test read the messages in order.
+func TestWebSocket_ArrivalSendsExactlyOneState(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	conn := wsConnect(t, srv, id, "Alice")
+
+	if got := recv(t, conn).Type; got != "welcome" {
+		t.Fatalf("expected welcome, got %q", got)
+	}
+	if got := recv(t, conn).Type; got != "state" {
+		t.Fatalf("expected state, got %q", got)
+	}
+
+	if err := conn.SetReadDeadline(time.Now().Add(200 * time.Millisecond)); err != nil {
+		t.Fatalf("set read deadline: %v", err)
+	}
+	var extra wsMsg
+	switch err := websocket.JSON.Receive(conn, &extra); {
+	case err == nil:
+		t.Fatalf("expected nothing more after the initial state, got a %q", extra.Type)
+	case !errors.Is(err, os.ErrDeadlineExceeded):
+		t.Fatalf("expected the read to time out on an idle connection, got %v", err)
 	}
 }
