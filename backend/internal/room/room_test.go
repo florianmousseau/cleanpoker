@@ -2,6 +2,7 @@ package room
 
 import (
 	"testing"
+	"time"
 )
 
 // newTestRoom creates a room and drains its broadcast so tests don't block.
@@ -400,5 +401,72 @@ func TestShow_SameNamedPlayersGiveStableResults(t *testing.T) {
 		if avg != "4.5" {
 			t.Fatalf("reveal %d: expected a stable avg of 4.5, got %s", i, avg)
 		}
+	}
+}
+
+// --- Subscription ordering ---
+
+// The contract the intermittent CI failure of TestHappyPath_VoteShowClear came
+// down to: once Subscribe has returned, the loop knows about the channel, so
+// the room change that follows reaches it. When the subscription was merely
+// queued, it and the Join broadcast raced for the same select, and the
+// arriving client either lost its own arrival or was handed it twice.
+func TestSubscribe_TakesEffectBeforeItReturns(t *testing.T) {
+	r := New("test", nil)
+	defer r.Stop()
+
+	ch := r.Subscribe("p1")
+	r.Join("p1", "Alice", false)
+
+	select {
+	case msg := <-ch:
+		if msg.Type != "state" {
+			t.Fatalf("expected a state message, got %q", msg.Type)
+		}
+		s, ok := msg.Payload.(Snapshot)
+		if !ok {
+			t.Fatalf("expected a snapshot payload, got %T", msg.Payload)
+		}
+		if len(s.Players) != 1 || s.Players[0].Name != "Alice" {
+			t.Fatalf("expected the arrival snapshot to hold Alice, got %v", s.Players)
+		}
+	case <-time.After(2 * time.Second):
+		t.Fatal("the subscriber never received the arrival broadcast that followed its subscription")
+	}
+}
+
+// The other face of the same race: a subscriber that the loop already holds
+// cannot be handed the same change twice.
+func TestSubscribe_ArrivalIsBroadcastOnce(t *testing.T) {
+	r := New("test", nil)
+	defer r.Stop()
+
+	ch := r.Subscribe("p1")
+	r.Join("p1", "Alice", false)
+	<-ch
+
+	select {
+	case msg := <-ch:
+		t.Fatalf("expected nothing more after the arrival, got a %q", msg.Type)
+	case <-time.After(100 * time.Millisecond):
+	}
+}
+
+// The wait Subscribe now does must never become a wait forever: a room the
+// cleanup has stopped has no loop left to acknowledge anything.
+func TestSubscribe_OnAStoppedRoomReturns(t *testing.T) {
+	r := New("test", nil)
+	r.Stop()
+
+	done := make(chan struct{})
+	go func() {
+		r.Subscribe("p1")
+		close(done)
+	}()
+
+	select {
+	case <-done:
+	case <-time.After(2 * time.Second):
+		t.Fatal("Subscribe never returned on a stopped room")
 	}
 }
