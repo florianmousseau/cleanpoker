@@ -77,6 +77,8 @@ type Room struct {
 type subscription struct {
 	playerID string
 	ch       chan Message
+	// ready is closed by the loop once the subscription is in hand.
+	ready chan struct{}
 }
 
 type directMessage struct {
@@ -276,9 +278,34 @@ func (r *Room) ToggleObserver(initiatorID, targetID string) {
 	})
 }
 
+// Subscribe registers a client and returns only once the room loop holds the
+// subscription. The wait is the whole point.
+//
+// Queuing the subscription and returning left the caller with a channel the
+// loop did not know about yet, and both messages - the subscription and the
+// broadcast a Join right after it produces - then sat in their buffers waiting
+// for the same select. Which one it picked was a coin toss, and the arriving
+// client either received its own arrival twice or lost the next broadcast
+// entirely. Measured on 2026-08-29: 105 duplicates out of 200 arrivals once
+// the loop was slow to reach its select, which is what a loaded CI runner does
+// to a goroutine that has just been started. That is the intermittent failure
+// of TestHappyPath_VoteShowClear, on both of its faces.
+//
+// Ordering, not timing, is what closes this: a subscriber that exists before
+// Join cannot miss the broadcast Join makes, and cannot be handed it twice.
 func (r *Room) Subscribe(playerID string) chan Message {
 	ch := make(chan Message, 16)
-	r.subscribe <- subscription{playerID: playerID, ch: ch}
+	ready := make(chan struct{})
+	select {
+	case r.subscribe <- subscription{playerID: playerID, ch: ch, ready: ready}:
+	case <-r.quit:
+		close(ch)
+		return ch
+	}
+	select {
+	case <-ready:
+	case <-r.quit:
+	}
 	return ch
 }
 
@@ -297,6 +324,7 @@ func (r *Room) run() {
 			return
 		case s := <-r.subscribe:
 			subs[s.playerID] = s.ch
+			close(s.ready)
 		case pid := <-r.unsubscribe:
 			if ch, ok := subs[pid]; ok {
 				delete(subs, pid)
