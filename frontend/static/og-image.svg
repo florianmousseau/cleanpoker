@@ -8,7 +8,7 @@
 
   <text x="80" y="310" font-size="44" font-family="system-ui,-apple-system,sans-serif" fill="#888888">Planning poker</text>
 
-  <text x="80" y="390" font-size="46" font-weight="600" font-family="system-ui,-apple-system,sans-serif" fill="#1a6b3c">create · vote · decide</text>
+  <text x="80" y="390" font-size="46" font-weight="600" font-family="system-ui,-apple-system,sans-serif" fill="#1a6b3c">create, vote, decide</text>
 
   <rect x="840" y="160" width="165" height="230" rx="14" fill="white" stroke="#d0d0d0" stroke-width="2" transform="rotate(-9 922 275)"/>
   <text x="858" y="218" font-size="38" font-weight="700" font-family="system-ui,-apple-system,sans-serif" fill="#bbbbbb" transform="rotate(-9 922 275)">?</text>
