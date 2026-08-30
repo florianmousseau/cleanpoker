@@ -1,7 +1,12 @@
+# target-branch is not optional here: dependabot defaults to the repository's
+# default branch, which is main, while every change is integrated through
+# develop. Without it the bumps land on the release branch and skip the one
+# they were meant to be tested on.
 version: 2
 updates:
   - package-ecosystem: npm
     directory: /frontend
+    target-branch: develop
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
@@ -15,6 +20,7 @@ updates:
 
   - package-ecosystem: gomod
     directory: /backend
+    target-branch: develop
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
@@ -26,12 +32,14 @@ updates:
 
   - package-ecosystem: docker
     directory: /backend
+    target-branch: develop
     schedule:
       interval: weekly
     labels: [dependencies, backend]
 
   - package-ecosystem: github-actions
     directory: /
+    target-branch: develop
     schedule:
       interval: monthly
     labels: [dependencies, ci]
