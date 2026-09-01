@@ -103,6 +103,21 @@
       hier das eine oder das andere.
     </p>
     <p>
+      <strong>Und seit dem 1. September 2026 zählt die Website ihre Leser auch selbst</strong>,
+      serverseitig, weiterhin ohne ein einziges Skript auf Ihrem Gerät. Für jede ausgelieferte
+      Seite berechnet der Server einen <strong>Fingerabdruck</strong> aus Ihrer IP-Adresse, Ihrem
+      Browser und einem Geheimnis, das täglich wechselt, und speichert dann nur diesen
+      Fingerabdruck, den Namen der Website, das Datum und das Land.
+      <strong>Ihre IP-Adresse wird weder gespeichert noch aufbewahrt</strong>: sie geht in eine
+      nicht umkehrbare Berechnung ein und verschwindet. Da das Geheimnis täglich wechselt, lassen
+      sich der Fingerabdruck von gestern und der von heute nicht verknüpfen; nichts erlaubt es
+      also, Sie von einem Tag auf den anderen oder von einer Website zur nächsten zu verfolgen.
+      Diese Zählung beantwortet eine einzige Frage: wie viele Menschen diese Website lesen.
+      Dieselbe Regel gilt auf allen Websites desselben Herausgebers, damit die Zahlen vergleichbar
+      bleiben. Rechtsgrundlage ist das <strong>berechtigte Interesse</strong> (Artikel 6.1.f
+      DSGVO).
+    </p>
+    <p>
       Der Spielserver führt zwei anonyme Zähler, die Anzahl der erstellten Sitzungen und die
       Anzahl der Beitritte. Sie enthalten keine Kennung, kein Pseudonym und keinen Raumnamen,
       nichts wird auf die Festplatte geschrieben, und sie beginnen bei jedem Neustart des

@@ -51,6 +51,7 @@
           <tr><td>Third-party requests</td><td><strong>0</strong></td></tr>
           <tr><td>Trackers, analytics scripts</td><td><strong>0</strong></td></tr>
           <tr><td>Requests counted by the host</td><td><strong>yes</strong> (Cloudflare, as for any site, server-side)</td></tr>
+          <tr><td>Counted by the site itself</td><td><strong>yes</strong> (daily fingerprint, server-side, no IP kept)</td></tr>
           <tr><td>Advertising cookies</td><td><strong>0</strong></td></tr>
           <tr><td>Google Fonts loaded</td><td><strong>0</strong></td></tr>
           <tr><td>Backend RAM</td><td><strong>~15 MB</strong> (Go binary)</td></tr>

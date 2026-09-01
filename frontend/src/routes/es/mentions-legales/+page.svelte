@@ -104,6 +104,19 @@
       información en su dispositivo, y ninguna página hace ni lo uno ni lo otro.
     </p>
     <p>
+      <strong>Y desde el 1 de septiembre de 2026 el sitio también cuenta sus lectores por sí
+      mismo</strong>, del lado del servidor, siempre sin un solo script en su dispositivo. Por cada
+      página servida, el servidor calcula una <strong>huella</strong> a partir de su dirección IP,
+      su navegador y un secreto que cambia cada día, y luego solo guarda esa huella, el nombre del
+      sitio, la fecha y el país. <strong>Su dirección IP no se registra ni se conserva</strong>:
+      entra en un cálculo irreversible y desaparece. Como el secreto cambia cada día, la huella de
+      ayer y la de hoy no pueden vincularse, de modo que nada permite seguirle de un día para otro
+      ni de un sitio a otro. Este recuento responde a una sola pregunta: cuántas personas leen
+      este sitio. La misma regla se aplica en todos los sitios del mismo editor, para que las
+      cifras se puedan comparar. Su base jurídica es el <strong>interés legítimo</strong>
+      (artículo 6.1.f del RGPD).
+    </p>
+    <p>
       El servidor de juego mantiene dos contadores anónimos, el número de sesiones creadas y
       el número de llegadas. No contienen ningún identificador, ningún seudónimo y ningún
       nombre de sala, nada se escribe en disco, y vuelven a cero cada vez que el servidor se
