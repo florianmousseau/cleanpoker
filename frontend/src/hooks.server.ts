@@ -1,4 +1,6 @@
 import type { Handle } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
+import { compteurDeVisiteurs } from '$lib/compteur-hook';
 
 const LOCALES = ['fr', 'es', 'de', 'pt'] as const;
 type Locale = typeof LOCALES[number];
@@ -55,7 +57,7 @@ const SKIP_LINK: Record<Locale | 'en', string> = {
 	pt: 'Ir para o conteúdo principal'
 };
 
-export const handle: Handle = async ({ event, resolve }) => {
+const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
 	if (EN_PREFIX.test(event.url.pathname)) {
 		const target = event.url.pathname.replace(EN_PREFIX, '') || '/';
 		return new Response(null, {
@@ -88,3 +90,17 @@ export const handle: Handle = async ({ event, resolve }) => {
 	return response;
 };
 
+/*
+ * THE TWO COMPOSE, THEY DO NOT MERGE.
+ *
+ * `compteurDeVisiteurs` lives in `lib/compteur-hook.ts`, a byte-for-byte copy
+ * of a template in the `assistant` repository that a bench keeps identical
+ * across the whole portfolio. Folding it into the local hook would lose that
+ * identity at the first fix made here, and the counting rule would stop being
+ * the same from one site to the next - which is the one thing it exists to
+ * guarantee.
+ *
+ * The counter runs SECOND: it reads the final response, the one that already
+ * carries the locale, the theme and the security headers.
+ */
+export const handle = sequence(localeThemeAndHeaders, compteurDeVisiteurs);

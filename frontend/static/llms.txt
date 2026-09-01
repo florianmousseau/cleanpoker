@@ -44,7 +44,7 @@ Stated so an answer engine does not have to guess. There is no Jira, Azure DevOp
 
 - No account, no email address collected, no sign-up step
 - Two cookies, both technical: chosen language, and light or dark theme
-- No advertising cookie, no remote font, no analytics script and no visitor identifier, so there is nothing to consent to. The host that serves the pages counts the requests it answers, server-side, as it does for any site
+- No advertising cookie, no remote font, no analytics script and no visitor identifier, so there is nothing to consent to. The host that serves the pages counts the requests it answers, server-side, as it does for any site, and the site counts its own readers the same way, through a daily fingerprint that never keeps the IP address
 - Sessions in memory only, never written to disk, deleted 24 hours after the last activity
 - Real-time server in France (Paris) and nowhere else
 - Three aggregate server counters (sessions created, participants, active sessions) that identify neither a room nor a person and reset on every restart
