@@ -105,6 +105,19 @@
       fait ni l'une ni l'autre.
     </p>
     <p>
+      <strong>Et depuis le 1er septembre 2026, le site compte aussi ses lecteurs lui-même</strong>,
+      côté serveur, toujours sans le moindre script chez vous. À chaque page servie, le serveur
+      calcule une <strong>empreinte</strong> à partir de votre adresse IP, de votre navigateur et
+      d'un secret qui change chaque jour, puis n'enregistre que cette empreinte, le nom du site, la
+      date et le pays. <strong>Votre adresse IP n'est ni enregistrée ni conservée</strong>&nbsp;:
+      elle entre dans un calcul irréversible et disparaît. Le secret changeant tous les jours,
+      l'empreinte d'hier et celle d'aujourd'hui ne peuvent pas être rapprochées, donc rien ne
+      permet de vous suivre d'un jour sur l'autre ni d'un site à l'autre. Ce comptage répond à une
+      seule question&nbsp;: combien de personnes lisent ce site. La même règle s'applique sur tous
+      les sites du même éditeur, pour que les chiffres se comparent. Sa base juridique est
+      l'<strong>intérêt légitime</strong> (article 6.1.f du RGPD).
+    </p>
+    <p>
       Le serveur de jeu tient deux compteurs anonymes, le nombre de sessions créées et le
       nombre d'arrivées. Ils ne contiennent aucun identifiant, aucun pseudonyme et aucun nom
       de salle, rien n'est écrit sur disque, et ils repartent de zéro à chaque redémarrage du

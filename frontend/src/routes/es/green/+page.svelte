@@ -51,6 +51,7 @@
           <tr><td>Solicitudes a terceros</td><td><strong>0</strong></td></tr>
           <tr><td>Rastreadores, scripts de medición</td><td><strong>0</strong></td></tr>
           <tr><td>Solicitudes contadas por el proveedor</td><td><strong>sí</strong> (Cloudflare, como en cualquier sitio, del lado del servidor)</td></tr>
+          <tr><td>Recuento por el propio sitio</td><td><strong>sí</strong> (huella del día, del lado del servidor, sin conservar la IP)</td></tr>
           <tr><td>Cookies publicitarias</td><td><strong>0</strong></td></tr>
           <tr><td>Fuentes de Google cargadas</td><td><strong>0</strong></td></tr>
           <tr><td>RAM del servidor</td><td><strong>~15 MB</strong> (binario Go)</td></tr>

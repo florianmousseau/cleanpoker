@@ -25,17 +25,26 @@
  * next month, in any of the five languages, would carry the old wording by
  * habit - it is the product's own vocabulary - and nothing else would notice.
  *
+ * TURNED AROUND A SECOND TIME, on 2026-09-01. The site now counts its own
+ * readers, server-side, by hashing their address with a salt that changes every
+ * day. That is a processing operation by the CONTROLLER, not by the host, so
+ * every sentence saying the host is the only one counting went false the second
+ * the middleware shipped. This file therefore also demands the three things a
+ * reader must be able to check, in all five languages: that the site counts,
+ * that their address is never kept, and on what legal basis.
+ *
  * TWO POLICIES, and that is not a duplicate. Cloudflare Pages applies _headers
  * to static assets only, never to the responses the SvelteKit worker produces,
  * so the HTML pages take their headers from hooks.server.ts. A permission left
  * open in one of them is a door nobody watches.
  */
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const VENDOR = 'cloudflareinsights';
 const TOOL = 'Cloudflare Web Analytics';
 const lire = (chemin) => readFileSync(chemin, 'utf8');
+const existe = (chemin) => existsSync(chemin);
 
 const shell = lire('src/app.html');
 const hooks = lire('src/hooks.server.ts');
@@ -162,6 +171,37 @@ require_(
 // tant que Cloudflare sert ces pages, c'est de nier TOUTE mesure. Un lecteur
 // qui lit « ce site ne mesure rien » et trouve un compteur d'audience dans le
 // cockpit a ete trompe, meme si aucun octet n'a touche son appareil.
+// --- ET AUCUNE PAGE NE PEUT DIRE QUE L'HEBERGEUR EST LE SEUL A COMPTER ---
+//
+// Depuis le 2026-09-01, le site compte lui-meme ses lecteurs. La liste des
+// declarations plus bas tient le paragraphe qu'on a ECRIT ; celle-ci tient tous
+// les AUTRES endroits ou une phrase pourrait encore dire l'inverse. La
+// distinction n'est pas theorique : une garde ecrite autour du paragraphe
+// corrige reste verte sur une page dont la premiere ligne dit encore le
+// contraire.
+//
+// Chaque tournure NOMME le comptage. La premiere version de cette liste portait
+// « and nowhere else », qui rougissait sur llms.txt - « Real-time server in
+// France (Paris) and nowhere else », une phrase vraie qui parle d'un
+// emplacement de serveur et non d'une mesure. Une tournure trop courte attrape
+// le vocabulaire ordinaire du produit.
+const EXCLUSIVITE_DE_L_HEBERGEUR = [
+	'the host is the only one counting',
+	'only the host counts',
+	'the site itself counts nothing',
+	'the site keeps no count of its own',
+	"seul l'hébergeur compte",
+	'de nulle part ailleurs',
+	'le site ne compte personne',
+	'le site ne compte pas ses lecteurs',
+	'nur der Hoster zählt',
+	'die Website selbst zählt nichts',
+	'solo el proveedor cuenta',
+	'el sitio no cuenta a nadie',
+	'apenas o alojamento conta',
+	'o site não conta ninguém'
+];
+
 const INTERDITES = [
 	VENDOR,
 	TOOL,
@@ -209,7 +249,7 @@ livres.push('static/llms.txt', '../README.md', '../docs/referencement.md');
 
 for (const chemin of livres) {
 	const texte = lire(chemin);
-	for (const phrase of INTERDITES) {
+	for (const phrase of [...INTERDITES, ...EXCLUSIVITE_DE_L_HEBERGEUR]) {
 		if (texte.includes(phrase)) {
 			faults.push(`${chemin.replaceAll('\\', '/')} still says "${phrase}"`);
 		}
@@ -229,6 +269,87 @@ require_(
 	'the French legal page still says nothing is written to disk'
 );
 
+// --- LE COMPTAGE DU SITE SE DECLARE, dans les cinq langues ---
+//
+// Le middleware compte un lecteur unique en hachant son adresse. C'est un
+// traitement du RESPONSABLE et non de l'hebergeur : le livrer sans ces phrases
+// mettrait en ligne des pages qui nient ce que le site fait, sur des donnees
+// personnelles - le miroir du defaut decrit en tete de ce fichier, et le plus
+// cher des deux.
+//
+// Les trois exigences sont les trois choses qu'un lecteur doit pouvoir
+// verifier. Retirer le compteur sans retirer le paragraphe est l'autre faute,
+// et elle rougit ici exactement de la meme facon.
+const DECLARATIONS = [
+	['src/routes/mentions-legales/+page.svelte', 'the site counts its readers itself'],
+	['src/routes/mentions-legales/+page.svelte', 'Your IP address is neither recorded nor kept'],
+	['src/routes/mentions-legales/+page.svelte', 'article 6.1.f GDPR'],
+	['src/routes/fr/mentions-legales/+page.svelte', 'le site compte aussi ses lecteurs lui-même'],
+	[
+		'src/routes/fr/mentions-legales/+page.svelte',
+		"Votre adresse IP n'est ni enregistrée ni conservée"
+	],
+	['src/routes/fr/mentions-legales/+page.svelte', 'article 6.1.f du RGPD'],
+	['src/routes/de/mentions-legales/+page.svelte', 'zählt die Website ihre Leser auch selbst'],
+	[
+		'src/routes/de/mentions-legales/+page.svelte',
+		'Ihre IP-Adresse wird weder gespeichert noch aufbewahrt'
+	],
+	['src/routes/de/mentions-legales/+page.svelte', 'Artikel 6.1.f DSGVO'],
+	[
+		'src/routes/es/mentions-legales/+page.svelte',
+		'el sitio también cuenta sus lectores por sí mismo'
+	],
+	['src/routes/es/mentions-legales/+page.svelte', 'Su dirección IP no se registra ni se conserva'],
+	['src/routes/es/mentions-legales/+page.svelte', 'artículo 6.1.f del RGPD'],
+	[
+		'src/routes/pt/mentions-legales/+page.svelte',
+		'o site conta também os seus leitores por si próprio'
+	],
+	[
+		'src/routes/pt/mentions-legales/+page.svelte',
+		'O seu endereço IP não é registado nem conservado'
+	],
+	['src/routes/pt/mentions-legales/+page.svelte', 'artigo 6.1.f do RGPD']
+];
+for (const [ou, phrase] of DECLARATIONS) {
+	require_(
+		flat(lire(ou)).includes(phrase),
+		`${ou} no longer states: "${phrase}", and the site counts readers anyway`
+	);
+}
+
+// L'ecran d'ecoconception porte la meme verite sous forme de tableau. Un
+// lecteur qui compare les deux pages doit y lire la meme chose.
+for (const [ou, phrase] of [
+	['src/routes/green/+page.svelte', '<td>Counted by the site itself</td>'],
+	['src/routes/fr/green/+page.svelte', '<td>Comptage par le site lui-même</td>'],
+	['src/routes/de/green/+page.svelte', '<td>Zählung durch die Website selbst</td>'],
+	['src/routes/es/green/+page.svelte', '<td>Recuento por el propio sitio</td>'],
+	['src/routes/pt/green/+page.svelte', '<td>Contagem pelo próprio site</td>']
+]) {
+	require_(
+		flat(lire(ou)).includes(phrase),
+		`${ou} no longer shows the count the site does itself, beside the host one`
+	);
+}
+
+// LA REGLE ET SON CABLAGE SONT DES COPIES, et le cockpit tient un banc qui les
+// refuse des qu'elles derivent. Ce qu'un banc LA-BAS ne peut pas voir, c'est
+// leur disparition d'ICI : un site qui perd son compteur affiche un tiret dans
+// le cockpit, et cinq pages legales continuent d'annoncer un comptage absent.
+for (const chemin of ['src/lib/compteur.js', 'src/lib/compteur-hook.ts']) {
+	require_(existe(chemin), `${chemin} is gone, and the pages still declare the count it does`);
+}
+require_(
+	hooks.includes('sequence(localeThemeAndHeaders, compteurDeVisiteurs)'),
+	'hooks.server.ts no longer runs the counter, while five legal pages announce it'
+);
+require_(
+	existe('src/routes/etat-compteur/+server.ts'),
+	'the /etat-compteur probe is gone, and nothing else can say WHY a visit does not count'
+);
+
 if (faults.length) {
 	console.error('The bytes and what the site says about them have drifted apart:\n');
 	for (const f of faults) console.error(`  - ${f}`);
@@ -240,5 +361,7 @@ if (faults.length) {
 }
 
 console.log(
-	'No measurement script: both policies closed, no page names a tool, and the host-side count is stated where the promise is made.'
+	'No measurement script: both policies closed, no page names a tool, and BOTH counts are ' +
+		'stated in five languages - the host one and the site own, with what it never keeps and ' +
+		`on what legal basis. ${EXCLUSIVITE_DE_L_HEBERGEUR.length} ways of claiming the host is the only counter are refused.`
 );

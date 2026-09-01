@@ -104,6 +104,19 @@
       seu dispositivo, e nenhuma página faz uma coisa nem outra.
     </p>
     <p>
+      <strong>E desde 1 de setembro de 2026 o site conta também os seus leitores por si
+      próprio</strong>, do lado do servidor, continuando sem um único script no seu dispositivo.
+      Por cada página servida, o servidor calcula uma <strong>impressão</strong> a partir do seu
+      endereço IP, do seu navegador e de um segredo que muda todos os dias, e guarda apenas essa
+      impressão, o nome do site, a data e o país. <strong>O seu endereço IP não é registado nem
+      conservado</strong>: entra num cálculo irreversível e desaparece. Como o segredo muda todos
+      os dias, a impressão de ontem e a de hoje não podem ser associadas, pelo que nada permite
+      segui-lo de um dia para o outro nem de um site para outro. Esta contagem responde a uma só
+      pergunta: quantas pessoas leem este site. A mesma regra aplica-se em todos os sites do mesmo
+      editor, para que os números possam ser comparados. A sua base jurídica é o
+      <strong>interesse legítimo</strong> (artigo 6.1.f do RGPD).
+    </p>
+    <p>
       O servidor de jogo mantém dois contadores anónimos, o número de sessões criadas e o
       número de chegadas. Não contêm qualquer identificador, pseudónimo ou nome de sala, nada
       é escrito em disco, e voltam a zero sempre que o servidor reinicia. Qualquer pessoa os

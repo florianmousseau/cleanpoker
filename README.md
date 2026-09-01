@@ -105,7 +105,7 @@ Every push to `main` runs a quality and security pipeline before deploying.
 
 ## Green IT
 
-- **No tracker**: no analytics script, no advertising cookie, no visitor identifier, nothing loaded from a third party. Like any website, the host that serves the pages counts the requests it answers; that count is server-side and never touches the reader's device.
+- **No tracker**: no analytics script, no advertising cookie, no visitor identifier, nothing loaded from a third party. Like any website, the host that serves the pages counts the requests it answers. The site also counts its own readers, server-side: a daily fingerprint derived from the IP address, which is never kept. Both counts are server-side and never touch the reader's device.
 - **System fonts**: no Google Fonts download
 - **Vanilla CSS**: no CSS framework (Tailwind, Bootstrap, etc.)
 - **Zero virtual DOM**: SvelteKit compiles to vanilla JS
