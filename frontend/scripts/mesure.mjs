@@ -249,9 +249,24 @@ livres.push('static/llms.txt', '../README.md', '../docs/referencement.md');
 
 for (const chemin of livres) {
 	const texte = lire(chemin);
-	for (const phrase of [...INTERDITES, ...EXCLUSIVITE_DE_L_HEBERGEUR]) {
+	for (const phrase of INTERDITES) {
 		if (texte.includes(phrase)) {
 			faults.push(`${chemin.replaceAll('\\', '/')} still says "${phrase}"`);
+		}
+	}
+	/*
+	 * MINUSCULES POUR CELLE-CI SEULEMENT, et le defaut a ete paye en eprouvant
+	 * la garde : « Seul l'hébergeur compte » avec sa majuscule de debut de phrase
+	 * passait au travers, c'est-a-dire exactement la position ou une telle phrase
+	 * apparait. `INTERDITES` garde sa casse parce qu'elle nomme des PRODUITS -
+	 * « Cloudflare Web Analytics » ne s'ecrit pas autrement.
+	 */
+	const minuscules = texte.toLowerCase();
+	for (const phrase of EXCLUSIVITE_DE_L_HEBERGEUR) {
+		if (minuscules.includes(phrase.toLowerCase())) {
+			faults.push(
+				`${chemin.replaceAll('\\', '/')} still says "${phrase}", which the site's own counter makes false`
+			);
 		}
 	}
 }
