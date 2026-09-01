@@ -32,19 +32,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  config:
-    name: Config
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    outputs:
-      can_review: ${{ steps.flags.outputs.can_review }}
-    steps:
-      - id: flags
-        run: echo "can_review=${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}" >> "$GITHUB_OUTPUT"
-
   review:
     name: review
-    needs: [config]
     # `release/*` est ecartee, et ce n'est pas un confort. La PR de release est
     # ouverte par `github-actions[bot]`, et l'action REFUSE un run initie par un
     # robot : « Workflow initiated by non-human actor: github-actions (type:
@@ -56,7 +45,9 @@ jobs:
     # controle, et l'invariant 1 ci-dessus tient a ce que la porte reste
     # etroite. Une PR de release ne porte qu'une entree de CHANGELOG ; le code,
     # lui, a ete revu sur son chemin vers `develop`.
-    if: needs.config.outputs.can_review == 'true' && github.event.pull_request.draft == false && !startsWith(github.head_ref, 'release/')
+    # The secret check is this job's first step rather than a job of its own:
+    # a job billed a full minute to compute a boolean is a minute wasted.
+    if: github.event.pull_request.draft == false && !startsWith(github.head_ref, 'release/')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -65,12 +56,17 @@ jobs:
       issues: write
       id-token: write # the action exchanges a GitHub OIDC token for its app token
     steps:
-      - uses: actions/checkout@v4
+      - id: flags
+        run: echo "can_review=${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v7
+        if: steps.flags.outputs.can_review == 'true'
         with:
           fetch-depth: 0
 
       - name: Claude review
-        uses: anthropics/claude-code-action@9db594c7a0e82298c121c18b7f08aa1579ce7341 # v1
+        if: steps.flags.outputs.can_review == 'true'
+        uses: anthropics/claude-code-action@1f291e1cfe0f5fc21db2aef19af844591600ade7 # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           use_sticky_comment: true

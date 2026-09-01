@@ -51,6 +51,7 @@
           <tr><td>Anfragen an Dritte</td><td><strong>0</strong></td></tr>
           <tr><td>Tracker, Mess-Skripte</td><td><strong>0</strong></td></tr>
           <tr><td>Vom Hoster gezählte Anfragen</td><td><strong>ja</strong> (Cloudflare, wie bei jeder Website, serverseitig)</td></tr>
+          <tr><td>Zählung durch die Website selbst</td><td><strong>ja</strong> (Tages-Fingerabdruck, serverseitig, keine IP gespeichert)</td></tr>
           <tr><td>Werbe-Cookies</td><td><strong>0</strong></td></tr>
           <tr><td>Geladene Google Fonts</td><td><strong>0</strong></td></tr>
           <tr><td>Backend-RAM</td><td><strong>~15 MB</strong> (Go-Binärdatei)</td></tr>

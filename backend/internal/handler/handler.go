@@ -85,16 +85,19 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), playerName
 		return
 	}
 
-	rm.Join(playerID, playerName, observer)
-	recordJoin()
-	defer rm.Leave(playerID)
-
+	// Subscribe first, join second, and let the join broadcast be the initial
+	// state. The client is registered before the room produces the message
+	// that concerns it, so it gets that message once - not twice, and never
+	// zero times. Sending a snapshot here on top of it would put the duplicate
+	// back, deterministically this time.
 	ch := rm.Subscribe(playerID)
 	defer rm.Unsubscribe(playerID)
 
-	if err := websocket.JSON.Send(conn, room.Message{Type: "state", Payload: rm.Snapshot()}); err != nil {
-		return
-	}
+	// Counted before the arrival is broadcast, so a client holding the state
+	// that shows it in the room can read /stats and find itself counted.
+	recordJoin()
+	rm.Join(playerID, playerName, observer)
+	defer rm.Leave(playerID)
 
 	go func() {
 		for msg := range ch {

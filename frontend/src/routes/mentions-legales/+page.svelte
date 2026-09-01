@@ -102,6 +102,18 @@
       attaches to reading or writing information on your device, and no page here does either.
     </p>
     <p>
+      <strong>And since 1 September 2026 the site counts its readers itself</strong>, server-side,
+      still without a single script on your device. For each page served, the server derives a
+      <strong>fingerprint</strong> from your IP address, your browser and a secret that changes
+      every day, then stores only that fingerprint, the site name, the date and the country.
+      <strong>Your IP address is neither recorded nor kept</strong>: it goes into a one-way
+      computation and disappears. Because the secret changes every day, yesterday's fingerprint
+      and today's cannot be linked, so nothing lets you be followed from one day to the next, nor
+      from one site to another. This count answers a single question: how many people read this
+      site. The same rule runs on every site published by the same editor, so that the figures can
+      be compared. Its legal basis is <strong>legitimate interest</strong> (article 6.1.f GDPR).
+    </p>
+    <p>
       The game server keeps two anonymous counters, the number of sessions created and the
       number of arrivals. They hold no identifier, no pseudonym and no room name, nothing is
       written to disk, and they restart from zero every time the server restarts. Anyone can

@@ -51,6 +51,7 @@
           <tr><td>Requêtes vers des tiers</td><td><strong>0</strong></td></tr>
           <tr><td>Traceurs, scripts de mesure</td><td><strong>0</strong></td></tr>
           <tr><td>Requêtes comptées par l'hébergeur</td><td><strong>oui</strong> (Cloudflare, comme pour tout site, côté serveur)</td></tr>
+          <tr><td>Comptage par le site lui-même</td><td><strong>oui</strong> (empreinte du jour, côté serveur, aucune IP conservée)</td></tr>
           <tr><td>Cookies publicitaires</td><td><strong>0</strong></td></tr>
           <tr><td>Polices Google chargées</td><td><strong>0</strong></td></tr>
           <tr><td>RAM backend</td><td><strong>~15 Mo</strong> (binaire Go)</td></tr>
