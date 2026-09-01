@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.7] - 2026-09-01
+
+- feat(compteur): count unique readers server-side, and say so in five languages (#189)
+- docs(og): drop the middle dot from the share card (#187)
+- fix(backend): a client is subscribed before it joins, so its arrival reaches it once (#182)
+
 ## [0.0.6] - 2026-08-24
 
 - fix(legal): name the second processor, the real-time server at Fly.io
