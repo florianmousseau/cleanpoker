@@ -135,7 +135,7 @@
     <h2>Intellectual property</h2>
     <p>
       The CleanPoker source code is published under the
-      <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT licence</a>.
+      <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>.
       You are free to reuse, modify and distribute it under the terms of this licence.
     </p>
 
@@ -155,7 +155,7 @@
   <footer class="footer">
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT Licence</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
       | <a href="/mentions-legales#confidentialite">Privacy</a>
