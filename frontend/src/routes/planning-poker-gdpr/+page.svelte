@@ -43,7 +43,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/planning-poker" class="back-link">← Planning poker guide</a>
+    <a href="/planning-poker" class="back-link">Planning poker guide</a>
 
     <h1>Planning poker and GDPR: where your session data goes</h1>
 
@@ -134,7 +134,7 @@
           <tr><td>Session retention</td><td>In memory only, never written to disk. Deleted 24 hours after the last activity.</td></tr>
           <tr><td>Hosting</td><td>Real-time server in France (Paris) and nowhere else, pages served by a renewable-powered delivery network.</td></tr>
           <tr><td>Audience measurement</td><td>No script, no cookie, no identifier on your device. Like any site, the host counts the requests it serves. The game server keeps three aggregate counters (sessions created, participants, active sessions) that identify neither a room nor a person, and reset to zero on every restart.</td></tr>
-          <tr><td>Verifiable</td><td>The source is public under the MIT licence. The three checks above apply to this page too.</td></tr>
+          <tr><td>Verifiable</td><td>The source is public under the MIT License. The three checks above apply to this page too.</td></tr>
         </tbody>
       </table>
     </div>
@@ -153,7 +153,7 @@
     </p>
 
     <div class="cta">
-      <a href="/" class="btn">Create a free session →</a>
+      <a href="/" class="btn">Create a free session</a>
     </div>
 
     <p class="related">
@@ -167,7 +167,7 @@
   <footer class="footer">
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT licence</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
       | <a href="/mentions-legales#confidentialite">Privacy</a>

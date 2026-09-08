@@ -26,7 +26,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/" class="back-link">← Back to home</a>
+    <a href="/" class="back-link">Back to home</a>
 
     <h1>About CleanPoker</h1>
 
@@ -41,7 +41,7 @@
       <li>Lighthouse Performance and Accessibility: <strong>100 / 100</strong></li>
       <li>100% renewable energy hosting (Cloudflare Pages + Fly.io CDG Paris)</li>
       <li>No tracker, no advertising cookies, no third-party script</li>
-      <li>Open source under <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT licence</a></li>
+      <li>Open source under <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a></li>
     </ul>
 
     <h2>Learn more</h2>

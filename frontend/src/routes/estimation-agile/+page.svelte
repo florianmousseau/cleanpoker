@@ -51,7 +51,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/a-propos" class="back-link">← About</a>
+    <a href="/a-propos" class="back-link">About</a>
 
     <h1>Agile estimation: complete guide</h1>
 
@@ -216,7 +216,7 @@
     </details>
 
     <div class="cta">
-      <a href="/" class="btn">Run a session with CleanPoker →</a>
+      <a href="/" class="btn">Run a session with CleanPoker</a>
     </div>
   </main>
 

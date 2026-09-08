@@ -13,7 +13,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/de" class="back-link">← Zurück zur Startseite</a>
+    <a href="/de" class="back-link">Zurück zur Startseite</a>
 
     <h1>Impressum & Datenschutz</h1>
 
@@ -162,7 +162,7 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
-      | <a href="/de/a-propos">Über CleanPoker</a>
+      | <a href="/de/a-propos">Über uns</a>
       | <a href="/de/mentions-legales">Impressum</a>
       | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>
     </p>

@@ -308,11 +308,16 @@ function blocFrancais(source: string): string {
     .join('');
 }
 
-function fautesDe(chemin: string, source: string): string[] {
+/*
+ * Les quatre masques appliques a un fichier, et les lignes qu un juge y refuse.
+ * Le juge est un parametre parce que ce site en a deux - la ponctuation double
+ * et les signes decoratifs - et qu ils lisent exactement les memes regions.
+ */
+function relevesDe(chemin: string, source: string, refuse: (ligne: string) => boolean): string[] {
   const lignes = new Map<number, string>();
   const relever = (contenu: string) => {
     contenu.split('\n').forEach((ligne, index) => {
-      if (estFautif(ligne)) lignes.set(index + 1, ligne.trim().slice(0, 100));
+      if (refuse(ligne)) lignes.set(index + 1, ligne.trim().slice(0, 100));
     });
   };
   if (extname(chemin) === '.svelte') {
@@ -326,6 +331,10 @@ function fautesDe(chemin: string, source: string): string[] {
   return [...lignes.entries()]
     .sort((a, b) => a[0] - b[0])
     .map(([numero, ligne]) => `${chemin}:${numero} ${ligne}`);
+}
+
+function fautesDe(chemin: string, source: string): string[] {
+  return relevesDe(chemin, source, estFautif);
 }
 
 describe('le detecteur de ponctuation decollee', () => {
@@ -449,5 +458,56 @@ describe('le texte francais affiche', () => {
       readFileSync(chemin, 'utf8').includes(INSECABLE)
     );
     expect(enClair).toEqual([]);
+  });
+});
+
+/*
+ * Aucun signe decoratif dans le texte affiche, quelle que soit la langue.
+ *
+ * La regle typographique du parc interdit la fleche, le tiret cadratin ou
+ * demi-cadratin, l ellipse unicode et l apostrophe courbe. Elle existait, elle
+ * n etait mesuree nulle part, et le site servait 83 fleches : une par lien de
+ * retour ( Back to home ), une par bouton d appel a l action, et les deux
+ * boutons de changement de role, ou la fleche remplacait le verbe. Un lien se
+ * suffit a lui-meme ; un bouton dit l acte.
+ *
+ * PERIMETRE : les cinq langues, contrairement au controle ci-dessus. Ces signes
+ * ne sont justes dans aucune. Les memes masques servent, donc une fleche dans
+ * une regle CSS, un commentaire ou un nom de classe ne rougit pas.
+ */
+const DECORATIFS = new RegExp(
+  '[\u2190\u2192\u2191\u2193\u21D0\u21D2\u279C\u27A4\u25B6\u25BA\u2022\u2023\u2013\u2014\u2026\u2018\u2019]'
+);
+
+function decoratifsDe(chemin: string, source: string): string[] {
+  return relevesDe(chemin, source, (ligne) => DECORATIFS.test(ligne));
+}
+
+describe('le detecteur de signes decoratifs', () => {
+  /*
+   * Il se prouve avant de mesurer : un detecteur mort passe au vert sur tout un
+   * site, et c est la seule facon qu un controle de forme mente.
+   */
+  it.each([
+    ['la fleche gauche du lien de retour', decoratifsDe('a.svelte', '<a>← Back to home</a>').length, 1],
+    ['la fleche droite du bouton', decoratifsDe('a.svelte', '<a>Try it →</a>').length, 1],
+    ['la fleche dans une chaine du dictionnaire', decoratifsDe('a.ts', "const x = '→ Observer';").length, 1],
+    ['le tiret cadratin', decoratifsDe('a.svelte', '<p>un mot — un autre</p>').length, 1],
+    ["l ellipse unicode", decoratifsDe('a.ts', "const x = 'Connexion…';").length, 1],
+    ["l apostrophe courbe", decoratifsDe('a.ts', "const x = \"it’s\";").length, 1],
+    ['le texte sans signe decoratif', decoratifsDe('a.svelte', '<a>Back to home</a>').length, 0],
+    ['la regle CSS, qui n est pas du texte', decoratifsDe('a.svelte', '<style>.x::after { content: "→"; }</style>').length, 0],
+    ['le commentaire, qui ne l est pas non plus', decoratifsDe('a.ts', '// une fleche → ici').length, 0]
+  ])('%s', (_nom, mesure, attendu) => {
+    expect(mesure).toBe(attendu);
+  });
+});
+
+describe('le texte affiche des cinq langues', () => {
+  it('ne porte aucune fleche, aucun cadratin, aucune ellipse ni apostrophe courbe', () => {
+    const fautes = [...fichiers('src/routes'), ...fichiers('src/lib')].flatMap((chemin) =>
+      decoratifsDe(chemin, readFileSync(chemin, 'utf8'))
+    );
+    expect(fautes).toEqual([]);
   });
 });
