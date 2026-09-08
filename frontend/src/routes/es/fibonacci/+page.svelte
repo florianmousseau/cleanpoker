@@ -51,7 +51,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/es/a-propos" class="back-link">← Acerca de</a>
+    <a href="/es/a-propos" class="back-link">Acerca de</a>
 
     <h1>Fibonacci en planning poker</h1>
 
@@ -122,7 +122,7 @@
     </details>
 
     <div class="cta">
-      <a href="/es" class="btn">Probar con CleanPoker →</a>
+      <a href="/es" class="btn">Probar con CleanPoker</a>
     </div>
   </main>
 

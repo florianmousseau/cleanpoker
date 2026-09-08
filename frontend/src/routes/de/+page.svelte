@@ -30,7 +30,7 @@
   createError="Session konnte nicht erstellt werden. Bitte erneut versuchen."
   footerSource="Quellcode"
   footerLicense="MIT-Lizenz"
-  footerAbout="Über CleanPoker"
+  footerAbout="Über uns"
   footerLegal="Impressum"
   footerPrivacy="Datenschutz"
 />

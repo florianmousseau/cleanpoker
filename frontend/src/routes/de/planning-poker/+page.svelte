@@ -33,13 +33,13 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/de/a-propos" class="back-link">← Über CleanPoker</a>
+    <a href="/de/a-propos" class="back-link">Über uns</a>
 
     <h1>Planning Poker: vollständiger Leitfaden</h1>
 
     <p>
       <strong>Planning Poker</strong> ist die am weitesten verbreitete Schätzungstechnik in
-      <strong>Scrum</strong> und Agilität. In 5 Minuten alles, was du wissen musst.
+      <strong>Scrum</strong> und Agilität. In 5 Minuten alles, was Sie wissen müssen.
     </p>
 
     <h2>Was ist Planning Poker?</h2>
@@ -127,7 +127,7 @@
     </details>
 
     <div class="cta">
-      <a href="/de" class="btn">Kostenlose Session erstellen →</a>
+      <a href="/de" class="btn">Kostenlose Session erstellen</a>
     </div>
   </main>
 
@@ -135,7 +135,7 @@
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
       | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
-      | <a href="/de/a-propos">Über CleanPoker</a>
+      | <a href="/de/a-propos">Über uns</a>
       | <a href="/de/mentions-legales">Impressum</a>
       | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>
     </p>

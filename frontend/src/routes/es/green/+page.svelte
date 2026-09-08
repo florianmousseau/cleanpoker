@@ -26,7 +26,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/es" class="back-link">← Volver al inicio</a>
+    <a href="/es" class="back-link">Volver al inicio</a>
 
     <h1>Eco-diseño: CleanPoker, tecnología digital responsable</h1>
 

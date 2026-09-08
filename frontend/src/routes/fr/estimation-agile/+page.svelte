@@ -41,7 +41,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/fr/a-propos" class="back-link">← À propos</a>
+    <a href="/fr/a-propos" class="back-link">À propos</a>
 
     <h1>Estimation agile&nbsp;: guide complet</h1>
 
@@ -149,7 +149,7 @@
     </details>
 
     <div class="cta">
-      <a href="/fr" class="btn">Lancer une session avec CleanPoker →</a>
+      <a href="/fr" class="btn">Lancer une session avec CleanPoker</a>
     </div>
   </main>
 

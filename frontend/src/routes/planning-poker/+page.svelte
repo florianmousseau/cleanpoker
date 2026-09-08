@@ -61,7 +61,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/a-propos" class="back-link">← About</a>
+    <a href="/a-propos" class="back-link">About</a>
 
     <h1>Planning poker: complete guide</h1>
 
@@ -233,7 +233,7 @@
     </details>
 
     <div class="cta">
-      <a href="/" class="btn">Create a free session →</a>
+      <a href="/" class="btn">Create a free session</a>
     </div>
 
     <p class="related">

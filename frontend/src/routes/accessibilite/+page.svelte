@@ -28,7 +28,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/" class="back-link">← Back to home</a>
+    <a href="/" class="back-link">Back to home</a>
 
     <h1>Accessibility: CleanPoker for inclusive teams</h1>
 
@@ -104,7 +104,7 @@
   <footer class="footer">
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT Licence</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
       | <a href="/mentions-legales#confidentialite">Privacy</a>

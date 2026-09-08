@@ -66,7 +66,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/fr/a-propos" class="back-link">← À propos</a>
+    <a href="/fr/a-propos" class="back-link">À propos</a>
 
     <h1>Poker planning&nbsp;: le guide complet</h1>
 
@@ -249,7 +249,7 @@
     </details>
 
     <div class="cta">
-      <a href="/fr" class="btn">Créer une session gratuite →</a>
+      <a href="/fr" class="btn">Créer une session gratuite</a>
     </div>
 
     <p class="related">

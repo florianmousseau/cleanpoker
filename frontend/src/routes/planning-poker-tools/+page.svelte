@@ -38,7 +38,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/planning-poker" class="back-link">← Planning poker guide</a>
+    <a href="/planning-poker" class="back-link">Planning poker guide</a>
 
     <h1>Planning poker tools compared: the 7 criteria that matter</h1>
 
@@ -118,7 +118,7 @@
           <tr><td>Accessibility</td><td>WCAG 2.1 AA, full keyboard navigation, NVDA and VoiceOver, Lighthouse accessibility 100.</td></tr>
           <tr><td>Weight</td><td>Under 50 KB of shared JavaScript, brotli compressed, measured on every CI run.</td></tr>
           <tr><td>Dropped connection</td><td>Automatic WebSocket reconnect with exponential backoff.</td></tr>
-          <tr><td>Source</td><td>Public, MIT licence.</td></tr>
+          <tr><td>Source</td><td>Public, MIT License.</td></tr>
         </tbody>
       </table>
     </div>
@@ -149,7 +149,7 @@
     </p>
 
     <div class="cta">
-      <a href="/" class="btn">Try CleanPoker →</a>
+      <a href="/" class="btn">Try CleanPoker</a>
     </div>
 
     <p class="related">
@@ -163,7 +163,7 @@
   <footer class="footer">
     <p>
       <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT licence</a>
+      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
       | <a href="/mentions-legales#confidentialite">Privacy</a>
