@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.8] - 2026-09-08
+
+- fix(test): read a footer label without stripping tags (#202)
+- fix(frontend): the displayed text holds its form - arrows, footer labels, register (#200)
+
 ## [0.0.7] - 2026-09-01
 
 - feat(compteur): count unique readers server-side, and say so in five languages (#189)
