@@ -82,6 +82,15 @@ jobs:
         working-directory: backend
         run: go test -coverprofile=coverage.out ./...
 
+      # Nothing else judged this repository's dependencies. Dependabot alerts
+      # cover the modules in go.mod, but not the standard library version the
+      # binary is built against, and no step here ever ran an audit - `npm ci`
+      # even passes `--no-audit`. govulncheck reads both, and reports only what
+      # the code actually reaches.
+      - name: govulncheck
+        working-directory: backend
+        run: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
+
       # Dependabot pull requests cannot read repository secrets. Skip the scan
       # there rather than failing the whole quality gate on every bump.
       - name: SonarCloud scan
