@@ -51,7 +51,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/a-propos" class="back-link">← About</a>
+    <a href="/a-propos" class="back-link">About</a>
 
     <h1>Alternatives to planning poker</h1>
 
@@ -221,7 +221,7 @@
     </details>
 
     <div class="cta">
-      <a href="/" class="btn">Try planning poker with CleanPoker →</a>
+      <a href="/" class="btn">Try planning poker with CleanPoker</a>
     </div>
   </main>
 

@@ -38,7 +38,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/fr/planning-poker" class="back-link">← Guide du poker planning</a>
+    <a href="/fr/planning-poker" class="back-link">Guide du poker planning</a>
 
     <h1>Comparatif des outils de poker planning&nbsp;: les 7 critères qui comptent</h1>
 
@@ -156,7 +156,7 @@
     </p>
 
     <div class="cta">
-      <a href="/fr" class="btn">Essayer CleanPoker →</a>
+      <a href="/fr" class="btn">Essayer CleanPoker</a>
     </div>
 
     <p class="related">

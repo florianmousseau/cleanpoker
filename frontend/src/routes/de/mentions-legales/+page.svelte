@@ -13,7 +13,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/de" class="back-link">← Zurück zur Startseite</a>
+    <a href="/de" class="back-link">Zurück zur Startseite</a>
 
     <h1>Impressum & Datenschutz</h1>
 

@@ -38,7 +38,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/planning-poker" class="back-link">← Planning poker guide</a>
+    <a href="/planning-poker" class="back-link">Planning poker guide</a>
 
     <h1>Planning poker tools compared: the 7 criteria that matter</h1>
 
@@ -149,7 +149,7 @@
     </p>
 
     <div class="cta">
-      <a href="/" class="btn">Try CleanPoker →</a>
+      <a href="/" class="btn">Try CleanPoker</a>
     </div>
 
     <p class="related">

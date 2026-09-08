@@ -26,7 +26,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/pt" class="back-link">← Voltar ao início</a>
+    <a href="/pt" class="back-link">Voltar ao início</a>
 
     <h1>Sobre o CleanPoker</h1>
 

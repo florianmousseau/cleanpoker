@@ -33,7 +33,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/de/a-propos" class="back-link">← Über CleanPoker</a>
+    <a href="/de/a-propos" class="back-link">Über CleanPoker</a>
 
     <h1>Planning Poker: vollständiger Leitfaden</h1>
 
@@ -127,7 +127,7 @@
     </details>
 
     <div class="cta">
-      <a href="/de" class="btn">Kostenlose Session erstellen →</a>
+      <a href="/de" class="btn">Kostenlose Session erstellen</a>
     </div>
   </main>
 

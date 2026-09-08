@@ -43,7 +43,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/planning-poker" class="back-link">← Planning poker guide</a>
+    <a href="/planning-poker" class="back-link">Planning poker guide</a>
 
     <h1>Planning poker and GDPR: where your session data goes</h1>
 
@@ -153,7 +153,7 @@
     </p>
 
     <div class="cta">
-      <a href="/" class="btn">Create a free session →</a>
+      <a href="/" class="btn">Create a free session</a>
     </div>
 
     <p class="related">

@@ -43,7 +43,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/fr/planning-poker" class="back-link">← Guide du poker planning</a>
+    <a href="/fr/planning-poker" class="back-link">Guide du poker planning</a>
 
     <h1>Poker planning et RGPD&nbsp;: où vont les données de vos sessions</h1>
 
@@ -155,7 +155,7 @@
     </p>
 
     <div class="cta">
-      <a href="/fr" class="btn">Créer une session gratuite →</a>
+      <a href="/fr" class="btn">Créer une session gratuite</a>
     </div>
 
     <p class="related">

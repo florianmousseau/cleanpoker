@@ -28,7 +28,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/" class="back-link">← Back to home</a>
+    <a href="/" class="back-link">Back to home</a>
 
     <h1>Accessibility: CleanPoker for inclusive teams</h1>
 

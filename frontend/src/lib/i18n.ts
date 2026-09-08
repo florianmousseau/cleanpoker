@@ -45,7 +45,7 @@ export const FR: Translation = {
 
   solo: {
     hint: 'Tu es seul(e) dans cette salle.',
-    invite: 'Inviter des coéquipiers →',
+    invite: 'Inviter des coéquipiers',
   },
 
   share: {
@@ -94,7 +94,7 @@ export const FR: Translation = {
     me: '(moi)',
     votedSr: ', a voté',
     votePending: 'voté',
-    toObserver: '→ Observateur',
+    toObserver: 'Passer en observateur',
     toObserverLabel: (n: string) => `Passer ${n} en observateur`,
     kick: 'Expulser',
     kickLabel: (n: string) => `Expulser ${n}`,
@@ -102,7 +102,7 @@ export const FR: Translation = {
 
   observers: {
     title: 'Observateurs',
-    toParticipant: '→ Participant',
+    toParticipant: 'Passer en participant',
     toParticipantLabel: (n: string) => `Passer ${n} en participant`,
   },
 
@@ -165,7 +165,7 @@ export const EN: Translation = {
 
   solo: {
     hint: 'You are alone in this room.',
-    invite: 'Invite teammates →',
+    invite: 'Invite teammates',
   },
 
   share: {
@@ -214,7 +214,7 @@ export const EN: Translation = {
     me: '(me)',
     votedSr: ', voted',
     votePending: 'voted',
-    toObserver: '→ Observer',
+    toObserver: 'Switch to observer',
     toObserverLabel: (n: string) => `Switch ${n} to observer`,
     kick: 'Remove',
     kickLabel: (n: string) => `Remove ${n}`,
@@ -222,7 +222,7 @@ export const EN: Translation = {
 
   observers: {
     title: 'Observers',
-    toParticipant: '→ Participant',
+    toParticipant: 'Switch to participant',
     toParticipantLabel: (n: string) => `Switch ${n} to participant`,
   },
 
@@ -285,7 +285,7 @@ export const ES: Translation = {
 
   solo: {
     hint: 'Estás solo en esta sala.',
-    invite: 'Invitar al equipo →',
+    invite: 'Invitar al equipo',
   },
 
   share: {
@@ -334,7 +334,7 @@ export const ES: Translation = {
     me: '(yo)',
     votedSr: ', votó',
     votePending: 'votado',
-    toObserver: '→ Observador',
+    toObserver: 'Cambiar a observador',
     toObserverLabel: (n: string) => `Cambiar ${n} a observador`,
     kick: 'Expulsar',
     kickLabel: (n: string) => `Expulsar a ${n}`,
@@ -342,7 +342,7 @@ export const ES: Translation = {
 
   observers: {
     title: 'Observadores',
-    toParticipant: '→ Participante',
+    toParticipant: 'Cambiar a participante',
     toParticipantLabel: (n: string) => `Cambiar ${n} a participante`,
   },
 
@@ -405,7 +405,7 @@ export const DE: Translation = {
 
   solo: {
     hint: 'Du bist allein in diesem Raum.',
-    invite: 'Team einladen →',
+    invite: 'Team einladen',
   },
 
   share: {
@@ -454,7 +454,7 @@ export const DE: Translation = {
     me: '(ich)',
     votedSr: ', hat abgestimmt',
     votePending: 'abgestimmt',
-    toObserver: '→ Beobachter',
+    toObserver: 'Zum Beobachter machen',
     toObserverLabel: (n: string) => `${n} zum Beobachter machen`,
     kick: 'Entfernen',
     kickLabel: (n: string) => `${n} entfernen`,
@@ -462,7 +462,7 @@ export const DE: Translation = {
 
   observers: {
     title: 'Beobachter',
-    toParticipant: '→ Teilnehmer',
+    toParticipant: 'Zum Teilnehmer machen',
     toParticipantLabel: (n: string) => `${n} zum Teilnehmer machen`,
   },
 
@@ -525,7 +525,7 @@ export const PT: Translation = {
 
   solo: {
     hint: 'Você está sozinho nesta sala.',
-    invite: 'Convidar a equipe →',
+    invite: 'Convidar a equipe',
   },
 
   share: {
@@ -574,7 +574,7 @@ export const PT: Translation = {
     me: '(eu)',
     votedSr: ', votou',
     votePending: 'votado',
-    toObserver: '→ Observador',
+    toObserver: 'Mudar para observador',
     toObserverLabel: (n: string) => `Mudar ${n} para observador`,
     kick: 'Remover',
     kickLabel: (n: string) => `Remover ${n}`,
@@ -582,7 +582,7 @@ export const PT: Translation = {
 
   observers: {
     title: 'Observadores',
-    toParticipant: '→ Participante',
+    toParticipant: 'Mudar para participante',
     toParticipantLabel: (n: string) => `Mudar ${n} para participante`,
   },
 

@@ -51,7 +51,7 @@
 
 <div class="page container">
   <main id="main">
-    <a href="/pt/a-propos" class="back-link">← Sobre</a>
+    <a href="/pt/a-propos" class="back-link">Sobre</a>
 
     <h1>Estimativa ágil: guia completo</h1>
 
@@ -115,7 +115,7 @@
     </details>
 
     <div class="cta">
-      <a href="/pt" class="btn">Criar sessão com CleanPoker →</a>
+      <a href="/pt" class="btn">Criar sessão com CleanPoker</a>
     </div>
   </main>
 
