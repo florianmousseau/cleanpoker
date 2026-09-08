@@ -48,7 +48,16 @@ export function libellesDe(source: string): [string, string][] {
   const couples: [string, string][] = [];
   for (const pied of source.matchAll(PIED)) {
     for (const lien of pied[1].matchAll(LIEN)) {
-      const libelle = lien[2].replace(/<[^>]*>/g, '').trim();
+      /*
+       * Le contenu du lien est pris TEL QUEL, seuls ses blancs sont normalises.
+       * Un retrait de balises par expression reguliere serait lu comme une
+       * desinfection HTML - CodeQL l a refuse en `js/incomplete-multi-character
+       * -sanitization`, et il a raison sur le principe meme si ce fichier ne
+       * sert rien a personne. Aucun des quarante pieds ne porte de balise a
+       * l interieur d un lien, et s il en naissait une, elle ferait partie du
+       * libelle compare : deux pages qui la posent differemment doivent diverger.
+       */
+      const libelle = lien[2].replace(/\s+/g, ' ').trim();
       if (libelle) couples.push([lien[1], libelle]);
     }
   }
