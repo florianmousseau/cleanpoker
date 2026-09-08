@@ -39,7 +39,7 @@
 
     <p>
       <strong>Planning Poker</strong> ist die am weitesten verbreitete Schätzungstechnik in
-      <strong>Scrum</strong> und Agilität. In 5 Minuten alles, was du wissen musst.
+      <strong>Scrum</strong> und Agilität. In 5 Minuten alles, was Sie wissen müssen.
     </p>
 
     <h2>Was ist Planning Poker?</h2>

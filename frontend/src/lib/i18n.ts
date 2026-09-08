@@ -27,7 +27,7 @@ export const FR: Translation = {
   copied: 'Copié\u00A0!',
 
   kicked: {
-    title: 'Vous avez été expulsé',
+    title: 'Tu as été expulsé',
     back: "Retour à l'accueil",
   },
 
