@@ -308,11 +308,16 @@ function blocFrancais(source: string): string {
     .join('');
 }
 
-function fautesDe(chemin: string, source: string): string[] {
+/*
+ * Les quatre masques appliques a un fichier, et les lignes qu un juge y refuse.
+ * Le juge est un parametre parce que ce site en a deux - la ponctuation double
+ * et les signes decoratifs - et qu ils lisent exactement les memes regions.
+ */
+function relevesDe(chemin: string, source: string, refuse: (ligne: string) => boolean): string[] {
   const lignes = new Map<number, string>();
   const relever = (contenu: string) => {
     contenu.split('\n').forEach((ligne, index) => {
-      if (estFautif(ligne)) lignes.set(index + 1, ligne.trim().slice(0, 100));
+      if (refuse(ligne)) lignes.set(index + 1, ligne.trim().slice(0, 100));
     });
   };
   if (extname(chemin) === '.svelte') {
@@ -326,6 +331,10 @@ function fautesDe(chemin: string, source: string): string[] {
   return [...lignes.entries()]
     .sort((a, b) => a[0] - b[0])
     .map(([numero, ligne]) => `${chemin}:${numero} ${ligne}`);
+}
+
+function fautesDe(chemin: string, source: string): string[] {
+  return relevesDe(chemin, source, estFautif);
 }
 
 describe('le detecteur de ponctuation decollee', () => {
@@ -471,23 +480,7 @@ const DECORATIFS = new RegExp(
 );
 
 function decoratifsDe(chemin: string, source: string): string[] {
-  const lignes = new Map<number, string>();
-  const relever = (contenu: string) => {
-    contenu.split('\n').forEach((ligne, index) => {
-      if (DECORATIFS.test(ligne)) lignes.set(index + 1, ligne.trim().slice(0, 100));
-    });
-  };
-  if (extname(chemin) === '.svelte') {
-    relever(masqueChaines(regionsCode(source)));
-    relever(masqueBalisage(source));
-    relever(masqueBalisageSansAccolades(source));
-    relever(masqueAttributs(source));
-  } else {
-    relever(masqueChaines(source));
-  }
-  return [...lignes.entries()]
-    .sort((a, b) => a[0] - b[0])
-    .map(([numero, ligne]) => `${chemin}:${numero} ${ligne}`);
+  return relevesDe(chemin, source, (ligne) => DECORATIFS.test(ligne));
 }
 
 describe('le detecteur de signes decoratifs', () => {
