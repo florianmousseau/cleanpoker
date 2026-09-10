@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.9] - 2026-09-10
+
+- fix(room): stop serving a translated room under the wrong lang attribute
+- fix(room): say so when the browser refuses to copy the room link
+
 ## [0.0.8] - 2026-09-08
 
 - fix(test): read a footer label without stripping tags (#202)
