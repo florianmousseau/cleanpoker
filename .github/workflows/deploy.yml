@@ -45,6 +45,13 @@ jobs:
         working-directory: frontend
         run: npm ci
 
+      # The Go side has govulncheck below; the frontend had nothing. Audited
+      # without --omit=dev because the build chain ships the site just as much
+      # as the single declared runtime dependency.
+      - name: Audit dependencies
+        working-directory: frontend
+        run: npm audit --audit-level=high
+
       - name: ESLint
         working-directory: frontend
         run: npm run lint
