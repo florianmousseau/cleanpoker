@@ -1,6 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { compteurDeVisiteurs } from '$lib/compteur-hook';
+import { SKIP_LINK } from '$lib/skip-link';
 
 const LOCALES = ['fr', 'es', 'de', 'pt'] as const;
 type Locale = typeof LOCALES[number];
@@ -44,18 +45,6 @@ function routeLocale(pathname: string): Locale | 'en' {
  */
 const EN_PREFIX = /^\/en(?=\/|$)/;
 
-/**
- * The skip link lives in app.html, outside any component, so it is the one
- * string the Svelte translations cannot reach. Translate it here, where the
- * locale is already known.
- */
-const SKIP_LINK: Record<Locale | 'en', string> = {
-	en: 'Skip to main content',
-	fr: 'Aller au contenu principal',
-	es: 'Ir al contenido principal',
-	de: 'Zum Hauptinhalt springen',
-	pt: 'Ir para o conteúdo principal'
-};
 
 const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
 	if (EN_PREFIX.test(event.url.pathname)) {

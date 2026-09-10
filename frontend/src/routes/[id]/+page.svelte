@@ -6,6 +6,7 @@
   import { FR, EN, ES, DE, PT, translateActivity } from '$lib/i18n';
   import { useRoom } from '$lib/useRoom.svelte';
   import { copierTexte } from '$lib/presse-papiers';
+  import { accorderDocumentALaLangue } from '$lib/html-lang';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
@@ -26,6 +27,14 @@
   let promoDismissed = $state(false);
 
   onMount(() => nameInputEl?.focus());
+
+  // A room URL has no locale prefix, so hooks.server.ts stamped `en` for
+  // everyone while this page renders in the cookie language. Anyone opening
+  // the shared link - the only way into a room - got a fully translated page
+  // under the wrong `lang`, with an untranslated skip link.
+  $effect(() => {
+    accorderDocumentALaLangue(document, lang.current);
+  });
 
   const room = useRoom(() => roomId, () => T);
 
