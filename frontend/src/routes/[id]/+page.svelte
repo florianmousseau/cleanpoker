@@ -5,6 +5,7 @@
   import Footer from '$lib/Footer.svelte';
   import { FR, EN, ES, DE, PT, translateActivity } from '$lib/i18n';
   import { useRoom } from '$lib/useRoom.svelte';
+  import { copierTexte } from '$lib/presse-papiers';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
@@ -19,7 +20,9 @@
   let nameInputEl = $state<HTMLInputElement | null>(null);
   let isObserver = $state(false);
   let copyFeedback = $state('');
+  let copyError = $state('');
   let inviteFeedback = $state('');
+  let inviteError = $state('');
   let promoDismissed = $state(false);
 
   onMount(() => nameInputEl?.focus());
@@ -31,18 +34,32 @@
     room.join(nameInput.trim(), isObserver);
   }
 
+  // A refused copy used to say nothing at all: the rejection left as an
+  // unhandled one, the label went back to "Copy link", and the host pasted the
+  // previous clipboard into the team channel. Sharing the URL is the whole of
+  // this step, so a failure has to be visible where the click happened.
   async function copyLink() {
-    await navigator.clipboard.writeText(window.location.href);
-    copyFeedback = T.copied;
-    setTimeout(() => (copyFeedback = ''), 2000);
+    if (await copierTexte(window.location.href)) {
+      copyError = '';
+      copyFeedback = T.copied;
+      setTimeout(() => (copyFeedback = ''), 2000);
+      return;
+    }
+    copyFeedback = '';
+    copyError = T.copyFailed;
   }
 
   // The invite lands in a team chat, where a bare URL says nothing. The sentence
   // names the product and answers the "do I need an account" question upfront.
   async function copyInvite() {
-    await navigator.clipboard.writeText(T.share.inviteMessage(window.location.href));
-    inviteFeedback = T.copied;
-    setTimeout(() => (inviteFeedback = ''), 2000);
+    if (await copierTexte(T.share.inviteMessage(window.location.href))) {
+      inviteError = '';
+      inviteFeedback = T.copied;
+      setTimeout(() => (inviteFeedback = ''), 2000);
+      return;
+    }
+    inviteFeedback = '';
+    inviteError = T.copyFailed;
   }
 
   const participants = $derived(room.roomState?.players.filter(p => !p.observer) ?? []);
@@ -97,6 +114,9 @@
           <span class="badge-pill">{T.tourLabel} {room.roomState.round}</span>
         {/if}
         <button class="btn btn-secondary btn-sm" onclick={copyLink}>{copyFeedback || T.copyLink}</button>
+        {#if copyError}
+          <span class="copy-error" role="alert">{copyError}</span>
+        {/if}
       </div>
     </div>
   </header>
@@ -145,6 +165,9 @@
           <button class="btn btn-secondary btn-sm" onclick={copyInvite}>
             {inviteFeedback || T.solo.invite}
           </button>
+          {#if inviteError}
+            <span class="copy-error" role="alert">{inviteError}</span>
+          {/if}
         </div>
       {/if}
 
@@ -398,6 +421,15 @@
   .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
   .logo { font-size: 1.125rem; font-weight: 700; text-decoration: none; color: var(--color-text); }
   .room-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+
+  /* Sits next to the button that failed, because that is where the eye already
+     is. It wraps onto its own line on a narrow screen rather than pushing the
+     room id out of the header. */
+  .copy-error {
+    flex-basis: 100%;
+    font-size: 0.8125rem;
+    color: var(--color-danger);
+  }
   .badge-pill {
     font-size: 0.78rem; padding: 0.2rem 0.6rem;
     background: var(--color-surface); border: 1px solid var(--color-border);
