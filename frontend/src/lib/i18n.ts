@@ -3,6 +3,7 @@ export interface Translation {
   tourLabel: string;
   copyLink: string;
   copied: string;
+  copyFailed: string;
   kicked: { title: string; back: string };
   join: { title: string; label: string; observer: string; btn: string };
   connection: { connecting: string; reconnecting: string };
@@ -25,6 +26,7 @@ export const FR: Translation = {
   tourLabel: 'Tour',
   copyLink: 'Copier le lien',
   copied: 'Copié\u00A0!',
+  copyFailed: "Ton navigateur a refusé la copie. Copie l'adresse depuis la barre du navigateur.",
 
   kicked: {
     title: 'Tu as été expulsé',
@@ -145,6 +147,7 @@ export const EN: Translation = {
   tourLabel: 'Round',
   copyLink: 'Copy link',
   copied: 'Copied!',
+  copyFailed: 'Your browser refused the copy. Copy the address from the browser bar.',
 
   kicked: {
     title: 'You have been removed',
@@ -265,6 +268,7 @@ export const ES: Translation = {
   tourLabel: 'Ronda',
   copyLink: 'Copiar enlace',
   copied: '¡Copiado!',
+  copyFailed: 'Tu navegador ha rechazado la copia. Copia la dirección desde la barra del navegador.',
 
   kicked: {
     title: 'Has sido expulsado',
@@ -385,6 +389,7 @@ export const DE: Translation = {
   tourLabel: 'Runde',
   copyLink: 'Link kopieren',
   copied: 'Kopiert!',
+  copyFailed: 'Dein Browser hat das Kopieren abgelehnt. Kopiere die Adresse aus der Browserleiste.',
 
   kicked: {
     title: 'Du wurdest entfernt',
@@ -505,6 +510,7 @@ export const PT: Translation = {
   tourLabel: 'Rodada',
   copyLink: 'Copiar link',
   copied: 'Copiado!',
+  copyFailed: 'O teu navegador recusou a cópia. Copia o endereço da barra do navegador.',
 
   kicked: {
     title: 'Você foi removido',
