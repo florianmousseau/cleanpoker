@@ -26,7 +26,12 @@
   let inviteError = $state('');
   let promoDismissed = $state(false);
 
-  onMount(() => nameInputEl?.focus());
+  // QA-105: a reload, or the back button after a footer link, used to put the
+  // participant in front of this form again - vote lost, and the team told
+  // they had left. The tab's seat is taken back before the form is offered.
+  onMount(() => {
+    if (!room.resume()) nameInputEl?.focus();
+  });
 
   // A room URL has no locale prefix, so hooks.server.ts stamped `en` for
   // everyone while this page renders in the cookie language. Anyone opening
