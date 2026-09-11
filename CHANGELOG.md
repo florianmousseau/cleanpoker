@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.10] - 2026-09-11
+
+- refactor(room): say why the refresh mutation changes nothing
+- fix(room): a reload takes the same seat back instead of leaving (QA-105)
+
 ## [0.0.9] - 2026-09-10
 
 - fix(room): stop serving a translated room under the wrong lang attribute
