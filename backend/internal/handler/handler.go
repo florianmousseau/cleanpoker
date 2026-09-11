@@ -39,13 +39,14 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 		roomID := r.PathValue("id")
 		playerName := r.URL.Query().Get("name")
 		observer := r.URL.Query().Get("observer") == "true"
+		token := r.URL.Query().Get("token")
 		if playerName == "" {
 			http.Error(w, "name required", http.StatusBadRequest)
 			return
 		}
 		rm := s.GetOrCreate(roomID, nil)
 		websocket.Handler(func(conn *websocket.Conn) {
-			handleWS(conn, rm, s.RecordJoin, playerName, observer)
+			handleWS(conn, rm, s.RecordJoin, arrival{name: playerName, observer: observer, token: token})
 		}).ServeHTTP(w, r)
 	})
 
@@ -78,26 +79,55 @@ func writeJSON(w http.ResponseWriter, v any) {
 	}
 }
 
-func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), playerName string, observer bool) {
-	playerID := uuid.New().String()
+// arrival is what a connecting client asks for: a new seat under a name, or
+// the seat its token opens if the room still holds it.
+type arrival struct {
+	name     string
+	observer bool
+	token    string
+}
 
-	if err := websocket.JSON.Send(conn, room.Message{Type: "welcome", Payload: map[string]string{"id": playerID}}); err != nil {
-		return
+// welcome gives the client what it needs to come back: its seat, the token
+// that opens it, and the vote it holds, which every snapshot masks.
+type welcome struct {
+	ID    string `json:"id"`
+	Token string `json:"token"`
+	Vote  string `json:"vote"`
+}
+
+func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival) {
+	seat, resumed := rm.Rejoin(a.token)
+	token := a.token
+	if !resumed {
+		seat = room.Player{ID: uuid.New().String(), Name: a.name, Observer: a.observer}
+		token = uuid.New().String()
 	}
+	// The seat outlives this connection: closing it starts the grace, it
+	// does not log a departure.
+	defer rm.Disconnect(seat.ID)
 
 	// Subscribe first, join second, and let the join broadcast be the initial
 	// state. The client is registered before the room produces the message
 	// that concerns it, so it gets that message once - not twice, and never
 	// zero times. Sending a snapshot here on top of it would put the duplicate
 	// back, deterministically this time.
-	ch := rm.Subscribe(playerID)
-	defer rm.Unsubscribe(playerID)
+	connID := uuid.New().String()
+	ch := rm.Subscribe(connID, seat.ID)
+	defer rm.Unsubscribe(connID)
 
-	// Counted before the arrival is broadcast, so a client holding the state
-	// that shows it in the room can read /stats and find itself counted.
-	recordJoin()
-	rm.Join(playerID, playerName, observer)
-	defer rm.Leave(playerID)
+	if err := websocket.JSON.Send(conn, room.Message{Type: "welcome", Payload: welcome{ID: seat.ID, Token: token, Vote: seat.Vote}}); err != nil {
+		return
+	}
+
+	if resumed {
+		rm.Refresh()
+	} else {
+		// Counted before the arrival is broadcast, so a client holding the
+		// state that shows it in the room can read /stats and find itself
+		// counted. A seat taken back is not a new arrival.
+		recordJoin()
+		rm.JoinWithToken(seat.ID, token, a.name, a.observer)
+	}
 
 	go func() {
 		for msg := range ch {
@@ -118,15 +148,15 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), playerName
 		}
 		switch action.Type {
 		case "vote":
-			rm.CastVote(playerID, action.Payload)
+			rm.CastVote(seat.ID, action.Payload)
 		case "show":
-			rm.Show(playerID)
+			rm.Show(seat.ID)
 		case "clear":
-			rm.Clear(playerID)
+			rm.Clear(seat.ID)
 		case "kick":
-			rm.Kick(playerID, action.Payload)
+			rm.Kick(seat.ID, action.Payload)
 		case "toggleObserver":
-			rm.ToggleObserver(playerID, action.Payload)
+			rm.ToggleObserver(seat.ID, action.Payload)
 		default:
 			log.Printf("unknown action: %s", action.Type)
 		}

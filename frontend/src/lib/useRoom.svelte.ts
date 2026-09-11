@@ -3,6 +3,7 @@ import { PUBLIC_WS_URL } from '$env/static/public';
 import { onDestroy } from 'svelte';
 import type { Translation } from '$lib/i18n';
 import { transitionOf } from '$lib/room-transition';
+import { forgetSeat, loadSeat, saveSeat, tabStorage } from '$lib/seat';
 
 export type Player = { id: string; name: string; vote: string; observer: boolean };
 export type Results = { avg: string; min: string; max: string; dist: Record<string, number> };
@@ -25,10 +26,14 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
   let reconnectDelay = 1000;
   let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
   let destroying = false;
+  // The token of the seat this tab holds. Every reconnection presents it, so
+  // a dropped socket takes the same seat back instead of adding a second one.
+  let token = '';
 
   function connect(name: string, observer: boolean) {
     if (!browser) return;
-    const url = `${PUBLIC_WS_URL}/rooms/${getRoomId()}/ws?name=${encodeURIComponent(name)}&observer=${observer}`;
+    const roomId = getRoomId();
+    const url = `${PUBLIC_WS_URL}/rooms/${roomId}/ws?name=${encodeURIComponent(name)}&observer=${observer}&token=${encodeURIComponent(token)}`;
     const socket = new WebSocket(url);
 
     socket.onopen = () => {
@@ -41,8 +46,13 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
       const T = getT();
       if (msg.type === 'welcome') {
         myId = msg.payload.id;
+        myVote = msg.payload.vote ?? '';
+        token = msg.payload.token ?? '';
+        if (token) saveSeat(tabStorage(), roomId, { name, observer, token });
       } else if (msg.type === 'kicked') {
         kicked = true;
+        token = '';
+        forgetSeat(tabStorage(), roomId);
         socket.close();
       } else if (msg.type === 'state') {
         const prev = roomState;
@@ -82,6 +92,15 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
     connect(name, observer);
   }
 
+  /** Take back the seat this tab held in the room, if it kept one. */
+  function resume(): boolean {
+    const seat = loadSeat(tabStorage(), getRoomId());
+    if (!seat) return false;
+    token = seat.token;
+    join(seat.name, seat.observer);
+    return true;
+  }
+
   function castVote(card: string) {
     const newVote = myVote === card ? '' : card;
     myVote = newVote;
@@ -107,6 +126,6 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
     get isReconnecting() { return isReconnecting; },
     get kicked() { return kicked; },
     get liveAnnouncement() { return liveAnnouncement; },
-    join, send, castVote, show, clear, kick, toggleObserver,
+    join, resume, send, castVote, show, clear, kick, toggleObserver,
   };
 }

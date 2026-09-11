@@ -324,3 +324,99 @@ func TestWebSocket_ArrivalSendsExactlyOneState(t *testing.T) {
 		t.Fatalf("expected the read to time out on an idle connection, got %v", err)
 	}
 }
+
+// --- A reload keeps the seat (QA-105) ---
+
+type welcomePayload struct {
+	ID    string `json:"id"`
+	Token string `json:"token"`
+	Vote  string `json:"vote"`
+}
+
+func dial(t *testing.T, srv *httptest.Server, roomID, query string) *websocket.Conn {
+	t.Helper()
+	u := "ws" + strings.TrimPrefix(srv.URL, "http") + "/rooms/" + roomID + "/ws?" + query
+	conn, err := websocket.Dial(u, "", "http://test")
+	if err != nil {
+		t.Fatalf("websocket dial: %v", err)
+	}
+	t.Cleanup(func() { _ = conn.Close() })
+	return conn
+}
+
+func decodeWelcome(t *testing.T, msg wsMsg) welcomePayload {
+	t.Helper()
+	if msg.Type != "welcome" {
+		t.Fatalf("expected welcome, got %q", msg.Type)
+	}
+	var w welcomePayload
+	if err := json.Unmarshal(msg.Payload, &w); err != nil {
+		t.Fatalf("decode welcome: %v", err)
+	}
+	return w
+}
+
+func activityHas(snap room.Snapshot, message string) bool {
+	for _, a := range snap.Activity {
+		if a.Message == message {
+			return true
+		}
+	}
+	return false
+}
+
+func TestWebSocket_ReloadTakesTheSameSeatBack(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+
+	bob := wsConnect(t, srv, id, "Bob")
+	recv(t, bob) // welcome
+	recv(t, bob) // Bob arrives
+
+	alice := wsConnect(t, srv, id, "Alice")
+	first := decodeWelcome(t, recv(t, alice))
+	if first.Token == "" {
+		t.Fatal("expected a token to come back with")
+	}
+	recv(t, alice) // Alice arrives
+	recv(t, bob)
+	send(t, alice, "vote", "5")
+	recv(t, alice)
+	recv(t, bob)
+
+	_ = alice.Close()
+	again := dial(t, srv, id, "name=Alice&token="+first.Token)
+	back := decodeWelcome(t, recv(t, again))
+	if back.ID != first.ID {
+		t.Fatalf("expected the same seat %s, got %s", first.ID, back.ID)
+	}
+	if back.Vote != "5" {
+		t.Fatalf("expected the vote to survive the reload, got %q", back.Vote)
+	}
+
+	snap := decodeSnap(t, recv(t, again))
+	if len(snap.Players) != 2 {
+		t.Fatalf("expected Alice and Bob, not a second Alice, got %d players", len(snap.Players))
+	}
+	if activityHas(snap, "left") {
+		t.Fatal("the team must not read that Alice left: she reloaded")
+	}
+	if got := getStats(t, srv).ParticipantsJoined; got != 2 {
+		t.Fatalf("expected a seat taken back not to count as an arrival, got %d", got)
+	}
+}
+
+func TestWebSocket_UnknownTokenGetsANewSeat(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	conn := dial(t, srv, id, "name=Alice&token=nothing-here")
+
+	w := decodeWelcome(t, recv(t, conn))
+	if w.Token == "" || w.Token == "nothing-here" {
+		t.Fatalf("expected a fresh token for a fresh seat, got %q", w.Token)
+	}
+	snap := decodeSnap(t, recv(t, conn))
+	if len(snap.Players) != 1 || !activityHas(snap, "joined") {
+		t.Fatalf("expected Alice to arrive as a new player, got %+v", snap.Players)
+	}
+}

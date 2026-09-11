@@ -1,6 +1,7 @@
 package room
 
 import (
+	"crypto/subtle"
 	"sync"
 	"time"
 )
@@ -19,11 +20,26 @@ const (
 	hiddenVote         = "hidden"
 )
 
+// DepartureGrace is how long a seat outlives the connection that held it. A
+// reload, a phone restoring a tab, or a look at another page of the site all
+// drop the socket; within this window the player takes the same seat back,
+// vote included, and the room never reads a departure that did not happen.
+const DepartureGrace = 30 * time.Second
+
 type Player struct {
 	ID       string `json:"id"`
 	Name     string `json:"name"`
 	Vote     string `json:"vote"`
 	Observer bool   `json:"observer"`
+	// token is what a returning client presents to take this seat back. It
+	// is unexported so no snapshot ever carries it to the other players.
+	token string
+}
+
+// departure is one pending removal. The room compares pointers, so a timer
+// that fires after its seat was taken back finds a stale entry and does nothing.
+type departure struct {
+	timer *time.Timer
 }
 
 type ActivityEntry struct {
@@ -66,6 +82,11 @@ type Room struct {
 	results      *Results
 	activity     []ActivityEntry
 	lastActivity time.Time
+	grace        time.Duration
+	// connections counts the live sockets of each seated player; a seat only
+	// starts its grace once the last one is gone.
+	connections map[string]int
+	departures  map[string]*departure
 
 	broadcast   chan Message
 	direct      chan directMessage
@@ -75,6 +96,7 @@ type Room struct {
 }
 
 type subscription struct {
+	connID   string
 	playerID string
 	ch       chan Message
 	// ready is closed by the loop once the subscription is in hand.
@@ -98,6 +120,9 @@ func New(id string, cards []string) *Room {
 		round:        1,
 		activity:     []ActivityEntry{},
 		lastActivity: time.Now(),
+		grace:        DepartureGrace,
+		connections:  make(map[string]int),
+		departures:   make(map[string]*departure),
 		broadcast:    make(chan Message, 32),
 		direct:       make(chan directMessage, 8),
 		subscribe:    make(chan subscription, 8),
@@ -124,6 +149,7 @@ func (r *Room) buildSnapshot(masked bool) Snapshot {
 	players := make([]*Player, 0, len(r.players))
 	for _, p := range r.players {
 		cp := *p
+		cp.token = ""
 		if masked && r.state == StateVoting && !cp.Observer && cp.Vote != "" {
 			cp.Vote = hiddenVote
 		}
@@ -184,9 +210,17 @@ func (r *Room) mutate(fn func()) {
 	r.broadcast <- Message{Type: "state", Payload: snap}
 }
 
+// Join seats a player that no client can take back.
 func (r *Room) Join(playerID, name string, observer bool) {
+	r.JoinWithToken(playerID, "", name, observer)
+}
+
+// JoinWithToken seats a player on its first connection. token is the secret
+// Rejoin will ask for; an empty one makes the seat impossible to take back.
+func (r *Room) JoinWithToken(playerID, token, name string, observer bool) {
 	r.mutate(func() {
-		r.players[playerID] = &Player{ID: playerID, Name: name, Observer: observer}
+		r.players[playerID] = &Player{ID: playerID, Name: name, Observer: observer, token: token}
+		r.connections[playerID]++
 		if observer {
 			r.logActivity(name, "joined_observer")
 		} else {
@@ -195,13 +229,92 @@ func (r *Room) Join(playerID, name string, observer bool) {
 	})
 }
 
+// Rejoin hands a returning client the seat its token opens, with the vote it
+// holds, and counts one more connection on it. It does not broadcast, so the
+// caller can subscribe first and then Refresh. It reports false when no seat
+// matches: the player was kicked, or its grace ran out.
+func (r *Room) Rejoin(token string) (Player, bool) {
+	if token == "" {
+		return Player{}, false
+	}
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	for _, p := range r.players {
+		if subtle.ConstantTimeCompare([]byte(p.token), []byte(token)) != 1 {
+			continue
+		}
+		r.cancelDeparture(p.ID)
+		r.connections[p.ID]++
+		r.lastActivity = time.Now()
+		seat := *p
+		seat.token = ""
+		return seat, true
+	}
+	return Player{}, false
+}
+
+// Refresh broadcasts the current state without changing it: what a client
+// that took its seat back needs, and what the others lose nothing receiving.
+func (r *Room) Refresh() {
+	r.mutate(func() {
+		// Nothing to change: the broadcast of the unchanged state is the point.
+	})
+}
+
+// Disconnect records that one of a player's connections closed. Once none is
+// left the seat waits out its grace before the departure is logged.
+func (r *Room) Disconnect(playerID string) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	r.connections[playerID]--
+	if r.connections[playerID] > 0 {
+		return
+	}
+	delete(r.connections, playerID)
+	if _, seated := r.players[playerID]; !seated {
+		return
+	}
+	d := &departure{}
+	r.departures[playerID] = d
+	d.timer = time.AfterFunc(r.grace, func() { r.expire(playerID, d) })
+}
+
+func (r *Room) expire(playerID string, d *departure) {
+	select {
+	case <-r.quit:
+		return
+	default:
+	}
+	r.mutate(func() {
+		if r.departures[playerID] != d {
+			return
+		}
+		delete(r.departures, playerID)
+		r.removePlayer(playerID)
+	})
+}
+
+// cancelDeparture must be called with r.mu held.
+func (r *Room) cancelDeparture(playerID string) {
+	if d, ok := r.departures[playerID]; ok {
+		d.timer.Stop()
+		delete(r.departures, playerID)
+	}
+}
+
 func (r *Room) Leave(playerID string) {
 	r.mutate(func() {
-		if p, ok := r.players[playerID]; ok {
-			r.logActivity(p.Name, "left")
-			delete(r.players, playerID)
-		}
+		r.cancelDeparture(playerID)
+		r.removePlayer(playerID)
 	})
+}
+
+// removePlayer must be called with r.mu held.
+func (r *Room) removePlayer(playerID string) {
+	if p, ok := r.players[playerID]; ok {
+		r.logActivity(p.Name, "left")
+		delete(r.players, playerID)
+	}
 }
 
 func (r *Room) CastVote(playerID, vote string) {
@@ -255,6 +368,7 @@ func (r *Room) Kick(initiatorID, targetID string) {
 		}
 		r.logActivity(r.nameOf(initiatorID), "kicked", target.Name)
 		delete(r.players, targetID)
+		r.cancelDeparture(targetID)
 		kicked = true
 	})
 	if kicked {
@@ -293,11 +407,14 @@ func (r *Room) ToggleObserver(initiatorID, targetID string) {
 //
 // Ordering, not timing, is what closes this: a subscriber that exists before
 // Join cannot miss the broadcast Join makes, and cannot be handed it twice.
-func (r *Room) Subscribe(playerID string) chan Message {
+//
+// A subscription belongs to one connection, not to a player: a seat taken back
+// by a second tab has two, and closing either must not cut the other off.
+func (r *Room) Subscribe(connID, playerID string) chan Message {
 	ch := make(chan Message, 16)
 	ready := make(chan struct{})
 	select {
-	case r.subscribe <- subscription{playerID: playerID, ch: ch, ready: ready}:
+	case r.subscribe <- subscription{connID: connID, playerID: playerID, ch: ch, ready: ready}:
 	case <-r.quit:
 		close(ch)
 		return ch
@@ -309,34 +426,36 @@ func (r *Room) Subscribe(playerID string) chan Message {
 	return ch
 }
 
-func (r *Room) Unsubscribe(playerID string) {
-	r.unsubscribe <- playerID
+func (r *Room) Unsubscribe(connID string) {
+	r.unsubscribe <- connID
 }
 
 func (r *Room) run() {
-	subs := make(map[string]chan Message)
+	subs := make(map[string]subscription)
 	for {
 		select {
 		case <-r.quit:
-			for _, ch := range subs {
-				close(ch)
+			for _, s := range subs {
+				close(s.ch)
 			}
 			return
 		case s := <-r.subscribe:
-			subs[s.playerID] = s.ch
+			subs[s.connID] = s
 			close(s.ready)
-		case pid := <-r.unsubscribe:
-			if ch, ok := subs[pid]; ok {
-				delete(subs, pid)
-				close(ch)
+		case connID := <-r.unsubscribe:
+			if s, ok := subs[connID]; ok {
+				delete(subs, connID)
+				close(s.ch)
 			}
 		case d := <-r.direct:
-			if ch, ok := subs[d.playerID]; ok {
-				trySend(ch, d.msg)
+			for _, s := range subs {
+				if s.playerID == d.playerID {
+					trySend(s.ch, d.msg)
+				}
 			}
 		case msg := <-r.broadcast:
-			for _, ch := range subs {
-				trySend(ch, msg)
+			for _, s := range subs {
+				trySend(s.ch, msg)
 			}
 		}
 	}
