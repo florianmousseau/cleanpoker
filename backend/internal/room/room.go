@@ -256,7 +256,9 @@ func (r *Room) Rejoin(token string) (Player, bool) {
 // Refresh broadcasts the current state without changing it: what a client
 // that took its seat back needs, and what the others lose nothing receiving.
 func (r *Room) Refresh() {
-	r.mutate(func() {})
+	r.mutate(func() {
+		// Nothing to change: the broadcast of the unchanged state is the point.
+	})
 }
 
 // Disconnect records that one of a player's connections closed. Once none is
