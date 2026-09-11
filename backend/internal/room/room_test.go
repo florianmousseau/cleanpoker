@@ -1,6 +1,8 @@
 package room
 
 import (
+	"encoding/json"
+	"strings"
 	"testing"
 	"time"
 )
@@ -415,7 +417,7 @@ func TestSubscribe_TakesEffectBeforeItReturns(t *testing.T) {
 	r := New("test", nil)
 	defer r.Stop()
 
-	ch := r.Subscribe("p1")
+	ch := r.Subscribe("c1", "p1")
 	r.Join("p1", "Alice", false)
 
 	select {
@@ -441,7 +443,7 @@ func TestSubscribe_ArrivalIsBroadcastOnce(t *testing.T) {
 	r := New("test", nil)
 	defer r.Stop()
 
-	ch := r.Subscribe("p1")
+	ch := r.Subscribe("c1", "p1")
 	r.Join("p1", "Alice", false)
 	<-ch
 
@@ -460,7 +462,7 @@ func TestSubscribe_OnAStoppedRoomReturns(t *testing.T) {
 
 	done := make(chan struct{})
 	go func() {
-		r.Subscribe("p1")
+		r.Subscribe("c1", "p1")
 		close(done)
 	}()
 
@@ -468,5 +470,188 @@ func TestSubscribe_OnAStoppedRoomReturns(t *testing.T) {
 	case <-done:
 	case <-time.After(2 * time.Second):
 		t.Fatal("Subscribe never returned on a stopped room")
+	}
+}
+
+
+// --- Seats that outlive their connection (QA-105) ---
+//
+// Reloading the page, or reading the legal notice and coming back, drops the
+// socket. The seat used to go with it: vote lost, name to type again, and the
+// whole team told "Alice left the session", which was false.
+
+func hasActivity(s Snapshot, message string) bool {
+	for _, a := range s.Activity {
+		if a.Message == message {
+			return true
+		}
+	}
+	return false
+}
+
+func waitFor(t *testing.T, cond func() bool) {
+	t.Helper()
+	deadline := time.Now().Add(2 * time.Second)
+	for !cond() {
+		if time.Now().After(deadline) {
+			t.Fatal("condition never became true")
+		}
+		time.Sleep(5 * time.Millisecond)
+	}
+}
+
+func TestRejoin_GivesTheSeatBackWithItsVote(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.JoinWithToken("p1", "secret", "Alice", false)
+	r.CastVote("p1", "5")
+	r.Disconnect("p1")
+
+	seat, ok := r.Rejoin("secret")
+	if !ok {
+		t.Fatal("expected the token to open the seat again")
+	}
+	if seat.ID != "p1" || seat.Name != "Alice" || seat.Vote != "5" {
+		t.Fatalf("expected Alice's seat with her vote 5, got %+v", seat)
+	}
+	s := snap(r)
+	if len(s.Players) != 1 {
+		t.Fatalf("expected one seat, not a second Alice, got %d", len(s.Players))
+	}
+	if hasActivity(s, "left") {
+		t.Fatal("a reload must not tell the room that Alice left")
+	}
+}
+
+func TestDisconnect_KeepsTheSeatDuringTheGrace(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.JoinWithToken("p1", "secret", "Alice", false)
+	r.Disconnect("p1")
+
+	s := snap(r)
+	if len(s.Players) != 1 {
+		t.Fatalf("expected the seat to wait out its grace, got %d players", len(s.Players))
+	}
+	if hasActivity(s, "left") {
+		t.Fatal("expected no departure logged while the grace runs")
+	}
+}
+
+func TestDisconnect_DepartsOnceTheGraceRunsOut(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.grace = 10 * time.Millisecond
+	r.JoinWithToken("p1", "secret", "Alice", false)
+	r.Disconnect("p1")
+
+	waitFor(t, func() bool { return len(snap(r).Players) == 0 })
+	if !hasActivity(snap(r), "left") {
+		t.Fatal("expected the departure to be logged once it is real")
+	}
+	if _, ok := r.Rejoin("secret"); ok {
+		t.Fatal("expected a seat that is gone to stay gone")
+	}
+}
+
+func TestRejoin_CancelsThePendingDeparture(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.grace = 20 * time.Millisecond
+	r.JoinWithToken("p1", "secret", "Alice", false)
+	r.Disconnect("p1")
+	if _, ok := r.Rejoin("secret"); !ok {
+		t.Fatal("expected the seat back")
+	}
+
+	time.Sleep(80 * time.Millisecond)
+	s := snap(r)
+	if len(s.Players) != 1 || hasActivity(s, "left") {
+		t.Fatalf("expected the timer of the old connection to do nothing, got %d players", len(s.Players))
+	}
+}
+
+func TestDisconnect_AnotherLiveConnectionKeepsTheSeat(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.grace = 10 * time.Millisecond
+	r.JoinWithToken("p1", "secret", "Alice", false)
+	if _, ok := r.Rejoin("secret"); !ok {
+		t.Fatal("expected a second tab to open the same seat")
+	}
+	r.Disconnect("p1")
+
+	time.Sleep(60 * time.Millisecond)
+	if len(snap(r).Players) != 1 {
+		t.Fatal("closing one tab must not start the grace while another holds the seat")
+	}
+}
+
+func TestRejoin_RefusesAnEmptyOrUnknownToken(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	r.JoinWithToken("p2", "secret", "Bob", false)
+
+	if _, ok := r.Rejoin(""); ok {
+		t.Fatal("an empty token must not open a seat joined without one")
+	}
+	if _, ok := r.Rejoin("guess"); ok {
+		t.Fatal("an unknown token must not open any seat")
+	}
+}
+
+func TestRejoin_AKickedPlayerCannotTakeTheSeatBack(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.JoinWithToken("p1", "secret", "Alice", false)
+	r.Join("host", "Host", false)
+	r.Kick("host", "p1")
+
+	if _, ok := r.Rejoin("secret"); ok {
+		t.Fatal("a kick must not be undone by a reload")
+	}
+}
+
+func TestSnapshot_NeverCarriesTheToken(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.JoinWithToken("p1", "do-not-leak", "Alice", false)
+
+	raw, err := json.Marshal(snap(r))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if strings.Contains(string(raw), "do-not-leak") {
+		t.Fatalf("the token opens the seat and must reach no other player: %s", raw)
+	}
+}
+
+func TestKick_ReachesEveryConnectionOfThePlayer(t *testing.T) {
+	r := New("test", nil)
+	defer r.Stop()
+	first := r.Subscribe("c1", "p1")
+	second := r.Subscribe("c2", "p1")
+	r.Join("p1", "Alice", false)
+	r.Join("host", "Host", false)
+	r.Kick("host", "p1")
+
+	for i, ch := range []chan Message{first, second} {
+		waitForMessage(t, ch, "kicked", i)
+	}
+}
+
+func waitForMessage(t *testing.T, ch chan Message, typ string, conn int) {
+	t.Helper()
+	timeout := time.After(2 * time.Second)
+	for {
+		select {
+		case msg := <-ch:
+			if msg.Type == typ {
+				return
+			}
+		case <-timeout:
+			t.Fatalf("connection %d never received %q", conn, typ)
+		}
 	}
 }
