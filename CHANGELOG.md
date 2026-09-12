@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.11] - 2026-09-12
+
+- fix(seo): keep the noindex legal notices out of the sitemap (#218)
+
 ## [0.0.10] - 2026-09-11
 
 - refactor(room): say why the refresh mutation changes nothing
