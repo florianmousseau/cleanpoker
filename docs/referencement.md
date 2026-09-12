@@ -148,13 +148,18 @@ Le prochain relevé se fait dans Search Console, contre le tableau du haut.
 ## Le contrôle qui empêche la rechute
 
 `frontend/scripts/check-seo.mjs`, lancé par `npm run check:seo` et par le job
-Code Quality, refuse trois régressions :
+Code Quality, refuse quatre régressions :
 
 - une balise `title` réintroduite dans `app.html` ;
 - une route qui n'en pose aucune ;
-- un `rel="canonical"` qui ne désigne pas le chemin de la page.
+- un `rel="canonical"` qui ne désigne pas le chemin de la page ;
+- une route indexable absente de `sitemap.xml`, ou une route en `noindex` qui
+  y figure. La seconde moitié manquait : le 2026-08-08, la règle a remis dans
+  le sitemap les cinq mentions légales sorties le 2026-08-03 (point 5
+  ci-dessus), faute de savoir qu'elles étaient en `noindex`. Elle lit
+  maintenant la balise `robots` de chaque route au lieu d'une liste d'exceptions.
 
-Les trois sont exactement ce qui a coûté l'indexation. Une règle que rien ne
+Les quatre sont exactement ce qui a coûté l'indexation. Une règle que rien ne
 mesure n'est qu'un souhait, et celle-ci était écrite nulle part.
 
 `sonar-project.properties` neutralise `Web:PageWithoutTitleCheck` sur le seul
