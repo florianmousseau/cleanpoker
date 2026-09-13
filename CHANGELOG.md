@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.12] - 2026-09-13
+
+- fix(home): drop the hint that repeated the lead and closed on a formula (#221)
+
 ## [0.0.11] - 2026-09-12
 
 - fix(seo): keep the noindex legal notices out of the sitemap (#218)
