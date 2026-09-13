@@ -26,7 +26,6 @@
   minCardsError="Minimum 2 cartes"
   createBtnLabel="Créer une session"
   creatingLabel="Création..."
-  hintText="Partage le lien. C'est prêt."
   createError="Impossible de créer la salle. Réessaie."
   footerSource="Code source"
   footerLicense="Licence MIT"

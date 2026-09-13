@@ -35,7 +35,6 @@
     minCardsError: string;
     createBtnLabel: string;
     creatingLabel: string;
-    hintText: string;
     createError: string;
     footerSource: string;
     footerLicense: string;
@@ -68,7 +67,6 @@
     minCardsError,
     createBtnLabel,
     creatingLabel,
-    hintText,
     createError,
     footerSource,
     footerLicense,
@@ -226,7 +224,6 @@
       <button type="submit" class="btn btn-primary btn-lg" disabled={creating || !isValid} data-testid="create-btn">
         {creating ? creatingLabel : createBtnLabel}
       </button>
-      <p class="hint">{hintText}</p>
     </form>
   </main>
 
@@ -287,7 +284,6 @@
   .cards-error { font-size: 0.78rem; color: var(--color-danger); }
 
   .btn-lg { padding: 0.875rem min(2.5rem, 40px); font-size: 1.125rem; border-radius: var(--radius-lg); }
-  .hint { font-size: 0.875rem; color: var(--color-text-muted); }
   .error { color: var(--color-danger); font-weight: 600; }
 
 </style>
