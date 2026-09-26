@@ -1,0 +1,23 @@
+name: Feature request
+description: Suggest a change to how CleanPoker works.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What your team tried to do, and what got in the way.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What you would like to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: CleanPoker has no accounts, no third-party scripts, a 50 kB JS budget, and keeps rooms in memory only. Say if the proposal would change any of that.
