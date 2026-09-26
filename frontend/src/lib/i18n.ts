@@ -13,7 +13,7 @@ export interface Translation {
   cards: { title: string; revealedSub: string; votingHint: string; selectedSuffix: (v: string) => string; voteLabel: (c: string) => string };
   controls: { title: string; newRound: string; reveal: string; pending: (n: number) => string };
   results: { title: string; avg: string; min: string; max: string; none: string };
-  participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string };
+  participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string; kickConfirm: (n: string) => string };
   observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
   activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
   live: { newRound: (n: number) => string; revealed: string };
@@ -100,6 +100,7 @@ export const FR: Translation = {
     toObserverLabel: (n: string) => `Passer ${n} en observateur`,
     kick: 'Expulser',
     kickLabel: (n: string) => `Expulser ${n}`,
+    kickConfirm: (n: string) => `Expulser ${n}\u00A0?`,
   },
 
   observers: {
@@ -221,6 +222,7 @@ export const EN: Translation = {
     toObserverLabel: (n: string) => `Switch ${n} to observer`,
     kick: 'Remove',
     kickLabel: (n: string) => `Remove ${n}`,
+    kickConfirm: (n: string) => `Remove ${n}?`,
   },
 
   observers: {
@@ -342,6 +344,7 @@ export const ES: Translation = {
     toObserverLabel: (n: string) => `Cambiar ${n} a observador`,
     kick: 'Expulsar',
     kickLabel: (n: string) => `Expulsar a ${n}`,
+    kickConfirm: (n: string) => `¿Expulsar a ${n}?`,
   },
 
   observers: {
@@ -463,6 +466,7 @@ export const DE: Translation = {
     toObserverLabel: (n: string) => `${n} zum Beobachter machen`,
     kick: 'Entfernen',
     kickLabel: (n: string) => `${n} entfernen`,
+    kickConfirm: (n: string) => `${n} entfernen?`,
   },
 
   observers: {
@@ -584,6 +588,7 @@ export const PT: Translation = {
     toObserverLabel: (n: string) => `Mudar ${n} para observador`,
     kick: 'Remover',
     kickLabel: (n: string) => `Remover ${n}`,
+    kickConfirm: (n: string) => `Remover ${n}?`,
   },
 
   observers: {

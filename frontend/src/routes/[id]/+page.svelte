@@ -7,6 +7,7 @@
   import { useRoom } from '$lib/useRoom.svelte';
   import { copierTexte } from '$lib/presse-papiers';
   import { accorderDocumentALaLangue } from '$lib/html-lang';
+  import { expulserApresAccord } from '$lib/expulsion';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
@@ -42,6 +43,10 @@
   });
 
   const room = useRoom(() => roomId, () => T);
+
+  function kick(player: { id: string; name: string }) {
+    expulserApresAccord(T.participants.kickConfirm(player.name), (q) => window.confirm(q), () => room.kick(player.id));
+  }
 
   function handleJoin() {
     if (!nameInput.trim()) return;
@@ -325,7 +330,7 @@
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-kick"
-                        onclick={() => room.kick(player.id)}
+                        onclick={() => kick(player)}
                         aria-label={T.participants.kickLabel(player.name)}>
                         {T.participants.kick}
                       </button>
@@ -367,7 +372,7 @@
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-kick"
-                        onclick={() => room.kick(player.id)}
+                        onclick={() => kick(player)}
                         aria-label={T.participants.kickLabel(player.name)}>
                         {T.participants.kick}
                       </button>
@@ -513,8 +518,12 @@
   .card-header-row h2 { font-size: 1rem; margin-bottom: 0.25rem; }
   .card-subtitle { font-size: 0.8rem; color: var(--color-text-muted); }
   .cards-list { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; }
+  /* A card label is whatever the host typed. A fixed box let a long one spill
+     past the card and the screen edge; the card now grows to hold it and
+     breaks it at any character once it reaches the width of the row. */
   .poker-card {
-    width: 3.5rem; height: 5rem;
+    min-width: 3.5rem; max-width: 100%; min-height: 5rem;
+    padding: 4px 8px; overflow-wrap: anywhere; text-align: center;
     font-size: 1.25rem; font-weight: 700; font-family: inherit;
     background: var(--color-card-face); border: 2px solid var(--color-border);
     color: var(--color-text);

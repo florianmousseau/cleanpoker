@@ -5,6 +5,7 @@ import (
 	"errors"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"os"
 	"strings"
 	"testing"
@@ -224,6 +225,46 @@ func TestWebSocket_NameRequired(t *testing.T) {
 	defer func() { _ = resp.Body.Close() }()
 	if resp.StatusCode != http.StatusBadRequest {
 		t.Fatalf("expected 400, got %d", resp.StatusCode)
+	}
+}
+
+// A plain GET is refused by the websocket handshake whatever the name, so these
+// dial a real socket: only the name can make it fail.
+func dialFails(t *testing.T, srv *httptest.Server, roomID, name string) bool {
+	t.Helper()
+	u := "ws" + strings.TrimPrefix(srv.URL, "http") + "/rooms/" + roomID + "/ws?name=" + url.QueryEscape(name)
+	conn, err := websocket.Dial(u, "", "http://test")
+	if err == nil {
+		_ = conn.Close()
+	}
+	return err != nil
+}
+
+func TestWebSocket_NameLongerThanTheFormAllowsIsRefused(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	if !dialFails(t, srv, id, strings.Repeat("N", handler.MaxNameLength+1)) {
+		t.Fatalf("a %d-character name was seated", handler.MaxNameLength+1)
+	}
+	if dialFails(t, srv, id, strings.Repeat("N", handler.MaxNameLength)) {
+		t.Fatalf("a %d-character name was refused", handler.MaxNameLength)
+	}
+}
+
+func TestWebSocket_NameCountsCharactersNotBytes(t *testing.T) {
+	// "é" is two bytes: counting bytes would refuse a name the form accepts.
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	if dialFails(t, srv, id, strings.Repeat("é", handler.MaxNameLength)) {
+		t.Fatalf("a %d-character accented name was refused", handler.MaxNameLength)
+	}
+}
+
+func TestWebSocket_BlankNameIsRefused(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	if !dialFails(t, srv, id, "   ") {
+		t.Fatal("a blank name was seated")
 	}
 }
 
