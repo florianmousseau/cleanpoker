@@ -280,7 +280,7 @@
   .cards-field input[type="text"]:focus { outline: none; border-color: var(--color-primary); }
 
   .cards-preview { display: flex; flex-wrap: wrap; gap: 0.3rem; min-height: 1.75rem; }
-  .card-chip { font-size: 0.78rem; font-weight: 700; padding: 0.15rem 0.5rem; background: var(--color-card-selected); color: var(--color-primary); border-radius: 99px; border: 1px solid var(--color-card-border-selected); }
+  .card-chip { overflow-wrap: anywhere; font-size: 0.78rem; font-weight: 700; padding: 0.15rem 0.5rem; background: var(--color-card-selected); color: var(--color-primary); border-radius: 99px; border: 1px solid var(--color-card-border-selected); }
   .cards-error { font-size: 0.78rem; color: var(--color-danger); }
 
   .btn-lg { padding: 0.875rem min(2.5rem, 40px); font-size: 1.125rem; border-radius: var(--radius-lg); }
