@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Accessibility statement
+    url: https://cleanpoker.dev/accessibilite
+    about: Known limitations and how accessibility is tested.
