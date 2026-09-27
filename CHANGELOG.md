@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.13] - 2026-09-27
+
+- fix(room): hold the name limit server-side, ask before removing someone, break long card labels (#230)
+- docs: rewrite the README from what the code does, add CONTRIBUTING and issue templates (#231)
+- chore(deps-dev): bump size-limit and @size-limit/file to 14.0.0 together (#229)
+- chore(deps-dev): bump the frontend group in /frontend with 4 updates (#225, #226)
+- chore(deps): bump golang.org/x/net in /backend in the backend group (#224)
+
 ## [0.0.12] - 2026-09-13
 
 - fix(home): drop the hint that repeated the lead and closed on a formula (#221)
