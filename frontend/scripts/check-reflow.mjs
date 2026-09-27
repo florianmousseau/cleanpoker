@@ -35,6 +35,12 @@
 // repairing it, and `documentElement.scrollWidth` then stops telling the truth
 // (measured on fidalo.co the same day).
 //
+// And one class of text no stylesheet rule predicts: what someone TYPED. A card
+// label is a single word of any length, and the body's `break-word` does not
+// lower the min-content of a flex item or of a fixed box. QA-108, 2026-09-10:
+// 40 characters without a space pushed the home page 10 px past a 375 px
+// screen, 300 of them 1762 px past a 1280 px one. See `TYPED_TEXT_BOXES`.
+//
 // It reads app.css AND every `<style>` block of the components: on quivad,
 // the 2026-08-22, a guard that read only the main sheet was green while two of
 // the three faulty grids lived in a component.
@@ -303,6 +309,33 @@ function tablesOutsideAScroller() {
 	return out;
 }
 
+/**
+ * The boxes that print a word someone typed, and nothing else. Each has to
+ * exist where it is declared AND break its text at any character, which is the
+ * one value that lowers a min-content. Unlike the table cells above, there is
+ * no weld to break in them: a card label never carries a no-break space.
+ */
+const TYPED_TEXT_BOXES = [
+	['lib/HomepageTemplate.svelte', '.card-chip'],
+	['routes/[id]/+page.svelte', '.poker-card']
+];
+
+function typedTextFaults(sheetList, boxes = TYPED_TEXT_BOXES) {
+	const out = [];
+	for (const [file, selector] of boxes) {
+		const sheet = sheetList.find((s) => relative(SRC, s.file).split(sep).join('/') === file);
+		const rule = sheet && rulesOf(sheet.css).find((r) => r.selector === selector);
+		if (!rule) {
+			out.push(`${file}: no \`${selector}\` rule, so nothing says how a typed label breaks`);
+		} else if (!/overflow-wrap:\s*anywhere/.test(rule.body)) {
+			out.push(
+				`${file}: \`${selector}\` prints what someone typed without \`overflow-wrap: anywhere\`, so one long word takes the page with it`
+			);
+		}
+	}
+	return out;
+}
+
 // --- Proving the detector, before it is allowed to pass -----------------------
 // A check that measures nothing stays green forever. Each of the four defects is
 // put back, one at a time, and has to turn it red - then the clean sheet has to
@@ -396,6 +429,14 @@ if (!bodyGuards('body { overflow-wrap: break-word; }').length)
 	proofs.push('misses a missing `.table-wrap` rule');
 if (!bodyGuards('body { overflow-wrap: break-word; } .table-wrap { overflow: hidden; }').length)
 	proofs.push('takes any `.table-wrap` rule for one that scrolls');
+const TYPED_SAMPLE = [['sample.svelte', '.chip']];
+const typedSheet = (css) => [{ file: join(SRC, 'sample.svelte'), css }];
+if (typedTextFaults(typedSheet('.chip { overflow-wrap: anywhere; padding: 2px; }'), TYPED_SAMPLE).length)
+	proofs.push('wrongly flags a typed-text box that breaks anywhere');
+if (!typedTextFaults(typedSheet('.chip { overflow-wrap: break-word; }'), TYPED_SAMPLE).length)
+	proofs.push('takes `break-word` for a break that lowers the min-content');
+if (!typedTextFaults(typedSheet('.other { overflow-wrap: anywhere; }'), TYPED_SAMPLE).length)
+	proofs.push('misses a typed-text box whose rule is gone');
 
 const found = sheets();
 if (found.length < MIN_SHEETS) {
@@ -420,6 +461,7 @@ if (proofs.length) {
 const global = found.find((s) => s.file.endsWith(`app.css`));
 const faults = found.flatMap(faultsIn);
 const netFaults = global ? bodyGuards(global.css) : ['app.css was not read'];
+netFaults.push(...typedTextFaults(found));
 for (const file of tablesOutsideAScroller()) {
 	netFaults.push(`${file}: a <table> with nothing scrolling around it - wrap it in a \`.table-wrap\``);
 }

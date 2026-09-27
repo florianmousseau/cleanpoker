@@ -1,0 +1,40 @@
+name: Bug report
+description: Something on cleanpoker.dev or in the code does not work as expected.
+labels: [bug]
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Start from a URL. Say how many people were in the room if it matters.
+      placeholder: |
+        1. Open https://cleanpoker.dev and create a room with the Fibonacci deck
+        2. Join from a second browser
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual
+      description: What happened instead. A screenshot or the console output helps.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser, OS and screen width
+      placeholder: Firefox 140, Windows 11, 1280 px
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Site language
+      options: [English, Français, Español, Deutsch, Português]
