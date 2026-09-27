@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strings"
 	"time"
+	"unicode/utf8"
 
 	"github.com/florianmousseau/cleanpoker/internal/room"
 	"github.com/florianmousseau/cleanpoker/internal/store"
@@ -37,11 +39,15 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 
 	mux.HandleFunc("GET /rooms/{id}/ws", func(w http.ResponseWriter, r *http.Request) {
 		roomID := r.PathValue("id")
-		playerName := r.URL.Query().Get("name")
+		playerName := strings.TrimSpace(r.URL.Query().Get("name"))
 		observer := r.URL.Query().Get("observer") == "true"
 		token := r.URL.Query().Get("token")
 		if playerName == "" {
 			http.Error(w, "name required", http.StatusBadRequest)
+			return
+		}
+		if utf8.RuneCountInString(playerName) > MaxNameLength {
+			http.Error(w, "name too long", http.StatusBadRequest)
 			return
 		}
 		rm := s.GetOrCreate(roomID, nil)
@@ -52,6 +58,12 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 
 	return cors(allowed, mux)
 }
+
+// MaxNameLength is the limit the join form announces with maxlength="30". A
+// limit held only by the form is not one: a scripted client used to seat a
+// 120-character name and have it broadcast to every participant. The form
+// counts UTF-16 units, so anything it lets through is at most this many runes.
+const MaxNameLength = 30
 
 // health is what a monitor reads. The status code alone already says the
 // process answers, so the body carries what a code cannot: uptime. A machine
