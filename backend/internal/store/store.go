@@ -35,15 +35,34 @@ func New() *Store {
 }
 
 func (s *Store) Create(cards []string) string {
+	id := s.CreateUncounted(cards)
+	s.mu.Lock()
+	s.roomsCreated++
+	s.mu.Unlock()
+	return id
+}
+
+// CreateUncounted opens a room the usage counters do not see: the one the
+// health probe walks through, which is not a session anybody held.
+func (s *Store) CreateUncounted(cards []string) string {
 	if len(cards) == 0 {
 		cards = room.DefaultCards
 	}
 	id := uuid.New().String()[:8]
 	s.mu.Lock()
 	s.rooms[id] = room.New(id, cards)
-	s.roomsCreated++
 	s.mu.Unlock()
 	return id
+}
+
+// Remove closes a room at once instead of leaving it to the daily cleanup.
+func (s *Store) Remove(id string) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if r, ok := s.rooms[id]; ok {
+		r.Stop()
+		delete(s.rooms, id)
+	}
 }
 
 // RecordJoin counts one person arriving in a session, observers included.

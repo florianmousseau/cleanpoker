@@ -1,6 +1,7 @@
 package handler_test
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"net/http"
@@ -12,6 +13,7 @@ import (
 	"time"
 
 	"github.com/florianmousseau/cleanpoker/internal/handler"
+	"github.com/florianmousseau/cleanpoker/internal/health"
 	"github.com/florianmousseau/cleanpoker/internal/room"
 	"github.com/florianmousseau/cleanpoker/internal/store"
 	"golang.org/x/net/websocket"
@@ -25,9 +27,27 @@ type wsMsg struct {
 
 func newTestServer(t *testing.T) *httptest.Server {
 	t.Helper()
-	srv := httptest.NewServer(handler.New(store.New(), []string{"http://test"}))
-	t.Cleanup(srv.Close)
+	srv, _ := newTestServerWithStore(t)
 	return srv
+}
+
+// newTestServerWithStore serves the real handler with the real probe walking
+// the server itself, the way production walks its own listener.
+func newTestServerWithStore(t *testing.T) (*httptest.Server, *store.Store) {
+	t.Helper()
+	s := store.New()
+	checker := &health.Checker{
+		Head: func(context.Context) (health.Head, error) {
+			return health.Head{SHA: "abcdef0123", Date: time.Now()}, nil
+		},
+		Commit: "abcdef0123",
+		Since:  s.Usage().Since,
+		Now:    time.Now,
+	}
+	srv := httptest.NewServer(handler.New(s, []string{"http://test"}, checker.Report))
+	t.Cleanup(srv.Close)
+	checker.Walk = health.RoomWalk(srv.URL, "http://test", srv.Client(), s.Remove)
+	return srv, s
 }
 
 func createRoom(t *testing.T, srv *httptest.Server) string {
@@ -87,9 +107,18 @@ func decodeSnap(t *testing.T, msg wsMsg) room.Snapshot {
 
 // --- Health ---
 
-func TestHealth(t *testing.T) {
-	srv := newTestServer(t)
-	resp, err := http.Get(srv.URL + "/health")
+type healthBody struct {
+	Status        string           `json:"status"`
+	UptimeSeconds *int64           `json:"uptimeSeconds"`
+	Alerte        string           `json:"alerte"`
+	Constats      []health.Constat `json:"constats"`
+	Echecs        []string         `json:"echecs_des_sondes"`
+	Deploye       health.Deploye   `json:"deploye"`
+}
+
+func getHealth(t *testing.T, url string) healthBody {
+	t.Helper()
+	resp, err := http.Get(url + "/health")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -100,18 +129,92 @@ func TestHealth(t *testing.T) {
 	if got := resp.Header.Get("Content-Type"); got != "application/json" {
 		t.Fatalf("expected a JSON content type, got %q", got)
 	}
-	var body struct {
-		Status        string `json:"status"`
-		UptimeSeconds *int64 `json:"uptimeSeconds"`
+	if got := resp.Header.Get("Cache-Control"); got != "no-store" {
+		t.Fatalf("a probe must never be cached, got %q", got)
 	}
+	var body healthBody
 	if err := json.NewDecoder(resp.Body).Decode(&body); err != nil {
 		t.Fatalf("decode health: %v", err)
 	}
-	if body.Status != "ok" {
-		t.Fatalf("expected status ok, got %q", body.Status)
+	return body
+}
+
+func TestHealth(t *testing.T) {
+	srv, s := newTestServerWithStore(t)
+	body := getHealth(t, srv.URL)
+	if body.Status != "ok" || body.UptimeSeconds == nil {
+		t.Fatalf("expected status ok and an uptime, got %+v", body)
 	}
-	if body.UptimeSeconds == nil {
-		t.Fatal("expected an uptime, got none")
+	if body.Alerte != health.OK || len(body.Echecs) != 0 {
+		t.Fatalf("expected a green probe on a healthy server, got %+v", body)
+	}
+	if body.Constats[0].Nom != "salle" || body.Constats[0].Niveau != health.OK {
+		t.Fatalf("expected the room walk to pass, got %+v", body.Constats)
+	}
+	if body.Deploye.Juge != "a jour" {
+		t.Fatalf("expected the build to be judged up to date, got %+v", body.Deploye)
+	}
+	// The walk is not a session: it must leave no room and no arrival behind.
+	if u := s.Usage(); u.RoomsCreated != 0 || u.ParticipantsJoined != 0 || u.ActiveRooms != 0 {
+		t.Fatalf("the probe left a trace in the usage counters: %+v", u)
+	}
+}
+
+// The real defect behind this one: a Fly secret ALLOWED_ORIGIN that forgets
+// the site. The server answers 200 to everything and every browser is refused.
+func TestHealth_RedWhenTheSiteOriginIsRefused(t *testing.T) {
+	s := store.New()
+	checker := &health.Checker{
+		Head: func(context.Context) (health.Head, error) {
+			return health.Head{SHA: "abcdef0123", Date: time.Now()}, nil
+		},
+		Commit: "abcdef0123",
+		Since:  s.Usage().Since,
+		Now:    time.Now,
+	}
+	srv := httptest.NewServer(handler.New(s, []string{"http://localhost:5173"}, checker.Report))
+	t.Cleanup(srv.Close)
+	checker.Walk = health.RoomWalk(srv.URL, "https://cleanpoker.dev", srv.Client(), s.Remove)
+
+	body := getHealth(t, srv.URL)
+	if body.Alerte != health.Rouge {
+		t.Fatalf("expected red when the site origin is refused, got %+v", body)
+	}
+	if len(body.Echecs) != 1 || !strings.Contains(body.Echecs[0], "CORS") {
+		t.Fatalf("expected the CORS reason to travel, got %v", body.Echecs)
+	}
+}
+
+// A server whose WebSocket route is gone still creates rooms: the home page
+// works and every room is empty. Only the join can see it.
+func TestHealth_RedWhenTheRoomCannotBeJoined(t *testing.T) {
+	s := store.New()
+	checker := &health.Checker{
+		Head: func(context.Context) (health.Head, error) {
+			return health.Head{SHA: "abcdef0123", Date: time.Now()}, nil
+		},
+		Commit: "abcdef0123",
+		Since:  s.Usage().Since,
+		Now:    time.Now,
+	}
+	healthy := handler.New(s, []string{"http://test"}, checker.Report)
+	broken := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasSuffix(r.URL.Path, "/ws") {
+			http.Error(w, "gone", http.StatusBadGateway)
+			return
+		}
+		healthy.ServeHTTP(w, r)
+	})
+	srv := httptest.NewServer(broken)
+	t.Cleanup(srv.Close)
+	checker.Walk = health.RoomWalk(srv.URL, "http://test", srv.Client(), s.Remove)
+
+	body := getHealth(t, srv.URL)
+	if body.Alerte != health.Rouge || len(body.Echecs) != 1 || !strings.Contains(body.Echecs[0], "WebSocket") {
+		t.Fatalf("expected red with the WebSocket reason, got %+v", body)
+	}
+	if u := s.Usage(); u.ActiveRooms != 0 {
+		t.Fatalf("a failed walk must still close its room, got %+v", u)
 	}
 }
 

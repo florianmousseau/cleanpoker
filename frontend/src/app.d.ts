@@ -1,4 +1,7 @@
 declare global {
+	/** The commit this build was made from, set by vite.config.ts. */
+	const __COMMIT__: string;
+
 	namespace App {
 		/**
 		 * What the Cloudflare adapter puts on `event.platform`.
@@ -11,6 +14,8 @@ declare global {
 		 */
 		interface Platform {
 			env: {
+				/** The Pages binding that serves the built files. */
+				ASSETS?: { fetch: (url: URL | string) => Promise<Response> };
 				SEL_COMPTEUR?: string;
 				VISITEURS?: {
 					writeDataPoint: (point: {
