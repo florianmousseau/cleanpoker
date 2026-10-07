@@ -155,6 +155,7 @@ describe('teteDuFlux', () => {
 describe('raison', () => {
 	it('carries the cause of an error', () => {
 		expect(raison('x')).toBe('x');
+		expect(raison({ statut: 1 })).toBe('{"statut":1}');
 		expect(raison(new Error('a'))).toBe('a');
 		expect(raison(new Error('fetch failed', { cause: { code: 'ENOTFOUND', message: 'getaddrinfo' } }))).toBe(
 			'fetch failed (ENOTFOUND getaddrinfo)'

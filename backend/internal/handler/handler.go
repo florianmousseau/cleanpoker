@@ -61,7 +61,9 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		rm := s.GetOrCreate(roomID, nil)
 		recordJoin := s.RecordJoin
 		if isProbe(r) {
-			recordJoin = func() {}
+			recordJoin = func() {
+				// The probe's seat is not an arrival: nothing to count.
+			}
 		}
 		websocket.Handler(func(conn *websocket.Conn) {
 			handleWS(conn, rm, recordJoin, arrival{name: playerName, observer: observer, token: token})

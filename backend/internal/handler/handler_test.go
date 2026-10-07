@@ -197,13 +197,13 @@ func TestHealth_RedWhenTheRoomCannotBeJoined(t *testing.T) {
 		Since:  s.Usage().Since,
 		Now:    time.Now,
 	}
-	real := handler.New(s, []string{"http://test"}, checker.Report)
+	healthy := handler.New(s, []string{"http://test"}, checker.Report)
 	broken := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if strings.HasSuffix(r.URL.Path, "/ws") {
 			http.Error(w, "gone", http.StatusBadGateway)
 			return
 		}
-		real.ServeHTTP(w, r)
+		healthy.ServeHTTP(w, r)
 	})
 	srv := httptest.NewServer(broken)
 	t.Cleanup(srv.Close)

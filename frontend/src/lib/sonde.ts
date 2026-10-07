@@ -69,12 +69,20 @@ function pire(constats: Constat[]): Niveau {
 export function raison(e: unknown): string {
 	if (typeof e !== 'object' || e === null) return String(e);
 	const { message, code, cause } = e as { message?: unknown; code?: unknown; cause?: unknown };
-	let texte = typeof message === 'string' ? message : String(e);
+	let texte = typeof message === 'string' ? message : JSON.stringify(e);
 	if (typeof code === 'string' && !texte.includes(code)) texte = `${code} ${texte}`;
 	return cause === undefined || cause === null ? texte : `${texte} (${raison(cause)})`;
 }
 
 const BASE = 'https://site.invalid';
+
+const alphabetique = (a: string, b: string): number => a.localeCompare(b);
+
+function trie(liste: Iterable<string>): string[] {
+	const copie = [...liste];
+	copie.sort(alphabetique);
+	return copie;
+}
 
 /** Resolve a reference found in the file at `depuis` to a path of the site. */
 function resoudre(ref: string, depuis: string): string {
@@ -87,7 +95,7 @@ export function fichiersDe(html: string, chemin = '/'): string[] {
 	for (const m of html.matchAll(/["']((?:\.{1,2}\/|\/)?_app\/immutable\/[^"'?#\s]+)["']/g)) {
 		vus.add(resoudre(m[1], chemin));
 	}
-	return [...vus].sort();
+	return trie(vus);
 }
 
 /** The modules a built script imports, statically or on demand. */
@@ -109,16 +117,11 @@ async function lirePage(l: Lecteurs, chemin: string): Promise<string> {
 }
 
 async function pages(l: Lecteurs): Promise<{ constat: Constat; fichiers: string[] }> {
-	const trouves = new Set<string>();
-	const echecs: string[] = [];
-	for (const chemin of PAGES_TEMOINS) {
-		try {
-			for (const f of fichiersDe(await lirePage(l, chemin), chemin)) trouves.add(f);
-		} catch (e) {
-			echecs.push(raison(e));
-		}
-	}
-	const fichiers = [...trouves].sort();
+	const lus = await Promise.allSettled(
+		PAGES_TEMOINS.map(async (chemin) => fichiersDe(await lirePage(l, chemin), chemin))
+	);
+	const echecs = lus.flatMap((r) => (r.status === 'rejected' ? [raison(r.reason)] : []));
+	const fichiers = trie(new Set(lus.flatMap((r) => (r.status === 'fulfilled' ? r.value : []))));
 	if (echecs.length) return { constat: { nom: 'pages', niveau: 'rouge', detail: echecs.join(' ; ') }, fichiers };
 	const detail = `${PAGES_TEMOINS.length} pages avec le formulaire`;
 	return { constat: { nom: 'pages', niveau: 'ok', detail }, fichiers };
@@ -130,6 +133,22 @@ async function lireFichier(l: Lecteurs, f: string): Promise<string[]> {
 	return f.endsWith('.js') ? importsDe(await r.text(), f) : [];
 }
 
+/** Read one wave of files, then the files they import, until none is new. */
+async function parcourir(l: Lecteurs, vague: string[], vus: Set<string>, echecs: string[]): Promise<void> {
+	if (!vague.length || vus.size > PLAFOND_FICHIERS) return;
+	const suivants = await Promise.all(
+		vague.map((f) =>
+			lireFichier(l, f).catch((e: unknown) => {
+				echecs.push(raison(e));
+				return [];
+			})
+		)
+	);
+	const nouveaux = suivants.flat().filter((f) => !vus.has(f));
+	for (const f of nouveaux) vus.add(f);
+	await parcourir(l, [...new Set(nouveaux)], vus, echecs);
+}
+
 async function fichiers(l: Lecteurs, depart: string[]): Promise<Constat> {
 	// A page that asks for nothing is a page whose markup was not read: the
 	// walk would be green by measuring nothing.
@@ -138,21 +157,9 @@ async function fichiers(l: Lecteurs, depart: string[]): Promise<Constat> {
 	}
 	const vus = new Set<string>(depart);
 	const echecs: string[] = [];
-	let vague = depart;
-	while (vague.length && vus.size <= PLAFOND_FICHIERS) {
-		const suivants = await Promise.all(
-			vague.map((f) =>
-				lireFichier(l, f).catch((e: unknown) => {
-					echecs.push(raison(e));
-					return [];
-				})
-			)
-		);
-		vague = suivants.flat().filter((f) => !vus.has(f));
-		for (const f of vague) vus.add(f);
-	}
+	await parcourir(l, depart, vus, echecs);
 	if (vus.size > PLAFOND_FICHIERS) echecs.push(`plus de ${PLAFOND_FICHIERS} fichiers : parcours arrete`);
-	if (echecs.length) return { nom: 'fichiers', niveau: 'rouge', detail: echecs.sort().join(' ; ') };
+	if (echecs.length) return { nom: 'fichiers', niveau: 'rouge', detail: trie(echecs).join(' ; ') };
 	return { nom: 'fichiers', niveau: 'ok', detail: `${vus.size} fichiers servis` };
 }
 
@@ -226,10 +233,10 @@ const PREFIXE_COMMIT = 'tag:github.com,2008:Grit::Commit/';
 
 /** Read the head of main out of the repository's public Atom feed. */
 export function teteDuFlux(xml: string): Tete {
-	const entree = xml.match(/<entry>([\s\S]*?)<\/entry>/);
+	const entree = /<entry>([\s\S]*?)<\/entry>/.exec(xml);
 	if (!entree) throw new Error('flux sans aucun commit');
-	const id = entree[1].match(/<id>([^<]*)<\/id>/)?.[1] ?? '';
-	const maj = entree[1].match(/<updated>([^<]*)<\/updated>/)?.[1] ?? '';
+	const id = /<id>([^<]*)<\/id>/.exec(entree[1])?.[1] ?? '';
+	const maj = /<updated>([^<]*)<\/updated>/.exec(entree[1])?.[1] ?? '';
 	if (!id.startsWith(PREFIXE_COMMIT) || id.length < PREFIXE_COMMIT.length + 7) {
 		throw new Error(`identifiant de commit inattendu "${id}"`);
 	}
