@@ -36,6 +36,9 @@ func TestDeploy_UpToDateIsGreen(t *testing.T) {
 	if r.Alerte != OK || r.Deploye.Juge != "a jour" || !r.Deploye.Retard.Mesure {
 		t.Fatalf("expected green and up to date, got %+v", r)
 	}
+	if r.Deploye.MainDepuis != "2026-10-04T20:00:00Z" {
+		t.Fatalf("expected the date main moved, got %q", r.Deploye.MainDepuis)
+	}
 }
 
 // The lesbancs defect of 2026-10-07: four merged pull requests, never

@@ -35,10 +35,8 @@ export interface Lecteurs {
 	page: (chemin: string) => Promise<Response>;
 	/** A built file, as the browser downloads it. */
 	fichier: (chemin: string) => Promise<Response>;
-	/** Anything outside the site: the room server, the head of main. */
+	/** The room server, as the browser calls it. */
 	reseau: (url: string) => Promise<Response>;
-	/** The newest commit of main, read at most every ten minutes. */
-	tete: () => Promise<Tete>;
 	commit: string;
 	serveur: string;
 	maintenant: number;
@@ -163,20 +161,40 @@ async function fichiers(l: Lecteurs, depart: string[]): Promise<Constat> {
 	return { nom: 'fichiers', niveau: 'ok', detail: `${vus.size} fichiers servis` };
 }
 
-async function serveur(l: Lecteurs): Promise<Constat> {
+interface CorpsServeur {
+	alerte?: string;
+	echecs_des_sondes?: string[];
+	deploye?: { main?: string; main_depuis?: string };
+}
+
+/**
+ * The head of main as the room server read it. Read from here rather than
+ * from GitHub: GitHub answers 429 to a share of the requests that leave
+ * Cloudflare, and one reading for the two builds cannot disagree with itself.
+ */
+function teteDuServeur(corps: CorpsServeur): Tete | Error {
+	const { main, main_depuis } = corps.deploye ?? {};
+	const date = Date.parse(main_depuis ?? '');
+	if (main && main.length >= 7 && !Number.isNaN(date)) return { sha: main, date };
+	const pourquoi = (corps.echecs_des_sondes ?? []).filter((e) => e.includes('tete de main')).join(' ; ');
+	return new Error(`le serveur de salles ne la publie pas${pourquoi ? ` (${pourquoi})` : ''}`);
+}
+
+async function serveur(l: Lecteurs): Promise<{ constat: Constat; tete: Tete | Error }> {
 	const url = `${l.serveur}/health`;
 	try {
 		const r = await l.reseau(url);
 		if (r.status !== 200) throw new Error(`HTTP ${r.status} : ${url}`);
-		const corps = (await r.json()) as { alerte?: string; echecs_des_sondes?: string[] };
+		const corps = (await r.json()) as CorpsServeur;
 		if (corps.alerte !== 'ok' && corps.alerte !== 'attention' && corps.alerte !== 'rouge') {
 			throw new Error(`${url} : pas d'alerte lisible`);
 		}
 		const echecs = corps.echecs_des_sondes ?? [];
 		const detail = echecs.length ? echecs.join(' ; ') : 'serveur de salles au vert';
-		return { nom: 'serveur', niveau: corps.alerte, detail };
+		return { constat: { nom: 'serveur', niveau: corps.alerte, detail }, tete: teteDuServeur(corps) };
 	} catch (e) {
-		return { nom: 'serveur', niveau: 'rouge', detail: `serveur de salles : ${raison(e)}` };
+		const detail = `serveur de salles : ${raison(e)}`;
+		return { constat: { nom: 'serveur', niveau: 'rouge', detail }, tete: new Error(detail) };
 	}
 }
 
@@ -189,17 +207,14 @@ function memeCommit(a: string, b: string): boolean {
 	return n >= 7 && a.slice(0, n) === b.slice(0, n);
 }
 
-async function deploiement(l: Lecteurs): Promise<{ constat: Constat; deploye: Deploye }> {
+function deploiement(l: Lecteurs, tete: Tete | Error): { constat: Constat; deploye: Deploye } {
 	const deploye: Deploye = { commit: l.commit, juge: 'non juge' };
 	if (!l.commit || l.commit === 'inconnu') {
 		const detail = 'commit servi inconnu : build sans GITHUB_SHA';
 		return { constat: { nom: 'deploiement', niveau: 'attention', detail }, deploye };
 	}
-	let tete: Tete;
-	try {
-		tete = await l.tete();
-	} catch (e) {
-		const detail = `tete de main illisible : ${raison(e)}`;
+	if (tete instanceof Error) {
+		const detail = `tete de main illisible : ${tete.message}`;
 		return { constat: { nom: 'deploiement', niveau: 'attention', detail }, deploye };
 	}
 	deploye.main = tete.sha;
@@ -219,28 +234,13 @@ async function deploiement(l: Lecteurs): Promise<{ constat: Constat; deploye: De
 
 /** Run every walk and judge the whole. */
 export async function sonder(l: Lecteurs): Promise<Rapport> {
-	const [vues, srv, dep] = await Promise.all([pages(l), serveur(l), deploiement(l)]);
-	const constats = [vues.constat, await fichiers(l, vues.fichiers), srv, dep.constat];
+	const [vues, srv] = await Promise.all([pages(l), serveur(l)]);
+	const dep = deploiement(l, srv.tete);
+	const constats = [vues.constat, await fichiers(l, vues.fichiers), srv.constat, dep.constat];
 	return {
 		alerte: pire(constats),
 		constats,
 		echecs_des_sondes: constats.filter((c) => c.niveau !== 'ok').map((c) => `${c.nom} : ${c.detail}`),
 		deploye: dep.deploye
 	};
-}
-
-const PREFIXE_COMMIT = 'tag:github.com,2008:Grit::Commit/';
-
-/** Read the head of main out of the repository's public Atom feed. */
-export function teteDuFlux(xml: string): Tete {
-	const entree = /<entry>([\s\S]*?)<\/entry>/.exec(xml);
-	if (!entree) throw new Error('flux sans aucun commit');
-	const id = /<id>([^<]*)<\/id>/.exec(entree[1])?.[1] ?? '';
-	const maj = /<updated>([^<]*)<\/updated>/.exec(entree[1])?.[1] ?? '';
-	if (!id.startsWith(PREFIXE_COMMIT) || id.length < PREFIXE_COMMIT.length + 7) {
-		throw new Error(`identifiant de commit inattendu "${id}"`);
-	}
-	const date = Date.parse(maj);
-	if (Number.isNaN(date)) throw new Error(`date de commit illisible "${maj}"`);
-	return { sha: id.slice(PREFIXE_COMMIT.length), date };
 }
