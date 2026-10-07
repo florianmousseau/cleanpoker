@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { fichiersDe, importsDe, raison, sonder, teteDuFlux, TOLERANCE_RETARD, type Lecteurs } from './sonde';
+import { fichiersDe, importsDe, raison, sonder, TOLERANCE_RETARD, type Lecteurs } from './sonde';
 
 const MAINTENANT = Date.UTC(2026, 9, 7, 20, 0, 0);
 const MAIN = '70044cc3595fed36e17a158128abc53c012d5daa';
@@ -18,6 +18,10 @@ const FICHIERS: Record<string, string> = {
 	'/_app/immutable/nodes/0.js': 'import"../chunks/a.js";'
 };
 
+function serveurVert(main = MAIN, depuis = MAINTENANT - 72 * 3600 * 1000) {
+	return { alerte: 'ok', echecs_des_sondes: [], deploye: { main, main_depuis: new Date(depuis).toISOString() } };
+}
+
 function json(corps: unknown, status = 200): Response {
 	return new Response(JSON.stringify(corps), { status });
 }
@@ -26,8 +30,7 @@ function sain(): Lecteurs {
 	return {
 		page: async () => new Response(PAGE),
 		fichier: async (f) => (f in FICHIERS ? new Response(FICHIERS[f]) : new Response('', { status: 404 })),
-		reseau: async () => json({ alerte: 'ok', echecs_des_sondes: [] }),
-		tete: async () => ({ sha: MAIN, date: MAINTENANT - 72 * 3600 * 1000 }),
+		reseau: async () => json(serveurVert()),
 		commit: MAIN,
 		serveur: 'https://serveur.test',
 		maintenant: MAINTENANT
@@ -83,7 +86,8 @@ describe('sonder', () => {
 	});
 
 	it('relays the room server verdict and its reasons', async () => {
-		const reseau = async () => json({ alerte: 'rouge', echecs_des_sondes: ['creation de salle : HTTP 503'] });
+		const reseau = async () =>
+			json({ ...serveurVert(), alerte: 'rouge', echecs_des_sondes: ['creation de salle : HTTP 503'] });
 		const r = await sonder({ ...sain(), reseau });
 		expect(r.alerte).toBe('rouge');
 		expect(r.echecs_des_sondes).toEqual(['serveur : creation de salle : HTTP 503']);
@@ -98,25 +102,28 @@ describe('sonder', () => {
 
 	// The lesbancs prod of 2026-10-07: four merged pull requests never deployed.
 	it('is attention when main moved more than a day ago', async () => {
-		const tete = async () => ({ sha: MAIN, date: MAINTENANT - TOLERANCE_RETARD - 3600 * 1000 });
-		const r = await sonder({ ...sain(), commit: 'ac104d1', tete });
+		const reseau = async () => json(serveurVert(MAIN, MAINTENANT - TOLERANCE_RETARD - 3600 * 1000));
+		const r = await sonder({ ...sain(), commit: 'ac104d1', reseau });
 		expect(r.alerte).toBe('attention');
 		expect(r.deploye).toMatchObject({ juge: 'en retard', retard: { mesure: true, heures: 25 } });
 		expect(constat(r, 'deploiement')?.detail).toContain('sert ac104d1, main est 70044cc');
 	});
 
 	it('stays green while a deploy can still be running', async () => {
-		const tete = async () => ({ sha: MAIN, date: MAINTENANT - 3600 * 1000 });
-		const r = await sonder({ ...sain(), commit: 'ac104d1', tete });
+		const reseau = async () => json(serveurVert(MAIN, MAINTENANT - 3600 * 1000));
+		const r = await sonder({ ...sain(), commit: 'ac104d1', reseau });
 		expect(r.alerte).toBe('ok');
 		expect(r.deploye.juge).toBe('en retard');
 	});
 
 	it('says why the build could not be judged', async () => {
-		const r = await sonder({ ...sain(), tete: async () => Promise.reject(new Error('HTTP 429 : flux')) });
+		const reseau = async () => json({ alerte: 'attention', echecs_des_sondes: ['tete de main illisible : HTTP 429 : flux'] });
+		const r = await sonder({ ...sain(), reseau });
 		expect(r.alerte).toBe('attention');
 		expect(r.deploye.juge).toBe('non juge');
-		expect(r.echecs_des_sondes).toEqual(['deploiement : tete de main illisible : HTTP 429 : flux']);
+		expect(r.echecs_des_sondes).toContain(
+			'deploiement : tete de main illisible : le serveur de salles ne la publie pas (tete de main illisible : HTTP 429 : flux)'
+		);
 		const r2 = await sonder({ ...sain(), commit: 'inconnu' });
 		expect(constat(r2, 'deploiement')).toMatchObject({ niveau: 'attention' });
 	});
@@ -133,22 +140,6 @@ describe('fichiersDe and importsDe', () => {
 			'/_app/immutable/chunks/a.js',
 			'/_app/immutable/entry/b.js'
 		]);
-	});
-});
-
-describe('teteDuFlux', () => {
-	it('reads the newest commit of the feed', () => {
-		const xml = `<feed><entry><id>tag:github.com,2008:Grit::Commit/${MAIN}</id><updated>2026-10-02T20:48:58Z</updated></entry>
-<entry><id>tag:github.com,2008:Grit::Commit/25396928a678</id><updated>2026-10-02T20:45:35Z</updated></entry></feed>`;
-		expect(teteDuFlux(xml)).toEqual({ sha: MAIN, date: Date.UTC(2026, 9, 2, 20, 48, 58) });
-	});
-
-	it('refuses what it cannot read', () => {
-		expect(() => teteDuFlux('<html></html>')).toThrow('aucun commit');
-		expect(() => teteDuFlux('<feed><entry><id>x</id><updated>2026-10-02T20:48:58Z</updated></entry></feed>')).toThrow('inattendu');
-		expect(() =>
-			teteDuFlux(`<feed><entry><id>tag:github.com,2008:Grit::Commit/${MAIN}</id><updated>hier</updated></entry></feed>`)
-		).toThrow('date');
 	});
 });
 
