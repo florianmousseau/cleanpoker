@@ -1,20 +1,23 @@
 package handler
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"net/http"
 	"strings"
-	"time"
 	"unicode/utf8"
 
+	"github.com/florianmousseau/cleanpoker/internal/health"
 	"github.com/florianmousseau/cleanpoker/internal/room"
 	"github.com/florianmousseau/cleanpoker/internal/store"
 	"github.com/google/uuid"
 	"golang.org/x/net/websocket"
 )
 
-func New(s *store.Store, allowedOrigins []string) http.Handler {
+// New wires the routes. Probe answers /health; it runs on every call, so it
+// is the probe's job to bound its own cost.
+func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context) health.Report) http.Handler {
 	allowed := make(map[string]bool, len(allowedOrigins))
 	for _, o := range allowedOrigins {
 		allowed[o] = true
@@ -22,7 +25,8 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
-		writeJSON(w, healthOf(s))
+		w.Header().Set("Cache-Control", "no-store")
+		writeJSON(w, probe(r.Context()))
 	})
 
 	mux.HandleFunc("GET /stats", func(w http.ResponseWriter, r *http.Request) {
@@ -33,8 +37,12 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 		var body struct {
 			Cards []string `json:"cards"`
 		}
-		_ = json.NewDecoder(r.Body).Decode(&body)
-		writeJSON(w, map[string]string{"id": s.Create(body.Cards)})
+		_ = json.NewDecoder(r.Body).Decode(&body) // an unreadable body opens a room with the default deck
+		create := s.Create
+		if isProbe(r) {
+			create = s.CreateUncounted
+		}
+		writeJSON(w, map[string]string{"id": create(body.Cards)})
 	})
 
 	mux.HandleFunc("GET /rooms/{id}/ws", func(w http.ResponseWriter, r *http.Request) {
@@ -51,8 +59,14 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 			return
 		}
 		rm := s.GetOrCreate(roomID, nil)
+		recordJoin := s.RecordJoin
+		if isProbe(r) {
+			recordJoin = func() {
+				// The probe's seat is not an arrival: nothing to count.
+			}
+		}
 		websocket.Handler(func(conn *websocket.Conn) {
-			handleWS(conn, rm, s.RecordJoin, arrival{name: playerName, observer: observer, token: token})
+			handleWS(conn, rm, recordJoin, arrival{name: playerName, observer: observer, token: token})
 		}).ServeHTTP(w, r)
 	})
 
@@ -65,20 +79,8 @@ func New(s *store.Store, allowedOrigins []string) http.Handler {
 // counts UTF-16 units, so anything it lets through is at most this many runes.
 const MaxNameLength = 30
 
-// health is what a monitor reads. The status code alone already says the
-// process answers, so the body carries what a code cannot: uptime. A machine
-// that auto-stops when idle answers every probe with an uptime of zero, which
-// looks identical to a healthy service until you read that number.
-type health struct {
-	Status        string `json:"status"`
-	UptimeSeconds int64  `json:"uptimeSeconds"`
-}
-
-func healthOf(s *store.Store) health {
-	return health{
-		Status:        "ok",
-		UptimeSeconds: int64(time.Since(s.Usage().Since).Seconds()),
-	}
+func isProbe(r *http.Request) bool {
+	return r.Header.Get(health.ProbeHeader) == "1"
 }
 
 // writeJSON answers with a JSON body. An empty 200 reads as no answer at all

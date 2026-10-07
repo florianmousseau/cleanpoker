@@ -473,7 +473,6 @@ func TestSubscribe_OnAStoppedRoomReturns(t *testing.T) {
 	}
 }
 
-
 // --- Seats that outlive their connection (QA-105) ---
 //
 // Reloading the page, or reading the legal notice and coming back, drops the
