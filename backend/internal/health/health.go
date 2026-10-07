@@ -40,10 +40,13 @@ type Constat struct {
 
 // Deploye says which build answers and how it compares to main.
 type Deploye struct {
-	Commit string  `json:"commit"`
-	Juge   string  `json:"juge"`
-	Main   string  `json:"main,omitempty"`
-	Retard *Retard `json:"retard,omitempty"`
+	Commit string `json:"commit"`
+	Juge   string `json:"juge"`
+	Main   string `json:"main,omitempty"`
+	// MainDepuis is when main last moved. The site judges its own build
+	// against Main and this date, read here rather than from GitHub.
+	MainDepuis string  `json:"main_depuis,omitempty"`
+	Retard     *Retard `json:"retard,omitempty"`
 }
 
 // Retard is the lag behind main, measured from the date main last moved.
@@ -151,6 +154,7 @@ func (c *Checker) deployConstat(ctx context.Context, now time.Time) (Constat, De
 			Detail: "tete de main illisible : " + err.Error()}, d
 	}
 	d.Main = head.SHA
+	d.MainDepuis = head.Date.UTC().Format(time.RFC3339)
 	if sameCommit(head.SHA, c.Commit) {
 		d.Juge = "a jour"
 		d.Retard = &Retard{Mesure: true}
