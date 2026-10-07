@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.14] - 2026-10-07
+
+- refactor(health): address static analysis findings
+- feat(health): judge what a visitor gets, on the server and on the site
+
 ## [0.0.13] - 2026-09-27
 
 - fix(room): hold the name limit server-side, ask before removing someone, break long card labels (#230)
