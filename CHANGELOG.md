@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.15] - 2026-10-07
+
+- fix(health): read the head of main from the room server on the site
+
 ## [0.0.14] - 2026-10-07
 
 - refactor(health): address static analysis findings
