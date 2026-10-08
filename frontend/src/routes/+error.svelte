@@ -1,15 +1,15 @@
 <script>
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
 </script>
 
 <svelte:head>
-  <title>Erreur {$page.status} | CleanPoker</title>
+  <title>Erreur {page.status} | CleanPoker</title>
 </svelte:head>
 
 <div class="container error-page">
   <main id="main">
-    <h1>{$page.status}</h1>
-    <p>{$page.error?.message ?? 'Page introuvable.'}</p>
+    <h1>{page.status}</h1>
+    <p>{page.error?.message ?? 'Page introuvable.'}</p>
     <a href="/" class="btn btn-primary">Retour à l'accueil</a>
   </main>
 </div>

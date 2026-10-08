@@ -20,8 +20,8 @@
  * copie intacte. Un depot qui fusionnerait les deux a la main perdrait la
  * garantie d'identite le jour du premier correctif.
  */
-import type { Handle } from '@sveltejs/kit';
-import { compter } from '$lib/compteur.js';
+import type { Handle } from '@sveltejs/kit/hooks';
+import { compter } from '#lib/compteur.js';
 
 export const compteurDeVisiteurs: Handle = async ({ event, resolve }) => {
 	const reponse = await resolve(event);

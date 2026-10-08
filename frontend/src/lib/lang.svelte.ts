@@ -1,5 +1,5 @@
-import { browser } from '$app/environment';
-import { applyLangAttribute } from '$lib/html-lang';
+import { browser } from '$app/env';
+import { applyLangAttribute } from '#lib/html-lang.ts';
 
 export type Lang = 'fr' | 'en' | 'es' | 'de' | 'pt';
 

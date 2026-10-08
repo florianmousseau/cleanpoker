@@ -1,7 +1,7 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit/hooks';
 import { sequence } from '@sveltejs/kit/hooks';
-import { compteurDeVisiteurs } from '$lib/compteur-hook';
-import { SKIP_LINK } from '$lib/skip-link';
+import { compteurDeVisiteurs } from '#lib/compteur-hook.ts';
+import { SKIP_LINK } from '#lib/skip-link.ts';
 
 const LOCALES = ['fr', 'es', 'de', 'pt'] as const;
 type Locale = typeof LOCALES[number];
