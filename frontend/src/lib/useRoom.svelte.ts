@@ -1,9 +1,9 @@
-import { browser } from '$app/environment';
-import { PUBLIC_WS_URL } from '$env/static/public';
+import { browser } from '$app/env';
+import { PUBLIC_WS_URL } from '$app/env/public';
 import { onDestroy } from 'svelte';
-import type { Translation } from '$lib/i18n';
-import { transitionOf } from '$lib/room-transition';
-import { forgetSeat, loadSeat, saveSeat, tabStorage } from '$lib/seat';
+import type { Translation } from '#lib/i18n.ts';
+import { transitionOf } from '#lib/room-transition.ts';
+import { forgetSeat, loadSeat, saveSeat, tabStorage } from '#lib/seat.ts';
 
 export type Player = { id: string; name: string; vote: string; observer: boolean };
 export type Results = { avg: string; min: string; max: string; dist: Record<string, number> };

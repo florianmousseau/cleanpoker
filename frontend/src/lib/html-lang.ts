@@ -1,4 +1,4 @@
-import { SKIP_LINK } from '$lib/skip-link';
+import { SKIP_LINK } from '#lib/skip-link.ts';
 
 /**
  * `<html lang>` is stamped once, by the `transformPageChunk` in
