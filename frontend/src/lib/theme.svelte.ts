@@ -1,4 +1,4 @@
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 
 export type Theme = 'light' | 'dark';
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;

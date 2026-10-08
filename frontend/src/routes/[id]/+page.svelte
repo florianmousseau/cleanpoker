@@ -1,13 +1,13 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { onMount } from 'svelte';
-  import { lang } from '$lib/lang.svelte';
-  import Footer from '$lib/Footer.svelte';
-  import { FR, EN, ES, DE, PT, translateActivity } from '$lib/i18n';
-  import { useRoom } from '$lib/useRoom.svelte';
-  import { copierTexte } from '$lib/presse-papiers';
-  import { accorderDocumentALaLangue } from '$lib/html-lang';
-  import { expulserApresAccord } from '$lib/expulsion';
+  import { lang } from '#lib/lang.svelte.ts';
+  import Footer from '#lib/Footer.svelte';
+  import { FR, EN, ES, DE, PT, translateActivity } from '#lib/i18n.ts';
+  import { useRoom } from '#lib/useRoom.svelte.ts';
+  import { copierTexte } from '#lib/presse-papiers.ts';
+  import { accorderDocumentALaLangue } from '#lib/html-lang.ts';
+  import { expulserApresAccord } from '#lib/expulsion.ts';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
