@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.17] - 2026-10-10
+
+- fix(counter): hand the bindings back to the counter and the probe under adapter-cloudflare 8 (#253)
+
 ## [0.0.16] - 2026-10-08
 
 - fix(deps): build the room server on Go 1.26.9 and x/net 0.60.0 (#249)
