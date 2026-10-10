@@ -1,6 +1,9 @@
 import type { Handle } from '@sveltejs/kit/hooks';
 import { sequence } from '@sveltejs/kit/hooks';
 import { compteurDeVisiteurs } from '#lib/compteur-hook.ts';
+import { plateformeCloudflare } from '#lib/plateforme.ts';
+import { building, dev } from '$app/env';
+import { env, waitUntil } from 'cloudflare:workers';
 import { SKIP_LINK } from '#lib/skip-link.ts';
 
 const LOCALES = ['fr', 'es', 'de', 'pt'] as const;
@@ -89,7 +92,11 @@ const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
  * the same from one site to the next - which is the one thing it exists to
  * guarantee.
  *
- * The counter runs SECOND: it reads the final response, the one that already
- * carries the locale, the theme and the security headers.
+ * The counter runs LAST: it reads the final response, the one that already
+ * carries the locale, the theme and the security headers. `plateformeCloudflare`
+ * runs FIRST, because adapter-cloudflare 8 passes no `platform` and the counter
+ * reads its bindings there.
  */
-export const handle = sequence(localeThemeAndHeaders, compteurDeVisiteurs);
+const plateforme = plateformeCloudflare({ env, waitUntil, actif: !dev && !building });
+
+export const handle = sequence(plateforme, localeThemeAndHeaders, compteurDeVisiteurs);
