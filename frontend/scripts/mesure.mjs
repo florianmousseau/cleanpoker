@@ -357,8 +357,14 @@ for (const chemin of ['src/lib/compteur.js', 'src/lib/compteur-hook.ts']) {
 	require_(existe(chemin), `${chemin} is gone, and the pages still declare the count it does`);
 }
 require_(
-	hooks.includes('sequence(localeThemeAndHeaders, compteurDeVisiteurs)'),
+	hooks.includes('sequence(plateforme, localeThemeAndHeaders, compteurDeVisiteurs)'),
 	'hooks.server.ts no longer runs the counter, while five legal pages announce it'
+);
+// adapter-cloudflare 8 passes no `platform`: without the hook that rebuilds it,
+// the counter above is wired and counts nothing (v0.0.16, 2026-10-10).
+require_(
+	hooks.includes("from 'cloudflare:workers'"),
+	'hooks.server.ts no longer hands the bindings to the counter, which then counts nothing'
 );
 require_(
 	existe('src/routes/etat-compteur/+server.ts'),
