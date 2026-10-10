@@ -1,5 +1,5 @@
 <script lang="ts">
-  import HomepageTemplate from '$lib/HomepageTemplate.svelte';
+  import HomepageTemplate from '#lib/HomepageTemplate.svelte';
 </script>
 
 <HomepageTemplate

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.16] - 2026-10-08
+
+- fix(deps): build the room server on Go 1.26.9 and x/net 0.60.0 (#249)
+
 ## [0.0.15] - 2026-10-07
 
 - fix(health): read the head of main from the room server on the site

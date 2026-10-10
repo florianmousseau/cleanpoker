@@ -1,8 +1,13 @@
+import adapter from '@sveltejs/adapter-cloudflare';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [
+		sveltekit({
+			adapter: adapter()
+		})
+	],
 	// The commit /health serves and judges against main. The deploy workflow
 	// builds on GitHub, which sets GITHUB_SHA; a local build says "inconnu".
 	define: {

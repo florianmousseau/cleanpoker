@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { PUBLIC_API_URL } from '$env/static/public';
+  import { PUBLIC_API_URL } from '$app/env/public';
   import { goto, replaceState } from '$app/navigation';
-  import { browser } from '$app/environment';
-  import { lang } from '$lib/lang.svelte';
-  import { parseCards } from '$lib/cards';
-  import Footer from '$lib/Footer.svelte';
+  import { browser } from '$app/env';
+  import { lang } from '#lib/lang.svelte.ts';
+  import { parseCards } from '#lib/cards.ts';
+  import Footer from '#lib/Footer.svelte';
 
   interface Props {
     locale: 'fr' | 'en' | 'es' | 'de' | 'pt';

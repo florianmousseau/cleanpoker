@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { lang } from '$lib/lang.svelte';
-  import { theme } from '$lib/theme.svelte';
+  import { lang } from '#lib/lang.svelte.ts';
+  import { theme } from '#lib/theme.svelte.ts';
 
   interface Props {
     navAriaLabel: string;

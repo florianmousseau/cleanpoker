@@ -26,7 +26,7 @@
  * le depot `assistant`, puis reporter partout d'un coup.
  */
 import type { RequestHandler } from '@sveltejs/kit';
-import { raisonDeNePasCompter } from '$lib/compteur.js';
+import { raisonDeNePasCompter } from '#lib/compteur.js';
 
 /*
  * Un site entierement prerendu prerendrait aussi cette route, et servirait donc
