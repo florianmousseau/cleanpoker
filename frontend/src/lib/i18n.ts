@@ -5,7 +5,7 @@ export interface Translation {
   copied: string;
   copyFailed: string;
   kicked: { title: string; back: string };
-  join: { title: string; label: string; observer: string; btn: string };
+  join: { title: string; label: string; placeholder: string; observer: string; btn: string };
   connection: { connecting: string; reconnecting: string };
   solo: { hint: string; invite: string };
   share: { ogTitle: string; ogDesc: string; inviteMessage: (url: string) => string };
@@ -36,6 +36,7 @@ export const FR: Translation = {
   join: {
     title: 'Rejoindre la salle',
     label: 'Ton prénom ou pseudo',
+    placeholder: 'ex. Amandine',
     observer: "Rejoindre en tant qu'observateur",
     btn: 'Rejoindre',
   },
@@ -158,6 +159,7 @@ export const EN: Translation = {
   join: {
     title: 'Join the room',
     label: 'Your first name or username',
+    placeholder: 'e.g. Alex',
     observer: 'Join as observer',
     btn: 'Join',
   },
@@ -280,6 +282,7 @@ export const ES: Translation = {
   join: {
     title: 'Unirse a la sala',
     label: 'Tu nombre o apodo',
+    placeholder: 'p. ej. Lucía',
     observer: 'Unirse como observador',
     btn: 'Unirse',
   },
@@ -402,6 +405,7 @@ export const DE: Translation = {
   join: {
     title: 'Dem Raum beitreten',
     label: 'Dein Name oder Spitzname',
+    placeholder: 'z. B. Lena',
     observer: 'Als Beobachter beitreten',
     btn: 'Beitreten',
   },
@@ -524,6 +528,7 @@ export const PT: Translation = {
   join: {
     title: 'Entrar na sala',
     label: 'Seu nome ou apelido',
+    placeholder: 'ex.: Ana',
     observer: 'Entrar como observador',
     btn: 'Entrar',
   },
