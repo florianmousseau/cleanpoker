@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.18] - 2026-10-14
+
+- feat(health): outage drill on the production probe (#257)
+- fix(i18n): translate the join form placeholder in every language (#256)
+
 ## [0.0.17] - 2026-10-10
 
 - fix(counter): hand the bindings back to the counter and the probe under adapter-cloudflare 8 (#253)
