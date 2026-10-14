@@ -155,7 +155,7 @@
           <label for="name-input">{T.join.label}</label>
           <!-- svelte-ignore a11y_autofocus -->
           <input id="name-input" type="text" bind:value={nameInput} bind:this={nameInputEl} maxlength="30"
-            autocomplete="off" placeholder="ex. Amandine" required
+            autocomplete="off" placeholder={T.join.placeholder} required
             autofocus
             onfocus={(e) => e.currentTarget.select()} />
           <label class="toggle-label">
