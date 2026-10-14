@@ -1,41 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { fichiersDe, importsDe, raison, sonder, TOLERANCE_RETARD, type Lecteurs } from './sonde';
-
-const MAINTENANT = Date.UTC(2026, 9, 7, 20, 0, 0);
-const MAIN = '70044cc3595fed36e17a158128abc53c012d5daa';
-
-const PAGE = `<html><head>
-<link href="./_app/immutable/assets/0.css" rel="stylesheet">
-<link rel="modulepreload" href="./_app/immutable/entry/start.js">
-</head><body><button data-testid="create-btn">Create</button>
-<script>import("./_app/immutable/entry/app.js")</script></body></html>`;
-
-const FICHIERS: Record<string, string> = {
-	'/_app/immutable/assets/0.css': 'body{}',
-	'/_app/immutable/entry/start.js': 'import"../chunks/a.js";',
-	'/_app/immutable/entry/app.js': 'const n=()=>import("../nodes/0.js");',
-	'/_app/immutable/chunks/a.js': 'export const a=1;',
-	'/_app/immutable/nodes/0.js': 'import"../chunks/a.js";'
-};
-
-function serveurVert(main = MAIN, depuis = MAINTENANT - 72 * 3600 * 1000) {
-	return { alerte: 'ok', echecs_des_sondes: [], deploye: { main, main_depuis: new Date(depuis).toISOString() } };
-}
-
-function json(corps: unknown, status = 200): Response {
-	return new Response(JSON.stringify(corps), { status });
-}
-
-function sain(): Lecteurs {
-	return {
-		page: async () => new Response(PAGE),
-		fichier: async (f) => (f in FICHIERS ? new Response(FICHIERS[f]) : new Response('', { status: 404 })),
-		reseau: async () => json(serveurVert()),
-		commit: MAIN,
-		serveur: 'https://serveur.test',
-		maintenant: MAINTENANT
-	};
-}
+import { fichiersDe, importsDe, raison, sonder, TOLERANCE_RETARD } from './sonde';
+import { FICHIERS, json, MAIN, MAINTENANT, PAGE, sain, serveurVert } from './sonde-temoin';
 
 function constat(r: Awaited<ReturnType<typeof sonder>>, nom: string) {
 	return r.constats.find((c) => c.nom === nom);
