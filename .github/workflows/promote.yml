@@ -256,75 +256,10 @@ jobs:
         env:
           BRANCH: ${{ steps.pr.outputs.branch }}
         run: |
-          branch="$BRANCH"
-
-          # Un run qui attend son approbation sort de l'API en
-          # `status: completed`, `conclusion: action_required` - et non en
-          # `status: action_required`. Mesure du 2026-10-16 sur la PR #264 (run
-          # 38981876656, tentative 1) : le filtre ne lisait que `status`, ne
-          # voyait donc AUCUN run, et jetait en plus l'erreur de l'approbation.
-          # Zero run libere a chaque release depuis la premiere ; toutes ont ete
-          # relancees a la main. On lit les deux champs, et chaque refus
-          # s'ecrit dans le journal.
-          #
-          # `approve` ne sert qu'aux PR venues d'un fork ; un run d'une PR du
-          # depot lui-meme se libere en le RELANCANT, ce qu'a fait chaque
-          # deblocage manuel (tentative 2, journal d'approbations vide).
-          en_attente() {
-            gh run list --branch "$branch" --event pull_request --limit 20 \
-              --json databaseId,status,conclusion \
-              --jq '.[] | select(.status == "action_required" or .conclusion == "action_required") | .databaseId'
-          }
-          liberes=0
-          vus=" "
-          for _ in $(seq 1 24); do
-            sleep 5
-            ids=$(en_attente)
-            if [ -z "$ids" ]; then
-              if [ "$liberes" -gt 0 ]; then break; fi
-              continue
-            fi
-            for id in $ids; do
-              # Un run deja libere qui retombe en attente ne se relance pas en
-              # boucle : il reste en attente, et le controle plus bas le dit.
-              case "$vus" in *" $id "*) continue ;; esac
-              vus="$vus$id "
-              if gh api --method POST "repos/$GITHUB_REPOSITORY/actions/runs/$id/approve" >/dev/null 2>approve.err; then
-                echo "run $id approuve"
-              elif gh run rerun "$id"; then
-                echo "run $id relance (approve : $(head -c 200 approve.err))"
-              else
-                echo "::warning::run $id ni approuve ni relance"
-                continue
-              fi
-              liberes=$((liberes + 1))
-            done
-          done
-          echo "runs liberes de l attente d approbation : $liberes"
-          restants=$(en_attente | wc -l)
-          if [ "$restants" -gt 0 ]; then
-            echo "::error::$restants run(s) de la PR de release toujours en action_required : release arretee avant le merge." >&2
-            exit 1
-          fi
-
-          # Un run relance publie ses checks quelques secondes plus tard.
-          # `gh pr checks` sort en 8 tant qu'un check tourne : on COMPTE les
-          # checks plutot que de lire son code de sortie.
-          nb=0
-          for _ in $(seq 1 12); do
-            nb=$(gh pr checks "$branch" --json name --jq length 2>/dev/null || true)
-            if [ "${nb:-0}" -gt 0 ]; then break; fi
-            sleep 5
-          done
-          if [ "${nb:-0}" -eq 0 ]; then
-            echo "::error::Aucun check sur la PR de release : release arretee avant le merge." >&2
-            exit 1
-          fi
-
-          # `--fail-fast` : un check rouge sort en 1, et le job s'arrete ICI,
-          # avant le merge. C'est tout l'objet de cette etape - `main` reste
-          # alors intacte et la prod continue de servir la version precedente.
-          gh pr checks "$branch" --watch --fail-fast --interval 15
+          # Copie hors de l'arbre : le back-merge plus bas extrait `main`, qui
+          # peut ne pas encore porter ce script.
+          cp .github/scripts/liberer-et-attendre.sh "$RUNNER_TEMP/"
+          "$RUNNER_TEMP/liberer-et-attendre.sh" "$BRANCH"
           echo "gate=verte" >> "$GITHUB_ENV"
 
       - name: Merge the release
@@ -355,6 +290,10 @@ jobs:
           gh pr create --base develop --head "$branch" \
             --title "chore: back-merge main after v$version" \
             --body "Report of the release commit into develop."
+          # `develop` exige les memes checks que `main`, et cette PR nait du
+          # meme robot : ses runs attendent la meme approbation (run
+          # 38983445842, PR #268 : `2 of 2 required status checks are expected`).
+          "$RUNNER_TEMP/liberer-et-attendre.sh" "$branch"
           gh pr merge "$branch" --merge
 
       - name: Deploy the release
