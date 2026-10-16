@@ -27,7 +27,7 @@ name: promote
 # check runs se posent bien sur le commit, mais la protection de branche lit le
 # rollup DE LA PR, et une check suite de `workflow_dispatch` n'y figure pas
 # (mesure sur la PR #162 : `Code Quality` et `Bundle Size` verts sur le SHA,
-# rollup de la PR vide, `mergeStateStatus` BLOCKED). L'etape ci-dessous approuve
+# rollup de la PR vide, `mergeStateStatus` BLOCKED). L'etape ci-dessous libere
 # donc les runs en attente, puis attend les checks DE LA PR - ceux que la
 # protection lit, et ceux qu'un humain regarderait.
 #
@@ -258,23 +258,66 @@ jobs:
         run: |
           branch="$BRANCH"
 
-          # Les runs mettent quelques secondes a apparaitre apres l'ouverture
-          # de la PR ; sans cette attente il n'y a rien a approuver.
-          approuves=0
-          for _ in $(seq 1 12); do
+          # Un run qui attend son approbation sort de l'API en
+          # `status: completed`, `conclusion: action_required` - et non en
+          # `status: action_required`. Mesure du 2026-10-16 sur la PR #264 (run
+          # 38981876656, tentative 1) : le filtre ne lisait que `status`, ne
+          # voyait donc AUCUN run, et jetait en plus l'erreur de l'approbation.
+          # Zero run libere a chaque release depuis la premiere ; toutes ont ete
+          # relancees a la main. On lit les deux champs, et chaque refus
+          # s'ecrit dans le journal.
+          #
+          # `approve` ne sert qu'aux PR venues d'un fork ; un run d'une PR du
+          # depot lui-meme se libere en le RELANCANT, ce qu'a fait chaque
+          # deblocage manuel (tentative 2, journal d'approbations vide).
+          en_attente() {
+            gh run list --branch "$branch" --event pull_request --limit 20 \
+              --json databaseId,status,conclusion \
+              --jq '.[] | select(.status == "action_required" or .conclusion == "action_required") | .databaseId'
+          }
+          liberes=0
+          vus=" "
+          for _ in $(seq 1 24); do
             sleep 5
-            for id in $(gh run list --branch "$branch" --event pull_request --limit 20 \
-              --json databaseId,status --jq '.[] | select(.status == "action_required") | .databaseId'); do
-              if gh api --method POST "repos/$GITHUB_REPOSITORY/actions/runs/$id/approve" >/dev/null 2>&1; then
-                approuves=$((approuves + 1))
+            ids=$(en_attente)
+            if [ -z "$ids" ]; then
+              if [ "$liberes" -gt 0 ]; then break; fi
+              continue
+            fi
+            for id in $ids; do
+              # Un run deja libere qui retombe en attente ne se relance pas en
+              # boucle : il reste en attente, et le controle plus bas le dit.
+              case "$vus" in *" $id "*) continue ;; esac
+              vus="$vus$id "
+              if gh api --method POST "repos/$GITHUB_REPOSITORY/actions/runs/$id/approve" >/dev/null 2>approve.err; then
+                echo "run $id approuve"
+              elif gh run rerun "$id"; then
+                echo "run $id relance (approve : $(head -c 200 approve.err))"
+              else
+                echo "::warning::run $id ni approuve ni relance"
+                continue
               fi
+              liberes=$((liberes + 1))
             done
-            if [ "$approuves" -gt 0 ]; then break; fi
           done
-          echo "runs liberes de l attente d approbation : $approuves"
+          echo "runs liberes de l attente d approbation : $liberes"
+          restants=$(en_attente | wc -l)
+          if [ "$restants" -gt 0 ]; then
+            echo "::error::$restants run(s) de la PR de release toujours en action_required : release arretee avant le merge." >&2
+            exit 1
+          fi
 
-          if ! gh pr checks "$branch" >/dev/null 2>&1; then
-            echo "::error::Aucun check sur la PR de release. Si des runs restent en action_required, les approuver puis relancer promote." >&2
+          # Un run relance publie ses checks quelques secondes plus tard.
+          # `gh pr checks` sort en 8 tant qu'un check tourne : on COMPTE les
+          # checks plutot que de lire son code de sortie.
+          nb=0
+          for _ in $(seq 1 12); do
+            nb=$(gh pr checks "$branch" --json name --jq length 2>/dev/null || true)
+            if [ "${nb:-0}" -gt 0 ]; then break; fi
+            sleep 5
+          done
+          if [ "${nb:-0}" -eq 0 ]; then
+            echo "::error::Aucun check sur la PR de release : release arretee avant le merge." >&2
             exit 1
           fi
 
