@@ -253,6 +253,7 @@
     text-align: center; padding-top: 3rem; padding-bottom: 3rem; gap: 1.5rem;
   }
 
+  .hero h1 { overflow-wrap: anywhere; }
   .accent { color: var(--color-primary); }
   .lead { font-size: 1.125rem; color: var(--color-text-muted); max-width: 36rem; }
 

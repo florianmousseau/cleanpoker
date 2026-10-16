@@ -41,6 +41,12 @@
 // 40 characters without a space pushed the home page 10 px past a 375 px
 // screen, 300 of them 1762 px past a 1280 px one. See `TYPED_TEXT_BOXES`.
 //
+// The home heading belongs to the same class for another reason: it is
+// TRANSLATED, so its longest word changes with the language. The hero centres
+// its children, which makes the heading a flex item as wide as its longest
+// word. Measured in production the 2026-10-17 at 320 px with the text doubled:
+// every page at zero but /de, 10 px past the screen on "entscheiden".
+//
 // It reads app.css AND every `<style>` block of the components: on quivad,
 // the 2026-08-22, a guard that read only the main sheet was green while two of
 // the three faulty grids lived in a component.
@@ -310,26 +316,29 @@ function tablesOutsideAScroller() {
 }
 
 /**
- * The boxes that print a word someone typed, and nothing else. Each has to
- * exist where it is declared AND break its text at any character, which is the
- * one value that lowers a min-content. Unlike the table cells above, there is
- * no weld to break in them: a card label never carries a no-break space.
+ * The boxes whose longest word no stylesheet can predict: what someone typed,
+ * and a heading written in five languages. Each has to exist where it is
+ * declared AND break its text at any character, which is the one value that
+ * lowers a min-content. Unlike the table cells above, `anywhere` leaves a weld
+ * alone here: it only breaks a sequence that cannot fit a line on its own, and
+ * the measured headings fit.
  */
 const TYPED_TEXT_BOXES = [
-	['lib/HomepageTemplate.svelte', '.card-chip'],
-	['routes/[id]/+page.svelte', '.poker-card']
+	['lib/HomepageTemplate.svelte', '.card-chip', 'prints what someone typed'],
+	['routes/[id]/+page.svelte', '.poker-card', 'prints what someone typed'],
+	['lib/HomepageTemplate.svelte', '.hero h1', 'centres a heading translated into five languages']
 ];
 
 function typedTextFaults(sheetList, boxes = TYPED_TEXT_BOXES) {
 	const out = [];
-	for (const [file, selector] of boxes) {
+	for (const [file, selector, reason] of boxes) {
 		const sheet = sheetList.find((s) => relative(SRC, s.file).split(sep).join('/') === file);
 		const rule = sheet && rulesOf(sheet.css).find((r) => r.selector === selector);
 		if (!rule) {
-			out.push(`${file}: no \`${selector}\` rule, so nothing says how a typed label breaks`);
+			out.push(`${file}: no \`${selector}\` rule, so nothing says how its longest word breaks`);
 		} else if (!/overflow-wrap:\s*anywhere/.test(rule.body)) {
 			out.push(
-				`${file}: \`${selector}\` prints what someone typed without \`overflow-wrap: anywhere\`, so one long word takes the page with it`
+				`${file}: \`${selector}\` ${reason} without \`overflow-wrap: anywhere\`, so one long word takes the page with it`
 			);
 		}
 	}
@@ -429,7 +438,7 @@ if (!bodyGuards('body { overflow-wrap: break-word; }').length)
 	proofs.push('misses a missing `.table-wrap` rule');
 if (!bodyGuards('body { overflow-wrap: break-word; } .table-wrap { overflow: hidden; }').length)
 	proofs.push('takes any `.table-wrap` rule for one that scrolls');
-const TYPED_SAMPLE = [['sample.svelte', '.chip']];
+const TYPED_SAMPLE = [['sample.svelte', '.chip', 'prints a sample']];
 const typedSheet = (css) => [{ file: join(SRC, 'sample.svelte'), css }];
 if (typedTextFaults(typedSheet('.chip { overflow-wrap: anywhere; padding: 2px; }'), TYPED_SAMPLE).length)
 	proofs.push('wrongly flags a typed-text box that breaks anywhere');
