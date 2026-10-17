@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.21] - 2026-10-17
+
+- fix(ci): free and wait for the back-merge checks too
+
 ## [0.0.20] - 2026-10-16
 
 - fix(ci): release the pending runs of the release pull request
