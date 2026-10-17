@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.26] - 2026-10-17
+
+- fix(home): check the deck against the server's limits and say which one (#285)
+- fix(ci): deploy a release before the back-merge, not after it
+
 ## [0.0.25] - 2026-10-17
 
 - fix(room): publish each state in the order it was applied

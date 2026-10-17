@@ -3,7 +3,7 @@
   import { goto, replaceState } from '$app/navigation';
   import { browser } from '$app/env';
   import { lang } from '#lib/lang.svelte.ts';
-  import { parseCards } from '#lib/cards.ts';
+  import { fitsServer, parseCards } from '#lib/cards.ts';
   import Footer from '#lib/Footer.svelte';
 
   interface Props {
@@ -33,6 +33,7 @@
     cardsSepHint: string;
     presetsAriaLabel: string;
     minCardsError: string;
+    deckLimitError: string;
     createBtnLabel: string;
     creatingLabel: string;
     createError: string;
@@ -65,6 +66,7 @@
     cardsSepHint,
     presetsAriaLabel,
     minCardsError,
+    deckLimitError,
     createBtnLabel,
     creatingLabel,
     createError,
@@ -118,7 +120,8 @@
   }
 
   const cards = $derived(parseCards(cardsInput));
-  const isValid = $derived(cards.length >= 2);
+  const fits = $derived(fitsServer(cards));
+  const isValid = $derived(cards.length >= 2 && fits);
 
   async function createRoom() {
     if (!isValid) return;
@@ -211,8 +214,10 @@
           {#each cards as card, i (i)}
             <span class="card-chip">{card}</span>
           {/each}
-          {#if !isValid}
+          {#if cards.length < 2}
             <span class="cards-error">{minCardsError}</span>
+          {:else if !fits}
+            <span class="cards-error">{deckLimitError}</span>
           {/if}
         </p>
       </div>

@@ -24,6 +24,7 @@
   cardsSepHint="(comma-separated)"
   presetsAriaLabel="Presets"
   minCardsError="Minimum 2 cards"
+  deckLimitError="64 cards max, 16 characters each"
   createBtnLabel="Create a session"
   creatingLabel="Creating..."
   createError="Unable to create the room. Please try again."

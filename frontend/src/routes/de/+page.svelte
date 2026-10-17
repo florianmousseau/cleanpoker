@@ -24,6 +24,7 @@
   cardsSepHint="(kommagetrennt)"
   presetsAriaLabel="Voreinstellungen"
   minCardsError="Mindestens 2 Karten"
+  deckLimitError="Höchstens 64 Karten, je 16 Zeichen"
   createBtnLabel="Session erstellen"
   creatingLabel="Erstelle..."
   createError="Session konnte nicht erstellt werden. Bitte erneut versuchen."
