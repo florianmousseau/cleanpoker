@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.24] - 2026-10-17
+
+- fix(server): refuse a room body over the size limit
+
 ## [0.0.23] - 2026-10-17
 
 - fix(server): bound what a client can make a room hold
