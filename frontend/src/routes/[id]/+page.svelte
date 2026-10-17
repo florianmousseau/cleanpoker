@@ -8,6 +8,7 @@
   import { copierTexte } from '#lib/presse-papiers.ts';
   import { accorderDocumentALaLangue } from '#lib/html-lang.ts';
   import { expulserApresAccord } from '#lib/expulsion.ts';
+  import { barWidth } from '#lib/distribution.ts';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
@@ -263,7 +264,7 @@
                 <div class="dist-row">
                   <span class="dist-val">{val}</span>
                   <div class="dist-bar-wrap">
-                    <div class="dist-bar" style="width:{Math.round((count/participants.length)*100)}%"></div>
+                    <div class="dist-bar" style="width:{barWidth(count, room.roomState.results.dist)}%"></div>
                   </div>
                   <span class="dist-count">{count}</span>
                 </div>
