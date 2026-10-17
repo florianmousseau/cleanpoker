@@ -188,6 +188,17 @@ func TestKick_LogsActivityWithTarget(t *testing.T) {
 
 // --- Vote logic ---
 
+func TestCastVote_IgnoresACardOutsideTheDeck(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	r.CastVote("p1", "1000")
+	r.Show("p1")
+	if s := snap(r); len(s.Results.Dist) != 0 {
+		t.Fatalf("a card outside the deck was counted: %+v", s.Results.Dist)
+	}
+}
+
 func TestCastVote_RecordsVote(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()
