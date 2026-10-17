@@ -37,7 +37,13 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		var body struct {
 			Cards []string `json:"cards"`
 		}
-		_ = json.NewDecoder(r.Body).Decode(&body) // an unreadable body opens a room with the default deck
+		// An unreadable body opens a room with the default deck; an oversized
+		// one is refused, since every room holds its deck in memory.
+		_ = json.NewDecoder(http.MaxBytesReader(w, r.Body, maxCreateBody)).Decode(&body)
+		if !deckFits(body.Cards) {
+			http.Error(w, "deck too large", http.StatusBadRequest)
+			return
+		}
 		create := s.Create
 		if isProbe(r) {
 			create = s.CreateUncounted
@@ -66,6 +72,7 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 			}
 		}
 		websocket.Handler(func(conn *websocket.Conn) {
+			conn.MaxPayloadBytes = maxFrameBytes
 			handleWS(conn, rm, recordJoin, arrival{name: playerName, observer: observer, token: token})
 		}).ServeHTTP(w, r)
 	})
@@ -78,6 +85,27 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 // 120-character name and have it broadcast to every participant. The form
 // counts UTF-16 units, so anything it lets through is at most this many runes.
 const MaxNameLength = 30
+
+// Bounds on what a client may make the server hold. A deck is a short list of
+// short labels; nothing an honest client sends comes near these.
+const (
+	maxCreateBody = 8 << 10
+	maxFrameBytes = 4 << 10
+	maxCards      = 64
+	maxCardLength = 16
+)
+
+func deckFits(cards []string) bool {
+	if len(cards) > maxCards {
+		return false
+	}
+	for _, c := range cards {
+		if utf8.RuneCountInString(c) > maxCardLength {
+			return false
+		}
+	}
+	return true
+}
 
 func isProbe(r *http.Request) bool {
 	return r.Header.Get(health.ProbeHeader) == "1"

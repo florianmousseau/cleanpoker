@@ -316,6 +316,36 @@ func TestCreateRoom_CustomCards(t *testing.T) {
 	}
 }
 
+func TestCreateRoom_OversizedDeckIsRefused(t *testing.T) {
+	srv := newTestServer(t)
+	cards := make([]string, 65)
+	for i := range cards {
+		cards[i] = "1"
+	}
+	payload, _ := json.Marshal(map[string][]string{"cards": cards})
+	resp, err := http.Post(srv.URL+"/rooms", "application/json", strings.NewReader(string(payload)))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode != http.StatusBadRequest {
+		t.Fatalf("status = %d, want 400", resp.StatusCode)
+	}
+}
+
+func TestCreateRoom_OverlongCardIsRefused(t *testing.T) {
+	srv := newTestServer(t)
+	resp, err := http.Post(srv.URL+"/rooms", "application/json",
+		strings.NewReader(`{"cards":["`+strings.Repeat("x", 17)+`"]}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode != http.StatusBadRequest {
+		t.Fatalf("status = %d, want 400", resp.StatusCode)
+	}
+}
+
 // --- WebSocket validation ---
 
 func TestWebSocket_NameRequired(t *testing.T) {
