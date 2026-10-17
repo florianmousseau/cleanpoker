@@ -3,6 +3,7 @@ package room
 import (
 	"encoding/json"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 )
@@ -730,5 +731,40 @@ func TestSlowSubscriber_IsCutOffNotSkipped(t *testing.T) {
 		case <-deadline:
 			t.Fatal("a subscriber with a full queue was never cut off")
 		}
+	}
+}
+
+// Concurrent commands must reach subscribers in the order they were applied:
+// the last state received is the last state produced. The interleaving is a
+// race, so it is tried many times: one try in thirty went red before the fix.
+func TestConcurrentCommands_PublishInOrder(t *testing.T) {
+	for try := 0; try < 100; try++ {
+		publishesInOrder(t)
+	}
+}
+
+func publishesInOrder(t *testing.T) {
+	t.Helper()
+	r := New("ordre", nil) // no test drainer: the loop must be the only reader
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	ch := r.Subscribe("c", "p1")
+	const n = 12 // under the 16 a subscriber queue holds
+	var wg sync.WaitGroup
+	for i := 0; i < n; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			r.Clear("p1")
+		}()
+	}
+	wg.Wait()
+	last := 0
+	for i := 0; i < n; i++ {
+		round := (<-ch).Payload.(Snapshot).Round
+		if round < last {
+			t.Fatalf("round %d published after round %d", round, last)
+		}
+		last = round
 	}
 }

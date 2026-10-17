@@ -210,13 +210,16 @@ func (r *Room) logActivity(initiator, message string, target ...string) {
 	}
 }
 
+// mutate applies fn and publishes the state it produced, both under the lock:
+// published after unlocking, two concurrent commands could reach the loop in
+// the reverse order and leave every screen on the older state. The loop never
+// takes r.mu, so publishing under it cannot deadlock.
 func (r *Room) mutate(fn func()) {
 	r.mu.Lock()
+	defer r.mu.Unlock()
 	fn()
 	r.lastActivity = time.Now()
-	snap := r.snapshot()
-	r.mu.Unlock()
-	r.publish(Message{Type: "state", Payload: snap})
+	r.publish(Message{Type: "state", Payload: r.snapshot()})
 }
 
 // Join seats a player that no client can take back.
