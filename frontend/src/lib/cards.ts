@@ -2,7 +2,7 @@
 export function parseCards(input: string): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
-  for (const raw of input.split(",")) {
+  for (const raw of input.split(',')) {
     const card = raw.trim();
     // A repeated label is meaningless in planning poker: two cards reading "1"
     // cannot be told apart in the results, and they used to crash the keyed
@@ -18,10 +18,7 @@ export function parseCards(input: string): string[] {
 export const MAX_CARDS = 64;
 export const MAX_CARD_LENGTH = 16;
 
-/** Whether the server will create a room for this deck, card length counted in characters as Go counts runes. */
+/** Whether the server will create a room for this deck, length counted in characters as Go counts runes. */
 export function fitsServer(cards: string[]): boolean {
-  return (
-    cards.length <= MAX_CARDS &&
-    cards.every((c) => [...c].length <= MAX_CARD_LENGTH)
-  );
+  return cards.length <= MAX_CARDS && cards.every((c) => [...c].length <= MAX_CARD_LENGTH);
 }
