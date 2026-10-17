@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.23] - 2026-10-17
+
+- fix(server): bound what a client can make a room hold
+
 ## [0.0.22] - 2026-10-17
 
 - fix(results): size the bars on the votes of the revealed round
