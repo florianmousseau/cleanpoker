@@ -182,10 +182,13 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 	go func() {
 		for msg := range ch {
 			if err := websocket.JSON.Send(conn, msg); err != nil {
-				_ = conn.Close()
-				return
+				break
 			}
 		}
+		// The channel also closes when the room is stopped: closing the socket
+		// ends the read loop below, and the client reconnects instead of
+		// staying on a room that no longer answers.
+		_ = conn.Close() // closing is the whole point; a second close changes nothing
 	}()
 
 	for {

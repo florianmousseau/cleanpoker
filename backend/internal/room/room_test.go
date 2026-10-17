@@ -3,6 +3,7 @@ package room
 import (
 	"encoding/json"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 )
@@ -685,5 +686,85 @@ func waitForMessage(t *testing.T, ch chan Message, typ string, conn int) {
 		case <-timeout:
 			t.Fatalf("connection %d never received %q", conn, typ)
 		}
+	}
+}
+
+// A client still connected when its room expires keeps sending commands; none
+// of them may block once the loop is gone.
+func TestStoppedRoom_CommandsNeverBlock(t *testing.T) {
+	r := newTestRoom(nil)
+	r.Join("p1", "Alice", false)
+	r.Stop()
+	done := make(chan struct{})
+	go func() {
+		for i := 0; i < 100; i++ {
+			r.CastVote("p1", "5")
+			r.Kick("p1", "p1")
+			r.Unsubscribe("c")
+		}
+		close(done)
+	}()
+	select {
+	case <-done:
+	case <-time.After(2 * time.Second):
+		t.Fatal("a command on a stopped room blocked")
+	}
+}
+
+// A subscriber that stops reading is cut off once its queue is full, instead
+// of silently missing the messages that follow.
+func TestSlowSubscriber_IsCutOffNotSkipped(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	ch := r.Subscribe("slow", "p1")
+	r.Join("p1", "Alice", false)
+	for i := 0; i < 40; i++ {
+		r.CastVote("p1", "5")
+	}
+	deadline := time.After(2 * time.Second)
+	for {
+		select {
+		case _, open := <-ch:
+			if !open {
+				return
+			}
+		case <-deadline:
+			t.Fatal("a subscriber with a full queue was never cut off")
+		}
+	}
+}
+
+// Concurrent commands must reach subscribers in the order they were applied:
+// the last state received is the last state produced. The interleaving is a
+// race, so it is tried many times: one try in thirty went red before the fix.
+func TestConcurrentCommands_PublishInOrder(t *testing.T) {
+	for try := 0; try < 100; try++ {
+		publishesInOrder(t)
+	}
+}
+
+func publishesInOrder(t *testing.T) {
+	t.Helper()
+	r := New("ordre", nil) // no test drainer: the loop must be the only reader
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	ch := r.Subscribe("c", "p1")
+	const n = 12 // under the 16 a subscriber queue holds
+	var wg sync.WaitGroup
+	for i := 0; i < n; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			r.Clear("p1")
+		}()
+	}
+	wg.Wait()
+	last := 0
+	for i := 0; i < n; i++ {
+		round := (<-ch).Payload.(Snapshot).Round
+		if round < last {
+			t.Fatalf("round %d published after round %d", round, last)
+		}
+		last = round
 	}
 }
