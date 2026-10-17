@@ -25,8 +25,8 @@
  * NE PAS EDITER UNE COPIE. Editer `templates/compteur/sveltekit-etat.ts` dans
  * le depot `assistant`, puis reporter partout d'un coup.
  */
-import type { RequestHandler } from "@sveltejs/kit";
-import { raisonDeNePasCompter } from "#lib/compteur.js";
+import type { RequestHandler } from '@sveltejs/kit';
+import { raisonDeNePasCompter } from '#lib/compteur.js';
 
 /*
  * Un site entierement prerendu prerendrait aussi cette route, et servirait donc
@@ -37,59 +37,59 @@ import { raisonDeNePasCompter } from "#lib/compteur.js";
 export const prerender = false;
 
 export const GET: RequestHandler = ({ request, platform }) => {
-  /*
-   * `cf` est lu SUR LA REQUETE, et pas sur `platform`, parce que c'est
-   * exactement ce que la regle lit. Une sonde qui irait chercher la donnee a
-   * un second endroit repondrait juste sur un compteur aveugle.
-   */
-  const cf = (request as { cf?: Record<string, unknown> }).cf ?? {};
-  const ua = request.headers.get("user-agent") ?? "";
-  const env = platform?.env;
+	/*
+	 * `cf` est lu SUR LA REQUETE, et pas sur `platform`, parce que c'est
+	 * exactement ce que la regle lit. Une sonde qui irait chercher la donnee a
+	 * un second endroit repondrait juste sur un compteur aveugle.
+	 */
+	const cf = (request as { cf?: Record<string, unknown> }).cf ?? {};
+	const ua = request.headers.get('user-agent') ?? '';
+	const env = platform?.env;
 
-  /*
-   * La raison rendue par la VRAIE regle, sur une reponse HTML feinte. Une copie
-   * des controles ici divergerait au premier correctif, ce qui est precisement
-   * ce que ce compteur existe pour empecher.
-   *
-   * `raisonDeNePasCompter` et non `compter` : la seconde marquerait le visiteur
-   * comme deja compte dans le cache d'arete, donc appeler la sonde empecherait
-   * sa page suivante d'etre comptee. Un instrument qui abime ce qu'il mesure
-   * est pire qu'absent.
-   */
-  const commeUnePage = new Response("", {
-    headers: { "content-type": "text/html; charset=utf-8" },
-  });
-  const raison = raisonDeNePasCompter(request, commeUnePage, env);
+	/*
+	 * La raison rendue par la VRAIE regle, sur une reponse HTML feinte. Une copie
+	 * des controles ici divergerait au premier correctif, ce qui est precisement
+	 * ce que ce compteur existe pour empecher.
+	 *
+	 * `raisonDeNePasCompter` et non `compter` : la seconde marquerait le visiteur
+	 * comme deja compte dans le cache d'arete, donc appeler la sonde empecherait
+	 * sa page suivante d'etre comptee. Un instrument qui abime ce qu'il mesure
+	 * est pire qu'absent.
+	 */
+	const commeUnePage = new Response('', {
+		headers: { 'content-type': 'text/html; charset=utf-8' }
+	});
+	const raison = raisonDeNePasCompter(request, commeUnePage, env);
 
-  return new Response(
-    JSON.stringify(
-      {
-        // Ce que la chaine dirait de VOUS, moins l'ecriture.
-        verdict: raison ?? "compterait",
-        // L'etat du cablage, qui est l'autre moitie de la question. Les deux
-        // se lisent ensemble : un verdict « compterait » avec un binding
-        // absent est impossible, et l'inverse designe le site, pas le client.
-        bindingVisiteurs: Boolean(env?.VISITEURS),
-        selPose: Boolean(env?.SEL_COMPTEUR),
-        // Le bord pose `cf` sur la requete ; si ce faux venait a devenir vrai
-        // en production, le compteur cesserait de voir les robots verifies et
-        // le pays sans qu'aucun autre champ ne bouge.
-        cfSurLaRequete: Object.keys(cf).length > 0,
-        // Ce que le bord a vu, sans rien qui identifie personne.
-        robotVerifie: cf["verifiedBotCategory"] || null,
-        pays: cf["country"] ?? null,
-        colo: cf["colo"] ?? null,
-        userAgent: ua.slice(0, 200),
-      },
-      null,
-      "\t",
-    ),
-    {
-      headers: {
-        "content-type": "application/json; charset=utf-8",
-        "cache-control": "no-store",
-        "x-robots-tag": "noindex",
-      },
-    },
-  );
+	return new Response(
+		JSON.stringify(
+			{
+				// Ce que la chaine dirait de VOUS, moins l'ecriture.
+				verdict: raison ?? 'compterait',
+				// L'etat du cablage, qui est l'autre moitie de la question. Les deux
+				// se lisent ensemble : un verdict « compterait » avec un binding
+				// absent est impossible, et l'inverse designe le site, pas le client.
+				bindingVisiteurs: Boolean(env?.VISITEURS),
+				selPose: Boolean(env?.SEL_COMPTEUR),
+				// Le bord pose `cf` sur la requete ; si ce faux venait a devenir vrai
+				// en production, le compteur cesserait de voir les robots verifies et
+				// le pays sans qu'aucun autre champ ne bouge.
+				cfSurLaRequete: Object.keys(cf).length > 0,
+				// Ce que le bord a vu, sans rien qui identifie personne.
+				robotVerifie: cf['verifiedBotCategory'] || null,
+				pays: cf['country'] ?? null,
+				colo: cf['colo'] ?? null,
+				userAgent: ua.slice(0, 200)
+			},
+			null,
+			'\t'
+		),
+		{
+			headers: {
+				'content-type': 'application/json; charset=utf-8',
+				'cache-control': 'no-store',
+				'x-robots-tag': 'noindex'
+			}
+		}
+	);
 };
