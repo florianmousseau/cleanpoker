@@ -149,6 +149,28 @@ func TestKick_RemovesPlayer(t *testing.T) {
 	}
 }
 
+// A kicked client that ignores "kicked" keeps its socket: its commands must
+// change nothing.
+func TestKick_KickedPlayerCanNoLongerCommand(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.Join("host", "Host", false)
+	r.Join("p1", "Alice", false)
+	r.CastVote("host", "5")
+	r.Kick("host", "p1")
+	r.Show("p1")
+	r.Clear("p1")
+	r.Kick("p1", "host")
+	r.ToggleObserver("p1", "host")
+	s := snap(r)
+	if s.State != StateVoting {
+		t.Fatalf("state = %q, want voting", s.State)
+	}
+	if len(s.Players) != 1 || s.Players[0].ID != "host" || s.Players[0].Observer {
+		t.Fatalf("players changed by a kicked client: %+v", s.Players)
+	}
+}
+
 func TestKick_LogsActivityWithTarget(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()

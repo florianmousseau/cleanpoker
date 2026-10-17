@@ -179,6 +179,14 @@ func (r *Room) Stop() {
 	close(r.quit)
 }
 
+// seated reports whether playerID still holds a seat. A kicked client keeps its
+// socket until its browser closes it, so every command checks the seat rather
+// than trusting the connection. Callers hold r.mu.
+func (r *Room) seated(playerID string) bool {
+	_, ok := r.players[playerID]
+	return ok
+}
+
 func (r *Room) nameOf(playerID string) string {
 	if p, ok := r.players[playerID]; ok {
 		return p.Name
@@ -334,6 +342,9 @@ func (r *Room) CastVote(playerID, vote string) {
 
 func (r *Room) Show(initiatorID string) {
 	r.mutate(func() {
+		if !r.seated(initiatorID) {
+			return
+		}
 		r.state = StateRevealed
 		votes := make([]string, 0, len(r.players))
 		for _, p := range r.players {
@@ -349,6 +360,9 @@ func (r *Room) Show(initiatorID string) {
 
 func (r *Room) Clear(initiatorID string) {
 	r.mutate(func() {
+		if !r.seated(initiatorID) {
+			return
+		}
 		for _, p := range r.players {
 			p.Vote = ""
 		}
@@ -363,7 +377,7 @@ func (r *Room) Kick(initiatorID, targetID string) {
 	var kicked bool
 	r.mutate(func() {
 		target, ok := r.players[targetID]
-		if !ok {
+		if !ok || !r.seated(initiatorID) {
 			return
 		}
 		r.logActivity(r.nameOf(initiatorID), "kicked", target.Name)
@@ -379,7 +393,7 @@ func (r *Room) Kick(initiatorID, targetID string) {
 func (r *Room) ToggleObserver(initiatorID, targetID string) {
 	r.mutate(func() {
 		target, ok := r.players[targetID]
-		if !ok {
+		if !ok || !r.seated(initiatorID) {
 			return
 		}
 		target.Observer = !target.Observer

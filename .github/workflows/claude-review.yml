@@ -44,10 +44,12 @@ jobs:
     # nourrit un agent porteur d'un jeton avec du texte que l'auteur de la PR
     # controle, et l'invariant 1 ci-dessus tient a ce que la porte reste
     # etroite. Une PR de release ne porte qu'une entree de CHANGELOG ; le code,
-    # lui, a ete revu sur son chemin vers `develop`.
+    # lui, a ete revu sur son chemin vers `develop`. `backmerge/*` suit la
+    # meme regle pour la meme raison : ouverte par le meme robot, elle ne porte
+    # que ce que `main` a deja recu (run 38983693809, PR #268).
     # The secret check is this job's first step rather than a job of its own:
     # a job billed a full minute to compute a boolean is a minute wasted.
-    if: github.event.pull_request.draft == false && !startsWith(github.head_ref, 'release/')
+    if: github.event.pull_request.draft == false && !startsWith(github.head_ref, 'release/') && !startsWith(github.head_ref, 'backmerge/')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:

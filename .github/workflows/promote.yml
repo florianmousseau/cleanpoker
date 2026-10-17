@@ -27,7 +27,7 @@ name: promote
 # check runs se posent bien sur le commit, mais la protection de branche lit le
 # rollup DE LA PR, et une check suite de `workflow_dispatch` n'y figure pas
 # (mesure sur la PR #162 : `Code Quality` et `Bundle Size` verts sur le SHA,
-# rollup de la PR vide, `mergeStateStatus` BLOCKED). L'etape ci-dessous approuve
+# rollup de la PR vide, `mergeStateStatus` BLOCKED). L'etape ci-dessous libere
 # donc les runs en attente, puis attend les checks DE LA PR - ceux que la
 # protection lit, et ceux qu'un humain regarderait.
 #
@@ -256,32 +256,10 @@ jobs:
         env:
           BRANCH: ${{ steps.pr.outputs.branch }}
         run: |
-          branch="$BRANCH"
-
-          # Les runs mettent quelques secondes a apparaitre apres l'ouverture
-          # de la PR ; sans cette attente il n'y a rien a approuver.
-          approuves=0
-          for _ in $(seq 1 12); do
-            sleep 5
-            for id in $(gh run list --branch "$branch" --event pull_request --limit 20 \
-              --json databaseId,status --jq '.[] | select(.status == "action_required") | .databaseId'); do
-              if gh api --method POST "repos/$GITHUB_REPOSITORY/actions/runs/$id/approve" >/dev/null 2>&1; then
-                approuves=$((approuves + 1))
-              fi
-            done
-            if [ "$approuves" -gt 0 ]; then break; fi
-          done
-          echo "runs liberes de l attente d approbation : $approuves"
-
-          if ! gh pr checks "$branch" >/dev/null 2>&1; then
-            echo "::error::Aucun check sur la PR de release. Si des runs restent en action_required, les approuver puis relancer promote." >&2
-            exit 1
-          fi
-
-          # `--fail-fast` : un check rouge sort en 1, et le job s'arrete ICI,
-          # avant le merge. C'est tout l'objet de cette etape - `main` reste
-          # alors intacte et la prod continue de servir la version precedente.
-          gh pr checks "$branch" --watch --fail-fast --interval 15
+          # Copie hors de l'arbre : le back-merge plus bas extrait `main`, qui
+          # peut ne pas encore porter ce script.
+          cp .github/scripts/liberer-et-attendre.sh "$RUNNER_TEMP/"
+          "$RUNNER_TEMP/liberer-et-attendre.sh" "$BRANCH"
           echo "gate=verte" >> "$GITHUB_ENV"
 
       - name: Merge the release
@@ -312,6 +290,10 @@ jobs:
           gh pr create --base develop --head "$branch" \
             --title "chore: back-merge main after v$version" \
             --body "Report of the release commit into develop."
+          # `develop` exige les memes checks que `main`, et cette PR nait du
+          # meme robot : ses runs attendent la meme approbation (run
+          # 38983445842, PR #268 : `2 of 2 required status checks are expected`).
+          "$RUNNER_TEMP/liberer-et-attendre.sh" "$branch"
           gh pr merge "$branch" --merge
 
       - name: Deploy the release

@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.21] - 2026-10-17
+
+- fix(ci): free and wait for the back-merge checks too
+
+## [0.0.20] - 2026-10-16
+
+- fix(ci): release the pending runs of the release pull request
+
+## [0.0.19] - 2026-10-16
+
+- fix(ui): the German home heading no longer pushes a 320 px screen (#263)
+
 ## [0.0.18] - 2026-10-14
 
 - feat(health): outage drill on the production probe (#257)
