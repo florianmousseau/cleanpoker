@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
 	"strings"
@@ -38,8 +39,15 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 			Cards []string `json:"cards"`
 		}
 		// An unreadable body opens a room with the default deck; an oversized
-		// one is refused, since every room holds its deck in memory.
-		_ = json.NewDecoder(http.MaxBytesReader(w, r.Body, maxCreateBody)).Decode(&body)
+		// one is refused, since every room holds its deck in memory. The size
+		// error has to be told apart: read as "unreadable", it opened a room
+		// with the default deck in place of the one asked for.
+		err := json.NewDecoder(http.MaxBytesReader(w, r.Body, maxCreateBody)).Decode(&body)
+		var tooLarge *http.MaxBytesError
+		if errors.As(err, &tooLarge) {
+			http.Error(w, "body too large", http.StatusRequestEntityTooLarge)
+			return
+		}
 		if !deckFits(body.Cards) {
 			http.Error(w, "deck too large", http.StatusBadRequest)
 			return

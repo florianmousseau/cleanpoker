@@ -346,6 +346,19 @@ func TestCreateRoom_OverlongCardIsRefused(t *testing.T) {
 	}
 }
 
+func TestCreateRoom_BodyOverTheLimitIsRefused(t *testing.T) {
+	srv := newTestServer(t)
+	payload := `{"cards":["XS","S"],"pad":"` + strings.Repeat("x", 8<<10) + `"}`
+	resp, err := http.Post(srv.URL+"/rooms", "application/json", strings.NewReader(payload))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode != http.StatusRequestEntityTooLarge {
+		t.Fatalf("status = %d, want 413", resp.StatusCode)
+	}
+}
+
 // --- WebSocket validation ---
 
 func TestWebSocket_NameRequired(t *testing.T) {
