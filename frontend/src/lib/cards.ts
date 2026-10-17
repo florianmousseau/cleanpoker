@@ -13,3 +13,12 @@ export function parseCards(input: string): string[] {
   }
   return out;
 }
+
+/** The deck the server holds: `maxCards` and `maxCardLength` in backend/internal/handler/handler.go. */
+export const MAX_CARDS = 64;
+export const MAX_CARD_LENGTH = 16;
+
+/** Whether the server will create a room for this deck, length counted in characters as Go counts runes. */
+export function fitsServer(cards: string[]): boolean {
+  return cards.length <= MAX_CARDS && cards.every((c) => [...c].length <= MAX_CARD_LENGTH);
+}

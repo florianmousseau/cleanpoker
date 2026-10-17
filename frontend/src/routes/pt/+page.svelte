@@ -24,6 +24,7 @@
   cardsSepHint="(separadas por vírgulas)"
   presetsAriaLabel="Predefinições"
   minCardsError="Mínimo 2 cartas"
+  deckLimitError="Máximo 64 cartas, 16 caracteres cada uma"
   createBtnLabel="Criar uma sessão"
   creatingLabel="A criar..."
   createError="Não foi possível criar a sala. Tente novamente."
