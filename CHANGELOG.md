@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.22] - 2026-10-17
+
+- fix(results): size the bars on the votes of the revealed round
+- fix(room): ignore commands from a seat that is gone
+
 ## [0.0.21] - 2026-10-17
 
 - fix(ci): free and wait for the back-merge checks too
