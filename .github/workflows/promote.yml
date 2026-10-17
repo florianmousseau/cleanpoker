@@ -263,6 +263,7 @@ jobs:
           echo "gate=verte" >> "$GITHUB_ENV"
 
       - name: Merge the release
+        id: merge
         # Ce qui autorise ce merge est le verdict de l'etape precedente, pris
         # sur les checks DE LA PR - ceux que la protection de `main` lit.
         env:
@@ -272,7 +273,18 @@ jobs:
           version="$VERSION"
           gh pr merge "$BRANCH" --merge --subject "release: v$version"
 
+      - name: Deploy the release
+        # Right after the merge and BEFORE the back-merge: a back-merge that fails
+        # (a conflict on `develop`, a refused PR) must not leave the release merged
+        # into `main` and never deployed (2026-10-17).
+        # Le merge ci-dessus est fait par GITHUB_TOKEN : il ne declenche rien.
+        # Ce dispatch est le SEUL chemin vers la prod, et il n'est pas optionnel.
+        run: gh workflow run deploy.yml --ref main
+
       - name: Back-merge main into develop
+        # After the deployment, and run even if it failed: the release is in `main`,
+        # `develop` has to carry it whatever happened to production.
+        if: ${{ !cancelled() && steps.merge.outcome == 'success' }}
         env:
           VERSION: ${{ steps.v.outputs.version }}
         # Jamais une PR dont la source est `main` : elle serait supprimee au
@@ -295,11 +307,6 @@ jobs:
           # 38983445842, PR #268 : `2 of 2 required status checks are expected`).
           "$RUNNER_TEMP/liberer-et-attendre.sh" "$branch"
           gh pr merge "$branch" --merge
-
-      - name: Deploy the release
-        # Le merge ci-dessus est fait par GITHUB_TOKEN : il ne declenche rien.
-        # Ce dispatch est le SEUL chemin vers la prod, et il n'est pas optionnel.
-        run: gh workflow run deploy.yml --ref main
 
       - name: Say what went out
         env:
