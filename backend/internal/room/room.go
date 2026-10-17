@@ -484,22 +484,29 @@ func (r *Room) run() {
 				close(s.ch)
 			}
 		case d := <-r.direct:
-			for _, s := range subs {
+			for id, s := range subs {
 				if s.playerID == d.playerID {
-					trySend(s.ch, d.msg)
+					deliverOrDrop(subs, id, d.msg)
 				}
 			}
 		case msg := <-r.broadcast:
-			for _, s := range subs {
-				trySend(s.ch, msg)
+			for id := range subs {
+				deliverOrDrop(subs, id, msg)
 			}
 		}
 	}
 }
 
-func trySend(ch chan Message, msg Message) {
+// deliverOrDrop queues msg for one subscriber. A subscriber whose queue is full
+// is cut off rather than skipped: a skipped reveal or kick left its screen on a
+// false state for good, while a closed channel closes its socket and the client
+// reconnects to the current one.
+func deliverOrDrop(subs map[string]subscription, id string, msg Message) {
+	s := subs[id]
 	select {
-	case ch <- msg:
+	case s.ch <- msg:
 	default:
+		delete(subs, id)
+		close(s.ch)
 	}
 }

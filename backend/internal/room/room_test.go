@@ -709,3 +709,26 @@ func TestStoppedRoom_CommandsNeverBlock(t *testing.T) {
 		t.Fatal("a command on a stopped room blocked")
 	}
 }
+
+// A subscriber that stops reading is cut off once its queue is full, instead
+// of silently missing the messages that follow.
+func TestSlowSubscriber_IsCutOffNotSkipped(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	ch := r.Subscribe("slow", "p1")
+	r.Join("p1", "Alice", false)
+	for i := 0; i < 40; i++ {
+		r.CastVote("p1", "5")
+	}
+	deadline := time.After(2 * time.Second)
+	for {
+		select {
+		case _, open := <-ch:
+			if !open {
+				return
+			}
+		case <-deadline:
+			t.Fatal("a subscriber with a full queue was never cut off")
+		}
+	}
+}
