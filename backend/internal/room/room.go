@@ -216,7 +216,7 @@ func (r *Room) mutate(fn func()) {
 	r.lastActivity = time.Now()
 	snap := r.snapshot()
 	r.mu.Unlock()
-	r.broadcast <- Message{Type: "state", Payload: snap}
+	r.publish(Message{Type: "state", Payload: snap})
 }
 
 // Join seats a player that no client can take back.
@@ -392,7 +392,10 @@ func (r *Room) Kick(initiatorID, targetID string) {
 		kicked = true
 	})
 	if kicked {
-		r.direct <- directMessage{playerID: targetID, msg: Message{Type: "kicked"}}
+		select {
+		case r.direct <- directMessage{playerID: targetID, msg: Message{Type: "kicked"}}:
+		case <-r.quit:
+		}
 	}
 }
 
@@ -447,7 +450,20 @@ func (r *Room) Subscribe(connID, playerID string) chan Message {
 }
 
 func (r *Room) Unsubscribe(connID string) {
-	r.unsubscribe <- connID
+	select {
+	case r.unsubscribe <- connID:
+	case <-r.quit:
+	}
+}
+
+// publish hands msg to the room loop, or drops it once the room is stopped: the
+// loop no longer reads, and a command from a client still connected to an
+// expired room would otherwise block its connection for good.
+func (r *Room) publish(msg Message) {
+	select {
+	case r.broadcast <- msg:
+	case <-r.quit:
+	}
 }
 
 func (r *Room) run() {

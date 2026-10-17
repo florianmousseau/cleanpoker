@@ -687,3 +687,25 @@ func waitForMessage(t *testing.T, ch chan Message, typ string, conn int) {
 		}
 	}
 }
+
+// A client still connected when its room expires keeps sending commands; none
+// of them may block once the loop is gone.
+func TestStoppedRoom_CommandsNeverBlock(t *testing.T) {
+	r := newTestRoom(nil)
+	r.Join("p1", "Alice", false)
+	r.Stop()
+	done := make(chan struct{})
+	go func() {
+		for i := 0; i < 100; i++ {
+			r.CastVote("p1", "5")
+			r.Kick("p1", "p1")
+			r.Unsubscribe("c")
+		}
+		close(done)
+	}()
+	select {
+	case <-done:
+	case <-time.After(2 * time.Second):
+		t.Fatal("a command on a stopped room blocked")
+	}
+}
