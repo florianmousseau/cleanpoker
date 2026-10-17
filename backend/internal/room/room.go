@@ -2,6 +2,7 @@ package room
 
 import (
 	"crypto/subtle"
+	"slices"
 	"sync"
 	"time"
 )
@@ -329,6 +330,11 @@ func (r *Room) CastVote(playerID, vote string) {
 	r.mutate(func() {
 		p, ok := r.players[playerID]
 		if !ok || r.state != StateVoting || p.Observer {
+			return
+		}
+		// A vote is a card of this room's deck or nothing: any other string
+		// from a scripted client would land in everyone's results.
+		if vote != "" && !slices.Contains(r.cards, vote) {
 			return
 		}
 		p.Vote = vote
