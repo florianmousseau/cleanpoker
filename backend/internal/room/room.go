@@ -210,13 +210,16 @@ func (r *Room) logActivity(initiator, message string, target ...string) {
 	}
 }
 
+// mutate applies fn and publishes the state it produced, both under the lock:
+// published after unlocking, two concurrent commands could reach the loop in
+// the reverse order and leave every screen on the older state. The loop never
+// takes r.mu, so publishing under it cannot deadlock.
 func (r *Room) mutate(fn func()) {
 	r.mu.Lock()
+	defer r.mu.Unlock()
 	fn()
 	r.lastActivity = time.Now()
-	snap := r.snapshot()
-	r.mu.Unlock()
-	r.broadcast <- Message{Type: "state", Payload: snap}
+	r.publish(Message{Type: "state", Payload: r.snapshot()})
 }
 
 // Join seats a player that no client can take back.
@@ -392,7 +395,10 @@ func (r *Room) Kick(initiatorID, targetID string) {
 		kicked = true
 	})
 	if kicked {
-		r.direct <- directMessage{playerID: targetID, msg: Message{Type: "kicked"}}
+		select {
+		case r.direct <- directMessage{playerID: targetID, msg: Message{Type: "kicked"}}:
+		case <-r.quit:
+		}
 	}
 }
 
@@ -447,7 +453,20 @@ func (r *Room) Subscribe(connID, playerID string) chan Message {
 }
 
 func (r *Room) Unsubscribe(connID string) {
-	r.unsubscribe <- connID
+	select {
+	case r.unsubscribe <- connID:
+	case <-r.quit:
+	}
+}
+
+// publish hands msg to the room loop, or drops it once the room is stopped: the
+// loop no longer reads, and a command from a client still connected to an
+// expired room would otherwise block its connection for good.
+func (r *Room) publish(msg Message) {
+	select {
+	case r.broadcast <- msg:
+	case <-r.quit:
+	}
 }
 
 func (r *Room) run() {
@@ -468,22 +487,29 @@ func (r *Room) run() {
 				close(s.ch)
 			}
 		case d := <-r.direct:
-			for _, s := range subs {
+			for id, s := range subs {
 				if s.playerID == d.playerID {
-					trySend(s.ch, d.msg)
+					deliverOrDrop(subs, id, d.msg)
 				}
 			}
 		case msg := <-r.broadcast:
-			for _, s := range subs {
-				trySend(s.ch, msg)
+			for id := range subs {
+				deliverOrDrop(subs, id, msg)
 			}
 		}
 	}
 }
 
-func trySend(ch chan Message, msg Message) {
+// deliverOrDrop queues msg for one subscriber. A subscriber whose queue is full
+// is cut off rather than skipped: a skipped reveal or kick left its screen on a
+// false state for good, while a closed channel closes its socket and the client
+// reconnects to the current one.
+func deliverOrDrop(subs map[string]subscription, id string, msg Message) {
+	s := subs[id]
 	select {
-	case ch <- msg:
+	case s.ch <- msg:
 	default:
+		delete(subs, id)
+		close(s.ch)
 	}
 }

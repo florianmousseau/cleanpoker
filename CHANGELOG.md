@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.25] - 2026-10-17
+
+- fix(room): publish each state in the order it was applied
+- fix(room): cut off a subscriber whose queue is full instead of skipping it
+- fix(room): an expired room closes its sockets and never blocks a command
+
 ## [0.0.24] - 2026-10-17
 
 - fix(server): refuse a room body over the size limit
