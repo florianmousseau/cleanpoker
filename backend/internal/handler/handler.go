@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 	"unicode/utf8"
 
 	"github.com/florianmousseau/cleanpoker/internal/health"
@@ -56,7 +57,12 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		if isProbe(r) {
 			create = s.CreateUncounted
 		}
-		writeJSON(w, map[string]string{"id": create(body.Cards)})
+		id, err := create(body.Cards)
+		if err != nil {
+			http.Error(w, "too many rooms", http.StatusServiceUnavailable)
+			return
+		}
+		writeJSON(w, map[string]string{"id": id})
 	})
 
 	mux.HandleFunc("GET /rooms/{id}/ws", func(w http.ResponseWriter, r *http.Request) {
@@ -72,7 +78,12 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 			http.Error(w, "name too long", http.StatusBadRequest)
 			return
 		}
-		rm := s.GetOrCreate(roomID, nil)
+		// The room is opened once the handshake succeeded, never before: a
+		// plain GET used to allocate a room and its goroutine for a day.
+		if !s.CanHold(roomID) {
+			http.Error(w, "too many rooms", http.StatusServiceUnavailable)
+			return
+		}
 		recordJoin := s.RecordJoin
 		if isProbe(r) {
 			recordJoin = func() {
@@ -81,6 +92,11 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		}
 		websocket.Handler(func(conn *websocket.Conn) {
 			conn.MaxPayloadBytes = maxFrameBytes
+			rm, err := s.GetOrCreate(roomID, nil)
+			if err != nil {
+				_ = conn.Close() // full since the check above: nothing to hold
+				return
+			}
 			handleWS(conn, rm, recordJoin, arrival{name: playerName, observer: observer, token: token})
 		}).ServeHTTP(w, r)
 	})
@@ -93,6 +109,10 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 // 120-character name and have it broadcast to every participant. The form
 // counts UTF-16 units, so anything it lets through is at most this many runes.
 const MaxNameLength = 30
+
+// IdleTimeout is how long a connection may stay silent. The page pings every
+// 25 seconds and the server answers, so both ends see a dead link in time.
+const IdleTimeout = 75 * time.Second
 
 // Bounds on what a client may make the server hold. A deck is a short list of
 // short labels; nothing an honest client sends comes near these.
@@ -192,6 +212,9 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 	}()
 
 	for {
+		// A client that went silent (a network cut no TCP close announced)
+		// is dropped, and its seat starts its grace like any departure.
+		_ = conn.SetReadDeadline(time.Now().Add(IdleTimeout))
 		var action struct {
 			Type    string `json:"type"`
 			Payload string `json:"payload"`
@@ -200,6 +223,10 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 			return
 		}
 		switch action.Type {
+		case "ping":
+			if err := websocket.JSON.Send(conn, room.Message{Type: "pong"}); err != nil {
+				return
+			}
 		case "vote":
 			rm.CastVote(seat.ID, action.Payload)
 		case "show":

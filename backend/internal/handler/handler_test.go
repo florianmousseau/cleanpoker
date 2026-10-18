@@ -439,8 +439,11 @@ func TestHappyPath_VoteShowClear(t *testing.T) {
 		t.Fatalf("expected Alice in room, got %v", snap.Players)
 	}
 
-	// vote: "5"
+	// vote: "5", answered privately with the vote the room holds
 	send(t, conn, "vote", "5")
+	if ack := recv(t, conn); ack.Type != "vote" || string(ack.Payload) != `"5"` {
+		t.Fatalf("expected the vote 5 acknowledged, got %s %s", ack.Type, ack.Payload)
+	}
 	snap = decodeSnap(t, recv(t, conn))
 	if snap.State != room.StateVoting {
 		t.Fatalf("expected still voting after vote, got %s", snap.State)
@@ -605,5 +608,60 @@ func TestWebSocket_UnknownTokenGetsANewSeat(t *testing.T) {
 	snap := decodeSnap(t, recv(t, conn))
 	if len(snap.Players) != 1 || !activityHas(snap, "joined") {
 		t.Fatalf("expected Alice to arrive as a new player, got %+v", snap.Players)
+	}
+}
+
+func newLimitedServer(t *testing.T, limit int) (*httptest.Server, *store.Store) {
+	t.Helper()
+	s := store.NewWithLimit(limit)
+	probe := func(context.Context) health.Report { return health.Report{} }
+	srv := httptest.NewServer(handler.New(s, []string{"http://test"}, probe))
+	t.Cleanup(srv.Close)
+	return srv, s
+}
+
+// A GET that never becomes a socket used to open a room and its goroutine,
+// kept for a day: a loop of them filled the memory of the machine.
+func TestWebSocket_FailedHandshakeOpensNoRoom(t *testing.T) {
+	srv, s := newLimitedServer(t, 10)
+	for i := range 5 {
+		resp, err := http.Get(srv.URL + "/rooms/ghost" + strings.Repeat("x", i) + "/ws?name=Bob")
+		if err != nil {
+			t.Fatal(err)
+		}
+		_ = resp.Body.Close()
+	}
+	if n := s.Usage().ActiveRooms; n != 0 {
+		t.Fatalf("failed handshakes opened %d rooms", n)
+	}
+}
+
+func TestRooms_RefusedOnceTheServerIsFull(t *testing.T) {
+	srv, _ := newLimitedServer(t, 1)
+	id := createRoom(t, srv)
+	resp, err := http.Post(srv.URL+"/rooms", "application/json", strings.NewReader("{}"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	_ = resp.Body.Close()
+	if resp.StatusCode != http.StatusServiceUnavailable {
+		t.Fatalf("expected 503 for a room past the limit, got %d", resp.StatusCode)
+	}
+	if !dialFails(t, srv, "another", "Bob") {
+		t.Fatal("a socket opened a room past the limit")
+	}
+	if dialFails(t, srv, id, "Bob") {
+		t.Fatal("a full server refused a room it already holds")
+	}
+}
+
+func TestWebSocket_PingIsAnswered(t *testing.T) {
+	srv := newTestServer(t)
+	conn := wsConnect(t, srv, createRoom(t, srv), "Alice")
+	recv(t, conn) // welcome
+	recv(t, conn) // arrival
+	send(t, conn, "ping", "")
+	if msg := recv(t, conn); msg.Type != "pong" {
+		t.Fatalf("expected pong, got %q", msg.Type)
 	}
 }
