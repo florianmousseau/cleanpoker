@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.27] - 2026-10-20
+
+- fix(room): ignore the answer to a vote that a later vote replaced
+- fix(room): bound rooms, answer each vote and drop silent sockets
+
 ## [0.0.26] - 2026-10-17
 
 - fix(home): check the deck against the server's limits and say which one (#285)
