@@ -67,6 +67,19 @@ describe('useRoom', () => {
     expect(room.myVote).toBe('5');
   });
 
+  it('does not let the answer to an earlier vote replace a later one', async () => {
+    const room = await joined();
+    FakeSocket.last.open();
+    room.castVote('5');
+    room.castVote('8');
+    FakeSocket.last.receive('vote', '5');
+    expect(room.myVote).toBe('8');
+    FakeSocket.last.receive('vote', '8');
+    expect(room.myVote).toBe('8');
+    room.castVote('5');
+    expect(FakeSocket.last.sent.at(-1)).toEqual({ type: 'vote', payload: '5' });
+  });
+
   it('pings, and reconnects after a silence', async () => {
     await joined();
     const first = FakeSocket.last;

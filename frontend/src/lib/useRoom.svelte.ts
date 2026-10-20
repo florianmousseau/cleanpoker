@@ -34,6 +34,9 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
   // The token of the seat this tab holds. Every reconnection presents it, so
   // a dropped socket takes the same seat back instead of adding a second one.
   let token = '';
+  // Votes sent and not yet answered: only the answer to the LAST one says what
+  // the room holds, an earlier answer would put back a vote already replaced.
+  let votesInFlight = 0;
 
   function connect(name: string, observer: boolean) {
     if (!browser) return;
@@ -75,11 +78,13 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
       if (msg.type === 'welcome') {
         myId = msg.payload.id;
         myVote = msg.payload.vote ?? '';
+        votesInFlight = 0;
         token = msg.payload.token ?? '';
         if (token) saveSeat(tabStorage(), roomId, { name, observer, token });
       } else if (msg.type === 'vote') {
         // The vote the room holds: a refused one does not stay on screen.
-        myVote = msg.payload ?? '';
+        votesInFlight = Math.max(0, votesInFlight - 1);
+        if (votesInFlight === 0) myVote = msg.payload ?? '';
       } else if (msg.type === 'kicked') {
         kicked = true;
         token = '';
@@ -136,7 +141,10 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
   function castVote(card: string) {
     const newVote = myVote === card ? '' : card;
     // Shown at once when it left; the room's answer then sets what it holds.
-    if (send('vote', newVote)) myVote = newVote;
+    if (send('vote', newVote)) {
+      myVote = newVote;
+      votesInFlight += 1;
+    }
   }
 
   function show() { send('show'); }
