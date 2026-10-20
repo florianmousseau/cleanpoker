@@ -714,7 +714,9 @@ func TestStoppedRoom_CommandsNeverBlock(t *testing.T) {
 // A subscriber that stops reading is cut off once its queue is full, instead
 // of silently missing the messages that follow.
 func TestSlowSubscriber_IsCutOffNotSkipped(t *testing.T) {
-	r := newTestRoom(nil)
+	// New, not newTestRoom: its drain of r.broadcast races the room loop and
+	// can take enough of the 81 messages that the queue of 16 never fills.
+	r := New("test", nil)
 	defer r.Stop()
 	ch := r.Subscribe("slow", "p1")
 	r.Join("p1", "Alice", false)
