@@ -83,14 +83,16 @@ type Room struct {
 	results      *Results
 	activity     []ActivityEntry
 	lastActivity time.Time
+	everJoined   bool
 	grace        time.Duration
 	// connections counts the live sockets of each seated player; a seat only
 	// starts its grace once the last one is gone.
 	connections map[string]int
 	departures  map[string]*departure
 
-	broadcast   chan Message
-	direct      chan directMessage
+	// broadcast carries every outgoing message, private ones included: one
+	// channel keeps them in the order the room produced them.
+	broadcast   chan directMessage
 	subscribe   chan subscription
 	unsubscribe chan string
 	quit        chan struct{}
@@ -104,6 +106,7 @@ type subscription struct {
 	ready chan struct{}
 }
 
+// directMessage is one outgoing message; an empty playerID sends it to all.
 type directMessage struct {
 	playerID string
 	msg      Message
@@ -124,8 +127,7 @@ func New(id string, cards []string) *Room {
 		grace:        DepartureGrace,
 		connections:  make(map[string]int),
 		departures:   make(map[string]*departure),
-		broadcast:    make(chan Message, 32),
-		direct:       make(chan directMessage, 8),
+		broadcast:    make(chan directMessage, 32),
 		subscribe:    make(chan subscription, 8),
 		unsubscribe:  make(chan string, 8),
 		quit:         make(chan struct{}),
@@ -138,6 +140,13 @@ func (r *Room) LastActivity() time.Time {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	return r.lastActivity
+}
+
+// EverJoined reports whether anybody ever took a seat in the room.
+func (r *Room) EverJoined() bool {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return r.everJoined
 }
 
 func (r *Room) Snapshot() Snapshot {
@@ -232,6 +241,7 @@ func (r *Room) Join(playerID, name string, observer bool) {
 func (r *Room) JoinWithToken(playerID, token, name string, observer bool) {
 	r.mutate(func() {
 		r.players[playerID] = &Player{ID: playerID, Name: name, Observer: observer, token: token}
+		r.everJoined = true
 		r.connections[playerID]++
 		if observer {
 			r.logActivity(name, "joined_observer")
@@ -329,10 +339,21 @@ func (r *Room) removePlayer(playerID string) {
 	}
 }
 
+// CastVote records a vote, then tells its voter which vote the room holds:
+// snapshots mask it, so without this a vote refused (cast after the reveal, or
+// from a seat turned observer) stayed on the voter's screen as if counted.
 func (r *Room) CastVote(playerID, vote string) {
 	r.mutate(func() {
 		p, ok := r.players[playerID]
-		if !ok || r.state != StateVoting || p.Observer {
+		if !ok {
+			return
+		}
+		defer func() {
+			// Queued under the lock, before the state: a later new round
+			// can never reach the voter ahead of this answer.
+			r.publishTo(playerID, Message{Type: "vote", Payload: p.Vote})
+		}()
+		if r.state != StateVoting || p.Observer {
 			return
 		}
 		// A vote is a card of this room's deck or nothing: any other string
@@ -351,7 +372,9 @@ func (r *Room) CastVote(playerID, vote string) {
 
 func (r *Room) Show(initiatorID string) {
 	r.mutate(func() {
-		if !r.seated(initiatorID) {
+		// A second reveal of the same round would recompute the results on
+		// whoever is seated now, after departures and role changes.
+		if !r.seated(initiatorID) || r.state == StateRevealed {
 			return
 		}
 		r.state = StateRevealed
@@ -395,11 +418,13 @@ func (r *Room) Kick(initiatorID, targetID string) {
 		kicked = true
 	})
 	if kicked {
-		select {
-		case r.direct <- directMessage{playerID: targetID, msg: Message{Type: "kicked"}}:
-		case <-r.quit:
-		}
+		r.tell(targetID, Message{Type: "kicked"})
 	}
+}
+
+// tell sends msg to the connections of one player only.
+func (r *Room) tell(playerID string, msg Message) {
+	r.publishTo(playerID, msg)
 }
 
 func (r *Room) ToggleObserver(initiatorID, targetID string) {
@@ -463,8 +488,13 @@ func (r *Room) Unsubscribe(connID string) {
 // loop no longer reads, and a command from a client still connected to an
 // expired room would otherwise block its connection for good.
 func (r *Room) publish(msg Message) {
+	r.publishTo("", msg)
+}
+
+// publishTo is publish for the connections of one player; "" means everyone.
+func (r *Room) publishTo(playerID string, msg Message) {
 	select {
-	case r.broadcast <- msg:
+	case r.broadcast <- directMessage{playerID: playerID, msg: msg}:
 	case <-r.quit:
 	}
 }
@@ -486,15 +516,11 @@ func (r *Room) run() {
 				delete(subs, connID)
 				close(s.ch)
 			}
-		case d := <-r.direct:
+		case d := <-r.broadcast:
 			for id, s := range subs {
-				if s.playerID == d.playerID {
+				if d.playerID == "" || s.playerID == d.playerID {
 					deliverOrDrop(subs, id, d.msg)
 				}
-			}
-		case msg := <-r.broadcast:
-			for id := range subs {
-				deliverOrDrop(subs, id, msg)
 			}
 		}
 	}
