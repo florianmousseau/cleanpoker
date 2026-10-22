@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.29] - 2026-10-22
+
+- fix(backend): bound every websocket write with a deadline
+
+## [0.0.28] - 2026-10-22
+
+- fix(home): keep the create button off until the page has its handler (#294)
+- fix(home): say how a vote works in the lead, in five languages (#292)
+- fix(deps): build the room server on Go 1.26.10 (GO-2026-6809) (#293)
+- fix(room): ignore the answer to a vote that a later vote replaced
+- fix(room): bound rooms, answer each vote and drop silent sockets
+
 ## [0.0.26] - 2026-10-17
 
 - fix(home): check the deck against the server's limits and say which one (#285)

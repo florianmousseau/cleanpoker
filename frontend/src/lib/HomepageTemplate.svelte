@@ -1,5 +1,6 @@
 <script lang="ts">
   import { PUBLIC_API_URL } from '$app/env/public';
+  import { onMount } from 'svelte';
   import { goto, replaceState } from '$app/navigation';
   import { browser } from '$app/env';
   import { lang } from '#lib/lang.svelte.ts';
@@ -112,6 +113,13 @@
       : '1,2,3,5,8,13,21,?'
   );
   let creating = $state(false);
+  // Before hydration the form has no handler, and a native submit reloads
+  // `/?` with no room: measured on 2026-10-22, the first click lost on a
+  // mid-range phone even after the load event. The button waits instead.
+  let ready = $state(false);
+  onMount(() => {
+    ready = true;
+  });
   let error = $state('');
 
   function pushCards(value: string) {
@@ -226,7 +234,7 @@
         <p class="error" role="alert">{error}</p>
       {/if}
 
-      <button type="submit" class="btn btn-primary btn-lg" disabled={creating || !isValid} data-testid="create-btn">
+      <button type="submit" class="btn btn-primary btn-lg" disabled={!ready || creating || !isValid} data-testid="create-btn">
         {creating ? creatingLabel : createBtnLabel}
       </button>
     </form>

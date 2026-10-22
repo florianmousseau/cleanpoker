@@ -19,7 +19,7 @@
   navAriaLabel="Language"
   h1Main="Planning poker:"
   h1Accent="create, vote, decide"
-  lead="Create a session, share the URL, estimate as a team. No account required."
+  lead="Estimate tasks as a team: everyone picks a card in secret, then all cards are shown at once. Create a session, share the link, no account."
   cardsLabel="Cards"
   cardsSepHint="(comma-separated)"
   presetsAriaLabel="Presets"
