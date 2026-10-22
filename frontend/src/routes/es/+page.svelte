@@ -19,7 +19,7 @@
   navAriaLabel="Idioma"
   h1Main="Planning poker:"
   h1Accent="crear, votar, decidir"
-  lead="Crea una sesión, comparte el enlace, estima en equipo. Sin cuenta."
+  lead="Estima las tareas en equipo: cada persona elige una carta en secreto y luego se muestran todas a la vez. Crea una sesión, comparte el enlace, sin cuenta."
   cardsLabel="Cartas"
   cardsSepHint="(separadas por comas)"
   presetsAriaLabel="Preajustes"
