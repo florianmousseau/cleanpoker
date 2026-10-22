@@ -19,7 +19,7 @@
   navAriaLabel="Sprache"
   h1Main="Planning Poker:"
   h1Accent="erstellen, abstimmen, entscheiden"
-  lead="Session erstellen, Link teilen, gemeinsam schätzen. Kein Konto nötig."
+  lead="Aufgaben gemeinsam schätzen: Jeder wählt verdeckt eine Karte, dann werden alle gleichzeitig aufgedeckt. Session erstellen, Link teilen, kein Konto."
   cardsLabel="Karten"
   cardsSepHint="(kommagetrennt)"
   presetsAriaLabel="Voreinstellungen"
