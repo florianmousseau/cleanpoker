@@ -768,3 +768,47 @@ func publishesInOrder(t *testing.T) {
 		last = round
 	}
 }
+
+// A refused vote used to stay on the voter's screen: snapshots mask votes, so
+// nothing told the client the room held another one.
+func TestCastVote_TellsTheVoterTheVoteHeld(t *testing.T) {
+	r := New("test", nil)
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	ch := r.Subscribe("c1", "p1")
+	r.CastVote("p1", "5")
+	r.Show("p1")
+	r.CastVote("p1", "8")
+
+	var acks []any
+	deadline := time.After(2 * time.Second)
+	for len(acks) < 2 {
+		select {
+		case msg := <-ch:
+			if msg.Type == "vote" {
+				acks = append(acks, msg.Payload)
+			}
+		case <-deadline:
+			t.Fatalf("expected two acknowledgements, got %v", acks)
+		}
+	}
+	if acks[0] != "5" || acks[1] != "5" {
+		t.Fatalf("expected the room to answer 5 twice, got %v", acks)
+	}
+}
+
+// A second reveal recomputed the results on whoever was seated by then.
+func TestShow_SecondRevealKeepsTheResults(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	r.Join("p2", "Bob", false)
+	r.CastVote("p1", "3")
+	r.CastVote("p2", "8")
+	r.Show("p1")
+	r.ToggleObserver("p1", "p2")
+	r.Show("p1")
+	if avg := snap(r).Results.Avg; avg != "5.5" {
+		t.Fatalf("expected the revealed average 5.5 to hold, got %s", avg)
+	}
+}

@@ -19,7 +19,7 @@
   navAriaLabel="Langue"
   h1Main="Poker planning&nbsp;:"
   h1Accent="créer, voter, décider"
-  lead="Créez une session de poker planning, partagez l'URL, estimez en équipe. Aucun compte requis."
+  lead="Estimez vos tâches en équipe&nbsp;: chacun choisit une carte en secret, puis toutes se révèlent ensemble. Créez une session, partagez le lien, sans compte."
   cardsLabel="Cartes"
   cardsSepHint="(séparées par des virgules)"
   presetsAriaLabel="Présélections"
