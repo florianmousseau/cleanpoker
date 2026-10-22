@@ -114,6 +114,20 @@ const MaxNameLength = 30
 // 25 seconds and the server answers, so both ends see a dead link in time.
 const IdleTimeout = 75 * time.Second
 
+// writeTimeout bounds one write to a client. A client that stops reading
+// without closing would otherwise hold its writer, its connection and its
+// goroutine for good: closing its queue does not unblock a write in progress.
+var writeTimeout = 10 * time.Second
+
+// sendBounded writes one message, or fails once the client has not taken it
+// within writeTimeout.
+func sendBounded(conn *websocket.Conn, v any) error {
+	if err := conn.SetWriteDeadline(time.Now().Add(writeTimeout)); err != nil {
+		return err
+	}
+	return websocket.JSON.Send(conn, v)
+}
+
 // Bounds on what a client may make the server hold. A deck is a short list of
 // short labels; nothing an honest client sends comes near these.
 const (
@@ -185,7 +199,7 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 	ch := rm.Subscribe(connID, seat.ID)
 	defer rm.Unsubscribe(connID)
 
-	if err := websocket.JSON.Send(conn, room.Message{Type: "welcome", Payload: welcome{ID: seat.ID, Token: token, Vote: seat.Vote}}); err != nil {
+	if err := sendBounded(conn, room.Message{Type: "welcome", Payload: welcome{ID: seat.ID, Token: token, Vote: seat.Vote}}); err != nil {
 		return
 	}
 
@@ -201,7 +215,7 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 
 	go func() {
 		for msg := range ch {
-			if err := websocket.JSON.Send(conn, msg); err != nil {
+			if err := sendBounded(conn, msg); err != nil {
 				break
 			}
 		}
@@ -224,7 +238,7 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 		}
 		switch action.Type {
 		case "ping":
-			if err := websocket.JSON.Send(conn, room.Message{Type: "pong"}); err != nil {
+			if err := sendBounded(conn, room.Message{Type: "pong"}); err != nil {
 				return
 			}
 		case "vote":

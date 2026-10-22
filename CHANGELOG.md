@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.29] - 2026-10-22
+
+- fix(backend): bound every websocket write with a deadline
+
 ## [0.0.28] - 2026-10-22
 
 - fix(home): keep the create button off until the page has its handler (#294)
