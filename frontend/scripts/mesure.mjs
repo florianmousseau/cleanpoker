@@ -226,6 +226,22 @@ const INTERDITES = [
 	'não medimos nada'
 ];
 
+/*
+ * LE COMPTEUR DE ZONE GARDE TROIS MOIS le navigateur, le reseau d'origine et la
+ * langue : ensemble ils peuvent parfois relier deux visites. Promettre que rien
+ * ne permet de suivre un lecteur d'un jour a l'autre serait une negation de plus.
+ * Lu sur le texte APLATI : la phrase court presque toujours sur deux lignes.
+ */
+const SUIVI_IMPOSSIBLE = [
+	'rien ne permet de vous suivre',
+	'rien ne peut vous suivre',
+	'nothing lets you be followed',
+	'nothing can follow you',
+	'nichts erlaubt es also, Sie',
+	'nada permite seguirle',
+	'nada permite segui-lo'
+];
+
 const livres = [];
 const parcourir = (dir) => {
 	for (const e of readdirSync(dir)) {
@@ -261,6 +277,12 @@ for (const chemin of livres) {
 	 * apparait. `INTERDITES` garde sa casse parce qu'elle nomme des PRODUITS -
 	 * « Cloudflare Web Analytics » ne s'ecrit pas autrement.
 	 */
+	const aplati = texte.replace(/\s+/g, ' ');
+	for (const phrase of SUIVI_IMPOSSIBLE) {
+		if (aplati.includes(phrase)) {
+			faults.push(`${chemin.replaceAll('\\', '/')} still promises "${phrase}"`);
+		}
+	}
 	const minuscules = texte.toLowerCase();
 	for (const phrase of EXCLUSIVITE_DE_L_HEBERGEUR) {
 		if (minuscules.includes(phrase.toLowerCase())) {
