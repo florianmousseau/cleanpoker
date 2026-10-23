@@ -93,6 +93,9 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
       } else if (msg.type === 'state') {
         const prev = roomState;
         roomState = msg.payload;
+        // An observer holds no vote: turning one clears it on the server, and
+        // without this the card stayed selected on its own screen.
+        if (msg.payload.players?.some((p: Player) => p.id === myId && p.observer)) myVote = '';
         const change = transitionOf(prev, msg.payload);
         if (change?.kind === 'newRound') {
           myVote = '';
@@ -117,10 +120,14 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
     watchdog = null;
   }
 
-  /** Send a command; false when the socket is not open and nothing left. */
+  /**
+   * Send a command; false when the socket is not open and nothing left. It
+   * names the round on screen, so the room refuses a vote or a "new round"
+   * meant for a round that has already gone.
+   */
   function send(type: string, payload = ''): boolean {
     if (ws?.readyState !== WebSocket.OPEN) return false;
-    ws.send(JSON.stringify({ type, payload }));
+    ws.send(JSON.stringify({ type, payload, round: roomState?.round ?? 0 }));
     return true;
   }
 
