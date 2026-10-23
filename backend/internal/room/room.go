@@ -339,10 +339,23 @@ func (r *Room) removePlayer(playerID string) {
 	}
 }
 
+// AnyRound is the round of a command that names none: what a client older
+// than the round check sends, and what the room still accepts from it.
+const AnyRound = 0
+
+// current reports whether a command meant for round belongs to the round the
+// room is in. A vote cast just before a new round, or the second click of a
+// double-clicked "new round", arrives naming the round that has already gone.
+// Callers hold r.mu.
+func (r *Room) current(round int) bool {
+	return round == AnyRound || round == r.round
+}
+
 // CastVote records a vote, then tells its voter which vote the room holds:
 // snapshots mask it, so without this a vote refused (cast after the reveal, or
 // from a seat turned observer) stayed on the voter's screen as if counted.
-func (r *Room) CastVote(playerID, vote string) {
+// round is the round the voter saw; a vote meant for an earlier one is refused.
+func (r *Room) CastVote(playerID, vote string, round int) {
 	r.mutate(func() {
 		p, ok := r.players[playerID]
 		if !ok {
@@ -353,7 +366,7 @@ func (r *Room) CastVote(playerID, vote string) {
 			// can never reach the voter ahead of this answer.
 			r.publishTo(playerID, Message{Type: "vote", Payload: p.Vote})
 		}()
-		if r.state != StateVoting || p.Observer {
+		if r.state != StateVoting || p.Observer || !r.current(round) {
 			return
 		}
 		// A vote is a card of this room's deck or nothing: any other string
@@ -390,9 +403,11 @@ func (r *Room) Show(initiatorID string) {
 	})
 }
 
-func (r *Room) Clear(initiatorID string) {
+// Clear starts a new round. round is the round the initiator saw: two clicks
+// on "new round" for the same round start one, not two.
+func (r *Room) Clear(initiatorID string, round int) {
 	r.mutate(func() {
-		if !r.seated(initiatorID) {
+		if !r.seated(initiatorID) || !r.current(round) {
 			return
 		}
 		for _, p := range r.players {

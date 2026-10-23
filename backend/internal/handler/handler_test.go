@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"net"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -482,6 +483,52 @@ func TestHappyPath_VoteShowClear(t *testing.T) {
 	}
 	if snap.Players[0].Vote != "" {
 		t.Fatalf("expected empty vote after clear, got %q", snap.Players[0].Vote)
+	}
+}
+
+// The round a client names travels with its command: a double click on "new
+// round" sends two clears for round 1, and the room starts round 2 once.
+func TestWebSocket_ClearNamesItsRound(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	conn := wsConnect(t, srv, id, "Alice")
+	recv(t, conn) // welcome
+	recv(t, conn) // arrival
+	for range 2 {
+		if err := websocket.JSON.Send(conn, map[string]any{"type": "clear", "payload": "", "round": 1}); err != nil {
+			t.Fatalf("websocket send: %v", err)
+		}
+		if snap := decodeSnap(t, recv(t, conn)); snap.Round != 2 {
+			t.Fatalf("expected round 2, got %d", snap.Round)
+		}
+	}
+}
+
+// A client sending faster than any person is cut off rather than amplified:
+// every command broadcasts the whole room to everyone in it.
+func TestWebSocket_FloodClosesTheConnection(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	conn := wsConnect(t, srv, id, "Alice")
+	for range 100 { // well past the burst of 40
+		// Pings, which broadcast nothing: the slow-subscriber cut cannot be
+		// what closes the socket here.
+		if err := websocket.JSON.Send(conn, map[string]string{"type": "ping", "payload": ""}); err != nil {
+			break
+		}
+	}
+	_ = conn.SetReadDeadline(time.Now().Add(5 * time.Second))
+	for {
+		var msg wsMsg
+		err := websocket.JSON.Receive(conn, &msg)
+		if err == nil {
+			continue
+		}
+		var timeout net.Error
+		if errors.As(err, &timeout) && timeout.Timeout() {
+			t.Fatal("the flooding connection was still open after five seconds")
+		}
+		return
 	}
 }
 
