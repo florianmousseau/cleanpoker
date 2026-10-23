@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.30] - 2026-10-23
+
+- fix(privacy): list every field the reader count stores, and how long
+
 ## [0.0.29] - 2026-10-22
 
 - fix(backend): bound every websocket write with a deadline

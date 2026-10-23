@@ -108,8 +108,7 @@
       <strong>Et depuis le 1er septembre 2026, le site compte aussi ses lecteurs lui-même</strong>,
       côté serveur, toujours sans le moindre script chez vous. À chaque page servie, le serveur
       calcule une <strong>empreinte</strong> à partir de votre adresse IP, de votre navigateur et
-      d'un secret qui change chaque jour, puis n'enregistre que cette empreinte, le nom du site, la
-      date et le pays. <strong>Votre adresse IP n'est ni enregistrée ni conservée</strong>&nbsp;:
+      d'un secret qui change chaque jour, puis enregistre cette empreinte avec le nom du site, la date, la page lue, la page d'où vous venez, le pays, la langue de votre navigateur et la signature technique de la requête (user-agent, réseau d'origine, protocole, paramètres de chiffrement, délai réseau), qui sert à séparer les lecteurs des robots. Ces lignes sont gardées trois mois, puis effacées. <strong>Votre adresse IP n'est ni enregistrée ni conservée</strong>&nbsp;:
       elle entre dans un calcul irréversible et disparaît. Le secret changeant tous les jours,
       l'empreinte d'hier et celle d'aujourd'hui ne peuvent pas être rapprochées, donc rien ne
       permet de vous suivre d'un jour sur l'autre ni d'un site à l'autre. Ce comptage répond à une
