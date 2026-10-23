@@ -109,8 +109,7 @@
       Por cada página servida, o servidor calcula uma <strong>impressão</strong> a partir do seu
       endereço IP, do seu navegador e de um segredo que muda todos os dias, e guarda essa impressão com o nome do site, a data, a página lida, a página de onde vem, o país, o idioma do seu navegador e a assinatura técnica do pedido (user-agent, rede de origem, protocolo, parâmetros de cifragem, atraso de rede), que serve para distinguir os leitores dos robôs. Estas linhas são conservadas durante três meses e depois apagadas. <strong>O seu endereço IP não é registado nem
       conservado</strong>: entra num cálculo irreversível e desaparece. Como o segredo muda todos
-      os dias, a impressão de ontem e a de hoje não podem ser associadas, pelo que nada permite
-      segui-lo de um dia para o outro nem de um site para outro. Esta contagem responde a uma só
+      os dias, a impressão de ontem e a de hoje não podem ser associadas. Os restantes campos guardados não são anónimos com certeza: em conjunto, o navegador, a rede de origem e o idioma poderiam por vezes distinguir um leitor de um dia para o outro. O site nunca faz esse cruzamento, não compara estas linhas com nenhuma outra fonte e apaga-as ao fim de três meses. Esta contagem responde a uma só
       pergunta: quantas pessoas leem este site. A mesma regra aplica-se em todos os sites do mesmo
       editor, para que os números possam ser comparados. A sua base jurídica é o
       <strong>interesse legítimo</strong> (artigo 6.1.f do RGPD).
