@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.31] - 2026-10-23
+
+- fix(privacy): stop promising that nothing can link a reader across days
+
 ## [0.0.30] - 2026-10-23
 
 - fix(privacy): list every field the reader count stores, and how long
