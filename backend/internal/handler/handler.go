@@ -225,6 +225,7 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 		_ = conn.Close() // closing is the whole point; a second close changes nothing
 	}()
 
+	pace := newCadence(time.Now())
 	for {
 		// A client that went silent (a network cut no TCP close announced)
 		// is dropped, and its seat starts its grace like any departure.
@@ -232,8 +233,16 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 		var action struct {
 			Type    string `json:"type"`
 			Payload string `json:"payload"`
+			// Round is the round the client saw; absent, it is room.AnyRound.
+			Round int `json:"round"`
 		}
 		if err := websocket.JSON.Receive(conn, &action); err != nil {
+			return
+		}
+		// Faster than any person: the socket closes, and an honest page that
+		// somehow got here reconnects to the same seat.
+		if !pace.allow(time.Now()) {
+			log.Printf("warn: command rate exceeded, closing connection")
 			return
 		}
 		switch action.Type {
@@ -242,11 +251,11 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 				return
 			}
 		case "vote":
-			rm.CastVote(seat.ID, action.Payload)
+			rm.CastVote(seat.ID, action.Payload, action.Round)
 		case "show":
 			rm.Show(seat.ID)
 		case "clear":
-			rm.Clear(seat.ID)
+			rm.Clear(seat.ID, action.Round)
 		case "kick":
 			rm.Kick(seat.ID, action.Payload)
 		case "toggleObserver":

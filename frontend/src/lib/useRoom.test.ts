@@ -8,7 +8,7 @@ class FakeSocket {
   static OPEN = 1;
   static last: FakeSocket;
   readyState = 0;
-  sent: { type: string; payload: string }[] = [];
+  sent: { type: string; payload: string; round?: number }[] = [];
   onopen: (() => void) | null = null;
   onmessage: ((e: { data: string }) => void) | null = null;
   onclose: (() => void) | null = null;
@@ -51,6 +51,29 @@ describe('useRoom', () => {
     vi.unstubAllGlobals();
   });
 
+  it('drops its own vote when the room turns it into an observer', async () => {
+    const room = await joined();
+    FakeSocket.last.open();
+    FakeSocket.last.receive('welcome', { id: 'me', token: 't', vote: '' });
+    room.castVote('8');
+    FakeSocket.last.receive('vote', '8');
+    const state = (observer: boolean) => ({ id: 'r1', cards: ['8'], state: 'voting', round: 1, results: null, activity: [], players: [{ id: 'me', name: 'Alice', vote: '', observer }] });
+    FakeSocket.last.receive('state', state(true));
+    expect(room.myVote).toBe('');
+    FakeSocket.last.receive('state', state(false));
+    expect(room.myVote).toBe('');
+    room.castVote('8');
+    expect(FakeSocket.last.sent.at(-1)).toEqual({ type: 'vote', payload: '8', round: 1 });
+  });
+
+  it('names the round on screen with every command', async () => {
+    const room = await joined();
+    FakeSocket.last.open();
+    FakeSocket.last.receive('state', { id: 'r1', cards: ['8'], state: 'revealed', round: 3, results: null, activity: [], players: [] });
+    room.clear();
+    expect(FakeSocket.last.sent.at(-1)).toEqual({ type: 'clear', payload: '', round: 3 });
+  });
+
   it('does not show a vote that could not leave', async () => {
     const room = await joined();
     room.castVote('5');
@@ -77,7 +100,7 @@ describe('useRoom', () => {
     FakeSocket.last.receive('vote', '8');
     expect(room.myVote).toBe('8');
     room.castVote('5');
-    expect(FakeSocket.last.sent.at(-1)).toEqual({ type: 'vote', payload: '5' });
+    expect(FakeSocket.last.sent.at(-1)).toEqual({ type: 'vote', payload: '5', round: 0 });
   });
 
   it('pings, and reconnects after a silence', async () => {

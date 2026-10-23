@@ -183,6 +183,11 @@ jobs:
   deploy-frontend:
     name: Frontend - Cloudflare Pages
     needs: [quality, bundle-size]
+    # Two releases close together must not deploy side by side: the older one
+    # could finish last and stay in production. Queued, never cancelled.
+    concurrency:
+      group: production-frontend
+      cancel-in-progress: false
     if: github.event_name != 'pull_request' && github.ref_name == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -216,6 +221,11 @@ jobs:
   deploy-backend:
     name: Backend - Fly.io
     needs: [quality, bundle-size]
+    # Two releases close together must not deploy side by side: the older one
+    # could finish last and stay in production. Queued, never cancelled.
+    concurrency:
+      group: production-backend
+      cancel-in-progress: false
     if: github.event_name != 'pull_request' && github.ref_name == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
