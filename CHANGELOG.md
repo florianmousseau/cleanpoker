@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.32] - 2026-10-23
+
+- fix(room): refuse stale commands, clear an observer's vote, bound command rate
+
 ## [0.0.31] - 2026-10-23
 
 - fix(privacy): stop promising that nothing can link a reader across days
