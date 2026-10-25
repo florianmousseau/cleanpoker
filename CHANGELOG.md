@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.34] - 2026-10-25
+
+- Corrections internes.
+
 ## [0.0.33] - 2026-10-25
 
 - fix(deps): move undici, zod and happy-dom to their patched lines (#310)
