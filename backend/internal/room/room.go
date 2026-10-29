@@ -107,9 +107,11 @@ type subscription struct {
 }
 
 // directMessage is one outgoing message; an empty playerID sends it to all.
+// last closes the player's connections once msg is queued on them.
 type directMessage struct {
 	playerID string
 	msg      Message
+	last     bool
 }
 
 func New(id string, cards []string) *Room {
@@ -433,13 +435,19 @@ func (r *Room) Kick(initiatorID, targetID string) {
 		kicked = true
 	})
 	if kicked {
-		r.tell(targetID, Message{Type: "kicked"})
+		r.dismiss(targetID, Message{Type: "kicked"})
 	}
 }
 
-// tell sends msg to the connections of one player only.
-func (r *Room) tell(playerID string, msg Message) {
-	r.publishTo(playerID, msg)
+// dismiss sends msg to the connections of one player, then closes them. A
+// kicked client that ignored its "kicked" message kept its subscription and
+// went on receiving every later state, names and revealed votes included,
+// without a seat to show for it.
+func (r *Room) dismiss(playerID string, msg Message) {
+	select {
+	case r.broadcast <- directMessage{playerID: playerID, msg: msg, last: true}:
+	case <-r.quit:
+	}
 }
 
 func (r *Room) ToggleObserver(initiatorID, targetID string) {
@@ -527,14 +535,14 @@ func (r *Room) run() {
 			subs[s.connID] = s
 			close(s.ready)
 		case connID := <-r.unsubscribe:
-			if s, ok := subs[connID]; ok {
-				delete(subs, connID)
-				close(s.ch)
-			}
+			closeSubscription(subs, connID)
 		case d := <-r.broadcast:
 			for id, s := range subs {
 				if d.playerID == "" || s.playerID == d.playerID {
 					deliverOrDrop(subs, id, d.msg)
+				}
+				if d.last && s.playerID == d.playerID {
+					closeSubscription(subs, id)
 				}
 			}
 		}
@@ -550,6 +558,13 @@ func deliverOrDrop(subs map[string]subscription, id string, msg Message) {
 	select {
 	case s.ch <- msg:
 	default:
+		closeSubscription(subs, id)
+	}
+}
+
+// closeSubscription forgets one connection and closes its channel, once.
+func closeSubscription(subs map[string]subscription, id string) {
+	if s, ok := subs[id]; ok {
 		delete(subs, id)
 		close(s.ch)
 	}
