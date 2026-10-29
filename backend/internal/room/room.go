@@ -450,11 +450,6 @@ func (r *Room) dismiss(playerID string, msg Message) {
 	}
 }
 
-// tell sends msg to the connections of one player only.
-func (r *Room) tell(playerID string, msg Message) {
-	r.publishTo(playerID, msg)
-}
-
 func (r *Room) ToggleObserver(initiatorID, targetID string) {
 	r.mutate(func() {
 		target, ok := r.players[targetID]
