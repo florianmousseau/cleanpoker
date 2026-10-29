@@ -2,8 +2,14 @@ package room
 
 import (
 	"fmt"
+	"regexp"
 	"strconv"
 )
+
+// plainDecimal is what a card must look like to count as a number. ParseFloat
+// also reads NaN, Inf and exponents, and one of those in a custom deck made
+// the average NaN or infinite.
+var plainDecimal = regexp.MustCompile(`^-?[0-9]+(\.[0-9]+)?$`)
 
 // computeResults calcule avg, mode, min, max sur les votes numériques.
 // Les votes non numériques ("?", "XS"...) sont ignorés dans avg/min/max mais comptés dans mode/dist.
@@ -15,6 +21,9 @@ func computeResults(votes []string, cards []string) Results {
 
 	for _, v := range votes {
 		dist[v]++
+		if !plainDecimal.MatchString(v) {
+			continue
+		}
 		if n, err := strconv.ParseFloat(v, 64); err == nil {
 			nums = append(nums, n)
 		}

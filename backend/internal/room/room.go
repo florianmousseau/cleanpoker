@@ -107,9 +107,12 @@ type subscription struct {
 }
 
 // directMessage is one outgoing message; an empty playerID sends it to all.
+// final also closes the player's connections once msg is queued: a kicked
+// client that ignored the message kept receiving every state after it.
 type directMessage struct {
 	playerID string
 	msg      Message
+	final    bool
 }
 
 func New(id string, cards []string) *Room {
@@ -418,7 +421,7 @@ func (r *Room) Kick(initiatorID, targetID string) {
 		kicked = true
 	})
 	if kicked {
-		r.tell(targetID, Message{Type: "kicked"})
+		r.dismiss(targetID, Message{Type: "kicked"})
 	}
 }
 
@@ -484,6 +487,14 @@ func (r *Room) Unsubscribe(connID string) {
 	}
 }
 
+// dismiss sends msg to the connections of one player, then closes them.
+func (r *Room) dismiss(playerID string, msg Message) {
+	select {
+	case r.broadcast <- directMessage{playerID: playerID, msg: msg, final: true}:
+	case <-r.quit:
+	}
+}
+
 // publish hands msg to the room loop, or drops it once the room is stopped: the
 // loop no longer reads, and a command from a client still connected to an
 // expired room would otherwise block its connection for good.
@@ -521,6 +532,9 @@ func (r *Room) run() {
 				if d.playerID == "" || s.playerID == d.playerID {
 					deliverOrDrop(subs, id, d.msg)
 				}
+				if d.final && s.playerID == d.playerID {
+					closeSubscription(subs, id)
+				}
 			}
 		}
 	}
@@ -535,6 +549,13 @@ func deliverOrDrop(subs map[string]subscription, id string, msg Message) {
 	select {
 	case s.ch <- msg:
 	default:
+		closeSubscription(subs, id)
+	}
+}
+
+// closeSubscription closes one subscriber's queue, once: its socket follows.
+func closeSubscription(subs map[string]subscription, id string) {
+	if s, ok := subs[id]; ok {
 		delete(subs, id)
 		close(s.ch)
 	}

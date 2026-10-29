@@ -812,3 +812,39 @@ func TestShow_SecondRevealKeepsTheResults(t *testing.T) {
 		t.Fatalf("expected the revealed average 5.5 to hold, got %s", avg)
 	}
 }
+
+// A kicked client that ignores "kicked" and stays connected must hear nothing
+// after it: its queue is closed, so the socket closes with it.
+func TestKick_ClosesTheConnectionsOfThePlayer(t *testing.T) {
+	r := New("test", nil)
+	defer r.Stop()
+	kicked := r.Subscribe("c1", "p1")
+	r.Join("p1", "Alice", false)
+	r.Join("host", "Host", false)
+	r.Kick("host", "p1")
+	waitForMessage(t, kicked, "kicked", 0)
+	r.CastVote("host", "5")
+	r.Show("host")
+	timeout := time.After(2 * time.Second)
+	for {
+		select {
+		case msg, open := <-kicked:
+			if !open {
+				return
+			}
+			t.Fatalf("a kicked connection still received %q", msg.Type)
+		case <-timeout:
+			t.Fatal("the kicked connection was never closed")
+		}
+	}
+}
+
+// A custom card the parser reads as a float but no estimate means - NaN, Inf,
+// an exponent - must not reach the average.
+func TestComputeResults_IgnoresNonDecimalNumbers(t *testing.T) {
+	cards := []string{"1", "NaN", "Inf", "1e308"}
+	res := computeResults([]string{"1", "NaN", "Inf", "1e308", "1e308"}, cards)
+	if res.Avg != "1" || res.Min != "1" || res.Max != "1" {
+		t.Fatalf("only plain decimals count: %+v", res)
+	}
+}
