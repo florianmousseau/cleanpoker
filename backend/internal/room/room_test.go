@@ -706,6 +706,33 @@ func TestKick_ReachesEveryConnectionOfThePlayer(t *testing.T) {
 	}
 }
 
+// A kicked client that ignores "kicked" and keeps its socket must receive
+// nothing after it: its channel is closed by the room.
+func TestKick_ClosesTheKickedConnections(t *testing.T) {
+	r := New("test", nil)
+	defer r.Stop()
+	kicked := r.Subscribe("c1", "p1")
+	r.Join("p1", "Alice", false)
+	r.Join("host", "Host", false)
+	r.Kick("host", "p1")
+	r.CastVote("host", "5", AnyRound)
+
+	timeout := time.After(2 * time.Second)
+	for {
+		select {
+		case msg, open := <-kicked:
+			if !open {
+				return
+			}
+			if msg.Type != "kicked" && msg.Type != "state" {
+				t.Fatalf("unexpected message after the kick: %q", msg.Type)
+			}
+		case <-timeout:
+			t.Fatal("the kicked connection was never closed")
+		}
+	}
+}
+
 func waitForMessage(t *testing.T, ch chan Message, typ string, conn int) {
 	t.Helper()
 	timeout := time.After(2 * time.Second)
@@ -845,5 +872,15 @@ func TestShow_SecondRevealKeepsTheResults(t *testing.T) {
 	r.Show("p1")
 	if avg := snap(r).Results.Avg; avg != "5.5" {
 		t.Fatalf("expected the revealed average 5.5 to hold, got %s", avg)
+	}
+}
+
+func TestComputeResults_SpecialNumbersAreLabels(t *testing.T) {
+	got := computeResults([]string{"NaN", "Inf", "1e308", "1e308", "3", "5"}, []string{"NaN", "Inf", "1e308", "3", "5"})
+	if got.Avg != "4" || got.Min != "3" || got.Max != "5" {
+		t.Fatalf("special numbers must not reach the average: %+v", got)
+	}
+	if got.Dist["1e308"] != 2 || got.Mode != "1e308" {
+		t.Fatalf("they still count as cards: %+v", got)
 	}
 }

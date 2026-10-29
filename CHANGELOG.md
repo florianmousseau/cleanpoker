@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.35] - 2026-10-29
+
+- fix(room): close a kicked player's connections, keep NaN and Inf out of the average (#320)
+
 ## [0.0.34] - 2026-10-25
 
 - Corrections internes.

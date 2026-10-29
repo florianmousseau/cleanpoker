@@ -2,8 +2,23 @@ package room
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 )
+
+// maxNumericVote bounds what counts as a number. ParseFloat also accepts NaN,
+// Inf and 1e308: one NaN card poisons the average, two 1e308 votes overflow
+// the sum, and both would be shown as an estimate.
+const maxNumericVote = 1e6
+
+// numericVote reads a vote as a number, or reports that it is a label.
+func numericVote(v string) (float64, bool) {
+	n, err := strconv.ParseFloat(v, 64)
+	if err != nil || math.IsNaN(n) || math.Abs(n) > maxNumericVote {
+		return 0, false
+	}
+	return n, true
+}
 
 // computeResults calcule avg, mode, min, max sur les votes numériques.
 // Les votes non numériques ("?", "XS"...) sont ignorés dans avg/min/max mais comptés dans mode/dist.
@@ -15,7 +30,7 @@ func computeResults(votes []string, cards []string) Results {
 
 	for _, v := range votes {
 		dist[v]++
-		if n, err := strconv.ParseFloat(v, 64); err == nil {
+		if n, ok := numericVote(v); ok {
 			nums = append(nums, n)
 		}
 	}
