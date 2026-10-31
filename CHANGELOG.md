@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.36] - 2026-10-31
+
+- perf(health): keep GitHub's signing keys in memory, read at most once a minute (#324)
+
 ## [0.0.35] - 2026-10-29
 
 - fix(room): close a kicked player's connections, keep NaN and Inf out of the average (#320)
