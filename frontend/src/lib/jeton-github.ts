@@ -14,8 +14,8 @@ const BRANCHE = 'refs/heads/main';
 
 type Cles = { keys?: (JsonWebKey & { kid?: string })[] };
 
-/** Les cles publiques de l'emetteur, au format JWKS. */
-export type LireLesCles = () => Promise<Cles>;
+/** Les cles publiques de l'emetteur, au format JWKS ; `kid` dit la cle cherchee. */
+export type LireLesCles = (kid?: unknown) => Promise<Cles>;
 
 /** Lit les cles publiques de GitHub par `appel`. */
 export function lireLesClesDeGithub(appel: typeof fetch): LireLesCles {
@@ -25,6 +25,38 @@ export function lireLesClesDeGithub(appel: typeof fetch): LireLesCles {
 		return (await r.json()) as Cles;
 	};
 }
+
+/** Combien de temps des cles lues servent sans relire GitHub. */
+export const CLES_GARDEES_MS = 10 * 60_000;
+/** L'intervalle minimal entre deux lectures, quelle que soit la cle demandee. */
+export const RELECTURE_MIN_MS = 60_000;
+
+/**
+ * Les cles de `lire`, gardees en memoire : au plus une lecture par minute,
+ * meme sous une rafale de jetons forges sur un `kid` inconnu (D-121). Une
+ * lecture qui echoue compte aussi, pour ne pas marteler GitHub en panne.
+ */
+export function gardeDesCles(lire: LireLesCles, horloge: () => number = Date.now): LireLesCles {
+	let gardees: Cles | null = null;
+	let tentee = Number.NEGATIVE_INFINITY;
+	return async (kid) => {
+		const age = horloge() - tentee;
+		const connue = gardees?.keys?.some((k) => k.kid === kid) ?? false;
+		const fraiche = gardees !== null && age < CLES_GARDEES_MS && (kid === undefined || connue);
+		if (fraiche || age < RELECTURE_MIN_MS) {
+			if (gardees === null) throw new Error('cles de GitHub : relecture trop proche');
+			return gardees;
+		}
+		tentee = horloge();
+		gardees = await lire(kid);
+		return gardees;
+	};
+}
+
+/** Les cles de GitHub que les routes `/health` partagent, une memoire par isolat. */
+export const clesDeGithub: LireLesCles = gardeDesCles(
+	lireLesClesDeGithub(fetch)
+);
 
 const depuisBase64Url = (s: string): Uint8Array<ArrayBuffer> => {
 	const b = atob(
@@ -45,7 +77,7 @@ async function signatureValide(
 	lireLesCles: LireLesCles,
 ): Promise<boolean> {
 	if (entete.alg !== 'RS256') return false;
-	const cle = ((await lireLesCles()).keys ?? []).find((k) => k.kid === entete.kid);
+	const cle = ((await lireLesCles(entete.kid)).keys ?? []).find((k) => k.kid === entete.kid);
 	if (cle === undefined) return false;
 	const publique = await crypto.subtle.importKey(
 		'jwk',
@@ -82,12 +114,14 @@ export async function commitAtteste(
 	if (morceaux.length !== 3) return { refus: 'jeton mal forme' };
 	const trio = morceaux as [string, string, string];
 	try {
+		// Les revendications d'abord : un jeton qui ne vise pas ce site ne fait pas sortir vers GitHub.
+		const r = lireJson(trio[1]);
+		const refus = revendicationsAttendues(r, maintenant);
+		if (refus !== null) return { refus };
 		if (!(await signatureValide(lireJson(trio[0]), trio, lireLesCles))) {
 			return { refus: 'signature invalide' };
 		}
-		const r = lireJson(trio[1]);
-		const refus = revendicationsAttendues(r, maintenant);
-		return refus === null ? { commit: r.sha as string } : { refus };
+		return { commit: r.sha as string };
 	} catch {
 		return { refus: 'jeton illisible' };
 	}
