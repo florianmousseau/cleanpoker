@@ -7,7 +7,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { PUBLIC_API_URL } from '$app/env/public';
 import { recevoirLExercice } from '#lib/exercice.ts';
-import { lireLesClesDeGithub } from '#lib/jeton-github.ts';
+import { clesDeGithub } from '#lib/jeton-github.ts';
 import { lecteursDeLaPlateforme, reponseDeSonde } from '#lib/sonde-plateforme.ts';
 
 export const prerender = false;
@@ -22,6 +22,6 @@ export const POST: RequestHandler = async ({ fetch: fetchInterne, platform, requ
 		serveur: PUBLIC_API_URL,
 		commit: __COMMIT__
 	});
-	const { status, corps } = await recevoirLExercice(jeton, lireLesClesDeGithub(fetch), demande, lecteurs);
+	const { status, corps } = await recevoirLExercice(jeton, clesDeGithub, demande, lecteurs);
 	return reponseDeSonde(corps, status);
 };
