@@ -17,6 +17,15 @@ updates:
       frontend:
         patterns: ["*"]
         update-types: [minor, patch]
+    # SvelteKit 3 stays out (decision of 2026-10-25, D-232): it fixes only low
+    # advisories and adds 3.6 to 4.5 kB of JS for every reader. Reopened on a
+    # high or critical advisory fixed only in Kit 3, or when Kit 2 stops
+    # receiving security fixes.
+    ignore:
+      - dependency-name: "@sveltejs/kit"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@sveltejs/adapter-*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: gomod
     directory: /backend

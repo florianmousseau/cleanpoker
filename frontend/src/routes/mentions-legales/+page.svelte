@@ -105,11 +105,10 @@
       <strong>And since 1 September 2026 the site counts its readers itself</strong>, server-side,
       still without a single script on your device. For each page served, the server derives a
       <strong>fingerprint</strong> from your IP address, your browser and a secret that changes
-      every day, then stores only that fingerprint, the site name, the date and the country.
+      every day, then stores that fingerprint with the site name, the date, the page read, the page you came from, the country, your browser's language and the technical signature of the request (user agent, originating network, protocol, encryption parameters, network delay), used to tell readers from robots. These lines are kept for three months, then deleted.
       <strong>Your IP address is neither recorded nor kept</strong>: it goes into a one-way
       computation and disappears. Because the secret changes every day, yesterday's fingerprint
-      and today's cannot be linked, so nothing lets you be followed from one day to the next, nor
-      from one site to another. This count answers a single question: how many people read this
+      and today's cannot be linked. The other fields kept are not anonymous for certain: together, browser, originating network and language could sometimes tell one reader apart from one day to the next. The site never makes that link, never cross-checks these lines with any other source, and deletes them after three months. This count answers a single question: how many people read this
       site. The same rule runs on every site published by the same editor, so that the figures can
       be compared. Its legal basis is <strong>legitimate interest</strong> (article 6.1.f GDPR).
     </p>

@@ -107,11 +107,9 @@
       <strong>Y desde el 1 de septiembre de 2026 el sitio también cuenta sus lectores por sí
       mismo</strong>, del lado del servidor, siempre sin un solo script en su dispositivo. Por cada
       página servida, el servidor calcula una <strong>huella</strong> a partir de su dirección IP,
-      su navegador y un secreto que cambia cada día, y luego solo guarda esa huella, el nombre del
-      sitio, la fecha y el país. <strong>Su dirección IP no se registra ni se conserva</strong>:
+      su navegador y un secreto que cambia cada día, y luego guarda esa huella con el nombre del sitio, la fecha, la página leída, la página de la que viene, el país, el idioma de su navegador y la firma técnica de la solicitud (user-agent, red de origen, protocolo, parámetros de cifrado, retardo de red), que sirve para distinguir a los lectores de los robots. Estas líneas se conservan tres meses y luego se borran. <strong>Su dirección IP no se registra ni se conserva</strong>:
       entra en un cálculo irreversible y desaparece. Como el secreto cambia cada día, la huella de
-      ayer y la de hoy no pueden vincularse, de modo que nada permite seguirle de un día para otro
-      ni de un sitio a otro. Este recuento responde a una sola pregunta: cuántas personas leen
+      ayer y la de hoy no pueden vincularse. Los demás campos guardados no son anónimos con certeza: juntos, el navegador, la red de origen y el idioma podrían a veces distinguir a un lector de un día para otro. El sitio nunca hace ese cruce, no compara estas líneas con ninguna otra fuente y las borra al cabo de tres meses. Este recuento responde a una sola pregunta: cuántas personas leen
       este sitio. La misma regla se aplica en todos los sitios del mismo editor, para que las
       cifras se puedan comparar. Su base jurídica es el <strong>interés legítimo</strong>
       (artículo 6.1.f del RGPD).

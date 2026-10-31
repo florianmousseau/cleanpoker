@@ -83,14 +83,16 @@ type Room struct {
 	results      *Results
 	activity     []ActivityEntry
 	lastActivity time.Time
+	everJoined   bool
 	grace        time.Duration
 	// connections counts the live sockets of each seated player; a seat only
 	// starts its grace once the last one is gone.
 	connections map[string]int
 	departures  map[string]*departure
 
-	broadcast   chan Message
-	direct      chan directMessage
+	// broadcast carries every outgoing message, private ones included: one
+	// channel keeps them in the order the room produced them.
+	broadcast   chan directMessage
 	subscribe   chan subscription
 	unsubscribe chan string
 	quit        chan struct{}
@@ -104,9 +106,12 @@ type subscription struct {
 	ready chan struct{}
 }
 
+// directMessage is one outgoing message; an empty playerID sends it to all.
+// last closes the player's connections once msg is queued on them.
 type directMessage struct {
 	playerID string
 	msg      Message
+	last     bool
 }
 
 func New(id string, cards []string) *Room {
@@ -124,8 +129,7 @@ func New(id string, cards []string) *Room {
 		grace:        DepartureGrace,
 		connections:  make(map[string]int),
 		departures:   make(map[string]*departure),
-		broadcast:    make(chan Message, 32),
-		direct:       make(chan directMessage, 8),
+		broadcast:    make(chan directMessage, 32),
 		subscribe:    make(chan subscription, 8),
 		unsubscribe:  make(chan string, 8),
 		quit:         make(chan struct{}),
@@ -138,6 +142,13 @@ func (r *Room) LastActivity() time.Time {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	return r.lastActivity
+}
+
+// EverJoined reports whether anybody ever took a seat in the room.
+func (r *Room) EverJoined() bool {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return r.everJoined
 }
 
 func (r *Room) Snapshot() Snapshot {
@@ -232,6 +243,7 @@ func (r *Room) Join(playerID, name string, observer bool) {
 func (r *Room) JoinWithToken(playerID, token, name string, observer bool) {
 	r.mutate(func() {
 		r.players[playerID] = &Player{ID: playerID, Name: name, Observer: observer, token: token}
+		r.everJoined = true
 		r.connections[playerID]++
 		if observer {
 			r.logActivity(name, "joined_observer")
@@ -329,10 +341,34 @@ func (r *Room) removePlayer(playerID string) {
 	}
 }
 
-func (r *Room) CastVote(playerID, vote string) {
+// AnyRound is the round of a command that names none: what a client older
+// than the round check sends, and what the room still accepts from it.
+const AnyRound = 0
+
+// current reports whether a command meant for round belongs to the round the
+// room is in. A vote cast just before a new round, or the second click of a
+// double-clicked "new round", arrives naming the round that has already gone.
+// Callers hold r.mu.
+func (r *Room) current(round int) bool {
+	return round == AnyRound || round == r.round
+}
+
+// CastVote records a vote, then tells its voter which vote the room holds:
+// snapshots mask it, so without this a vote refused (cast after the reveal, or
+// from a seat turned observer) stayed on the voter's screen as if counted.
+// round is the round the voter saw; a vote meant for an earlier one is refused.
+func (r *Room) CastVote(playerID, vote string, round int) {
 	r.mutate(func() {
 		p, ok := r.players[playerID]
-		if !ok || r.state != StateVoting || p.Observer {
+		if !ok {
+			return
+		}
+		defer func() {
+			// Queued under the lock, before the state: a later new round
+			// can never reach the voter ahead of this answer.
+			r.publishTo(playerID, Message{Type: "vote", Payload: p.Vote})
+		}()
+		if r.state != StateVoting || p.Observer || !r.current(round) {
 			return
 		}
 		// A vote is a card of this room's deck or nothing: any other string
@@ -351,7 +387,9 @@ func (r *Room) CastVote(playerID, vote string) {
 
 func (r *Room) Show(initiatorID string) {
 	r.mutate(func() {
-		if !r.seated(initiatorID) {
+		// A second reveal of the same round would recompute the results on
+		// whoever is seated now, after departures and role changes.
+		if !r.seated(initiatorID) || r.state == StateRevealed {
 			return
 		}
 		r.state = StateRevealed
@@ -367,9 +405,11 @@ func (r *Room) Show(initiatorID string) {
 	})
 }
 
-func (r *Room) Clear(initiatorID string) {
+// Clear starts a new round. round is the round the initiator saw: two clicks
+// on "new round" for the same round start one, not two.
+func (r *Room) Clear(initiatorID string, round int) {
 	r.mutate(func() {
-		if !r.seated(initiatorID) {
+		if !r.seated(initiatorID) || !r.current(round) {
 			return
 		}
 		for _, p := range r.players {
@@ -395,10 +435,18 @@ func (r *Room) Kick(initiatorID, targetID string) {
 		kicked = true
 	})
 	if kicked {
-		select {
-		case r.direct <- directMessage{playerID: targetID, msg: Message{Type: "kicked"}}:
-		case <-r.quit:
-		}
+		r.dismiss(targetID, Message{Type: "kicked"})
+	}
+}
+
+// dismiss sends msg to the connections of one player, then closes them. A
+// kicked client that ignored its "kicked" message kept its subscription and
+// went on receiving every later state, names and revealed votes included,
+// without a seat to show for it.
+func (r *Room) dismiss(playerID string, msg Message) {
+	select {
+	case r.broadcast <- directMessage{playerID: playerID, msg: msg, last: true}:
+	case <-r.quit:
 	}
 }
 
@@ -463,8 +511,13 @@ func (r *Room) Unsubscribe(connID string) {
 // loop no longer reads, and a command from a client still connected to an
 // expired room would otherwise block its connection for good.
 func (r *Room) publish(msg Message) {
+	r.publishTo("", msg)
+}
+
+// publishTo is publish for the connections of one player; "" means everyone.
+func (r *Room) publishTo(playerID string, msg Message) {
 	select {
-	case r.broadcast <- msg:
+	case r.broadcast <- directMessage{playerID: playerID, msg: msg}:
 	case <-r.quit:
 	}
 }
@@ -482,19 +535,15 @@ func (r *Room) run() {
 			subs[s.connID] = s
 			close(s.ready)
 		case connID := <-r.unsubscribe:
-			if s, ok := subs[connID]; ok {
-				delete(subs, connID)
-				close(s.ch)
-			}
-		case d := <-r.direct:
+			closeSubscription(subs, connID)
+		case d := <-r.broadcast:
 			for id, s := range subs {
-				if s.playerID == d.playerID {
+				if d.playerID == "" || s.playerID == d.playerID {
 					deliverOrDrop(subs, id, d.msg)
 				}
-			}
-		case msg := <-r.broadcast:
-			for id := range subs {
-				deliverOrDrop(subs, id, msg)
+				if d.last && s.playerID == d.playerID {
+					closeSubscription(subs, id)
+				}
 			}
 		}
 	}
@@ -509,6 +558,13 @@ func deliverOrDrop(subs map[string]subscription, id string, msg Message) {
 	select {
 	case s.ch <- msg:
 	default:
+		closeSubscription(subs, id)
+	}
+}
+
+// closeSubscription forgets one connection and closes its channel, once.
+func closeSubscription(subs map[string]subscription, id string) {
+	if s, ok := subs[id]; ok {
 		delete(subs, id)
 		close(s.ch)
 	}

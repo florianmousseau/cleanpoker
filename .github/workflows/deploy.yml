@@ -106,7 +106,7 @@ jobs:
       # there rather than failing the whole quality gate on every bump.
       - name: SonarCloud scan
         if: env.SONAR_TOKEN != ''
-        uses: SonarSource/sonarqube-scan-action@ba9859eae8dd6bd29e412f25ddbbef3d032000f4 # v8.2.2
+        uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
         env:
           SONAR_HOST_URL: https://sonarcloud.io
 
@@ -183,6 +183,11 @@ jobs:
   deploy-frontend:
     name: Frontend - Cloudflare Pages
     needs: [quality, bundle-size]
+    # Two releases close together must not deploy side by side: the older one
+    # could finish last and stay in production. Queued, never cancelled.
+    concurrency:
+      group: production-frontend
+      cancel-in-progress: false
     if: github.event_name != 'pull_request' && github.ref_name == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -216,6 +221,11 @@ jobs:
   deploy-backend:
     name: Backend - Fly.io
     needs: [quality, bundle-size]
+    # Two releases close together must not deploy side by side: the older one
+    # could finish last and stay in production. Queued, never cancelled.
+    concurrency:
+      group: production-backend
+      cancel-in-progress: false
     if: github.event_name != 'pull_request' && github.ref_name == 'main'
     runs-on: ubuntu-latest
     timeout-minutes: 5

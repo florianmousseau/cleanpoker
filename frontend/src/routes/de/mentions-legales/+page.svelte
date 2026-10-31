@@ -106,12 +106,10 @@
       <strong>Und seit dem 1. September 2026 zählt die Website ihre Leser auch selbst</strong>,
       serverseitig, weiterhin ohne ein einziges Skript auf Ihrem Gerät. Für jede ausgelieferte
       Seite berechnet der Server einen <strong>Fingerabdruck</strong> aus Ihrer IP-Adresse, Ihrem
-      Browser und einem Geheimnis, das täglich wechselt, und speichert dann nur diesen
-      Fingerabdruck, den Namen der Website, das Datum und das Land.
+      Browser und einem Geheimnis, das täglich wechselt, und speichert diesen Fingerabdruck dann mit dem Namen der Website, dem Datum, der gelesenen Seite, der Seite, von der Sie kommen, dem Land, der Sprache Ihres Browsers und der technischen Signatur der Anfrage (User-Agent, Herkunftsnetz, Protokoll, Verschlüsselungsparameter, Netzlaufzeit), die Leser von Robotern unterscheidet. Diese Zeilen werden drei Monate aufbewahrt und dann gelöscht.
       <strong>Ihre IP-Adresse wird weder gespeichert noch aufbewahrt</strong>: sie geht in eine
       nicht umkehrbare Berechnung ein und verschwindet. Da das Geheimnis täglich wechselt, lassen
-      sich der Fingerabdruck von gestern und der von heute nicht verknüpfen; nichts erlaubt es
-      also, Sie von einem Tag auf den anderen oder von einer Website zur nächsten zu verfolgen.
+      sich der Fingerabdruck von gestern und der von heute nicht verknüpfen. Die übrigen gespeicherten Felder sind nicht mit Sicherheit anonym: Zusammen könnten Browser, Herkunftsnetz und Sprache einen Leser manchmal von einem Tag zum anderen unterscheiden. Die Website stellt diese Verbindung nie her, gleicht diese Zeilen mit keiner anderen Quelle ab und löscht sie nach drei Monaten.
       Diese Zählung beantwortet eine einzige Frage: wie viele Menschen diese Website lesen.
       Dieselbe Regel gilt auf allen Websites desselben Herausgebers, damit die Zahlen vergleichbar
       bleiben. Rechtsgrundlage ist das <strong>berechtigte Interesse</strong> (Artikel 6.1.f

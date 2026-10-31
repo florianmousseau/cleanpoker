@@ -1,5 +1,41 @@
 # Changelog
 
+## [0.0.35] - 2026-10-29
+
+- fix(room): close a kicked player's connections, keep NaN and Inf out of the average (#320)
+
+## [0.0.34] - 2026-10-25
+
+- Corrections internes.
+
+## [0.0.33] - 2026-10-25
+
+- fix(deps): move undici, zod and happy-dom to their patched lines (#310)
+
+## [0.0.32] - 2026-10-23
+
+- fix(room): refuse stale commands, clear an observer's vote, bound command rate
+
+## [0.0.31] - 2026-10-23
+
+- fix(privacy): stop promising that nothing can link a reader across days
+
+## [0.0.30] - 2026-10-23
+
+- fix(privacy): list every field the reader count stores, and how long
+
+## [0.0.29] - 2026-10-22
+
+- fix(backend): bound every websocket write with a deadline
+
+## [0.0.28] - 2026-10-22
+
+- fix(home): keep the create button off until the page has its handler (#294)
+- fix(home): say how a vote works in the lead, in five languages (#292)
+- fix(deps): build the room server on Go 1.26.10 (GO-2026-6809) (#293)
+- fix(room): ignore the answer to a vote that a later vote replaced
+- fix(room): bound rooms, answer each vote and drop silent sockets
+
 ## [0.0.26] - 2026-10-17
 
 - fix(home): check the deck against the server's limits and say which one (#285)

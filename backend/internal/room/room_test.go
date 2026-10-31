@@ -53,7 +53,7 @@ func TestShow_TransitionsToRevealed(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()
 	r.Join("p1", "Alice", false)
-	r.CastVote("p1", "5")
+	r.CastVote("p1", "5", AnyRound)
 	r.Show("p1")
 	s := snap(r)
 	if s.State != StateRevealed {
@@ -68,9 +68,9 @@ func TestClear_ResetsToVoting(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()
 	r.Join("p1", "Alice", false)
-	r.CastVote("p1", "5")
+	r.CastVote("p1", "5", AnyRound)
 	r.Show("p1")
-	r.Clear("p1")
+	r.Clear("p1", AnyRound)
 	s := snap(r)
 	if s.State != StateVoting {
 		t.Fatalf("expected voting, got %s", s.State)
@@ -87,11 +87,43 @@ func TestClear_ClearsVotes(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()
 	r.Join("p1", "Alice", false)
-	r.CastVote("p1", "8")
+	r.CastVote("p1", "8", AnyRound)
 	r.Show("p1")
-	r.Clear("p1")
+	r.Clear("p1", AnyRound)
 	if v := playerVote(r, "p1"); v != "" {
 		t.Fatalf("expected empty vote after clear, got %q", v)
+	}
+}
+
+func TestCastVote_RefusesAVoteMeantForAnEarlierRound(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	r.Clear("p1", 1)
+	r.CastVote("p1", "5", 1)
+	if v := playerVote(r, "p1"); v != "" {
+		t.Fatalf("a vote meant for round 1 landed in round 2: %q", v)
+	}
+	r.CastVote("p1", "5", 2)
+	if v := playerVote(r, "p1"); v != hiddenVote {
+		t.Fatalf("a vote for the current round was refused: %q", v)
+	}
+}
+
+func TestClear_TwoClicksForOneRoundStartOneRound(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	r.Join("p2", "Bob", false)
+	r.Clear("p1", 1)
+	r.CastVote("p1", "8", 2)
+	r.Clear("p2", 1)
+	s := snap(r)
+	if s.Round != 2 {
+		t.Fatalf("expected round 2, got %d", s.Round)
+	}
+	if v := playerVote(r, "p1"); v != hiddenVote {
+		t.Fatalf("the late click erased a vote of the new round: %q", v)
 	}
 }
 
@@ -157,10 +189,10 @@ func TestKick_KickedPlayerCanNoLongerCommand(t *testing.T) {
 	defer r.Stop()
 	r.Join("host", "Host", false)
 	r.Join("p1", "Alice", false)
-	r.CastVote("host", "5")
+	r.CastVote("host", "5", AnyRound)
 	r.Kick("host", "p1")
 	r.Show("p1")
-	r.Clear("p1")
+	r.Clear("p1", AnyRound)
 	r.Kick("p1", "host")
 	r.ToggleObserver("p1", "host")
 	s := snap(r)
@@ -193,7 +225,7 @@ func TestCastVote_IgnoresACardOutsideTheDeck(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()
 	r.Join("p1", "Alice", false)
-	r.CastVote("p1", "1000")
+	r.CastVote("p1", "1000", AnyRound)
 	r.Show("p1")
 	if s := snap(r); len(s.Results.Dist) != 0 {
 		t.Fatalf("a card outside the deck was counted: %+v", s.Results.Dist)
@@ -204,7 +236,7 @@ func TestCastVote_RecordsVote(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()
 	r.Join("p1", "Alice", false)
-	r.CastVote("p1", "5")
+	r.CastVote("p1", "5", AnyRound)
 	// Raw vote visible only after reveal; check via show
 	r.Show("p1")
 	s := snap(r)
@@ -219,7 +251,7 @@ func TestCastVote_ObserverCannotVote(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()
 	r.Join("obs", "Bob", true)
-	r.CastVote("obs", "3")
+	r.CastVote("obs", "3", AnyRound)
 	r.Show("obs")
 	if v := playerVote(r, "obs"); v != "" {
 		t.Fatalf("observer should not have a vote, got %q", v)
@@ -231,7 +263,7 @@ func TestCastVote_BlockedAfterReveal(t *testing.T) {
 	defer r.Stop()
 	r.Join("p1", "Alice", false)
 	r.Show("p1")
-	r.CastVote("p1", "8")
+	r.CastVote("p1", "8", AnyRound)
 	s := snap(r)
 	for _, p := range s.Players {
 		if p.ID == "p1" && p.Vote != "" {
@@ -244,7 +276,7 @@ func TestSnapshot_VotesHiddenDuringVoting(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()
 	r.Join("p1", "Alice", false)
-	r.CastVote("p1", "8")
+	r.CastVote("p1", "8", AnyRound)
 	s := snap(r) // masked snapshot
 	for _, p := range s.Players {
 		if p.ID == "p1" && p.Vote != hiddenVote {
@@ -257,7 +289,7 @@ func TestSnapshot_VotesVisibleAfterReveal(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()
 	r.Join("p1", "Alice", false)
-	r.CastVote("p1", "8")
+	r.CastVote("p1", "8", AnyRound)
 	r.Show("p1")
 	s := snap(r)
 	for _, p := range s.Players {
@@ -274,7 +306,7 @@ func TestToggleObserver_ParticipantBecomesObserver(t *testing.T) {
 	defer r.Stop()
 	r.Join("host", "Host", false)
 	r.Join("p1", "Alice", false)
-	r.CastVote("p1", "5")
+	r.CastVote("p1", "5", AnyRound)
 	r.ToggleObserver("host", "p1")
 	s := snap(r)
 	for _, p := range s.Players {
@@ -311,7 +343,7 @@ func TestActivityLog_CappedAt20(t *testing.T) {
 	r.Join("p1", "Alice", false)
 	// Generate 25 votes to produce 25 activity entries (+ 1 join = 26 total)
 	for i := 0; i < 25; i++ {
-		r.CastVote("p1", "3")
+		r.CastVote("p1", "3", AnyRound)
 	}
 	s := snap(r)
 	if len(s.Activity) > maxActivityEntries {
@@ -400,9 +432,9 @@ func TestShow_CountsBothVotesOfSameNamedPlayers(t *testing.T) {
 	r.Join("p1", "Alex", false)
 	r.Join("p2", "Alex", false)
 	r.Join("p3", "Bob", false)
-	r.CastVote("p1", "1")
-	r.CastVote("p2", "8")
-	r.CastVote("p3", "3")
+	r.CastVote("p1", "1", AnyRound)
+	r.CastVote("p2", "8", AnyRound)
+	r.CastVote("p3", "3", AnyRound)
 	r.Show("p1")
 
 	res := snap(r).Results
@@ -429,8 +461,8 @@ func TestShow_SameNamedPlayersGiveStableResults(t *testing.T) {
 		r := newTestRoom([]string{"1", "2", "3", "5", "8"})
 		r.Join("p1", "Alex", false)
 		r.Join("p2", "Alex", false)
-		r.CastVote("p1", "1")
-		r.CastVote("p2", "8")
+		r.CastVote("p1", "1", AnyRound)
+		r.CastVote("p2", "8", AnyRound)
 		r.Show("p1")
 		avg := snap(r).Results.Avg
 		r.Stop()
@@ -537,7 +569,7 @@ func TestRejoin_GivesTheSeatBackWithItsVote(t *testing.T) {
 	r := newTestRoom(nil)
 	defer r.Stop()
 	r.JoinWithToken("p1", "secret", "Alice", false)
-	r.CastVote("p1", "5")
+	r.CastVote("p1", "5", AnyRound)
 	r.Disconnect("p1")
 
 	seat, ok := r.Rejoin("secret")
@@ -674,6 +706,33 @@ func TestKick_ReachesEveryConnectionOfThePlayer(t *testing.T) {
 	}
 }
 
+// A kicked client that ignores "kicked" and keeps its socket must receive
+// nothing after it: its channel is closed by the room.
+func TestKick_ClosesTheKickedConnections(t *testing.T) {
+	r := New("test", nil)
+	defer r.Stop()
+	kicked := r.Subscribe("c1", "p1")
+	r.Join("p1", "Alice", false)
+	r.Join("host", "Host", false)
+	r.Kick("host", "p1")
+	r.CastVote("host", "5", AnyRound)
+
+	timeout := time.After(2 * time.Second)
+	for {
+		select {
+		case msg, open := <-kicked:
+			if !open {
+				return
+			}
+			if msg.Type != "kicked" && msg.Type != "state" {
+				t.Fatalf("unexpected message after the kick: %q", msg.Type)
+			}
+		case <-timeout:
+			t.Fatal("the kicked connection was never closed")
+		}
+	}
+}
+
 func waitForMessage(t *testing.T, ch chan Message, typ string, conn int) {
 	t.Helper()
 	timeout := time.After(2 * time.Second)
@@ -698,7 +757,7 @@ func TestStoppedRoom_CommandsNeverBlock(t *testing.T) {
 	done := make(chan struct{})
 	go func() {
 		for i := 0; i < 100; i++ {
-			r.CastVote("p1", "5")
+			r.CastVote("p1", "5", AnyRound)
 			r.Kick("p1", "p1")
 			r.Unsubscribe("c")
 		}
@@ -714,12 +773,15 @@ func TestStoppedRoom_CommandsNeverBlock(t *testing.T) {
 // A subscriber that stops reading is cut off once its queue is full, instead
 // of silently missing the messages that follow.
 func TestSlowSubscriber_IsCutOffNotSkipped(t *testing.T) {
-	r := newTestRoom(nil)
+	// No test drainer: it reads the broadcast channel too, so it stole a random
+	// share of the 80 messages and the subscriber sometimes got fewer than its
+	// queue holds - never full, never cut off, red on a loaded runner.
+	r := New("slow", nil)
 	defer r.Stop()
 	ch := r.Subscribe("slow", "p1")
 	r.Join("p1", "Alice", false)
 	for i := 0; i < 40; i++ {
-		r.CastVote("p1", "5")
+		r.CastVote("p1", "5", AnyRound)
 	}
 	deadline := time.After(2 * time.Second)
 	for {
@@ -755,7 +817,7 @@ func publishesInOrder(t *testing.T) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			r.Clear("p1")
+			r.Clear("p1", AnyRound)
 		}()
 	}
 	wg.Wait()
@@ -766,5 +828,59 @@ func publishesInOrder(t *testing.T) {
 			t.Fatalf("round %d published after round %d", round, last)
 		}
 		last = round
+	}
+}
+
+// A refused vote used to stay on the voter's screen: snapshots mask votes, so
+// nothing told the client the room held another one.
+func TestCastVote_TellsTheVoterTheVoteHeld(t *testing.T) {
+	r := New("test", nil)
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	ch := r.Subscribe("c1", "p1")
+	r.CastVote("p1", "5", AnyRound)
+	r.Show("p1")
+	r.CastVote("p1", "8", AnyRound)
+
+	var acks []any
+	deadline := time.After(2 * time.Second)
+	for len(acks) < 2 {
+		select {
+		case msg := <-ch:
+			if msg.Type == "vote" {
+				acks = append(acks, msg.Payload)
+			}
+		case <-deadline:
+			t.Fatalf("expected two acknowledgements, got %v", acks)
+		}
+	}
+	if acks[0] != "5" || acks[1] != "5" {
+		t.Fatalf("expected the room to answer 5 twice, got %v", acks)
+	}
+}
+
+// A second reveal recomputed the results on whoever was seated by then.
+func TestShow_SecondRevealKeepsTheResults(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	r.Join("p2", "Bob", false)
+	r.CastVote("p1", "3", AnyRound)
+	r.CastVote("p2", "8", AnyRound)
+	r.Show("p1")
+	r.ToggleObserver("p1", "p2")
+	r.Show("p1")
+	if avg := snap(r).Results.Avg; avg != "5.5" {
+		t.Fatalf("expected the revealed average 5.5 to hold, got %s", avg)
+	}
+}
+
+func TestComputeResults_SpecialNumbersAreLabels(t *testing.T) {
+	got := computeResults([]string{"NaN", "Inf", "1e308", "1e308", "3", "5"}, []string{"NaN", "Inf", "1e308", "3", "5"})
+	if got.Avg != "4" || got.Min != "3" || got.Max != "5" {
+		t.Fatalf("special numbers must not reach the average: %+v", got)
+	}
+	if got.Dist["1e308"] != 2 || got.Mode != "1e308" {
+		t.Fatalf("they still count as cards: %+v", got)
 	}
 }
