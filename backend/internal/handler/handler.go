@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -44,6 +45,10 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		// refused, since every room holds its deck in memory, and so is any
 		// other unreadable body: {"cards":["XS",42]} decodes half a deck and
 		// opened a room with a deck nobody asked for.
+		// The size cap does not bound how long the body takes to arrive: a body
+		// sent a byte a minute would hold the connection. A read deadline closes
+		// it; a connection that cannot take one keeps the size cap alone.
+		_ = http.NewResponseController(w).SetReadDeadline(time.Now().Add(createBodyTimeout))
 		dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, maxCreateBody))
 		err := dec.Decode(&body)
 		// One object and nothing after it: a trailing value or garbage is an
@@ -55,6 +60,10 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 					err = errors.New("trailing data")
 				}
 			}
+		}
+		if errors.Is(err, os.ErrDeadlineExceeded) {
+			http.Error(w, "body too slow", http.StatusRequestTimeout)
+			return
 		}
 		var tooLarge *http.MaxBytesError
 		if errors.As(err, &tooLarge) {
@@ -295,4 +304,20 @@ func cors(allowed map[string]bool, next http.Handler) http.Handler {
 		}
 		next.ServeHTTP(w, r)
 	})
+}
+
+// createBodyTimeout bounds how long POST /rooms waits for its body.
+var createBodyTimeout = 10 * time.Second
+
+// NewServer serves h on addr with read limits: a client that trickles its
+// headers, or keeps an idle connection, does not hold a connection for ever.
+// No ReadTimeout: it would also cut the WebSocket connections after their
+// upgrade; the room body has its own deadline.
+func NewServer(addr string, h http.Handler) *http.Server {
+	return &http.Server{
+		Addr:              addr,
+		Handler:           h,
+		ReadHeaderTimeout: 10 * time.Second,
+		IdleTimeout:       120 * time.Second,
+	}
 }

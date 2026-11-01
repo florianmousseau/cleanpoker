@@ -50,7 +50,7 @@ func main() {
 	mux := handler.New(roomStore, allowedOrigins, checker.Report)
 
 	log.Printf("CleanPoker backend listening on :%s", port)
-	if err := http.ListenAndServe(":"+port, mux); err != nil {
+	if err := handler.NewServer(":"+port, mux).ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}
 }
