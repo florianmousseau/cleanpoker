@@ -34,12 +34,16 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
   // The token of the seat this tab holds. Every reconnection presents it, so
   // a dropped socket takes the same seat back instead of adding a second one.
   let token = '';
+  // The role the room holds for this tab now: a switch made in the room must
+  // survive a reconnection that recreates the seat.
+  let myObserver = false;
   // Votes sent and not yet answered: only the answer to the LAST one says what
   // the room holds, an earlier answer would put back a vote already replaced.
   let votesInFlight = 0;
 
   function connect(name: string, observer: boolean) {
     if (!browser) return;
+    myObserver = observer;
     const roomId = getRoomId();
     const url = `${PUBLIC_WS_URL}/rooms/${roomId}/ws?name=${encodeURIComponent(name)}&observer=${observer}&token=${encodeURIComponent(token)}`;
     const socket = new WebSocket(url);
@@ -52,7 +56,7 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
       isReconnecting = true;
       reconnectTimer = setTimeout(() => {
         reconnectDelay = Math.min(reconnectDelay * 2, 30000);
-        connect(name, observer);
+        connect(name, myObserver);
       }, reconnectDelay);
     };
     const armWatchdog = () => {
@@ -80,7 +84,7 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
         myVote = msg.payload.vote ?? '';
         votesInFlight = 0;
         token = msg.payload.token ?? '';
-        if (token) saveSeat(tabStorage(), roomId, { name, observer, token });
+        if (token) saveSeat(tabStorage(), roomId, { name, observer: myObserver, token });
       } else if (msg.type === 'vote') {
         // The vote the room holds: a refused one does not stay on screen.
         votesInFlight = Math.max(0, votesInFlight - 1);
@@ -95,7 +99,12 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
         roomState = msg.payload;
         // An observer holds no vote: turning one clears it on the server, and
         // without this the card stayed selected on its own screen.
-        if (msg.payload.players?.some((p: Player) => p.id === myId && p.observer)) myVote = '';
+        const me = msg.payload.players?.find((p: Player) => p.id === myId);
+        if (me?.observer) myVote = '';
+        if (me && me.observer !== myObserver) {
+          myObserver = me.observer;
+          if (token) saveSeat(tabStorage(), roomId, { name, observer: myObserver, token });
+        }
         const change = transitionOf(prev, msg.payload);
         if (change?.kind === 'newRound') {
           myVote = '';
