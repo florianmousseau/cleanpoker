@@ -5,6 +5,7 @@ import { plateformeCloudflare } from '#lib/plateforme.ts';
 import { building, dev } from '$app/env';
 import { env, waitUntil } from 'cloudflare:workers';
 import { SKIP_LINK } from '#lib/skip-link.ts';
+import { sansPrefixeEn } from '#lib/redirection-en.ts';
 
 const LOCALES = ['fr', 'es', 'de', 'pt'] as const;
 type Locale = typeof LOCALES[number];
@@ -46,12 +47,9 @@ function routeLocale(pathname: string): Locale | 'en' {
  * alternatives, /en/fibonacci and /en/estimation-agile had no redirect route
  * and fell through to /[id], which treats an unknown segment as a room id.
  */
-const EN_PREFIX = /^\/en(?=\/|$)/;
-
-
 const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
-	if (EN_PREFIX.test(event.url.pathname)) {
-		const target = event.url.pathname.replace(EN_PREFIX, '') || '/';
+	const target = sansPrefixeEn(event.url.pathname);
+	if (target !== null) {
 		return new Response(null, {
 			status: 301,
 			headers: { location: `${target}${event.url.search}` }
