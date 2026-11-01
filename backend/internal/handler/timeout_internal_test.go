@@ -39,6 +39,7 @@ func TestCreateRoom_RefusesABodyThatNeverArrives(t *testing.T) {
 	if err != nil {
 		t.Fatalf("no answer before the client gave up: %v", err)
 	}
+	defer func() { _ = res.Body.Close() }() // a refused body has nothing left to read
 	if res.StatusCode != http.StatusRequestTimeout {
 		t.Fatalf("status %d, want 408", res.StatusCode)
 	}
