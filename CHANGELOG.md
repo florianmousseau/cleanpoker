@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.40] - 2026-11-01
+
+- fix: keep the /en redirect on site, bound slow bodies and share the health probe (#337)
+
 ## [0.0.39] - 2026-11-01
 
 - fix(rooms): refuse a body with anything after its object (#334)
