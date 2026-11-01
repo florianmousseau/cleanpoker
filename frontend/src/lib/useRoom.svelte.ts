@@ -68,6 +68,10 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
       }, SILENCE_MS);
     };
 
+    // Armed now, not on open: a socket that stays CONNECTING fires nothing,
+    // and the visitor waited on it with no new attempt.
+    armWatchdog();
+
     socket.onopen = () => {
       isReconnecting = false;
       reconnectDelay = 1000;
