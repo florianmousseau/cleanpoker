@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { MAX_CARDS, MAX_CARD_LENGTH, fitsServer, parseCards } from './cards';
+import { MAX_CARDS, MAX_CARD_LENGTH, cardsQuery, fitsServer, parseCards } from './cards';
 
 describe('parseCards', () => {
   it('splits, trims and drops empty entries', () => {
@@ -42,5 +42,23 @@ describe('fitsServer', () => {
     const go = readFileSync(handler, 'utf8');
     expect(go).toMatch(new RegExp(`maxCards\\s*=\\s*${MAX_CARDS}\\b`));
     expect(go).toMatch(new RegExp(`maxCardLength\\s*=\\s*${MAX_CARD_LENGTH}\\b`));
+  });
+});
+
+describe('cardsQuery', () => {
+  it('reads back exactly the deck that was typed', () => {
+    for (const deck of ['1,2,3,5,8,13,21,?', 'XS,S,M,L,XL,XXL,?', '1+1,C#,a&b,%26,x=y,50 %']) {
+      expect(new URLSearchParams(cardsQuery(deck)).get('cards')).toBe(deck);
+    }
+  });
+  it('keeps the commas and the question mark readable', () => {
+    expect(cardsQuery('1,2,?')).toBe('?cards=1,2,?');
+  });
+});
+
+describe('the room page on a narrow screen', () => {
+  it('keeps the role and kick commands, inside the scrolling table', () => {
+    const page = readFileSync(new URL('../routes/[id]/+page.svelte', import.meta.url), 'utf8');
+    expect(page).not.toMatch(/\.col-action\s*\{\s*display:\s*none/);
   });
 });

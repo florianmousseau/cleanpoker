@@ -580,7 +580,6 @@
   .col-status { width: 2rem; }
   .col-vote { width: 5rem; }
   .col-action { width: 8rem; }
-  @media (max-width: 42rem) { .col-action { display: none; } }
 
   .action-btn {
     display: inline-flex; align-items: center; justify-content: center;

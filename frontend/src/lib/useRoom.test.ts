@@ -66,6 +66,18 @@ describe('useRoom', () => {
     expect(FakeSocket.last.sent.at(-1)).toEqual({ type: 'vote', payload: '8', round: 1 });
   });
 
+  it('reconnects with the role the room holds now, not the one it joined with', async () => {
+    await joined();
+    FakeSocket.last.open();
+    FakeSocket.last.receive('welcome', { id: 'me', token: 't', vote: '' });
+    FakeSocket.last.receive('state', { id: 'r1', cards: ['8'], state: 'voting', round: 1, results: null, activity: [], players: [{ id: 'me', name: 'Alice', vote: '', observer: true }] });
+    const before = FakeSocket.last;
+    before.onclose?.();
+    vi.advanceTimersByTime(1000);
+    expect(FakeSocket.last).not.toBe(before);
+    expect(FakeSocket.last.url).toContain('observer=true');
+  });
+
   it('names the round on screen with every command', async () => {
     const room = await joined();
     FakeSocket.last.open();

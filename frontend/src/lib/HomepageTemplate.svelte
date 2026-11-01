@@ -4,7 +4,7 @@
   import { goto, replaceState } from '$app/navigation';
   import { browser } from '$app/env';
   import { lang } from '#lib/lang.svelte.ts';
-  import { fitsServer, parseCards } from '#lib/cards.ts';
+  import { cardsQuery, fitsServer, parseCards } from '#lib/cards.ts';
   import Footer from '#lib/Footer.svelte';
 
   interface Props {
@@ -123,13 +123,14 @@
   let error = $state('');
 
   function pushCards(value: string) {
-    const safe = value.replace(/&/g, '%26').replace(/=/g, '%3D');
-    replaceState(`?cards=${safe}`, {});
+    replaceState(cardsQuery(value), {});
   }
 
   const cards = $derived(parseCards(cardsInput));
   const fits = $derived(fitsServer(cards));
   const isValid = $derived(cards.length >= 2 && fits);
+
+  const CREATE_TIMEOUT_MS = 15000;
 
   async function createRoom() {
     if (!isValid) return;
@@ -140,6 +141,8 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cards }),
+        // A request that never settles must not hold the button for good.
+        signal: AbortSignal.timeout(CREATE_TIMEOUT_MS),
       });
       if (!res.ok) throw new Error();
       const { id } = await res.json();
@@ -202,7 +205,7 @@
               type="button"
               class="preset-btn"
               class:active={cardsInput === preset.cards}
-              onclick={() => { cardsInput = preset.cards; }}
+              onclick={() => { cardsInput = preset.cards; pushCards(preset.cards); }}
               aria-pressed={cardsInput === preset.cards}
             >{preset.label}</button>
           {/each}
