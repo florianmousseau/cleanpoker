@@ -44,7 +44,18 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		// refused, since every room holds its deck in memory, and so is any
 		// other unreadable body: {"cards":["XS",42]} decodes half a deck and
 		// opened a room with a deck nobody asked for.
-		err := json.NewDecoder(http.MaxBytesReader(w, r.Body, maxCreateBody)).Decode(&body)
+		dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, maxCreateBody))
+		err := dec.Decode(&body)
+		// One object and nothing after it: a trailing value or garbage is an
+		// invalid body, and reading on keeps a large tail under the size cap.
+		if err == nil {
+			if extra := dec.Decode(&struct{}{}); !errors.Is(extra, io.EOF) {
+				err = extra
+				if err == nil {
+					err = errors.New("trailing data")
+				}
+			}
+		}
 		var tooLarge *http.MaxBytesError
 		if errors.As(err, &tooLarge) {
 			http.Error(w, "body too large", http.StatusRequestEntityTooLarge)
