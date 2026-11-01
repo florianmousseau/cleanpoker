@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.39] - 2026-11-01
+
+- fix(rooms): refuse a body with anything after its object (#334)
+
 ## [0.0.38] - 2026-11-01
 
 - fix(rooms): refuse a half-read deck, watch a socket that never opens (#331)
