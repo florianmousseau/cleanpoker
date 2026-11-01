@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.37] - 2026-11-01
+
+- fix(frontend): four audit findings on the room and the home form (#327)
+
 ## [0.0.36] - 2026-10-31
 
 - perf(health): keep GitHub's signing keys in memory, read at most once a minute (#324)
