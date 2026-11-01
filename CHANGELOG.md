@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.38] - 2026-11-01
+
+- fix(rooms): refuse a half-read deck, watch a socket that never opens (#331)
+
 ## [0.0.37] - 2026-11-01
 
 - fix(frontend): four audit findings on the room and the home form (#327)

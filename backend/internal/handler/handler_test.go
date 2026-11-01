@@ -347,6 +347,31 @@ func TestCreateRoom_OverlongCardIsRefused(t *testing.T) {
 	}
 }
 
+func TestCreateRoom_HalfReadableDeckIsRefused(t *testing.T) {
+	srv := newTestServer(t)
+	resp, err := http.Post(srv.URL+"/rooms", "application/json",
+		strings.NewReader(`{"cards":["XS",42,"XL"]}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode != http.StatusBadRequest {
+		t.Fatalf("status = %d, want 400", resp.StatusCode)
+	}
+}
+
+func TestCreateRoom_EmptyBodyTakesTheDefaultDeck(t *testing.T) {
+	srv := newTestServer(t)
+	resp, err := http.Post(srv.URL+"/rooms", "application/json", strings.NewReader(""))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode != http.StatusOK {
+		t.Fatalf("status = %d, want 200", resp.StatusCode)
+	}
+}
+
 func TestCreateRoom_BodyOverTheLimitIsRefused(t *testing.T) {
 	srv := newTestServer(t)
 	payload := `{"cards":["XS","S"],"pad":"` + strings.Repeat("x", 8<<10) + `"}`

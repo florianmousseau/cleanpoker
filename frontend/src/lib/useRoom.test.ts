@@ -66,6 +66,15 @@ describe('useRoom', () => {
     expect(FakeSocket.last.sent.at(-1)).toEqual({ type: 'vote', payload: '8', round: 1 });
   });
 
+  it('replaces a socket that never leaves CONNECTING', async () => {
+    await joined();
+    const stuck = FakeSocket.last;
+    vi.advanceTimersByTime(60_000);
+    expect(stuck.readyState).toBe(3);
+    vi.advanceTimersByTime(1000);
+    expect(FakeSocket.last).not.toBe(stuck);
+  });
+
   it('reconnects with the role the room holds now, not the one it joined with', async () => {
     await joined();
     FakeSocket.last.open();

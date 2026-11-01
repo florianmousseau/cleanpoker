@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"io"
 	"log"
 	"net/http"
 	"strings"
@@ -39,14 +40,18 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		var body struct {
 			Cards []string `json:"cards"`
 		}
-		// An unreadable body opens a room with the default deck; an oversized
-		// one is refused, since every room holds its deck in memory. The size
-		// error has to be told apart: read as "unreadable", it opened a room
-		// with the default deck in place of the one asked for.
+		// An empty body opens a room with the default deck; an oversized one is
+		// refused, since every room holds its deck in memory, and so is any
+		// other unreadable body: {"cards":["XS",42]} decodes half a deck and
+		// opened a room with a deck nobody asked for.
 		err := json.NewDecoder(http.MaxBytesReader(w, r.Body, maxCreateBody)).Decode(&body)
 		var tooLarge *http.MaxBytesError
 		if errors.As(err, &tooLarge) {
 			http.Error(w, "body too large", http.StatusRequestEntityTooLarge)
+			return
+		}
+		if err != nil && !errors.Is(err, io.EOF) {
+			http.Error(w, "invalid body", http.StatusBadRequest)
 			return
 		}
 		if !deckFits(body.Cards) {
