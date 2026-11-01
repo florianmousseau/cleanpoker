@@ -22,3 +22,11 @@ export const MAX_CARD_LENGTH = 16;
 export function fitsServer(cards: string[]): boolean {
   return cards.length <= MAX_CARDS && cards.every((c) => [...c].length <= MAX_CARD_LENGTH);
 }
+
+/**
+ * The query that carries a deck in the address. Everything but the comma and
+ * the question mark is escaped, so `+`, `#`, `&` and `%26` read back as typed.
+ */
+export function cardsQuery(value: string): string {
+  return `?cards=${encodeURIComponent(value).replace(/%2C/gi, ',').replace(/%3F/gi, '?')}`;
+}
