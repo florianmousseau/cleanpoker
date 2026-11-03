@@ -36,10 +36,10 @@
     </p>
     <p>
       <strong>Serveur temps réel (backend)</strong><br />
-      Fly.io, Inc.<br />
-      2261 Market Street #4099, San Francisco, CA 94114, États-Unis<br />
-      Données hébergées en région <strong>Europe (Paris, France)</strong><br />
-      <a href="https://fly.io" rel="noopener noreferrer">fly.io</a>
+      OVH SAS<br />
+      2 rue Kellermann, 59100 Roubaix, France<br />
+      Données hébergées en région <strong>Europe (Gravelines, France)</strong><br />
+      <a href="https://www.ovhcloud.com" rel="noopener noreferrer">ovhcloud.com</a>
     </p>
 
     <!-- ── Données personnelles ── -->
@@ -72,7 +72,7 @@
     <h3>Transfert de données</h3>
     <p>
       Les données du backend (pseudonymes, activité de vote) sont hébergées
-      <strong>exclusivement en France (Paris)</strong> chez Fly.io.
+      <strong>exclusivement en France (Gravelines)</strong> chez OVHcloud.
       Le frontend est servi via le réseau mondial Cloudflare, qui adhère au
       <em>EU-US Data Privacy Framework</em> depuis juillet 2023.
     </p>
@@ -99,7 +99,7 @@
       appareil. Comme pour tout site web, l'hébergeur qui sert ces pages, Cloudflare, enregistre
       les requêtes auxquelles il répond, la page, le pays, le navigateur et l'adresse IP au moment
       de la requête, pour délivrer et protéger le service, en qualité de sous-traitant. Le serveur de jeu temps
-      réel, hébergé chez Fly.io, journalise ses propres connexions de la même façon. C'est pourquoi rien ne vous demande
+      réel, hébergé chez OVHcloud, journalise ses propres connexions de la même façon. C'est pourquoi rien ne vous demande
       votre consentement&nbsp;: le consentement de l'article 82 de la loi Informatique et Libertés
       porte sur la lecture ou l'écriture d'informations dans votre terminal, et aucune page n'en
       fait ni l'une ni l'autre.

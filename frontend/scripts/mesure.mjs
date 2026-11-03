@@ -68,12 +68,12 @@ require_(
 	'_headers allows a script it has no reason to allow, and the static half of the site disagrees'
 );
 require_(
-	hooks.includes(`"connect-src 'self' https://cleanpoker-backend.fly.dev wss://cleanpoker-backend.fly.dev"`),
+	hooks.includes(`"connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev"`),
 	'hooks.server.ts lets the page reach the game server, and nothing else'
 );
 require_(
 	headers.includes(
-		`connect-src 'self' https://cleanpoker-backend.fly.dev wss://cleanpoker-backend.fly.dev;`
+		`connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev;`
 	),
 	'_headers lets the page reach the game server, and nothing else'
 );

@@ -24,7 +24,7 @@ const SECURITY_HEADERS: Record<string, string> = {
 	'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
 	'Content-Security-Policy': [
 		"default-src 'self'",
-		"connect-src 'self' https://cleanpoker-backend.fly.dev wss://cleanpoker-backend.fly.dev",
+		"connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev",
 		"script-src 'self' 'unsafe-inline'",
 		"style-src 'self' 'unsafe-inline'",
 		"img-src 'self' data:",
