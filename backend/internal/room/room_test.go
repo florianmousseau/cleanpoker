@@ -884,3 +884,17 @@ func TestComputeResults_SpecialNumbersAreLabels(t *testing.T) {
 		t.Fatalf("they still count as cards: %+v", got)
 	}
 }
+
+func TestComputeResults_KeepsTheCardPrecision(t *testing.T) {
+	res := computeResults([]string{"0.01", "0.04"}, []string{"0.01", "0.04"})
+	if res.Min != "0.01" || res.Max != "0.04" || res.Avg != "0.03" {
+		t.Fatalf("expected min 0.01, max 0.04, avg 0.03, got min=%s max=%s avg=%s", res.Min, res.Max, res.Avg)
+	}
+}
+
+func TestComputeResults_AverageStaysAtOneDecimalOnWholeCards(t *testing.T) {
+	res := computeResults([]string{"1", "2", "2"}, []string{"1", "2"})
+	if res.Avg != "1.7" {
+		t.Fatalf("expected avg 1.7, got %s", res.Avg)
+	}
+}
