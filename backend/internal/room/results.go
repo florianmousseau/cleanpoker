@@ -1,9 +1,9 @@
 package room
 
 import (
-	"fmt"
 	"math"
 	"strconv"
+	"strings"
 )
 
 // maxNumericVote bounds what counts as a number. ParseFloat also accepts NaN,
@@ -61,18 +61,42 @@ func computeResults(votes []string, cards []string) Results {
 	}
 	avg := sum / float64(len(nums))
 
-	fmtNum := func(f float64) string {
-		if f == float64(int(f)) {
-			return fmt.Sprintf("%d", int(f))
-		}
-		return fmt.Sprintf("%.1f", f)
-	}
-
 	return Results{
-		Avg:  fmtNum(avg),
+		Avg:  formatAverage(avg, nums),
 		Mode: mode,
-		Min:  fmtNum(min),
-		Max:  fmtNum(max),
+		Min:  exactNumber(min),
+		Max:  exactNumber(max),
 		Dist: dist,
 	}
+}
+
+// exactNumber writes a card value as it was voted: 0.01 stays 0.01.
+func exactNumber(f float64) string {
+	return strconv.FormatFloat(f, 'f', -1, 64)
+}
+
+// decimalsOf counts the decimals a vote was written with.
+func decimalsOf(f float64) int {
+	s := exactNumber(f)
+	if i := strings.IndexByte(s, '.'); i >= 0 {
+		return len(s) - i - 1
+	}
+	return 0
+}
+
+// formatAverage rounds the average to one decimal, or to the finest decimal a
+// vote carries: two votes of 0.01 and 0.04 must not average to 0.0.
+func formatAverage(avg float64, nums []float64) string {
+	decimals := 1
+	for _, n := range nums {
+		decimals = max(decimals, decimalsOf(n))
+	}
+	if avg == math.Trunc(avg) {
+		return exactNumber(avg)
+	}
+	s := strconv.FormatFloat(avg, 'f', decimals, 64)
+	if strings.Contains(s, ".") {
+		s = strings.TrimRight(strings.TrimRight(s, "0"), ".")
+	}
+	return s
 }
