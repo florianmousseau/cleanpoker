@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.41] - 2026-11-03
+
+- fix(results): keep the card precision in min, max and average (#340)
+
 ## [0.0.40] - 2026-11-01
 
 - fix: keep the /en redirect on site, bound slow bodies and share the health probe (#337)
