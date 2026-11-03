@@ -17,7 +17,7 @@
 
 - Frontend : SvelteKit 5 (runes), TypeScript, CSS vanilla
 - Backend : Go + WebSocket natif
-- Hébergement : Cloudflare Pages (frontend) + Fly.io CDG Paris (backend)
+- Hébergement : Cloudflare Pages (frontend) + OVHcloud Gravelines (backend, `salles.cleanpoker.dev`, construit depuis `main` par le VPS)
 - Branche de prod : `main` (jamais de commit direct, toujours via PR depuis `develop`)
 
 ## Philosophie du projet

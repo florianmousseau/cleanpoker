@@ -39,7 +39,7 @@
     <ul class="facts">
       <li>JS-Bundle <strong>&lt; 50 KB</strong> (brotli)</li>
       <li>Lighthouse Performance und Barrierefreiheit: <strong>100 / 100</strong></li>
-      <li>100% erneuerbare Energie Hosting (Cloudflare Pages + Fly.io CDG Paris)</li>
+      <li>100% erneuerbare Energie Hosting (Cloudflare Pages + OVHcloud Gravelines)</li>
       <li>Keine Tracker, keine Werbe-Cookies, keine Drittanbieter-Skripte</li>
       <li>Open Source unter <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a></li>
     </ul>
