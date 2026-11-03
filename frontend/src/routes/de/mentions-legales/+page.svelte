@@ -36,10 +36,10 @@
     </p>
     <p>
       <strong>Echtzeit-Server (Backend)</strong><br />
-      Fly.io, Inc.<br />
-      2261 Market Street #4099, San Francisco, CA 94114, Vereinigte Staaten<br />
-      Daten gehostet in der Region <strong>Europa (Paris, Frankreich)</strong><br />
-      <a href="https://fly.io" rel="noopener noreferrer">fly.io</a>
+      OVH SAS<br />
+      2 rue Kellermann, 59100 Roubaix, Frankreich<br />
+      Daten gehostet in der Region <strong>Europa (Gravelines, Frankreich)</strong><br />
+      <a href="https://www.ovhcloud.com" rel="noopener noreferrer">ovhcloud.com</a>
     </p>
 
     <!-- ── Personenbezogene Daten ── -->
@@ -71,7 +71,7 @@
     <h3>Datenübertragungen</h3>
     <p>
       Backend-Daten (Pseudonyme, Abstimmungsaktivität) werden
-      <strong>ausschließlich in Frankreich (Paris)</strong> bei Fly.io gehostet.
+      <strong>ausschließlich in Frankreich (Gravelines)</strong> bei OVHcloud gehostet.
       Das Frontend wird über das globale Cloudflare-Netzwerk bereitgestellt, das seit Juli 2023
       dem <em>EU-US Data Privacy Framework</em> beigetreten ist.
     </p>
@@ -98,7 +98,7 @@
       jeder Website protokolliert der Hoster dieser Seiten, Cloudflare, die Anfragen, die er
       beantwortet, die Seite, das Land, den Browser und die IP-Adresse im Moment der Anfrage, um
       den Dienst als Auftragsverarbeiter auszuliefern und zu schützen. Der Echtzeit-Spielserver
-      bei Fly.io protokolliert seine eigenen Verbindungen ebenso. Deshalb fragt hier nichts nach Ihrer Einwilligung:
+      bei OVHcloud protokolliert seine eigenen Verbindungen ebenso. Deshalb fragt hier nichts nach Ihrer Einwilligung:
       die Einwilligung knüpft an das Lesen oder Schreiben auf dem Endgerät an, und keine Seite tut
       hier das eine oder das andere.
     </p>

@@ -36,10 +36,10 @@
     </p>
     <p>
       <strong>Servidor em tempo real (backend)</strong><br />
-      Fly.io, Inc.<br />
-      2261 Market Street #4099, San Francisco, CA 94114, Estados Unidos<br />
-      Dados alojados na região <strong>Europa (Paris, França)</strong><br />
-      <a href="https://fly.io" rel="noopener noreferrer">fly.io</a>
+      OVH SAS<br />
+      2 rue Kellermann, 59100 Roubaix, França<br />
+      Dados alojados na região <strong>Europa (Gravelines, França)</strong><br />
+      <a href="https://www.ovhcloud.com" rel="noopener noreferrer">ovhcloud.com</a>
     </p>
 
     <!-- ── Dados pessoais ── -->
@@ -72,7 +72,7 @@
     <h3>Transferência de dados</h3>
     <p>
       Os dados do backend (pseudónimos, atividade de votação) são alojados
-      <strong>exclusivamente em França (Paris)</strong> na Fly.io.
+      <strong>exclusivamente em França (Gravelines)</strong> na OVHcloud.
       O frontend é servido através da rede mundial do Cloudflare, que aderiu ao
       <em>EU-US Data Privacy Framework</em> em julho de 2023.
     </p>
@@ -99,7 +99,7 @@
       de visitante no seu dispositivo. Como em qualquer site, o alojamento que serve estas
       páginas, a Cloudflare, regista os pedidos a que responde, a página, o país, o navegador e o
       endereço IP no momento do pedido, para entregar e proteger o serviço, na qualidade de subcontratante. O servidor de jogo em
-      tempo real, alojado na Fly.io, regista as suas próprias ligações da mesma forma. É por isso que nada
+      tempo real, alojado na OVHcloud, regista as suas próprias ligações da mesma forma. É por isso que nada
       aqui lhe pede consentimento: o consentimento aplica-se à leitura ou escrita de informação no
       seu dispositivo, e nenhuma página faz uma coisa nem outra.
     </p>

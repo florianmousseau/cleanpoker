@@ -19,7 +19,7 @@
       '@type': 'WebApplication',
       name: 'CleanPoker',
       url: 'https://cleanpoker.dev',
-      sustainabilityNote: 'Hébergé sur énergie renouvelable (Cloudflare Pages + Fly.io CDG Paris). Bundle JS < 50 Ko brotli. Aucun script tiers. CO₂ < 0,1 g par visite.',
+      sustainabilityNote: 'Hébergé sur énergie renouvelable (Cloudflare Pages + OVHcloud Gravelines). Bundle JS < 50 Ko brotli. Aucun script tiers. CO₂ < 0,1 g par visite.',
     },
   })}<\/script>`}
 </svelte:head>
@@ -79,7 +79,7 @@
         Cloudflare est référencé dans la base The Green Web Foundation.
       </li>
       <li>
-        <strong>Backend&nbsp;: Fly.io CDG (Paris, France)</strong> - hébergeur certifié énergie renouvelable,
+        <strong>Backend&nbsp;: OVHcloud (Gravelines, France)</strong> - hébergeur certifié énergie renouvelable,
         résidence des données en France, latence minimale pour les équipes européennes.
       </li>
     </ul>

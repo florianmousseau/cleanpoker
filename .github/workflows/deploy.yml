@@ -59,16 +59,16 @@ jobs:
       - name: svelte-check
         working-directory: frontend
         env:
-          PUBLIC_API_URL: https://cleanpoker-backend.fly.dev
-          PUBLIC_WS_URL: wss://cleanpoker-backend.fly.dev
+          PUBLIC_API_URL: https://salles.cleanpoker.dev
+          PUBLIC_WS_URL: wss://salles.cleanpoker.dev
         run: npm run check
 
       - name: Frontend unit tests
         working-directory: frontend
         # SvelteKit 3 validates src/env.ts when Vitest starts, as the check does.
         env:
-          PUBLIC_API_URL: https://cleanpoker-backend.fly.dev
-          PUBLIC_WS_URL: wss://cleanpoker-backend.fly.dev
+          PUBLIC_API_URL: https://salles.cleanpoker.dev
+          PUBLIC_WS_URL: wss://salles.cleanpoker.dev
         run: npm test
 
       - name: SEO head checks
@@ -136,8 +136,8 @@ jobs:
       - name: Build
         working-directory: frontend
         env:
-          PUBLIC_API_URL: https://cleanpoker-backend.fly.dev
-          PUBLIC_WS_URL: wss://cleanpoker-backend.fly.dev
+          PUBLIC_API_URL: https://salles.cleanpoker.dev
+          PUBLIC_WS_URL: wss://salles.cleanpoker.dev
         run: npm run build
 
       - name: Check bundle size
@@ -169,8 +169,8 @@ jobs:
       - name: Build
         working-directory: frontend
         env:
-          PUBLIC_API_URL: https://cleanpoker-backend.fly.dev
-          PUBLIC_WS_URL: wss://cleanpoker-backend.fly.dev
+          PUBLIC_API_URL: https://salles.cleanpoker.dev
+          PUBLIC_WS_URL: wss://salles.cleanpoker.dev
         run: npm run build
 
       - name: Deploy preview to Cloudflare Pages
@@ -207,8 +207,8 @@ jobs:
       - name: Build
         working-directory: frontend
         env:
-          PUBLIC_API_URL: https://cleanpoker-backend.fly.dev
-          PUBLIC_WS_URL: wss://cleanpoker-backend.fly.dev
+          PUBLIC_API_URL: https://salles.cleanpoker.dev
+          PUBLIC_WS_URL: wss://salles.cleanpoker.dev
         run: npm run build
 
       - name: Deploy to Cloudflare Pages
@@ -217,29 +217,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy frontend/.svelte-kit/cloudflare --project-name=cleanpoker
-
-  deploy-backend:
-    name: Backend - Fly.io
-    needs: [quality, bundle-size]
-    # Two releases close together must not deploy side by side: the older one
-    # could finish last and stay in production. Queued, never cancelled.
-    concurrency:
-      group: production-backend
-      cancel-in-progress: false
-    if: github.event_name != 'pull_request' && github.ref_name == 'main'
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: superfly/flyctl-actions/setup-flyctl@ed8efb33836e8b2096c7fd3ba1c8afe303ebbff1 # master
-        name: Setup flyctl
-
-      - name: Deploy
-        working-directory: backend
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        run: flyctl deploy --remote-only --ha=false --build-arg COMMIT=${{ github.sha }}
 
   lighthouse:
     name: Lighthouse CI
