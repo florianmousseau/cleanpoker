@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.42] - 2026-11-03
+
+- feat(backend): serve rooms from OVH at salles.cleanpoker.dev (#343)
+
 ## [0.0.41] - 2026-11-03
 
 - fix(results): keep the card precision in min, max and average (#340)
