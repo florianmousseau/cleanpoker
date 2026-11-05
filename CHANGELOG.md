@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.44] - 2026-11-05
+
+- fix(ws): refuse a WebSocket opened from a foreign origin (#349)
+
+## [0.0.43] - 2026-11-04
+
+- Corrections internes.
+
 ## [0.0.42] - 2026-11-03
 
 - feat(backend): serve rooms from OVH at salles.cleanpoker.dev (#343)

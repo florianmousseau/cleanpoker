@@ -9,6 +9,7 @@
   import { accorderDocumentALaLangue } from '#lib/html-lang.ts';
   import { expulserApresAccord } from '#lib/expulsion.ts';
   import { barWidth } from '#lib/distribution.ts';
+  import { allVoted as allVotedOf } from '#lib/reveal.ts';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
@@ -84,7 +85,7 @@
 
   const participants = $derived(room.roomState?.players.filter(p => !p.observer) ?? []);
   const observers = $derived(room.roomState?.players.filter(p => p.observer) ?? []);
-  const allVoted = $derived(participants.length > 0 && participants.every(p => p.vote !== ''));
+  const allVoted = $derived(allVotedOf(room.roomState?.players ?? []));
   const me = $derived(room.roomState?.players.find(p => p.id === room.myId));
   const isSolo = $derived(room.roomState !== null && room.roomState.players.length === 1);
   // Most people meet CleanPoker as someone else's guest and never see the home

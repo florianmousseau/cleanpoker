@@ -105,6 +105,12 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		}
 		// The room is opened once the handshake succeeded, never before: a
 		// plain GET used to allocate a room and its goroutine for a day.
+		// CORS does not cover a WebSocket: without this, any page could seat
+		// its visitors' browsers in a room whose address it knows.
+		if !allowed[r.Header.Get("Origin")] {
+			http.Error(w, "origin not allowed", http.StatusForbidden)
+			return
+		}
 		if !s.CanHold(roomID) {
 			http.Error(w, "too many rooms", http.StatusServiceUnavailable)
 			return
