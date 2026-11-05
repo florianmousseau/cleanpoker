@@ -764,3 +764,16 @@ func TestWebSocket_PingIsAnswered(t *testing.T) {
 		t.Fatalf("expected pong, got %q", msg.Type)
 	}
 }
+
+func TestWS_RefusesAForeignOriginWithoutSeatingAnyone(t *testing.T) {
+	srv, s := newTestServerWithStore(t)
+	roomID := createRoom(t, srv)
+	u := "ws" + strings.TrimPrefix(srv.URL, "http") + "/rooms/" + roomID + "/ws?name=Mallory"
+	if conn, err := websocket.Dial(u, "", "https://evil.example"); err == nil {
+		_ = conn.Close()
+		t.Fatal("a foreign origin opened the WebSocket")
+	}
+	if joined := s.Usage().ParticipantsJoined; joined != 0 {
+		t.Fatalf("a foreign origin was seated: %d arrivals", joined)
+	}
+}
