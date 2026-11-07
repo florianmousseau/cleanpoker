@@ -157,9 +157,7 @@ func (s *Store) Sweep(ttl, unjoinedTTL time.Duration) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	for id, r := range s.rooms {
-		idle := time.Since(r.LastActivity())
-		if idle > ttl || (!r.EverJoined() && idle > unjoinedTTL) {
-			r.Stop()
+		if r.Expire(ttl, unjoinedTTL) {
 			delete(s.rooms, id)
 		}
 	}
