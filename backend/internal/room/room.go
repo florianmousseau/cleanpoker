@@ -84,7 +84,9 @@ type Room struct {
 	activity     []ActivityEntry
 	lastActivity time.Time
 	everJoined   bool
-	grace        time.Duration
+	// closed is set under mu when the room shuts: no command changes it after.
+	closed bool
+	grace  time.Duration
 	// connections counts the live sockets of each seated player; a seat only
 	// starts its grace once the last one is gone.
 	connections map[string]int
@@ -138,17 +140,22 @@ func New(id string, cards []string) *Room {
 	return r
 }
 
-func (r *Room) LastActivity() time.Time {
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return r.lastActivity
-}
-
-// EverJoined reports whether anybody ever took a seat in the room.
-func (r *Room) EverJoined() bool {
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return r.everJoined
+// Expire shuts the room when it has been idle for longer than ttl, or for
+// longer than unjoinedTTL with nobody ever seated, and reports whether it is
+// shut. The check and the shutdown share the lock every command takes, so a
+// vote or a rejoin either lands first and keeps the room alive, or finds it
+// shut and changes nothing.
+func (r *Room) Expire(ttl, unjoinedTTL time.Duration) bool {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	if !r.closed {
+		idle := time.Since(r.lastActivity)
+		if idle <= ttl && (r.everJoined || idle <= unjoinedTTL) {
+			return false
+		}
+		r.shut()
+	}
+	return true
 }
 
 func (r *Room) Snapshot() Snapshot {
@@ -188,6 +195,16 @@ func (r *Room) buildSnapshot(masked bool) Snapshot {
 func (r *Room) snapshot() Snapshot { return r.buildSnapshot(true) }
 
 func (r *Room) Stop() {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	if !r.closed {
+		r.shut()
+	}
+}
+
+// shut closes the room for good. Callers hold r.mu.
+func (r *Room) shut() {
+	r.closed = true
 	close(r.quit)
 }
 
@@ -228,6 +245,9 @@ func (r *Room) logActivity(initiator, message string, target ...string) {
 func (r *Room) mutate(fn func()) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
+	if r.closed {
+		return
+	}
 	fn()
 	r.lastActivity = time.Now()
 	r.publish(Message{Type: "state", Payload: r.snapshot()})
@@ -258,11 +278,11 @@ func (r *Room) JoinWithToken(playerID, token, name string, observer bool) {
 // caller can subscribe first and then Refresh. It reports false when no seat
 // matches: the player was kicked, or its grace ran out.
 func (r *Room) Rejoin(token string) (Player, bool) {
-	if token == "" {
-		return Player{}, false
-	}
 	r.mu.Lock()
 	defer r.mu.Unlock()
+	if token == "" || r.closed {
+		return Player{}, false
+	}
 	for _, p := range r.players {
 		if subtle.ConstantTimeCompare([]byte(p.token), []byte(token)) != 1 {
 			continue

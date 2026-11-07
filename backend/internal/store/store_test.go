@@ -58,3 +58,16 @@ func TestSweep_ClosesRoomsNobodyEntered(t *testing.T) {
 		t.Fatal("a room in use was closed")
 	}
 }
+
+func TestSweep_LeavesNoCommandToAClosedRoom(t *testing.T) {
+	s := New()
+	id, _ := s.Create(nil)
+	r, _ := s.GetOrCreate(id, nil)
+	r.JoinWithToken("p1", "tok", "Alice", false)
+
+	s.Sweep(-time.Nanosecond, time.Hour)
+
+	if _, ok := r.Rejoin("tok"); ok {
+		t.Fatal("a swept room still handed a seat back")
+	}
+}
