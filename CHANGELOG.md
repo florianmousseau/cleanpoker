@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.45] - 2026-11-07
+
+- fix(store): check a room's idleness and shut it under the room lock
+
 ## [0.0.44] - 2026-11-05
 
 - fix(ws): refuse a WebSocket opened from a foreign origin (#349)
