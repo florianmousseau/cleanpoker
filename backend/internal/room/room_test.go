@@ -898,3 +898,37 @@ func TestComputeResults_AverageStaysAtOneDecimalOnWholeCards(t *testing.T) {
 		t.Fatalf("expected avg 1.7, got %s", res.Avg)
 	}
 }
+
+// --- Expiry ---
+
+func TestExpire_KeepsARoomInUse(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.JoinWithToken("p1", "tok", "Alice", false)
+	if r.Expire(time.Hour, time.Hour) {
+		t.Fatal("a room used a moment ago was shut")
+	}
+	r.CastVote("p1", "5", AnyRound)
+	if playerVote(r, "p1") != hiddenVote {
+		t.Fatal("a room that was kept refused a vote")
+	}
+}
+
+func TestExpire_ShutRoomTakesNoCommand(t *testing.T) {
+	r := newTestRoom(nil)
+	r.JoinWithToken("p1", "tok", "Alice", false)
+	if !r.Expire(-time.Nanosecond, time.Hour) {
+		t.Fatal("an idle room was kept")
+	}
+	r.CastVote("p1", "5", AnyRound)
+	if playerVote(r, "p1") != "" {
+		t.Fatal("a shut room took a vote")
+	}
+	if _, ok := r.Rejoin("tok"); ok {
+		t.Fatal("a shut room handed a seat back")
+	}
+	if !r.Expire(time.Hour, time.Hour) {
+		t.Fatal("a shut room reported itself open")
+	}
+	r.Stop() // closing twice must not panic
+}
