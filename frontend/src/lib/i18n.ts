@@ -299,7 +299,7 @@ export const ES: Translation = {
 
   share: {
     ogTitle: 'Planning poker, sin cuenta ni seguimiento comportamental',
-    ogDesc: 'Únete a la sesión de estimación. Sin cuenta, sin seguimiento comportamental, sin anuncios.',
+    ogDesc: 'Únete a la sesión de estimación. Nadie necesita una cuenta.',
     inviteMessage: (url: string) => `Estimación en planning poker, votamos aquí: ${url}\nSin cuenta.`,
   },
 
@@ -422,7 +422,7 @@ export const DE: Translation = {
 
   share: {
     ogTitle: 'Planning Poker, ohne Konto und ohne verhaltensbasiertes Tracking',
-    ogDesc: 'Tritt der Schätzrunde bei. Kein Konto, kein verhaltensbasiertes Tracking, keine Werbung.',
+    ogDesc: 'Tritt der Schätzrunde bei. Niemand braucht ein Konto.',
     inviteMessage: (url: string) => `Planning-Poker-Schätzung, wir stimmen hier ab: ${url}\nKein Konto nötig.`,
   },
 
@@ -545,7 +545,7 @@ export const PT: Translation = {
 
   share: {
     ogTitle: 'Planning poker, sem conta e sem rastreio comportamental',
-    ogDesc: 'Entre na sessão de estimativa. Sem conta, sem rastreio comportamental, sem anúncios.',
+    ogDesc: 'Entre na sessão de estimativa. Ninguém precisa de conta.',
     inviteMessage: (url: string) => `Estimativa em planning poker, votamos aqui: ${url}\nSem conta.`,
   },
 
