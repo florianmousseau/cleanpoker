@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.46] - 2026-11-10
+
+- Corrections internes.
+
 ## [0.0.45] - 2026-11-07
 
 - fix(store): check a room's idleness and shut it under the room lock
