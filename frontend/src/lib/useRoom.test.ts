@@ -2,7 +2,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('$app/env', () => ({ browser: true }));
 vi.mock('$app/env/public', () => ({ PUBLIC_WS_URL: 'ws://test' }));
-vi.mock('svelte', async (original) => ({ ...(await original<typeof import('svelte')>()), onDestroy: () => {} }));
+const destroyHooks = vi.hoisted(() => [] as (() => void)[]);
+vi.mock('svelte', async (original) => ({
+  ...(await original<typeof import('svelte')>()),
+  onDestroy: (hook: () => void) => destroyHooks.push(hook),
+}));
 
 class FakeSocket {
   static OPEN = 1;
@@ -42,6 +46,7 @@ async function joined() {
 
 describe('useRoom', () => {
   beforeEach(() => {
+    destroyHooks.length = 0;
     vi.useFakeTimers();
     vi.stubGlobal('WebSocket', FakeSocket);
     vi.stubGlobal('sessionStorage', { getItem: () => null, setItem: () => {}, removeItem: () => {} });
@@ -134,5 +139,44 @@ describe('useRoom', () => {
     expect(first.readyState).toBe(3);
     vi.advanceTimersByTime(1_000);
     expect(FakeSocket.last).not.toBe(first);
+  });
+
+  it('opens no socket and sends no ping once destroyed during a scheduled reconnection', async () => {
+    await joined();
+    const first = FakeSocket.last;
+    first.open();
+    first.onclose?.();
+    destroyHooks.forEach((hook) => hook());
+    vi.advanceTimersByTime(120_000);
+    expect(FakeSocket.last).toBe(first);
+    expect(first.sent).toEqual([]);
+  });
+
+  it('closes its socket and stops pinging when destroyed while connected', async () => {
+    await joined();
+    const socket = FakeSocket.last;
+    socket.open();
+    destroyHooks.forEach((hook) => hook());
+    expect(socket.readyState).toBe(3);
+    socket.onclose?.();
+    vi.advanceTimersByTime(120_000);
+    expect(socket.sent).toEqual([]);
+    expect(FakeSocket.last).toBe(socket);
+  });
+
+  it('forgets the seat and never reconnects once kicked', async () => {
+    const removeItem = vi.fn();
+    vi.stubGlobal('sessionStorage', { getItem: () => null, setItem: () => {}, removeItem });
+    const room = await joined();
+    const socket = FakeSocket.last;
+    socket.open();
+    socket.receive('welcome', { id: 'me', token: 't', vote: '' });
+    socket.receive('kicked', null);
+    expect(room.kicked).toBe(true);
+    expect(removeItem).toHaveBeenCalled();
+    expect(socket.readyState).toBe(3);
+    socket.onclose?.();
+    vi.advanceTimersByTime(120_000);
+    expect(FakeSocket.last).toBe(socket);
   });
 });
