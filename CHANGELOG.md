@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.47] - 2026-11-12
+
+- fix(room): let the room snapshot clear a stale welcome vote after a reload (#362)
+- fix(backend): build on go 1.27.4 for the net/http advisory (#363)
+- fix(home): state facts in title, meta, h1 and lead, drop slogan phrasing (#358)
+
 ## [0.0.46] - 2026-11-10
 
 - Corrections internes.
