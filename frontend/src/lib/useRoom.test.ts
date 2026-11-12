@@ -71,6 +71,26 @@ describe('useRoom', () => {
     expect(FakeSocket.last.sent.at(-1)).toEqual({ type: 'vote', payload: '8', round: 1 });
   });
 
+  it('drops a welcome vote the room no longer holds after a reload', async () => {
+    const room = await joined();
+    FakeSocket.last.open();
+    FakeSocket.last.receive('welcome', { id: 'me', token: 't', vote: '8' });
+    expect(room.myVote).toBe('8');
+    const cleared = { id: 'r1', cards: ['8'], state: 'voting', round: 2, results: null, activity: [], players: [{ id: 'me', name: 'Alice', vote: '', observer: false }] };
+    FakeSocket.last.receive('state', cleared);
+    expect(room.myVote).toBe('');
+  });
+
+  it('keeps a vote on its way while the room has not counted it yet', async () => {
+    const room = await joined();
+    FakeSocket.last.open();
+    FakeSocket.last.receive('welcome', { id: 'me', token: 't', vote: '' });
+    FakeSocket.last.receive('state', { id: 'r1', cards: ['8'], state: 'voting', round: 1, results: null, activity: [], players: [{ id: 'me', name: 'Alice', vote: '', observer: false }] });
+    room.castVote('8');
+    FakeSocket.last.receive('state', { id: 'r1', cards: ['8'], state: 'voting', round: 1, results: null, activity: [], players: [{ id: 'me', name: 'Alice', vote: '', observer: false }] });
+    expect(room.myVote).toBe('8');
+  });
+
   it('replaces a socket that never leaves CONNECTING', async () => {
     await joined();
     const stuck = FakeSocket.last;
