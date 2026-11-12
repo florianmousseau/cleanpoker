@@ -105,6 +105,10 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
         // without this the card stayed selected on its own screen.
         const me = msg.payload.players?.find((p: Player) => p.id === myId);
         if (me?.observer) myVote = '';
+        // A seat taken back can carry the vote of a round cleared before it was
+        // subscribed: the room's snapshot, which says only whether a vote is
+        // held, wins over the welcome once no vote of ours is on its way.
+        if (me && me.vote === '' && votesInFlight === 0) myVote = '';
         if (me && me.observer !== myObserver) {
           myObserver = me.observer;
           if (token) saveSeat(tabStorage(), roomId, { name, observer: myObserver, token });
