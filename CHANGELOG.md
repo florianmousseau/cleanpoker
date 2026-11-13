@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.48] - 2026-11-13
+
+- fix(backend): refuse a room deck with blank or repeated cards (#366)
+
 ## [0.0.47] - 2026-11-12
 
 - fix(room): let the room snapshot clear a stale welcome vote after a reload (#362)
