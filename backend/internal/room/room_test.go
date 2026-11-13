@@ -932,3 +932,32 @@ func TestExpire_ShutRoomTakesNoCommand(t *testing.T) {
 	}
 	r.Stop() // closing twice must not panic
 }
+
+// The vote answer carries the card in clear: only the voter's own connections
+// may receive it, and every other seat sees the masked state until the reveal.
+func TestCastVote_TheCardStaysWithItsVoterUntilTheReveal(t *testing.T) {
+	r := New("test", []string{"3", "5", "8"})
+	defer r.Stop()
+	alice := r.Subscribe("c1", "alice")
+	bob := r.Subscribe("c2", "bob")
+	r.Join("alice", "Alice", false)
+	r.Join("bob", "Bob", false)
+	r.CastVote("alice", "8", AnyRound)
+
+	waitForMessage(t, alice, "vote", 0)
+	quiet := time.After(200 * time.Millisecond)
+	for {
+		select {
+		case msg := <-bob:
+			raw, err := json.Marshal(msg)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if msg.Type == "vote" || strings.Contains(string(raw), `"vote":"8"`) {
+				t.Fatalf("Bob received Alice's card before the reveal: %s", raw)
+			}
+		case <-quiet:
+			return
+		}
+	}
+}
