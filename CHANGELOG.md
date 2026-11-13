@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.49] - 2026-11-13
+
+- fix(room): the reconnection delay starts over on a welcome, not on an open socket (#369)
+
 ## [0.0.48] - 2026-11-13
 
 - fix(backend): refuse a room deck with blank or repeated cards (#366)
