@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.50] - 2026-11-13
+
+- fix(room): a client navigation to another room rebuilds the page, and a test keeps the vote answer private (#372)
+
 ## [0.0.49] - 2026-11-13
 
 - fix(room): the reconnection delay starts over on a welcome, not on an open socket (#369)
