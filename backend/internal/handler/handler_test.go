@@ -347,6 +347,20 @@ func TestCreateRoom_OverlongCardIsRefused(t *testing.T) {
 	}
 }
 
+func TestCreateRoom_UnplayableDeckIsRefused(t *testing.T) {
+	srv := newTestServer(t)
+	for _, body := range []string{`{"cards":["",""]}`, `{"cards":["XS","  "]}`, `{"cards":["XS","XS"]}`} {
+		resp, err := http.Post(srv.URL+"/rooms", "application/json", strings.NewReader(body))
+		if err != nil {
+			t.Fatal(err)
+		}
+		_ = resp.Body.Close() // only the status is read
+		if resp.StatusCode != http.StatusBadRequest {
+			t.Errorf("%s: status = %d, want 400", body, resp.StatusCode)
+		}
+	}
+}
+
 func TestCreateRoom_HalfReadableDeckIsRefused(t *testing.T) {
 	srv := newTestServer(t)
 	resp, err := http.Post(srv.URL+"/rooms", "application/json",
