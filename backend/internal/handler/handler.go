@@ -75,7 +75,7 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 			return
 		}
 		if !deckFits(body.Cards) {
-			http.Error(w, "deck too large", http.StatusBadRequest)
+			http.Error(w, "invalid deck", http.StatusBadRequest)
 			return
 		}
 		create := s.Create
@@ -168,14 +168,19 @@ const (
 	maxCardLength = 16
 )
 
+// deckFits also refuses what the home page form drops: a blank label is the
+// vote-withdrawal command, so a deck of blanks opens a room nobody can vote in,
+// and two equal labels cannot be told apart in the results.
 func deckFits(cards []string) bool {
 	if len(cards) > maxCards {
 		return false
 	}
+	seen := make(map[string]bool, len(cards))
 	for _, c := range cards {
-		if utf8.RuneCountInString(c) > maxCardLength {
+		if utf8.RuneCountInString(c) > maxCardLength || strings.TrimSpace(c) == "" || seen[c] {
 			return false
 		}
+		seen[c] = true
 	}
 	return true
 }
