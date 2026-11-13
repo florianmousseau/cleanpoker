@@ -112,6 +112,26 @@ describe('useRoom', () => {
     expect(FakeSocket.last.url).toContain('observer=true');
   });
 
+  it('spaces its attempts while sockets open and close with no welcome, and starts over after one', async () => {
+    await joined();
+    FakeSocket.last.open();
+    FakeSocket.last.receive('welcome', { id: 'me', token: 't', vote: '' });
+    const dropThenWait = (ms: number) => {
+      const before = FakeSocket.last;
+      before.onclose?.();
+      vi.advanceTimersByTime(ms - 1);
+      expect(FakeSocket.last).toBe(before);
+      vi.advanceTimersByTime(1);
+      expect(FakeSocket.last).not.toBe(before);
+      FakeSocket.last.open();
+    };
+    dropThenWait(1000);
+    dropThenWait(2000);
+    dropThenWait(4000);
+    FakeSocket.last.receive('welcome', { id: 'me', token: 't', vote: '' });
+    dropThenWait(1000);
+  });
+
   it('names the round on screen with every command', async () => {
     const room = await joined();
     FakeSocket.last.open();
