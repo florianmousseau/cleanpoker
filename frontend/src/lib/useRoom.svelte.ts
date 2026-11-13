@@ -74,7 +74,6 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
 
     socket.onopen = () => {
       isReconnecting = false;
-      reconnectDelay = 1000;
       armWatchdog();
       heartbeat = setInterval(() => send('ping'), PING_MS);
     };
@@ -84,6 +83,9 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
       const msg = JSON.parse(event.data);
       const T = getT();
       if (msg.type === 'welcome') {
+        // Only a welcome proves the room is back: a server that accepts and
+        // then closes would otherwise hold every visitor at one try a second.
+        reconnectDelay = 1000;
         myId = msg.payload.id;
         myVote = msg.payload.vote ?? '';
         votesInFlight = 0;
