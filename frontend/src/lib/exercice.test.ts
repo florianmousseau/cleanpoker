@@ -1,5 +1,13 @@
-import { describe, expect, it } from 'vitest';
-import { COUPURES, jugerLaCoupure, lireLesCoupures, recevoirLExercice, sonderEnExercice } from './exercice';
+import { describe, expect, it, vi } from 'vitest';
+import {
+	COUPURES,
+	jugerLaCoupure,
+	lireLaDemandeBornee,
+	lireLesCoupures,
+	OCTETS_MAX_DE_LA_DEMANDE,
+	recevoirLExercice,
+	sonderEnExercice
+} from './exercice';
 import { AUDIENCE, commitAtteste, EMETTEUR, lireLesClesDeGithub } from './jeton-github';
 import { sonder } from './sonde';
 import { json, MAIN, MAINTENANT, sain, serveurVert } from './sonde-temoin';
@@ -146,19 +154,51 @@ describe('the OIDC token', () => {
 
 describe('POST /health/exercice', () => {
 	it('is 401 without a token of main, 400 on an unreadable request, 200 with the verdict', async () => {
-		expect(await recevoirLExercice('', cles, { couper: [] }, sain())).toEqual({
+		expect(await recevoirLExercice('', cles, async () => ({ couper: [] }), sain())).toEqual({
 			status: 401,
 			corps: { refus: 'jeton mal forme' }
 		});
 		const develop = await jeton({ ...SAINES, ref: 'refs/heads/develop' });
-		expect((await recevoirLExercice(develop, cles, { couper: [] }, sain())).status).toBe(401);
+		expect((await recevoirLExercice(develop, cles, async () => ({ couper: [] }), sain())).status).toBe(401);
 		const vrai = await jeton(SAINES);
-		expect(await recevoirLExercice(vrai, cles, { couper: 'x' }, sain())).toEqual({
+		expect(await recevoirLExercice(vrai, cles, async () => ({ couper: 'x' }), sain())).toEqual({
 			status: 400,
 			corps: { refus: 'couper doit etre une liste' }
 		});
-		const r = await recevoirLExercice(vrai, cles, { couper: ['fichiers'] }, sain());
+		const r = await recevoirLExercice(vrai, cles, async () => ({ couper: ['fichiers'] }), sain());
 		expect(r.status).toBe(200);
 		expect(r.corps).toMatchObject({ alerte: 'rouge', exercice: { coupe: ['fichiers'], verdicts: { fichiers: { vu: true } } } });
+	});
+
+	it('never reads the body of a caller without a token of main', async () => {
+		const lireLeCorps = vi.fn(() => Promise.resolve({ couper: [] }));
+		const develop = await jeton({ ...SAINES, ref: 'refs/heads/develop' });
+		expect((await recevoirLExercice(develop, cles, lireLeCorps, sain())).status).toBe(401);
+		expect((await recevoirLExercice('', cles, lireLeCorps, sain())).status).toBe(401);
+		expect(lireLeCorps).not.toHaveBeenCalled();
+	});
+});
+
+describe('the body of a drill request', () => {
+	const poster = (corps: string | null) => new Request('https://x/health/exercice', { method: 'POST', body: corps });
+
+	it('is read as JSON under the bound', async () => {
+		expect(await lireLaDemandeBornee(poster('{"couper":["fichiers"]}'))).toEqual({ couper: ['fichiers'] });
+	});
+
+	it('is null when missing, unreadable or past the bound, and the stream is cut there', async () => {
+		expect(await lireLaDemandeBornee(poster(null))).toBeNull();
+		expect(await lireLaDemandeBornee(poster('{pas du json'))).toBeNull();
+		expect(await lireLaDemandeBornee(poster(`{"couper":"${'x'.repeat(OCTETS_MAX_DE_LA_DEMANDE)}"}`))).toBeNull();
+		let tires = 0;
+		const sansFin = new ReadableStream<Uint8Array>({
+			pull(c) {
+				tires += 1;
+				c.enqueue(new Uint8Array(1024));
+			}
+		});
+		const r = new Request('https://x/health/exercice', { method: 'POST', body: sansFin, duplex: 'half' } as RequestInit);
+		expect(await lireLaDemandeBornee(r)).toBeNull();
+		expect(tires).toBeLessThan(10);
 	});
 });
