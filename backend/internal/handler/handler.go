@@ -27,6 +27,7 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		allowed[o] = true
 	}
 	mux := http.NewServeMux()
+	admit := newAdmission(time.Now)
 
 	mux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "no-store")
@@ -38,6 +39,11 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 	})
 
 	mux.HandleFunc("POST /rooms", func(w http.ResponseWriter, r *http.Request) {
+		if !admit.allow(sourceOf(r)) {
+			w.Header().Set("Retry-After", "600")
+			http.Error(w, "too many rooms from this address", http.StatusTooManyRequests)
+			return
+		}
 		var body struct {
 			Cards []string `json:"cards"`
 		}

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.51] - 2026-11-14
+
+- fix(rooms): admit room creation per source before allocating (#376)
+- fix(health): check the drill token before reading the request body (#375)
+
 ## [0.0.50] - 2026-11-13
 
 - fix(room): a client navigation to another room rebuilds the page, and a test keeps the vote answer private (#372)
