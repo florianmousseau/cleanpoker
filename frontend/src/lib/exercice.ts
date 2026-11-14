@@ -152,20 +152,62 @@ export async function sonderEnExercice(l: Lecteurs, coupe: readonly string[]): P
 	return { exercice: { coupe: [...coupe], connues: Object.keys(COUPURES), verdicts }, ...lu };
 }
 
+/** The most a drill request may weigh: `{"couper": [...]}` over every cut is far under it. */
+export const OCTETS_MAX_DE_LA_DEMANDE = 4096;
+
+/**
+ * The JSON body of `requete`, or null when it is unreadable or heavier than
+ * `max` bytes. The stream is cut as soon as it passes the bound, so a large
+ * body costs at most `max` bytes, never its own size.
+ */
+export async function lireLaDemandeBornee(requete: Request, max = OCTETS_MAX_DE_LA_DEMANDE): Promise<unknown> {
+	if (requete.body === null) return null;
+	const lecteur = requete.body.getReader();
+	const morceaux: Uint8Array[] = [];
+	let lus = 0;
+	for (;;) {
+		const { done, value } = await lecteur.read();
+		if (done) break;
+		lus += value.byteLength;
+		if (lus > max) {
+			await lecteur.cancel();
+			return null;
+		}
+		morceaux.push(value);
+	}
+	try {
+		return JSON.parse(new TextDecoder().decode(concatener(morceaux, lus))) as unknown;
+	} catch {
+		return null;
+	}
+}
+
+function concatener(morceaux: readonly Uint8Array[], taille: number): Uint8Array {
+	const tout = new Uint8Array(taille);
+	let pos = 0;
+	for (const m of morceaux) {
+		tout.set(m, pos);
+		pos += m.byteLength;
+	}
+	return tout;
+}
+
 /**
  * `POST /health/exercice`: 401 without the OIDC token of `main` (otherwise
  * anyone could make the site walk itself at will), 400 on an unreadable
- * request, 200 with `exercice` and the body of `/health` otherwise.
+ * request, 200 with `exercice` and the body of `/health` otherwise. The body
+ * is read only once the token is accepted: an anonymous caller costs the
+ * worker a signature check, never the parsing of what it sent.
  */
 export async function recevoirLExercice(
 	jeton: string,
 	lireLesCles: LireLesCles,
-	corps: unknown,
+	lireLeCorps: () => Promise<unknown>,
 	l: Lecteurs
 ): Promise<{ status: number; corps: unknown }> {
 	const atteste = await commitAtteste(jeton, lireLesCles, l.maintenant);
 	if ('refus' in atteste) return { status: 401, corps: { refus: atteste.refus } };
-	const demande = lireLesCoupures(corps);
+	const demande = lireLesCoupures(await lireLeCorps());
 	if ('refus' in demande) return { status: 400, corps: demande };
 	return { status: 200, corps: await sonderEnExercice(l, demande.coupe) };
 }
