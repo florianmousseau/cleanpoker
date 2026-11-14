@@ -201,4 +201,22 @@ describe('the body of a drill request', () => {
 		expect(await lireLaDemandeBornee(r)).toBeNull();
 		expect(tires).toBeLessThan(10);
 	});
+
+	it('is null when the stream fails, and does not wait for a cancel that never ends', async () => {
+		const casse = new ReadableStream<Uint8Array>({
+			pull(c) {
+				c.error(new Error('connexion perdue'));
+			}
+		});
+		const r1 = new Request('https://x/health/exercice', { method: 'POST', body: casse, duplex: 'half' } as RequestInit);
+		expect(await lireLaDemandeBornee(r1)).toBeNull();
+		const tetu = new ReadableStream<Uint8Array>({
+			pull(c) {
+				c.enqueue(new Uint8Array(OCTETS_MAX_DE_LA_DEMANDE + 1));
+			},
+			cancel: () => new Promise(() => undefined)
+		});
+		const r2 = new Request('https://x/health/exercice', { method: 'POST', body: tetu, duplex: 'half' } as RequestInit);
+		expect(await lireLaDemandeBornee(r2)).toBeNull();
+	});
 });

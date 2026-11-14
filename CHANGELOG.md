@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.52] - 2026-11-14
+
+- fix(health): a failing or stubborn drill body is a 400, never a 500 (#379)
+
 ## [0.0.51] - 2026-11-14
 
 - fix(rooms): admit room creation per source before allocating (#376)

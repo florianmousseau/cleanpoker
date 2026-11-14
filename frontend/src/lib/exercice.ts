@@ -165,17 +165,18 @@ export async function lireLaDemandeBornee(requete: Request, max = OCTETS_MAX_DE_
 	const lecteur = requete.body.getReader();
 	const morceaux: Uint8Array[] = [];
 	let lus = 0;
-	for (;;) {
-		const { done, value } = await lecteur.read();
-		if (done) break;
-		lus += value.byteLength;
-		if (lus > max) {
-			await lecteur.cancel();
-			return null;
-		}
-		morceaux.push(value);
-	}
 	try {
+		for (;;) {
+			const { done, value } = await lecteur.read();
+			if (done) break;
+			lus += value.byteLength;
+			if (lus > max) {
+				// Not awaited: a stream slow or unable to cancel must not hold the 400.
+				lecteur.cancel().catch(() => undefined);
+				return null;
+			}
+			morceaux.push(value);
+		}
 		return JSON.parse(new TextDecoder().decode(concatener(morceaux, lus))) as unknown;
 	} catch {
 		return null;
