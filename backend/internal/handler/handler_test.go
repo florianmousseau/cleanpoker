@@ -271,6 +271,19 @@ func TestStats_CountsRoomsAndEveryArrival(t *testing.T) {
 	}
 }
 
+// A room opened by its address alone is a session too: without it the stats
+// showed arrivals with zero sessions created.
+func TestStats_RoomOpenedByItsAddressCountsAsCreated(t *testing.T) {
+	srv := newTestServer(t)
+	conn := wsConnect(t, srv, "abcd1234", "amandine")
+	recv(t, conn)
+	recv(t, conn)
+	usage := getStats(t, srv)
+	if usage.RoomsCreated != 1 || usage.ParticipantsJoined != 1 {
+		t.Fatalf("expected 1 room and 1 arrival, got %+v", usage)
+	}
+}
+
 func TestStats_ObserversCountAsArrivals(t *testing.T) {
 	srv := newTestServer(t)
 	id := createRoom(t, srv)
