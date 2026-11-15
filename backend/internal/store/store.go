@@ -126,9 +126,21 @@ func (s *Store) CanHold(id string) bool {
 	return ok || len(s.rooms) < s.limit
 }
 
-// GetOrCreate returns the room id, opening it if needed. It returns ErrFull
-// when the room does not exist and the server holds MaxRooms already.
+// GetOrCreate returns the room id, opening it if needed, and counts that
+// opening as a created session: a room reached by its address alone used to
+// count its arrivals and not itself. It returns ErrFull when the room does not
+// exist and the server holds MaxRooms already.
 func (s *Store) GetOrCreate(id string, cards []string) (*room.Room, error) {
+	return s.getOrCreate(id, cards, true)
+}
+
+// GetOrCreateUncounted is GetOrCreate for the health probe, whose room is not
+// a session anybody held.
+func (s *Store) GetOrCreateUncounted(id string, cards []string) (*room.Room, error) {
+	return s.getOrCreate(id, cards, false)
+}
+
+func (s *Store) getOrCreate(id string, cards []string, counted bool) (*room.Room, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	if r, ok := s.rooms[id]; ok {
@@ -139,6 +151,9 @@ func (s *Store) GetOrCreate(id string, cards []string) (*room.Room, error) {
 	}
 	r := room.New(id, cards)
 	s.rooms[id] = r
+	if counted {
+		s.roomsCreated++
+	}
 	return r, nil
 }
 
