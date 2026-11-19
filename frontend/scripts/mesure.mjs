@@ -38,59 +38,66 @@
  * so the HTML pages take their headers from hooks.server.ts. A permission left
  * open in one of them is a door nobody watches.
  */
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { join } from "node:path";
 
-const VENDOR = 'cloudflareinsights';
-const TOOL = 'Cloudflare Web Analytics';
-const lire = (chemin) => readFileSync(chemin, 'utf8');
+const VENDOR = "cloudflareinsights";
+const TOOL = "Cloudflare Web Analytics";
+const lire = (chemin) => readFileSync(chemin, "utf8");
 const existe = (chemin) => existsSync(chemin);
 
-const shell = lire('src/app.html');
-const hooks = lire('src/hooks.server.ts');
-const headers = lire('_headers');
-const llms = lire('static/llms.txt');
-const readme = lire('../README.md');
+const shell = lire("src/app.html");
+const hooks = lire("src/hooks.server.ts");
+const headers = lire("_headers");
+const llms = lire("static/llms.txt");
+const readme = lire("../README.md");
 
 const faults = [];
 const require_ = (condition, phrase) => {
-	if (!condition) faults.push(phrase);
+  if (!condition) faults.push(phrase);
 };
 
 // --- rien ne charge, et les deux politiques sont refermees ---
-require_(!shell.includes(VENDOR), 'src/app.html loads a measurement script again');
 require_(
-	hooks.includes(`"script-src 'self' 'unsafe-inline'"`) && !hooks.includes(VENDOR),
-	'hooks.server.ts allows a script it has no reason to allow'
+  !shell.includes(VENDOR),
+  "src/app.html loads a measurement script again",
 );
 require_(
-	headers.includes(`script-src 'self' 'unsafe-inline';`) && !headers.includes(VENDOR),
-	'_headers allows a script it has no reason to allow, and the static half of the site disagrees'
+  hooks.includes(`"script-src 'self' 'unsafe-inline'"`) &&
+    !hooks.includes(VENDOR),
+  "hooks.server.ts allows a script it has no reason to allow",
 );
 require_(
-	hooks.includes(`"connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev"`),
-	'hooks.server.ts lets the page reach the game server, and nothing else'
+  headers.includes(`script-src 'self' 'unsafe-inline';`) &&
+    !headers.includes(VENDOR),
+  "_headers allows a script it has no reason to allow, and the static half of the site disagrees",
 );
 require_(
-	headers.includes(
-		`connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev;`
-	),
-	'_headers lets the page reach the game server, and nothing else'
+  hooks.includes(
+    `"connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev"`,
+  ),
+  "hooks.server.ts lets the page reach the game server, and nothing else",
+);
+require_(
+  headers.includes(
+    `connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev;`,
+  ),
+  "_headers lets the page reach the game server, and nothing else",
 );
 
 // A token in the shell is the other way the beacon comes back: the script tag
 // can be rebuilt around it in one line.
 require_(
-	!/"token":\s*"[0-9a-f]{32}"/.test(shell),
-	'the shell carries a site token again, which is a beacon waiting for its tag'
+  !/"token":\s*"[0-9a-f]{32}"/.test(shell),
+  "the shell carries a site token again, which is a beacon waiting for its tag",
 );
 // The retired tokens STAY in .gitleaks.toml: a full-history scan still finds
 // them in the commits that carried them, so dropping the allowance turns the
 // repository red with nothing new to hide. What must not come back is a token
 // declared as served.
 require_(
-	!lire('../.gitleaks.toml').includes('# Served today.'),
-	'.gitleaks.toml declares a token as served while no page serves one'
+  !lire("../.gitleaks.toml").includes("# Served today."),
+  ".gitleaks.toml declares a token as served while no page serves one",
 );
 
 // --- la nuance, exigee la ou la promesse est faite ---
@@ -98,70 +105,78 @@ require_(
 // Chacune de ces phrases dit les DEUX moities. Elles sont verifiees une par
 // une, et pas par mot-cle : une formulation voisine qui ne garderait que la
 // premiere moitie est exactement le mensonge qu'on repare.
-const flat = (texte) => texte.replace(/\s+/g, ' ');
+const flat = (texte) => texte.replace(/\s+/g, " ");
 const NUANCE = [
-	['../README.md', readme, 'the host that serves the pages counts the requests it answers'],
-	['static/llms.txt', llms, 'The host that serves the pages counts the requests it answers'],
-	[
-		'src/routes/green/+page.svelte',
-		null,
-		'<tr><td>Requests counted by the host</td><td><strong>yes</strong>'
-	],
-	[
-		'src/routes/fr/green/+page.svelte',
-		null,
-		"<tr><td>Requêtes comptées par l'hébergeur</td><td><strong>oui</strong>"
-	],
-	[
-		'src/routes/de/green/+page.svelte',
-		null,
-		'<tr><td>Vom Hoster gezählte Anfragen</td><td><strong>ja</strong>'
-	],
-	[
-		'src/routes/es/green/+page.svelte',
-		null,
-		'<tr><td>Solicitudes contadas por el proveedor</td><td><strong>sí</strong>'
-	],
-	[
-		'src/routes/pt/green/+page.svelte',
-		null,
-		'<tr><td>Pedidos contados pelo alojamento</td><td><strong>sim</strong>'
-	],
-	[
-		'src/routes/mentions-legales/+page.svelte',
-		null,
-		'the host that serves these pages, Cloudflare, records the requests it answers'
-	],
-	[
-		'src/routes/fr/mentions-legales/+page.svelte',
-		null,
-		"l'hébergeur qui sert ces pages, Cloudflare, enregistre les requêtes auxquelles il répond"
-	],
-	[
-		'src/routes/de/mentions-legales/+page.svelte',
-		null,
-		'protokolliert der Hoster dieser Seiten, Cloudflare, die Anfragen, die er beantwortet'
-	],
-	[
-		'src/routes/es/mentions-legales/+page.svelte',
-		null,
-		'el proveedor que sirve estas páginas, Cloudflare, registra las solicitudes que responde'
-	],
-	[
-		'src/routes/pt/mentions-legales/+page.svelte',
-		null,
-		'o alojamento que serve estas páginas, a Cloudflare, regista os pedidos a que responde'
-	]
+  [
+    "../README.md",
+    readme,
+    "the host that serves the pages counts the requests it answers",
+  ],
+  [
+    "static/llms.txt",
+    llms,
+    "The host that serves the pages counts the requests it answers",
+  ],
+  [
+    "src/routes/green/+page.svelte",
+    null,
+    "<tr><td>Requests counted by the host</td><td><strong>yes</strong>",
+  ],
+  [
+    "src/routes/fr/green/+page.svelte",
+    null,
+    "<tr><td>Requêtes comptées par l'hébergeur</td><td><strong>oui</strong>",
+  ],
+  [
+    "src/routes/de/green/+page.svelte",
+    null,
+    "<tr><td>Vom Hoster gezählte Anfragen</td><td><strong>ja</strong>",
+  ],
+  [
+    "src/routes/es/green/+page.svelte",
+    null,
+    "<tr><td>Solicitudes contadas por el proveedor</td><td><strong>sí</strong>",
+  ],
+  [
+    "src/routes/pt/green/+page.svelte",
+    null,
+    "<tr><td>Pedidos contados pelo alojamento</td><td><strong>sim</strong>",
+  ],
+  [
+    "src/routes/mentions-legales/+page.svelte",
+    null,
+    "the host that serves these pages, Cloudflare, records the requests it answers",
+  ],
+  [
+    "src/routes/fr/mentions-legales/+page.svelte",
+    null,
+    "l'hébergeur qui sert ces pages, Cloudflare, enregistre les requêtes auxquelles il répond",
+  ],
+  [
+    "src/routes/de/mentions-legales/+page.svelte",
+    null,
+    "protokolliert der Hoster dieser Seiten, Cloudflare, die Anfragen, die er beantwortet",
+  ],
+  [
+    "src/routes/es/mentions-legales/+page.svelte",
+    null,
+    "el proveedor que sirve estas páginas, Cloudflare, registra las solicitudes que responde",
+  ],
+  [
+    "src/routes/pt/mentions-legales/+page.svelte",
+    null,
+    "o alojamento que serve estas páginas, a Cloudflare, regista os pedidos a que responde",
+  ],
 ];
 for (const [ou, deja, phrase] of NUANCE) {
-	require_(
-		flat(deja ?? lire(ou)).includes(phrase),
-		`${ou} no longer says the host counts requests, and the claim beside it needs that half`
-	);
+  require_(
+    flat(deja ?? lire(ou)).includes(phrase),
+    `${ou} no longer says the host counts requests, and the claim beside it needs that half`,
+  );
 }
 require_(
-	readme.includes('badge/trackers-0'),
-	'the trackers-0 badge is the promise this product is sold on, and it is true again'
+  readme.includes("badge/trackers-0"),
+  "the trackers-0 badge is the promise this product is sold on, and it is true again",
 );
 
 // --- le vocabulaire interdit, dans les cinq langues, PARTOUT ---
@@ -186,44 +201,44 @@ require_(
 // emplacement de serveur et non d'une mesure. Une tournure trop courte attrape
 // le vocabulaire ordinaire du produit.
 const EXCLUSIVITE_DE_L_HEBERGEUR = [
-	'the host is the only one counting',
-	'only the host counts',
-	'the site itself counts nothing',
-	'the site keeps no count of its own',
-	"seul l'hébergeur compte",
-	'de nulle part ailleurs',
-	'le site ne compte personne',
-	'le site ne compte pas ses lecteurs',
-	'nur der Hoster zählt',
-	'die Website selbst zählt nichts',
-	'solo el proveedor cuenta',
-	'el sitio no cuenta a nadie',
-	'apenas o alojamento conta',
-	'o site não conta ninguém'
+  "the host is the only one counting",
+  "only the host counts",
+  "the site itself counts nothing",
+  "the site keeps no count of its own",
+  "seul l'hébergeur compte",
+  "de nulle part ailleurs",
+  "le site ne compte personne",
+  "le site ne compte pas ses lecteurs",
+  "nur der Hoster zählt",
+  "die Website selbst zählt nichts",
+  "solo el proveedor cuenta",
+  "el sitio no cuenta a nadie",
+  "apenas o alojamento conta",
+  "o site não conta ninguém",
 ];
 
 const INTERDITES = [
-	VENDOR,
-	TOOL,
-	'no measurement at all',
-	'nothing is measured',
-	'we measure nothing',
-	'no analytics of any kind',
-	'zero analytics',
-	'measures nothing',
-	'aucune mesure',
-	'ne mesure rien',
-	'ne mesurons rien',
-	'zéro analytics',
-	'keine Messung',
-	'misst nichts',
-	'messen nichts',
-	'ninguna medición',
-	'no mide nada',
-	'no medimos nada',
-	'nenhuma medição',
-	'não mede nada',
-	'não medimos nada'
+  VENDOR,
+  TOOL,
+  "no measurement at all",
+  "nothing is measured",
+  "we measure nothing",
+  "no analytics of any kind",
+  "zero analytics",
+  "measures nothing",
+  "aucune mesure",
+  "ne mesure rien",
+  "ne mesurons rien",
+  "zéro analytics",
+  "keine Messung",
+  "misst nichts",
+  "messen nichts",
+  "ninguna medición",
+  "no mide nada",
+  "no medimos nada",
+  "nenhuma medição",
+  "não mede nada",
+  "não medimos nada",
 ];
 
 /*
@@ -233,25 +248,25 @@ const INTERDITES = [
  * Lu sur le texte APLATI : la phrase court presque toujours sur deux lignes.
  */
 const SUIVI_IMPOSSIBLE = [
-	'rien ne permet de vous suivre',
-	'rien ne peut vous suivre',
-	'nothing lets you be followed',
-	'nothing can follow you',
-	'nichts erlaubt es also, Sie',
-	'nada permite seguirle',
-	'nada permite segui-lo'
+  "rien ne permet de vous suivre",
+  "rien ne peut vous suivre",
+  "nothing lets you be followed",
+  "nothing can follow you",
+  "nichts erlaubt es also, Sie",
+  "nada permite seguirle",
+  "nada permite segui-lo",
 ];
 
 const livres = [];
 const parcourir = (dir) => {
-	for (const e of readdirSync(dir)) {
-		if (['node_modules', 'build', '.svelte-kit'].includes(e)) continue;
-		const p = join(dir, e);
-		if (statSync(p).isDirectory()) parcourir(p);
-		else if (/\.(svelte|ts|txt|md|html)$/.test(e)) livres.push(p);
-	}
+  for (const e of readdirSync(dir)) {
+    if (["node_modules", "build", ".svelte-kit"].includes(e)) continue;
+    const p = join(dir, e);
+    if (statSync(p).isDirectory()) parcourir(p);
+    else if (/\.(svelte|ts|txt|md|html)$/.test(e)) livres.push(p);
+  }
 };
-parcourir('src');
+parcourir("src");
 // Le README parce qu'il est la vitrine du depot public, et `referencement.md`
 // parce qu'il porte les textes destines a etre SOUMIS ailleurs - annuaires,
 // listes awesome - ou personne ne les relira jamais.
@@ -261,54 +276,58 @@ parcourir('src');
 // servi a aucun lecteur. La lecon de truecopy.dev - une note qui cite la phrase
 // retiree la remet en circulation - vaut pour ce qui est livre ; la note, elle,
 // doit bien vivre quelque part.
-livres.push('static/llms.txt', '../README.md', '../docs/referencement.md');
+livres.push("static/llms.txt", "../README.md", "../docs/referencement.md");
 
 for (const chemin of livres) {
-	const texte = lire(chemin);
-	for (const phrase of INTERDITES) {
-		if (texte.includes(phrase)) {
-			faults.push(`${chemin.replaceAll('\\', '/')} still says "${phrase}"`);
-		}
-	}
-	/*
-	 * MINUSCULES POUR CELLE-CI SEULEMENT, et le defaut a ete paye en eprouvant
-	 * la garde : « Seul l'hébergeur compte » avec sa majuscule de debut de phrase
-	 * passait au travers, c'est-a-dire exactement la position ou une telle phrase
-	 * apparait. `INTERDITES` garde sa casse parce qu'elle nomme des PRODUITS -
-	 * « Cloudflare Web Analytics » ne s'ecrit pas autrement.
-	 */
-	const aplati = texte.replace(/\s+/g, ' ');
-	for (const phrase of SUIVI_IMPOSSIBLE) {
-		if (aplati.includes(phrase)) {
-			faults.push(`${chemin.replaceAll('\\', '/')} still promises "${phrase}"`);
-		}
-	}
-	const minuscules = texte.toLowerCase();
-	for (const phrase of EXCLUSIVITE_DE_L_HEBERGEUR) {
-		if (minuscules.includes(phrase.toLowerCase())) {
-			faults.push(
-				`${chemin.replaceAll('\\', '/')} still says "${phrase}", which the site's own counter makes false`
-			);
-		}
-	}
+  const texte = lire(chemin);
+  for (const phrase of INTERDITES) {
+    if (texte.includes(phrase)) {
+      faults.push(`${chemin.replaceAll("\\", "/")} still says "${phrase}"`);
+    }
+  }
+  /*
+   * MINUSCULES POUR CELLE-CI SEULEMENT, et le defaut a ete paye en eprouvant
+   * la garde : « Seul l'hébergeur compte » avec sa majuscule de debut de phrase
+   * passait au travers, c'est-a-dire exactement la position ou une telle phrase
+   * apparait. `INTERDITES` garde sa casse parce qu'elle nomme des PRODUITS -
+   * « Cloudflare Web Analytics » ne s'ecrit pas autrement.
+   */
+  const aplati = texte.replace(/\s+/g, " ");
+  for (const phrase of SUIVI_IMPOSSIBLE) {
+    if (aplati.includes(phrase)) {
+      faults.push(`${chemin.replaceAll("\\", "/")} still promises "${phrase}"`);
+    }
+  }
+  const minuscules = texte.toLowerCase();
+  for (const phrase of EXCLUSIVITE_DE_L_HEBERGEUR) {
+    if (minuscules.includes(phrase.toLowerCase())) {
+      faults.push(
+        `${chemin.replaceAll("\\", "/")} still says "${phrase}", which the site's own counter makes false`,
+      );
+    }
+  }
 }
 
 // --- et ce qui reste vrai, verifie sans condition ---
 require_(
-	lire('src/routes/green/+page.svelte').includes(
-		'No Google Analytics or any behavioral tracking tool'
-	),
-	'the eco-design page still rules out behavioural tracking'
+  lire("src/routes/green/+page.svelte").includes(
+    "No Google Analytics or any behavioral tracking tool",
+  ),
+  "the eco-design page still rules out behavioural tracking",
 );
 require_(
-	lire('src/routes/fr/mentions-legales/+page.svelte').includes('rien n&apos;est écrit sur disque') ||
-		lire('src/routes/fr/mentions-legales/+page.svelte').includes("rien n'est écrit sur disque"),
-	'the French legal page still says nothing is written to disk'
+  lire("src/routes/fr/mentions-legales/+page.svelte").includes(
+    "rien n&apos;est écrit sur disque",
+  ) ||
+    lire("src/routes/fr/mentions-legales/+page.svelte").includes(
+      "rien n'est écrit sur disque",
+    ),
+  "the French legal page still says nothing is written to disk",
 );
 
 // --- LE COMPTAGE DU SITE SE DECLARE, dans les cinq langues ---
 //
-// Le middleware compte un lecteur unique en hachant son adresse. C'est un
+// Le Worker de zone du parc compte un lecteur unique en hachant son adresse. C'est un
 // traitement du RESPONSABLE et non de l'hebergeur : le livrer sans ces phrases
 // mettrait en ligne des pages qui nient ce que le site fait, sur des donnees
 // personnelles - le miroir du defaut decrit en tete de ce fichier, et le plus
@@ -318,93 +337,108 @@ require_(
 // verifier. Retirer le compteur sans retirer le paragraphe est l'autre faute,
 // et elle rougit ici exactement de la meme facon.
 const DECLARATIONS = [
-	['src/routes/mentions-legales/+page.svelte', 'the site counts its readers itself'],
-	['src/routes/mentions-legales/+page.svelte', 'Your IP address is neither recorded nor kept'],
-	['src/routes/mentions-legales/+page.svelte', 'article 6.1.f GDPR'],
-	['src/routes/fr/mentions-legales/+page.svelte', 'le site compte aussi ses lecteurs lui-même'],
-	[
-		'src/routes/fr/mentions-legales/+page.svelte',
-		"Votre adresse IP n'est ni enregistrée ni conservée"
-	],
-	['src/routes/fr/mentions-legales/+page.svelte', 'article 6.1.f du RGPD'],
-	['src/routes/de/mentions-legales/+page.svelte', 'zählt die Website ihre Leser auch selbst'],
-	[
-		'src/routes/de/mentions-legales/+page.svelte',
-		'Ihre IP-Adresse wird weder gespeichert noch aufbewahrt'
-	],
-	['src/routes/de/mentions-legales/+page.svelte', 'Artikel 6.1.f DSGVO'],
-	[
-		'src/routes/es/mentions-legales/+page.svelte',
-		'el sitio también cuenta sus lectores por sí mismo'
-	],
-	['src/routes/es/mentions-legales/+page.svelte', 'Su dirección IP no se registra ni se conserva'],
-	['src/routes/es/mentions-legales/+page.svelte', 'artículo 6.1.f del RGPD'],
-	[
-		'src/routes/pt/mentions-legales/+page.svelte',
-		'o site conta também os seus leitores por si próprio'
-	],
-	[
-		'src/routes/pt/mentions-legales/+page.svelte',
-		'O seu endereço IP não é registado nem conservado'
-	],
-	['src/routes/pt/mentions-legales/+page.svelte', 'artigo 6.1.f do RGPD']
+  [
+    "src/routes/mentions-legales/+page.svelte",
+    "the site counts its readers itself",
+  ],
+  [
+    "src/routes/mentions-legales/+page.svelte",
+    "Your IP address is neither recorded nor kept",
+  ],
+  ["src/routes/mentions-legales/+page.svelte", "article 6.1.f GDPR"],
+  [
+    "src/routes/fr/mentions-legales/+page.svelte",
+    "le site compte aussi ses lecteurs lui-même",
+  ],
+  [
+    "src/routes/fr/mentions-legales/+page.svelte",
+    "Votre adresse IP n'est ni enregistrée ni conservée",
+  ],
+  ["src/routes/fr/mentions-legales/+page.svelte", "article 6.1.f du RGPD"],
+  [
+    "src/routes/de/mentions-legales/+page.svelte",
+    "zählt die Website ihre Leser auch selbst",
+  ],
+  [
+    "src/routes/de/mentions-legales/+page.svelte",
+    "Ihre IP-Adresse wird weder gespeichert noch aufbewahrt",
+  ],
+  ["src/routes/de/mentions-legales/+page.svelte", "Artikel 6.1.f DSGVO"],
+  [
+    "src/routes/es/mentions-legales/+page.svelte",
+    "el sitio también cuenta sus lectores por sí mismo",
+  ],
+  [
+    "src/routes/es/mentions-legales/+page.svelte",
+    "Su dirección IP no se registra ni se conserva",
+  ],
+  ["src/routes/es/mentions-legales/+page.svelte", "artículo 6.1.f del RGPD"],
+  [
+    "src/routes/pt/mentions-legales/+page.svelte",
+    "o site conta também os seus leitores por si próprio",
+  ],
+  [
+    "src/routes/pt/mentions-legales/+page.svelte",
+    "O seu endereço IP não é registado nem conservado",
+  ],
+  ["src/routes/pt/mentions-legales/+page.svelte", "artigo 6.1.f do RGPD"],
 ];
 for (const [ou, phrase] of DECLARATIONS) {
-	require_(
-		flat(lire(ou)).includes(phrase),
-		`${ou} no longer states: "${phrase}", and the site counts readers anyway`
-	);
+  require_(
+    flat(lire(ou)).includes(phrase),
+    `${ou} no longer states: "${phrase}", and the site counts readers anyway`,
+  );
 }
 
 // L'ecran d'ecoconception porte la meme verite sous forme de tableau. Un
 // lecteur qui compare les deux pages doit y lire la meme chose.
 for (const [ou, phrase] of [
-	['src/routes/green/+page.svelte', '<td>Counted by the site itself</td>'],
-	['src/routes/fr/green/+page.svelte', '<td>Comptage par le site lui-même</td>'],
-	['src/routes/de/green/+page.svelte', '<td>Zählung durch die Website selbst</td>'],
-	['src/routes/es/green/+page.svelte', '<td>Recuento por el propio sitio</td>'],
-	['src/routes/pt/green/+page.svelte', '<td>Contagem pelo próprio site</td>']
+  ["src/routes/green/+page.svelte", "<td>Counted by the site itself</td>"],
+  [
+    "src/routes/fr/green/+page.svelte",
+    "<td>Comptage par le site lui-même</td>",
+  ],
+  [
+    "src/routes/de/green/+page.svelte",
+    "<td>Zählung durch die Website selbst</td>",
+  ],
+  ["src/routes/es/green/+page.svelte", "<td>Recuento por el propio sitio</td>"],
+  ["src/routes/pt/green/+page.svelte", "<td>Contagem pelo próprio site</td>"],
 ]) {
-	require_(
-		flat(lire(ou)).includes(phrase),
-		`${ou} no longer shows the count the site does itself, beside the host one`
-	);
+  require_(
+    flat(lire(ou)).includes(phrase),
+    `${ou} no longer shows the count the site does itself, beside the host one`,
+  );
 }
 
-// LA REGLE ET SON CABLAGE SONT DES COPIES, et le cockpit tient un banc qui les
-// refuse des qu'elles derivent. Ce qu'un banc LA-BAS ne peut pas voir, c'est
-// leur disparition d'ICI : un site qui perd son compteur affiche un tiret dans
-// le cockpit, et cinq pages legales continuent d'annoncer un comptage absent.
-for (const chemin of ['src/lib/compteur.js', 'src/lib/compteur-hook.ts']) {
-	require_(existe(chemin), `${chemin} is gone, and the pages still declare the count it does`);
+// LE COMPTEUR POSE DANS LE SITE EST RETIRE (2026-11-19). Le Worker de zone du
+// parc compte cleanpoker.dev devant le site, ce que les pages ci-dessus
+// declarent. La copie locale ne revient pas : elle ecrivait un jeu sans lecteur.
+for (const chemin of [
+  "src/lib/compteur.js",
+  "src/lib/compteur-hook.ts",
+  "src/routes/etat-compteur/+server.ts",
+]) {
+  require_(
+    !existe(chemin),
+    `${chemin} is back, while the zone Worker already counts the site`,
+  );
 }
-require_(
-	hooks.includes('sequence(plateforme, localeThemeAndHeaders, compteurDeVisiteurs)'),
-	'hooks.server.ts no longer runs the counter, while five legal pages announce it'
-);
-// adapter-cloudflare 8 passes no `platform`: without the hook that rebuilds it,
-// the counter above is wired and counts nothing (v0.0.16, 2026-10-10).
-require_(
-	hooks.includes("from 'cloudflare:workers'"),
-	'hooks.server.ts no longer hands the bindings to the counter, which then counts nothing'
-);
-require_(
-	existe('src/routes/etat-compteur/+server.ts'),
-	'the /etat-compteur probe is gone, and nothing else can say WHY a visit does not count'
-);
 
 if (faults.length) {
-	console.error('The bytes and what the site says about them have drifted apart:\n');
-	for (const f of faults) console.error(`  - ${f}`);
-	console.error(
-		'\nEither a script came back that no page declares, or a page is claiming\n' +
-			'more silence than this site can honestly promise. Both are the same defect.'
-	);
-	process.exit(1);
+  console.error(
+    "The bytes and what the site says about them have drifted apart:\n",
+  );
+  for (const f of faults) console.error(`  - ${f}`);
+  console.error(
+    "\nEither a script came back that no page declares, or a page is claiming\n" +
+      "more silence than this site can honestly promise. Both are the same defect.",
+  );
+  process.exit(1);
 }
 
 console.log(
-	'No measurement script: both policies closed, no page names a tool, and BOTH counts are ' +
-		'stated in five languages - the host one and the site own, with what it never keeps and ' +
-		`on what legal basis. ${EXCLUSIVITE_DE_L_HEBERGEUR.length} ways of claiming the host is the only counter are refused.`
+  "No measurement script: both policies closed, no page names a tool, and BOTH counts are " +
+    "stated in five languages - the host one and the site own, with what it never keeps and " +
+    `on what legal basis. ${EXCLUSIVITE_DE_L_HEBERGEUR.length} ways of claiming the host is the only counter are refused.`,
 );
