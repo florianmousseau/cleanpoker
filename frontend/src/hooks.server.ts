@@ -1,14 +1,13 @@
-import type { Handle } from '@sveltejs/kit/hooks';
-import { sequence } from '@sveltejs/kit/hooks';
-import { compteurDeVisiteurs } from '#lib/compteur-hook.ts';
-import { plateformeCloudflare } from '#lib/plateforme.ts';
-import { building, dev } from '$app/env';
-import { env, waitUntil } from 'cloudflare:workers';
-import { SKIP_LINK } from '#lib/skip-link.ts';
-import { sansPrefixeEn } from '#lib/redirection-en.ts';
+import type { Handle } from "@sveltejs/kit/hooks";
+import { sequence } from "@sveltejs/kit/hooks";
+import { plateformeCloudflare } from "#lib/plateforme.ts";
+import { building, dev } from "$app/env";
+import { env, waitUntil } from "cloudflare:workers";
+import { SKIP_LINK } from "#lib/skip-link.ts";
+import { sansPrefixeEn } from "#lib/redirection-en.ts";
 
-const LOCALES = ['fr', 'es', 'de', 'pt'] as const;
-type Locale = typeof LOCALES[number];
+const LOCALES = ["fr", "es", "de", "pt"] as const;
+type Locale = (typeof LOCALES)[number];
 
 /**
  * Cloudflare Pages applies _headers to static assets only, never to the
@@ -16,28 +15,30 @@ type Locale = typeof LOCALES[number];
  * them. Keep this table and the _headers file in sync.
  */
 const SECURITY_HEADERS: Record<string, string> = {
-	'X-Content-Type-Options': 'nosniff',
-	'X-Frame-Options': 'DENY',
-	'Cross-Origin-Opener-Policy': 'same-origin',
-	'Referrer-Policy': 'strict-origin-when-cross-origin',
-	'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=()',
-	'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
-	'Content-Security-Policy': [
-		"default-src 'self'",
-		"connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev",
-		"script-src 'self' 'unsafe-inline'",
-		"style-src 'self' 'unsafe-inline'",
-		"img-src 'self' data:",
-		"font-src 'self'",
-		"object-src 'none'",
-		"base-uri 'self'",
-		"frame-ancestors 'none'"
-	].join('; ')
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "geolocation=(), microphone=(), camera=(), payment=()",
+  "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+  "Content-Security-Policy": [
+    "default-src 'self'",
+    "connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev",
+    "script-src 'self' 'unsafe-inline'",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data:",
+    "font-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "frame-ancestors 'none'",
+  ].join("; "),
 };
 
-function routeLocale(pathname: string): Locale | 'en' {
-	const match = LOCALES.find((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
-	return match ?? 'en';
+function routeLocale(pathname: string): Locale | "en" {
+  const match = LOCALES.find(
+    (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`),
+  );
+  return match ?? "en";
 }
 
 /**
@@ -48,53 +49,51 @@ function routeLocale(pathname: string): Locale | 'en' {
  * and fell through to /[id], which treats an unknown segment as a room id.
  */
 const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
-	const target = sansPrefixeEn(event.url.pathname);
-	if (target !== null) {
-		return new Response(null, {
-			status: 301,
-			headers: { location: `${target}${event.url.search}` }
-		});
-	}
+  const target = sansPrefixeEn(event.url.pathname);
+  if (target !== null) {
+    return new Response(null, {
+      status: 301,
+      headers: { location: `${target}${event.url.search}` },
+    });
+  }
 
-	const locale = routeLocale(event.url.pathname);
+  const locale = routeLocale(event.url.pathname);
 
-	const themeCookie = event.cookies.get('theme');
-	const themeAttr = themeCookie === 'dark' ? ' data-theme="dark"'
-		: themeCookie === 'light' ? ' data-theme="light"'
-		: '';
+  const themeCookie = event.cookies.get("theme");
+  const themeAttr =
+    themeCookie === "dark"
+      ? ' data-theme="dark"'
+      : themeCookie === "light"
+        ? ' data-theme="light"'
+        : "";
 
-	const response = await resolve(event, {
-		transformPageChunk: ({ html }) =>
-			html
-				.replace('<html lang="fr">', `<html lang="${locale}"${themeAttr}>`)
-				.replace(
-					'class="skip-link">Aller au contenu principal</a>',
-					`class="skip-link">${SKIP_LINK[locale]}</a>`
-				),
-	});
+  const response = await resolve(event, {
+    transformPageChunk: ({ html }) =>
+      html
+        .replace('<html lang="fr">', `<html lang="${locale}"${themeAttr}>`)
+        .replace(
+          'class="skip-link">Aller au contenu principal</a>',
+          `class="skip-link">${SKIP_LINK[locale]}</a>`,
+        ),
+  });
 
-	for (const [header, value] of Object.entries(SECURITY_HEADERS)) {
-		response.headers.set(header, value);
-	}
+  for (const [header, value] of Object.entries(SECURITY_HEADERS)) {
+    response.headers.set(header, value);
+  }
 
-	return response;
+  return response;
 };
 
 /*
- * THE TWO COMPOSE, THEY DO NOT MERGE.
- *
- * `compteurDeVisiteurs` lives in `lib/compteur-hook.ts`, a byte-for-byte copy
- * of a template in the `assistant` repository that a bench keeps identical
- * across the whole portfolio. Folding it into the local hook would lose that
- * identity at the first fix made here, and the counting rule would stop being
- * the same from one site to the next - which is the one thing it exists to
- * guarantee.
- *
- * The counter runs LAST: it reads the final response, the one that already
- * carries the locale, the theme and the security headers. `plateformeCloudflare`
- * runs FIRST, because adapter-cloudflare 8 passes no `platform` and the counter
- * reads its bindings there.
+ * `plateformeCloudflare` runs FIRST, because adapter-cloudflare 8 passes no
+ * `platform` and the routes read their bindings there. The in-site visitor
+ * counter that ran last left on 2026-11-19: the zone Worker of the estate
+ * counts cleanpoker.dev.
  */
-const plateforme = plateformeCloudflare({ env, waitUntil, actif: !dev && !building });
+const plateforme = plateformeCloudflare({
+  env,
+  waitUntil,
+  actif: !dev && !building,
+});
 
-export const handle = sequence(plateforme, localeThemeAndHeaders, compteurDeVisiteurs);
+export const handle = sequence(plateforme, localeThemeAndHeaders);
