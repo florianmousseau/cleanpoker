@@ -166,8 +166,8 @@ func NewServer(rooms Rooms, version string) *mcp.Server {
 		&mcp.ServerOptions{Instructions: instructions})
 	s := service{rooms: rooms}
 	mcp.AddTool(srv, &mcp.Tool{Name: "join_room", Description: "Join a planning poker room as a participant marked as an AI. Returns the seat token and the room state."}, s.join)
-	mcp.AddTool(srv, &mcp.Tool{Name: "get_room", Description: "Read a room: deck, round, who voted, and the results once a person has revealed the votes.", Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true}}, s.get)
-	mcp.AddTool(srv, &mcp.Tool{Name: "vote", Description: "Vote one card of the room deck, hidden from the team until the reveal. An empty card withdraws the vote."}, s.vote)
+	mcp.AddTool(srv, &mcp.Tool{Name: "get_room", Description: "Read a room: deck, round, the story list and the one on the table, who voted, and the results once a person has revealed the votes.", Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true}}, s.get)
+	mcp.AddTool(srv, &mcp.Tool{Name: "vote", Description: "Vote one card of the room deck with a short reason, both hidden from the team until the reveal. An empty card withdraws the vote."}, s.vote)
 	mcp.AddTool(srv, &mcp.Tool{Name: "leave_room", Description: "Leave the room and give up the seat."}, s.leave)
 	return srv
 }

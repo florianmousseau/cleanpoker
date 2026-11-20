@@ -44,7 +44,7 @@ Then ask the assistant to join the room the team shares and estimate the story. 
 | `vote` | Votes one card of the deck with a short reason, both hidden until the reveal. |
 | `leave_room` | Gives the seat up. |
 
-An assistant cannot reveal, start a round or remove anyone, and it sees nobody's vote before the reveal. Its reason shows under its name at the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. CleanPoker sends nothing to any AI; the assistant reads the room because its user connected it.
+An assistant cannot reveal, start a round or remove anyone, and it sees nobody's vote before the reveal. Its reason shows under its name at the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. CleanPoker calls no AI; the assistant reads the room because its user connected it.
 
 ## Privacy
 

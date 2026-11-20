@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Le texte de la story est-il envoyé à une IA ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Oui, à l\'assistant qu\'une personne de l\'équipe a connecté, et à aucune autre IA : CleanPoker n\'en appelle aucune. L\'assistant reçoit l\'état de la salle : les titres des stories si l\'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Oui, à l\'assistant qu\'une personne de l\'équipe a connecté, et à aucune autre IA : CleanPoker n\'en appelle aucune. L\'assistant reçoit l\'état de la salle : les titres des stories et leurs estimations si l\'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.' },
       },
     ],
   })}<\/script>`}
@@ -63,7 +63,7 @@
     </table>
     </div>
     <p>
-      Son vote compte dans la moyenne et la médiane, et sa raison, une ou deux phrases, s'affiche sous son nom à la révélation. Tout participant peut retirer une IA&nbsp;; dans une salle verrouillée, seul l'hôte le peut. L'IA n'agit que quand on le lui demande&nbsp;: un message par tour, et sa place reste occupée tant qu'elle n'a pas quitté la salle.
+      Son vote compte dans la moyenne et la médiane, et sa justification, 280 caractères au plus, s'affiche sous son nom à la révélation. Avec la révélation automatique, la salle attend aussi son vote. Tout participant peut retirer une IA&nbsp;; dans une salle verrouillée, seul l'hôte le peut. L'IA n'agit que quand on le lui demande&nbsp;: un message par tour, et sa place reste occupée tant qu'elle n'a pas quitté la salle.
     </p>
 
     <h2>Connecter son assistant par MCP</h2>
@@ -78,7 +78,7 @@
     </ul>
     <p>CleanPoker ne demande ni compte ni clé d'API, et il n'y a rien à installer&nbsp;: l'adresse est celle d'un serveur MCP distant, avec quatre outils, <code>join_room</code>, <code>get_room</code>, <code>vote</code> et <code>leave_room</code>. La salle doit déjà être ouverte par une personne dans son navigateur. Si l'équipe y a collé sa liste de stories, l'assistant lit celle en cours&nbsp;; sinon, donnez-lui la story dans votre message. Puis, dans la conversation&nbsp;:</p>
     <pre><code>Rejoins la salle https://cleanpoker.dev/ab12cd34 sous le nom Claude.
-Estime la story en cours en story points et vote avec ta raison, sans me dire ta carte.
+Estime la story en cours en story points et vote en justifiant ta carte en une ou deux phrases, sans me la dire.
 Quitte la salle quand je te le dis.</code></pre>
 
     <h2>Ce qu'une IA estime bien</h2>
@@ -93,19 +93,19 @@ Quitte la salle quand je te le dis.</code></pre>
       <li><strong>Votre code</strong>, sauf si l'assistant y a accès (Cursor ou VS Code ouverts sur le dépôt).</li>
       <li><strong>La vélocité de l'équipe</strong>&nbsp;: un 5 n'a de sens que pour l'équipe qui l'a calibré.</li>
       <li><strong>Les dépendances humaines</strong>&nbsp;: la personne absente, l'équipe voisine qui doit livrer avant.</li>
-      <li><strong>La discussion</strong>&nbsp;: elle lit le titre de la story en cours, jamais ce que l'équipe se dit.</li>
+      <li><strong>Ce qui n'est pas écrit dans la salle</strong>&nbsp;: elle lit le titre de la story en cours, 200 caractères au plus, jamais sa description ni ce que l'équipe se dit. Collez le détail dans votre message.</li>
     </ul>
 
     <h2>Règles pour qu'elle serve</h2>
     <ul>
       <li><strong>Elle vote avant la discussion</strong>, en même temps que tout le monde. Si elle annonce sa carte dans votre conversation avant la révélation, votez d'abord.</li>
-      <li><strong>Un écart se discute.</strong> L'IA dit 13 et l'équipe dit 3&nbsp;: demandez-lui ce qu'elle a vu.</li>
+      <li><strong>Un écart se discute.</strong> L'IA dit 13 et l'équipe dit 3&nbsp;: lisez sa justification sous son nom, puis demandez-lui le détail.</li>
       <li><strong>La personne qui fera le travail tranche.</strong> Cette personne connaît le code qu'il faudra toucher, l'IA non.</li>
     </ul>
 
     <h2>Ce que reçoit l'assistant</h2>
     <p>
-      CleanPoker n'appelle aucune IA. L'assistant connecté par une personne de l'équipe reçoit l'état de la salle&nbsp;: les titres des stories si l'équipe en a collé une liste, les noms des participants, qui a voté, puis les votes une fois révélés. Il le reçoit sous l'abonnement de cette personne et les règles de son entreprise sur l'IA. La salle vit en mémoire sur le serveur de Gravelines et disparaît 24 heures après la dernière activité.
+      CleanPoker n'appelle aucune IA. L'assistant connecté par une personne de l'équipe reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, qui a voté, le journal d'activité, puis les votes une fois révélés. Il le reçoit sous l'abonnement de cette personne et les règles de son entreprise sur l'IA. La salle vit en mémoire sur le serveur de Gravelines et disparaît 24 heures après la dernière activité.
     </p>
 
     <h2>Questions fréquentes</h2>
@@ -114,7 +114,7 @@ Quitte la salle quand je te le dis.</code></pre>
     <h3>Une IA estime-t-elle mieux qu'une équipe&nbsp;?</h3>
     <p>Non. Elle ne connaît ni la vélocité de l'équipe, ni l'état réel du code, ni qui dépend de qui. Elle est utile pour repérer ce que la story oublie&nbsp;: tests, migration de données, cas limites. Son vote sert à ouvrir la discussion quand il s'écarte de celui de l'équipe.</p>
     <h3>Le texte de la story est-il envoyé à une IA&nbsp;?</h3>
-    <p>Oui, à l'assistant qu'une personne de l'équipe a connecté, et à aucune autre IA&nbsp;: CleanPoker n'en appelle aucune. L'assistant reçoit l'état de la salle&nbsp;: les titres des stories si l'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.</p>
+    <p>Oui, à l'assistant qu'une personne de l'équipe a connecté, et à aucune autre IA&nbsp;: CleanPoker n'en appelle aucune. L'assistant reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.</p>
 
     <div class="cta">
       <a href="/fr" class="btn">Créer une salle</a>

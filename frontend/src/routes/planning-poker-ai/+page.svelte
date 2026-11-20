@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Is the story text sent to an AI?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Yes, to the assistant a team member connected, and to no other AI: CleanPoker calls none. The assistant receives the room state: the story titles if the team pasted a list, participant names, then the votes once revealed.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes, to the assistant a team member connected, and to no other AI: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.' },
       },
     ],
   })}<\/script>`}
@@ -63,7 +63,7 @@
     </table>
     </div>
     <p>
-      Its vote counts in the average and the median, and its reason, one or two sentences, shows under its name at the reveal. Any participant can remove an AI; in a locked room, only the host can. The AI acts only when asked: one message per round, and its seat stays taken until it leaves the room.
+      Its vote counts in the average and the median, and its reason, 280 characters at most, shows under its name at the reveal. With auto-reveal on, the room waits for its vote too. Any participant can remove an AI; in a locked room, only the host can. The AI acts only when asked: one message per round, and its seat stays taken until it leaves the room.
     </p>
 
     <h2>Connect your assistant over MCP</h2>
@@ -78,7 +78,7 @@
     </ul>
     <p>CleanPoker asks for no account and no API key, and there is nothing to install: the address is a remote MCP server with four tools, <code>join_room</code>, <code>get_room</code>, <code>vote</code> and <code>leave_room</code>. A person must already have the room open in a browser. If the team pasted its story list into the room, the assistant reads the one on the table; otherwise, give it the story in your message. Then, in the conversation:</p>
     <pre><code>Join the room https://cleanpoker.dev/ab12cd34 as Claude.
-Estimate the story on the table in story points and vote with your reason, without telling me your card.
+Estimate the story on the table in story points and vote with a one or two sentence reason, without telling me your card.
 Leave the room when I say so.</code></pre>
 
     <h2>What AI estimates well</h2>
@@ -93,19 +93,19 @@ Leave the room when I say so.</code></pre>
       <li><strong>Your code</strong>, unless the assistant can read it (Cursor or VS Code open on the repository).</li>
       <li><strong>Team velocity</strong>: a 5 only means something to the team that calibrated it.</li>
       <li><strong>Human dependencies</strong>: the person on leave, another team that has to ship first.</li>
-      <li><strong>The discussion</strong>: it reads the title of the story on the table, never what the team says.</li>
+      <li><strong>What is not written in the room</strong>: it reads the title of the story on the table, 200 characters at most, never its description or what the team says. Paste the detail in your message.</li>
     </ul>
 
     <h2>Rules that make it useful</h2>
     <ul>
       <li><strong>It votes before the discussion</strong>, together with everyone. If it tells you its card in your conversation before the reveal, vote first.</li>
-      <li><strong>A gap gets discussed.</strong> The AI says 13 and the team says 3: ask it what it saw.</li>
+      <li><strong>A gap gets discussed.</strong> The AI says 13 and the team says 3: read its reason under its name, then ask it for the detail.</li>
       <li><strong>The person who will do the work decides.</strong> That person knows the code that has to change; the AI does not.</li>
     </ul>
 
     <h2>What the assistant receives</h2>
     <p>
-      CleanPoker calls no AI. The assistant a team member connected receives the room state: the story titles if the team pasted a list, participant names, who has voted, then the votes once revealed. It receives it under that person's subscription and their company's AI rules. The room lives in memory on the server in Gravelines, France, and disappears 24 hours after the last activity.
+      CleanPoker calls no AI. The assistant a team member connected receives the room state: the story titles and their estimates if the team pasted a list, participant names, who has voted, the activity log, then the votes once revealed. It receives it under that person's subscription and their company's AI rules. The room lives in memory on the server in Gravelines, France, and disappears 24 hours after the last activity.
     </p>
 
     <h2>FAQ</h2>
@@ -114,7 +114,7 @@ Leave the room when I say so.</code></pre>
     <h3>Does AI estimate better than a team?</h3>
     <p>No. It does not know the team's velocity, the real state of the code or who depends on whom. It is useful for spotting what the story leaves out: tests, data migration, edge cases. Its vote opens the discussion when it differs from the team's.</p>
     <h3>Is the story text sent to an AI?</h3>
-    <p>Yes, to the assistant a team member connected, and to no other AI: CleanPoker calls none. The assistant receives the room state: the story titles if the team pasted a list, participant names, then the votes once revealed.</p>
+    <p>Yes, to the assistant a team member connected, and to no other AI: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.</p>
 
     <div class="cta">
       <a href="/" class="btn">Create a room</a>
