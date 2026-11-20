@@ -74,6 +74,8 @@
       <strong>ausschließlich in Frankreich (Gravelines)</strong> bei OVHcloud gehostet.
       Das Frontend wird über das globale Cloudflare-Netzwerk bereitgestellt, das seit Juli 2023
       dem <em>EU-US Data Privacy Framework</em> beigetreten ist.
+      Auch der Datenverkehr zwischen Ihrem Browser und dem Echtzeit-Server läuft über dieses
+      Netzwerk, bevor er Gravelines erreicht.
     </p>
 
     <h3>Ihre Rechte</h3>

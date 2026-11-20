@@ -75,6 +75,8 @@
       <strong>exclusivement en France (Gravelines)</strong> chez OVHcloud.
       Le frontend est servi via le réseau mondial Cloudflare, qui adhère au
       <em>EU-US Data Privacy Framework</em> depuis juillet 2023.
+      Les échanges entre votre navigateur et le serveur temps réel passent eux aussi par ce
+      réseau avant d'arriver à Gravelines.
     </p>
 
     <h3>Vos droits</h3>
