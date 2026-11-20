@@ -47,6 +47,10 @@
     <h2>Mehr erfahren</h2>
 
     <div class="cards-grid">
+      <a href="/de/guides" class="card">
+        <h3>Alle Leitfäden</h3>
+        <p>Jeder Leitfaden auf einer Seite, nach Thema geordnet.</p>
+      </a>
       <a href="/de/planning-poker" class="card">
         <h3>Planning-Poker-Leitfaden</h3>
         <p>Regeln, Fibonacci-Folge, Kartenvergleich, praktische Tipps für agile Teams.</p>
