@@ -69,7 +69,7 @@
       l'autre n'a tort&nbsp;; ils mesurent simplement des choses différentes.
     </p>
     <p>
-      Les <strong>story points</strong> mesurent l'<em>effort relatif</em> dans
+      Les <strong><a href="/fr/story-points">story points</a></strong> mesurent l'<em>effort relatif</em> dans
       l'expérience partagée de l'équipe. L'effort combine trois choses&nbsp;: le volume de
       travail, l'incertitude et la complexité. La complexité seule n'y suffit pas - une
       tâche simple mais très volumineuse peut peser plus lourd qu'une petite tâche

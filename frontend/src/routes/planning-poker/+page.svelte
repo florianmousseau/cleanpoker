@@ -240,6 +240,7 @@
       See also:
       <a href="/planning-poker-tools">how to choose a planning poker tool</a>,
       <a href="/planning-poker-ai">let an AI vote</a>,
+      <a href="/story-points">story points</a>,
       <a href="/planning-poker-gdpr">planning poker and GDPR</a>,
       <a href="/fibonacci">the Fibonacci sequence in detail</a>,
       <a href="/alternatives">alternatives to the technique</a>.

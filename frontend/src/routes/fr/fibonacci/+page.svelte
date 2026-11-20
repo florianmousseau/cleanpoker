@@ -168,6 +168,8 @@
       </p>
     </details>
 
+    <p>À lire aussi&nbsp;: <a href="/fr/story-points">les story points</a>, avec un exemple chiffré et la vélocité.</p>
+
     <div class="cta">
       <a href="/fr" class="btn">Essayer avec PokerAgile</a>
     </div>
