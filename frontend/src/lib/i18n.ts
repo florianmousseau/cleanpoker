@@ -16,6 +16,7 @@ export interface Translation {
   stories: { title: string; onTable: string; none: string; addLabel: string; addPlaceholder: string; addBtn: string; clear: string; clearConfirm: string; colStory: string; colEstimate: string; vote: (t: string) => string; keep: (v: string) => string; keepTitle: string; next: string; copyMd: string; downloadCsv: string; copied: string };
   qr: { show: string; hide: string; alt: string; failed: string };
   ia: { button: string; again: string; running: string; downloading: (n: number) => string; failed: string; private: string };
+  options: string;
   team: { summary: string; name: string; color: string };
   host: { badge: string; ai: string; lock: string; unlock: string; lockedHint: string; timer: string; timerStop: string; timerLeft: (s: string) => string; timerOver: string; seconds: (n: number) => string };
   participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string; kickConfirm: (n: string) => string };
@@ -53,7 +54,7 @@ export const FR: Translation = {
 
   solo: {
     hint: 'Tu es seul(e) dans cette salle.',
-    invite: 'Inviter des coéquipiers',
+    invite: 'Inviter des collègues',
   },
 
   share: {
@@ -127,6 +128,7 @@ export const FR: Translation = {
     failed: "L'analyse n'a pas abouti.",
     private: "Visible par vous seul. L'analyse tourne dans le navigateur, sur cet ordinateur.",
   },
+  options: 'Options',
   team: {
     summary: "Habiller la salle aux couleurs de l'équipe",
     name: "Nom de l'équipe",
@@ -312,6 +314,7 @@ export const EN: Translation = {
     failed: 'The analysis did not complete.',
     private: 'Only you see this. The analysis runs in the browser, on this computer.',
   },
+  options: 'Options',
   team: {
     summary: "Dress the room in the team's colours",
     name: 'Team name',
@@ -497,6 +500,7 @@ export const ES: Translation = {
     failed: 'El análisis no se completó.',
     private: 'Solo usted lo ve. El análisis se hace en el navegador, en este ordenador.',
   },
+  options: 'Opciones',
   team: {
     summary: 'Vestir la sala con los colores del equipo',
     name: 'Nombre del equipo',
@@ -682,6 +686,7 @@ export const DE: Translation = {
     failed: 'Die Analyse wurde nicht abgeschlossen.',
     private: 'Nur Sie sehen das. Die Analyse läuft im Browser, auf diesem Computer.',
   },
+  options: 'Optionen',
   team: {
     summary: 'Den Raum in den Farben des Teams gestalten',
     name: 'Teamname',
@@ -867,6 +872,7 @@ export const PT: Translation = {
     failed: 'A análise não terminou.',
     private: 'Só você vê isto. A análise roda no navegador, neste computador.',
   },
+  options: 'Opções',
   team: {
     summary: 'Vestir a sala com as cores da equipe',
     name: 'Nome da equipe',

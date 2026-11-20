@@ -99,6 +99,8 @@
   const isHost = $derived(room.roomState !== null && room.roomState.host === room.myId);
   const canRun = $derived(room.roomState === null || peutMener(room.roomState, room.myId));
   const TIMER_CHOICES = [30, 60, 120, 300];
+  // Role and removal buttons show only with the options: the list stays a list of who voted.
+  let optionsOpen = $state(false);
 
   // One tick a second while a timer runs; the deadline comes from the server.
   let now = $state(Date.now());
@@ -168,7 +170,6 @@
           <span class="badge-pill">{T.tourLabel} {room.roomState.round}</span>
         {/if}
         <button class="btn btn-secondary btn-sm" onclick={copyLink}>{copyFeedback || T.copyLink}</button>
-        <QrCode {roomId} {T} />
         {#if copyError}
           <span class="copy-error" role="alert">{copyError}</span>
         {/if}
@@ -293,32 +294,8 @@
               {timerLeft === 0 ? T.host.timerOver : T.host.timerLeft(cadran(timerLeft))}
             </p>
           {/if}
-          {#if canRun && room.roomState.state === 'voting'}
-            <div class="timer-row" role="group" aria-label={T.host.timer}>
-              <span class="timer-label">{T.host.timer}</span>
-              {#each TIMER_CHOICES as seconds (seconds)}
-                <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(seconds)}>{T.host.seconds(seconds)}</button>
-              {/each}
-              {#if room.roomState.timerEnd}
-                <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(0)}>{T.host.timerStop}</button>
-              {/if}
-            </div>
-          {/if}
-          {#if canRun}
-            <label class="auto-reveal">
-              <input type="checkbox" checked={room.roomState.autoReveal ?? false}
-                onchange={(e) => room.setAutoReveal(e.currentTarget.checked)} data-testid="auto-reveal" />
-              <span>{T.controls.autoReveal}</span>
-            </label>
-          {/if}
           {#if room.roomState.locked}
             <p class="hint" data-testid="locked-hint">{T.host.lockedHint}</p>
-          {/if}
-          {#if isHost}
-            <button class="btn btn-secondary btn-sm lock-btn" onclick={() => room.setLocked(!room.roomState?.locked)}
-              aria-pressed={room.roomState.locked} data-testid="lock-btn">
-              {room.roomState.locked ? T.host.unlock : T.host.lock}
-            </button>
           {/if}
         </section>
 
@@ -378,10 +355,6 @@
         </aside>
       {/if}
 
-      <StoriesPanel {stories} current={currentIndex} {T} {canRun}
-        onAdd={(text) => room.addStories(text)}
-        onClear={() => room.clearStories()}
-        onSelect={(i) => room.selectStory(i)} />
 
       <!-- Participants -->
       <section class="panel" aria-labelledby="participants-title">
@@ -396,8 +369,10 @@
                   <th scope="col" class="col-status"><span class="sr-only">{T.participants.colStatus}</span></th>
                   <th scope="col">{T.participants.colName}</th>
                   <th scope="col" class="col-vote">{T.participants.colVote}</th>
+                  {#if optionsOpen}
                   <th scope="col" class="col-action">{T.participants.colRole}</th>
                   <th scope="col" class="col-action">{T.participants.colAction}</th>
+                  {/if}
                 </tr>
               </thead>
               <tbody>
@@ -421,6 +396,7 @@
                         <span class="vote-empty">-</span>
                       {/if}
                     </td>
+                    {#if optionsOpen}
                     <td class="col-action">
                       <button class="action-btn action-btn-switch"
                         disabled={!canRun && player.id !== room.myId}
@@ -437,6 +413,7 @@
                         {T.participants.kick}
                       </button>
                     </td>
+                    {/if}
                   </tr>
                 {/each}
               </tbody>
@@ -454,8 +431,10 @@
               <thead>
                 <tr>
                   <th scope="col">{T.participants.colName}</th>
+                  {#if optionsOpen}
                   <th scope="col" class="col-action">{T.participants.colRole}</th>
                   <th scope="col" class="col-action">{T.participants.colAction}</th>
+                  {/if}
                 </tr>
               </thead>
               <tbody>
@@ -467,6 +446,7 @@
                       {#if player.id === room.roomState.host}<span class="me-tag">({T.host.badge})</span>{/if}
                       {#if player.ai}<span class="me-tag">({T.host.ai})</span>{/if}
                     </td>
+                    {#if optionsOpen}
                     <td class="col-action">
                       <button class="action-btn action-btn-switch"
                         disabled={!canRun && player.id !== room.myId}
@@ -483,6 +463,7 @@
                         {T.participants.kick}
                       </button>
                     </td>
+                    {/if}
                   </tr>
                 {/each}
               </tbody>
@@ -491,39 +472,83 @@
         </section>
       {/if}
 
-      <!-- Journal d'activité -->
-      <section class="panel" aria-labelledby="log-title">
-        <h2 id="log-title">{T.activity.title}</h2>
-        {#if room.roomState.activity.length === 0}
-          <p class="empty">{T.activity.none}</p>
-        {:else}
-          <div class="table-wrap">
-            <table class="log-table" aria-label={T.activity.title}>
-              <thead>
-                <tr>
-                  <th scope="col">{T.activity.colTime}</th>
-                  <th scope="col">{T.activity.colAuthor}</th>
-                  <th scope="col">{T.activity.colAction}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Keyed by position, never by content: timestamps are cut to
-                     the second, so two identical events in the same second
-                     (a double-clicked "new round", a vote changed twice) used
-                     to collide and throw each_key_duplicate, poisoning the room
-                     for every player who arrived afterwards. -->
-                {#each [...room.roomState.activity].reverse() as entry, i (i)}
-                  <tr>
-                    <td class="log-time">{entry.timestamp}</td>
-                    <td>{entry.initiator}</td>
-                    <td>{translateActivity(entry.message, entry.target ?? '', T)}</td>
-                  </tr>
+      {#if stories.length > 0}
+      <StoriesPanel {stories} current={currentIndex} {T} {canRun}
+        onAdd={(text) => room.addStories(text)}
+        onClear={() => room.clearStories()}
+        onSelect={(i) => room.selectStory(i)} />
+      {/if}
+
+      <!-- Everything beyond voting waits here, closed: the room opens on the cards. -->
+      <details class="panel options" data-testid="options" bind:open={optionsOpen}>
+        <summary>{T.options}</summary>
+        <div class="options-body">
+            {#if canRun && room.roomState.state === 'voting'}
+              <div class="timer-row" role="group" aria-label={T.host.timer}>
+                <span class="timer-label">{T.host.timer}</span>
+                {#each TIMER_CHOICES as seconds (seconds)}
+                  <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(seconds)}>{T.host.seconds(seconds)}</button>
                 {/each}
-              </tbody>
-            </table>
-          </div>
-        {/if}
-      </section>
+                {#if room.roomState.timerEnd}
+                  <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(0)}>{T.host.timerStop}</button>
+                {/if}
+              </div>
+            {/if}
+            {#if canRun}
+              <label class="auto-reveal">
+                <input type="checkbox" checked={room.roomState.autoReveal ?? false}
+                  onchange={(e) => room.setAutoReveal(e.currentTarget.checked)} data-testid="auto-reveal" />
+                <span>{T.controls.autoReveal}</span>
+              </label>
+            {/if}
+            {#if isHost}
+              <button class="btn btn-secondary btn-sm lock-btn" onclick={() => room.setLocked(!room.roomState?.locked)}
+                aria-pressed={room.roomState.locked} data-testid="lock-btn">
+                {room.roomState.locked ? T.host.unlock : T.host.lock}
+              </button>
+            {/if}
+          <QrCode {roomId} {T} />
+          {#if stories.length === 0}
+          <StoriesPanel {stories} current={currentIndex} {T} {canRun}
+            onAdd={(text) => room.addStories(text)}
+            onClear={() => room.clearStories()}
+            onSelect={(i) => room.selectStory(i)} />
+          {/if}
+        <!-- Journal d'activité -->
+        <section class="panel" aria-labelledby="log-title">
+          <h2 id="log-title">{T.activity.title}</h2>
+          {#if room.roomState.activity.length === 0}
+            <p class="empty">{T.activity.none}</p>
+          {:else}
+            <div class="table-wrap">
+              <table class="log-table" aria-label={T.activity.title}>
+                <thead>
+                  <tr>
+                    <th scope="col">{T.activity.colTime}</th>
+                    <th scope="col">{T.activity.colAuthor}</th>
+                    <th scope="col">{T.activity.colAction}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Keyed by position, never by content: timestamps are cut to
+                       the second, so two identical events in the same second
+                       (a double-clicked "new round", a vote changed twice) used
+                       to collide and throw each_key_duplicate, poisoning the room
+                       for every player who arrived afterwards. -->
+                  {#each [...room.roomState.activity].reverse() as entry, i (i)}
+                    <tr>
+                      <td class="log-time">{entry.timestamp}</td>
+                      <td>{entry.initiator}</td>
+                      <td>{translateActivity(entry.message, entry.target ?? '', T)}</td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            </div>
+          {/if}
+        </section>
+        </div>
+      </details>
     {/if}
   </main>
 
@@ -673,6 +698,9 @@
   .timer-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin-top: 0.5rem; }
   .timer-label { font-size: 0.8rem; color: var(--color-text-muted); margin-right: 0.25rem; }
   .lock-btn { margin-top: 0.625rem; }
+  .options summary { cursor: pointer; font-weight: 600; }
+  .options-body { display: flex; flex-direction: column; gap: 0.875rem; margin-top: 0.875rem; }
+  .options-body .lock-btn, .options-body .auto-reveal, .options-body .timer-row { margin-top: 0; align-self: flex-start; }
   .reason { margin-top: 0.25rem; font-size: 0.8rem; font-weight: 400; color: var(--color-text-muted); overflow-wrap: break-word; }
   .auto-reveal { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.625rem; font-size: 0.85rem; cursor: pointer; }
   .auto-reveal input { accent-color: var(--color-primary); }
