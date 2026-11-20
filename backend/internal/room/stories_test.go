@@ -122,3 +122,31 @@ func TestAutoReveal_TurnedOnWhenAllHaveVotedRevealsAtOnce(t *testing.T) {
 		t.Fatal("expected an immediate reveal")
 	}
 }
+
+func TestCastVoteWithReason_HiddenUntilTheRevealThenClearedByANewRound(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.JoinSeat(Player{ID: "bot", Name: "Claude", AI: true}, "")
+	r.Join("p1", "Alice", false)
+	r.CastVoteWithReason("bot", "8", "  Migration and tests are missing.  ", AnyRound)
+	reasonOf := func() string {
+		for _, p := range snap(r).Players {
+			if p.ID == "bot" {
+				return p.Reason
+			}
+		}
+		return ""
+	}
+	if reasonOf() != "" {
+		t.Fatal("the reason showed before the reveal")
+	}
+	r.Show("p1")
+	if got := reasonOf(); got != "Migration and tests are missing." {
+		t.Fatalf("unexpected reason after the reveal: %q", got)
+	}
+	r.Clear("p1", AnyRound)
+	r.Show("p1")
+	if reasonOf() != "" {
+		t.Fatal("a new round kept the reason")
+	}
+}

@@ -69,9 +69,10 @@ type roomIn struct {
 }
 
 type voteIn struct {
-	Room string `json:"room" jsonschema:"the room address or id"`
-	Seat string `json:"seat" jsonschema:"the token join_room returned"`
-	Card string `json:"card" jsonschema:"one card of the room deck, or empty to withdraw the vote"`
+	Room   string `json:"room" jsonschema:"the room address or id"`
+	Seat   string `json:"seat" jsonschema:"the token join_room returned"`
+	Card   string `json:"card" jsonschema:"one card of the room deck, or empty to withdraw the vote"`
+	Reason string `json:"reason,omitempty" jsonschema:"why this card, in one or two sentences; shown to the team at the reveal"`
 }
 
 type seatIn struct {
@@ -139,7 +140,7 @@ func (s service) vote(_ context.Context, _ *mcp.CallToolRequest, in voteIn) (*mc
 	if err != nil {
 		return nil, stateOut{}, err
 	}
-	rm.CastVote(id, in.Card, room.AnyRound)
+	rm.CastVoteWithReason(id, in.Card, in.Reason, room.AnyRound)
 	return nil, stateOut{State: rm.Snapshot()}, nil
 }
 
@@ -153,9 +154,11 @@ func (s service) leave(_ context.Context, _ *mcp.CallToolRequest, in seatIn) (*m
 }
 
 const instructions = `CleanPoker is planning poker for agile teams. A person shares a room address;
-join it with join_room, estimate the story your user gives you (the room does
-not hold it), then vote one card of the room deck with vote. Votes stay hidden until a person reveals them, and
-get_room shows the results after the reveal. Leave with leave_room when done.`
+join it with join_room. When the room holds a list of stories, the one at index
+"current" of "stories" is on the table: estimate it. Otherwise your user gives
+you the story. Vote one card of the room deck with vote, with a one or two
+sentence reason: votes and reasons stay hidden until a person reveals them,
+and get_room shows the results after the reveal. Leave with leave_room when done.`
 
 // NewServer builds the MCP server over rooms.
 func NewServer(rooms Rooms, version string) *mcp.Server {
