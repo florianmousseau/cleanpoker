@@ -156,6 +156,7 @@
       See also:
       <a href="/planning-poker">the planning poker guide</a>,
       <a href="/planning-poker-gdpr">planning poker and GDPR</a>,
+      <a href="/planning-poker-ai">letting an AI vote</a>,
       <a href="/alternatives">alternatives to the technique itself</a>.
     </p>
   </main>

@@ -1,9 +1,9 @@
 <svelte:head>
-  <title>Planning poker with AI: let Claude or ChatGPT vote | CleanPoker</title>
-  <meta name="description" content="Let an AI assistant vote in a planning poker room: connect Claude, ChatGPT or Cursor over MCP, what AI estimates well, what it estimates badly, and how to use it without letting it decide for the team." />
+  <title>AI planning poker: let Claude or ChatGPT vote | CleanPoker</title>
+  <meta name="description" content="Let Claude, ChatGPT or Cursor vote in a planning poker room: one MCP address to paste, nothing to install. What AI estimates well, and what it gets wrong." />
   <link rel="canonical" href="https://cleanpoker.dev/planning-poker-ai" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-ai" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker-ia" />
+  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-ai" />
   <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-ai" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -23,17 +23,17 @@
       {
         '@type': 'Question',
         name: 'Can an AI vote in planning poker?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Yes. On CleanPoker, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.cleanpoker.dev/mcp, reads the story and votes one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes. On CleanPoker, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.cleanpoker.dev/mcp, gets the story in its own conversation and picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.' },
       },
       {
         '@type': 'Question',
         name: 'Does AI estimate better than a team?',
-        acceptedAnswer: { '@type': 'Answer', text: 'No. It knows neither the team velocity, nor the real state of the code, nor the dependencies between people. It is useful for spotting what the story leaves out: tests, data migration, edge cases. Its vote opens the discussion when it differs from the team.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'No. It does not know the team\'s velocity, the real state of the code or who depends on whom. It is useful for spotting what the story leaves out: tests, data migration, edge cases. Its vote opens the discussion when it differs from the team\'s.' },
       },
       {
         '@type': 'Question',
         name: 'Is the story text sent to an AI?',
-        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker sends nothing to any AI. The story goes through the assistant of the person who connected it, under their subscription and their company rules. A room where nobody connects an assistant works exactly as before.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker sends nothing to any AI and never receives the story text, which stays in the conversation of the person who connected the assistant. The assistant receives the room state: participant names, then the votes once revealed.' },
       },
     ],
   })}<\/script>`}
@@ -46,9 +46,7 @@
     <h1>Planning poker with AI: let Claude or ChatGPT vote in the room</h1>
 
     <p class="lead">
-      Since November 20, 2026, an AI assistant can join a CleanPoker room and vote like a team
-      member. It picks its card in secret, the card is revealed with the others, and it shows in
-      the list marked <strong>(AI)</strong>.
+      Since November 20, 2026, an AI assistant can join a CleanPoker planning poker room and vote like a team member. It picks its card in secret, the card is revealed with the others, and it shows in the list marked <strong>(AI)</strong>.
     </p>
 
     <h2>What the AI can do in the room</h2>
@@ -56,67 +54,75 @@
     <table>
       <thead><tr><th>Action</th><th>A person</th><th>An AI</th></tr></thead>
       <tbody>
-        <tr><td>Vote a card in secret</td><td>yes</td><td>yes</td></tr>
+        <tr><td>Pick a card in secret</td><td>yes</td><td>yes</td></tr>
         <tr><td>See other votes before the reveal</td><td>no</td><td>no</td></tr>
-        <tr><td>Reveal the votes, start a new round</td><td>yes</td><td>no</td></tr>
-        <tr><td>Remove someone, lock the room</td><td>yes</td><td>no</td></tr>
+        <tr><td>Reveal the votes, start a round, remove someone</td><td>yes (host only once the room is locked)</td><td>no</td></tr>
+        <tr><td>Lock the room</td><td>the host</td><td>no</td></tr>
         <tr><td>Be the room host</td><td>yes</td><td>no</td></tr>
       </tbody>
     </table>
     </div>
     <p>
-      The host removes an AI like any participant. A room where nobody connects an assistant does
-      not change.
+      Its vote counts in the average and the median. Any participant can remove an AI; in a locked room, only the host can. The AI acts only when asked: one message per round, and its seat stays taken until it leaves the room.
     </p>
 
-    <h2>Connect your assistant</h2>
+    <h2>Connect your assistant over MCP</h2>
     <p>The address is the same everywhere:</p>
     <pre><code>https://salles.cleanpoker.dev/mcp</code></pre>
     <ul>
-      <li><strong>Claude</strong>: Settings, Connectors, Add custom connector, then paste the address.</li>
-      <li><strong>ChatGPT</strong>: Settings, Apps, turn on developer mode, then create an app with the address.</li>
+      <li><strong>Claude</strong>: Settings, Connectors, Add custom connector, then paste the address. On a Team or Enterprise plan, a workspace owner adds it first.</li>
+      <li><strong>Claude Code</strong>: <code>claude mcp add --transport http cleanpoker https://salles.cleanpoker.dev/mcp</code></li>
+      <li><strong>ChatGPT</strong>: Settings, Apps &amp; Connectors, Advanced settings, turn on developer mode, then Create with the address. Developer mode is limited to ChatGPT's paid plans.</li>
       <li><strong>Cursor</strong>: in <code>~/.cursor/mcp.json</code>, add <code>&#123;"mcpServers": &#123; "cleanpoker": &#123; "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
-      <li><strong>VS Code</strong>: in <code>.vscode/mcp.json</code>, add <code>&#123;"servers": &#123; "cleanpoker": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
+      <li><strong>VS Code</strong>: with Copilot in agent mode, in <code>.vscode/mcp.json</code>, add <code>&#123;"servers": &#123; "cleanpoker": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
     </ul>
-    <p>No account, no key. Then, in the conversation:</p>
+    <p>CleanPoker asks for no account and no API key, and there is nothing to install: the address is a remote MCP server with four tools, <code>join_room</code>, <code>get_room</code>, <code>vote</code> and <code>leave_room</code>. A person must already have the room open in a browser. Then, in the conversation:</p>
     <pre><code>Join the room https://cleanpoker.dev/ab12cd34 as Claude.
-Story: CSV export of the month's invoices, filtered by customer.
-Estimate it in story points and vote, then explain your choice in three lines.</code></pre>
+The story to estimate is a CSV export of the month's invoices, filtered by customer.
+Estimate it in story points and vote, without telling me your card.
+After the reveal I will ask for your reasoning. Leave the room when I say so.</code></pre>
 
     <h2>What AI estimates well</h2>
     <ul>
       <li><strong>What the story leaves out</strong>: tests, data migration, access rights, edge cases, translation.</li>
       <li><strong>Relative size</strong> of a well-written story, against another one you give it as a reference.</li>
-      <li><strong>A written reason</strong> for its vote, worth reading when the gap is large.</li>
+      <li><strong>A written reason</strong> for its vote, to ask for after the reveal when the gap is large.</li>
     </ul>
 
     <h2>What it estimates badly</h2>
     <ul>
       <li><strong>Your code</strong>, unless the assistant can read it (Cursor or VS Code open on the repository).</li>
       <li><strong>Team velocity</strong>: a 5 only means something to the team that calibrated it.</li>
-      <li><strong>Human dependencies</strong>: the person on leave, the neighbour team that must ship first.</li>
+      <li><strong>Human dependencies</strong>: the person on leave, another team that has to ship first.</li>
+      <li><strong>The room's context</strong>: it sees neither the story nor the discussion, only what you type to it.</li>
     </ul>
 
-    <h2>Three rules that make it useful</h2>
+    <h2>Rules that make it useful</h2>
     <ul>
-      <li><strong>It votes before the discussion</strong>, together with everyone. Its card shown first would anchor the team.</li>
-      <li><strong>A gap opens the discussion, it does not close it.</strong> The AI says 13 and the team says 3: ask it what it saw.</li>
-      <li><strong>The person who will do the work decides.</strong> The AI will not be there to ship it.</li>
+      <li><strong>It votes before the discussion</strong>, together with everyone. If it tells you its card in your conversation before the reveal, vote first.</li>
+      <li><strong>A gap gets discussed.</strong> The AI says 13 and the team says 3: ask it what it saw.</li>
+      <li><strong>The person who will do the work decides.</strong> They alone know the code they will have to touch.</li>
     </ul>
 
     <h2>Where the story text goes</h2>
     <p>
-      CleanPoker calls no AI. The story goes through the assistant of the person who connected it,
-      under their subscription and their company's AI rules. The room content stays on the server
-      in Gravelines, France, in memory, and disappears 24 hours after the last activity.
+      CleanPoker calls no AI and never receives the story text: it stays in the conversation of the person who connected the assistant, under their subscription and their company's AI rules. The assistant does receive the room state: participant names, who has voted, then the votes once revealed. The room lives in memory on the server in Gravelines, France, and disappears 24 hours after the last activity.
     </p>
+
+    <h2>FAQ</h2>
+    <h3>Can an AI vote in planning poker?</h3>
+    <p>Yes. On CleanPoker, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.cleanpoker.dev/mcp, gets the story in its own conversation and picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.</p>
+    <h3>Does AI estimate better than a team?</h3>
+    <p>No. It does not know the team's velocity, the real state of the code or who depends on whom. It is useful for spotting what the story leaves out: tests, data migration, edge cases. Its vote opens the discussion when it differs from the team's.</p>
+    <h3>Is the story text sent to an AI?</h3>
+    <p>CleanPoker sends nothing to any AI and never receives the story text, which stays in the conversation of the person who connected the assistant. The assistant receives the room state: participant names, then the votes once revealed.</p>
 
     <div class="cta">
       <a href="/" class="btn">Create a room</a>
     </div>
 
     <p class="related">
-      Read also:
+      See also:
       <a href="/planning-poker">the planning poker guide</a>,
       <a href="/planning-poker-tools">how to choose a planning poker tool</a>,
       <a href="/estimation-agile">agile estimation</a>.
@@ -149,6 +155,7 @@ Estimate it in story points and vote, then explain your choice in three lines.</
 
   h1 { margin-bottom: 1.5rem; }
   h2 { margin-top: 2rem; margin-bottom: 0.75rem; }
+  h3 { margin-top: 1.25rem; margin-bottom: 0.25rem; font-size: 1rem; }
 
   p, li { line-height: 1.7; }
 

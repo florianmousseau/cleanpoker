@@ -1,6 +1,6 @@
 <svelte:head>
-  <title>Planning poker avec une IA&nbsp;: faire voter Claude ou ChatGPT | CleanPoker</title>
-  <meta name="description" content="Faire voter un assistant IA dans une salle de planning poker&nbsp;: brancher Claude, ChatGPT ou Cursor en MCP, ce que l'IA estime bien, ce qu'elle estime mal, et comment s'en servir sans qu'elle décide à la place de l'équipe." />
+  <title>Planning poker IA&nbsp;: faire voter Claude ou ChatGPT | CleanPoker</title>
+  <meta name="description" content="Faites voter Claude, ChatGPT ou Cursor dans une salle de planning poker&nbsp;: une adresse MCP à coller, rien à installer. Ce que l'IA estime bien, et mal." />
   <link rel="canonical" href="https://cleanpoker.dev/fr/planning-poker-ia" />
   <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker-ia" />
   <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-ai" />
@@ -23,17 +23,17 @@
       {
         '@type': 'Question',
         name: 'Peut-on faire voter une IA au planning poker ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Oui. Sur CleanPoker, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle avec l\'adresse https://salles.cleanpoker.dev/mcp, lit la story et vote une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Oui. Sur CleanPoker, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l\'adresse https://salles.cleanpoker.dev/mcp, reçoit la story dans sa conversation et choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.' },
       },
       {
         '@type': 'Question',
         name: 'Une IA estime-t-elle mieux qu\'une équipe ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Non. Elle ne connaît ni la vélocité de l\'équipe, ni l\'état réel du code, ni les dépendances entre personnes. Elle est utile pour repérer ce que la story oublie : tests, migration de données, cas limites. Son vote sert à ouvrir la discussion quand il s\'écarte de celui de l\'équipe.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Non. Elle ne connaît ni la vélocité de l\'équipe, ni l\'état réel du code, ni qui dépend de qui. Elle est utile pour repérer ce que la story oublie : tests, migration de données, cas limites. Son vote sert à ouvrir la discussion quand il s\'écarte de celui de l\'équipe.' },
       },
       {
         '@type': 'Question',
         name: 'Le texte de la story est-il envoyé à une IA ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker n\'envoie rien à aucune IA. La story passe par l\'assistant de la personne qui l\'a branché, avec son abonnement et les règles de son entreprise. Une salle où personne ne branche d\'assistant fonctionne exactement comme avant.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker n\'envoie rien à aucune IA et ne reçoit pas le texte de la story, qui reste dans la conversation de la personne qui a connecté l\'assistant. L\'assistant reçoit l\'état de la salle : les noms des participants, puis les votes une fois révélés.' },
       },
     ],
   })}<\/script>`}
@@ -46,9 +46,7 @@
     <h1>Planning poker avec une IA&nbsp;: faire voter Claude ou ChatGPT dans la salle</h1>
 
     <p class="lead">
-      Depuis le 20 novembre 2026, un assistant IA peut rejoindre une salle CleanPoker et voter
-      comme un membre de l'équipe. Il choisit sa carte en secret, elle se révèle avec les autres,
-      et il apparaît dans la liste avec la mention <strong>(IA)</strong>.
+      Depuis le 20 novembre 2026, un assistant IA peut rejoindre une salle CleanPoker de poker planning et voter comme un membre de l'équipe. Il choisit sa carte en secret, elle se révèle avec les autres, et il apparaît dans la liste avec la mention <strong>(IA)</strong>.
     </p>
 
     <h2>Ce que l'IA peut faire dans la salle</h2>
@@ -56,38 +54,39 @@
     <table>
       <thead><tr><th>Action</th><th>Une personne</th><th>Une IA</th></tr></thead>
       <tbody>
-        <tr><td>Voter une carte en secret</td><td>oui</td><td>oui</td></tr>
+        <tr><td>Choisir une carte en secret</td><td>oui</td><td>oui</td></tr>
         <tr><td>Voir les votes des autres avant la révélation</td><td>non</td><td>non</td></tr>
-        <tr><td>Révéler les votes, lancer un nouveau tour</td><td>oui</td><td>non</td></tr>
-        <tr><td>Retirer quelqu'un, verrouiller la salle</td><td>oui</td><td>non</td></tr>
+        <tr><td>Révéler les votes, lancer un tour, retirer quelqu'un</td><td>oui (l'hôte seul si la salle est verrouillée)</td><td>non</td></tr>
+        <tr><td>Verrouiller la salle</td><td>l'hôte</td><td>non</td></tr>
         <tr><td>Être hôte de la salle</td><td>oui</td><td>non</td></tr>
       </tbody>
     </table>
     </div>
     <p>
-      L'hôte retire une IA comme n'importe quel participant. Une salle où personne ne branche
-      d'assistant ne change pas.
+      Son vote compte dans la moyenne et la médiane. Tout participant peut retirer une IA&nbsp;; dans une salle verrouillée, seul l'hôte le peut. L'IA n'agit que quand on le lui demande&nbsp;: un message par tour, et sa place reste occupée tant qu'elle n'a pas quitté la salle.
     </p>
 
-    <h2>Brancher son assistant</h2>
+    <h2>Connecter son assistant par MCP</h2>
     <p>L'adresse est la même partout&nbsp;:</p>
     <pre><code>https://salles.cleanpoker.dev/mcp</code></pre>
     <ul>
-      <li><strong>Claude</strong>&nbsp;: Paramètres, Connecteurs, Ajouter un connecteur personnalisé, puis coller l'adresse.</li>
-      <li><strong>ChatGPT</strong>&nbsp;: Paramètres, Applications, activer le mode développeur, puis créer une application avec l'adresse.</li>
+      <li><strong>Claude</strong>&nbsp;: Paramètres, Connecteurs, Ajouter un connecteur personnalisé, puis coller l'adresse. Dans une offre Team ou Enterprise, un propriétaire de l'espace l'ajoute d'abord.</li>
+      <li><strong>Claude Code</strong>&nbsp;: <code>claude mcp add --transport http cleanpoker https://salles.cleanpoker.dev/mcp</code></li>
+      <li><strong>ChatGPT</strong>&nbsp;: Paramètres, Applications et connecteurs, Paramètres avancés, activer le mode développeur, puis Créer avec l'adresse. Le mode développeur est réservé aux offres payantes de ChatGPT.</li>
       <li><strong>Cursor</strong>&nbsp;: dans <code>~/.cursor/mcp.json</code>, ajouter <code>&#123;"mcpServers": &#123; "cleanpoker": &#123; "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
-      <li><strong>VS Code</strong>&nbsp;: dans <code>.vscode/mcp.json</code>, ajouter <code>&#123;"servers": &#123; "cleanpoker": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
+      <li><strong>VS Code</strong>&nbsp;: avec Copilot en mode agent, dans <code>.vscode/mcp.json</code>, ajouter <code>&#123;"servers": &#123; "cleanpoker": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
     </ul>
-    <p>Aucun compte, aucune clé. Puis, dans la conversation&nbsp;:</p>
+    <p>CleanPoker ne demande ni compte ni clé d'API, et il n'y a rien à installer&nbsp;: l'adresse est celle d'un serveur MCP distant, avec quatre outils, <code>join_room</code>, <code>get_room</code>, <code>vote</code> et <code>leave_room</code>. La salle doit déjà être ouverte par une personne dans son navigateur. Puis, dans la conversation&nbsp;:</p>
     <pre><code>Rejoins la salle https://cleanpoker.dev/ab12cd34 sous le nom Claude.
-Story&nbsp;: export CSV des factures du mois, filtré par client.
-Estime-la en story points et vote, puis explique ton choix en trois lignes.</code></pre>
+La story à estimer est l'export CSV des factures du mois, filtré par client.
+Estime-la en story points et vote, sans me dire ta carte.
+Après la révélation, je te demanderai ton raisonnement. Quitte la salle quand je te le dis.</code></pre>
 
     <h2>Ce qu'une IA estime bien</h2>
     <ul>
       <li><strong>Ce que la story oublie</strong>&nbsp;: tests, migration de données, droits d'accès, cas limites, traduction.</li>
       <li><strong>La taille relative</strong> d'une story bien écrite, comparée à une autre que vous lui donnez en référence.</li>
-      <li><strong>Une explication écrite</strong> de son vote, utile à relire quand l'écart est grand.</li>
+      <li><strong>Une explication écrite</strong> de son vote, à lui demander après la révélation quand l'écart est grand.</li>
     </ul>
 
     <h2>Ce qu'elle estime mal</h2>
@@ -95,22 +94,28 @@ Estime-la en story points et vote, puis explique ton choix en trois lignes.</cod
       <li><strong>Votre code</strong>, sauf si l'assistant y a accès (Cursor ou VS Code ouverts sur le dépôt).</li>
       <li><strong>La vélocité de l'équipe</strong>&nbsp;: un 5 n'a de sens que pour l'équipe qui l'a calibré.</li>
       <li><strong>Les dépendances humaines</strong>&nbsp;: la personne absente, l'équipe voisine qui doit livrer avant.</li>
+      <li><strong>Le contexte de la salle</strong>&nbsp;: elle ne voit ni la story ni la discussion, seulement ce que vous lui écrivez.</li>
     </ul>
 
-    <h2>Trois règles pour qu'elle serve</h2>
+    <h2>Règles pour qu'elle serve</h2>
     <ul>
-      <li><strong>Elle vote avant la discussion</strong>, en même temps que tout le monde. Sa carte montrée en premier ancrerait l'équipe.</li>
-      <li><strong>Un écart ouvre la discussion, il ne la clôt pas.</strong> L'IA dit 13 et l'équipe dit 3&nbsp;: demandez-lui ce qu'elle a vu.</li>
-      <li><strong>La personne qui fera le travail tranche.</strong> L'IA ne sera pas là pour le livrer.</li>
+      <li><strong>Elle vote avant la discussion</strong>, en même temps que tout le monde. Si elle annonce sa carte dans votre conversation avant la révélation, votez d'abord.</li>
+      <li><strong>Un écart se discute.</strong> L'IA dit 13 et l'équipe dit 3&nbsp;: demandez-lui ce qu'elle a vu.</li>
+      <li><strong>La personne qui fera le travail tranche.</strong> Elle seule connaît le code qu'elle devra toucher.</li>
     </ul>
 
     <h2>Où va le texte de la story</h2>
     <p>
-      CleanPoker n'appelle aucune IA. La story passe par l'assistant de la personne qui l'a
-      branché, avec son abonnement et les règles de son entreprise sur l'IA. Le contenu de la
-      salle reste sur le serveur de Gravelines, en mémoire, et disparaît 24 heures après la
-      dernière activité.
+      CleanPoker n'appelle aucune IA et ne reçoit jamais le texte de la story&nbsp;: il reste dans la conversation de la personne qui a connecté l'assistant, avec son abonnement et les règles de son entreprise sur l'IA. L'assistant, lui, reçoit l'état de la salle&nbsp;: les noms des participants, qui a voté, puis les votes une fois révélés. La salle vit en mémoire sur le serveur de Gravelines et disparaît 24 heures après la dernière activité.
     </p>
+
+    <h2>Questions fréquentes</h2>
+    <h3>Peut-on faire voter une IA au planning poker&nbsp;?</h3>
+    <p>Oui. Sur CleanPoker, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l'adresse https://salles.cleanpoker.dev/mcp, reçoit la story dans sa conversation et choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.</p>
+    <h3>Une IA estime-t-elle mieux qu'une équipe&nbsp;?</h3>
+    <p>Non. Elle ne connaît ni la vélocité de l'équipe, ni l'état réel du code, ni qui dépend de qui. Elle est utile pour repérer ce que la story oublie&nbsp;: tests, migration de données, cas limites. Son vote sert à ouvrir la discussion quand il s'écarte de celui de l'équipe.</p>
+    <h3>Le texte de la story est-il envoyé à une IA&nbsp;?</h3>
+    <p>CleanPoker n'envoie rien à aucune IA et ne reçoit pas le texte de la story, qui reste dans la conversation de la personne qui a connecté l'assistant. L'assistant reçoit l'état de la salle&nbsp;: les noms des participants, puis les votes une fois révélés.</p>
 
     <div class="cta">
       <a href="/fr" class="btn">Créer une salle</a>
@@ -150,6 +155,7 @@ Estime-la en story points et vote, puis explique ton choix en trois lignes.</cod
 
   h1 { margin-bottom: 1.5rem; }
   h2 { margin-top: 2rem; margin-bottom: 0.75rem; }
+  h3 { margin-top: 1.25rem; margin-bottom: 0.25rem; font-size: 1rem; }
 
   p, li { line-height: 1.7; }
 
