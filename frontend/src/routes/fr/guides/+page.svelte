@@ -45,6 +45,10 @@
       <li><a href="/fr/comparatif-outils">Comparatif des outils de poker planning</a></li>
       <li><a href="/fr/poker-planning-rgpd">Poker planning et RGPD</a></li>
     </ul>
+    <h2>Organiser</h2>
+    <ul>
+      <li><a href="/fr/matrice-raci">Matrice RACI&nbsp;: définition et modèle à remplir</a></li>
+    </ul>
     <h2>Après le sprint</h2>
     <ul>
       <li><a href="/fr/retrospective">Formats de rétrospective</a></li>
