@@ -188,3 +188,27 @@ ne peut donc pas rougir, ce que le detecteur prouve.
 Il refuse aussi **un signe qui OUVRE une ligne de source** : le retour a la ligne
 d'une source HTML est rendu comme une espace ordinaire, donc un signe pose seul
 en tete de ligne s'affiche colle a l'espace de la ligne d'avant.
+
+## Les pages de rang Fibonacci ne chargent rien cote client
+
+`/fr/suite-de-fibonacci/[n]` et `/fibonacci-numbers/[n]` servent les rangs 1 a
+100 depuis UNE route chacune. Trois choix y tiennent le JS partage sous 50 Ko,
+et chacun a ete mesure avec `npm run size` avant d'etre retenu (base 47,96 Ko) :
+
+- **aucune fonction `load`** : la premiere `load` serveur du site coute 0,96 Ko
+  de JS partage a toutes les pages, la premiere `load` universelle 0,80 Ko ;
+- **aucun matcher de parametre** (`src/params.ts`) : 0,46 Ko. Un rang inconnu
+  (`/fibonacci-numbers/101`, `/fr/suite-de-fibonacci/abc`) est renvoye en 404
+  par `hooks.server.ts`, sur la regle `rangInconnu` de `src/lib/fibonacci.ts` ;
+- **`csr = false`** dans `+page.server.ts` et un calcul garde par
+  `import.meta.env.SSR` dans la page : `src/lib/fibonacci-pages.ts` et la table
+  des facteurs premiers ne partent dans aucun fichier client.
+
+La consequence a connaitre : un lien vers une page de rang doit demander la page
+au serveur. Le tableau des deux pages de reference porte `data-sveltekit-reload`
+et `fibonacci.test.ts` le verifie. Les deux pages de reference, elles, calculent
+leurs 100 lignes avec six lignes recopiees dans leur propre fichier, et le meme
+test compare leur rendu au module.
+
+Les entrees du sitemap se regenerent avec `node scripts/gen-fibonacci-sitemap.mjs`,
+la table des facteurs avec `node scripts/gen-fibonacci-facteurs.mjs`.

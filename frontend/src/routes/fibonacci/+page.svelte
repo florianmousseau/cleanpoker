@@ -193,6 +193,7 @@
     </details>
 
     <p>See also: <a href="/story-points">story points</a>, with a worked example and velocity.</p>
+    <p>The sequence in mathematics: <a href="/fibonacci-numbers">the first 100 Fibonacci numbers</a>, with the formula.</p>
 
     <div class="cta">
       <a href="/" class="btn">Try it with PokerAgile</a>

@@ -169,6 +169,7 @@
     </details>
 
     <p>À lire aussi&nbsp;: <a href="/fr/story-points">les story points</a>, avec un exemple chiffré et la vélocité.</p>
+    <p>La suite en mathématiques&nbsp;: <a href="/fr/suite-de-fibonacci">les 100 premiers nombres de Fibonacci</a>, avec la formule.</p>
 
     <div class="cta">
       <a href="/fr" class="btn">Essayer avec PokerAgile</a>

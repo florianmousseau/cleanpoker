@@ -6,6 +6,7 @@ import { env, waitUntil } from "cloudflare:workers";
 import { SKIP_LINK } from "#lib/skip-link.ts";
 import { sansPrefixeEn } from "#lib/redirection-en.ts";
 import { versNouveauDomaine } from "#lib/domaine.ts";
+import { rangInconnu } from "#lib/fibonacci.ts";
 
 const LOCALES = ["fr", "es", "de", "pt"] as const;
 type Locale = (typeof LOCALES)[number];
@@ -60,6 +61,16 @@ const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
       status: 301,
       headers: { location: `${target}${event.url.search}` },
     });
+  }
+
+  /*
+   * A rank page exists for 1 to 100. The route takes any segment, because a
+   * param matcher or a load function would each add client code to every
+   * page of the site. An unknown rank is handed to a path no route serves, so
+   * the visitor gets the same 404 page as anywhere else.
+   */
+  if (rangInconnu(event.url.pathname)) {
+    return event.fetch(`${event.url.pathname.replace(/\/$/, "")}/introuvable`);
   }
 
   const locale = routeLocale(event.url.pathname);
