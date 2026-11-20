@@ -540,4 +540,75 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://pokeragile.com/scrum-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/scrum-poker"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/fr/scrum-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/scrum-poker"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/es/scrum-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/scrum-poker"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/de/scrum-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/scrum-poker"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/pt/scrum-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/scrum-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/scrum-poker"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/t-shirt-sizing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/t-shirt-sizing"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/t-shirt-sizing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/t-shirt-sizing"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/fr/t-shirt-sizing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/t-shirt-sizing"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/t-shirt-sizing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/t-shirt-sizing"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

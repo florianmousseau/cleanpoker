@@ -126,6 +126,8 @@
       </p>
     </details>
 
+    <p>Dieselbe Technik heißt auch Scrum Poker: <a href="/de/scrum-poker">Scrum Poker online</a>.</p>
+
     <div class="cta">
       <a href="/de" class="btn">Kostenlose Session erstellen</a>
     </div>

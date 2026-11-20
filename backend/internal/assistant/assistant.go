@@ -140,7 +140,11 @@ func (s service) vote(_ context.Context, _ *mcp.CallToolRequest, in voteIn) (*mc
 	if err != nil {
 		return nil, stateOut{}, err
 	}
-	rm.CastVoteWithReason(id, in.Card, in.Reason, room.AnyRound)
+	// Returned as an error, the refusal reaches the assistant as a tool
+	// error: it used to read a success and tell its user it had voted.
+	if err := rm.CastVoteWithReason(id, in.Card, in.Reason, room.AnyRound); err != nil {
+		return nil, stateOut{}, err
+	}
 	return nil, stateOut{State: rm.Snapshot()}, nil
 }
 

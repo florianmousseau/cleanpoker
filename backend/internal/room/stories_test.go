@@ -128,7 +128,9 @@ func TestCastVoteWithReason_HiddenUntilTheRevealThenClearedByANewRound(t *testin
 	defer r.Stop()
 	r.JoinSeat(Player{ID: "bot", Name: "Claude", AI: true}, "")
 	r.Join("p1", "Alice", false)
-	r.CastVoteWithReason("bot", "8", "  Migration and tests are missing.  ", AnyRound)
+	if err := r.CastVoteWithReason("bot", "8", "  Migration and tests are missing.  ", AnyRound); err != nil {
+		t.Fatal(err)
+	}
 	reasonOf := func() string {
 		for _, p := range snap(r).Players {
 			if p.ID == "bot" {

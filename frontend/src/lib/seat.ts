@@ -12,6 +12,10 @@ type SeatStorage = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
 
 const keyOf = (roomId: string) => `cleanpoker:seat:${roomId}`;
 
+// The name is the person's, not the tab's: it is kept for every room opened
+// from this browser, so localStorage.
+const NAME_KEY = 'cleanpoker:name';
+
 function isSeat(value: unknown): value is Seat {
   if (typeof value !== 'object' || value === null) return false;
   const seat = value as Record<string, unknown>;
@@ -58,5 +62,32 @@ export function tabStorage(): SeatStorage | null {
     return typeof sessionStorage === 'undefined' ? null : sessionStorage;
   } catch {
     return null;
+  }
+}
+
+/** The browser's localStorage, or null where it does not exist or is blocked. */
+export function deviceStorage(): SeatStorage | null {
+  try {
+    return typeof localStorage === 'undefined' ? null : localStorage;
+  } catch {
+    return null;
+  }
+}
+
+/** The name last used to join a room from this browser, or an empty string. */
+export function loadName(storage: SeatStorage | null): string {
+  try {
+    return storage?.getItem(NAME_KEY)?.trim() ?? '';
+  } catch {
+    return '';
+  }
+}
+
+/** Keep the name for the next join form. A storage that refuses only costs the retyping. */
+export function saveName(storage: SeatStorage | null, name: string): void {
+  try {
+    storage?.setItem(NAME_KEY, name.trim());
+  } catch {
+    // Private mode or a full quota: the join form just opens empty.
   }
 }

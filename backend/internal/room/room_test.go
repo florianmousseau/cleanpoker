@@ -2,6 +2,7 @@ package room
 
 import (
 	"encoding/json"
+	"errors"
 	"strings"
 	"sync"
 	"testing"
@@ -959,5 +960,78 @@ func TestCastVote_TheCardStaysWithItsVoterUntilTheReveal(t *testing.T) {
 		case <-quiet:
 			return
 		}
+	}
+}
+
+func TestSnapshot_KeepsPlayersInJoinOrder(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	want := []string{"p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"}
+	for _, id := range want {
+		r.Join(id, "Player "+id, false)
+	}
+	// The host leaving passes the role on; a role switch and a vote change
+	// a seat: none of them may move a row.
+	r.Leave("p1")
+	r.ToggleObserver("p3", "p3")
+	r.CastVote("p5", "5", AnyRound)
+	want = want[1:]
+	for i := range 50 {
+		players := snap(r).Players
+		if len(players) != len(want) {
+			t.Fatalf("snapshot %d: %d players, want %d", i, len(players), len(want))
+		}
+		for j, p := range players {
+			if p.ID != want[j] {
+				t.Fatalf("snapshot %d: seat %d is %s, want %s", i, j, p.ID, want[j])
+			}
+		}
+	}
+}
+
+func TestCastVoteWithReason_SaysWhyAVoteIsRefused(t *testing.T) {
+	r := newTestRoom([]string{"1", "2", "3"})
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	r.Join("o1", "Olga", true)
+	if err := r.CastVoteWithReason("p1", "2", "", AnyRound); err != nil {
+		t.Fatalf("a card of the deck was refused: %v", err)
+	}
+	if err := r.CastVoteWithReason("p1", "", "", AnyRound); err != nil {
+		t.Fatalf("withdrawing a vote was refused: %v", err)
+	}
+	refused := []struct {
+		player, card string
+		round        int
+		want         error
+	}{
+		{"p1", "40", AnyRound, ErrNotInDeck},
+		{"o1", "2", AnyRound, ErrObserver},
+		{"p1", "2", 7, ErrOtherRound},
+		{"ghost", "2", AnyRound, ErrNoSeat},
+	}
+	for _, c := range refused {
+		if err := r.CastVoteWithReason(c.player, c.card, "", c.round); !errors.Is(err, c.want) {
+			t.Errorf("%s voting %q: got %v, want %v", c.player, c.card, err, c.want)
+		}
+	}
+	r.Show("p1")
+	if err := r.CastVoteWithReason("p1", "2", "", AnyRound); !errors.Is(err, ErrRevealed) {
+		t.Errorf("after the reveal: got %v, want %v", err, ErrRevealed)
+	}
+}
+
+func TestActivity_CarriesAnInstantNotAServerClock(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	before := time.Now().UnixMilli()
+	r.Join("p1", "Alice", false)
+	entry := snap(r).Activity[0]
+	if entry.Timestamp < before || entry.Timestamp > time.Now().UnixMilli() {
+		t.Fatalf("expected Unix milliseconds of now, got %d", entry.Timestamp)
+	}
+	raw, _ := json.Marshal(entry)
+	if !strings.Contains(string(raw), `"timestamp":1`) {
+		t.Fatalf("expected a number on the wire, got %s", raw)
 	}
 }

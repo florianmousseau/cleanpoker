@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { forgetSeat, loadSeat, saveSeat } from './seat';
+import { forgetSeat, loadName, loadSeat, saveName, saveSeat } from './seat';
 
 function memoryStorage() {
   const items = new Map<string, string>();
@@ -59,5 +59,29 @@ describe('seat', () => {
     expect(loadSeat(refusing, 'abc')).toBeNull();
     expect(() => saveSeat(refusing, 'abc', alice)).not.toThrow();
     expect(() => forgetSeat(refusing, 'abc')).not.toThrow();
+  });
+});
+
+describe('name', () => {
+  it('gives back the name of the last join, whatever the room', () => {
+    const storage = memoryStorage();
+    saveName(storage, '  Alice ');
+    expect(loadName(storage)).toBe('Alice');
+    expect([...storage.items.keys()]).toEqual(['cleanpoker:name']);
+  });
+
+  it('is empty when nothing was kept or the storage is missing', () => {
+    expect(loadName(memoryStorage())).toBe('');
+    expect(loadName(null)).toBe('');
+  });
+
+  it('survives a storage that throws', () => {
+    const broken = {
+      getItem: () => { throw new Error('blocked'); },
+      setItem: () => { throw new Error('blocked'); },
+      removeItem: () => {},
+    };
+    expect(loadName(broken)).toBe('');
+    expect(() => saveName(broken, 'Alice')).not.toThrow();
   });
 });

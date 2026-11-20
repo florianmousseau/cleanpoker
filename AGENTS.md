@@ -57,7 +57,7 @@ quelqu'un écrira le mois prochain avec le vocabulaire d'à côté.
 
 Ce qui reste vrai et se vend toujours : aucun cookie publicitaire, aucun compte,
 aucun script tiers, moins de 50 Ko de JS, et le contenu des sessions qui vit en
-mémoire et ne quitte pas Paris.
+mémoire et ne quitte pas Gravelines.
 
 ## Invariants à ne pas casser
 

@@ -187,3 +187,50 @@ func TestVote_CarriesAReasonAndTheStoryOnTheTableIsReadable(t *testing.T) {
 		}
 	}
 }
+
+// errorText is what the assistant reads when a tool call fails.
+func errorText(res *mcp.CallToolResult) string {
+	if !res.IsError || len(res.Content) == 0 {
+		return ""
+	}
+	text, _ := res.Content[0].(*mcp.TextContent)
+	if text == nil {
+		return ""
+	}
+	return text.Text
+}
+
+func TestVote_ACardOutsideTheDeckIsAnError(t *testing.T) {
+	s := store.New()
+	rm, _ := s.GetOrCreate("team42", nil)
+	cs := connect(t, s)
+	var joined joinOut
+	call(t, cs, "join_room", map[string]any{"room": "team42", "name": "Claude"}, &joined)
+
+	res := call(t, cs, "vote", map[string]any{"room": "team42", "seat": joined.Seat, "card": "4"}, nil)
+	if got := errorText(res); !strings.Contains(got, "not in the room deck") {
+		t.Fatalf("expected a tool error naming the deck, got %q", got)
+	}
+	if rm.Snapshot().Players[0].Vote != "" {
+		t.Fatal("the refused card was recorded")
+	}
+}
+
+func TestVote_AfterTheRevealIsAnError(t *testing.T) {
+	s := store.New()
+	rm, _ := s.GetOrCreate("team42", nil)
+	rm.Join("p1", "Alice", false)
+	cs := connect(t, s)
+	var joined joinOut
+	call(t, cs, "join_room", map[string]any{"room": "team42", "name": "Claude"}, &joined)
+	rm.CastVote("p1", "5", room.AnyRound)
+	rm.Show("p1")
+
+	res := call(t, cs, "vote", map[string]any{"room": "team42", "seat": joined.Seat, "card": "8"}, nil)
+	if got := errorText(res); !strings.Contains(got, "already revealed") {
+		t.Fatalf("expected a tool error naming the reveal, got %q", got)
+	}
+	if got := rm.Snapshot().Results.Avg; got != "5" {
+		t.Fatalf("the late vote changed the results: avg %q", got)
+	}
+}
