@@ -118,7 +118,7 @@ function taskFindings(row: Cell[], task: number): Finding[] {
  * a role that holds no letter. Nothing else is a rule, so nothing else is flagged.
  */
 export function checkMatrix(m: Matrix): Finding[] {
-  const found = m.cells.flatMap(taskFindings);
+  const found = m.cells.flatMap((row, task) => taskFindings(row, task));
   m.roles.forEach((_, role) => {
     if (m.cells.every((row) => row[role] === '')) found.push({ kind: 'emptyRole', role });
   });
