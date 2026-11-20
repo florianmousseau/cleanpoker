@@ -17,7 +17,10 @@ export function storiesCsv(stories: Story[], header: [string, string]): string {
 }
 
 function cellMd(value: string): string {
-  return value.replaceAll('|', String.raw`\|`).replaceAll(/\s*[\r\n]+\s*/g, ' ');
+  const lines = value.replaceAll('|', String.raw`\|`).split(/[\r\n]+/);
+  const last = lines.length - 1;
+  // A line break and the spaces around it become one space; the ends stay as typed.
+  return lines.map((line, i) => (i > 0 ? line.trimStart() : line)).map((line, i) => (i < last ? line.trimEnd() : line)).join(' ');
 }
 
 /** The stories as a Markdown table, ready to paste into GitHub, Linear or Jira. */
