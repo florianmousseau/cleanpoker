@@ -23,7 +23,7 @@
 ## Philosophie du projet
 
 - Aucun traceur, aucun cookie publicitaire, aucun script tiers
-- Bundle JS < 50 Ko (brotli), mesuré par `npm run size` sur le JS partagé
+- JS < 50 Ko (brotli) à la première visite, mesuré par `npm run size` sur l'accueil (`/`, `/fr`) et sur une salle (`/[id]`)
 - Lighthouse Performance et Accessibilité : 100/100
 - WCAG 2.1 AA
 - Hébergement sur énergie renouvelable
@@ -59,6 +59,36 @@ Ce qui reste vrai et se vend toujours : aucun cookie publicitaire, aucun compte,
 aucun script tiers, moins de 50 Ko de JS, et le contenu des sessions qui vit en
 mémoire et ne quitte pas Gravelines.
 
+## Moins de 50 Ko de JavaScript : ce que le visiteur télécharge
+
+La promesse publique est « moins de 50 Ko de JavaScript ». Elle se mesure sur
+ce qu'une première visite télécharge, pas sur un dossier du build.
+
+`frontend/scripts/check-first-visit.mjs`, joué par `npm run size` après la
+garde `Entry JS` de size-limit, suit le manifeste du build : les fichiers
+d'entrée, le client qu'ils importent toujours, les layouts et la page de la
+route, et tout ce qu'ils importent statiquement. Pour une salle il ajoute LE
+dictionnaire que son `load` attend, le plus lourd des cinq. Trois visites sont
+tenues sous 50 000 octets brotli : `/`, `/fr` et `/[id]`. Ce qui se charge au
+clic (options, liste de stories, IA locale) n'est pas compté.
+
+L'ancienne garde sommait `chunks/` : elle passait pendant qu'une salle
+téléchargeait 55 Ko, parce que le fichier de la salle n'était pas dans ce
+dossier, et elle aurait rougi le jour où les cinq langues sont devenues cinq
+fichiers chargés un à un.
+
+Le contrôle refuse de passer sur du vide : manifeste absent, route inconnue,
+fermeture trop petite pour être une page, ou salle qui n'a plus cinq
+dictionnaires. Il prouve son parcours sur un échantillon avant de lire le
+build. Si une salle dépasse, on allège la salle, on ne touche pas à la limite.
+
+**Les dictionnaires ne s'importent jamais statiquement.** `src/lib/i18n/<langue>.ts`
+porte ce que la salle dit, `src/lib/i18n/extras/<langue>.ts` ce que seuls les
+options, le formulaire de stories, le QR code et l'IA locale disent ;
+`src/lib/dictionaries.ts` en charge une langue à la fois, et
+`src/routes/[id]/+page.ts` l'attend avant l'affichage. Un import statique
+remettrait les cinq langues dans chaque salle : `src/lib/slim.test.ts` le refuse.
+
 ## Invariants à ne pas casser
 
 - **La politique de sécurité est dans DEUX fichiers** : `frontend/_headers` pour
@@ -93,7 +123,7 @@ rien.
 
 **Le perimetre est le francais et lui seul.** Le site sert cinq langues, et dans
 les quatre autres l'espace devant un deux-points n'existe pas. Sont lus
-`src/routes/fr`, le dictionnaire `src/lib/i18n/fr.ts` et `src/routes/+error.svelte`,
+`src/routes/fr`, les dictionnaires `src/lib/i18n/fr.ts` et `src/lib/i18n/extras/fr.ts`, et `src/routes/+error.svelte`,
 seul ecran francais qu'aucun dictionnaire ne traduit.
 
 **L'insecable ne s'ecrit jamais en clair dans une source** : posee litteralement,

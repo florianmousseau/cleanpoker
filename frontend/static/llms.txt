@@ -85,6 +85,6 @@ Guides are in English and French; the core guides also exist in Spanish, German 
 
 - Frontend: SvelteKit 5 (runes), TypeScript, vanilla CSS
 - Backend: Go, native WebSocket
-- Bundle: under 50 KB JS (brotli compressed)
+- JavaScript: under 50 KB on a first visit, home or room (brotli compressed, checked on every CI run)
 - No external dependencies at runtime
 - Source: https://github.com/florianmousseau/pokeragile

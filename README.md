@@ -89,7 +89,7 @@ cd frontend && npm ci && cp .env.example .env && npm run dev
 | Go backend: rooms in memory, one goroutine per room | OVHcloud VPS, Gravelines (France), built from `main` by the server itself | WebSocket, plus `POST /rooms` |
 
 - **`backend/`** is Go with the standard library HTTP server and `golang.org/x/net/websocket`. `internal/store` holds the rooms in a map. `internal/room` owns each room's state behind one event loop, which broadcasts a snapshot on every change and masks the votes until they are revealed. `internal/handler` exposes `POST /rooms`, `GET /rooms/{id}/ws`, `/health` and `/stats`.
-- **`frontend/`** is SvelteKit 5 with runes, TypeScript and plain CSS, deployed with `adapter-cloudflare`. `src/lib/useRoom.svelte.ts` holds the WebSocket client and `src/routes/[id]` the room page. The room translations live in `src/lib/i18n/`, one file per language, and only the room page imports them.
+- **`frontend/`** is SvelteKit 5 with runes, TypeScript and plain CSS, deployed with `adapter-cloudflare`. `src/lib/useRoom.svelte.ts` holds the WebSocket client and `src/routes/[id]` the room page. The room translations live in `src/lib/i18n/`, one file per language, fetched one language at a time by `src/lib/dictionaries.ts`.
 - Security headers are set in two places that must stay in sync. `frontend/src/hooks.server.ts` covers pages rendered by the worker and `frontend/_headers` covers static files.
 
 ## Checks
@@ -106,7 +106,7 @@ Every pull request runs the same steps as the `Code Quality` and `Bundle Size` j
 | `npm run check:seo` | titles, descriptions and alternates of every page |
 | `npm run check:reflow` | CSS that could push a page past a 320 px screen |
 | `npm run mesure` | no measurement script, and the privacy wording above in five languages |
-| `npm run build && npm run size` | shared JS stays under 50 kB brotli |
+| `npm run build && npm run size` | a first visit downloads under 50 kB of JavaScript (brotli), on the home and in a room |
 
 CodeQL scans Go and TypeScript, and SonarCloud analyses the code on each run. After each production deploy, Lighthouse CI audits the live site.
 

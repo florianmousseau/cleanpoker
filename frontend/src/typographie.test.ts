@@ -9,7 +9,7 @@
  *
  * PERIMETRE : le francais et lui seul. Ce site sert cinq langues, et dans les
  * quatre autres l espace devant un deux-points n existe pas - la regle y serait
- * fausse. Sont donc lus `src/routes/fr` et le dictionnaire `i18n/fr.ts`.
+ * fausse. Sont donc lus `src/routes/fr` et les dictionnaires `i18n/fr.ts` et `i18n/extras/fr.ts`.
  *
  * L insecable ne s ecrit JAMAIS en clair : `&nbsp;` dans du balisage, `\u00A0`
  * dans une chaine. Posee litteralement elle est indiscernable d une espace
@@ -280,7 +280,7 @@ function regionsCode(source: string): string {
 }
 
 const RACINE = 'src/routes/fr';
-const DICTIONNAIRE = 'src/lib/i18n/fr.ts';
+const DICTIONNAIRES = ['src/lib/i18n/fr.ts', 'src/lib/i18n/extras/fr.ts'];
 /*
  * La page d erreur est ecrite en francais pour les cinq langues - elle porte
  * « Erreur 404 » et « Retour a l accueil » en dur - et elle vit hors de
@@ -436,7 +436,7 @@ describe('le texte francais affiche', () => {
       ...[...fichiers(RACINE), ERREUR].flatMap((chemin) =>
         fautesDe(chemin, readFileSync(chemin, 'utf8'))
       ),
-      ...fautesDe(DICTIONNAIRE, blocFrancais(readFileSync(DICTIONNAIRE, 'utf8')))
+      ...DICTIONNAIRES.flatMap((chemin) => fautesDe(chemin, blocFrancais(readFileSync(chemin, 'utf8'))))
     ];
     expect(fautes).toEqual([]);
   });
@@ -454,7 +454,7 @@ describe('le texte francais affiche', () => {
   });
 
   it("n ecrit jamais l insecable en clair dans une source", () => {
-    const enClair = [...fichiers(RACINE), ERREUR, DICTIONNAIRE].filter((chemin) =>
+    const enClair = [...fichiers(RACINE), ERREUR, ...DICTIONNAIRES].filter((chemin) =>
       readFileSync(chemin, 'utf8').includes(INSECABLE)
     );
     expect(enClair).toEqual([]);

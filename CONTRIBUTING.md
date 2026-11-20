@@ -33,11 +33,11 @@ A change in behaviour comes with a test that fails without it. When a check turn
 
 These come from real regressions. [AGENTS.md](AGENTS.md) has the full reasoning, in French.
 
-- **No third-party scripts, trackers or advertising cookies.** The shared JS budget is 50 kB brotli.
+- **No third-party scripts, trackers or advertising cookies.** The JavaScript budget is 50 kB brotli for a first visit, on the home and in a room: `npm run size` follows the build manifest from the entry files to the page and counts what the browser fetches before the page works.
 - **Security headers live in two files**, `frontend/_headers` and `frontend/src/hooks.server.ts`, and must stay identical.
 - **Nothing may push a page past a 320 px screen**, including with the browser text size doubled. `npm run check:reflow` lists the CSS patterns it refuses. Wrap every `<table>` in a `<div class="table-wrap">`.
 - **French text uses a no-break space** before `:` `;` `?` `!` `%` and `»`. Write it `&nbsp;` in Svelte markup and ` ` in a JavaScript string, never as a literal character. `npm test` checks it.
-- **User-facing text ships in five languages** (EN, FR, ES, DE, PT). A new string goes into the `Translation` type of `frontend/src/lib/i18n.ts` and into each dictionary of `frontend/src/lib/i18n/`.
+- **User-facing text ships in five languages** (EN, FR, ES, DE, PT). A new string goes into the `Translation` type of `frontend/src/lib/i18n.ts` and into each dictionary of `frontend/src/lib/i18n/`; one that only the options, the story form, the QR code or the local AI show goes into `Extras` and `frontend/src/lib/i18n/extras/`, fetched with them. Never import a dictionary statically: `frontend/src/lib/dictionaries.ts` fetches one language at a time.
 - **The `/[id]` room route stays `noindex`.**
 
 ## License

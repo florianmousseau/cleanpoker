@@ -20,20 +20,38 @@ function* sources(dir: string): Generator<string> {
 }
 
 const ROOM = 'src/routes/[id]/+page.svelte';
-const DICTIONARY = /from\s+['"][^'"]*i18n\/(fr|en|es|de|pt|all)(\.ts)?['"]/;
+const STATIC_DICTIONARY = /from\s+['"][^'"]*i18n\/(extras\/)?(fr|en|es|de|pt|all)(\.ts)?['"]/;
 
 describe('the room dictionaries', () => {
-  it('are imported by the room page and by nothing else', () => {
+  it('are never a static import of anything a visitor downloads', () => {
     const importers = [...sources('src')].filter(
-      (path) => !path.startsWith(join('src', 'lib', 'i18n')) && DICTIONARY.test(readFileSync(path, 'utf8'))
+      (path) => !path.startsWith(join('src', 'lib', 'i18n')) && STATIC_DICTIONARY.test(readFileSync(path, 'utf8'))
     );
-    expect(importers).toEqual([ROOM]);
+    expect(importers).toEqual([]);
   });
 
   it('proves the detector on the import the home page used to carry', () => {
-    expect(DICTIONARY.test("import { FR } from '#lib/i18n/fr.ts';")).toBe(true);
-    expect(DICTIONARY.test("import { FR, EN } from './i18n/all';")).toBe(true);
-    expect(DICTIONARY.test("import type { Translation } from '#lib/i18n.ts';")).toBe(false);
+    expect(STATIC_DICTIONARY.test("import { FR } from '#lib/i18n/fr.ts';")).toBe(true);
+    expect(STATIC_DICTIONARY.test("import { DE } from '#lib/i18n/extras/de.ts';")).toBe(true);
+    expect(STATIC_DICTIONARY.test("import { FR, EN } from './i18n/all';")).toBe(true);
+    expect(STATIC_DICTIONARY.test("import type { Translation } from '#lib/i18n.ts';")).toBe(false);
+    expect(STATIC_DICTIONARY.test("fr: () => import('#lib/i18n/fr.ts').then((m) => m.FR),")).toBe(false);
+  });
+
+  it('are fetched one language at a time, the room words apart from the option words', () => {
+    const loaders = readFileSync('src/lib/dictionaries.ts', 'utf8');
+    for (const l of ['fr', 'en', 'es', 'de', 'pt']) {
+      expect(loaders, l).toContain(`import('#lib/i18n/${l}.ts')`);
+      expect(loaders, l).toContain(`import('#lib/i18n/extras/${l}.ts')`);
+    }
+  });
+
+  it('are awaited before the room shows, on the server and before hydration', () => {
+    const load = readFileSync('src/routes/[id]/+page.ts', 'utf8');
+    expect(load).toContain('await loadDictionary(lang.current)');
+    const page = readFileSync(ROOM, 'utf8');
+    expect(page).toContain('roomWords(() => data.T)');
+    expect(page).toContain('onLangChange={(l) => words.change(l as Lang)}');
   });
 
   it('say the same things in the five languages', () => {
@@ -41,7 +59,7 @@ describe('the room dictionaries', () => {
       Object.entries(o).flatMap(([k, v]) =>
         typeof v === 'object' ? shape(v as object).map((s) => `${k}.${s}`) : [`${k}:${typeof v}`]
       );
-    for (const t of [FR, ES, DE, PT]) expect(shape(t)).toEqual(shape(EN));
+    for (const t of [FR, ES, DE, PT]) expect(shape(t).sort()).toEqual(shape(EN).sort());
   });
 });
 

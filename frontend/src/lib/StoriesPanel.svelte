@@ -1,14 +1,15 @@
 <script lang="ts">
-  import type { Translation } from '#lib/i18n.ts';
+  import type { Extras, Translation } from '#lib/i18n.ts';
   import type { Story } from '#lib/useRoom.svelte.ts';
   import { storiesCsv, storiesMarkdown, withCredit } from '#lib/export.ts';
   import { credit } from '#lib/credit.svelte.ts';
   import { copierTexte } from '#lib/presse-papiers.ts';
 
-  let { stories, current, T, canRun, onAdd, onClear, onSelect }: {
+  let { stories, current, T, X, canRun, onAdd, onClear, onSelect }: {
     stories: Story[];
     current: number;
     T: Translation;
+    X: Extras;
     canRun: boolean;
     onAdd: (text: string) => void;
     onClear: () => void;
@@ -27,7 +28,7 @@
   }
 
   function clear() {
-    if (window.confirm(T.stories.clearConfirm)) onClear();
+    if (window.confirm(X.stories.clearConfirm)) onClear();
   }
 
   async function copyMarkdown() {
@@ -50,9 +51,9 @@
 </script>
 
 <section class="panel" aria-labelledby="stories-title" data-testid="stories">
-  <h2 id="stories-title">{T.stories.title}</h2>
+  <h2 id="stories-title">{X.stories.title}</h2>
   {#if stories.length === 0}
-    <p class="empty">{T.stories.none}</p>
+    <p class="empty">{X.stories.none}</p>
   {:else}
     <div class="table-wrap">
       <table class="stories-table">
@@ -67,7 +68,7 @@
             <tr class:on-table={i === current} aria-current={i === current ? 'true' : undefined}>
               <td>
                 {#if canRun && i !== current}
-                  <button class="story-link" onclick={() => onSelect(i)} aria-label={T.stories.vote(story.title)}>{story.title}</button>
+                  <button class="story-link" onclick={() => onSelect(i)} aria-label={X.stories.vote(story.title)}>{story.title}</button>
                 {:else}
                   <span class="story-title">{story.title}</span>
                 {/if}
@@ -79,18 +80,18 @@
       </table>
     </div>
     <div class="story-actions">
-      <button class="btn btn-secondary btn-sm" onclick={copyMarkdown}>{copied ? T.stories.copied : T.stories.copyMd}</button>
-      <button class="btn btn-secondary btn-sm" onclick={downloadCsv}>{T.stories.downloadCsv}</button>
+      <button class="btn btn-secondary btn-sm" onclick={copyMarkdown}>{copied ? T.stories.copied : X.stories.copyMd}</button>
+      <button class="btn btn-secondary btn-sm" onclick={downloadCsv}>{X.stories.downloadCsv}</button>
       {#if canRun}
-        <button class="btn btn-secondary btn-sm" onclick={clear}>{T.stories.clear}</button>
+        <button class="btn btn-secondary btn-sm" onclick={clear}>{X.stories.clear}</button>
       {/if}
     </div>
   {/if}
   {#if canRun}
     <form class="add-form" onsubmit={add}>
-      <label for="stories-input">{T.stories.addLabel}</label>
-      <textarea id="stories-input" rows="3" bind:value={text} placeholder={T.stories.addPlaceholder}></textarea>
-      <button type="submit" class="btn btn-secondary btn-sm" disabled={!text.trim()}>{T.stories.addBtn}</button>
+      <label for="stories-input">{X.stories.addLabel}</label>
+      <textarea id="stories-input" rows="3" bind:value={text} placeholder={X.stories.addPlaceholder}></textarea>
+      <button type="submit" class="btn btn-secondary btn-sm" disabled={!text.trim()}>{X.stories.addBtn}</button>
     </form>
   {/if}
 </section>

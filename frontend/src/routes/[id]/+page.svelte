@@ -5,11 +5,9 @@
   import Footer from '#lib/Footer.svelte';
   import { equipeDe } from '#lib/equipe.ts';
   import Logo from '#lib/Logo.svelte';
-  import { FR } from '#lib/i18n/fr.ts';
-  import { EN } from '#lib/i18n/en.ts';
-  import { ES } from '#lib/i18n/es.ts';
-  import { DE } from '#lib/i18n/de.ts';
-  import { PT } from '#lib/i18n/pt.ts';
+  import type { Translation } from '#lib/i18n.ts';
+  import { roomWords } from '#lib/room-words.svelte.ts';
+  import type { Lang } from '#lib/lang.svelte.ts';
   import { useRoom, type Player } from '#lib/useRoom.svelte.ts';
   import { copierTexte } from '#lib/presse-papiers.ts';
   import { accorderDocumentALaLangue } from '#lib/html-lang.ts';
@@ -26,13 +24,10 @@
 
   const roomId = $derived(page.params.id ?? '');
   const equipe = $derived(equipeDe(page.url.searchParams));
-  const T = $derived(
-    lang.current === 'fr' ? FR :
-    lang.current === 'es' ? ES :
-    lang.current === 'de' ? DE :
-    lang.current === 'pt' ? PT :
-    EN
-  );
+  let { data }: { data: { T: Translation } } = $props();
+  const words = roomWords(() => data.T);
+  const T = $derived(words.current);
+  const X = $derived(words.extras);
 
   let nameInput = $state('');
   let nameInputEl = $state<HTMLInputElement | null>(null);
@@ -160,7 +155,12 @@
   const RoomOptions = lazily(() => optionsOpen, () => import('#lib/RoomOptions.svelte'));
   const StoriesPanel = lazily(() => stories.length > 0, () => import('#lib/StoriesPanel.svelte'));
   // Only a browser with a built-in model can run the analysis.
-  const LocalAi = lazily(() => onTable !== undefined && 'LanguageModel' in globalThis, () => import('#lib/LocalAi.svelte'));
+  const aiWanted = $derived(onTable !== undefined && 'LanguageModel' in globalThis);
+  const LocalAi = lazily(() => aiWanted, () => import('#lib/LocalAi.svelte'));
+  // Their words come with them, in the one language the room speaks.
+  $effect(() => {
+    if (optionsOpen || aiWanted || stories.length > 0) words.wantExtras();
+  });
 
   const homeHref = $derived(
     lang.current === 'fr' ? '/fr' :
@@ -282,8 +282,8 @@
       {#if onTable}
         <div>
           <p class="on-table" data-testid="story-on-table">{T.stories.onTable} <strong>{onTable.title}</strong></p>
-          {#if LocalAi.current}
-            <LocalAi.current story={onTable.title} lang={lang.current} {T} />
+          {#if LocalAi.current && X}
+            <LocalAi.current story={onTable.title} lang={lang.current} {X} />
           {/if}
         </div>
       {/if}
@@ -527,8 +527,8 @@
         </aside>
       {/if}
 
-      {#if stories.length > 0 && StoriesPanel.current}
-      <StoriesPanel.current {stories} current={currentIndex} {T} {canRun}
+      {#if stories.length > 0 && StoriesPanel.current && X}
+      <StoriesPanel.current {stories} current={currentIndex} {T} {X} {canRun}
         onAdd={(text) => room.addStories(text)}
         onClear={() => room.clearStories()}
         onSelect={(i) => room.selectStory(i)} />
@@ -537,8 +537,8 @@
       <!-- Everything beyond voting waits here, closed: the room opens on the cards. -->
       <details class="panel options" data-testid="options" bind:open={optionsOpen}>
         <summary>{T.options}</summary>
-        {#if RoomOptions.current}
-          <RoomOptions.current {room} roomState={room.roomState} {roomId} {T} {canRun} {isHost} {stories} current={currentIndex} />
+        {#if RoomOptions.current && X}
+          <RoomOptions.current {room} roomState={room.roomState} {roomId} {T} {X} {canRun} {isHost} {stories} current={currentIndex} />
         {/if}
       </details>
     {/if}
@@ -552,7 +552,7 @@
     privacy={T.footer.privacy}
     about={T.footer.about}
     locale={lang.current}
-    onLangChange={(l) => lang.set(l as 'fr'|'en'|'es'|'de'|'pt')}
+    onLangChange={(l) => words.change(l as Lang)}
   />
 </div>
 

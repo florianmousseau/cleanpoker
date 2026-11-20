@@ -1,6 +1,6 @@
 <script lang="ts">
   import { PUBLIC_API_URL } from '$app/env/public';
-  import { translateActivity, type Translation } from '#lib/i18n.ts';
+  import { translateActivity, type Extras, type Translation } from '#lib/i18n.ts';
   import type { RoomState, Story, useRoom } from '#lib/useRoom.svelte.ts';
   import QrCode from '#lib/QrCode.svelte';
   import StoriesPanel from '#lib/StoriesPanel.svelte';
@@ -11,11 +11,12 @@
 
   // Everything beyond voting. The room fetches this file when the options
   // are first opened, so nothing here weighs on someone who only votes.
-  let { room, roomState, roomId, T, canRun, isHost, stories, current }: {
+  let { room, roomState, roomId, T, X, canRun, isHost, stories, current }: {
     room: ReturnType<typeof useRoom>;
     roomState: RoomState;
     roomId: string;
     T: Translation;
+    X: Extras;
     canRun: boolean;
     isHost: boolean;
     stories: Story[];
@@ -27,7 +28,7 @@
   let aiError = $state('');
 
   async function copyAiPrompt() {
-    if (await copierTexte(T.ia.prompt(roomUrl(window.location), mcpUrl(PUBLIC_API_URL)))) {
+    if (await copierTexte(X.ia.prompt(roomUrl(window.location), mcpUrl(PUBLIC_API_URL)))) {
       aiError = '';
       aiFeedback = T.copied;
       setTimeout(() => (aiFeedback = ''), 2000);
@@ -40,13 +41,13 @@
 
 <div class="options-body">
   {#if canRun && roomState.state === 'voting'}
-    <div class="timer-row" role="group" aria-label={T.host.timer}>
-      <span class="timer-label">{T.host.timer}</span>
+    <div class="timer-row" role="group" aria-label={X.host.timer}>
+      <span class="timer-label">{X.host.timer}</span>
       {#each TIMER_CHOICES as seconds (seconds)}
-        <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(seconds)}>{T.host.seconds(seconds)}</button>
+        <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(seconds)}>{X.host.seconds(seconds)}</button>
       {/each}
       {#if roomState.timerEnd}
-        <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(0)}>{T.host.timerStop}</button>
+        <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(0)}>{X.host.timerStop}</button>
       {/if}
     </div>
   {/if}
@@ -54,19 +55,19 @@
     <label class="option-check">
       <input type="checkbox" checked={roomState.autoReveal ?? false}
         onchange={(e) => room.setAutoReveal(e.currentTarget.checked)} data-testid="auto-reveal" />
-      <span>{T.controls.autoReveal}</span>
+      <span>{X.controls.autoReveal}</span>
     </label>
   {/if}
   {#if isHost}
     <button class="btn btn-secondary btn-sm lock-btn" onclick={() => room.setLocked(!roomState.locked)}
       aria-pressed={roomState.locked} data-testid="lock-btn">
-      {roomState.locked ? T.host.unlock : T.host.lock}
+      {roomState.locked ? X.host.unlock : X.host.lock}
     </button>
   {/if}
-  <QrCode {roomId} {T} />
+  <QrCode {roomId} {X} />
   <div class="invite-ai">
-  <button class="btn btn-secondary btn-sm" onclick={copyAiPrompt} data-testid="invite-ai">{aiFeedback || T.ia.invite}</button>
-  <span class="hint">{T.ia.inviteHelp}</span>
+  <button class="btn btn-secondary btn-sm" onclick={copyAiPrompt} data-testid="invite-ai">{aiFeedback || X.ia.invite}</button>
+  <span class="hint">{X.ia.inviteHelp}</span>
   {#if aiError}
     <span class="copy-error" role="alert">{aiError}</span>
   {/if}
@@ -74,26 +75,26 @@
   <label class="option-check">
     <input type="checkbox" checked={credit.on}
       onchange={(e) => credit.set(e.currentTarget.checked)} data-testid="credit-option" />
-    <span>{T.results.creditOption}</span>
+    <span>{X.results.creditOption}</span>
   </label>
   {#if stories.length === 0}
-  <StoriesPanel {stories} {current} {T} {canRun}
+  <StoriesPanel {stories} {current} {T} {X} {canRun}
   onAdd={(text) => room.addStories(text)}
   onClear={() => room.clearStories()}
   onSelect={(i) => room.selectStory(i)} />
   {/if}
   <section class="panel" aria-labelledby="log-title">
-    <h2 id="log-title">{T.activity.title}</h2>
+    <h2 id="log-title">{X.activity.title}</h2>
     {#if roomState.activity.length === 0}
-    <p class="empty">{T.activity.none}</p>
+    <p class="empty">{X.activity.none}</p>
     {:else}
     <div class="table-wrap">
-      <table class="log-table" aria-label={T.activity.title}>
+      <table class="log-table" aria-label={X.activity.title}>
         <thead>
           <tr>
-            <th scope="col">{T.activity.colTime}</th>
-            <th scope="col">{T.activity.colAuthor}</th>
-            <th scope="col">{T.activity.colAction}</th>
+            <th scope="col">{X.activity.colTime}</th>
+            <th scope="col">{X.activity.colAuthor}</th>
+            <th scope="col">{X.activity.colAction}</th>
           </tr>
         </thead>
         <tbody>
@@ -106,7 +107,7 @@
             <tr>
               <td class="log-time">{logTime(entry.timestamp)}</td>
               <td>{entry.initiator}</td>
-              <td>{translateActivity(entry.message, entry.target ?? '', T)}</td>
+              <td>{translateActivity(entry.message, entry.target ?? '', X)}</td>
             </tr>
           {/each}
         </tbody>
