@@ -72,7 +72,7 @@
     <ul>
       <li><strong>Claude</strong>&nbsp;: Paramètres, Connecteurs, Ajouter un connecteur personnalisé, puis coller l'adresse. Dans une offre Team ou Enterprise, un propriétaire de l'espace l'ajoute d'abord.</li>
       <li><strong>Claude Code</strong>&nbsp;: <code>claude mcp add --transport http cleanpoker https://salles.cleanpoker.dev/mcp</code></li>
-      <li><strong>ChatGPT</strong>&nbsp;: Paramètres, Applications et connecteurs, Paramètres avancés, activer le mode développeur, puis Créer avec l'adresse. Le mode développeur est réservé aux offres payantes de ChatGPT.</li>
+      <li><strong>ChatGPT</strong>&nbsp;: Paramètres, Applications, Paramètres avancés, activer le mode développeur, puis Créer une application avec l'adresse. Le vote demande une offre Business, Enterprise ou Edu&nbsp;; sur Plus et Pro, le mode développeur n'accepte que les outils de lecture, et l'IA lit la salle sans voter.</li>
       <li><strong>Cursor</strong>&nbsp;: dans <code>~/.cursor/mcp.json</code>, ajouter <code>&#123;"mcpServers": &#123; "cleanpoker": &#123; "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
       <li><strong>VS Code</strong>&nbsp;: avec Copilot en mode agent, dans <code>.vscode/mcp.json</code>, ajouter <code>&#123;"servers": &#123; "cleanpoker": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
     </ul>
