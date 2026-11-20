@@ -50,6 +50,8 @@ The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the l
 - [Scrum poker online (PT)](https://pokeragile.com/pt/scrum-poker) - Portuguese version
 - [T-shirt sizing](https://pokeragile.com/t-shirt-sizing) - The six sizes from XS to XXL, when sizes replace numbers, session steps with the T-shirt deck, an example conversion to story points, sizes versus Fibonacci
 - [T-shirt sizing (FR)](https://pokeragile.com/fr/t-shirt-sizing) - French version
+- [Retrospective formats](https://pokeragile.com/retrospective) - 11 sprint retrospective formats with steps and durations, the five phases from Derby and Larsen, common mistakes
+- [Retrospective formats (FR)](https://pokeragile.com/fr/retrospective) - French version
 - [Planning poker and GDPR](https://pokeragile.com/planning-poker-gdpr) - What an estimation tool processes as personal data, what a DPO checks, how to verify any tool in two minutes
 - [Poker planning et RGPD](https://pokeragile.com/fr/poker-planning-rgpd) - French version
 - [Accessibility statement](https://pokeragile.com/accessibilite) - WCAG 2.1 AA conformance and how it was tested

@@ -39,13 +39,13 @@
   const GUIDES: Record<string, { label: string; links: [string, string][] }> = {
     en: { label: 'Guides', links: [
       ['/planning-poker', 'Planning poker guide'], ['/scrum-poker', 'Scrum poker'], ['/story-points', 'Story points'],
-      ['/t-shirt-sizing', 'T-shirt sizing'], ['/fibonacci', 'Fibonacci scale'],
+      ['/t-shirt-sizing', 'T-shirt sizing'], ['/retrospective', 'Retrospective formats'], ['/fibonacci', 'Fibonacci scale'],
       ['/estimation-agile', 'Agile estimation'], ['/alternatives', 'Alternatives'], ['/planning-poker-tools', 'Tools compared'],
       ['/planning-poker-ai', 'Planning poker with AI'], ['/planning-poker-gdpr', 'GDPR'],
     ] },
     fr: { label: 'Guides', links: [
       ['/fr/planning-poker', 'Guide du poker planning'], ['/fr/scrum-poker', 'Scrum poker'], ['/fr/story-points', 'Story points'],
-      ['/fr/t-shirt-sizing', 'T-shirt sizing'], ['/fr/fibonacci', 'Suite de Fibonacci'],
+      ['/fr/t-shirt-sizing', 'T-shirt sizing'], ['/fr/retrospective', 'Formats de rétrospective'], ['/fr/fibonacci', 'Suite de Fibonacci'],
       ['/fr/estimation-agile', 'Estimation agile'], ['/fr/alternatives', 'Alternatives'], ['/fr/comparatif-outils', 'Comparatif des outils'],
       ['/fr/planning-poker-ia', 'Planning poker avec une IA'], ['/fr/poker-planning-rgpd', 'RGPD'],
     ] },

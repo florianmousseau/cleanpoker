@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.60] - 2026-11-20
+
+- feat(seo): retrospective formats guide in English and French (#418)
+- feat(seo): home titles with the head queries, guide links in the home footer, richer app schema (#417)
+
 ## [0.0.59] - 2026-11-20
 
 - feat(seo): story points guide in French and English (#413)
