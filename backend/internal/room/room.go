@@ -32,6 +32,9 @@ type Player struct {
 	Name     string `json:"name"`
 	Vote     string `json:"vote"`
 	Observer bool   `json:"observer"`
+	// AI marks a seat held by an assistant through the API rather than by a
+	// person in a browser. It votes like anyone, and never holds the host role.
+	AI bool `json:"ai,omitempty"`
 	// token is what a returning client presents to take this seat back. It
 	// is unexported so no snapshot ever carries it to the other players.
 	token string
@@ -287,11 +290,17 @@ func (r *Room) Join(playerID, name string, observer bool) {
 // JoinWithToken seats a player on its first connection. token is the secret
 // Rejoin will ask for; an empty one makes the seat impossible to take back.
 func (r *Room) JoinWithToken(playerID, token, name string, observer bool) {
+	r.JoinSeat(Player{ID: playerID, Name: name, Observer: observer}, token)
+}
+
+// JoinSeat seats p on its first connection; see JoinWithToken for token.
+func (r *Room) JoinSeat(p Player, token string) {
+	playerID, name, observer := p.ID, p.Name, p.Observer
 	r.mutate(func() {
 		r.nextSeq++
-		r.players[playerID] = &Player{ID: playerID, Name: name, Observer: observer, token: token, seq: r.nextSeq}
+		r.players[playerID] = &Player{ID: playerID, Name: name, Observer: observer, AI: p.AI, token: token, seq: r.nextSeq}
 		r.everJoined = true
-		if r.host == "" {
+		if r.host == "" && !p.AI {
 			r.host = playerID
 		}
 		r.connections[playerID]++
@@ -325,6 +334,22 @@ func (r *Room) Rejoin(token string) (Player, bool) {
 		return seat, true
 	}
 	return Player{}, false
+}
+
+// SeatOf names the seat a token opens, without counting a connection: what an
+// assistant acting through single requests presents on each call.
+func (r *Room) SeatOf(token string) (string, bool) {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	if token == "" || r.closed {
+		return "", false
+	}
+	for _, p := range r.players {
+		if subtle.ConstantTimeCompare([]byte(p.token), []byte(token)) == 1 {
+			return p.ID, true
+		}
+	}
+	return "", false
 }
 
 // Refresh broadcasts the current state without changing it: what a client
@@ -402,6 +427,9 @@ func (r *Room) passHostOn(goneID string) {
 	r.host = ""
 	first := 0
 	for id, p := range r.players {
+		if p.AI {
+			continue
+		}
 		if r.host == "" || p.seq < first {
 			r.host, first = id, p.seq
 		}

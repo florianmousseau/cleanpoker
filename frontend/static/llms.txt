@@ -12,6 +12,7 @@ French-speaking teams usually invert the two words and call the technique "poker
 - Fibonacci scale (1, 2, 3, 5, 8, 13, 21, ?) by default, fully customizable
 - Results show average, median, min, max and the vote distribution
 - Voting timer (30 s, 1, 2 or 5 min) and a host who can lock the room so only they reveal, restart or remove players
+- AI assistants can join a room and vote through the MCP endpoint https://salles.cleanpoker.dev/mcp (tools: join_room, get_room, vote, leave_room), shown to the team as an AI participant
 - No account required, no advertising cookie, no third-party script
 - WCAG 2.1 AA accessible, Lighthouse 100/100 performance
 - Available in 5 languages: English, French, Spanish, German, Portuguese
