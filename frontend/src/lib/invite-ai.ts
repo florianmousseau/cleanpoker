@@ -3,7 +3,9 @@
  * host as the rooms, so it follows the configured API address.
  */
 export function mcpUrl(apiUrl: string): string {
-  return `${apiUrl.replace(/\/+$/, '')}/mcp`;
+  let base = apiUrl;
+  while (base.endsWith('/')) base = base.slice(0, -1);
+  return `${base}/mcp`;
 }
 
 /** The room address without its query: the team colours mean nothing to an assistant. */

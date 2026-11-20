@@ -64,7 +64,7 @@ describe('the room page on a narrow screen', () => {
   it('hides the role and kick columns only where the line under the name shows', () => {
     const narrow = /@media \(max-width: 40rem\) \{[^@]*\.col-action \{ display: none; \}[^@]*\.actions-row \{ display: table-row; \}/;
     expect(page).toMatch(narrow);
-    expect(page.split('.col-action { display: none; }').length).toBe(2);
+    expect(page.split('.col-action { display: none; }')).toHaveLength(2);
   });
 
   it('renders both commands in the columns and in the line, for both tables', () => {

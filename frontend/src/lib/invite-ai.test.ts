@@ -38,6 +38,6 @@ describe('invite your AI', () => {
     const page = readFileSync(new URL('../routes/[id]/+page.svelte', import.meta.url), 'utf8');
     const options = page.slice(page.indexOf('<details class="panel options"'), page.indexOf('</details>'));
     expect(options).toContain('data-testid="invite-ai"');
-    expect(page.split('data-testid="invite-ai"').length).toBe(2);
+    expect(page.split('data-testid="invite-ai"')).toHaveLength(2);
   });
 });
