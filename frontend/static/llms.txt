@@ -41,6 +41,8 @@ The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the l
 - [Planning poker avec une IA](https://pokeragile.com/fr/planning-poker-ia) - French version
 - [Story points](https://pokeragile.com/story-points) - What a story point measures, why the scale is Fibonacci, calibration, velocity, a worked example with three stories
 - [Story points (FR)](https://pokeragile.com/fr/story-points) - French version
+- [Retrospective formats](https://pokeragile.com/retrospective) - 11 sprint retrospective formats with steps and durations, the five phases from Derby and Larsen, common mistakes
+- [Retrospective formats (FR)](https://pokeragile.com/fr/retrospective) - French version
 - [Planning poker and GDPR](https://pokeragile.com/planning-poker-gdpr) - What an estimation tool processes as personal data, what a DPO checks, how to verify any tool in two minutes
 - [Poker planning et RGPD](https://pokeragile.com/fr/poker-planning-rgpd) - French version
 - [Accessibility statement](https://pokeragile.com/accessibilite) - WCAG 2.1 AA conformance and how it was tested
