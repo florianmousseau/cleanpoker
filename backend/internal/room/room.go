@@ -83,6 +83,12 @@ type Snapshot struct {
 	Host     string `json:"host"`
 	Locked   bool   `json:"locked"`
 	TimerEnd int64  `json:"timerEnd"`
+	// Stories is the list the team estimates in turn; Current indexes the
+	// one on the table, -1 when none is. AutoReveal reveals once every
+	// participant has voted.
+	Stories    []Story `json:"stories"`
+	Current    int     `json:"current"`
+	AutoReveal bool    `json:"autoReveal"`
 }
 
 // TimerDurations are the only countdowns a room accepts, in seconds.
@@ -103,6 +109,9 @@ type Room struct {
 	locked       bool
 	timerEnd     time.Time
 	nextSeq      int
+	stories      []Story
+	currentStory int
+	autoReveal   bool
 	// closed is set under mu when the room shuts: no command changes it after.
 	closed bool
 	grace  time.Duration
@@ -148,6 +157,7 @@ func New(id string, cards []string) *Room {
 		activity:     []ActivityEntry{},
 		lastActivity: time.Now(),
 		grace:        DepartureGrace,
+		currentStory: -1,
 		connections:  make(map[string]int),
 		departures:   make(map[string]*departure),
 		broadcast:    make(chan directMessage, 32),
@@ -211,6 +221,10 @@ func (r *Room) buildSnapshot(masked bool) Snapshot {
 		Host:     r.host,
 		Locked:   r.locked,
 		TimerEnd: unixMilliOrZero(r.timerEnd),
+
+		Stories:    slices.Clone(r.stories),
+		Current:    r.currentStory,
+		AutoReveal: r.autoReveal,
 	}
 }
 
@@ -486,6 +500,9 @@ func (r *Room) CastVote(playerID, vote string, round int) {
 		} else {
 			r.logActivity(p.Name, "voted")
 		}
+		if r.autoReveal && r.everyoneVoted() {
+			r.reveal("CleanPoker")
+		}
 	})
 }
 
@@ -496,18 +513,40 @@ func (r *Room) Show(initiatorID string) {
 		if !r.allowed(initiatorID) || r.state == StateRevealed {
 			return
 		}
-		r.state = StateRevealed
-		r.timerEnd = time.Time{}
-		votes := make([]string, 0, len(r.players))
-		for _, p := range r.players {
-			if !p.Observer && p.Vote != "" {
-				votes = append(votes, p.Vote)
-			}
-		}
-		res := computeResults(votes, r.cards)
-		r.results = &res
-		r.logActivity(r.nameOf(initiatorID), "revealed")
+		r.reveal(r.nameOf(initiatorID))
 	})
+}
+
+// reveal shows the votes of this round and computes its results. Callers
+// hold r.mu and have checked the round is still voting.
+func (r *Room) reveal(by string) {
+	r.state = StateRevealed
+	r.timerEnd = time.Time{}
+	votes := make([]string, 0, len(r.players))
+	for _, p := range r.players {
+		if !p.Observer && p.Vote != "" {
+			votes = append(votes, p.Vote)
+		}
+	}
+	res := computeResults(votes, r.cards)
+	r.results = &res
+	r.logActivity(by, "revealed")
+}
+
+// everyoneVoted reports whether at least one participant sits and all of them
+// hold a vote. Callers hold r.mu.
+func (r *Room) everyoneVoted() bool {
+	seated := 0
+	for _, p := range r.players {
+		if p.Observer {
+			continue
+		}
+		if p.Vote == "" {
+			return false
+		}
+		seated++
+	}
+	return seated > 0
 }
 
 // Clear starts a new round. round is the round the initiator saw: two clicks
@@ -517,15 +556,20 @@ func (r *Room) Clear(initiatorID string, round int) {
 		if !r.allowed(initiatorID) || !r.current(round) {
 			return
 		}
-		for _, p := range r.players {
-			p.Vote = ""
-		}
-		r.timerEnd = time.Time{}
-		r.state = StateVoting
-		r.results = nil
-		r.round++
+		r.newRound()
 		r.logActivity(r.nameOf(initiatorID), "new_round")
 	})
+}
+
+// newRound clears the votes and opens the next round. Callers hold r.mu.
+func (r *Room) newRound() {
+	for _, p := range r.players {
+		p.Vote = ""
+	}
+	r.timerEnd = time.Time{}
+	r.state = StateVoting
+	r.results = nil
+	r.round++
 }
 
 func (r *Room) Kick(initiatorID, targetID string) {
