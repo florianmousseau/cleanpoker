@@ -4,7 +4,6 @@ import { onDestroy } from 'svelte';
 import type { Translation } from '#lib/i18n.ts';
 import { transitionOf } from '#lib/room-transition.ts';
 import { chunkLines } from '#lib/export.ts';
-import { measurePayload } from '#lib/mesure-story.ts';
 import { forgetSeat, loadSeat, saveSeat, tabStorage } from '#lib/seat.ts';
 
 export type Player = { id: string; name: string; vote: string; observer: boolean; ai?: boolean; reason?: string };
@@ -196,9 +195,6 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
   function clearStories() { send('clearStories'); }
   function selectStory(index: number) { myVote = ''; send('selectStory', String(index)); }
   function estimate(card: string) { send('estimate', card); }
-  function measure(index: number, a: Pick<Actual, 'files' | 'added' | 'removed'>) {
-    send('measure', measurePayload(index, a));
-  }
   function setAutoReveal(on: boolean) { send('autoReveal', on ? 'on' : 'off'); }
 
   onDestroy(() => {
@@ -217,6 +213,6 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
     get kicked() { return kicked; },
     get liveAnnouncement() { return liveAnnouncement; },
     join, resume, send, castVote, show, clear, kick, toggleObserver, setLocked, startTimer,
-    addStories, clearStories, selectStory, estimate, measure, setAutoReveal,
+    addStories, clearStories, selectStory, estimate, setAutoReveal,
   };
 }

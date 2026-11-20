@@ -79,7 +79,7 @@
   </label>
   {#if stories.length === 0}
   <StoriesPanel {stories} references={roomState.references} {current} {T} {X} {canRun}
-  onMeasure={(i, a) => room.measure(i, a)}
+  onMeasure={(p) => room.send('measure', p)}
   onAdd={(text) => room.addStories(text)}
   onClear={() => room.clearStories()}
   onSelect={(i) => room.selectStory(i)} />

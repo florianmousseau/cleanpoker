@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { Extras, Translation } from '#lib/i18n.ts';
-  import type { Actual, Reference, Story } from '#lib/useRoom.svelte.ts';
+  import type { Reference, Story } from '#lib/useRoom.svelte.ts';
   import { storiesCsv, storiesMarkdown, withCredit } from '#lib/export.ts';
   import { credit } from '#lib/credit.svelte.ts';
   import { copierTexte } from '#lib/presse-papiers.ts';
-  import { isGap, linesOf } from '#lib/mesure-story.ts';
+  import { isGap, linesOf, measurePayload } from '#lib/mesure-story.ts';
 
   let { stories, references = [], current, T, X, canRun, onAdd, onClear, onSelect, onMeasure }: {
     stories: Story[];
@@ -16,7 +16,8 @@
     onAdd: (text: string) => void;
     onClear: () => void;
     onSelect: (index: number) => void;
-    onMeasure: (index: number, actual: Pick<Actual, 'files' | 'added' | 'removed'>) => void;
+    // The "measure" command, ready to send: built here so the room page carries none of it.
+    onMeasure: (payload: string) => void;
   } = $props();
 
   let text = $state('');
@@ -26,17 +27,17 @@
   // A measure is compared with an estimate: only kept stories can take one.
   const kept = $derived(stories.map((story, index) => ({ story, index })).filter(({ story }) => story.estimate));
   const anyMeasured = $derived(stories.some((s) => s.actual));
-  let measuredIndex = $state(-1);
-  let files = $state(0);
-  let added = $state(0);
-  let removed = $state(0);
 
+  // Read from the form on submit: a bound select or number field would add
+  // its Svelte helpers to the runtime every visitor of a room downloads.
   function measure(e: SubmitEvent) {
     e.preventDefault();
-    if (measuredIndex < 0 || added + removed <= 0) return;
-    onMeasure(measuredIndex, { files, added, removed });
-    measuredIndex = -1;
-    files = added = removed = 0;
+    const form = e.currentTarget as HTMLFormElement;
+    const field = (name: string) => Number(new FormData(form).get(name));
+    const actual = { files: field('files'), added: field('added'), removed: field('removed') };
+    if (actual.added + actual.removed <= 0) return;
+    onMeasure(measurePayload(field('story'), actual));
+    form.reset();
   }
 
   function add(e: SubmitEvent) {
@@ -127,23 +128,23 @@
       <summary>{X.stories.measureTitle}</summary>
       <form class="measure-form" onsubmit={measure} data-testid="measure-form">
         <label>{X.stories.measureStory}
-          <select bind:value={measuredIndex} required>
-            <option value={-1} disabled></option>
+          <select name="story" required>
+            <option value=""></option>
             {#each kept as { story, index } (index)}
               <option value={index}>{story.title}</option>
             {/each}
           </select>
         </label>
         <label>{X.stories.measureFiles}
-          <input type="number" min="0" max="1000000" step="1" bind:value={files} />
+          <input type="number" name="files" min="0" max="1000000" step="1" value="0" required />
         </label>
         <label>{X.stories.measureAdded}
-          <input type="number" min="0" max="1000000" step="1" bind:value={added} />
+          <input type="number" name="added" min="0" max="1000000" step="1" value="0" required />
         </label>
         <label>{X.stories.measureRemoved}
-          <input type="number" min="0" max="1000000" step="1" bind:value={removed} />
+          <input type="number" name="removed" min="0" max="1000000" step="1" value="0" required />
         </label>
-        <button type="submit" class="btn btn-secondary btn-sm" disabled={measuredIndex < 0 || added + removed <= 0}>{X.stories.measureBtn}</button>
+        <button type="submit" class="btn btn-secondary btn-sm">{X.stories.measureBtn}</button>
       </form>
     </details>
   {/if}
