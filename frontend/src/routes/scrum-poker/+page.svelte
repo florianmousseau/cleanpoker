@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Scrum poker online: free tool, no account | PokerAgile</title>
-  <meta name="description" content="Scrum poker online: create a room, send the link, vote in secret and reveal the cards together. Fibonacci, T-shirt or custom decks, free, no account." />
+  <meta name="description" content="Scrum poker online: create a room, send the link, vote in secret and reveal the cards together. Fibonacci, T-shirt, powers of two or a custom deck." />
   <link rel="canonical" href="https://pokeragile.com/scrum-poker" />
   <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/scrum-poker" />
   <link rel="alternate" hreflang="en" href="https://pokeragile.com/scrum-poker" />
@@ -11,7 +11,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://pokeragile.com/scrum-poker" />
   <meta property="og:title" content="Scrum poker online: free tool, no account" />
-  <meta property="og:description" content="Scrum poker online: create a room, send the link, vote in secret and reveal the cards together. Fibonacci, T-shirt or custom decks, free, no account." />
+  <meta property="og:description" content="Scrum poker online: create a room, send the link, vote in secret and reveal the cards together. Fibonacci, T-shirt, powers of two or a custom deck." />
   <meta property="og:image" content="https://pokeragile.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   {@html `<script type="application/ld+json">${JSON.stringify({
@@ -47,7 +47,7 @@
       {
         '@type': 'Question',
         name: 'What do you do when the cards differ at the reveal?',
-        acceptedAnswer: { '@type': 'Answer', text: 'The person who voted lowest and the person who voted highest explain their choice, then the team votes again. If the votes are still split between two adjacent cards after two rounds, the team takes the higher one.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'The person who voted lowest and the person who voted highest explain their choice, then the team votes again. If the votes are still split between two adjacent cards after two rounds, the team can take the higher one.' },
       },
     ],
   })}<\/script>`}
@@ -60,7 +60,7 @@
     <h1>Scrum poker online</h1>
 
     <p class="lead">
-    Scrum poker, planning poker and pointing poker are three names for one estimation technique: each team member picks a card in secret, and all cards are turned over at the same time. James Grenning described it in 2002 under the name planning poker, and Mike Cohn's 2005 book "Agile Estimating and Planning" made it widely known. "Planning Poker" is a registered trademark of Mountain Goat Software, Mike Cohn's company, and many tools go by "scrum poker" or "pointing poker".
+    On PokerAgile, one person creates a scrum poker room and sends the link. Each team member picks a card in secret, and all cards are turned over at the same time. Scrum poker, planning poker and pointing poker are three names for this estimation technique.
     </p>
 
     <div class="cta">
@@ -101,13 +101,16 @@
 
     <h2>What PokerAgile is</h2>
     <ul>
-    <li><strong>Price</strong>: free. There is no paid tier and no cap on participants or sessions.</li>
+    <li><strong>Price</strong>: free. There is no paid tier and no cap on the number of participants in a room.</li>
     <li><strong>Account</strong>: none. A name is enough to join a room.</li>
     <li><strong>Source code</strong>: published on <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">GitHub</a> under the MIT license.</li>
-    <li><strong>Data</strong>: rooms are kept in memory on a server in France and deleted 24 hours after the last activity.</li>
+    <li><strong>Data</strong>: rooms are kept in memory on a server in Gravelines, France, and deleted 24 hours after the last activity.</li>
     <li><strong>AI</strong>: an assistant such as Claude, ChatGPT or Cursor can <a href="/planning-poker-ai">join the room and vote through MCP</a>.</li>
     <li><strong>Languages</strong>: English, French, German, Spanish and Portuguese.</li>
     </ul>
+
+    <h2>Where the name comes from</h2>
+    <p>James Grenning described the technique in 2002 under the name planning poker, and Mike Cohn's 2005 book "Agile Estimating and Planning" made it widely known. "Planning Poker" is a registered trademark of Mountain Goat Software, Mike Cohn's company, and many tools go by "scrum poker" or "pointing poker".</p>
 
     <h2>FAQ</h2>
     <h3>Is scrum poker the same as planning poker?</h3>
@@ -117,7 +120,7 @@
     <h3>Which cards are used in scrum poker?</h3>
     <p>Most often 1, 2, 3, 5, 8, 13 and 21, taken from the Fibonacci sequence. Some decks use the rounded variant 0, ½, 1, 2, 3, 5, 8, 13, 20, 40, 100. The gap between two cards grows with size: 1 point between 2 and 3, 8 points between 13 and 21.</p>
     <h3>What do you do when the cards differ at the reveal?</h3>
-    <p>The person who voted lowest and the person who voted highest explain their choice, then the team votes again. If the votes are still split between two adjacent cards after two rounds, the team takes the higher one.</p>
+    <p>The person who voted lowest and the person who voted highest explain their choice, then the team votes again. If the votes are still split between two adjacent cards after two rounds, the team can take the higher one.</p>
 
     <div class="cta">
       <a href="/" class="btn">Create a scrum poker room</a>

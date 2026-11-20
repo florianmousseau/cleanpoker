@@ -47,7 +47,7 @@
       {
         '@type': 'Question',
         name: 'Que faire quand les cartes diffèrent à la révélation ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'La personne qui a voté le plus bas et celle qui a voté le plus haut expliquent leur choix, puis l\'équipe revote. Si les votes restent partagés entre deux cartes voisines après deux tours, l\'équipe retient la plus haute.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'La personne qui a voté le plus bas et celle qui a voté le plus haut expliquent leur choix, puis l\'équipe revote. Si les votes restent partagés entre deux cartes voisines après deux tours, l\'équipe peut retenir la plus haute.' },
       },
     ],
   })}<\/script>`}
@@ -60,7 +60,7 @@
     <h1>Scrum poker en ligne</h1>
 
     <p class="lead">
-    Scrum poker, planning poker et pointing poker sont trois noms d'une même technique d'estimation&nbsp;: chaque membre de l'équipe choisit une carte en secret, puis toutes les cartes sont révélées en même temps. James Grenning l'a décrite en 2002 sous le nom de planning poker. Mike Cohn l'a fait connaître en 2005 avec son livre «&nbsp;Agile Estimating and Planning&nbsp;». «&nbsp;Planning Poker&nbsp;» est une marque déposée de Mountain Goat Software, la société de Mike Cohn, et beaucoup d'outils emploient «&nbsp;scrum poker&nbsp;» ou «&nbsp;pointing poker&nbsp;».
+    Sur PokerAgile, une personne crée une salle de scrum poker et envoie le lien. Chaque membre de l'équipe choisit une carte en secret, puis toutes les cartes sont révélées en même temps. Scrum poker, planning poker et pointing poker sont trois noms de cette même technique d'estimation.
     </p>
 
     <div class="cta">
@@ -101,13 +101,16 @@
 
     <h2>PokerAgile en bref</h2>
     <ul>
-    <li><strong>Prix</strong>&nbsp;: gratuit. Il n'existe pas d'offre payante ni de limite de participants ou de sessions.</li>
+    <li><strong>Prix</strong>&nbsp;: gratuit. Il n'existe pas d'offre payante ni de limite de participants par salle.</li>
     <li><strong>Compte</strong>&nbsp;: aucun. Un nom suffit pour rejoindre une salle.</li>
     <li><strong>Code source</strong>&nbsp;: publié sur <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">GitHub</a> sous licence MIT.</li>
-    <li><strong>Données</strong>&nbsp;: les salles vivent en mémoire sur un serveur en France et sont supprimées 24 heures après la dernière activité.</li>
+    <li><strong>Données</strong>&nbsp;: les salles vivent en mémoire sur un serveur à Gravelines, en France, et sont supprimées 24 heures après la dernière activité.</li>
     <li><strong>IA</strong>&nbsp;: un assistant comme Claude, ChatGPT ou Cursor peut <a href="/fr/planning-poker-ia">rejoindre la salle et voter par MCP</a>.</li>
     <li><strong>Langues</strong>&nbsp;: français, anglais, allemand, espagnol et portugais.</li>
     </ul>
+
+    <h2>D'où vient le nom</h2>
+    <p>James Grenning a décrit la technique en 2002 sous le nom de planning poker. Mike Cohn l'a fait connaître en 2005 avec son livre «&nbsp;Agile Estimating and Planning&nbsp;». «&nbsp;Planning Poker&nbsp;» est une marque déposée de Mountain Goat Software, la société de Mike Cohn, et beaucoup d'outils emploient «&nbsp;scrum poker&nbsp;» ou «&nbsp;pointing poker&nbsp;».</p>
 
     <h2>Questions fréquentes</h2>
     <h3>Le scrum poker est-il la même chose que le planning poker&nbsp;?</h3>
@@ -117,7 +120,7 @@
     <h3>Quelles cartes utilise-t-on au scrum poker&nbsp;?</h3>
     <p>Le plus souvent 1, 2, 3, 5, 8, 13 et 21, tirées de la suite de Fibonacci. Certains jeux utilisent la variante arrondie 0, ½, 1, 2, 3, 5, 8, 13, 20, 40, 100. L'écart entre deux cartes grandit avec la taille&nbsp;: 1 point entre 2 et 3, 8 points entre 13 et 21.</p>
     <h3>Que faire quand les cartes diffèrent à la révélation&nbsp;?</h3>
-    <p>La personne qui a voté le plus bas et celle qui a voté le plus haut expliquent leur choix, puis l'équipe revote. Si les votes restent partagés entre deux cartes voisines après deux tours, l'équipe retient la plus haute.</p>
+    <p>La personne qui a voté le plus bas et celle qui a voté le plus haut expliquent leur choix, puis l'équipe revote. Si les votes restent partagés entre deux cartes voisines après deux tours, l'équipe peut retenir la plus haute.</p>
 
     <div class="cta">
       <a href="/fr" class="btn">Créer une salle de scrum poker</a>

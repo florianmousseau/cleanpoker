@@ -47,7 +47,7 @@
       {
         '@type': 'Question',
         name: 'Was tun, wenn die Karten beim Aufdecken auseinanderliegen?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Die Person mit der niedrigsten und die Person mit der höchsten Karte erklären ihre Wahl, dann stimmt das Team erneut ab. Liegen die Stimmen nach zwei Runden immer noch zwischen zwei benachbarten Karten, nimmt das Team die höhere.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Die Person mit der niedrigsten und die Person mit der höchsten Karte erklären ihre Wahl, dann stimmt das Team erneut ab. Liegen die Stimmen nach zwei Runden immer noch zwischen zwei benachbarten Karten, kann das Team die höhere nehmen.' },
       },
     ],
   })}<\/script>`}
@@ -60,7 +60,7 @@
     <h1>Scrum Poker online</h1>
 
     <p class="lead">
-    Scrum Poker, Planning Poker und Pointing Poker sind drei Namen für dieselbe Schätztechnik: Jedes Teammitglied wählt verdeckt eine Karte, und alle Karten werden gleichzeitig aufgedeckt. James Grenning hat das Verfahren 2002 unter dem Namen Planning Poker beschrieben, Mike Cohn hat es 2005 mit seinem Buch „Agile Estimating and Planning“ bekannt gemacht. „Planning Poker“ ist eine eingetragene Marke von Mountain Goat Software, dem Unternehmen von Mike Cohn, und viele Werkzeuge heißen „Scrum Poker“ oder „Pointing Poker“.
+    Auf PokerAgile erstellt eine Person einen Scrum-Poker-Raum und verschickt den Link. Jedes Teammitglied wählt verdeckt eine Karte, und alle Karten werden gleichzeitig aufgedeckt. Scrum Poker, Planning Poker und Pointing Poker sind drei Namen für diese Schätztechnik.
     </p>
 
     <div class="cta">
@@ -70,7 +70,7 @@
     <h2>So läuft eine Runde Scrum Poker ab</h2>
     <ol>
     <li>Eine Person <a href="/de">erstellt einen Raum auf PokerAgile</a>, wählt das Kartenset und schickt den Link an das Team.</li>
-    <li>Jede Person öffnet den Link und gibt einen Vornamen oder ein Pseudonym ein. Wer zusieht, ohne abzustimmen, tritt als Beobachter bei.</li>
+    <li>Jede Person öffnet den Link und gibt einen Vornamen oder einen Spitznamen ein. Wer zusieht, ohne abzustimmen, tritt als Beobachter bei.</li>
     <li>Der Product Owner liest die User Story vor und beantwortet Fragen.</li>
     <li>Alle Teilnehmenden wählen eine Karte. Der Raum zeigt, wer abgestimmt hat, aber nicht, welche Karte.</li>
     <li>Sobald alle abgestimmt haben, deckt die Schaltfläche „Aufdecken“ alle Karten gleichzeitig auf. Eine Option deckt sie automatisch auf, wenn die letzte Stimme eingeht.</li>
@@ -101,13 +101,16 @@
 
     <h2>Was PokerAgile ist</h2>
     <ul>
-    <li><strong>Preis</strong>: kostenlos. Es gibt keinen Bezahltarif und keine Obergrenze für Teilnehmende oder Sitzungen.</li>
+    <li><strong>Preis</strong>: kostenlos. Es gibt keinen Bezahltarif und keine Obergrenze für Teilnehmende pro Raum.</li>
     <li><strong>Konto</strong>: keines. Zum Beitreten genügt ein Name.</li>
     <li><strong>Quellcode</strong>: auf <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">GitHub</a> unter der MIT-Lizenz veröffentlicht.</li>
-    <li><strong>Daten</strong>: Die Räume liegen im Arbeitsspeicher eines Servers in Frankreich und werden 24 Stunden nach der letzten Aktivität gelöscht.</li>
+    <li><strong>Daten</strong>: Die Räume liegen im Arbeitsspeicher eines Servers in Gravelines (Frankreich) und werden 24 Stunden nach der letzten Aktivität gelöscht.</li>
     <li><strong>KI</strong>: Ein Assistent wie Claude, ChatGPT oder Cursor kann dem Raum über MCP beitreten und mit abstimmen.</li>
     <li><strong>Sprachen</strong>: Deutsch, Englisch, Französisch, Spanisch und Portugiesisch.</li>
     </ul>
+
+    <h2>Woher der Name kommt</h2>
+    <p>James Grenning hat das Verfahren 2002 unter dem Namen Planning Poker beschrieben, Mike Cohn hat es 2005 mit seinem Buch „Agile Estimating and Planning“ bekannt gemacht. „Planning Poker“ ist eine eingetragene Marke von Mountain Goat Software, dem Unternehmen von Mike Cohn, und viele Tools heißen „Scrum Poker“ oder „Pointing Poker“.</p>
 
     <h2>Häufig gestellte Fragen</h2>
     <h3>Ist Scrum Poker dasselbe wie Planning Poker?</h3>
@@ -117,7 +120,7 @@
     <h3>Welche Karten verwendet man beim Scrum Poker?</h3>
     <p>Am häufigsten 1, 2, 3, 5, 8, 13 und 21 aus der Fibonacci-Folge. Manche Kartensets nutzen die gerundete Variante 0, ½, 1, 2, 3, 5, 8, 13, 20, 40, 100. Der Abstand zwischen zwei Karten wächst mit der Größe: 1 Punkt zwischen 2 und 3, 8 Punkte zwischen 13 und 21.</p>
     <h3>Was tun, wenn die Karten beim Aufdecken auseinanderliegen?</h3>
-    <p>Die Person mit der niedrigsten und die Person mit der höchsten Karte erklären ihre Wahl, dann stimmt das Team erneut ab. Liegen die Stimmen nach zwei Runden immer noch zwischen zwei benachbarten Karten, nimmt das Team die höhere.</p>
+    <p>Die Person mit der niedrigsten und die Person mit der höchsten Karte erklären ihre Wahl, dann stimmt das Team erneut ab. Liegen die Stimmen nach zwei Runden immer noch zwischen zwei benachbarten Karten, kann das Team die höhere nehmen.</p>
 
     <div class="cta">
       <a href="/de" class="btn">Scrum-Poker-Raum erstellen</a>

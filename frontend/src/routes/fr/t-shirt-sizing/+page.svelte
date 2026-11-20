@@ -60,6 +60,10 @@
     Le T-shirt sizing est une technique d'estimation relative&nbsp;: l'équipe range les éléments du backlog dans six tailles, XS, S, M, L, XL et XXL, au lieu de leur donner un chiffre. Une taille dit si un élément est plus gros ou plus petit que les autres. Elle ne dit pas combien de jours il prendra.
     </p>
 
+    <div class="cta">
+    <a href="/fr?cards=XS,S,M,L,XL,XXL,?" class="btn">Créer une salle avec le jeu T-shirt</a>
+    </div>
+
     <h2>Le sens d'une taille</h2>
     <p>Les six tailles sont ordonnées&nbsp;: un L est plus gros qu'un M. Elles ne sont pas proportionnelles&nbsp;: rien dans l'échelle ne dit qu'un L vaut deux M, et deux tailles ne s'additionnent pas. Chaque équipe donne leur sens aux tailles en choisissant un élément de référence par taille. Le M d'une équipe peut donc être le L d'une autre.</p>
 
@@ -75,13 +79,13 @@
     <ul>
     <li><strong>La vélocité.</strong> La vélocité est la somme des points terminés pendant un sprint. Deux M et un L n'ont pas de somme.</li>
     <li><strong>La capacité d'un sprint.</strong> Une équipe qui termine 23 points par sprint peut vérifier que son plan de sprint totalise environ 23. Les tailles ne donnent rien à additionner.</li>
-    <li><strong>Une date.</strong> 140 points à 23 points par sprint font environ 6 sprints. Le même backlog en tailles ne donne aucune date tant que les tailles ne sont pas converties.</li>
+    <li><strong>Une date.</strong> 138 points à 23 points par sprint font 6 sprints. Le même backlog en tailles ne donne aucune date tant que les tailles ne sont pas converties.</li>
     </ul>
     <p>La <a href="/fr/story-points">page sur les story points</a> détaille la vélocité et la prévision.</p>
 
     <h2>Mener une séance de T-shirt sizing avec PokerAgile</h2>
     <ol>
-    <li>Ouvrez la <a href="/fr?cards=XS,S,M,L,XL,XXL,?">page d'accueil de PokerAgile</a> et cliquez sur le jeu «&nbsp;T-shirt&nbsp;». Les cartes sont XS, S, M, L, XL, XXL et «&nbsp;?&nbsp;».</li>
+    <li>Ouvrez la <a href="/fr?cards=XS,S,M,L,XL,XXL,?">page d'accueil de PokerAgile avec le jeu «&nbsp;T-shirt&nbsp;» sélectionné</a>. Les cartes sont XS, S, M, L, XL, XXL et «&nbsp;?&nbsp;».</li>
     <li>Créez la salle et envoyez son lien à l'équipe. Un nom suffit pour la rejoindre.</li>
     <li>Avant le premier vote, choisissez ensemble un élément que tout le monde connaît et appelez-le M.</li>
     <li>Lisez l'élément à estimer et répondez aux questions.</li>

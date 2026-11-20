@@ -47,7 +47,7 @@
       {
         '@type': 'Question',
         name: 'O que fazer quando as cartas diferem na revelação?',
-        acceptedAnswer: { '@type': 'Answer', text: 'A pessoa que votou mais baixo e a que votou mais alto explicam a escolha, e a equipa volta a votar. Se, após duas rondas, os votos continuarem divididos entre duas cartas vizinhas, a equipa fica com a mais alta.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'A pessoa que votou mais baixo e a que votou mais alto explicam a escolha, e a equipa volta a votar. Se, após duas rondas, os votos continuarem divididos entre duas cartas vizinhas, a equipa pode ficar com a mais alta.' },
       },
     ],
   })}<\/script>`}
@@ -60,7 +60,7 @@
     <h1>Scrum poker online</h1>
 
     <p class="lead">
-    Scrum poker, planning poker e pointing poker são três nomes para a mesma técnica de estimativa: cada membro da equipa escolhe uma carta em segredo e todas as cartas são reveladas ao mesmo tempo. James Grenning descreveu-a em 2002 com o nome planning poker, e Mike Cohn divulgou-a em 2005 com o livro «Agile Estimating and Planning». «Planning Poker» é uma marca registada da Mountain Goat Software, a empresa de Mike Cohn, e muitas ferramentas chamam-se «scrum poker» ou «pointing poker».
+    No PokerAgile, uma pessoa cria uma sala de scrum poker e envia a ligação. Cada membro da equipa escolhe uma carta em segredo e todas as cartas são reveladas ao mesmo tempo. Scrum poker, planning poker e pointing poker são três nomes para esta mesma técnica de estimativa.
     </p>
 
     <div class="cta">
@@ -101,13 +101,16 @@
 
     <h2>O que é o PokerAgile</h2>
     <ul>
-    <li><strong>Preço</strong>: gratuito. Não existe plano pago nem limite de participantes ou de sessões.</li>
+    <li><strong>Preço</strong>: gratuito. Não existe plano pago nem limite de participantes por sala.</li>
     <li><strong>Conta</strong>: nenhuma. Para entrar numa sala basta um nome.</li>
     <li><strong>Código-fonte</strong>: publicado no <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">GitHub</a> sob a licença MIT.</li>
-    <li><strong>Dados</strong>: as salas ficam na memória de um servidor em França e são apagadas 24 horas após a última atividade.</li>
+    <li><strong>Dados</strong>: as salas ficam na memória de um servidor em Gravelines, em França, e são apagadas 24 horas após a última atividade.</li>
     <li><strong>IA</strong>: um assistente como o Claude, o ChatGPT ou o Cursor pode entrar na sala e votar através de MCP.</li>
     <li><strong>Línguas</strong>: português, inglês, francês, espanhol e alemão.</li>
     </ul>
+
+    <h2>De onde vem o nome</h2>
+    <p>James Grenning descreveu a técnica em 2002 com o nome planning poker, e Mike Cohn divulgou-a em 2005 com o livro «Agile Estimating and Planning». «Planning Poker» é uma marca registada da Mountain Goat Software, a empresa de Mike Cohn, e muitas ferramentas chamam-se «scrum poker» ou «pointing poker».</p>
 
     <h2>Perguntas frequentes</h2>
     <h3>O scrum poker é o mesmo que o planning poker?</h3>
@@ -117,7 +120,7 @@
     <h3>Que cartas se usam no scrum poker?</h3>
     <p>As mais comuns são 1, 2, 3, 5, 8, 13 e 21, da sequência de Fibonacci. Alguns baralhos usam a variante arredondada 0, ½, 1, 2, 3, 5, 8, 13, 20, 40, 100. A distância entre duas cartas cresce com o tamanho: 1 ponto entre 2 e 3, 8 pontos entre 13 e 21.</p>
     <h3>O que fazer quando as cartas diferem na revelação?</h3>
-    <p>A pessoa que votou mais baixo e a que votou mais alto explicam a escolha, e a equipa volta a votar. Se, após duas rondas, os votos continuarem divididos entre duas cartas vizinhas, a equipa fica com a mais alta.</p>
+    <p>A pessoa que votou mais baixo e a que votou mais alto explicam a escolha, e a equipa volta a votar. Se, após duas rondas, os votos continuarem divididos entre duas cartas vizinhas, a equipa pode ficar com a mais alta.</p>
 
     <div class="cta">
       <a href="/pt" class="btn">Criar uma sala de scrum poker</a>

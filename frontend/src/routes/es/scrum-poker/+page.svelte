@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Scrum poker online: gratis y sin registro | PokerAgile</title>
-  <meta name="description" content="Scrum poker online: crea una sala, envía el enlace, vota en secreto y revela las cartas a la vez. Barajas Fibonacci, tallas de camiseta o personalizada." />
+  <meta name="description" content="Scrum poker online: crea una sala, envía el enlace, vota en secreto y revela las cartas a la vez. Barajas Fibonacci, T-shirt, potencias de dos o personalizada." />
   <link rel="canonical" href="https://pokeragile.com/es/scrum-poker" />
   <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/scrum-poker" />
   <link rel="alternate" hreflang="en" href="https://pokeragile.com/scrum-poker" />
@@ -11,7 +11,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://pokeragile.com/es/scrum-poker" />
   <meta property="og:title" content="Scrum poker online: gratis y sin registro" />
-  <meta property="og:description" content="Scrum poker online: crea una sala, envía el enlace, vota en secreto y revela las cartas a la vez. Barajas Fibonacci, tallas de camiseta o personalizada." />
+  <meta property="og:description" content="Scrum poker online: crea una sala, envía el enlace, vota en secreto y revela las cartas a la vez. Barajas Fibonacci, T-shirt, potencias de dos o personalizada." />
   <meta property="og:image" content="https://pokeragile.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   {@html `<script type="application/ld+json">${JSON.stringify({
@@ -47,7 +47,7 @@
       {
         '@type': 'Question',
         name: '¿Qué hacer si las cartas no coinciden al revelar?',
-        acceptedAnswer: { '@type': 'Answer', text: 'La persona que votó más bajo y la que votó más alto explican su elección, y el equipo vuelve a votar. Si después de dos rondas los votos siguen repartidos entre dos cartas contiguas, el equipo se queda con la más alta.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'La persona que votó más bajo y la que votó más alto explican su elección, y el equipo vuelve a votar. Si después de dos rondas los votos siguen repartidos entre dos cartas contiguas, el equipo puede quedarse con la más alta.' },
       },
     ],
   })}<\/script>`}
@@ -60,7 +60,7 @@
     <h1>Scrum poker online</h1>
 
     <p class="lead">
-    Scrum poker, planning poker y pointing poker son tres nombres de una misma técnica de estimación: cada miembro del equipo elige una carta en secreto y todas las cartas se muestran a la vez. James Grenning la describió en 2002 con el nombre de planning poker, y Mike Cohn la dio a conocer en 2005 con su libro «Agile Estimating and Planning». «Planning Poker» es una marca registrada de Mountain Goat Software, la empresa de Mike Cohn, y muchas herramientas se llaman «scrum poker» o «pointing poker».
+    En PokerAgile, una persona crea una sala de scrum poker y envía el enlace. Cada miembro del equipo elige una carta en secreto y todas las cartas se muestran a la vez. Scrum poker, planning poker y pointing poker son tres nombres de esta misma técnica de estimación.
     </p>
 
     <div class="cta">
@@ -74,7 +74,7 @@
     <li>El product owner lee la historia de usuario y responde a las preguntas.</li>
     <li>Cada participante elige una carta. La sala muestra quién ha votado, pero no la carta elegida.</li>
     <li>Cuando todos han votado, el botón «Revelar» muestra todas las cartas a la vez. Una opción las revela automáticamente al llegar el último voto.</li>
-    <li>La persona que votó más bajo y la que votó más alto explican su carta. Después, el equipo empieza una nueva ronda o conserva una carta para la historia.</li>
+    <li>La persona que votó más bajo y la que votó más alto explican su carta. Después, el equipo empieza una nueva ronda o se queda con una carta para la historia.</li>
     </ol>
 
     <h2>Las barajas de cartas</h2>
@@ -97,17 +97,20 @@
     <li>El acuerdo: el porcentaje de votos que recibió la carta más elegida.</li>
     <li>Una barra por carta, con su número de votos.</li>
     </ul>
-    <p>Ejemplo: cinco personas votan 3, 5, 5, 5 y 8. La sala muestra una media de 5,2, una mediana de 5, un mínimo de 3, un máximo de 8 y un acuerdo del 60 %. Con la baraja de tallas de camiseta no hay números: la sala muestra solo el acuerdo y las barras. Si el equipo pegó una lista de historias, la carta conservada queda junto a cada historia, y la lista se descarga en CSV o se copia en Markdown.</p>
+    <p>Ejemplo: cinco personas votan 3, 5, 5, 5 y 8. La sala muestra una media de 5,2, una mediana de 5, un mínimo de 3, un máximo de 8 y un acuerdo del 60 %. Con la baraja T-shirt no hay números: la sala muestra solo el acuerdo y las barras. Si el equipo pegó una lista de historias, la carta elegida queda junto a cada historia, y la lista se descarga en CSV o se copia en Markdown.</p>
 
     <h2>Qué es PokerAgile</h2>
     <ul>
-    <li><strong>Precio</strong>: gratuito. No existe plan de pago ni límite de participantes o de sesiones.</li>
+    <li><strong>Precio</strong>: gratuito. No existe plan de pago ni límite de participantes por sala.</li>
     <li><strong>Cuenta</strong>: ninguna. Para unirse a una sala basta con un nombre.</li>
     <li><strong>Código fuente</strong>: publicado en <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">GitHub</a> con licencia MIT.</li>
-    <li><strong>Datos</strong>: las salas se guardan en la memoria de un servidor en Francia y se borran 24 horas después de la última actividad.</li>
+    <li><strong>Datos</strong>: las salas se guardan en la memoria de un servidor en Gravelines (Francia) y se borran 24 horas después de la última actividad.</li>
     <li><strong>IA</strong>: un asistente como Claude, ChatGPT o Cursor puede unirse a la sala y votar mediante MCP.</li>
     <li><strong>Idiomas</strong>: español, inglés, francés, alemán y portugués.</li>
     </ul>
+
+    <h2>De dónde viene el nombre</h2>
+    <p>James Grenning describió la técnica en 2002 con el nombre de planning poker, y Mike Cohn la dio a conocer en 2005 con su libro «Agile Estimating and Planning». «Planning Poker» es una marca registrada de Mountain Goat Software, la empresa de Mike Cohn, y muchas herramientas se llaman «scrum poker» o «pointing poker».</p>
 
     <h2>Preguntas frecuentes</h2>
     <h3>¿El scrum poker es lo mismo que el planning poker?</h3>
@@ -117,7 +120,7 @@
     <h3>¿Qué cartas se usan en el scrum poker?</h3>
     <p>Lo más habitual es 1, 2, 3, 5, 8, 13 y 21, de la sucesión de Fibonacci. Algunas barajas usan la variante redondeada 0, ½, 1, 2, 3, 5, 8, 13, 20, 40, 100. La distancia entre dos cartas crece con el tamaño: 1 punto entre 2 y 3, 8 puntos entre 13 y 21.</p>
     <h3>¿Qué hacer si las cartas no coinciden al revelar?</h3>
-    <p>La persona que votó más bajo y la que votó más alto explican su elección, y el equipo vuelve a votar. Si después de dos rondas los votos siguen repartidos entre dos cartas contiguas, el equipo se queda con la más alta.</p>
+    <p>La persona que votó más bajo y la que votó más alto explican su elección, y el equipo vuelve a votar. Si después de dos rondas los votos siguen repartidos entre dos cartas contiguas, el equipo puede quedarse con la más alta.</p>
 
     <div class="cta">
       <a href="/es" class="btn">Crear una sala de scrum poker</a>

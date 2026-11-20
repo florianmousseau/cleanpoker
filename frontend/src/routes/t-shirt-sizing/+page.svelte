@@ -60,6 +60,10 @@
     T-shirt sizing is a relative estimation technique: the team sorts backlog items into six sizes, XS, S, M, L, XL and XXL, instead of giving them a number. A size says how large an item is compared with the others, not how many days it takes.
     </p>
 
+    <div class="cta">
+    <a href="/?cards=XS,S,M,L,XL,XXL,?" class="btn">Create a room with the T-shirt deck</a>
+    </div>
+
     <h2>What a size says, and what it does not</h2>
     <p>The six sizes are ordered: an L is larger than an M. They are not proportional: nothing in the scale says an L is twice an M, and two sizes cannot be added. Each team gives the sizes their meaning by picking one reference item per size, so one team's M can be another team's L.</p>
 
@@ -75,13 +79,13 @@
     <ul>
     <li><strong>Velocity.</strong> Velocity is the sum of the points finished in a sprint. Two M and one L have no sum.</li>
     <li><strong>Sprint capacity.</strong> A team that finishes 23 points per sprint can check that its sprint plan adds up to about 23. Sizes give nothing to add up.</li>
-    <li><strong>A date.</strong> 140 points at 23 points per sprint is about 6 sprints. The same backlog in sizes gives no date until the sizes are converted.</li>
+    <li><strong>A date.</strong> 138 points at 23 points per sprint is 6 sprints. The same backlog in sizes gives no date until the sizes are converted.</li>
     </ul>
     <p>The <a href="/story-points">story points page</a> covers velocity and forecasting.</p>
 
     <h2>How to run a T-shirt sizing session with PokerAgile</h2>
     <ol>
-    <li>Open the <a href="/?cards=XS,S,M,L,XL,XXL,?">PokerAgile home page</a> and click the "T-shirt" preset. The deck is XS, S, M, L, XL, XXL and "?".</li>
+    <li>Open the <a href="/?cards=XS,S,M,L,XL,XXL,?">PokerAgile home page with the T-shirt deck selected</a>. The deck is XS, S, M, L, XL, XXL and "?".</li>
     <li>Create the room and send its link to the team. Joining asks for a name, not an account.</li>
     <li>Before the first vote, agree on one item everyone knows and call it M.</li>
     <li>Read the item to estimate and answer questions.</li>
