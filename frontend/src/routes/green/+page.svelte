@@ -113,7 +113,7 @@
         </a>
       </li>
       <li>
-        <a href="https://github.com/florianmousseau/cleanpoker/actions" rel="noopener noreferrer">
+        <a href="https://github.com/florianmousseau/pokeragile/actions" rel="noopener noreferrer">
           GitHub Actions: Lighthouse CI and Eco-CI results
         </a>
       </li>
@@ -132,8 +132,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Source code</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
       | <a href="/mentions-legales#confidentialite">Privacy</a>

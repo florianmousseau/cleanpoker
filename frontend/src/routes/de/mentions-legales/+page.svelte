@@ -23,7 +23,7 @@
       Diese Website wird persönlich herausgegeben von:<br />
       <strong>Florian Mousseau</strong>, Privatperson<br />
       Frankreich<br />
-      Kontakt: <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      Kontakt: <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
 
     <!-- ── Hosting ── -->
@@ -46,7 +46,7 @@
     <h2 id="confidentialite">Personenbezogene Daten (DSGVO)</h2>
     <p>
       <strong>Verantwortlicher:</strong> Florian Mousseau,
-      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
 
     <h3>Erhobene Daten</h3>
@@ -80,7 +80,7 @@
     <p>
       Gemäß der DSGVO haben Sie das Recht auf Auskunft, Berichtigung und Löschung
       Ihrer Daten. Um diese Rechte auszuüben oder bei Fragen:
-      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
     <p>
       Sie können auch eine Beschwerde bei der
@@ -137,7 +137,7 @@
     <h2>Geistiges Eigentum</h2>
     <p>
       Der Quellcode von PokerAgile ist unter der
-      <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a> veröffentlicht.
+      <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a> veröffentlicht.
       Sie können ihn unter den Bedingungen dieser Lizenz frei verwenden, ändern und verbreiten.
     </p>
 
@@ -158,8 +158,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Quellcode</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
       | <a href="/de/a-propos">Über uns</a>
       | <a href="/de/mentions-legales">Impressum</a>
       | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>

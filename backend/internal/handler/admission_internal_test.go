@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/florianmousseau/cleanpoker/internal/health"
-	"github.com/florianmousseau/cleanpoker/internal/store"
+	"github.com/florianmousseau/pokeragile/internal/health"
+	"github.com/florianmousseau/pokeragile/internal/store"
 )
 
 func TestABurstFromOneSourceLeavesTheCapacityToOthers(t *testing.T) {

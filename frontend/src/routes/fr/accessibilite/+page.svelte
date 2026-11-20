@@ -92,7 +92,7 @@
     <h2>Signaler un problème</h2>
     <p>
       Pour signaler un problème d'accessibilité ou suggérer une amélioration&nbsp;:
-      <a href="https://github.com/florianmousseau/cleanpoker/issues" rel="noopener noreferrer">
+      <a href="https://github.com/florianmousseau/pokeragile/issues" rel="noopener noreferrer">
         ouvrir une issue GitHub
       </a>
     </p>
@@ -103,8 +103,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Code source</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
       | <a href="/fr/a-propos">À propos</a>
       | <a href="/fr/mentions-legales">Mentions légales</a>
       | <a href="/fr/mentions-legales#confidentialite">Confidentialité</a>

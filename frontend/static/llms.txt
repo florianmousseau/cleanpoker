@@ -15,7 +15,7 @@ French-speaking teams usually invert the two words and call the technique "poker
 - Story list pasted one per line, the chosen estimate kept for each, export as CSV or a Markdown table
 - Agreement on the most chosen card, lowest and highest votes marked, optional reveal on the last vote
 - In Chrome 148+ on desktop, a button analyzes the story on the table with Chrome's on-device model (Gemini Nano): the analysis sends the story to no service
-- AI assistants can join a room and vote through the MCP endpoint https://salles.cleanpoker.dev/mcp (tools: join_room, get_room, vote, leave_room), shown to the team as an AI participant
+- AI assistants can join a room and vote through the MCP endpoint https://salles.pokeragile.com/mcp (tools: join_room, get_room, vote, leave_room), shown to the team as an AI participant
 - No account required, no advertising cookie, no third-party script
 - WCAG 2.1 AA accessible, Lighthouse 100/100 performance
 - Available in 5 languages: English, French, Spanish, German, Portuguese
@@ -72,4 +72,4 @@ All content pages are available in 5 languages with canonical hreflang:
 - Backend: Go, native WebSocket
 - Bundle: under 50 KB JS (brotli compressed)
 - No external dependencies at runtime
-- Source: https://github.com/florianmousseau/cleanpoker
+- Source: https://github.com/florianmousseau/pokeragile

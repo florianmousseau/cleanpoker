@@ -4,8 +4,8 @@ Planning poker for agile teams, in the browser. Create a room, share its link, v
 
 Live at **[pokeragile.com](https://pokeragile.com)**, in English, French, Spanish, German and Portuguese.
 
-[![Deploy](https://github.com/florianmousseau/cleanpoker/actions/workflows/deploy.yml/badge.svg?branch=develop)](https://github.com/florianmousseau/cleanpoker/actions/workflows/deploy.yml)
-[![CodeQL](https://github.com/florianmousseau/cleanpoker/actions/workflows/codeql.yml/badge.svg)](https://github.com/florianmousseau/cleanpoker/actions/workflows/codeql.yml)
+[![Deploy](https://github.com/florianmousseau/pokeragile/actions/workflows/deploy.yml/badge.svg?branch=develop)](https://github.com/florianmousseau/pokeragile/actions/workflows/deploy.yml)
+[![CodeQL](https://github.com/florianmousseau/pokeragile/actions/workflows/codeql.yml/badge.svg)](https://github.com/florianmousseau/pokeragile/actions/workflows/codeql.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=florianmousseau_cleanpoker&metric=alert_status)](https://sonarcloud.io/project/overview?id=florianmousseau_cleanpoker)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Trackers](https://img.shields.io/badge/trackers-0-brightgreen)](https://pokeragile.com/green)
@@ -32,7 +32,7 @@ Live at **[pokeragile.com](https://pokeragile.com)**, in English, French, Spanis
 The room server speaks the [Model Context Protocol](https://modelcontextprotocol.io). Add this address as a remote MCP server (a custom connector in Claude, an MCP server in ChatGPT, Cursor or VS Code):
 
 ```
-https://salles.cleanpoker.dev/mcp
+https://salles.pokeragile.com/mcp
 ```
 
 Then ask the assistant to join the room the team shares and estimate the story. Its tools:

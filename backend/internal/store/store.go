@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/florianmousseau/cleanpoker/internal/room"
+	"github.com/florianmousseau/pokeragile/internal/room"
 	"github.com/google/uuid"
 )
 

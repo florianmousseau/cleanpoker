@@ -41,7 +41,7 @@
       <li>Lighthouse Performance und Barrierefreiheit: <strong>100 / 100</strong></li>
       <li>100% erneuerbare Energie Hosting (Cloudflare Pages + OVHcloud Gravelines)</li>
       <li>Keine Tracker, keine Werbe-Cookies, keine Drittanbieter-Skripte</li>
-      <li>Open Source unter <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a></li>
+      <li>Open Source unter <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a></li>
     </ul>
 
     <h2>Mehr erfahren</h2>
@@ -80,8 +80,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Quellcode</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
       | <a href="/de/a-propos">Über uns</a>
       | <a href="/de/mentions-legales">Impressum</a>
       | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>
