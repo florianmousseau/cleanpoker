@@ -1,17 +1,17 @@
 <svelte:head>
-  <title>Planning poker tools compared: the 7 criteria that matter | CleanPoker</title>
-  <meta name="description" content="How to choose an online planning poker tool: seven criteria you can check yourself in minutes, what CleanPoker does, what it does not do, and when another tool is the right call." />
-  <link rel="canonical" href="https://cleanpoker.dev/planning-poker-tools" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-tools" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/comparatif-outils" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-tools" />
+  <title>Planning poker tools compared: the 7 criteria that matter | PokerAgile</title>
+  <meta name="description" content="How to choose an online planning poker tool: seven criteria you can check yourself in minutes, what PokerAgile does, what it does not do, and when another tool is the right call." />
+  <link rel="canonical" href="https://pokeragile.com/planning-poker-tools" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-tools" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/comparatif-outils" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-tools" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Planning poker tools compared: the 7 criteria that matter',
-    url: 'https://cleanpoker.dev/planning-poker-tools',
-    description: 'Seven criteria for choosing an online planning poker tool, all checkable yourself, and exactly what CleanPoker covers, including what it cannot do.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    url: 'https://pokeragile.com/planning-poker-tools',
+    description: 'Seven criteria for choosing an online planning poker tool, all checkable yourself, and exactly what PokerAgile covers, including what it cannot do.',
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -24,8 +24,8 @@
       },
       {
         '@type': 'Question',
-        name: 'What can CleanPoker not do?',
-        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker has no Jira, Azure DevOps or Linear integration, no backlog import, no history of past sessions, no CSV export, no voting timer and no permanent teams. If any of those is essential, a tool built into the issue tracker is the right choice.' },
+        name: 'What can PokerAgile not do?',
+        acceptedAnswer: { '@type': 'Answer', text: 'PokerAgile has no Jira, Azure DevOps or Linear integration, no backlog import from a tracker, no history of past sessions and no permanent teams. If any of those is essential, a tool built into the issue tracker is the right choice. Stories are pasted into the room and their estimates leave as CSV or a Markdown table.' },
       },
       {
         '@type': 'Question',
@@ -105,11 +105,11 @@
       <strong>How to check</strong>: look for a repository link, and at the date of the last commit.
     </p>
 
-    <h2>Exactly what CleanPoker covers</h2>
+    <h2>Exactly what PokerAgile covers</h2>
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>Criterion</th><th>CleanPoker</th></tr>
+          <tr><th>Criterion</th><th>PokerAgile</th></tr>
         </thead>
         <tbody>
           <tr><td>Paywall</td><td>None. No paid tier, no participant cap, no session quota.</td></tr>
@@ -123,20 +123,20 @@
       </table>
     </div>
 
-    <h2>What CleanPoker cannot do</h2>
+    <h2>What PokerAgile cannot do</h2>
     <p>
       The list is short and deliberate, but it rules the tool out for some teams. Better to know
       before opening it than after:
     </p>
     <ul>
       <li><strong>No integrations</strong> with Jira, Azure DevOps, Linear or GitHub: stories are presented out loud.</li>
-      <li><strong>No backlog import</strong>, and therefore no CSV export of results.</li>
+      <li><strong>No backlog import from a tracker</strong>: stories are pasted one per line, and their estimates leave as CSV or a Markdown table, to paste back by hand.</li>
       <li><strong>No history</strong> of past sessions, no velocity tracking over time. That is the direct price of criterion 2.</li>
-      <li><strong>No voting timer</strong>, no permanent teams, no accounts.</li>
+      <li><strong>No permanent teams</strong>, no accounts.</li>
     </ul>
     <p>
       If the estimate has to land automatically in a ticket's story points field, a tool built into
-      the issue tracker does that job and CleanPoker does not. If the meeting only needs votes to
+      the issue tracker does that job and PokerAgile does not. If the meeting only needs votes to
       stay hidden until the reveal, the integration costs more than it returns.
     </p>
 
@@ -149,21 +149,22 @@
     </p>
 
     <div class="cta">
-      <a href="/" class="btn">Try CleanPoker</a>
+      <a href="/" class="btn">Try PokerAgile</a>
     </div>
 
     <p class="related">
       See also:
       <a href="/planning-poker">the planning poker guide</a>,
       <a href="/planning-poker-gdpr">planning poker and GDPR</a>,
+      <a href="/planning-poker-ai">letting an AI vote</a>,
       <a href="/alternatives">alternatives to the technique itself</a>.
     </p>
   </main>
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Source code</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
       | <a href="/mentions-legales#confidentialite">Privacy</a>

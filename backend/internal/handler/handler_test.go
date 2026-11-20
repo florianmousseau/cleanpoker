@@ -1,6 +1,7 @@
 package handler_test
 
 import (
+	"bufio"
 	"context"
 	"encoding/json"
 	"errors"
@@ -13,10 +14,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/florianmousseau/cleanpoker/internal/handler"
-	"github.com/florianmousseau/cleanpoker/internal/health"
-	"github.com/florianmousseau/cleanpoker/internal/room"
-	"github.com/florianmousseau/cleanpoker/internal/store"
+	"github.com/florianmousseau/pokeragile/internal/handler"
+	"github.com/florianmousseau/pokeragile/internal/health"
+	"github.com/florianmousseau/pokeragile/internal/room"
+	"github.com/florianmousseau/pokeragile/internal/store"
 	"golang.org/x/net/websocket"
 )
 
@@ -802,5 +803,64 @@ func TestWS_RefusesAForeignOriginWithoutSeatingAnyone(t *testing.T) {
 	}
 	if joined := s.Usage().ParticipantsJoined; joined != 0 {
 		t.Fatalf("a foreign origin was seated: %d arrivals", joined)
+	}
+}
+
+func TestWebSocket_LockAndTimerReachTheRoom(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	conn := wsConnect(t, srv, id, "Alice")
+	recv(t, conn) // welcome
+	if snap := decodeSnap(t, recv(t, conn)); snap.Host == "" {
+		t.Fatal("expected the first seat to be host")
+	}
+
+	send(t, conn, "lock", "on")
+	if snap := decodeSnap(t, recv(t, conn)); !snap.Locked {
+		t.Fatal("expected the host to lock the room")
+	}
+
+	send(t, conn, "timer", "60")
+	if snap := decodeSnap(t, recv(t, conn)); snap.TimerEnd == 0 {
+		t.Fatal("expected a running timer")
+	}
+
+	send(t, conn, "timer", "soon")
+	send(t, conn, "lock", "off")
+	if snap := decodeSnap(t, recv(t, conn)); snap.Locked || snap.TimerEnd == 0 {
+		t.Fatalf("expected an open room with its timer, got locked=%v timer=%d", snap.Locked, snap.TimerEnd)
+	}
+}
+
+// handshakeStatus opens a WebSocket handshake without any Origin header, as an
+// assistant's client does, and returns the HTTP status the server answers.
+func handshakeStatus(t *testing.T, srv *httptest.Server, path string) int {
+	t.Helper()
+	conn, err := net.Dial("tcp", strings.TrimPrefix(srv.URL, "http://"))
+	if err != nil {
+		t.Fatalf("dial: %v", err)
+	}
+	defer func() { _ = conn.Close() }()
+	req := "GET " + path + " HTTP/1.1\r\nHost: test\r\nUpgrade: websocket\r\nConnection: Upgrade\r\n" +
+		"Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==\r\nSec-WebSocket-Version: 13\r\n\r\n"
+	if _, err := conn.Write([]byte(req)); err != nil {
+		t.Fatalf("write: %v", err)
+	}
+	resp, err := http.ReadResponse(bufio.NewReader(conn), nil)
+	if err != nil {
+		t.Fatalf("read: %v", err)
+	}
+	_ = resp.Body.Close()
+	return resp.StatusCode
+}
+
+func TestWebSocket_NoOriginIsAdmittedOnlyAsAnAI(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	if got := handshakeStatus(t, srv, "/rooms/"+id+"/ws?name=Bot"); got != http.StatusForbidden {
+		t.Fatalf("expected 403 without origin nor ai flag, got %d", got)
+	}
+	if got := handshakeStatus(t, srv, "/rooms/"+id+"/ws?name=Bot&ai=true"); got != http.StatusSwitchingProtocols {
+		t.Fatalf("expected 101 for an AI without origin, got %d", got)
 	}
 }

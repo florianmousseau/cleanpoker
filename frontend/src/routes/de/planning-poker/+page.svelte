@@ -1,13 +1,13 @@
 <svelte:head>
-  <title>Planning Poker: Regeln, Fibonacci und praktischer Leitfaden | CleanPoker</title>
+  <title>Planning Poker: Regeln, Fibonacci und praktischer Leitfaden | PokerAgile</title>
   <meta name="description" content="Was ist Planning Poker? Regeln, Fibonacci-Folge, T-Shirt-Sizing, Tipps zur Schätzung von User Stories im agilen Team. Vollständiger kostenloser Leitfaden." />
-  <link rel="canonical" href="https://cleanpoker.dev/de/planning-poker" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker" />
+  <link rel="canonical" href="https://pokeragile.com/de/planning-poker" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/planning-poker" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/planning-poker" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/planning-poker" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -120,7 +120,7 @@
     <details>
       <summary>Funktioniert Planning Poker für Remote-Teams?</summary>
       <p>
-        Ja, genau dafür gibt es CleanPoker. Erstelle eine Session, teile die URL, jeder
+        Ja, genau dafür gibt es PokerAgile. Erstelle eine Session, teile die URL, jeder
         Teilnehmer stimmt auf seinem eigenen Gerät ab. Die Ergebnisse werden in Echtzeit
         über WebSocket enthüllt, ohne Konfiguration oder Konto.
       </p>
@@ -133,8 +133,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Quellcode</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
       | <a href="/de/a-propos">Über uns</a>
       | <a href="/de/mentions-legales">Impressum</a>
       | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>

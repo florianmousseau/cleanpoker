@@ -3,6 +3,9 @@
   import { onMount } from 'svelte';
   import { lang } from '#lib/lang.svelte.ts';
   import Footer from '#lib/Footer.svelte';
+  import QrCode from '#lib/QrCode.svelte';
+  import { equipeDe } from '#lib/equipe.ts';
+  import Logo from '#lib/Logo.svelte';
   import { FR, EN, ES, DE, PT, translateActivity } from '#lib/i18n.ts';
   import { useRoom } from '#lib/useRoom.svelte.ts';
   import { copierTexte } from '#lib/presse-papiers.ts';
@@ -10,8 +13,14 @@
   import { expulserApresAccord } from '#lib/expulsion.ts';
   import { barWidth } from '#lib/distribution.ts';
   import { allVoted as allVotedOf } from '#lib/reveal.ts';
+  import { moyenneAffichee } from '#lib/moyenne.ts';
+  import { cadran, peutMener, secondesRestantes } from '#lib/minuteur.ts';
+  import { agreement, extreme } from '#lib/consensus.ts';
+  import StoriesPanel from '#lib/StoriesPanel.svelte';
+  import LocalAi from '#lib/LocalAi.svelte';
 
   const roomId = $derived(page.params.id ?? '');
+  const equipe = $derived(equipeDe(page.url.searchParams));
   const T = $derived(
     lang.current === 'fr' ? FR :
     lang.current === 'es' ? ES :
@@ -87,8 +96,33 @@
   const observers = $derived(room.roomState?.players.filter(p => p.observer) ?? []);
   const allVoted = $derived(allVotedOf(room.roomState?.players ?? []));
   const me = $derived(room.roomState?.players.find(p => p.id === room.myId));
+  const isHost = $derived(room.roomState !== null && room.roomState.host === room.myId);
+  const canRun = $derived(room.roomState === null || peutMener(room.roomState, room.myId));
+  const TIMER_CHOICES = [30, 60, 120, 300];
+  // Role and removal buttons show only with the options: the list stays a list of who voted.
+  let optionsOpen = $state(false);
+
+  // One tick a second while a timer runs; the deadline comes from the server.
+  let now = $state(Date.now());
+  $effect(() => {
+    if (!room.roomState?.timerEnd) return;
+    now = Date.now();
+    const tick = setInterval(() => (now = Date.now()), 1000);
+    return () => clearInterval(tick);
+  });
+  const timerLeft = $derived(room.roomState?.timerEnd ? secondesRestantes(room.roomState.timerEnd, now) : null);
+
+  const stories = $derived(room.roomState?.stories ?? []);
+  const currentIndex = $derived(room.roomState?.current ?? -1);
+  const onTable = $derived(currentIndex >= 0 ? stories[currentIndex] : undefined);
+  // The cards the team voted, in deck order: the estimates it can keep.
+  const keepable = $derived(
+    room.roomState?.results ? room.roomState.cards.filter(c => (room.roomState?.results?.dist[c] ?? 0) > 0) : []
+  );
+  const agreed = $derived(room.roomState?.results ? agreement(room.roomState.results.dist) : null);
+
   const isSolo = $derived(room.roomState !== null && room.roomState.players.length === 1);
-  // Most people meet CleanPoker as someone else's guest and never see the home
+  // Most people meet PokerAgile as someone else's guest and never see the home
   // page. The reveal is the one moment they are looking at the result rather
   // than at a card, so that is where they get told they can host their own.
   const showPromo = $derived(
@@ -106,16 +140,16 @@
 </script>
 
 <svelte:head>
-  <title>{T.salleLabel} {roomId} | CleanPoker</title>
+  <title>{T.salleLabel} {roomId} | PokerAgile</title>
   <meta name="robots" content="noindex" />
   <!-- This URL is the only one anyone ever shares, and it lands in a team chat.
-       The card is what the whole channel sees, so it says what CleanPoker is
+       The card is what the whole channel sees, so it says what PokerAgile is
        and never echoes the room id. noindex keeps it out of search all the same. -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="CleanPoker" />
+  <meta property="og:site_name" content="PokerAgile" />
   <meta property="og:title" content={T.share.ogTitle} />
   <meta property="og:description" content={T.share.ogDesc} />
-  <meta property="og:image" content="https://cleanpoker.dev/og-image.png" />
+  <meta property="og:image" content="https://pokeragile.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -125,11 +159,12 @@
 
 <div aria-live="polite" aria-atomic="true" class="sr-only">{room.liveAnnouncement}</div>
 
-<div class="page">
+<div class="page" class:equipe={equipe?.clair} style:--eq-clair={equipe?.clair || undefined} style:--eq-sombre={equipe?.sombre || undefined}>
   <header class="header">
     <div class="container header-inner">
-      <a href={homeHref} class="logo" aria-label="CleanPoker, accueil">♠ CleanPoker</a>
+      <a href={homeHref} class="logo" aria-label="PokerAgile, accueil"><Logo /><span>PokerAgile</span></a>
       <div class="room-meta">
+        {#if equipe?.nom}<span class="badge-pill team-name" data-testid="team-name">{equipe.nom}</span>{/if}
         <span class="badge-pill">{T.salleLabel} <code>{roomId}</code></span>
         {#if room.roomState}
           <span class="badge-pill">{T.tourLabel} {room.roomState.round}</span>
@@ -192,6 +227,13 @@
         </div>
       {/if}
 
+      {#if onTable}
+        <div>
+          <p class="on-table" data-testid="story-on-table">{T.stories.onTable} <strong>{onTable.title}</strong></p>
+          <LocalAi story={onTable.title} lang={lang.current} {T} />
+        </div>
+      {/if}
+
       <!-- Cartes -->
       {#if !me?.observer}
         <section class="card-section" aria-labelledby="cards-title">
@@ -233,10 +275,10 @@
         <section class="panel" aria-labelledby="controls-title">
           <h2 id="controls-title">{T.controls.title}</h2>
           <div class="controls-btns">
-            <button class="btn btn-secondary btn-block" onclick={() => room.clear()} data-testid="new-round-btn">
+            <button class="btn btn-secondary btn-block" onclick={() => room.clear()} disabled={!canRun} data-testid="new-round-btn">
               {T.controls.newRound}
             </button>
-            <button class="btn btn-primary btn-block" onclick={() => room.show()} disabled={!allVoted || room.roomState.state === 'revealed'}
+            <button class="btn btn-primary btn-block" onclick={() => room.show()} disabled={!canRun || !allVoted || room.roomState.state === 'revealed'}
               aria-describedby={!allVoted ? 'show-hint' : undefined}
               data-testid="reveal-btn">
               {T.controls.reveal}
@@ -247,6 +289,14 @@
               {T.controls.pending(participants.filter(p => p.vote === '').length)}
             </p>
           {/if}
+          {#if timerLeft !== null}
+            <p class="timer-left" class:timer-over={timerLeft === 0} role="timer" data-testid="timer-left">
+              {timerLeft === 0 ? T.host.timerOver : T.host.timerLeft(cadran(timerLeft))}
+            </p>
+          {/if}
+          {#if room.roomState.locked}
+            <p class="hint" data-testid="locked-hint">{T.host.lockedHint}</p>
+          {/if}
         </section>
 
         <section class="panel" aria-labelledby="results-title" data-testid="results">
@@ -255,10 +305,16 @@
             <div data-testid="results-data">
             {#if room.roomState.results.avg !== 'N/A'}
               <div class="stats-grid">
-                <div class="stat"><span class="stat-label">{T.results.avg}</span><span class="stat-value">{room.roomState.results.avg}</span></div>
+                <div class="stat"><span class="stat-label">{T.results.avg}</span><span class="stat-value">{moyenneAffichee(room.roomState.results.avg, lang.current)}</span></div>
+                {#if room.roomState.results.median}
+                  <div class="stat"><span class="stat-label">{T.results.median}</span><span class="stat-value">{moyenneAffichee(room.roomState.results.median, lang.current)}</span></div>
+                {/if}
                 <div class="stat"><span class="stat-label">{T.results.min}</span><span class="stat-value">{room.roomState.results.min}</span></div>
                 <div class="stat"><span class="stat-label">{T.results.max}</span><span class="stat-value">{room.roomState.results.max}</span></div>
               </div>
+            {/if}
+            {#if agreed !== null}
+              <p class="agreement" data-testid="agreement">{T.results.agreement(agreed)}</p>
             {/if}
             <div class="dist">
               {#each Object.entries(room.roomState.results.dist).sort((a,b) => b[1]-a[1]) as [val, count] (val)}
@@ -271,6 +327,17 @@
                 </div>
               {/each}
             </div>
+            {#if onTable && canRun}
+              <div class="keep" role="group" aria-label={T.stories.keepTitle}>
+                {#each keepable as card (card)}
+                  <button class="btn btn-secondary btn-sm" class:kept={onTable.estimate === card}
+                    aria-pressed={onTable.estimate === card} onclick={() => room.estimate(card)}>{T.stories.keep(card)}</button>
+                {/each}
+                {#if currentIndex < stories.length - 1}
+                  <button class="btn btn-primary btn-sm" onclick={() => room.selectStory(currentIndex + 1)} data-testid="next-story">{T.stories.next}</button>
+                {/if}
+              </div>
+            {/if}
             </div>
           {:else}
             <p class="no-results">{T.results.none}</p>
@@ -288,6 +355,7 @@
         </aside>
       {/if}
 
+
       <!-- Participants -->
       <section class="panel" aria-labelledby="participants-title">
         <h2 id="participants-title">{T.participants.title}</h2>
@@ -301,8 +369,10 @@
                   <th scope="col" class="col-status"><span class="sr-only">{T.participants.colStatus}</span></th>
                   <th scope="col">{T.participants.colName}</th>
                   <th scope="col" class="col-vote">{T.participants.colVote}</th>
+                  {#if optionsOpen}
                   <th scope="col" class="col-action">{T.participants.colRole}</th>
                   <th scope="col" class="col-action">{T.participants.colAction}</th>
+                  {/if}
                 </tr>
               </thead>
               <tbody>
@@ -312,19 +382,24 @@
                     <td class="player-name-cell">
                       {player.name}
                       {#if player.id === room.myId}<span class="me-tag">{T.participants.me}</span>{/if}
+                      {#if player.id === room.roomState.host}<span class="me-tag">({T.host.badge})</span>{/if}
+                      {#if player.ai}<span class="me-tag">({T.host.ai})</span>{/if}
                       {#if player.vote !== ''}<span class="sr-only">{T.participants.votedSr}</span>{/if}
+                      {#if room.roomState.state === 'revealed' && player.reason}<p class="reason">{player.reason}</p>{/if}
                     </td>
                     <td class="vote-cell">
                       {#if room.roomState.state === 'revealed'}
-                        <span class="vote-revealed">{player.vote || '-'}</span>
+                        <span class="vote-revealed" data-extreme={room.roomState.results ? extreme(player.vote, room.roomState.results.min, room.roomState.results.max) : null}>{player.vote || '-'}</span>
                       {:else if player.vote === 'hidden'}
                         <span class="vote-pending">{T.participants.votePending}</span>
                       {:else}
                         <span class="vote-empty">-</span>
                       {/if}
                     </td>
+                    {#if optionsOpen}
                     <td class="col-action">
                       <button class="action-btn action-btn-switch"
+                        disabled={!canRun && player.id !== room.myId}
                         onclick={() => room.toggleObserver(player.id)}
                         aria-label={T.participants.toObserverLabel(player.name)}>
                         {T.participants.toObserver}
@@ -332,11 +407,13 @@
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-kick"
+                        disabled={!canRun}
                         onclick={() => kick(player)}
                         aria-label={T.participants.kickLabel(player.name)}>
                         {T.participants.kick}
                       </button>
                     </td>
+                    {/if}
                   </tr>
                 {/each}
               </tbody>
@@ -354,8 +431,10 @@
               <thead>
                 <tr>
                   <th scope="col">{T.participants.colName}</th>
+                  {#if optionsOpen}
                   <th scope="col" class="col-action">{T.participants.colRole}</th>
                   <th scope="col" class="col-action">{T.participants.colAction}</th>
+                  {/if}
                 </tr>
               </thead>
               <tbody>
@@ -364,9 +443,13 @@
                     <td class="player-name-cell">
                       {player.name}
                       {#if player.id === room.myId}<span class="me-tag">{T.participants.me}</span>{/if}
+                      {#if player.id === room.roomState.host}<span class="me-tag">({T.host.badge})</span>{/if}
+                      {#if player.ai}<span class="me-tag">({T.host.ai})</span>{/if}
                     </td>
+                    {#if optionsOpen}
                     <td class="col-action">
                       <button class="action-btn action-btn-switch"
+                        disabled={!canRun && player.id !== room.myId}
                         onclick={() => room.toggleObserver(player.id)}
                         aria-label={T.observers.toParticipantLabel(player.name)}>
                         {T.observers.toParticipant}
@@ -374,11 +457,13 @@
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-kick"
+                        disabled={!canRun}
                         onclick={() => kick(player)}
                         aria-label={T.participants.kickLabel(player.name)}>
                         {T.participants.kick}
                       </button>
                     </td>
+                    {/if}
                   </tr>
                 {/each}
               </tbody>
@@ -387,39 +472,83 @@
         </section>
       {/if}
 
-      <!-- Journal d'activité -->
-      <section class="panel" aria-labelledby="log-title">
-        <h2 id="log-title">{T.activity.title}</h2>
-        {#if room.roomState.activity.length === 0}
-          <p class="empty">{T.activity.none}</p>
-        {:else}
-          <div class="table-wrap">
-            <table class="log-table" aria-label={T.activity.title}>
-              <thead>
-                <tr>
-                  <th scope="col">{T.activity.colTime}</th>
-                  <th scope="col">{T.activity.colAuthor}</th>
-                  <th scope="col">{T.activity.colAction}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Keyed by position, never by content: timestamps are cut to
-                     the second, so two identical events in the same second
-                     (a double-clicked "new round", a vote changed twice) used
-                     to collide and throw each_key_duplicate, poisoning the room
-                     for every player who arrived afterwards. -->
-                {#each [...room.roomState.activity].reverse() as entry, i (i)}
-                  <tr>
-                    <td class="log-time">{entry.timestamp}</td>
-                    <td>{entry.initiator}</td>
-                    <td>{translateActivity(entry.message, entry.target ?? '', T)}</td>
-                  </tr>
+      {#if stories.length > 0}
+      <StoriesPanel {stories} current={currentIndex} {T} {canRun}
+        onAdd={(text) => room.addStories(text)}
+        onClear={() => room.clearStories()}
+        onSelect={(i) => room.selectStory(i)} />
+      {/if}
+
+      <!-- Everything beyond voting waits here, closed: the room opens on the cards. -->
+      <details class="panel options" data-testid="options" bind:open={optionsOpen}>
+        <summary>{T.options}</summary>
+        <div class="options-body">
+            {#if canRun && room.roomState.state === 'voting'}
+              <div class="timer-row" role="group" aria-label={T.host.timer}>
+                <span class="timer-label">{T.host.timer}</span>
+                {#each TIMER_CHOICES as seconds (seconds)}
+                  <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(seconds)}>{T.host.seconds(seconds)}</button>
                 {/each}
-              </tbody>
-            </table>
-          </div>
-        {/if}
-      </section>
+                {#if room.roomState.timerEnd}
+                  <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(0)}>{T.host.timerStop}</button>
+                {/if}
+              </div>
+            {/if}
+            {#if canRun}
+              <label class="auto-reveal">
+                <input type="checkbox" checked={room.roomState.autoReveal ?? false}
+                  onchange={(e) => room.setAutoReveal(e.currentTarget.checked)} data-testid="auto-reveal" />
+                <span>{T.controls.autoReveal}</span>
+              </label>
+            {/if}
+            {#if isHost}
+              <button class="btn btn-secondary btn-sm lock-btn" onclick={() => room.setLocked(!room.roomState?.locked)}
+                aria-pressed={room.roomState.locked} data-testid="lock-btn">
+                {room.roomState.locked ? T.host.unlock : T.host.lock}
+              </button>
+            {/if}
+          <QrCode {roomId} {T} />
+          {#if stories.length === 0}
+          <StoriesPanel {stories} current={currentIndex} {T} {canRun}
+            onAdd={(text) => room.addStories(text)}
+            onClear={() => room.clearStories()}
+            onSelect={(i) => room.selectStory(i)} />
+          {/if}
+        <!-- Journal d'activité -->
+        <section class="panel" aria-labelledby="log-title">
+          <h2 id="log-title">{T.activity.title}</h2>
+          {#if room.roomState.activity.length === 0}
+            <p class="empty">{T.activity.none}</p>
+          {:else}
+            <div class="table-wrap">
+              <table class="log-table" aria-label={T.activity.title}>
+                <thead>
+                  <tr>
+                    <th scope="col">{T.activity.colTime}</th>
+                    <th scope="col">{T.activity.colAuthor}</th>
+                    <th scope="col">{T.activity.colAction}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Keyed by position, never by content: timestamps are cut to
+                       the second, so two identical events in the same second
+                       (a double-clicked "new round", a vote changed twice) used
+                       to collide and throw each_key_duplicate, poisoning the room
+                       for every player who arrived afterwards. -->
+                  {#each [...room.roomState.activity].reverse() as entry, i (i)}
+                    <tr>
+                      <td class="log-time">{entry.timestamp}</td>
+                      <td>{entry.initiator}</td>
+                      <td>{translateActivity(entry.message, entry.target ?? '', T)}</td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            </div>
+          {/if}
+        </section>
+        </div>
+      </details>
     {/if}
   </main>
 
@@ -437,10 +566,29 @@
 
 <style>
   .page { display: flex; flex-direction: column; min-height: 100dvh; }
+  /* A team colour, already brought to 4.5:1 against the text that sits on it. */
+  .page.equipe {
+    --color-primary: var(--eq-clair); --color-primary-hover: var(--eq-clair);
+    --color-card-border-selected: var(--eq-clair);
+    --color-card-selected: color-mix(in srgb, var(--eq-clair) 12%, white);
+  }
+  :global([data-theme="dark"]) .page.equipe {
+    --color-primary: var(--eq-sombre); --color-primary-hover: var(--eq-sombre);
+    --color-card-border-selected: var(--eq-sombre);
+    --color-card-selected: color-mix(in srgb, var(--eq-sombre) 18%, #0d1117);
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .page.equipe {
+      --color-primary: var(--eq-sombre); --color-primary-hover: var(--eq-sombre);
+      --color-card-border-selected: var(--eq-sombre);
+      --color-card-selected: color-mix(in srgb, var(--eq-sombre) 18%, #0d1117);
+    }
+  }
+  .badge-pill.team-name { font-weight: 700; color: var(--color-primary); border-color: var(--color-primary); }
 
   .header { padding: 0.75rem 0; border-bottom: 1px solid var(--color-border); }
   .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
-  .logo { font-size: 1.125rem; font-weight: 700; text-decoration: none; color: var(--color-text); }
+  .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.125rem; font-weight: 700; text-decoration: none; color: var(--color-text); }
   .room-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
 
   /* Sits next to the button that failed, because that is where the eye already
@@ -545,8 +693,26 @@
   .controls-btns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.625rem; margin-bottom: 0.5rem; }
   .btn-block { width: 100%; justify-content: center; }
   .hint { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem; }
+  .timer-left { font-size: 1.125rem; font-weight: 700; color: var(--color-primary); margin: 0.5rem 0; font-variant-numeric: tabular-nums; }
+  .timer-left.timer-over { color: var(--color-danger); }
+  .timer-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin-top: 0.5rem; }
+  .timer-label { font-size: 0.8rem; color: var(--color-text-muted); margin-right: 0.25rem; }
+  .lock-btn { margin-top: 0.625rem; }
+  .options summary { cursor: pointer; font-weight: 600; }
+  .options-body { display: flex; flex-direction: column; gap: 0.875rem; margin-top: 0.875rem; }
+  .options-body .lock-btn, .options-body .auto-reveal, .options-body .timer-row { margin-top: 0; align-self: flex-start; }
+  .reason { margin-top: 0.25rem; font-size: 0.8rem; font-weight: 400; color: var(--color-text-muted); overflow-wrap: break-word; }
+  .auto-reveal { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.625rem; font-size: 0.85rem; cursor: pointer; }
+  .auto-reveal input { accent-color: var(--color-primary); }
+  .on-table { font-size: 1rem; padding: 0.625rem min(1rem, 16px); background: var(--color-card-selected); border: 1px solid var(--color-card-border-selected); border-radius: var(--radius-lg); overflow-wrap: break-word; }
+  .agreement { font-size: 0.85rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.5rem; }
+  .keep { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.875rem; }
+  .keep .kept { background: var(--color-card-selected); border-color: var(--color-card-border-selected); color: var(--color-primary); }
+  .vote-revealed[data-extreme] { padding: 0.05rem 0.4rem; border-radius: 99px; outline: 2px solid var(--color-danger); }
+  .action-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-  .stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.625rem; margin-bottom: 1rem; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.625rem; margin-bottom: 1rem; }
+  @media (max-width: 30rem) { .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .stat { display: flex; flex-direction: column; align-items: center; gap: 0.125rem; padding: 0.625rem; background: var(--color-surface); border-radius: var(--radius); border: 1px solid var(--color-border); }
   .stat-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); }
   .stat-value { font-size: 1.375rem; font-weight: 700; color: var(--color-primary); }

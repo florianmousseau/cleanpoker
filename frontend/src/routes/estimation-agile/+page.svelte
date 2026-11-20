@@ -1,20 +1,20 @@
 <svelte:head>
-  <title>Agile estimation: story points, velocity and sprint planning | CleanPoker</title>
+  <title>Agile estimation: story points, velocity and sprint planning | PokerAgile</title>
   <meta name="description" content="Complete guide to agile estimation: story points vs. hours, how velocity works, capacity planning, and the most common mistakes to avoid." />
-  <link rel="canonical" href="https://cleanpoker.dev/estimation-agile" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile" />
+  <link rel="canonical" href="https://pokeragile.com/estimation-agile" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/estimation-agile" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/estimation-agile" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/estimation-agile" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/estimation-agile" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/estimation-agile" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/estimation-agile" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Agile estimation: story points, velocity and sprint planning',
-    url: 'https://cleanpoker.dev/estimation-agile',
+    url: 'https://pokeragile.com/estimation-agile',
     description: 'Complete guide to agile estimation: story points, velocity, capacity planning, and common pitfalls.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -87,7 +87,7 @@
       comparable metric across sprints.
     </p>
     <p>
-      The shift from hours to story points is the single most impactful change most teams
+      The shift from hours to <a href="/story-points">story points</a> is the single most impactful change most teams
       can make to improve planning accuracy.
     </p>
 
@@ -216,14 +216,14 @@
     </details>
 
     <div class="cta">
-      <a href="/" class="btn">Run a session with CleanPoker</a>
+      <a href="/" class="btn">Run a session with PokerAgile</a>
     </div>
   </main>
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Source code</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
       | <a href="/mentions-legales#confidentialite">Privacy</a>

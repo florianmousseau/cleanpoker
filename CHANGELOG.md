@@ -1,5 +1,61 @@
 # Changelog
 
+## [0.0.60] - 2026-11-20
+
+- feat(seo): retrospective formats guide in English and French (#418)
+- feat(seo): home titles with the head queries, guide links in the home footer, richer app schema (#417)
+
+## [0.0.59] - 2026-11-20
+
+- feat(seo): story points guide in French and English (#413)
+
+## [0.0.58] - 2026-11-20
+
+- fix(i18n): invite colleagues rather than teammates in French
+- feat(room): the room opens on the vote, everything else under Options
+- feat(room): team colours and name carried by the room address
+
+## [0.0.57] - 2026-11-20
+
+- feat(brand): PokerAgile on pokeragile.com, cleanpoker.dev redirects page for page
+
+## [0.0.56] - 2026-11-20
+
+- refactor: split vote acceptance from recording, use replaceAll in the export
+- fix(i18n): close the qr block after the merge
+- feat(room): QR code of the room address
+- fix(content): name the browser in the download message, and 'other' AI service
+- fix(content): the browser AI section says what is true of privacy, language and reach
+- feat(room): analyse the story on the table with Chrome's built-in AI
+- fix(content): keep the paste-and-export sentence after the tracker advice
+- fix(content): the AI guide says the assistant reads a title only, and what it receives
+- feat(mcp): the assistant reads the story on the table and gives a reason
+- feat(room): story list, export, agreement and auto-reveal
+
+## [0.0.55] - 2026-11-20
+
+- fix(mcp): mark get_room as read-only for clients that gate write tools
+- fix(content): state the ChatGPT plans that allow an AI vote
+- fix(content): answer the story question plainly, name who knows the code
+- fix(content): correct the AI guide after review
+- fix(mcp): refuse a room nobody opened instead of creating it
+- feat(brand): a drawn two-card mark replaces the spade glyph
+- feat(content): planning poker with AI guide, in English and French
+- feat(mcp): let AI assistants join a room and vote
+
+## [0.0.54] - 2026-11-20
+
+- docs(seo): directory texts name Gravelines and the free timer
+- refactor(room): name the role-switch permission
+- fix(content): name Gravelines, not Paris, as the real-time server location
+- feat(room): host lock, voting timer and median
+
+## [0.0.53] - 2026-11-20
+
+- fix(room): write the average with the reader's decimal comma, drop the slogan from the invitation
+- refactor: retire the in-site visitor counter (#384)
+- fix(store): count a room opened by its address as a created session
+
 ## [0.0.52] - 2026-11-14
 
 - fix(health): a failing or stubborn drill body is a 400, never a 500 (#379)

@@ -1,23 +1,23 @@
 <svelte:head>
-  <title>Poker planning accessible&nbsp;: WCAG 2.1 AA et lecteurs d'écran | CleanPoker</title>
-  <meta name="description" content="CleanPoker est un outil de planning poker entièrement accessible aux personnes en situation de handicap. Navigation clavier, lecteurs d'écran (NVDA, VoiceOver, JAWS), conformité WCAG 2.1 AA." />
-  <link rel="canonical" href="https://cleanpoker.dev/fr/accessibilite" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite" />
+  <title>Poker planning accessible&nbsp;: WCAG 2.1 AA et lecteurs d'écran | PokerAgile</title>
+  <meta name="description" content="PokerAgile est un outil de planning poker entièrement accessible aux personnes en situation de handicap. Navigation clavier, lecteurs d'écran (NVDA, VoiceOver, JAWS), conformité WCAG 2.1 AA." />
+  <link rel="canonical" href="https://pokeragile.com/fr/accessibilite" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/accessibilite" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/accessibilite" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/accessibilite" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/accessibilite" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/accessibilite" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/accessibilite" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Déclaration d\'accessibilité : CleanPoker',
-    url: 'https://cleanpoker.dev/fr/accessibilite',
-    description: 'CleanPoker est un outil de planning poker entièrement accessible aux personnes en situation de handicap. Navigation clavier complète, compatible lecteurs d\'écran NVDA, VoiceOver et JAWS. Conforme WCAG 2.1 AA.',
+    name: 'Déclaration d\'accessibilité : PokerAgile',
+    url: 'https://pokeragile.com/fr/accessibilite',
+    description: 'PokerAgile est un outil de planning poker entièrement accessible aux personnes en situation de handicap. Navigation clavier complète, compatible lecteurs d\'écran NVDA, VoiceOver et JAWS. Conforme WCAG 2.1 AA.',
     isPartOf: {
       '@type': 'WebApplication',
-      name: 'CleanPoker',
-      url: 'https://cleanpoker.dev',
+      name: 'PokerAgile',
+      url: 'https://pokeragile.com',
       accessibilityFeature: ['highContrastDisplay','readingOrder','structuralNavigation','alternativeText','displayTransformability'],
       accessibilityHazard: ['noFlashingHazard','noMotionSimulationHazard','noSoundHazard'],
       accessibilityControl: ['fullKeyboardControl','fullMouseControl','fullTouchControl'],
@@ -30,17 +30,17 @@
   <main id="main">
     <a href="/fr" class="back-link">Retour à l'accueil</a>
 
-    <h1>Accessibilité&nbsp;: CleanPoker pour les équipes inclusives</h1>
+    <h1>Accessibilité&nbsp;: PokerAgile pour les équipes inclusives</h1>
 
     <p>
-      <strong>CleanPoker</strong> est un outil de planning poker conçu pour être utilisable par tous,
+      <strong>PokerAgile</strong> est un outil de planning poker conçu pour être utilisable par tous,
       y compris les personnes en situation de handicap&nbsp;: utilisateurs de lecteurs d'écran,
       personnes naviguant au clavier, personnes malvoyantes ou ayant des troubles moteurs.
       Il est conforme au référentiel <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 niveau AA.
     </p>
 
     <h2>Pour qui&nbsp;?</h2>
-    <p>CleanPoker est adapté aux&nbsp;:</p>
+    <p>PokerAgile est adapté aux&nbsp;:</p>
     <ul>
       <li>Personnes aveugles ou malvoyantes utilisant un lecteur d'écran (NVDA, VoiceOver, JAWS)</li>
       <li>Personnes ayant des troubles moteurs naviguant exclusivement au clavier</li>
@@ -50,7 +50,7 @@
     </ul>
 
     <h2>État de conformité</h2>
-    <p>CleanPoker est <strong>en conformité partielle</strong> avec les critères WCAG 2.1 AA.
+    <p>PokerAgile est <strong>en conformité partielle</strong> avec les critères WCAG 2.1 AA.
     L'accessibilité a été intégrée dès la conception, pas ajoutée après coup.
     Le score Lighthouse Accessibilité est de <strong>100/100</strong>.</p>
 
@@ -92,7 +92,7 @@
     <h2>Signaler un problème</h2>
     <p>
       Pour signaler un problème d'accessibilité ou suggérer une amélioration&nbsp;:
-      <a href="https://github.com/florianmousseau/cleanpoker/issues" rel="noopener noreferrer">
+      <a href="https://github.com/florianmousseau/pokeragile/issues" rel="noopener noreferrer">
         ouvrir une issue GitHub
       </a>
     </p>
@@ -103,8 +103,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Code source</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
       | <a href="/fr/a-propos">À propos</a>
       | <a href="/fr/mentions-legales">Mentions légales</a>
       | <a href="/fr/mentions-legales#confidentialite">Confidentialité</a>

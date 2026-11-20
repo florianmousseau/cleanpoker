@@ -8,13 +8,14 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 	"unicode/utf8"
 
-	"github.com/florianmousseau/cleanpoker/internal/health"
-	"github.com/florianmousseau/cleanpoker/internal/room"
-	"github.com/florianmousseau/cleanpoker/internal/store"
+	"github.com/florianmousseau/pokeragile/internal/health"
+	"github.com/florianmousseau/pokeragile/internal/room"
+	"github.com/florianmousseau/pokeragile/internal/store"
 	"github.com/google/uuid"
 	"golang.org/x/net/websocket"
 )
@@ -33,6 +34,8 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		w.Header().Set("Cache-Control", "no-store")
 		writeJSON(w, probe(r.Context()))
 	})
+
+	mux.HandleFunc("GET /qr", qrHandler(allowed))
 
 	mux.HandleFunc("GET /stats", func(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, s.Usage())
@@ -100,6 +103,7 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		roomID := r.PathValue("id")
 		playerName := strings.TrimSpace(r.URL.Query().Get("name"))
 		observer := r.URL.Query().Get("observer") == "true"
+		ai := r.URL.Query().Get("ai") == "true"
 		token := r.URL.Query().Get("token")
 		if playerName == "" {
 			http.Error(w, "name required", http.StatusBadRequest)
@@ -113,7 +117,10 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		// plain GET used to allocate a room and its goroutine for a day.
 		// CORS does not cover a WebSocket: without this, any page could seat
 		// its visitors' browsers in a room whose address it knows.
-		if !allowed[r.Header.Get("Origin")] {
+		// An assistant connects from no page at all, so it sends no Origin;
+		// a browser always sends one. Such a seat is marked as an AI to all.
+		origin := r.Header.Get("Origin")
+		if !allowed[origin] && (origin != "" || !ai) {
 			http.Error(w, "origin not allowed", http.StatusForbidden)
 			return
 		}
@@ -129,18 +136,45 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 			}
 			open = s.GetOrCreateUncounted
 		}
-		websocket.Handler(func(conn *websocket.Conn) {
+		// The origin was judged above; the library's own check refuses a
+		// missing one, which is exactly the assistant this route admits.
+		websocket.Server{Handshake: originAlreadyChecked, Handler: func(conn *websocket.Conn) {
 			conn.MaxPayloadBytes = maxFrameBytes
-			rm, err := open(roomID, nil)
+			rm, err := open(roomID, linkDeck(r.URL.Query().Get("cards")))
 			if err != nil {
 				_ = conn.Close() // full since the check above: nothing to hold
 				return
 			}
-			handleWS(conn, rm, recordJoin, arrival{name: playerName, observer: observer, token: token})
-		}).ServeHTTP(w, r)
+			handleWS(conn, rm, recordJoin, arrival{name: playerName, observer: observer, ai: origin == "" && ai, token: token})
+		}}.ServeHTTP(w, r)
 	})
 
 	return cors(allowed, mux)
+}
+
+// linkDeck reads the deck a room address carries (?cards=1,2,3,5), used only
+// when the room has to be opened again: a team's saved link keeps its deck
+// past the 24 hours a room lives. An unusable deck gives the default one.
+func linkDeck(raw string) []string {
+	if raw == "" {
+		return nil
+	}
+	cards := strings.Split(raw, ",")
+	for i := range cards {
+		cards[i] = strings.TrimSpace(cards[i])
+	}
+	if len(cards) < 2 || !deckFits(cards) {
+		return nil
+	}
+	return cards
+}
+
+// originAlreadyChecked reads the Origin into config without refusing a
+// missing one: the route has judged it before the upgrade.
+func originAlreadyChecked(config *websocket.Config, req *http.Request) error {
+	origin, err := websocket.Origin(config, req)
+	config.Origin = origin
+	return err
 }
 
 // MaxNameLength is the limit the join form announces with maxlength="30". A
@@ -212,6 +246,7 @@ func writeJSON(w http.ResponseWriter, v any) {
 type arrival struct {
 	name     string
 	observer bool
+	ai       bool
 	token    string
 }
 
@@ -254,7 +289,7 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 		// state that shows it in the room can read /stats and find itself
 		// counted. A seat taken back is not a new arrival.
 		recordJoin()
-		rm.JoinWithToken(seat.ID, token, a.name, a.observer)
+		rm.JoinSeat(room.Player{ID: seat.ID, Name: a.name, Observer: a.observer, AI: a.ai}, token)
 	}
 
 	go func() {
@@ -289,25 +324,45 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 			log.Printf("warn: command rate exceeded, closing connection")
 			return
 		}
-		switch action.Type {
-		case "ping":
+		if action.Type == "ping" {
 			if err := sendBounded(conn, room.Message{Type: "pong"}); err != nil {
 				return
 			}
-		case "vote":
-			rm.CastVote(seat.ID, action.Payload, action.Round)
-		case "show":
-			rm.Show(seat.ID)
-		case "clear":
-			rm.Clear(seat.ID, action.Round)
-		case "kick":
-			rm.Kick(seat.ID, action.Payload)
-		case "toggleObserver":
-			rm.ToggleObserver(seat.ID, action.Payload)
-		default:
-			log.Printf("unknown action: %s", action.Type)
+			continue
 		}
+		run, ok := commands[action.Type]
+		if !ok {
+			log.Printf("unknown action: %s", action.Type)
+			continue
+		}
+		run(rm, seat.ID, action.Payload, action.Round)
 	}
+}
+
+// command runs one client action on the room, for the seat that sent it.
+type command func(rm *room.Room, seatID, payload string, round int)
+
+var commands = map[string]command{
+	"vote":           func(rm *room.Room, id, p string, round int) { rm.CastVote(id, p, round) },
+	"show":           func(rm *room.Room, id, _ string, _ int) { rm.Show(id) },
+	"clear":          func(rm *room.Room, id, _ string, round int) { rm.Clear(id, round) },
+	"kick":           func(rm *room.Room, id, p string, _ int) { rm.Kick(id, p) },
+	"toggleObserver": func(rm *room.Room, id, p string, _ int) { rm.ToggleObserver(id, p) },
+	"lock":           func(rm *room.Room, id, p string, _ int) { rm.SetLocked(id, p == "on") },
+	"autoReveal":     func(rm *room.Room, id, p string, _ int) { rm.SetAutoReveal(id, p == "on") },
+	"addStories":     func(rm *room.Room, id, p string, _ int) { rm.AddStories(id, p) },
+	"clearStories":   func(rm *room.Room, id, _ string, _ int) { rm.ClearStories(id) },
+	"estimate":       func(rm *room.Room, id, p string, _ int) { rm.Estimate(id, p) },
+	"timer": func(rm *room.Room, id, p string, _ int) {
+		if seconds, err := strconv.Atoi(p); err == nil {
+			rm.StartTimer(id, seconds)
+		}
+	},
+	"selectStory": func(rm *room.Room, id, p string, _ int) {
+		if index, err := strconv.Atoi(p); err == nil {
+			rm.SelectStory(id, index)
+		}
+	},
 }
 
 func cors(allowed map[string]bool, next http.Handler) http.Handler {

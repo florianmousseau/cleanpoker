@@ -11,9 +11,11 @@
     about: string;
     locale: string;
     onLangChange?: (l: string) => void;
+    /** The home page links its guides; the room keeps a bare footer. */
+    guides?: boolean;
   }
 
-  let { navAriaLabel, source, license, legal, privacy, about, locale, onLangChange }: Props = $props();
+  let { navAriaLabel, source, license, legal, privacy, about, locale, onLangChange, guides = false }: Props = $props();
 
   const ALL_LANGS = ['en', 'fr', 'es', 'de', 'pt'] as const;
   const langHref = (l: string) => (l === 'en' ? '/' : `/${l}`);
@@ -33,9 +35,42 @@
   );
 
   const prefix = $derived(locale === 'en' ? '' : `/${locale}`);
+
+  const GUIDES: Record<string, { label: string; links: [string, string][] }> = {
+    en: { label: 'Guides', links: [
+      ['/planning-poker', 'Planning poker guide'], ['/story-points', 'Story points'], ['/retrospective', 'Retrospective formats'], ['/fibonacci', 'Fibonacci scale'],
+      ['/estimation-agile', 'Agile estimation'], ['/alternatives', 'Alternatives'], ['/planning-poker-tools', 'Tools compared'],
+      ['/planning-poker-ai', 'Planning poker with AI'], ['/planning-poker-gdpr', 'GDPR'],
+    ] },
+    fr: { label: 'Guides', links: [
+      ['/fr/planning-poker', 'Guide du poker planning'], ['/fr/story-points', 'Story points'], ['/fr/retrospective', 'Formats de rétrospective'], ['/fr/fibonacci', 'Suite de Fibonacci'],
+      ['/fr/estimation-agile', 'Estimation agile'], ['/fr/alternatives', 'Alternatives'], ['/fr/comparatif-outils', 'Comparatif des outils'],
+      ['/fr/planning-poker-ia', 'Planning poker avec une IA'], ['/fr/poker-planning-rgpd', 'RGPD'],
+    ] },
+    es: { label: 'Guías', links: [
+      ['/es/planning-poker', 'Guía de planning poker'], ['/es/fibonacci', 'Fibonacci'],
+      ['/es/estimation-agile', 'Estimación ágil'], ['/es/alternatives', 'Alternativas'],
+    ] },
+    de: { label: 'Leitfäden', links: [
+      ['/de/planning-poker', 'Planning-Poker-Leitfaden'], ['/de/fibonacci', 'Fibonacci'],
+      ['/de/estimation-agile', 'Agile Schätzung'], ['/de/alternatives', 'Alternativen'],
+    ] },
+    pt: { label: 'Guias', links: [
+      ['/pt/planning-poker', 'Guia de planning poker'], ['/pt/fibonacci', 'Fibonacci'],
+      ['/pt/estimation-agile', 'Estimativa ágil'], ['/pt/alternatives', 'Alternativas'],
+    ] },
+  };
+  const guideLinks = $derived(guides ? GUIDES[locale] : undefined);
 </script>
 
 <footer class="footer container">
+  {#if guideLinks}
+    <nav class="guides" aria-label={guideLinks.label}>
+      {#each guideLinks.links as [href, text] (href)}
+        <a {href}>{text}</a>
+      {/each}
+    </nav>
+  {/if}
   <div class="footer-controls">
     <nav class="lang-nav" aria-label={navAriaLabel}>
       {#each ALL_LANGS as l (l)}
@@ -74,8 +109,8 @@
     </button>
   </div>
   <p>
-    <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">{source}</a>
-    | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">{license}</a>
+    <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">{source}</a>
+    | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">{license}</a>
     | <a href="{prefix}/a-propos">{about}</a>
     | <a href="{prefix}/mentions-legales">{legal}</a>
     | <a href="{prefix}/mentions-legales#confidentialite">{privacy}</a>
@@ -85,6 +120,7 @@
 <style>
   .footer { padding: 1.5rem min(1rem, 16px); border-top: 1px solid var(--color-border); font-size: 0.875rem; color: var(--color-text-muted); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
   .footer-controls { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+  .guides { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.375rem 1rem; }
   .lang-nav { display: flex; gap: 0.375rem; flex-wrap: wrap; justify-content: center; }
   .lang-link {
     font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;

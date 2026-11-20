@@ -1,13 +1,13 @@
 <svelte:head>
-  <title>Impressum & Datenschutz | CleanPoker</title>
-  <meta name="description" content="Impressum, Datenschutzerklärung und Hosting-Informationen für CleanPoker." />
-  <link rel="canonical" href="https://cleanpoker.dev/de/mentions-legales" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales" />
+  <title>Impressum & Datenschutz | PokerAgile</title>
+  <meta name="description" content="Impressum, Datenschutzerklärung und Hosting-Informationen für PokerAgile." />
+  <link rel="canonical" href="https://pokeragile.com/de/mentions-legales" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/mentions-legales" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/mentions-legales" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/mentions-legales" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/mentions-legales" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/mentions-legales" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/mentions-legales" />
   <meta name="robots" content="noindex" />
 </svelte:head>
 
@@ -23,7 +23,7 @@
       Diese Website wird persönlich herausgegeben von:<br />
       <strong>Florian Mousseau</strong>, Privatperson<br />
       Frankreich<br />
-      Kontakt: <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      Kontakt: <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
 
     <!-- ── Hosting ── -->
@@ -46,12 +46,12 @@
     <h2 id="confidentialite">Personenbezogene Daten (DSGVO)</h2>
     <p>
       <strong>Verantwortlicher:</strong> Florian Mousseau,
-      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
 
     <h3>Erhobene Daten</h3>
     <p>
-      CleanPoker erhebt ausschließlich den <strong>Pseudonym</strong>, den Sie frei eingeben,
+      PokerAgile erhebt ausschließlich den <strong>Pseudonym</strong>, den Sie frei eingeben,
       um einer Sitzung beizutreten. Dieses Pseudonym wird den anderen Teilnehmern derselben Sitzung angezeigt.
       Es werden keine E-Mail-Adresse, Telefonnummer oder echte Identifikationsdaten angefragt oder gespeichert.
     </p>
@@ -80,7 +80,7 @@
     <p>
       Gemäß der DSGVO haben Sie das Recht auf Auskunft, Berichtigung und Löschung
       Ihrer Daten. Um diese Rechte auszuüben oder bei Fragen:
-      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
     <p>
       Sie können auch eine Beschwerde bei der
@@ -90,7 +90,7 @@
     <!-- ── Cookies ── -->
     <h2>Cookies</h2>
     <p>
-      CleanPoker <strong>verwendet keine Werbe-Cookies und kein Werkzeug, das Besucher verfolgt</strong>.
+      PokerAgile <strong>verwendet keine Werbe-Cookies und kein Werkzeug, das Besucher verfolgt</strong>.
     </p>
     <p>
       <strong>Kein Skript misst hier Ihren Besuch</strong>: es wird kein Messwerkzeug geladen,
@@ -136,15 +136,15 @@
     <!-- ── Geistiges Eigentum ── -->
     <h2>Geistiges Eigentum</h2>
     <p>
-      Der Quellcode von CleanPoker ist unter der
-      <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a> veröffentlicht.
+      Der Quellcode von PokerAgile ist unter der
+      <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a> veröffentlicht.
       Sie können ihn unter den Bedingungen dieser Lizenz frei verwenden, ändern und verbreiten.
     </p>
 
     <!-- ── Haftung ── -->
     <h2>Haftungsbeschränkung</h2>
     <p>
-      CleanPoker ist ein kostenloser Dienst, der ohne Gewähr bereitgestellt wird. Der Herausgeber kann nicht
+      PokerAgile ist ein kostenloser Dienst, der ohne Gewähr bereitgestellt wird. Der Herausgeber kann nicht
       für direkte oder indirekte Schäden haftbar gemacht werden, die durch die Nutzung oder Nichtverfügbarkeit
       des Dienstes entstehen.
     </p>
@@ -158,8 +158,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Quellcode</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
       | <a href="/de/a-propos">Über uns</a>
       | <a href="/de/mentions-legales">Impressum</a>
       | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>

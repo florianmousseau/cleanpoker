@@ -8,8 +8,8 @@
  */
 
 export const EMETTEUR = 'https://token.actions.githubusercontent.com';
-export const AUDIENCE = 'https://cleanpoker.dev';
-const DEPOT = 'florianmousseau/cleanpoker';
+export const AUDIENCE = 'https://pokeragile.com';
+const DEPOT = 'florianmousseau/pokeragile';
 const BRANCHE = 'refs/heads/main';
 
 type Cles = { keys?: (JsonWebKey & { kid?: string })[] };

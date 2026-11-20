@@ -1,20 +1,20 @@
 <svelte:head>
-  <title>Agile Schätzung: Story Points, Velocity und Sprint-Planung | CleanPoker</title>
+  <title>Agile Schätzung: Story Points, Velocity und Sprint-Planung | PokerAgile</title>
   <meta name="description" content="Vollständiger Leitfaden zur agilen Schätzung: Story Points vs. Stunden, Velocity, Kapazitätsplanung und häufige Fehler." />
-  <link rel="canonical" href="https://cleanpoker.dev/de/estimation-agile" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile" />
+  <link rel="canonical" href="https://pokeragile.com/de/estimation-agile" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/estimation-agile" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/estimation-agile" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/estimation-agile" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/estimation-agile" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/estimation-agile" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/estimation-agile" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Agile Schätzung: Story Points, Velocity und Sprint-Planung',
-    url: 'https://cleanpoker.dev/de/estimation-agile',
+    url: 'https://pokeragile.com/de/estimation-agile',
     description: 'Vollständiger Leitfaden zur agilen Schätzung: Story Points, Velocity, Kapazitätsplanung und häufige Fehler.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -116,14 +116,14 @@
     </details>
 
     <div class="cta">
-      <a href="/de" class="btn">Mit CleanPoker eine Session starten</a>
+      <a href="/de" class="btn">Mit PokerAgile eine Session starten</a>
     </div>
   </main>
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Quellcode</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Quellcode</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT-Lizenz</a>
       | <a href="/de/a-propos">Über uns</a>
       | <a href="/de/mentions-legales">Impressum</a>
       | <a href="/de/mentions-legales#confidentialite">Datenschutz</a>

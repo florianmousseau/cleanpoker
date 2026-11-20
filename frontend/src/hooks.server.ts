@@ -5,6 +5,7 @@ import { building, dev } from "$app/env";
 import { env, waitUntil } from "cloudflare:workers";
 import { SKIP_LINK } from "#lib/skip-link.ts";
 import { sansPrefixeEn } from "#lib/redirection-en.ts";
+import { versNouveauDomaine } from "#lib/domaine.ts";
 
 const LOCALES = ["fr", "es", "de", "pt"] as const;
 type Locale = (typeof LOCALES)[number];
@@ -23,7 +24,7 @@ const SECURITY_HEADERS: Record<string, string> = {
   "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
   "Content-Security-Policy": [
     "default-src 'self'",
-    "connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev",
+    "connect-src 'self' https://salles.pokeragile.com wss://salles.pokeragile.com",
     "script-src 'self' 'unsafe-inline'",
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data:",
@@ -49,6 +50,10 @@ function routeLocale(pathname: string): Locale | "en" {
  * and fell through to /[id], which treats an unknown segment as a room id.
  */
 const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
+  const moved = versNouveauDomaine(event.url);
+  if (moved !== null) {
+    return new Response(null, { status: 301, headers: { location: moved } });
+  }
   const target = sansPrefixeEn(event.url.pathname);
   if (target !== null) {
     return new Response(null, {
@@ -88,7 +93,7 @@ const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
  * `plateformeCloudflare` runs FIRST, because adapter-cloudflare 8 passes no
  * `platform` and the routes read their bindings there. The in-site visitor
  * counter that ran last left on 2026-11-19: the zone Worker of the estate
- * counts cleanpoker.dev.
+ * counts pokeragile.com.
  */
 const plateforme = plateformeCloudflare({
   env,

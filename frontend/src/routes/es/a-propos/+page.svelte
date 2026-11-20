@@ -1,23 +1,23 @@
 <svelte:head>
-  <title>Acerca de CleanPoker - Planning poker eco-diseñado</title>
-  <meta name="description" content="CleanPoker es una herramienta de planning poker gratuita, eco-diseñada, sin seguimiento comportamental, accesible WCAG 2.1 AA, menos de 50 KB JS, alojamiento verde. Código abierto MIT." />
-  <link rel="canonical" href="https://cleanpoker.dev/es/a-propos" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos" />
+  <title>Acerca de PokerAgile - Planning poker eco-diseñado</title>
+  <meta name="description" content="PokerAgile es una herramienta de planning poker gratuita, eco-diseñada, sin seguimiento comportamental, accesible WCAG 2.1 AA, menos de 50 KB JS, alojamiento verde. Código abierto MIT." />
+  <link rel="canonical" href="https://pokeragile.com/es/a-propos" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/a-propos" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/a-propos" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/a-propos" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/a-propos" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/a-propos" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/a-propos" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Acerca de CleanPoker',
-    url: 'https://cleanpoker.dev/es/a-propos',
-    description: 'CleanPoker es una herramienta de planning poker gratuita, eco-diseñada, sin seguimiento comportamental, accesible WCAG 2.1 AA.',
+    name: 'Acerca de PokerAgile',
+    url: 'https://pokeragile.com/es/a-propos',
+    description: 'PokerAgile es una herramienta de planning poker gratuita, eco-diseñada, sin seguimiento comportamental, accesible WCAG 2.1 AA.',
     isPartOf: {
       '@type': 'WebApplication',
-      name: 'CleanPoker',
-      url: 'https://cleanpoker.dev',
+      name: 'PokerAgile',
+      url: 'https://pokeragile.com',
       description: 'Planning poker gratuito, sin seguimiento comportamental, bundle JS menos de 50 KB, alojamiento en energía renovable, WCAG 2.1 AA.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
     },
@@ -28,10 +28,10 @@
   <main id="main">
     <a href="/es" class="back-link">Volver al inicio</a>
 
-    <h1>Acerca de CleanPoker</h1>
+    <h1>Acerca de PokerAgile</h1>
 
     <p>
-      <strong>CleanPoker</strong> es una herramienta de <strong>planning poker</strong> colaborativa,
+      <strong>PokerAgile</strong> es una herramienta de <strong>planning poker</strong> colaborativa,
       gratuita y de código abierto. Crea una sesión en un clic, comparte la URL con tu equipo
       y estima en tiempo real. Sin cuenta, sin registro, sin seguimiento comportamental.
     </p>
@@ -41,7 +41,7 @@
       <li>Lighthouse Rendimiento y Accesibilidad: <strong>100 / 100</strong></li>
       <li>Alojamiento 100% energía renovable (Cloudflare Pages + OVHcloud Gravelines)</li>
       <li>Sin rastreadores, sin cookies publicitarias, sin scripts de terceros</li>
-      <li>Código abierto bajo <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licencia MIT</a></li>
+      <li>Código abierto bajo <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">licencia MIT</a></li>
     </ul>
 
     <h2>Saber más</h2>
@@ -80,8 +80,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Código fuente</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licencia MIT</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Código fuente</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">Licencia MIT</a>
       | <a href="/es/a-propos">Acerca de</a>
       | <a href="/es/mentions-legales">Aviso legal</a>
       | <a href="/es/mentions-legales#confidentialite">Privacidad</a>

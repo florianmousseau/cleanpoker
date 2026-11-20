@@ -4,490 +4,538 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://cleanpoker.dev/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/"/>
+    <loc>https://pokeragile.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/"/>
+    <loc>https://pokeragile.com/fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/es</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/"/>
+    <loc>https://pokeragile.com/es</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/de</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/"/>
+    <loc>https://pokeragile.com/de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/pt</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/"/>
+    <loc>https://pokeragile.com/pt</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- Planning poker guide -->
   <url>
-    <loc>https://cleanpoker.dev/planning-poker</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker"/>
+    <loc>https://pokeragile.com/planning-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr/planning-poker</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker"/>
+    <loc>https://pokeragile.com/fr/planning-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/es/planning-poker</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker"/>
+    <loc>https://pokeragile.com/es/planning-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/de/planning-poker</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker"/>
+    <loc>https://pokeragile.com/de/planning-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/pt/planning-poker</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker"/>
+    <loc>https://pokeragile.com/pt/planning-poker</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/planning-poker"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Fibonacci -->
   <url>
-    <loc>https://cleanpoker.dev/fibonacci</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci"/>
+    <loc>https://pokeragile.com/fibonacci</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/fibonacci"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr/fibonacci</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci"/>
+    <loc>https://pokeragile.com/fr/fibonacci</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/fibonacci"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/es/fibonacci</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci"/>
+    <loc>https://pokeragile.com/es/fibonacci</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/fibonacci"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/de/fibonacci</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci"/>
+    <loc>https://pokeragile.com/de/fibonacci</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/fibonacci"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/pt/fibonacci</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci"/>
+    <loc>https://pokeragile.com/pt/fibonacci</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/fibonacci"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/fibonacci"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Agile estimation -->
   <url>
-    <loc>https://cleanpoker.dev/estimation-agile</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile"/>
+    <loc>https://pokeragile.com/estimation-agile</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/estimation-agile"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr/estimation-agile</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile"/>
+    <loc>https://pokeragile.com/fr/estimation-agile</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/estimation-agile"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/es/estimation-agile</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile"/>
+    <loc>https://pokeragile.com/es/estimation-agile</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/estimation-agile"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/de/estimation-agile</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile"/>
+    <loc>https://pokeragile.com/de/estimation-agile</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/estimation-agile"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/pt/estimation-agile</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile"/>
+    <loc>https://pokeragile.com/pt/estimation-agile</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/estimation-agile"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/estimation-agile"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Alternatives -->
   <url>
-    <loc>https://cleanpoker.dev/alternatives</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives"/>
+    <loc>https://pokeragile.com/alternatives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/alternatives"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr/alternatives</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives"/>
+    <loc>https://pokeragile.com/fr/alternatives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/alternatives"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/es/alternatives</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives"/>
+    <loc>https://pokeragile.com/es/alternatives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/alternatives"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/de/alternatives</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives"/>
+    <loc>https://pokeragile.com/de/alternatives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/alternatives"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/pt/alternatives</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives"/>
+    <loc>https://pokeragile.com/pt/alternatives</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/alternatives"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/alternatives"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- About -->
   <url>
-    <loc>https://cleanpoker.dev/a-propos</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos"/>
+    <loc>https://pokeragile.com/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/a-propos"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr/a-propos</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos"/>
+    <loc>https://pokeragile.com/fr/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/a-propos"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/es/a-propos</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos"/>
+    <loc>https://pokeragile.com/es/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/a-propos"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/de/a-propos</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos"/>
+    <loc>https://pokeragile.com/de/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/a-propos"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/pt/a-propos</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos"/>
+    <loc>https://pokeragile.com/pt/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/a-propos"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <!-- Green / Eco-design -->
   <url>
-    <loc>https://cleanpoker.dev/green</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green"/>
+    <loc>https://pokeragile.com/green</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/green"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/green"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/green"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/green"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/green"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/green"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr/green</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green"/>
+    <loc>https://pokeragile.com/fr/green</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/green"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/green"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/green"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/green"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/green"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/green"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/es/green</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green"/>
+    <loc>https://pokeragile.com/es/green</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/green"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/green"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/green"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/green"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/green"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/green"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/de/green</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green"/>
+    <loc>https://pokeragile.com/de/green</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/green"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/green"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/green"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/green"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/green"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/green"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/pt/green</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green"/>
+    <loc>https://pokeragile.com/pt/green</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/green"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/green"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/green"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/green"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/green"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/green"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <!-- Accessibility -->
   <url>
-    <loc>https://cleanpoker.dev/accessibilite</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite"/>
+    <loc>https://pokeragile.com/accessibilite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/accessibilite"/>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr/accessibilite</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite"/>
+    <loc>https://pokeragile.com/fr/accessibilite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/accessibilite"/>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/es/accessibilite</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite"/>
+    <loc>https://pokeragile.com/es/accessibilite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/accessibilite"/>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/de/accessibilite</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite"/>
+    <loc>https://pokeragile.com/de/accessibilite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/accessibilite"/>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/pt/accessibilite</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/accessibilite"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/accessibilite"/>
+    <loc>https://pokeragile.com/pt/accessibilite</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/accessibilite"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/accessibilite"/>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <!-- Privacy and tool-choice guides, English and French only -->
   <url>
-    <loc>https://cleanpoker.dev/planning-poker-gdpr</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-gdpr"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/poker-planning-rgpd"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-gdpr"/>
+    <loc>https://pokeragile.com/planning-poker-gdpr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-gdpr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/poker-planning-rgpd"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-gdpr"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr/poker-planning-rgpd</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-gdpr"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/poker-planning-rgpd"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-gdpr"/>
+    <loc>https://pokeragile.com/fr/poker-planning-rgpd</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-gdpr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/poker-planning-rgpd"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-gdpr"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/planning-poker-tools</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-tools"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/comparatif-outils"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-tools"/>
+    <loc>https://pokeragile.com/planning-poker-tools</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-tools"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/comparatif-outils"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-tools"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cleanpoker.dev/fr/comparatif-outils</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-tools"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/comparatif-outils"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-tools"/>
+    <loc>https://pokeragile.com/fr/comparatif-outils</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-tools"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/comparatif-outils"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-tools"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/planning-poker-ai</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-ai"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker-ia"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-ai"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/fr/planning-poker-ia</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-ai"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker-ia"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-ai"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/story-points</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/story-points"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/story-points"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/story-points"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/fr/story-points</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/story-points"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/story-points"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/story-points"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/retrospective</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/retrospective"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/retrospective"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/retrospective"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/fr/retrospective</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/retrospective"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/retrospective"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/retrospective"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/florianmousseau/cleanpoker/internal/room"
+	"github.com/florianmousseau/pokeragile/internal/room"
 	"github.com/google/uuid"
 )
 
@@ -130,6 +130,14 @@ func (s *Store) CanHold(id string) bool {
 // opening as a created session: a room reached by its address alone used to
 // count its arrivals and not itself. It returns ErrFull when the room does not
 // exist and the server holds MaxRooms already.
+// Get returns the open room with this id, without opening one.
+func (s *Store) Get(id string) (*room.Room, bool) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	r, ok := s.rooms[id]
+	return r, ok
+}
+
 func (s *Store) GetOrCreate(id string, cards []string) (*room.Room, error) {
 	return s.getOrCreate(id, cards, true)
 }

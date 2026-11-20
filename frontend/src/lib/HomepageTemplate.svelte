@@ -1,4 +1,7 @@
 <script lang="ts">
+  import Logo from '#lib/Logo.svelte';
+  import { FR, EN, ES, DE, PT } from '#lib/i18n.ts';
+  import { requeteEquipe } from '#lib/equipe.ts';
   import { PUBLIC_API_URL } from '$app/env/public';
   import { onMount } from 'svelte';
   import { goto, replaceState } from '$app/navigation';
@@ -87,12 +90,17 @@
   const jsonLd = $derived({
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'CleanPoker',
+    name: 'PokerAgile',
     url: jsonLdUrl,
     description: jsonLdDesc,
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+    isAccessibleForFree: true,
+    license: 'https://opensource.org/licenses/MIT',
+    sameAs: ['https://github.com/florianmousseau/pokeragile'],
+    inLanguage: ['en', 'fr', 'es', 'de', 'pt'],
+    author: { '@type': 'Person', name: 'Florian Mousseau', url: 'https://florianmousseau.com' },
     accessibilityFeature: [
       'highContrastDisplay',
       'readingOrder',
@@ -130,6 +138,11 @@
   const fits = $derived(fitsServer(cards));
   const isValid = $derived(cards.length >= 2 && fits);
 
+  const TT = $derived({ fr: FR, en: EN, es: ES, de: DE, pt: PT }[locale]);
+  let teamName = $state('');
+  let teamColor = $state('#1a6b3c');
+  let teamOpen = $state(false);
+
   const CREATE_TIMEOUT_MS = 15000;
 
   async function createRoom() {
@@ -147,7 +160,9 @@
       if (!res.ok) throw new Error();
       const { id } = await res.json();
       lang.set(locale);
-      await goto(`/${id}`);
+      // The team and its deck travel in the address: a saved link reopens the
+      // same room dressed the same way, sprint after sprint.
+      await goto(`/${id}${teamOpen ? requeteEquipe(teamName, teamColor, cards) : requeteEquipe('', '', cards)}`);
     } catch {
       error = createError;
     } finally {
@@ -161,39 +176,39 @@
   <meta name="description" content={metaDesc} />
   <meta name="keywords" content={keywords} />
   <link rel="canonical" href={canonical} />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com" />
   <meta property="og:locale" content={ogLocale} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonical} />
   <meta property="og:title" content={ogTitle} />
   <meta property="og:description" content={ogDesc} />
-  <meta property="og:image" content="https://cleanpoker.dev/og-image.png" />
+  <meta property="og:image" content="https://pokeragile.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={twitterTitle} />
   <meta name="twitter:description" content={twitterDesc} />
-  <meta name="twitter:image" content="https://cleanpoker.dev/og-image.png" />
+  <meta name="twitter:image" content="https://pokeragile.com/og-image.png" />
   {@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}<\/script>`}
 </svelte:head>
 
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label="CleanPoker, accueil">
-        <span class="logo" aria-hidden="true">♠</span>
-        <span class="logo-text">CleanPoker</span>
+      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label="PokerAgile, accueil">
+        <Logo />
+        <span class="logo-text">PokerAgile</span>
       </a>
     </div>
   </header>
 
   <main id="main" class="hero container">
-    <h1>{h1Main}<br /><span class="accent">{h1Accent}</span></h1>
+    <h1>{h1Main} <br /><span class="accent">{h1Accent}</span></h1>
     <p class="lead">{lead}</p>
 
     <form class="create-form" onsubmit={(e) => { e.preventDefault(); createRoom(); }}>
@@ -233,6 +248,16 @@
         </p>
       </div>
 
+      <details class="team-field" bind:open={teamOpen}>
+        <summary>{TT.team.summary}</summary>
+        <div class="team-inputs">
+          <label for="team-name">{TT.team.name}</label>
+          <input id="team-name" type="text" maxlength="30" autocomplete="off" bind:value={teamName} />
+          <label for="team-color">{TT.team.color}</label>
+          <input id="team-color" type="color" bind:value={teamColor} />
+        </div>
+      </details>
+
       {#if error}
         <p class="error" role="alert">{error}</p>
       {/if}
@@ -251,6 +276,7 @@
     legal={footerLegal}
     privacy={footerPrivacy}
     {locale}
+    guides
   />
 </div>
 
@@ -260,7 +286,6 @@
   .header { padding: 1rem 0; border-bottom: 1px solid var(--color-border); }
   .header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; }
   .logo-group { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
-  .logo { font-size: 1.5rem; color: var(--color-primary); }
   .logo-text { font-size: 1.25rem; font-weight: 700; }
 
   .hero {
@@ -296,6 +321,11 @@
   }
   .cards-field input[type="text"]:focus { outline: none; border-color: var(--color-primary); }
 
+  .team-field { width: 100%; font-size: 0.9rem; }
+  .team-field summary { cursor: pointer; font-weight: 600; color: var(--color-text-muted); }
+  .team-inputs { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.5rem 0.75rem; margin-top: 0.625rem; }
+  .team-inputs input[type="text"] { width: 100%; padding: 0.5rem min(0.75rem, 12px); font: inherit; border: 2px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg); color: var(--color-text); }
+  .team-inputs input[type="color"] { width: 3rem; height: 2.25rem; padding: 0; border: 2px solid var(--color-border); border-radius: var(--radius); background: none; }
   .cards-preview { display: flex; flex-wrap: wrap; gap: 0.3rem; min-height: 1.75rem; }
   .card-chip { overflow-wrap: anywhere; font-size: 0.78rem; font-weight: 700; padding: 0.15rem 0.5rem; background: var(--color-card-selected); color: var(--color-primary); border-radius: 99px; border: 1px solid var(--color-card-border-selected); }
   .cards-error { font-size: 0.78rem; color: var(--color-danger); }

@@ -1,15 +1,16 @@
 package main
 
 import (
+	"github.com/florianmousseau/pokeragile/internal/assistant"
 	"log"
 	"net/http"
 	"os"
 	"strings"
 	"time"
 
-	"github.com/florianmousseau/cleanpoker/internal/handler"
-	"github.com/florianmousseau/cleanpoker/internal/health"
-	"github.com/florianmousseau/cleanpoker/internal/store"
+	"github.com/florianmousseau/pokeragile/internal/handler"
+	"github.com/florianmousseau/pokeragile/internal/health"
+	"github.com/florianmousseau/pokeragile/internal/store"
 )
 
 // commit is the build being served, set by the Dockerfile from the
@@ -22,7 +23,7 @@ func siteOrigin() string {
 	if o := os.Getenv("SITE_ORIGIN"); o != "" {
 		return o
 	}
-	return "https://cleanpoker.dev"
+	return "https://pokeragile.com"
 }
 
 func main() {
@@ -47,9 +48,11 @@ func main() {
 		Since:  roomStore.Usage().Since,
 		Now:    time.Now,
 	}
-	mux := handler.New(roomStore, allowedOrigins, checker.Report)
+	mux := http.NewServeMux()
+	mux.Handle("/", handler.New(roomStore, allowedOrigins, checker.Report))
+	mux.Handle("/mcp", assistant.Handler(roomStore, commit))
 
-	log.Printf("CleanPoker backend listening on :%s", port)
+	log.Printf("PokerAgile backend listening on :%s", port)
 	if err := handler.NewServer(":"+port, mux).ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}

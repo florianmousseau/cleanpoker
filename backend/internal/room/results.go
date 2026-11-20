@@ -2,6 +2,7 @@ package room
 
 import (
 	"math"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -46,7 +47,7 @@ func computeResults(votes []string, cards []string) Results {
 	}
 
 	if len(nums) == 0 {
-		return Results{Avg: "N/A", Mode: mode, Min: "N/A", Max: "N/A", Dist: dist}
+		return Results{Avg: "N/A", Median: "N/A", Mode: mode, Min: "N/A", Max: "N/A", Dist: dist}
 	}
 
 	sum, min, max := 0.0, nums[0], nums[0]
@@ -62,11 +63,12 @@ func computeResults(votes []string, cards []string) Results {
 	avg := sum / float64(len(nums))
 
 	return Results{
-		Avg:  formatAverage(avg, nums),
-		Mode: mode,
-		Min:  exactNumber(min),
-		Max:  exactNumber(max),
-		Dist: dist,
+		Avg:    formatAverage(avg, nums),
+		Median: median(nums),
+		Mode:   mode,
+		Min:    exactNumber(min),
+		Max:    exactNumber(max),
+		Dist:   dist,
 	}
 }
 
@@ -99,4 +101,17 @@ func formatAverage(avg float64, nums []float64) string {
 		s = strings.TrimRight(strings.TrimRight(s, "0"), ".")
 	}
 	return s
+}
+
+// median is the middle vote, or the average of the two middle ones,
+// rounded as the average is.
+func median(nums []float64) string {
+	sorted := slices.Clone(nums)
+	slices.Sort(sorted)
+	mid := len(sorted) / 2
+	if len(sorted)%2 == 1 {
+		return exactNumber(sorted[mid])
+	}
+	pair := []float64{sorted[mid-1], sorted[mid]}
+	return formatAverage((pair[0]+pair[1])/2, pair)
 }

@@ -1,24 +1,24 @@
 <svelte:head>
-  <title>Eco-design & tecnologia responsável | CleanPoker</title>
-  <meta name="description" content="Declaração de eco-design do CleanPoker. Bundle JS abaixo de 50 KB brotli, sem rastreio comportamental, zero cookies publicitários, alojamento 100% energia renovável, Lighthouse Performance 100, CO2 abaixo de 0,1 g por visita." />
-  <link rel="canonical" href="https://cleanpoker.dev/pt/green" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/green" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/green" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/green" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/green" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/green" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/green" />
+  <title>Eco-design & tecnologia responsável | PokerAgile</title>
+  <meta name="description" content="Declaração de eco-design do PokerAgile. Bundle JS abaixo de 50 KB brotli, sem rastreio comportamental, zero cookies publicitários, alojamento 100% energia renovável, Lighthouse Performance 100, CO2 abaixo de 0,1 g por visita." />
+  <link rel="canonical" href="https://pokeragile.com/pt/green" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/green" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/green" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/green" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/green" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/green" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/green" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Eco-design: CleanPoker',
-    url: 'https://cleanpoker.dev/pt/green',
-    description: 'Declaração de eco-design do CleanPoker. Bundle JS abaixo de 50 KB brotli, sem rastreio comportamental, zero cookies publicitários, alojamento 100% energia renovável, Lighthouse Performance 100, CO2 abaixo de 0,1 g por visita.',
+    name: 'Eco-design: PokerAgile',
+    url: 'https://pokeragile.com/pt/green',
+    description: 'Declaração de eco-design do PokerAgile. Bundle JS abaixo de 50 KB brotli, sem rastreio comportamental, zero cookies publicitários, alojamento 100% energia renovável, Lighthouse Performance 100, CO2 abaixo de 0,1 g por visita.',
     keywords: 'eco-design, green IT, tecnologia responsável, planning poker ecológico, zero rastreadores, alojamento verde, energia renovável, Lighthouse 100, bundle leve, baixo CO2',
     isPartOf: {
       '@type': 'WebApplication',
-      name: 'CleanPoker',
-      url: 'https://cleanpoker.dev',
+      name: 'PokerAgile',
+      url: 'https://pokeragile.com',
       sustainabilityNote: 'Alojado em energia renovável (Cloudflare Pages + OVHcloud Gravelines). Bundle JS abaixo de 50 KB brotli. Nenhum script de terceiros. CO2 abaixo de 0,1 g por visita.',
     },
   })}<\/script>`}
@@ -28,10 +28,10 @@
   <main id="main">
     <a href="/pt" class="back-link">Voltar ao início</a>
 
-    <h1>Eco-design: CleanPoker, tecnologia digital responsável</h1>
+    <h1>Eco-design: PokerAgile, tecnologia digital responsável</h1>
 
     <p>
-      <strong>CleanPoker</strong> é concebido segundo os princípios da <strong>tecnologia digital responsável</strong>:
+      <strong>PokerAgile</strong> é concebido segundo os princípios da <strong>tecnologia digital responsável</strong>:
       cada decisão técnica visa reduzir a pegada de carbono, eliminar dependências desnecessárias
       e respeitar a privacidade dos utilizadores. Não é um rótulo adicionado a posteriori,
       é o ADN do projeto.
@@ -84,7 +84,7 @@
       </li>
     </ul>
 
-    <h2>O que o CleanPoker NÃO faz</h2>
+    <h2>O que o PokerAgile NÃO faz</h2>
     <ul>
       <li>Sem Google Analytics nem qualquer ferramenta de rastreamento comportamental</li>
       <li>Sem publicidade, sem monetização, sem freemium</li>
@@ -99,12 +99,12 @@
     <ul>
       <li>
         <a href="https://www.websitecarbon.com/website/cleanpoker-dev/" rel="noopener noreferrer">
-          Website Carbon: pegada de CO₂ de cleanpoker.dev
+          Website Carbon: pegada de CO₂ de pokeragile.com
         </a>
       </li>
       <li>
-        <a href="https://www.thegreenwebfoundation.org/green-web-check/?url=cleanpoker.dev" rel="noopener noreferrer">
-          The Green Web Foundation: verificar o alojamento verde de cleanpoker.dev
+        <a href="https://www.thegreenwebfoundation.org/green-web-check/?url=pokeragile.com" rel="noopener noreferrer">
+          The Green Web Foundation: verificar o alojamento verde de pokeragile.com
         </a>
       </li>
       <li>
@@ -113,7 +113,7 @@
         </a>
       </li>
       <li>
-        <a href="https://github.com/florianmousseau/cleanpoker/actions" rel="noopener noreferrer">
+        <a href="https://github.com/florianmousseau/pokeragile/actions" rel="noopener noreferrer">
           GitHub Actions: resultados do Lighthouse CI e Eco-CI
         </a>
       </li>
@@ -132,8 +132,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Código fonte</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licença MIT</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Código fonte</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">Licença MIT</a>
       | <a href="/pt/a-propos">Sobre</a>
       | <a href="/pt/mentions-legales">Aviso legal</a>
       | <a href="/pt/mentions-legales#confidentialite">Privacidade</a>

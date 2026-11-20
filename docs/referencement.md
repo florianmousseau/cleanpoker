@@ -86,18 +86,17 @@ comme alternative à Planning Poker Online, PlanITpoker et Kollabe. Champ
 description, 300 caractères environ :
 
 > Free and open source planning poker for agile teams. Create a session, share
-> the URL, estimate together. No account, no ads, no advertising cookie, no paid
-> tier. Sessions live in memory and are deleted after 24 hours. WCAG 2.1 AA
+> the URL, estimate together. Voting timer, median and a host who can lock the
+> room, all free. No account, no ads, no advertising cookie, no paid tier. Sessions live in memory and are deleted after 24 hours. WCAG 2.1 AA
 > accessible, under 50 KB of JavaScript, MIT licence.
 
 **European Alternatives** (`european-alternatives.eu`) - formulaire de
 proposition. L'argument décisif y est l'hébergement, à mettre en avant :
 
-> CleanPoker is a free planning poker tool for agile teams, hosted in Paris,
-> France. No account, no advertising cookie, no ad network and no third-party
+> CleanPoker is a free planning poker tool for agile teams, hosted in
+> Gravelines, France. No account, no advertising cookie, no ad network and no third-party
 > script at all. Session content never leaves the European Union: it is held in
-> memory on the Paris server and deleted 24 hours after the last activity.
-> memory on the Paris server and deleted 24 hours after the last activity.
+> memory on the French server and deleted 24 hours after the last activity.
 > Interface in French, English, Spanish, German and Portuguese. Open source,
 > MIT licence.
 

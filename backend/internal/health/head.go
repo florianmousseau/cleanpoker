@@ -12,7 +12,7 @@ import (
 
 // MainFeed is the public Atom feed of main. The repository is public, so the
 // head is read without a token and outside the API's hourly quota.
-const MainFeed = "https://github.com/florianmousseau/cleanpoker/commits/main.atom"
+const MainFeed = "https://github.com/florianmousseau/pokeragile/commits/main.atom"
 
 const commitIDPrefix = "tag:github.com,2008:Grit::Commit/"
 
