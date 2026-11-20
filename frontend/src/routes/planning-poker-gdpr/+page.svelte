@@ -35,7 +35,7 @@
       {
         '@type': 'Question',
         name: 'Where are CleanPoker sessions hosted?',
-        acceptedAnswer: { '@type': 'Answer', text: 'The real-time server runs in Paris, France, and nowhere else. Sessions live in memory only, are never written to disk, and are deleted 24 hours after the last activity. There is no account, no email collected, no advertising cookie and no third-party script: the only two cookies remember the chosen language and theme, and stay on the device.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'The real-time server runs in Gravelines, France, and nowhere else. Sessions live in memory only, are never written to disk, and are deleted 24 hours after the last activity. There is no account, no email collected, no advertising cookie and no third-party script: the only two cookies remember the chosen language and theme, and stay on the device.' },
       },
     ],
   })}<\/script>`}
@@ -132,7 +132,7 @@
           <tr><td>Cookies</td><td>Two, both technical: language and theme. No advertising cookie, no measurement cookie.</td></tr>
           <tr><td>Third-party scripts</td><td>None. No analytics script, no remote fonts, no external CDN.</td></tr>
           <tr><td>Session retention</td><td>In memory only, never written to disk. Deleted 24 hours after the last activity.</td></tr>
-          <tr><td>Hosting</td><td>Real-time server in France (Paris) and nowhere else, pages served by a renewable-powered delivery network.</td></tr>
+          <tr><td>Hosting</td><td>Real-time server in France (Gravelines) and nowhere else, pages served by a renewable-powered delivery network.</td></tr>
           <tr><td>Audience measurement</td><td>No script, no cookie, no identifier on your device. Like any site, the host counts the requests it serves. The game server keeps three aggregate counters (sessions created, participants, active sessions) that identify neither a room nor a person, and reset to zero on every restart.</td></tr>
           <tr><td>Verifiable</td><td>The source is public under the MIT License. The three checks above apply to this page too.</td></tr>
         </tbody>
