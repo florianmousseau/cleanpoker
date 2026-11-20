@@ -15,6 +15,7 @@
   import { cadran, peutMener, secondesRestantes } from '#lib/minuteur.ts';
   import { agreement, extreme } from '#lib/consensus.ts';
   import StoriesPanel from '#lib/StoriesPanel.svelte';
+  import LocalAi from '#lib/LocalAi.svelte';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
@@ -221,7 +222,10 @@
       {/if}
 
       {#if onTable}
-        <p class="on-table" data-testid="story-on-table">{T.stories.onTable} <strong>{onTable.title}</strong></p>
+        <div>
+          <p class="on-table" data-testid="story-on-table">{T.stories.onTable} <strong>{onTable.title}</strong></p>
+          <LocalAi story={onTable.title} lang={lang.current} {T} />
+        </div>
       {/if}
 
       <!-- Cartes -->
@@ -401,6 +405,7 @@
                       {#if player.id === room.roomState.host}<span class="me-tag">({T.host.badge})</span>{/if}
                       {#if player.ai}<span class="me-tag">({T.host.ai})</span>{/if}
                       {#if player.vote !== ''}<span class="sr-only">{T.participants.votedSr}</span>{/if}
+                      {#if room.roomState.state === 'revealed' && player.reason}<p class="reason">{player.reason}</p>{/if}
                     </td>
                     <td class="vote-cell">
                       {#if room.roomState.state === 'revealed'}
@@ -644,6 +649,7 @@
   .timer-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin-top: 0.5rem; }
   .timer-label { font-size: 0.8rem; color: var(--color-text-muted); margin-right: 0.25rem; }
   .lock-btn { margin-top: 0.625rem; }
+  .reason { margin-top: 0.25rem; font-size: 0.8rem; font-weight: 400; color: var(--color-text-muted); overflow-wrap: break-word; }
   .auto-reveal { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.625rem; font-size: 0.85rem; cursor: pointer; }
   .auto-reveal input { accent-color: var(--color-primary); }
   .on-table { font-size: 1rem; padding: 0.625rem min(1rem, 16px); background: var(--color-card-selected); border: 1px solid var(--color-card-border-selected); border-radius: var(--radius-lg); overflow-wrap: break-word; }

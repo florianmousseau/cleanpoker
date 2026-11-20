@@ -164,3 +164,26 @@ func TestHandler_AnswersAPublicHostOnLoopback(t *testing.T) {
 		t.Fatalf("expected 4 tools, got %+v", out.Result.Tools)
 	}
 }
+
+func TestVote_CarriesAReasonAndTheStoryOnTheTableIsReadable(t *testing.T) {
+	s := store.New()
+	rm, _ := s.GetOrCreate("team42", nil)
+	rm.Join("p1", "Alice", false)
+	rm.AddStories("p1", "CSV export\nLogin")
+	cs := connect(t, s)
+
+	var joined joinOut
+	call(t, cs, "join_room", map[string]any{"room": "team42", "name": "Claude"}, &joined)
+	if joined.State.Current != 0 || joined.State.Stories[0].Title != "CSV export" {
+		t.Fatalf("the assistant cannot read the story on the table: %+v", joined.State.Stories)
+	}
+	call(t, cs, "vote", map[string]any{"room": "team42", "seat": joined.Seat, "card": "8", "reason": "No test plan."}, nil)
+	rm.Show("p1")
+	var read stateOut
+	call(t, cs, "get_room", map[string]any{"room": "team42"}, &read)
+	for _, p := range read.State.Players {
+		if p.AI && p.Reason != "No test plan." {
+			t.Fatalf("expected the reason after the reveal, got %q", p.Reason)
+		}
+	}
+}

@@ -6,7 +6,7 @@ import { transitionOf } from '#lib/room-transition.ts';
 import { chunkLines } from '#lib/export.ts';
 import { forgetSeat, loadSeat, saveSeat, tabStorage } from '#lib/seat.ts';
 
-export type Player = { id: string; name: string; vote: string; observer: boolean; ai?: boolean };
+export type Player = { id: string; name: string; vote: string; observer: boolean; ai?: boolean; reason?: string };
 export type Story = { title: string; estimate: string };
 export type Results = { avg: string; median: string; min: string; max: string; dist: Record<string, number> };
 export type ActivityEntry = { timestamp: string; initiator: string; message: string; target?: string };

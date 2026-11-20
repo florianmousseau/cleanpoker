@@ -14,6 +14,7 @@ export interface Translation {
   controls: { title: string; newRound: string; reveal: string; pending: (n: number) => string; autoReveal: string };
   results: { title: string; agreement: (n: number) => string; avg: string; median: string; min: string; max: string; none: string };
   stories: { title: string; onTable: string; none: string; addLabel: string; addPlaceholder: string; addBtn: string; clear: string; clearConfirm: string; colStory: string; colEstimate: string; vote: (t: string) => string; keep: (v: string) => string; keepTitle: string; next: string; copyMd: string; downloadCsv: string; copied: string };
+  ia: { button: string; again: string; running: string; downloading: (n: number) => string; failed: string; private: string };
   host: { badge: string; ai: string; lock: string; unlock: string; lockedHint: string; timer: string; timerStop: string; timerLeft: (s: string) => string; timerOver: string; seconds: (n: number) => string };
   participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string; kickConfirm: (n: string) => string };
   observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
@@ -109,6 +110,14 @@ export const FR: Translation = {
     copyMd: 'Copier en Markdown',
     downloadCsv: 'Télécharger en CSV',
     copied: 'Copié',
+  },
+  ia: {
+    button: "Analyser la story avec l'IA du navigateur",
+    again: "Relancer l'analyse",
+    running: 'Analyse en cours',
+    downloading: (n: number) => `Le navigateur télécharge son modèle, ${n}\u00A0%`,
+    failed: "L'analyse n'a pas abouti.",
+    private: "Visible par vous seul. L'analyse tourne dans le navigateur, sur cet ordinateur.",
   },
   host: {
     badge: 'hôte',
@@ -276,6 +285,14 @@ export const EN: Translation = {
     downloadCsv: 'Download as CSV',
     copied: 'Copied',
   },
+  ia: {
+    button: "Analyze the story with the browser's AI",
+    again: 'Run the analysis again',
+    running: 'Analyzing',
+    downloading: (n: number) => `The browser is downloading its model, ${n}%`,
+    failed: 'The analysis did not complete.',
+    private: 'Only you see this. The analysis runs in the browser, on this computer.',
+  },
   host: {
     badge: 'host',
     ai: 'AI',
@@ -441,6 +458,14 @@ export const ES: Translation = {
     copyMd: 'Copiar en Markdown',
     downloadCsv: 'Descargar en CSV',
     copied: 'Copiado',
+  },
+  ia: {
+    button: 'Analizar la historia con la IA del navegador',
+    again: 'Repetir el análisis',
+    running: 'Analizando',
+    downloading: (n: number) => `El navegador descarga su modelo, ${n} %`,
+    failed: 'El análisis no se completó.',
+    private: 'Solo usted lo ve. El análisis se hace en el navegador, en este ordenador.',
   },
   host: {
     badge: 'anfitrión',
@@ -608,6 +633,14 @@ export const DE: Translation = {
     downloadCsv: 'Als CSV herunterladen',
     copied: 'Kopiert',
   },
+  ia: {
+    button: 'Story mit der KI des Browsers analysieren',
+    again: 'Analyse wiederholen',
+    running: 'Analyse läuft',
+    downloading: (n: number) => `Der Browser lädt sein Modell, ${n} %`,
+    failed: 'Die Analyse wurde nicht abgeschlossen.',
+    private: 'Nur Sie sehen das. Die Analyse läuft im Browser, auf diesem Computer.',
+  },
   host: {
     badge: 'Host',
     ai: 'KI',
@@ -773,6 +806,14 @@ export const PT: Translation = {
     copyMd: 'Copiar em Markdown',
     downloadCsv: 'Baixar em CSV',
     copied: 'Copiado',
+  },
+  ia: {
+    button: 'Analisar a história com a IA do navegador',
+    again: 'Refazer a análise',
+    running: 'Analisando',
+    downloading: (n: number) => `O navegador está baixando o modelo, ${n} %`,
+    failed: 'A análise não terminou.',
+    private: 'Só você vê isto. A análise roda no navegador, neste computador.',
   },
   host: {
     badge: 'anfitrião',

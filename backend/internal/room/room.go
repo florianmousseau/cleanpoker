@@ -3,6 +3,7 @@ package room
 import (
 	"crypto/subtle"
 	"slices"
+	"strings"
 	"sync"
 	"time"
 )
@@ -35,6 +36,9 @@ type Player struct {
 	// AI marks a seat held by an assistant through the API rather than by a
 	// person in a browser. It votes like anyone, and never holds the host role.
 	AI bool `json:"ai,omitempty"`
+	// Reason is the short explanation an assistant gives with its vote,
+	// hidden with the vote until the reveal.
+	Reason string `json:"reason,omitempty"`
 	// token is what a returning client presents to take this seat back. It
 	// is unexported so no snapshot ever carries it to the other players.
 	token string
@@ -200,6 +204,9 @@ func (r *Room) buildSnapshot(masked bool) Snapshot {
 		cp.token = ""
 		if masked && r.state == StateVoting && !cp.Observer && cp.Vote != "" {
 			cp.Vote = hiddenVote
+		}
+		if masked && r.state == StateVoting {
+			cp.Reason = ""
 		}
 		players = append(players, &cp)
 	}
@@ -476,6 +483,15 @@ func (r *Room) current(round int) bool {
 // from a seat turned observer) stayed on the voter's screen as if counted.
 // round is the round the voter saw; a vote meant for an earlier one is refused.
 func (r *Room) CastVote(playerID, vote string, round int) {
+	r.CastVoteWithReason(playerID, vote, "", round)
+}
+
+// MaxReasonLength bounds the explanation a vote carries.
+const MaxReasonLength = 280
+
+// CastVoteWithReason is CastVote with a short explanation, shown to the room
+// with the vote at the reveal.
+func (r *Room) CastVoteWithReason(playerID, vote, reason string, round int) {
 	r.mutate(func() {
 		p, ok := r.players[playerID]
 		if !ok {
@@ -495,6 +511,10 @@ func (r *Room) CastVote(playerID, vote string, round int) {
 			return
 		}
 		p.Vote = vote
+		p.Reason = ""
+		if vote != "" {
+			p.Reason = cut(strings.TrimSpace(reason), MaxReasonLength)
+		}
 		if vote == "" {
 			r.logActivity(p.Name, "unvoted")
 		} else {
@@ -565,6 +585,7 @@ func (r *Room) Clear(initiatorID string, round int) {
 func (r *Room) newRound() {
 	for _, p := range r.players {
 		p.Vote = ""
+		p.Reason = ""
 	}
 	r.timerEnd = time.Time{}
 	r.state = StateVoting
