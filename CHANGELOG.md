@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.57] - 2026-11-20
+
+- feat(brand): PokerAgile on pokeragile.com, cleanpoker.dev redirects page for page
+
 ## [0.0.56] - 2026-11-20
 
 - refactor: split vote acceptance from recording, use replaceAll in the export
