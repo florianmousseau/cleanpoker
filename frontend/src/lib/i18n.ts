@@ -11,11 +11,11 @@ export interface Translation {
   share: { ogTitle: string; ogDesc: string; inviteMessage: (url: string) => string };
   promo: { lead: string; cta: string; close: string };
   cards: { title: string; revealedSub: string; votingHint: string; selectedSuffix: (v: string) => string; voteLabel: (c: string) => string };
-  controls: { title: string; newRound: string; reveal: string; pending: (n: number) => string; autoReveal: string };
+  controls: { title: string; newRound: string; reveal: string; voted: (n: number, total: number) => string; autoReveal: string };
   results: { title: string; agreement: (n: number) => string; avg: string; median: string; min: string; max: string; none: string };
   stories: { title: string; onTable: string; none: string; addLabel: string; addPlaceholder: string; addBtn: string; clear: string; clearConfirm: string; colStory: string; colEstimate: string; vote: (t: string) => string; keep: (v: string) => string; keepTitle: string; next: string; copyMd: string; downloadCsv: string; copied: string };
   qr: { show: string; hide: string; alt: string; failed: string };
-  ia: { button: string; again: string; running: string; downloading: (n: number) => string; failed: string; private: string };
+  ia: { button: string; again: string; running: string; downloading: (n: number) => string; failed: string; private: string; invite: string; inviteHelp: string; prompt: (room: string, mcp: string) => string };
   options: string;
   team: { summary: string; name: string; color: string };
   host: { badge: string; ai: string; lock: string; unlock: string; lockedHint: string; timer: string; timerStop: string; timerLeft: (s: string) => string; timerOver: string; seconds: (n: number) => string };
@@ -81,7 +81,7 @@ export const FR: Translation = {
     title: 'Tour en cours',
     newRound: 'Nouveau tour',
     reveal: 'Révéler',
-    pending: (n: number) => `${n} participant(s) n'ont pas encore voté.`,
+    voted: (n: number, total: number) => `${n} sur ${total} ${n > 1 ? 'ont' : 'a'} voté`,
     autoReveal: 'Révéler dès que tout le monde a voté',
   },
 
@@ -127,6 +127,9 @@ export const FR: Translation = {
     downloading: (n: number) => `Le navigateur télécharge son modèle, ${n}\u00A0%`,
     failed: "L'analyse n'a pas abouti.",
     private: "Visible par vous seul. L'analyse tourne dans le navigateur, sur cet ordinateur.",
+    invite: 'Inviter ton IA',
+    inviteHelp: 'Copie une consigne à coller dans ton assistant IA.',
+    prompt: (room: string, mcp: string) => `Rejoins ma salle de planning poker ${room} par le serveur MCP ${mcp} (outils\u00A0: join_room, get_room, vote, leave_room). Lis la story sur la table, vote avec une carte du jeu et donne ta raison en une phrase. Ne révèle pas ta carte dans la conversation.`,
   },
   options: 'Options',
   team: {
@@ -267,7 +270,7 @@ export const EN: Translation = {
     title: 'Current round',
     newRound: 'New round',
     reveal: 'Reveal',
-    pending: (n: number) => `${n} participant(s) haven't voted yet.`,
+    voted: (n: number, total: number) => `${n} of ${total} ${n === 1 ? 'has' : 'have'} voted`,
     autoReveal: 'Reveal as soon as everyone has voted',
   },
 
@@ -313,6 +316,9 @@ export const EN: Translation = {
     downloading: (n: number) => `The browser is downloading its model, ${n}%`,
     failed: 'The analysis did not complete.',
     private: 'Only you see this. The analysis runs in the browser, on this computer.',
+    invite: 'Invite your AI',
+    inviteHelp: 'Copies a prompt to paste into your AI assistant.',
+    prompt: (room: string, mcp: string) => `Join my planning poker room ${room} through the MCP server ${mcp} (tools: join_room, get_room, vote, leave_room). Read the story on the table, vote with one card from the deck and give your reason in one sentence. Do not reveal your card in the chat.`,
   },
   options: 'Options',
   team: {
@@ -453,7 +459,7 @@ export const ES: Translation = {
     title: 'Ronda actual',
     newRound: 'Nueva ronda',
     reveal: 'Revelar',
-    pending: (n: number) => `${n} participante(s) aún no han votado.`,
+    voted: (n: number, total: number) => `${n} de ${total} ${n === 1 ? 'ha' : 'han'} votado`,
     autoReveal: 'Revelar en cuanto todos hayan votado',
   },
 
@@ -499,6 +505,9 @@ export const ES: Translation = {
     downloading: (n: number) => `El navegador descarga su modelo, ${n} %`,
     failed: 'El análisis no se completó.',
     private: 'Solo usted lo ve. El análisis se hace en el navegador, en este ordenador.',
+    invite: 'Invitar a tu IA',
+    inviteHelp: 'Copia una instrucción para pegar en tu asistente de IA.',
+    prompt: (room: string, mcp: string) => `Únete a mi sala de planning poker ${room} mediante el servidor MCP ${mcp} (herramientas: join_room, get_room, vote, leave_room). Lee la historia que está sobre la mesa, vota con una carta de la baraja y da tu motivo en una frase. No reveles tu carta en el chat.`,
   },
   options: 'Opciones',
   team: {
@@ -639,7 +648,7 @@ export const DE: Translation = {
     title: 'Aktuelle Runde',
     newRound: 'Neue Runde',
     reveal: 'Aufdecken',
-    pending: (n: number) => `${n} Teilnehmer ${n === 1 ? 'hat' : 'haben'} noch nicht abgestimmt.`,
+    voted: (n: number, total: number) => `${n} von ${total} ${n === 1 ? 'hat' : 'haben'} abgestimmt`,
     autoReveal: 'Aufdecken, sobald alle abgestimmt haben',
   },
 
@@ -685,6 +694,9 @@ export const DE: Translation = {
     downloading: (n: number) => `Der Browser lädt sein Modell, ${n} %`,
     failed: 'Die Analyse wurde nicht abgeschlossen.',
     private: 'Nur Sie sehen das. Die Analyse läuft im Browser, auf diesem Computer.',
+    invite: 'Deine KI einladen',
+    inviteHelp: 'Kopiert einen Prompt zum Einfügen in deinen KI-Assistenten.',
+    prompt: (room: string, mcp: string) => `Tritt meinem Planning-Poker-Raum ${room} über den MCP-Server ${mcp} bei (Tools: join_room, get_room, vote, leave_room). Lies die Story auf dem Tisch, stimme mit einer Karte aus dem Deck ab und begründe deine Wahl in einem Satz. Verrate deine Karte nicht im Chat.`,
   },
   options: 'Optionen',
   team: {
@@ -825,7 +837,7 @@ export const PT: Translation = {
     title: 'Rodada atual',
     newRound: 'Nova rodada',
     reveal: 'Revelar',
-    pending: (n: number) => `${n} participante(s) ainda não votaram.`,
+    voted: (n: number, total: number) => `${n} de ${total} ${n === 1 ? 'votou' : 'votaram'}`,
     autoReveal: 'Revelar assim que todos votarem',
   },
 
@@ -871,6 +883,9 @@ export const PT: Translation = {
     downloading: (n: number) => `O navegador está baixando o modelo, ${n} %`,
     failed: 'A análise não terminou.',
     private: 'Só você vê isto. A análise roda no navegador, neste computador.',
+    invite: 'Convidar sua IA',
+    inviteHelp: 'Copia um prompt para colar no seu assistente de IA.',
+    prompt: (room: string, mcp: string) => `Entre na minha sala de planning poker ${room} pelo servidor MCP ${mcp} (ferramentas: join_room, get_room, vote, leave_room). Leia a história que está na mesa, vote com uma carta do baralho e dê o seu motivo em uma frase. Não revele a sua carta no chat.`,
   },
   options: 'Opções',
   team: {

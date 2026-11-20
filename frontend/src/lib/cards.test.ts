@@ -57,8 +57,31 @@ describe('cardsQuery', () => {
 });
 
 describe('the room page on a narrow screen', () => {
-  it('keeps the role and kick commands, inside the scrolling table', () => {
-    const page = readFileSync(new URL('../routes/[id]/+page.svelte', import.meta.url), 'utf8');
-    expect(page).not.toMatch(/\.col-action\s*\{\s*display:\s*none/);
+  const page = readFileSync(new URL('../routes/[id]/+page.svelte', import.meta.url), 'utf8');
+
+  // The two columns used to stay and push "Remove" behind a sideways scroll
+  // nothing announced. They may only go where the line of actions takes over.
+  it('hides the role and kick columns only where the line under the name shows', () => {
+    const narrow = /@media \(max-width: 40rem\) \{[^@]*\.col-action \{ display: none; \}[^@]*\.actions-row \{ display: table-row; \}/;
+    expect(page).toMatch(narrow);
+    expect(page.split('.col-action { display: none; }').length).toBe(2);
+  });
+
+  it('renders both commands in the columns and in the line, for both tables', () => {
+    expect(page.split('{@render kickAction(player)}').length - 1).toBe(4);
+    expect(page.split('{@render roleAction(player, ').length - 1).toBe(4);
+  });
+
+  it('shows the promo after the votes, not between the results and them', () => {
+    expect(page.indexOf('data-testid="promo"')).toBeGreaterThan(page.indexOf('id="observers-title"'));
+  });
+
+  it('sends a removed person to the home of their language', () => {
+    expect(page).toContain('<a href={homeHref} class="btn btn-primary" data-testid="kicked-home">');
+  });
+
+  it('prefills the name from the last join and keeps it on join, without joining', () => {
+    expect(page).toContain('nameInput = loadName(deviceStorage());');
+    expect(page).toContain('saveName(deviceStorage(), name);');
   });
 });
