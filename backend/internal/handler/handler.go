@@ -140,7 +140,7 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		// missing one, which is exactly the assistant this route admits.
 		websocket.Server{Handshake: originAlreadyChecked, Handler: func(conn *websocket.Conn) {
 			conn.MaxPayloadBytes = maxFrameBytes
-			rm, err := open(roomID, nil)
+			rm, err := open(roomID, linkDeck(r.URL.Query().Get("cards")))
 			if err != nil {
 				_ = conn.Close() // full since the check above: nothing to hold
 				return
@@ -150,6 +150,23 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 	})
 
 	return cors(allowed, mux)
+}
+
+// linkDeck reads the deck a room address carries (?cards=1,2,3,5), used only
+// when the room has to be opened again: a team's saved link keeps its deck
+// past the 24 hours a room lives. An unusable deck gives the default one.
+func linkDeck(raw string) []string {
+	if raw == "" {
+		return nil
+	}
+	cards := strings.Split(raw, ",")
+	for i := range cards {
+		cards[i] = strings.TrimSpace(cards[i])
+	}
+	if len(cards) < 2 || !deckFits(cards) {
+		return nil
+	}
+	return cards
 }
 
 // originAlreadyChecked reads the Origin into config without refusing a
