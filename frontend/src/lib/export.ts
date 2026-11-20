@@ -3,7 +3,7 @@ import type { Story } from '#lib/useRoom.svelte.ts';
 // A cell a spreadsheet would run as a formula is written as text instead.
 function cellCsv(value: string): string {
   const safe = /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
-  return /[",\n\r;]/.test(safe) ? `"${safe.replace(/"/g, '""')}"` : safe;
+  return /[",\n\r;]/.test(safe) ? `"${safe.replaceAll('"', '""')}"` : safe;
 }
 
 /** The stories as CSV, one row per story, with a header row. */
@@ -13,7 +13,7 @@ export function storiesCsv(stories: Story[], header: [string, string]): string {
 }
 
 function cellMd(value: string): string {
-  return value.replace(/\|/g, '\\|');
+  return value.replaceAll('|', String.raw`\|`);
 }
 
 /** The stories as a Markdown table, ready to paste into GitHub, Linear or Jira. */
