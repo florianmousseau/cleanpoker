@@ -15,6 +15,11 @@ import {
 import { facteursPremiers } from './fibonacci-facteurs';
 
 
+function tailleDe(longueur: number): 'longue' | 'moyenne' | 'courte' {
+	if (longueur > 15) return 'longue';
+	return longueur > 9 ? 'moyenne' : 'courte';
+}
+
 export type Langue = 'fr' | 'en';
 
 const FORMATS = {
@@ -49,7 +54,7 @@ export function donneesDuRang(n: number, langue: Langue) {
 	return {
 		...terme(n, langue),
 		chiffres: longueur,
-		taille: longueur > 15 ? 'longue' : longueur > 9 ? 'moyenne' : 'courte',
+		taille: tailleDe(longueur),
 		pair: valeur % 2n === 0n,
 		premier: estPremier(valeur),
 		facteurs: puissances(facteursPremiers(n), langue),

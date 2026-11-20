@@ -31,7 +31,10 @@ export function rangInconnu(pathname: string): boolean {
 }
 
 function grouper(valeur: bigint, separateur: string): string {
-	return valeur.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separateur);
+	const chiffres = valeur.toString();
+	const groupes: string[] = [];
+	for (let fin = chiffres.length; fin > 0; fin -= 3) groupes.unshift(chiffres.slice(Math.max(0, fin - 3), fin));
+	return groupes.join(separateur);
 }
 
 /** Format with non-breaking spaces between thousands. */
