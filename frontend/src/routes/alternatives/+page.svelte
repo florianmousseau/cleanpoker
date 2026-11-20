@@ -1,20 +1,20 @@
 <svelte:head>
-  <title>Alternatives to planning poker: T-shirt sizing, dot voting and more | CleanPoker</title>
+  <title>Alternatives to planning poker: T-shirt sizing, dot voting and more | PokerAgile</title>
   <meta name="description" content="Explore the best alternatives to planning poker: T-shirt sizing, affinity mapping, dot voting, and bucket system. Discover which technique fits your team and context." />
-  <link rel="canonical" href="https://cleanpoker.dev/alternatives" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/alternatives" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/alternatives" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/alternatives" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/alternatives" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/alternatives" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/alternatives" />
+  <link rel="canonical" href="https://pokeragile.com/alternatives" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/alternatives" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/alternatives" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/alternatives" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/alternatives" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/alternatives" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/alternatives" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Alternatives to planning poker: T-shirt sizing, dot voting and more',
-    url: 'https://cleanpoker.dev/alternatives',
+    url: 'https://pokeragile.com/alternatives',
     description: 'Comparison of the main alternatives to planning poker for agile estimation: T-shirt sizing, affinity mapping, dot voting, and bucket system.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -169,7 +169,7 @@
       disagreement), and Fibonacci scales (prevents false precision).
     </p>
     <p>
-      Use CleanPoker when you need a fast, privacy-respecting planning poker session with
+      Use PokerAgile when you need a fast, privacy-respecting planning poker session with
       no setup, no account, and no behavioural tracking.
     </p>
 
@@ -221,7 +221,7 @@
     </details>
 
     <div class="cta">
-      <a href="/" class="btn">Try planning poker with CleanPoker</a>
+      <a href="/" class="btn">Try planning poker with PokerAgile</a>
     </div>
   </main>
 

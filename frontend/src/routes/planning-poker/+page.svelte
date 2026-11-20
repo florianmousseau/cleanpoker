@@ -1,20 +1,20 @@
 <svelte:head>
-  <title>Planning poker: rules, Fibonacci and practical guide | CleanPoker</title>
+  <title>Planning poker: rules, Fibonacci and practical guide | PokerAgile</title>
   <meta name="description" content="What is planning poker? The rules in 5 steps, the Fibonacci sequence, how long a session takes, remote and asynchronous estimation, and the mistakes that skew estimates. Free complete guide." />
-  <link rel="canonical" href="https://cleanpoker.dev/planning-poker" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker" />
+  <link rel="canonical" href="https://pokeragile.com/planning-poker" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/planning-poker" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/planning-poker" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/planning-poker" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Planning poker: rules, Fibonacci and practical guide',
-    url: 'https://cleanpoker.dev/planning-poker',
-    description: 'Complete guide to planning poker: definition, rules, why Fibonacci, session length, remote and asynchronous estimation, how to use CleanPoker.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    url: 'https://pokeragile.com/planning-poker',
+    description: 'Complete guide to planning poker: definition, rules, why Fibonacci, session length, remote and asynchronous estimation, how to use PokerAgile.',
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -218,7 +218,7 @@
     <details>
       <summary>Does planning poker work for remote teams?</summary>
       <p>
-        Yes, that is precisely why CleanPoker exists. Create a session, share the URL, each
+        Yes, that is precisely why PokerAgile exists. Create a session, share the URL, each
         participant votes on their own device. Results are revealed in real time via WebSocket,
         with no setup or account required.
       </p>
@@ -227,7 +227,7 @@
     <details>
       <summary>What is the maximum number of participants?</summary>
       <p>
-        CleanPoker has no technical limit. In practice, beyond 10 participants, discussions become
+        PokerAgile has no technical limit. In practice, beyond 10 participants, discussions become
         difficult to manage. For large teams, prefer parallel sessions or sub-group estimation.
       </p>
     </details>

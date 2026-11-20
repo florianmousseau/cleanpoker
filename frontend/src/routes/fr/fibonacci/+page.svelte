@@ -1,20 +1,20 @@
 <svelte:head>
-  <title>Fibonacci en poker planning&nbsp;: pourquoi et comment l'utiliser | CleanPoker</title>
+  <title>Fibonacci en poker planning&nbsp;: pourquoi et comment l'utiliser | PokerAgile</title>
   <meta name="description" content="Pourquoi les équipes agiles utilisent-elles la suite de Fibonacci en planning poker&nbsp;? Psychologie, choix des cartes et comparaison avec d'autres échelles." />
-  <link rel="canonical" href="https://cleanpoker.dev/fr/fibonacci" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/fibonacci" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/fibonacci" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/fibonacci" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/fibonacci" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/fibonacci" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/fibonacci" />
+  <link rel="canonical" href="https://pokeragile.com/fr/fibonacci" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/fibonacci" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/fibonacci" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/fibonacci" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/fibonacci" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/fibonacci" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/fibonacci" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Fibonacci en planning poker : pourquoi et comment l'utiliser",
-    "url": "https://cleanpoker.dev/fr/fibonacci",
+    "url": "https://pokeragile.com/fr/fibonacci",
     "description": "Guide complet sur la suite de Fibonacci en estimation agile : psychologie, choix des cartes et comparaison avec autres échelles.",
-    "isPartOf": { "@type": "WebApplication", "name": "CleanPoker", "url": "https://cleanpoker.dev" },
+    "isPartOf": { "@type": "WebApplication", "name": "PokerAgile", "url": "https://pokeragile.com" },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org",
@@ -169,7 +169,7 @@
     </details>
 
     <div class="cta">
-      <a href="/fr" class="btn">Essayer avec CleanPoker</a>
+      <a href="/fr" class="btn">Essayer avec PokerAgile</a>
     </div>
   </main>
 

@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-  <title>Erreur {page.status} | CleanPoker</title>
+  <title>Erreur {page.status} | PokerAgile</title>
 </svelte:head>
 
 <div class="container error-page">

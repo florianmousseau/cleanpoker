@@ -8,7 +8,7 @@
  */
 
 export const EMETTEUR = 'https://token.actions.githubusercontent.com';
-export const AUDIENCE = 'https://cleanpoker.dev';
+export const AUDIENCE = 'https://pokeragile.com';
 const DEPOT = 'florianmousseau/cleanpoker';
 const BRANCHE = 'refs/heads/main';
 

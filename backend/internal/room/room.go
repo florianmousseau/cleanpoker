@@ -507,7 +507,7 @@ func (r *Room) CastVoteWithReason(playerID, vote, reason string, round int) {
 		}
 		r.record(p, vote, reason)
 		if r.autoReveal && r.everyoneVoted() {
-			r.reveal("CleanPoker")
+			r.reveal("PokerAgile")
 		}
 	})
 }
