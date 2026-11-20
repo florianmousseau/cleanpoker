@@ -35,6 +35,8 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		writeJSON(w, probe(r.Context()))
 	})
 
+	mux.HandleFunc("GET /qr", qrHandler(allowed))
+
 	mux.HandleFunc("GET /stats", func(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, s.Usage())
 	})

@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import { lang } from '#lib/lang.svelte.ts';
   import Footer from '#lib/Footer.svelte';
+  import QrCode from '#lib/QrCode.svelte';
   import Logo from '#lib/Logo.svelte';
   import { FR, EN, ES, DE, PT, translateActivity } from '#lib/i18n.ts';
   import { useRoom } from '#lib/useRoom.svelte.ts';
@@ -163,6 +164,7 @@
           <span class="badge-pill">{T.tourLabel} {room.roomState.round}</span>
         {/if}
         <button class="btn btn-secondary btn-sm" onclick={copyLink}>{copyFeedback || T.copyLink}</button>
+        <QrCode {roomId} {T} />
         {#if copyError}
           <span class="copy-error" role="alert">{copyError}</span>
         {/if}
