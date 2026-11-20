@@ -502,28 +502,38 @@ func (r *Room) CastVoteWithReason(playerID, vote, reason string, round int) {
 			// can never reach the voter ahead of this answer.
 			r.publishTo(playerID, Message{Type: "vote", Payload: p.Vote})
 		}()
-		if r.state != StateVoting || p.Observer || !r.current(round) {
+		if !r.accepts(p, vote, round) {
 			return
 		}
-		// A vote is a card of this room's deck or nothing: any other string
-		// from a scripted client would land in everyone's results.
-		if vote != "" && !slices.Contains(r.cards, vote) {
-			return
-		}
-		p.Vote = vote
-		p.Reason = ""
-		if vote != "" {
-			p.Reason = cut(strings.TrimSpace(reason), MaxReasonLength)
-		}
-		if vote == "" {
-			r.logActivity(p.Name, "unvoted")
-		} else {
-			r.logActivity(p.Name, "voted")
-		}
+		r.record(p, vote, reason)
 		if r.autoReveal && r.everyoneVoted() {
 			r.reveal("PokerAgile")
 		}
 	})
+}
+
+// accepts reports whether p may cast vote now: a round still voting, the
+// round the voter saw, a participant, and a card of this room's deck or
+// nothing, since any other string from a scripted client would land in
+// everyone's results. Callers hold r.mu.
+func (r *Room) accepts(p *Player, vote string, round int) bool {
+	if r.state != StateVoting || p.Observer || !r.current(round) {
+		return false
+	}
+	return vote == "" || slices.Contains(r.cards, vote)
+}
+
+// record sets the vote and its reason, an empty vote clearing both. Callers
+// hold r.mu.
+func (r *Room) record(p *Player, vote, reason string) {
+	p.Vote = vote
+	p.Reason = ""
+	if vote == "" {
+		r.logActivity(p.Name, "unvoted")
+		return
+	}
+	p.Reason = cut(strings.TrimSpace(reason), MaxReasonLength)
+	r.logActivity(p.Name, "voted")
 }
 
 func (r *Room) Show(initiatorID string) {
