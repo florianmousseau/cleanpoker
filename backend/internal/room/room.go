@@ -35,6 +35,8 @@ type Player struct {
 	// token is what a returning client presents to take this seat back. It
 	// is unexported so no snapshot ever carries it to the other players.
 	token string
+	// seq orders arrivals: the host role passes to the earliest seat left.
+	seq int
 }
 
 // departure is one pending removal. The room compares pointers, so a timer
@@ -51,11 +53,12 @@ type ActivityEntry struct {
 }
 
 type Results struct {
-	Avg  string         `json:"avg"`
-	Mode string         `json:"mode"`
-	Min  string         `json:"min"`
-	Max  string         `json:"max"`
-	Dist map[string]int `json:"dist"`
+	Avg    string         `json:"avg"`
+	Median string         `json:"median"`
+	Mode   string         `json:"mode"`
+	Min    string         `json:"min"`
+	Max    string         `json:"max"`
+	Dist   map[string]int `json:"dist"`
 }
 
 type Message struct {
@@ -71,7 +74,16 @@ type Snapshot struct {
 	Results  *Results        `json:"results"`
 	Players  []*Player       `json:"players"`
 	Activity []ActivityEntry `json:"activity"`
+	// Host is the seat that can lock the room; Locked keeps the round
+	// commands to it. TimerEnd is the vote deadline in Unix milliseconds, 0
+	// when no timer runs.
+	Host     string `json:"host"`
+	Locked   bool   `json:"locked"`
+	TimerEnd int64  `json:"timerEnd"`
 }
+
+// TimerDurations are the only countdowns a room accepts, in seconds.
+var TimerDurations = []int{30, 60, 120, 300}
 
 type Room struct {
 	mu           sync.RWMutex
@@ -84,6 +96,10 @@ type Room struct {
 	activity     []ActivityEntry
 	lastActivity time.Time
 	everJoined   bool
+	host         string
+	locked       bool
+	timerEnd     time.Time
+	nextSeq      int
 	// closed is set under mu when the room shuts: no command changes it after.
 	closed bool
 	grace  time.Duration
@@ -189,7 +205,17 @@ func (r *Room) buildSnapshot(masked bool) Snapshot {
 		Results:  results,
 		Players:  players,
 		Activity: activity,
+		Host:     r.host,
+		Locked:   r.locked,
+		TimerEnd: unixMilliOrZero(r.timerEnd),
 	}
+}
+
+func unixMilliOrZero(t time.Time) int64 {
+	if t.IsZero() {
+		return 0
+	}
+	return t.UnixMilli()
 }
 
 func (r *Room) snapshot() Snapshot { return r.buildSnapshot(true) }
@@ -262,8 +288,12 @@ func (r *Room) Join(playerID, name string, observer bool) {
 // Rejoin will ask for; an empty one makes the seat impossible to take back.
 func (r *Room) JoinWithToken(playerID, token, name string, observer bool) {
 	r.mutate(func() {
-		r.players[playerID] = &Player{ID: playerID, Name: name, Observer: observer, token: token}
+		r.nextSeq++
+		r.players[playerID] = &Player{ID: playerID, Name: name, Observer: observer, token: token, seq: r.nextSeq}
 		r.everJoined = true
+		if r.host == "" {
+			r.host = playerID
+		}
 		r.connections[playerID]++
 		if observer {
 			r.logActivity(name, "joined_observer")
@@ -358,7 +388,33 @@ func (r *Room) removePlayer(playerID string) {
 	if p, ok := r.players[playerID]; ok {
 		r.logActivity(p.Name, "left")
 		delete(r.players, playerID)
+		r.passHostOn(playerID)
 	}
+}
+
+// passHostOn hands the host role to the earliest seat left once its holder
+// is gone, and unlocks the room when nobody is left to hold it. Callers hold
+// r.mu.
+func (r *Room) passHostOn(goneID string) {
+	if r.host != goneID {
+		return
+	}
+	r.host = ""
+	first := 0
+	for id, p := range r.players {
+		if r.host == "" || p.seq < first {
+			r.host, first = id, p.seq
+		}
+	}
+	if r.host == "" {
+		r.locked = false
+	}
+}
+
+// allowed reports whether a seat may run a round command: anyone seated in an
+// open room, the host alone in a locked one. Callers hold r.mu.
+func (r *Room) allowed(initiatorID string) bool {
+	return r.seated(initiatorID) && (!r.locked || initiatorID == r.host)
 }
 
 // AnyRound is the round of a command that names none: what a client older
@@ -409,10 +465,11 @@ func (r *Room) Show(initiatorID string) {
 	r.mutate(func() {
 		// A second reveal of the same round would recompute the results on
 		// whoever is seated now, after departures and role changes.
-		if !r.seated(initiatorID) || r.state == StateRevealed {
+		if !r.allowed(initiatorID) || r.state == StateRevealed {
 			return
 		}
 		r.state = StateRevealed
+		r.timerEnd = time.Time{}
 		votes := make([]string, 0, len(r.players))
 		for _, p := range r.players {
 			if !p.Observer && p.Vote != "" {
@@ -429,12 +486,13 @@ func (r *Room) Show(initiatorID string) {
 // on "new round" for the same round start one, not two.
 func (r *Room) Clear(initiatorID string, round int) {
 	r.mutate(func() {
-		if !r.seated(initiatorID) || !r.current(round) {
+		if !r.allowed(initiatorID) || !r.current(round) {
 			return
 		}
 		for _, p := range r.players {
 			p.Vote = ""
 		}
+		r.timerEnd = time.Time{}
 		r.state = StateVoting
 		r.results = nil
 		r.round++
@@ -446,12 +504,13 @@ func (r *Room) Kick(initiatorID, targetID string) {
 	var kicked bool
 	r.mutate(func() {
 		target, ok := r.players[targetID]
-		if !ok || !r.seated(initiatorID) {
+		if !ok || !r.allowed(initiatorID) {
 			return
 		}
 		r.logActivity(r.nameOf(initiatorID), "kicked", target.Name)
 		delete(r.players, targetID)
 		r.cancelDeparture(targetID)
+		r.passHostOn(targetID)
 		kicked = true
 	})
 	if kicked {
@@ -473,7 +532,8 @@ func (r *Room) dismiss(playerID string, msg Message) {
 func (r *Room) ToggleObserver(initiatorID, targetID string) {
 	r.mutate(func() {
 		target, ok := r.players[targetID]
-		if !ok || !r.seated(initiatorID) {
+		// A player may always change their own role, even in a locked room.
+		if !ok || !(r.allowed(initiatorID) || (initiatorID == targetID && r.seated(initiatorID))) {
 			return
 		}
 		target.Observer = !target.Observer
@@ -483,6 +543,43 @@ func (r *Room) ToggleObserver(initiatorID, targetID string) {
 		} else {
 			r.logActivity(r.nameOf(initiatorID), "to_participant", target.Name)
 		}
+	})
+}
+
+// SetLocked locks or opens the room. Only the host can.
+func (r *Room) SetLocked(initiatorID string, locked bool) {
+	r.mutate(func() {
+		if initiatorID != r.host || !r.seated(initiatorID) || r.locked == locked {
+			return
+		}
+		r.locked = locked
+		if locked {
+			r.logActivity(r.nameOf(initiatorID), "locked")
+		} else {
+			r.logActivity(r.nameOf(initiatorID), "unlocked")
+		}
+	})
+}
+
+// StartTimer starts a vote countdown of seconds, one of TimerDurations, or
+// stops the running one when seconds is 0. A reveal or a new round stops it.
+func (r *Room) StartTimer(initiatorID string, seconds int) {
+	r.mutate(func() {
+		if !r.allowed(initiatorID) || r.state != StateVoting {
+			return
+		}
+		if seconds == 0 {
+			if !r.timerEnd.IsZero() {
+				r.timerEnd = time.Time{}
+				r.logActivity(r.nameOf(initiatorID), "timer_stopped")
+			}
+			return
+		}
+		if !slices.Contains(TimerDurations, seconds) {
+			return
+		}
+		r.timerEnd = time.Now().Add(time.Duration(seconds) * time.Second)
+		r.logActivity(r.nameOf(initiatorID), "timer_started")
 	})
 }
 

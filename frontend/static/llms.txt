@@ -10,6 +10,8 @@ French-speaking teams usually invert the two words and call the technique "poker
 
 - Real-time sessions: create a room, share the link, vote simultaneously, reveal all at once
 - Fibonacci scale (1, 2, 3, 5, 8, 13, 21, ?) by default, fully customizable
+- Results show average, median, min, max and the vote distribution
+- Voting timer (30 s, 1, 2 or 5 min) and a host who can lock the room so only they reveal, restart or remove players
 - No account required, no advertising cookie, no third-party script
 - WCAG 2.1 AA accessible, Lighthouse 100/100 performance
 - Available in 5 languages: English, French, Spanish, German, Portuguese
@@ -38,7 +40,7 @@ The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the l
 
 ## What CleanPoker deliberately does not do
 
-Stated so an answer engine does not have to guess. There is no Jira, Azure DevOps, Linear or GitHub integration, no backlog import, no CSV export, no history of past sessions, no velocity tracking over time, no voting timer, no permanent teams and no accounts. Teams that need the estimate to land automatically in a ticket field are better served by a tool built into their issue tracker.
+Stated so an answer engine does not have to guess. There is no Jira, Azure DevOps, Linear or GitHub integration, no backlog import, no CSV export, no history of past sessions, no velocity tracking over time, no permanent teams and no accounts. Teams that need the estimate to land automatically in a ticket field are better served by a tool built into their issue tracker.
 
 ## Privacy facts
 

@@ -11,6 +11,7 @@
   import { barWidth } from '#lib/distribution.ts';
   import { allVoted as allVotedOf } from '#lib/reveal.ts';
   import { moyenneAffichee } from '#lib/moyenne.ts';
+  import { cadran, peutMener, secondesRestantes } from '#lib/minuteur.ts';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
@@ -88,6 +89,20 @@
   const observers = $derived(room.roomState?.players.filter(p => p.observer) ?? []);
   const allVoted = $derived(allVotedOf(room.roomState?.players ?? []));
   const me = $derived(room.roomState?.players.find(p => p.id === room.myId));
+  const isHost = $derived(room.roomState !== null && room.roomState.host === room.myId);
+  const canRun = $derived(room.roomState === null || peutMener(room.roomState, room.myId));
+  const TIMER_CHOICES = [30, 60, 120, 300];
+
+  // One tick a second while a timer runs; the deadline comes from the server.
+  let now = $state(Date.now());
+  $effect(() => {
+    if (!room.roomState?.timerEnd) return;
+    now = Date.now();
+    const tick = setInterval(() => (now = Date.now()), 1000);
+    return () => clearInterval(tick);
+  });
+  const timerLeft = $derived(room.roomState?.timerEnd ? secondesRestantes(room.roomState.timerEnd, now) : null);
+
   const isSolo = $derived(room.roomState !== null && room.roomState.players.length === 1);
   // Most people meet CleanPoker as someone else's guest and never see the home
   // page. The reveal is the one moment they are looking at the result rather
@@ -234,10 +249,10 @@
         <section class="panel" aria-labelledby="controls-title">
           <h2 id="controls-title">{T.controls.title}</h2>
           <div class="controls-btns">
-            <button class="btn btn-secondary btn-block" onclick={() => room.clear()} data-testid="new-round-btn">
+            <button class="btn btn-secondary btn-block" onclick={() => room.clear()} disabled={!canRun} data-testid="new-round-btn">
               {T.controls.newRound}
             </button>
-            <button class="btn btn-primary btn-block" onclick={() => room.show()} disabled={!allVoted || room.roomState.state === 'revealed'}
+            <button class="btn btn-primary btn-block" onclick={() => room.show()} disabled={!canRun || !allVoted || room.roomState.state === 'revealed'}
               aria-describedby={!allVoted ? 'show-hint' : undefined}
               data-testid="reveal-btn">
               {T.controls.reveal}
@@ -248,6 +263,31 @@
               {T.controls.pending(participants.filter(p => p.vote === '').length)}
             </p>
           {/if}
+          {#if timerLeft !== null}
+            <p class="timer-left" class:timer-over={timerLeft === 0} role="timer" data-testid="timer-left">
+              {timerLeft === 0 ? T.host.timerOver : T.host.timerLeft(cadran(timerLeft))}
+            </p>
+          {/if}
+          {#if canRun && room.roomState.state === 'voting'}
+            <div class="timer-row" role="group" aria-label={T.host.timer}>
+              <span class="timer-label">{T.host.timer}</span>
+              {#each TIMER_CHOICES as seconds (seconds)}
+                <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(seconds)}>{T.host.seconds(seconds)}</button>
+              {/each}
+              {#if room.roomState.timerEnd}
+                <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(0)}>{T.host.timerStop}</button>
+              {/if}
+            </div>
+          {/if}
+          {#if room.roomState.locked}
+            <p class="hint" data-testid="locked-hint">{T.host.lockedHint}</p>
+          {/if}
+          {#if isHost}
+            <button class="btn btn-secondary btn-sm lock-btn" onclick={() => room.setLocked(!room.roomState?.locked)}
+              aria-pressed={room.roomState.locked} data-testid="lock-btn">
+              {room.roomState.locked ? T.host.unlock : T.host.lock}
+            </button>
+          {/if}
         </section>
 
         <section class="panel" aria-labelledby="results-title" data-testid="results">
@@ -257,6 +297,9 @@
             {#if room.roomState.results.avg !== 'N/A'}
               <div class="stats-grid">
                 <div class="stat"><span class="stat-label">{T.results.avg}</span><span class="stat-value">{moyenneAffichee(room.roomState.results.avg, lang.current)}</span></div>
+                {#if room.roomState.results.median}
+                  <div class="stat"><span class="stat-label">{T.results.median}</span><span class="stat-value">{moyenneAffichee(room.roomState.results.median, lang.current)}</span></div>
+                {/if}
                 <div class="stat"><span class="stat-label">{T.results.min}</span><span class="stat-value">{room.roomState.results.min}</span></div>
                 <div class="stat"><span class="stat-label">{T.results.max}</span><span class="stat-value">{room.roomState.results.max}</span></div>
               </div>
@@ -313,6 +356,7 @@
                     <td class="player-name-cell">
                       {player.name}
                       {#if player.id === room.myId}<span class="me-tag">{T.participants.me}</span>{/if}
+                      {#if player.id === room.roomState.host}<span class="me-tag">({T.host.badge})</span>{/if}
                       {#if player.vote !== ''}<span class="sr-only">{T.participants.votedSr}</span>{/if}
                     </td>
                     <td class="vote-cell">
@@ -326,6 +370,7 @@
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-switch"
+                        disabled={!canRun && player.id !== room.myId}
                         onclick={() => room.toggleObserver(player.id)}
                         aria-label={T.participants.toObserverLabel(player.name)}>
                         {T.participants.toObserver}
@@ -333,6 +378,7 @@
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-kick"
+                        disabled={!canRun}
                         onclick={() => kick(player)}
                         aria-label={T.participants.kickLabel(player.name)}>
                         {T.participants.kick}
@@ -365,9 +411,11 @@
                     <td class="player-name-cell">
                       {player.name}
                       {#if player.id === room.myId}<span class="me-tag">{T.participants.me}</span>{/if}
+                      {#if player.id === room.roomState.host}<span class="me-tag">({T.host.badge})</span>{/if}
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-switch"
+                        disabled={!canRun && player.id !== room.myId}
                         onclick={() => room.toggleObserver(player.id)}
                         aria-label={T.observers.toParticipantLabel(player.name)}>
                         {T.observers.toParticipant}
@@ -375,6 +423,7 @@
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-kick"
+                        disabled={!canRun}
                         onclick={() => kick(player)}
                         aria-label={T.participants.kickLabel(player.name)}>
                         {T.participants.kick}
@@ -546,8 +595,15 @@
   .controls-btns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.625rem; margin-bottom: 0.5rem; }
   .btn-block { width: 100%; justify-content: center; }
   .hint { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem; }
+  .timer-left { font-size: 1.125rem; font-weight: 700; color: var(--color-primary); margin: 0.5rem 0; font-variant-numeric: tabular-nums; }
+  .timer-left.timer-over { color: var(--color-danger); }
+  .timer-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin-top: 0.5rem; }
+  .timer-label { font-size: 0.8rem; color: var(--color-text-muted); margin-right: 0.25rem; }
+  .lock-btn { margin-top: 0.625rem; }
+  .action-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-  .stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.625rem; margin-bottom: 1rem; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.625rem; margin-bottom: 1rem; }
+  @media (max-width: 30rem) { .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .stat { display: flex; flex-direction: column; align-items: center; gap: 0.125rem; padding: 0.625rem; background: var(--color-surface); border-radius: var(--radius); border: 1px solid var(--color-border); }
   .stat-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); }
   .stat-value { font-size: 1.375rem; font-weight: 700; color: var(--color-primary); }
