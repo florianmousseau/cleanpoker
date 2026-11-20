@@ -358,11 +358,30 @@ var commands = map[string]command{
 			rm.StartTimer(id, seconds)
 		}
 	},
+	"measure": measure,
 	"selectStory": func(rm *room.Room, id, p string, _ int) {
 		if index, err := strconv.Atoi(p); err == nil {
 			rm.SelectStory(id, index)
 		}
 	},
+}
+
+// measure reads "index,files,added,removed,tests,minutes" and records what the
+// story cost. Anything else is dropped, like any malformed command.
+func measure(rm *room.Room, id, p string, _ int) {
+	parts := strings.Split(p, ",")
+	if len(parts) != 6 {
+		return
+	}
+	var n [6]int
+	for i, part := range parts {
+		v, err := strconv.Atoi(part)
+		if err != nil {
+			return
+		}
+		n[i] = v
+	}
+	_ = rm.ReportActual(id, n[0], room.Actual{Files: n[1], Added: n[2], Removed: n[3], Tests: n[4], Minutes: n[5]})
 }
 
 func cors(allowed map[string]bool, next http.Handler) http.Handler {

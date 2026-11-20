@@ -44,6 +44,7 @@ Then ask the assistant to join the room the team shares and estimate the story. 
 | `add_stories` | Appends story titles to the room's list, 100 stories of 200 characters at most. Refused when the host locked the room, as for any participant. |
 | `vote` | Votes one card of the deck with a short reason, both hidden until the reveal. |
 | `get_estimates` | Reads the story list with the estimate the team kept for each, as data and as a Markdown table. |
+| `report_actual` | Reports what a story the team estimated cost once delivered: files touched, lines added and removed, tests added, working time. Numbers only. The room then shows which card the delivered story looks like. |
 | `leave_room` | Gives the seat up. |
 
 An assistant that already has access to Jira, Linear or GitHub can do the whole tour: read the sprint's stories there, add them to the room, vote on each, then read the kept estimates and write them back. PokerAgile connects to no tracker; the assistant uses its own access.

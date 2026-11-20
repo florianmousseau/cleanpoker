@@ -79,7 +79,7 @@
       <li><strong>Cursor</strong>: in <code>~/.cursor/mcp.json</code>, add <code>&#123;"mcpServers": &#123; "pokeragile": &#123; "url": "https://salles.pokeragile.com/mcp" &#125; &#125; &#125;</code>.</li>
       <li><strong>VS Code</strong>: with Copilot in agent mode, in <code>.vscode/mcp.json</code>, add <code>&#123;"servers": &#123; "pokeragile": &#123; "type": "http", "url": "https://salles.pokeragile.com/mcp" &#125; &#125; &#125;</code>.</li>
     </ul>
-    <p>PokerAgile asks for no account and no API key, and there is nothing to install: the address is a remote MCP server with six tools, <code>join_room</code>, <code>get_room</code>, <code>add_stories</code>, <code>vote</code>, <code>get_estimates</code> and <code>leave_room</code>. A person must already have the room open in a browser. If the team pasted its story list into the room, the assistant reads the one on the table; otherwise, give it the story in your message. Then, in the conversation:</p>
+    <p>PokerAgile asks for no account and no API key, and there is nothing to install: the address is a remote MCP server with seven tools, <code>join_room</code>, <code>get_room</code>, <code>add_stories</code>, <code>vote</code>, <code>get_estimates</code>, <code>report_actual</code> and <code>leave_room</code>. A person must already have the room open in a browser. If the team pasted its story list into the room, the assistant reads the one on the table; otherwise, give it the story in your message. Then, in the conversation:</p>
     <pre><code>Join the room https://pokeragile.com/ab12cd34 as Claude.
 Estimate the story on the table in story points and vote with a one or two sentence reason, without telling me your card.
 Leave the room when I say so.</code></pre>

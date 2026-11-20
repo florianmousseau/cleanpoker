@@ -4,10 +4,14 @@ import { onDestroy } from 'svelte';
 import type { Translation } from '#lib/i18n.ts';
 import { transitionOf } from '#lib/room-transition.ts';
 import { chunkLines } from '#lib/export.ts';
+import { measurePayload } from '#lib/mesure-story.ts';
 import { forgetSeat, loadSeat, saveSeat, tabStorage } from '#lib/seat.ts';
 
 export type Player = { id: string; name: string; vote: string; observer: boolean; ai?: boolean; reason?: string };
-export type Story = { title: string; estimate: string };
+/** What a delivered story cost: numbers only. */
+export type Actual = { files: number; added: number; removed: number; tests: number; minutes: number };
+export type Reference = { card: string; title: string };
+export type Story = { title: string; estimate: string; actual?: Actual; looksLike?: string };
 export type Results = { avg: string; median: string; min: string; max: string; dist: Record<string, number> };
 // timestamp: Unix milliseconds; a server not yet updated sends its clock as text.
 export type ActivityEntry = { timestamp: number | string; initiator: string; message: string; target?: string };
@@ -16,7 +20,7 @@ export type RoomState = {
   state: 'voting' | 'revealed'; round: number;
   results: Results | null; players: Player[]; activity: ActivityEntry[];
   host: string; locked: boolean; timerEnd: number;
-  stories?: Story[]; current?: number; autoReveal?: boolean;
+  stories?: Story[]; current?: number; autoReveal?: boolean; references?: Reference[];
 };
 
 const PING_MS = 25_000;
@@ -192,6 +196,9 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
   function clearStories() { send('clearStories'); }
   function selectStory(index: number) { myVote = ''; send('selectStory', String(index)); }
   function estimate(card: string) { send('estimate', card); }
+  function measure(index: number, a: Pick<Actual, 'files' | 'added' | 'removed'>) {
+    send('measure', measurePayload(index, a));
+  }
   function setAutoReveal(on: boolean) { send('autoReveal', on ? 'on' : 'off'); }
 
   onDestroy(() => {
@@ -210,6 +217,6 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
     get kicked() { return kicked; },
     get liveAnnouncement() { return liveAnnouncement; },
     join, resume, send, castVote, show, clear, kick, toggleObserver, setLocked, startTimer,
-    addStories, clearStories, selectStory, estimate, setAutoReveal,
+    addStories, clearStories, selectStory, estimate, measure, setAutoReveal,
   };
 }

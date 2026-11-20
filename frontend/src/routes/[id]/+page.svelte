@@ -528,7 +528,8 @@
       {/if}
 
       {#if stories.length > 0 && StoriesPanel.current && X}
-      <StoriesPanel.current {stories} current={currentIndex} {T} {X} {canRun}
+      <StoriesPanel.current {stories} references={room.roomState?.references} current={currentIndex} {T} {X} {canRun}
+        onMeasure={(i, a) => room.measure(i, a)}
         onAdd={(text) => room.addStories(text)}
         onClear={() => room.clearStories()}
         onSelect={(i) => room.selectStory(i)} />

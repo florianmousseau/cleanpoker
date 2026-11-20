@@ -160,8 +160,8 @@ func TestHandler_AnswersAPublicHostOnLoopback(t *testing.T) {
 	if err := json.NewDecoder(resp.Body).Decode(&out); err != nil {
 		t.Fatalf("status %d, decode: %v", resp.StatusCode, err)
 	}
-	if len(out.Result.Tools) != 6 {
-		t.Fatalf("expected 6 tools, got %+v", out.Result.Tools)
+	if len(out.Result.Tools) != 7 {
+		t.Fatalf("expected 7 tools, got %+v", out.Result.Tools)
 	}
 }
 
@@ -344,7 +344,7 @@ func TestGetEstimates_ListsKeptEstimatesAndAMarkdownTable(t *testing.T) {
 
 	var out estimatesOut
 	call(t, cs, "get_estimates", map[string]any{"room": "https://pokeragile.com/team42"}, &out)
-	want := []estimate{{"CSV export", "5", false}, {"Login | SSO", "", true}, {"Search", "", false}}
+	want := []estimate{{Title: "CSV export", Estimate: "5"}, {Title: "Login | SSO", OnTable: true}, {Title: "Search"}}
 	if len(out.Stories) != len(want) {
 		t.Fatalf("expected %d stories, got %+v", len(want), out.Stories)
 	}
@@ -389,7 +389,7 @@ func TestServer_OffersNoHostTool(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := map[string]bool{"join_room": true, "get_room": true, "add_stories": true, "get_estimates": true, "vote": true, "leave_room": true}
+	want := map[string]bool{"join_room": true, "get_room": true, "add_stories": true, "get_estimates": true, "vote": true, "report_actual": true, "leave_room": true}
 	for _, tool := range res.Tools {
 		if !want[tool.Name] {
 			t.Errorf("unexpected tool %q", tool.Name)
@@ -398,5 +398,133 @@ func TestServer_OffersNoHostTool(t *testing.T) {
 	}
 	if len(want) != 0 {
 		t.Errorf("missing tools: %v", want)
+	}
+}
+
+// keep puts each title on the table in turn and keeps card as its estimate.
+func keep(t *testing.T, rm *room.Room, estimates ...string) {
+	t.Helper()
+	for i, card := range estimates {
+		rm.SelectStory("p1", i)
+		rm.CastVote("p1", card, room.AnyRound)
+		rm.Show("p1")
+		rm.Estimate("p1", card)
+	}
+}
+
+func TestReportActual_RecordsTheMeasureAndGetEstimatesReturnsIt(t *testing.T) {
+	rm, cs, seat := seatIn42(t)
+	rm.AddStories("p1", "CSV export\nLogin")
+	keep(t, rm, "3")
+
+	var out estimatesOut
+	res := call(t, cs, "report_actual", map[string]any{"room": "team42", "seat": seat,
+		"story": 1, "files": 4, "added": 120, "removed": 30, "tests": 6, "minutes": 45}, &out)
+	if res.IsError {
+		t.Fatalf("unexpected refusal: %+v", res.Content)
+	}
+	want := room.Actual{Files: 4, Added: 120, Removed: 30, Tests: 6, Minutes: 45}
+	if got := out.Stories[0].Actual; got == nil || *got != want {
+		t.Fatalf("expected %+v, got %+v", want, got)
+	}
+	if out.Stories[1].Actual != nil {
+		t.Fatal("the other story was measured too")
+	}
+	var read estimatesOut
+	call(t, cs, "get_estimates", map[string]any{"room": "team42"}, &read)
+	if got := read.Stories[0].Actual; got == nil || *got != want {
+		t.Fatalf("get_estimates lost the measure: %+v", got)
+	}
+}
+
+func TestReportActual_Refusals(t *testing.T) {
+	rm, cs, seat := seatIn42(t)
+	rm.AddStories("p1", "CSV export\nLogin")
+	keep(t, rm, "3")
+	ok := map[string]any{"room": "team42", "seat": seat, "story": 1, "files": 1, "added": 10, "removed": 0}
+	with := func(key string, value any) map[string]any {
+		args := map[string]any{}
+		for k, v := range ok {
+			args[k] = v
+		}
+		args[key] = value
+		return args
+	}
+	cases := map[string]map[string]any{
+		"no kept estimate":   with("story", 2),
+		"no such story":      with("story", 3),
+		"position zero":      with("story", 0),
+		"unknown seat":       with("seat", "nope"),
+		"negative number":    with("files", -1),
+		"number too large":   with("added", room.MaxActual+1),
+		"no line changed":    with("added", 0),
+		"a file name":        with("path", "internal/room/room.go"),
+		"a repository":       with("repository", "https://example.com/team/app"),
+		"text for a number":  with("files", "four"),
+		"a fractional count": with("added", 1.5),
+	}
+	for name, args := range cases {
+		res, err := cs.CallTool(context.Background(), &mcp.CallToolParams{Name: "report_actual", Arguments: args})
+		if err == nil && !res.IsError {
+			t.Errorf("%s: expected a refusal", name)
+		}
+	}
+	for _, st := range rm.Snapshot().Stories {
+		if st.Actual != nil {
+			t.Fatalf("a refused report was recorded: %+v", st)
+		}
+	}
+}
+
+func TestReportActual_ALockedRoomIsAnError(t *testing.T) {
+	rm, cs, seat := seatIn42(t)
+	rm.AddStories("p1", "CSV export")
+	keep(t, rm, "3")
+	rm.SetLocked("p1", true)
+	res := call(t, cs, "report_actual", map[string]any{"room": "team42", "seat": seat, "story": 1, "files": 1, "added": 10, "removed": 0}, nil)
+	if !res.IsError {
+		t.Fatal("expected a refusal in a locked room")
+	}
+}
+
+// The tool takes numbers and nothing else: no field could carry code, a file
+// name or a repository address.
+func TestReportActual_TakesOnlyNumbers(t *testing.T) {
+	cs := connect(t, store.New())
+	res, err := cs.ListTools(context.Background(), nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, tool := range res.Tools {
+		if tool.Name != "report_actual" {
+			continue
+		}
+		raw, _ := json.Marshal(tool.InputSchema)
+		var schema struct {
+			Properties           map[string]struct{ Type string } `json:"properties"`
+			AdditionalProperties any                              `json:"additionalProperties"`
+		}
+		if err := json.Unmarshal(raw, &schema); err != nil {
+			t.Fatal(err)
+		}
+		if schema.AdditionalProperties != false {
+			t.Errorf("the schema accepts unknown fields: %s", raw)
+		}
+		for name, p := range schema.Properties {
+			if name != "room" && name != "seat" && p.Type != "integer" {
+				t.Errorf("field %q is %q, not an integer", name, p.Type)
+			}
+		}
+		return
+	}
+	t.Fatal("report_actual is not offered")
+}
+
+// An assistant with no reference must not invent a point.
+func TestInstructions_TellTheAssistantToCalibrate(t *testing.T) {
+	for _, want := range []string{"read get_estimates", `vote "?"`, "what you took as\none point", "report_actual", "Numbers only"} {
+		if !strings.Contains(instructions, want) {
+			t.Errorf("the instructions no longer say %q", want)
+		}
 	}
 }
