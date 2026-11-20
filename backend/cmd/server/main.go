@@ -1,16 +1,16 @@
 package main
 
 import (
-	"github.com/florianmousseau/cleanpoker/internal/assistant"
+	"github.com/florianmousseau/pokeragile/internal/assistant"
 	"log"
 	"net/http"
 	"os"
 	"strings"
 	"time"
 
-	"github.com/florianmousseau/cleanpoker/internal/handler"
-	"github.com/florianmousseau/cleanpoker/internal/health"
-	"github.com/florianmousseau/cleanpoker/internal/store"
+	"github.com/florianmousseau/pokeragile/internal/handler"
+	"github.com/florianmousseau/pokeragile/internal/health"
+	"github.com/florianmousseau/pokeragile/internal/store"
 )
 
 // commit is the build being served, set by the Dockerfile from the

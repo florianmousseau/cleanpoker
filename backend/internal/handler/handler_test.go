@@ -14,10 +14,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/florianmousseau/cleanpoker/internal/handler"
-	"github.com/florianmousseau/cleanpoker/internal/health"
-	"github.com/florianmousseau/cleanpoker/internal/room"
-	"github.com/florianmousseau/cleanpoker/internal/store"
+	"github.com/florianmousseau/pokeragile/internal/handler"
+	"github.com/florianmousseau/pokeragile/internal/health"
+	"github.com/florianmousseau/pokeragile/internal/room"
+	"github.com/florianmousseau/pokeragile/internal/store"
 	"golang.org/x/net/websocket"
 )
 
