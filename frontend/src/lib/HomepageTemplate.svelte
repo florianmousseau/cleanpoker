@@ -127,6 +127,7 @@
   let ready = $state(false);
   onMount(() => {
     ready = true;
+    lang.visit(locale);
   });
   let error = $state('');
 

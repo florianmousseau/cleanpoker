@@ -6,18 +6,34 @@ export type Lang = 'fr' | 'en' | 'es' | 'de' | 'pt';
 const LANGS = new Set<Lang>(['fr', 'en', 'es', 'de', 'pt']);
 const MAX_AGE = 60 * 60 * 24 * 365;
 
-function readCookie(): Lang {
+/**
+ * The language a visitor gets: the one they chose (the cookie), else the first
+ * language of their browser that the site speaks, else English. A guest who
+ * opens an invite link has no cookie yet and used to get English whatever
+ * their browser said.
+ */
+export function pickLang(cookie: string, preferred: readonly string[]): Lang {
+	const chosen = /(?:^|;\s*)lang=([^;]+)/.exec(cookie)?.[1];
+	if (LANGS.has(chosen as Lang)) return chosen as Lang;
+	for (const tag of preferred) {
+		const base = tag.toLowerCase().split('-')[0];
+		if (LANGS.has(base as Lang)) return base as Lang;
+	}
+	return 'en';
+}
+
+// Read while the module loads, never in an effect: the first client render
+// is already in the right language. The server has neither and renders English.
+function initialLang(): Lang {
 	if (!browser) return 'en';
-	const match = /(?:^|;\s*)lang=([^;]+)/.exec(document.cookie);
-	const v = match?.[1];
-	return LANGS.has(v as Lang) ? (v as Lang) : 'en';
+	return pickLang(document.cookie, globalThis.navigator?.languages ?? []);
 }
 
 function writeCookie(l: Lang) {
 	document.cookie = `lang=${l}; path=/; max-age=${MAX_AGE}; SameSite=Lax`;
 }
 
-let _lang = $state<Lang>(readCookie());
+let _lang = $state<Lang>(initialLang());
 
 export const lang = {
 	get current(): Lang { return _lang; },
@@ -27,5 +43,12 @@ export const lang = {
 			writeCookie(l);
 			applyLangAttribute(document, l);
 		}
+	},
+	/**
+	 * A localized home was opened: the room opened next speaks its language.
+	 * The English home says nothing, it is also where every bare link lands.
+	 */
+	visit(l: Lang) {
+		if (l !== 'en' && l !== _lang) this.set(l);
 	},
 };
