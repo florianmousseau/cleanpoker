@@ -16,6 +16,10 @@ const keyOf = (roomId: string) => `cleanpoker:seat:${roomId}`;
 // from this browser, so localStorage.
 const NAME_KEY = 'cleanpoker:name';
 
+// A choice of the person too: whether a copied result ends with the line
+// that names PokerAgile. Kept only once they turn it off or back on.
+const CREDIT_KEY = 'cleanpoker:credit';
+
 function isSeat(value: unknown): value is Seat {
   if (typeof value !== 'object' || value === null) return false;
   const seat = value as Record<string, unknown>;
@@ -89,5 +93,23 @@ export function saveName(storage: SeatStorage | null, name: string): void {
     storage?.setItem(NAME_KEY, name.trim());
   } catch {
     // Private mode or a full quota: the join form just opens empty.
+  }
+}
+
+/** Whether copied results end with the PokerAgile line: yes until the person says no. */
+export function loadCredit(storage: SeatStorage | null): boolean {
+  try {
+    return storage?.getItem(CREDIT_KEY) !== 'off';
+  } catch {
+    return true;
+  }
+}
+
+/** Keep the choice. A storage that refuses only costs unchecking the box again. */
+export function saveCredit(storage: SeatStorage | null, on: boolean): void {
+  try {
+    storage?.setItem(CREDIT_KEY, on ? 'on' : 'off');
+  } catch {
+    // Private mode or a full quota: the choice lasts as long as the page.
   }
 }

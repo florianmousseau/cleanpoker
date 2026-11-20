@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { Translation } from '#lib/i18n.ts';
+  import type { Extras } from '#lib/i18n.ts';
   import { analyser, langueDeReponse, modeleLocal, type LanguageModelApi } from '#lib/ia-locale.ts';
 
-  let { story, lang, T }: { story: string; lang: string; T: Translation } = $props();
+  let { story, lang, X }: { story: string; lang: string; X: Extras } = $props();
 
   let api = $state<LanguageModelApi | null>(null);
   let answerLang = $state<string | null>(null);
@@ -54,19 +54,19 @@
 {#if api && answerLang}
   <div class="local-ai" data-testid="local-ai">
     <button class="btn btn-secondary btn-sm" onclick={run} disabled={status === 'running'}>
-      {status === 'done' ? T.ia.again : T.ia.button}
+      {status === 'done' ? X.ia.again : X.ia.button}
     </button>
     {#if status === 'running' && progress !== null && progress < 100}
-      <p class="ai-note" role="status">{T.ia.downloading(progress)}</p>
+      <p class="ai-note" role="status">{X.ia.downloading(progress)}</p>
     {:else if status === 'running' && !text}
-      <p class="ai-note" role="status">{T.ia.running}</p>
+      <p class="ai-note" role="status">{X.ia.running}</p>
     {/if}
     {#if status === 'failed'}
-      <p class="ai-note" role="alert">{T.ia.failed}</p>
+      <p class="ai-note" role="alert">{X.ia.failed}</p>
     {/if}
     {#if text}
       <div class="ai-out" aria-live="polite">{text}</div>
-      <p class="ai-note">{T.ia.private}</p>
+      <p class="ai-note">{X.ia.private}</p>
     {/if}
   </div>
 {/if}

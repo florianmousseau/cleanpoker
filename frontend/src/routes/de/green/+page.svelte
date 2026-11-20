@@ -44,7 +44,7 @@
           <tr><th>Metrik</th><th>Wert</th></tr>
         </thead>
         <tbody>
-          <tr><td>Gemeinsames JS-Bundle (brotli, CI-validiert)</td><td><strong>&lt; 50 KB</strong></td></tr>
+          <tr><td>JavaScript beim ersten Besuch, Startseite oder Raum (brotli, CI-validiert)</td><td><strong>&lt; 50 KB</strong></td></tr>
           <tr><td>Geschätztes CO₂ pro Besuch</td><td><strong>&lt; 0,1 g</strong></td></tr>
           <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
           <tr><td>Lighthouse Barrierefreiheit</td><td><strong>100 / 100</strong></td></tr>

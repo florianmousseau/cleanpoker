@@ -1,13 +1,13 @@
 <script lang="ts">
   import { page } from '$app/state';
-  import { PUBLIC_API_URL } from '$app/env/public';
   import { onMount, tick } from 'svelte';
   import { lang } from '#lib/lang.svelte.ts';
   import Footer from '#lib/Footer.svelte';
-  import QrCode from '#lib/QrCode.svelte';
   import { equipeDe } from '#lib/equipe.ts';
   import Logo from '#lib/Logo.svelte';
-  import { FR, EN, ES, DE, PT, translateActivity } from '#lib/i18n.ts';
+  import type { Translation } from '#lib/i18n.ts';
+  import { roomWords } from '#lib/room-words.svelte.ts';
+  import type { Lang } from '#lib/lang.svelte.ts';
   import { useRoom, type Player } from '#lib/useRoom.svelte.ts';
   import { copierTexte } from '#lib/presse-papiers.ts';
   import { accorderDocumentALaLangue } from '#lib/html-lang.ts';
@@ -17,21 +17,17 @@
   import { moyenneAffichee } from '#lib/moyenne.ts';
   import { cadran, peutMener, secondesRestantes } from '#lib/minuteur.ts';
   import { agreement, extreme } from '#lib/consensus.ts';
-  import StoriesPanel from '#lib/StoriesPanel.svelte';
-  import LocalAi from '#lib/LocalAi.svelte';
+  import { lazily } from '#lib/lazy.svelte.ts';
+  import { resultMarkdown, withCredit } from '#lib/export.ts';
+  import { credit } from '#lib/credit.svelte.ts';
   import { deviceStorage, loadName, saveName } from '#lib/seat.ts';
-  import { logTime } from '#lib/log-time.ts';
-  import { mcpUrl, roomUrl } from '#lib/invite-ai.ts';
 
   const roomId = $derived(page.params.id ?? '');
   const equipe = $derived(equipeDe(page.url.searchParams));
-  const T = $derived(
-    lang.current === 'fr' ? FR :
-    lang.current === 'es' ? ES :
-    lang.current === 'de' ? DE :
-    lang.current === 'pt' ? PT :
-    EN
-  );
+  let { data }: { data: { T: Translation } } = $props();
+  const words = roomWords(() => data.T);
+  const T = $derived(words.current);
+  const X = $derived(words.extras);
 
   let nameInput = $state('');
   let nameInputEl = $state<HTMLInputElement | null>(null);
@@ -40,8 +36,8 @@
   let copyError = $state('');
   let inviteFeedback = $state('');
   let inviteError = $state('');
-  let aiFeedback = $state('');
-  let aiError = $state('');
+  let resultFeedback = $state('');
+  let resultError = $state('');
   let promoDismissed = $state(false);
 
   // QA-105: a reload, or the back button after a footer link, used to put the
@@ -103,15 +99,18 @@
     inviteError = T.copyFailed;
   }
 
-  async function copyAiPrompt() {
-    if (await copierTexte(T.ia.prompt(roomUrl(window.location), mcpUrl(PUBLIC_API_URL)))) {
-      aiError = '';
-      aiFeedback = T.copied;
-      setTimeout(() => (aiFeedback = ''), 2000);
+  // The round as Markdown, for the ticket or the team channel.
+  async function copyResult() {
+    if (!room.roomState) return;
+    const text = withCredit(resultMarkdown(room.roomState, T, lang.current), credit.line(T.results.credit));
+    if (await copierTexte(text)) {
+      resultError = '';
+      resultFeedback = T.stories.copied;
+      setTimeout(() => (resultFeedback = ''), 2000);
       return;
     }
-    aiFeedback = '';
-    aiError = T.copyFailed;
+    resultFeedback = '';
+    resultError = T.copyFailed;
   }
 
   const participants = $derived(room.roomState?.players.filter(p => !p.observer) ?? []);
@@ -121,7 +120,6 @@
   const me = $derived(room.roomState?.players.find(p => p.id === room.myId));
   const isHost = $derived(room.roomState !== null && room.roomState.host === room.myId);
   const canRun = $derived(room.roomState === null || peutMener(room.roomState, room.myId));
-  const TIMER_CHOICES = [30, 60, 120, 300];
   // Role and removal buttons show only with the options: the list stays a list of who voted.
   let optionsOpen = $state(false);
 
@@ -153,6 +151,17 @@
     room.roomState?.state === 'revealed' &&
     room.roomState.players.length > 1
   );
+  // Fetched when first needed, never before: the room opens on the cards.
+  const RoomOptions = lazily(() => optionsOpen, () => import('#lib/RoomOptions.svelte'));
+  const StoriesPanel = lazily(() => stories.length > 0, () => import('#lib/StoriesPanel.svelte'));
+  // Only a browser with a built-in model can run the analysis.
+  const aiWanted = $derived(onTable !== undefined && 'LanguageModel' in globalThis);
+  const LocalAi = lazily(() => aiWanted, () => import('#lib/LocalAi.svelte'));
+  // Their words come with them, in the one language the room speaks.
+  $effect(() => {
+    if (optionsOpen || aiWanted || stories.length > 0) words.wantExtras();
+  });
+
   const homeHref = $derived(
     lang.current === 'fr' ? '/fr' :
     lang.current === 'es' ? '/es' :
@@ -205,7 +214,7 @@
 <div class="page" class:equipe={equipe?.clair} style:--eq-clair={equipe?.clair || undefined} style:--eq-sombre={equipe?.sombre || undefined}>
   <header class="header">
     <div class="container header-inner">
-      <a href={homeHref} class="logo" aria-label="PokerAgile, accueil"><Logo /><span>PokerAgile</span></a>
+      <a href={homeHref} class="logo" aria-label={T.homeLabel}><Logo /><span>PokerAgile</span></a>
       <div class="room-meta">
         {#if equipe?.nom}<span class="badge-pill team-name" data-testid="team-name">{equipe.nom}</span>{/if}
         <span class="badge-pill">{T.salleLabel} <code>{roomId}</code></span>
@@ -273,7 +282,9 @@
       {#if onTable}
         <div>
           <p class="on-table" data-testid="story-on-table">{T.stories.onTable} <strong>{onTable.title}</strong></p>
-          <LocalAi story={onTable.title} lang={lang.current} {T} />
+          {#if LocalAi.current && X}
+            <LocalAi.current story={onTable.title} lang={lang.current} {X} />
+          {/if}
         </div>
       {/if}
 
@@ -383,6 +394,12 @@
                 {/if}
               </div>
             {/if}
+            <div class="copy-result">
+              <button class="btn btn-secondary btn-sm" onclick={copyResult} data-testid="copy-result">{resultFeedback || T.results.copy}</button>
+              {#if resultError}
+                <span class="copy-error" role="alert">{resultError}</span>
+              {/if}
+            </div>
             </div>
           {:else}
             <p class="no-results">{T.results.none}</p>
@@ -510,8 +527,8 @@
         </aside>
       {/if}
 
-      {#if stories.length > 0}
-      <StoriesPanel {stories} current={currentIndex} {T} {canRun}
+      {#if stories.length > 0 && StoriesPanel.current && X}
+      <StoriesPanel.current {stories} current={currentIndex} {T} {X} {canRun}
         onAdd={(text) => room.addStories(text)}
         onClear={() => room.clearStories()}
         onSelect={(i) => room.selectStory(i)} />
@@ -520,79 +537,9 @@
       <!-- Everything beyond voting waits here, closed: the room opens on the cards. -->
       <details class="panel options" data-testid="options" bind:open={optionsOpen}>
         <summary>{T.options}</summary>
-        <div class="options-body">
-            {#if canRun && room.roomState.state === 'voting'}
-              <div class="timer-row" role="group" aria-label={T.host.timer}>
-                <span class="timer-label">{T.host.timer}</span>
-                {#each TIMER_CHOICES as seconds (seconds)}
-                  <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(seconds)}>{T.host.seconds(seconds)}</button>
-                {/each}
-                {#if room.roomState.timerEnd}
-                  <button class="btn btn-secondary btn-sm" onclick={() => room.startTimer(0)}>{T.host.timerStop}</button>
-                {/if}
-              </div>
-            {/if}
-            {#if canRun}
-              <label class="auto-reveal">
-                <input type="checkbox" checked={room.roomState.autoReveal ?? false}
-                  onchange={(e) => room.setAutoReveal(e.currentTarget.checked)} data-testid="auto-reveal" />
-                <span>{T.controls.autoReveal}</span>
-              </label>
-            {/if}
-            {#if isHost}
-              <button class="btn btn-secondary btn-sm lock-btn" onclick={() => room.setLocked(!room.roomState?.locked)}
-                aria-pressed={room.roomState.locked} data-testid="lock-btn">
-                {room.roomState.locked ? T.host.unlock : T.host.lock}
-              </button>
-            {/if}
-          <QrCode {roomId} {T} />
-          <div class="invite-ai">
-            <button class="btn btn-secondary btn-sm" onclick={copyAiPrompt} data-testid="invite-ai">{aiFeedback || T.ia.invite}</button>
-            <span class="hint">{T.ia.inviteHelp}</span>
-            {#if aiError}
-              <span class="copy-error" role="alert">{aiError}</span>
-            {/if}
-          </div>
-          {#if stories.length === 0}
-          <StoriesPanel {stories} current={currentIndex} {T} {canRun}
-            onAdd={(text) => room.addStories(text)}
-            onClear={() => room.clearStories()}
-            onSelect={(i) => room.selectStory(i)} />
-          {/if}
-        <!-- Journal d'activité -->
-        <section class="panel" aria-labelledby="log-title">
-          <h2 id="log-title">{T.activity.title}</h2>
-          {#if room.roomState.activity.length === 0}
-            <p class="empty">{T.activity.none}</p>
-          {:else}
-            <div class="table-wrap">
-              <table class="log-table" aria-label={T.activity.title}>
-                <thead>
-                  <tr>
-                    <th scope="col">{T.activity.colTime}</th>
-                    <th scope="col">{T.activity.colAuthor}</th>
-                    <th scope="col">{T.activity.colAction}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- Keyed by position, never by content: timestamps are cut to
-                       the second, so two identical events in the same second
-                       (a double-clicked "new round", a vote changed twice) used
-                       to collide and throw each_key_duplicate, poisoning the room
-                       for every player who arrived afterwards. -->
-                  {#each [...room.roomState.activity].reverse() as entry, i (i)}
-                    <tr>
-                      <td class="log-time">{logTime(entry.timestamp)}</td>
-                      <td>{entry.initiator}</td>
-                      <td>{translateActivity(entry.message, entry.target ?? '', T)}</td>
-                    </tr>
-                  {/each}
-                </tbody>
-              </table>
-            </div>
-          {/if}
-        </section>
-        </div>
+        {#if RoomOptions.current && X}
+          <RoomOptions.current {room} roomState={room.roomState} {roomId} {T} {X} {canRun} {isHost} {stories} current={currentIndex} />
+        {/if}
       </details>
     {/if}
   </main>
@@ -605,7 +552,7 @@
     privacy={T.footer.privacy}
     about={T.footer.about}
     locale={lang.current}
-    onLangChange={(l) => lang.set(l as 'fr'|'en'|'es'|'de'|'pt')}
+    onLangChange={(l) => words.change(l as Lang)}
   />
 </div>
 
@@ -741,19 +688,11 @@
   .hint { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem; }
   .timer-left { font-size: 1.125rem; font-weight: 700; color: var(--color-primary); margin: 0.5rem 0; font-variant-numeric: tabular-nums; }
   .timer-left.timer-over { color: var(--color-danger); }
-  .timer-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin-top: 0.5rem; }
-  .timer-label { font-size: 0.8rem; color: var(--color-text-muted); margin-right: 0.25rem; }
-  .lock-btn { margin-top: 0.625rem; }
-  .invite-ai { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.625rem; }
-  .invite-ai .hint { margin-top: 0; }
   .options summary { cursor: pointer; font-weight: 600; }
-  .options-body { display: flex; flex-direction: column; gap: 0.875rem; margin-top: 0.875rem; }
-  .options-body .lock-btn, .options-body .auto-reveal, .options-body .timer-row { margin-top: 0; align-self: flex-start; }
   .reason { margin-top: 0.25rem; font-size: 0.8rem; font-weight: 400; color: var(--color-text-muted); overflow-wrap: break-word; }
-  .auto-reveal { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.625rem; font-size: 0.85rem; cursor: pointer; }
-  .auto-reveal input { accent-color: var(--color-primary); }
   .on-table { font-size: 1rem; padding: 0.625rem min(1rem, 16px); background: var(--color-card-selected); border: 1px solid var(--color-card-border-selected); border-radius: var(--radius-lg); overflow-wrap: break-word; }
   .agreement { font-size: 0.85rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.5rem; }
+  .copy-result { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.875rem; }
   .keep { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.875rem; }
   .keep .kept { background: var(--color-card-selected); border-color: var(--color-card-border-selected); color: var(--color-primary); }
   .vote-revealed[data-extreme] { padding: 0.05rem 0.4rem; border-radius: 99px; outline: 2px solid var(--color-danger); }
@@ -774,9 +713,8 @@
   .dist-count { width: 1.25rem; font-size: 0.78rem; color: var(--color-text-muted); }
 
   .table-wrap { overflow-x: auto; }
-  .participants-table, .log-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-  .participants-table th, .participants-table td,
-  .log-table th, .log-table td {
+  .participants-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .participants-table th, .participants-table td {
     padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid var(--color-border);
   }
   .participants-table thead th { font-size: 0.78rem; color: var(--color-text-muted); font-weight: 600; }
@@ -821,12 +759,6 @@
   .action-btn-switch:hover { background: var(--color-primary); color: white; border-color: var(--color-primary); }
   .action-btn-kick { background: transparent; color: var(--color-danger); border-color: var(--color-danger); }
   .action-btn-kick:hover { background: var(--color-danger); color: white; }
-
-  .log-table thead th { font-size: 0.78rem; color: var(--color-text-muted); font-weight: 600; }
-  .log-table tbody tr:nth-child(even) { background: var(--color-surface); }
-  .log-table tbody tr:last-child td { border-bottom: none; }
-  .log-time { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-muted); }
-  .table-wrap .log-time { white-space: nowrap; }
 
   .center-msg { text-align: center; padding: 4rem 0; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.62] - 2026-11-20
+
+- feat(mcp): add_stories and get_estimates, the tracker to the room and back (#425)
+- feat(home): one Guides link to a hub page instead of eleven footer links (#426)
+
 ## [0.0.61] - 2026-11-20
 
 - feat(room): reveal anytime, stable order, guest language, invite your AI (#421)

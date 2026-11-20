@@ -160,8 +160,8 @@ func TestHandler_AnswersAPublicHostOnLoopback(t *testing.T) {
 	if err := json.NewDecoder(resp.Body).Decode(&out); err != nil {
 		t.Fatalf("status %d, decode: %v", resp.StatusCode, err)
 	}
-	if len(out.Result.Tools) != 4 {
-		t.Fatalf("expected 4 tools, got %+v", out.Result.Tools)
+	if len(out.Result.Tools) != 6 {
+		t.Fatalf("expected 6 tools, got %+v", out.Result.Tools)
 	}
 }
 
@@ -232,5 +232,171 @@ func TestVote_AfterTheRevealIsAnError(t *testing.T) {
 	}
 	if got := rm.Snapshot().Results.Avg; got != "5" {
 		t.Fatalf("the late vote changed the results: avg %q", got)
+	}
+}
+
+func seatIn42(t *testing.T) (*room.Room, *mcp.ClientSession, string) {
+	t.Helper()
+	s := store.New()
+	rm, err := s.GetOrCreate("team42", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rm.Join("p1", "Alice", false)
+	cs := connect(t, s)
+	var joined joinOut
+	call(t, cs, "join_room", map[string]any{"room": "team42", "name": "Claude"}, &joined)
+	return rm, cs, joined.Seat
+}
+
+func TestAddStories_AppendsTrimmedTitlesAndNamesTheOneOnTheTable(t *testing.T) {
+	rm, cs, seat := seatIn42(t)
+	var out addOut
+	call(t, cs, "add_stories", map[string]any{"room": "team42", "seat": seat,
+		"stories": []string{"  CSV export ", "", "Login\nwith SSO"}}, &out)
+	if out.Added != 2 || out.Refused != 1 || out.Why != "1 blank" {
+		t.Fatalf("got added %d, refused %d, why %q", out.Added, out.Refused, out.Why)
+	}
+	if out.Story != "CSV export" || out.State.Current != 0 {
+		t.Fatalf("expected the first story on the table, got %q at %d", out.Story, out.State.Current)
+	}
+	got := rm.Snapshot().Stories
+	if len(got) != 2 || got[0].Title != "CSV export" || got[1].Title != "Login with SSO" {
+		t.Fatalf("unexpected list: %+v", got)
+	}
+	if rm.Snapshot().Host != "p1" {
+		t.Fatal("adding stories changed the host")
+	}
+}
+
+func TestAddStories_CutsLongTitlesAndStopsAtTheListLimit(t *testing.T) {
+	rm, cs, seat := seatIn42(t)
+	titles := make([]string, room.MaxStories+2)
+	for i := range titles {
+		titles[i] = "story"
+	}
+	titles[0] = strings.Repeat("é", room.MaxStoryLength+5)
+	var out addOut
+	call(t, cs, "add_stories", map[string]any{"room": "team42", "seat": seat, "stories": titles}, &out)
+	if out.Added != room.MaxStories || out.Refused != 2 {
+		t.Fatalf("got added %d, refused %d", out.Added, out.Refused)
+	}
+	if !strings.Contains(out.Why, "2 refused, the list holds 100") || !strings.Contains(out.Why, "1 added but shortened to 200") {
+		t.Fatalf("unexpected why: %q", out.Why)
+	}
+	got := rm.Snapshot().Stories
+	if len(got) != room.MaxStories || len([]rune(got[0].Title)) != room.MaxStoryLength {
+		t.Fatalf("expected %d stories and a cut title, got %d and %d runes", room.MaxStories, len(got), len([]rune(got[0].Title)))
+	}
+}
+
+func TestAddStories_TooManyInOneCallIsAnError(t *testing.T) {
+	rm, cs, seat := seatIn42(t)
+	res := call(t, cs, "add_stories", map[string]any{"room": "team42", "seat": seat,
+		"stories": make([]string, maxTitlesPerCall+1)}, nil)
+	if got := errorText(res); !strings.Contains(got, "too many stories") {
+		t.Fatalf("expected a tool error, got %q", got)
+	}
+	if len(rm.Snapshot().Stories) != 0 {
+		t.Fatal("the refused call added stories")
+	}
+}
+
+func TestAddStories_ALockedRoomIsAnError(t *testing.T) {
+	rm, cs, seat := seatIn42(t)
+	rm.SetLocked("p1", true)
+	res := call(t, cs, "add_stories", map[string]any{"room": "team42", "seat": seat, "stories": []string{"Login"}}, nil)
+	if got := errorText(res); !strings.Contains(got, "the host locked the room: ask the host to add the stories or unlock") {
+		t.Fatalf("expected a tool error naming the lock, got %q", got)
+	}
+	if len(rm.Snapshot().Stories) != 0 {
+		t.Fatal("the locked room took the stories")
+	}
+	rm.SetLocked("p1", false)
+	var out addOut
+	call(t, cs, "add_stories", map[string]any{"room": "team42", "seat": seat, "stories": []string{"Login"}}, &out)
+	if out.Added != 1 {
+		t.Fatalf("expected the unlocked room to take the story, got %+v", out)
+	}
+}
+
+func TestAddStories_NeedsASeat(t *testing.T) {
+	rm, cs, _ := seatIn42(t)
+	for _, seat := range []any{"", "nope", "p1"} {
+		res := call(t, cs, "add_stories", map[string]any{"room": "team42", "seat": seat, "stories": []string{"Login"}}, nil)
+		if got := errorText(res); !strings.Contains(got, "join it first") {
+			t.Fatalf("seat %q: expected a tool error, got %q", seat, got)
+		}
+	}
+	if len(rm.Snapshot().Stories) != 0 {
+		t.Fatal("a call without a seat added stories")
+	}
+}
+
+func TestGetEstimates_ListsKeptEstimatesAndAMarkdownTable(t *testing.T) {
+	rm, cs, seat := seatIn42(t)
+	call(t, cs, "add_stories", map[string]any{"room": "team42", "seat": seat,
+		"stories": []string{"CSV export", "Login | SSO", "Search"}}, nil)
+	rm.CastVote("p1", "5", room.AnyRound)
+	rm.Show("p1")
+	rm.Estimate("p1", "5")
+	rm.SelectStory("p1", 1)
+
+	var out estimatesOut
+	call(t, cs, "get_estimates", map[string]any{"room": "https://pokeragile.com/team42"}, &out)
+	want := []estimate{{"CSV export", "5", false}, {"Login | SSO", "", true}, {"Search", "", false}}
+	if len(out.Stories) != len(want) {
+		t.Fatalf("expected %d stories, got %+v", len(want), out.Stories)
+	}
+	for i, w := range want {
+		if out.Stories[i] != w {
+			t.Errorf("story %d: got %+v, want %+v", i, out.Stories[i], w)
+		}
+	}
+	table := "| # | Story | Estimate |\n| --- | --- | --- |\n| 1 | CSV export | 5 |\n| 2 | Login \\| SSO |  |\n| 3 | Search |  |\n"
+	if out.Markdown != table {
+		t.Fatalf("unexpected table:\n%s", out.Markdown)
+	}
+}
+
+func TestGetEstimates_AnEmptyListAndAnUnopenedRoom(t *testing.T) {
+	_, cs, _ := seatIn42(t)
+	var out estimatesOut
+	call(t, cs, "get_estimates", map[string]any{"room": "team42"}, &out)
+	if len(out.Stories) != 0 || !strings.HasPrefix(out.Markdown, "| # | Story | Estimate |") {
+		t.Fatalf("unexpected empty answer: %+v", out)
+	}
+	if res := call(t, cs, "get_estimates", map[string]any{"room": "typo1234"}, nil); !res.IsError {
+		t.Fatal("expected an error for a room nobody opened")
+	}
+}
+
+func TestGetRoom_NamesTheStoryOnTheTableAndTheDeck(t *testing.T) {
+	rm, cs, _ := seatIn42(t)
+	rm.AddStories("p1", "CSV export\nLogin")
+	rm.SelectStory("p1", 1)
+	var read stateOut
+	call(t, cs, "get_room", map[string]any{"room": "team42"}, &read)
+	if read.Story != "Login" || len(read.State.Cards) == 0 {
+		t.Fatalf("expected the story and the deck, got %q and %v", read.Story, read.State.Cards)
+	}
+}
+
+// The assistant has no tool for what a person decides.
+func TestServer_OffersNoHostTool(t *testing.T) {
+	cs := connect(t, store.New())
+	res, err := cs.ListTools(context.Background(), nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := map[string]bool{"join_room": true, "get_room": true, "add_stories": true, "get_estimates": true, "vote": true, "leave_room": true}
+	for _, tool := range res.Tools {
+		if !want[tool.Name] {
+			t.Errorf("unexpected tool %q", tool.Name)
+		}
+		delete(want, tool.Name)
+	}
+	if len(want) != 0 {
+		t.Errorf("missing tools: %v", want)
 	}
 }

@@ -41,10 +41,20 @@ Then ask the assistant to join the room the team shares and estimate the story. 
 | --- | --- |
 | `join_room` | Takes a seat marked as an AI and returns a seat token. An AI never holds the host role. |
 | `get_room` | Reads the deck, the round, the story list and the one on the table, who voted, and the results once a person reveals them. |
+| `add_stories` | Appends story titles to the room's list, 100 stories of 200 characters at most. Refused when the host locked the room, as for any participant. |
 | `vote` | Votes one card of the deck with a short reason, both hidden until the reveal. |
+| `get_estimates` | Reads the story list with the estimate the team kept for each, as data and as a Markdown table. |
 | `leave_room` | Gives the seat up. |
 
-An assistant cannot reveal, start a round or remove anyone, and it sees nobody's vote before the reveal. Its reason shows under its name at the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. PokerAgile calls no AI service; the assistant reads the room because its user connected it.
+An assistant that already has access to Jira, Linear or GitHub can do the whole tour: read the sprint's stories there, add them to the room, vote on each, then read the kept estimates and write them back. PokerAgile connects to no tracker; the assistant uses its own access.
+
+```
+Take the stories of the current sprint in Linear and add them to my room https://pokeragile.com/ab12cd34.
+Vote on each one when it is on the table, with a one or two sentence reason.
+When I say we are done, write the estimates the team kept back to Linear.
+```
+
+An assistant cannot reveal, start a round, choose the story on the table, keep an estimate, clear the list or remove anyone, and it sees nobody's vote before the reveal. Its reason shows under its name at the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. PokerAgile calls no AI service; the assistant reads the room because its user connected it.
 
 ## The browser's built-in AI
 
@@ -79,7 +89,7 @@ cd frontend && npm ci && cp .env.example .env && npm run dev
 | Go backend: rooms in memory, one goroutine per room | OVHcloud VPS, Gravelines (France), built from `main` by the server itself | WebSocket, plus `POST /rooms` |
 
 - **`backend/`** is Go with the standard library HTTP server and `golang.org/x/net/websocket`. `internal/store` holds the rooms in a map. `internal/room` owns each room's state behind one event loop, which broadcasts a snapshot on every change and masks the votes until they are revealed. `internal/handler` exposes `POST /rooms`, `GET /rooms/{id}/ws`, `/health` and `/stats`.
-- **`frontend/`** is SvelteKit 5 with runes, TypeScript and plain CSS, deployed with `adapter-cloudflare`. `src/lib/useRoom.svelte.ts` holds the WebSocket client and `src/routes/[id]` the room page. The translations for the five languages live in `src/lib/i18n.ts`.
+- **`frontend/`** is SvelteKit 5 with runes, TypeScript and plain CSS, deployed with `adapter-cloudflare`. `src/lib/useRoom.svelte.ts` holds the WebSocket client and `src/routes/[id]` the room page. The room translations live in `src/lib/i18n/`, one file per language, fetched one language at a time by `src/lib/dictionaries.ts`.
 - Security headers are set in two places that must stay in sync. `frontend/src/hooks.server.ts` covers pages rendered by the worker and `frontend/_headers` covers static files.
 
 ## Checks
@@ -96,7 +106,7 @@ Every pull request runs the same steps as the `Code Quality` and `Bundle Size` j
 | `npm run check:seo` | titles, descriptions and alternates of every page |
 | `npm run check:reflow` | CSS that could push a page past a 320 px screen |
 | `npm run mesure` | no measurement script, and the privacy wording above in five languages |
-| `npm run build && npm run size` | shared JS stays under 50 kB brotli |
+| `npm run build && npm run size` | a first visit downloads under 50 kB of JavaScript (brotli), on the home and in a room |
 
 CodeQL scans Go and TypeScript, and SonarCloud analyses the code on each run. After each production deploy, Lighthouse CI audits the live site.
 

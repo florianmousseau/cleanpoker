@@ -44,7 +44,7 @@
           <tr><th>Métrica</th><th>Valor</th></tr>
         </thead>
         <tbody>
-          <tr><td>Bundle JS compartido (brotli, validado por CI)</td><td><strong>&lt; 50 KB</strong></td></tr>
+          <tr><td>JavaScript en la primera visita, inicio o sala (brotli, validado por CI)</td><td><strong>&lt; 50 KB</strong></td></tr>
           <tr><td>CO₂ estimado por visita</td><td><strong>&lt; 0,1 g</strong></td></tr>
           <tr><td>Lighthouse Rendimiento</td><td><strong>100 / 100</strong></td></tr>
           <tr><td>Lighthouse Accesibilidad</td><td><strong>100 / 100</strong></td></tr>
