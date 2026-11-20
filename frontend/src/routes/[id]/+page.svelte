@@ -10,6 +10,7 @@
   import { expulserApresAccord } from '#lib/expulsion.ts';
   import { barWidth } from '#lib/distribution.ts';
   import { allVoted as allVotedOf } from '#lib/reveal.ts';
+  import { moyenneAffichee } from '#lib/moyenne.ts';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
@@ -255,7 +256,7 @@
             <div data-testid="results-data">
             {#if room.roomState.results.avg !== 'N/A'}
               <div class="stats-grid">
-                <div class="stat"><span class="stat-label">{T.results.avg}</span><span class="stat-value">{room.roomState.results.avg}</span></div>
+                <div class="stat"><span class="stat-label">{T.results.avg}</span><span class="stat-value">{moyenneAffichee(room.roomState.results.avg, lang.current)}</span></div>
                 <div class="stat"><span class="stat-label">{T.results.min}</span><span class="stat-value">{room.roomState.results.min}</span></div>
                 <div class="stat"><span class="stat-label">{T.results.max}</span><span class="stat-value">{room.roomState.results.max}</span></div>
               </div>

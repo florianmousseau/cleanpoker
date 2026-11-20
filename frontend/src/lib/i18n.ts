@@ -58,7 +58,7 @@ export const FR: Translation = {
   },
 
   promo: {
-    lead: 'CleanPoker est libre et gratuit, sans compte, sans traceur et sans publicité.',
+    lead: 'Pour ta prochaine estimation, ouvre ta propre salle\u00A0: le lien suffit à inviter ton équipe.',
     cta: 'Créer ta propre salle',
     close: 'Fermer',
   },
@@ -181,7 +181,7 @@ export const EN: Translation = {
   },
 
   promo: {
-    lead: 'CleanPoker is free, with no account, no behavioural tracking and no ads.',
+    lead: 'For your next estimate, open your own room: the link is all your team needs to join.',
     cta: 'Create your own room',
     close: 'Close',
   },
@@ -304,7 +304,7 @@ export const ES: Translation = {
   },
 
   promo: {
-    lead: 'CleanPoker es libre y gratuito, sin cuenta, sin seguimiento comportamental y sin anuncios.',
+    lead: 'Para tu próxima estimación, abre tu propia sala: basta el enlace para invitar a tu equipo.',
     cta: 'Crea tu propia sala',
     close: 'Cerrar',
   },
@@ -427,7 +427,7 @@ export const DE: Translation = {
   },
 
   promo: {
-    lead: 'CleanPoker ist frei und kostenlos, ohne Konto, ohne verhaltensbasiertes Tracking und ohne Werbung.',
+    lead: 'Für deine nächste Schätzung öffne deinen eigenen Raum: Der Link reicht, um dein Team einzuladen.',
     cta: 'Eigenen Raum erstellen',
     close: 'Schließen',
   },
@@ -550,7 +550,7 @@ export const PT: Translation = {
   },
 
   promo: {
-    lead: 'CleanPoker é livre e gratuito, sem conta, sem rastreio comportamental e sem anúncios.',
+    lead: 'Para a sua próxima estimativa, abra a sua própria sala: o link basta para convidar a equipe.',
     cta: 'Crie a sua própria sala',
     close: 'Fechar',
   },
