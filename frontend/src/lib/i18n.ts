@@ -54,7 +54,7 @@ export const FR: Translation = {
 
   solo: {
     hint: 'Tu es seul(e) dans cette salle.',
-    invite: 'Inviter des coéquipiers',
+    invite: 'Inviter des collègues',
   },
 
   share: {
