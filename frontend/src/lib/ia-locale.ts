@@ -1,7 +1,8 @@
 /*
  * Chrome's built-in model (Prompt API, stable on the web since Chrome 148).
- * It runs on the reader's machine: the story never leaves it, and nothing is
- * downloaded from this site. Other browsers have no LanguageModel at all.
+ * It runs on the reader's machine: the analysis sends the story to no service,
+ * and nothing is downloaded from this site. Where a browser has no
+ * LanguageModel, the button does not show.
  */
 
 type Availability = 'unavailable' | 'downloadable' | 'downloading' | 'available';

@@ -112,12 +112,12 @@ export const FR: Translation = {
     copied: 'Copié',
   },
   ia: {
-    button: "Analyser la story avec l'IA de Chrome",
+    button: "Analyser la story avec l'IA du navigateur",
     again: "Relancer l'analyse",
     running: 'Analyse en cours',
     downloading: (n: number) => `Chrome télécharge son modèle, ${n}\u00A0%`,
     failed: "L'analyse n'a pas abouti.",
-    private: "Visible par vous seul. L'analyse tourne dans Chrome, sur cet ordinateur.",
+    private: "Visible par vous seul. L'analyse tourne dans le navigateur, sur cet ordinateur.",
   },
   host: {
     badge: 'hôte',
@@ -286,12 +286,12 @@ export const EN: Translation = {
     copied: 'Copied',
   },
   ia: {
-    button: "Analyse the story with Chrome's AI",
+    button: "Analyze the story with the browser's AI",
     again: 'Run the analysis again',
-    running: 'Analysing',
+    running: 'Analyzing',
     downloading: (n: number) => `Chrome is downloading its model, ${n}%`,
     failed: 'The analysis did not complete.',
-    private: 'Only you see this. The analysis runs in Chrome, on this computer.',
+    private: 'Only you see this. The analysis runs in the browser, on this computer.',
   },
   host: {
     badge: 'host',
@@ -460,12 +460,12 @@ export const ES: Translation = {
     copied: 'Copiado',
   },
   ia: {
-    button: 'Analizar la historia con la IA de Chrome',
+    button: 'Analizar la historia con la IA del navegador',
     again: 'Repetir el análisis',
     running: 'Analizando',
     downloading: (n: number) => `Chrome descarga su modelo, ${n} %`,
     failed: 'El análisis no se completó.',
-    private: 'Solo usted lo ve. El análisis se hace en Chrome, en este ordenador.',
+    private: 'Solo usted lo ve. El análisis se hace en el navegador, en este ordenador.',
   },
   host: {
     badge: 'anfitrión',
@@ -634,12 +634,12 @@ export const DE: Translation = {
     copied: 'Kopiert',
   },
   ia: {
-    button: 'Story mit der KI von Chrome analysieren',
+    button: 'Story mit der KI des Browsers analysieren',
     again: 'Analyse wiederholen',
     running: 'Analyse läuft',
     downloading: (n: number) => `Chrome lädt sein Modell, ${n} %`,
     failed: 'Die Analyse wurde nicht abgeschlossen.',
-    private: 'Nur Sie sehen das. Die Analyse läuft in Chrome, auf diesem Computer.',
+    private: 'Nur Sie sehen das. Die Analyse läuft im Browser, auf diesem Computer.',
   },
   host: {
     badge: 'Host',
@@ -808,12 +808,12 @@ export const PT: Translation = {
     copied: 'Copiado',
   },
   ia: {
-    button: 'Analisar a história com a IA do Chrome',
+    button: 'Analisar a história com a IA do navegador',
     again: 'Refazer a análise',
     running: 'Analisando',
     downloading: (n: number) => `O Chrome está baixando o modelo, ${n} %`,
     failed: 'A análise não terminou.',
-    private: 'Só você vê isto. A análise roda no Chrome, neste computador.',
+    private: 'Só você vê isto. A análise roda no navegador, neste computador.',
   },
   host: {
     badge: 'anfitrião',

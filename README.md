@@ -44,11 +44,11 @@ Then ask the assistant to join the room the team shares and estimate the story. 
 | `vote` | Votes one card of the deck with a short reason, both hidden until the reveal. |
 | `leave_room` | Gives the seat up. |
 
-An assistant cannot reveal, start a round or remove anyone, and it sees nobody's vote before the reveal. Its reason shows under its name at the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. CleanPoker calls no AI; the assistant reads the room because its user connected it.
+An assistant cannot reveal, start a round or remove anyone, and it sees nobody's vote before the reveal. Its reason shows under its name at the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. CleanPoker calls no AI service; the assistant reads the room because its user connected it.
 
-## Chrome's built-in AI
+## The browser's built-in AI
 
-Where Chrome exposes its on-device model (the Prompt API, Chrome 148 and later on desktop), the room shows a button that analyses the story on the table: what it leaves out, and a split if it looks too large. The model runs on the reader's computer; the story does not leave it and the answer is shown to that reader only. Elsewhere the button does not appear.
+Where Chrome exposes its on-device model (the Prompt API, Chrome 148 and later on desktop), the room shows a button that analyses the story on the table: what it leaves out, and a split if it looks too large. The model runs on the reader's computer; the analysis sends the story to no service and the answer is shown to that reader only. Elsewhere the button does not appear.
 
 ## Privacy
 

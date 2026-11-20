@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Le texte de la story est-il envoyé à une IA ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Oui, à l\'assistant qu\'une personne de l\'équipe a connecté, et à aucune autre IA : CleanPoker n\'en appelle aucune. L\'assistant reçoit l\'état de la salle : les titres des stories et leurs estimations si l\'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Oui, à l\'assistant qu\'une personne de l\'équipe a connecté, et à aucun service d\'IA : CleanPoker n\'en appelle aucun. L\'assistant reçoit l\'état de la salle : les titres des stories et leurs estimations si l\'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.' },
       },
     ],
   })}<\/script>`}
@@ -105,18 +105,20 @@ Quitte la salle quand je te le dis.</code></pre>
 
     <h2>Ce que reçoit l'assistant</h2>
     <p>
-      CleanPoker n'appelle aucune IA. L'assistant connecté par une personne de l'équipe reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, qui a voté, le journal d'activité, puis les votes une fois révélés. Il le reçoit sous l'abonnement de cette personne et les règles de son entreprise sur l'IA. La salle vit en mémoire sur le serveur de Gravelines et disparaît 24 heures après la dernière activité.
+      CleanPoker n'appelle aucun service d'IA. L'assistant connecté par une personne de l'équipe reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, qui a voté, le journal d'activité, puis les votes une fois révélés. Il le reçoit sous l'abonnement de cette personne et les règles de son entreprise sur l'IA. La salle vit en mémoire sur le serveur de Gravelines et disparaît 24 heures après la dernière activité.
     </p>
 
-    <h2>Sans assistant connecté&nbsp;: l'IA intégrée à Chrome</h2>
+    <h2>Sans assistant connecté&nbsp;: l'IA intégrée au navigateur</h2>
     <p>
       Dans Chrome 148 ou plus récent, sur un ordinateur Windows, macOS, Linux ou un Chromebook Plus,
-      un bouton «&nbsp;Analyser la story avec l'IA de Chrome&nbsp;» apparaît sous la story en cours. Il
-      liste ce que la story oublie et propose un découpage si elle paraît trop grosse, sans donner
-      d'estimation. Le modèle, Gemini Nano, tourne sur l'ordinateur&nbsp;: la story n'en sort pas, et la
-      réponse n'est visible que par la personne qui a cliqué. Au premier usage, Chrome télécharge le
-      modèle, plusieurs gigaoctets. Le bouton n'apparaît pas dans les autres navigateurs, sur
-      téléphone, ni sur une machine que Chrome juge trop peu puissante.
+      un bouton «&nbsp;Analyser la story avec l'IA du navigateur&nbsp;» apparaît sous la story en cours, si
+      l'équipe a collé sa liste de stories. Il liste ce que la story oublie, cinq lignes au plus, et
+      propose un découpage si elle paraît trop grosse, sans donner d'estimation. Le modèle, Gemini
+      Nano, tourne sur l'ordinateur&nbsp;: l'analyse n'envoie la story à aucun service, et la réponse
+      n'est visible que par la personne qui a cliqué. Elle arrive en français si le modèle le
+      propose, sinon en anglais. Au premier usage, Chrome télécharge le modèle, plusieurs
+      gigaoctets&nbsp;; il demande 22&nbsp;Go libres sur le disque, et 16&nbsp;Go de mémoire ou une carte
+      graphique de plus de 4&nbsp;Go. Le bouton n'apparaît ni sur téléphone, ni dans Firefox ou Safari.
     </p>
 
     <h2>Questions fréquentes</h2>
@@ -125,7 +127,7 @@ Quitte la salle quand je te le dis.</code></pre>
     <h3>Une IA estime-t-elle mieux qu'une équipe&nbsp;?</h3>
     <p>Non. Elle ne connaît ni la vélocité de l'équipe, ni l'état réel du code, ni qui dépend de qui. Elle est utile pour repérer ce que la story oublie&nbsp;: tests, migration de données, cas limites. Son vote sert à ouvrir la discussion quand il s'écarte de celui de l'équipe.</p>
     <h3>Le texte de la story est-il envoyé à une IA&nbsp;?</h3>
-    <p>Oui, à l'assistant qu'une personne de l'équipe a connecté, et à aucune autre IA&nbsp;: CleanPoker n'en appelle aucune. L'assistant reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.</p>
+    <p>Oui, à l'assistant qu'une personne de l'équipe a connecté, et à aucun service d'IA&nbsp;: CleanPoker n'en appelle aucun. L'assistant reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.</p>
 
     <div class="cta">
       <a href="/fr" class="btn">Créer une salle</a>

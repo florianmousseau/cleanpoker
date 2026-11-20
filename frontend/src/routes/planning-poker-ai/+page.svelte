@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Is the story text sent to an AI?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Yes, to the assistant a team member connected, and to no other AI: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes, to the assistant a team member connected, and to no AI service: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.' },
       },
     ],
   })}<\/script>`}
@@ -105,18 +105,20 @@ Leave the room when I say so.</code></pre>
 
     <h2>What the assistant receives</h2>
     <p>
-      CleanPoker calls no AI. The assistant a team member connected receives the room state: the story titles and their estimates if the team pasted a list, participant names, who has voted, the activity log, then the votes once revealed. It receives it under that person's subscription and their company's AI rules. The room lives in memory on the server in Gravelines, France, and disappears 24 hours after the last activity.
+      CleanPoker calls no AI service. The assistant a team member connected receives the room state: the story titles and their estimates if the team pasted a list, participant names, who has voted, the activity log, then the votes once revealed. It receives it under that person's subscription and their company's AI rules. The room lives in memory on the server in Gravelines, France, and disappears 24 hours after the last activity.
     </p>
 
-    <h2>Without a connected assistant: the AI built into Chrome</h2>
+    <h2>Without a connected assistant: the AI built into the browser</h2>
     <p>
       In Chrome 148 or later, on a Windows, macOS or Linux computer or a Chromebook Plus, an
-      "Analyse the story with Chrome's AI" button shows under the story on the table. It lists what
-      the story leaves out and proposes a split if it looks too large, without giving an estimate.
-      The model, Gemini Nano, runs on the computer: the story does not leave it, and only the person
-      who clicked sees the answer. On first use, Chrome downloads the model, several gigabytes. The
-      button does not show in other browsers, on phones, or on a machine Chrome finds not powerful
-      enough.
+      "Analyze the story with the browser's AI" button shows under the story on the table, if the
+      team pasted its story list. It lists what the story leaves out, five lines at most, and
+      proposes a split if it looks too large, without giving an estimate. The model, Gemini Nano,
+      runs on the computer: the analysis sends the story to no service, and only the person who
+      clicked sees the answer. The answer comes in the room's language if the model offers it,
+      otherwise in English. On first use, Chrome downloads the model, several gigabytes; it needs
+      22 GB of free disk, and 16 GB of memory or a graphics card with more than 4 GB. The button
+      does not show on phones, or in Firefox or Safari.
     </p>
 
     <h2>FAQ</h2>
@@ -125,7 +127,7 @@ Leave the room when I say so.</code></pre>
     <h3>Does AI estimate better than a team?</h3>
     <p>No. It does not know the team's velocity, the real state of the code or who depends on whom. It is useful for spotting what the story leaves out: tests, data migration, edge cases. Its vote opens the discussion when it differs from the team's.</p>
     <h3>Is the story text sent to an AI?</h3>
-    <p>Yes, to the assistant a team member connected, and to no other AI: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.</p>
+    <p>Yes, to the assistant a team member connected, and to no AI service: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.</p>
 
     <div class="cta">
       <a href="/" class="btn">Create a room</a>
