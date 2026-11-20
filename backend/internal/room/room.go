@@ -2,6 +2,7 @@ package room
 
 import (
 	"crypto/subtle"
+	"errors"
 	"slices"
 	"strings"
 	"sync"
@@ -53,7 +54,9 @@ type departure struct {
 }
 
 type ActivityEntry struct {
-	Timestamp string `json:"timestamp"`
+	// Timestamp is in Unix milliseconds: each browser shows it in its own
+	// time zone, where a clock formatted here was the server's.
+	Timestamp int64  `json:"timestamp"`
 	Initiator string `json:"initiator"`
 	Message   string `json:"message"`
 	Target    string `json:"target,omitempty"`
@@ -210,6 +213,8 @@ func (r *Room) buildSnapshot(masked bool) Snapshot {
 		}
 		players = append(players, &cp)
 	}
+	// A map has no order: without this the rows moved on every update.
+	slices.SortFunc(players, func(a, b *Player) int { return a.seq - b.seq })
 	activity := make([]ActivityEntry, len(r.activity))
 	copy(activity, r.activity)
 	var results *Results
@@ -275,7 +280,7 @@ func (r *Room) nameOf(playerID string) string {
 
 func (r *Room) logActivity(initiator, message string, target ...string) {
 	entry := ActivityEntry{
-		Timestamp: time.Now().Format("15:04:05"),
+		Timestamp: time.Now().UnixMilli(),
 		Initiator: initiator,
 		Message:   message,
 	}
@@ -483,18 +488,30 @@ func (r *Room) current(round int) bool {
 // from a seat turned observer) stayed on the voter's screen as if counted.
 // round is the round the voter saw; a vote meant for an earlier one is refused.
 func (r *Room) CastVote(playerID, vote string, round int) {
-	r.CastVoteWithReason(playerID, vote, "", round)
+	_ = r.CastVoteWithReason(playerID, vote, "", round)
 }
 
 // MaxReasonLength bounds the explanation a vote carries.
 const MaxReasonLength = 280
 
+// Why a vote was refused, for a caller that has no screen to see it on.
+var (
+	ErrNoSeat       = errors.New("no such seat in this room")
+	ErrRevealed     = errors.New("the round is already revealed: wait for the next round to vote")
+	ErrObserver     = errors.New("an observer does not vote")
+	ErrOtherRound   = errors.New("this vote was meant for a round that has ended")
+	ErrNotInDeck    = errors.New("this card is not in the room deck")
+	errRoomIsClosed = errors.New("the room is closed")
+)
+
 // CastVoteWithReason is CastVote with a short explanation, shown to the room
-// with the vote at the reveal.
-func (r *Room) CastVoteWithReason(playerID, vote, reason string, round int) {
+// with the vote at the reveal. It returns why the vote was refused, if it was.
+func (r *Room) CastVoteWithReason(playerID, vote, reason string, round int) error {
+	err := errRoomIsClosed
 	r.mutate(func() {
 		p, ok := r.players[playerID]
 		if !ok {
+			err = ErrNoSeat
 			return
 		}
 		defer func() {
@@ -502,7 +519,7 @@ func (r *Room) CastVoteWithReason(playerID, vote, reason string, round int) {
 			// can never reach the voter ahead of this answer.
 			r.publishTo(playerID, Message{Type: "vote", Payload: p.Vote})
 		}()
-		if !r.accepts(p, vote, round) {
+		if err = r.refusal(p, vote, round); err != nil {
 			return
 		}
 		r.record(p, vote, reason)
@@ -510,17 +527,25 @@ func (r *Room) CastVoteWithReason(playerID, vote, reason string, round int) {
 			r.reveal("PokerAgile")
 		}
 	})
+	return err
 }
 
-// accepts reports whether p may cast vote now: a round still voting, the
-// round the voter saw, a participant, and a card of this room's deck or
-// nothing, since any other string from a scripted client would land in
-// everyone's results. Callers hold r.mu.
-func (r *Room) accepts(p *Player, vote string, round int) bool {
-	if r.state != StateVoting || p.Observer || !r.current(round) {
-		return false
+// refusal says why p may not cast vote now, or nil: it takes a round still
+// voting, the round the voter saw, a participant, and a card of this room's
+// deck or nothing, since any other string from a scripted client would land
+// in everyone's results. Callers hold r.mu.
+func (r *Room) refusal(p *Player, vote string, round int) error {
+	switch {
+	case r.state != StateVoting:
+		return ErrRevealed
+	case p.Observer:
+		return ErrObserver
+	case !r.current(round):
+		return ErrOtherRound
+	case vote != "" && !slices.Contains(r.cards, vote):
+		return ErrNotInDeck
 	}
-	return vote == "" || slices.Contains(r.cards, vote)
+	return nil
 }
 
 // record sets the vote and its reason, an empty vote clearing both. Callers
