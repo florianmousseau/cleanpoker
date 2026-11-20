@@ -16,6 +16,7 @@ export interface Translation {
   stories: { title: string; onTable: string; none: string; addLabel: string; addPlaceholder: string; addBtn: string; clear: string; clearConfirm: string; colStory: string; colEstimate: string; vote: (t: string) => string; keep: (v: string) => string; keepTitle: string; next: string; copyMd: string; downloadCsv: string; copied: string };
   qr: { show: string; hide: string; alt: string; failed: string };
   ia: { button: string; again: string; running: string; downloading: (n: number) => string; failed: string; private: string };
+  team: { summary: string; name: string; color: string };
   host: { badge: string; ai: string; lock: string; unlock: string; lockedHint: string; timer: string; timerStop: string; timerLeft: (s: string) => string; timerOver: string; seconds: (n: number) => string };
   participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string; kickConfirm: (n: string) => string };
   observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
@@ -125,6 +126,11 @@ export const FR: Translation = {
     downloading: (n: number) => `Le navigateur télécharge son modèle, ${n}\u00A0%`,
     failed: "L'analyse n'a pas abouti.",
     private: "Visible par vous seul. L'analyse tourne dans le navigateur, sur cet ordinateur.",
+  },
+  team: {
+    summary: "Habiller la salle aux couleurs de l'équipe",
+    name: "Nom de l'équipe",
+    color: 'Couleur',
   },
   host: {
     badge: 'hôte',
@@ -306,6 +312,11 @@ export const EN: Translation = {
     failed: 'The analysis did not complete.',
     private: 'Only you see this. The analysis runs in the browser, on this computer.',
   },
+  team: {
+    summary: "Dress the room in the team's colours",
+    name: 'Team name',
+    color: 'Colour',
+  },
   host: {
     badge: 'host',
     ai: 'AI',
@@ -485,6 +496,11 @@ export const ES: Translation = {
     downloading: (n: number) => `El navegador descarga su modelo, ${n} %`,
     failed: 'El análisis no se completó.',
     private: 'Solo usted lo ve. El análisis se hace en el navegador, en este ordenador.',
+  },
+  team: {
+    summary: 'Vestir la sala con los colores del equipo',
+    name: 'Nombre del equipo',
+    color: 'Color',
   },
   host: {
     badge: 'anfitrión',
@@ -666,6 +682,11 @@ export const DE: Translation = {
     failed: 'Die Analyse wurde nicht abgeschlossen.',
     private: 'Nur Sie sehen das. Die Analyse läuft im Browser, auf diesem Computer.',
   },
+  team: {
+    summary: 'Den Raum in den Farben des Teams gestalten',
+    name: 'Teamname',
+    color: 'Farbe',
+  },
   host: {
     badge: 'Host',
     ai: 'KI',
@@ -845,6 +866,11 @@ export const PT: Translation = {
     downloading: (n: number) => `O navegador está baixando o modelo, ${n} %`,
     failed: 'A análise não terminou.',
     private: 'Só você vê isto. A análise roda no navegador, neste computador.',
+  },
+  team: {
+    summary: 'Vestir a sala com as cores da equipe',
+    name: 'Nome da equipe',
+    color: 'Cor',
   },
   host: {
     badge: 'anfitrião',

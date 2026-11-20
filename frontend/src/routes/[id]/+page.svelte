@@ -4,6 +4,7 @@
   import { lang } from '#lib/lang.svelte.ts';
   import Footer from '#lib/Footer.svelte';
   import QrCode from '#lib/QrCode.svelte';
+  import { equipeDe } from '#lib/equipe.ts';
   import Logo from '#lib/Logo.svelte';
   import { FR, EN, ES, DE, PT, translateActivity } from '#lib/i18n.ts';
   import { useRoom } from '#lib/useRoom.svelte.ts';
@@ -19,6 +20,7 @@
   import LocalAi from '#lib/LocalAi.svelte';
 
   const roomId = $derived(page.params.id ?? '');
+  const equipe = $derived(equipeDe(page.url.searchParams));
   const T = $derived(
     lang.current === 'fr' ? FR :
     lang.current === 'es' ? ES :
@@ -155,11 +157,12 @@
 
 <div aria-live="polite" aria-atomic="true" class="sr-only">{room.liveAnnouncement}</div>
 
-<div class="page">
+<div class="page" class:equipe={equipe?.clair} style:--eq-clair={equipe?.clair || undefined} style:--eq-sombre={equipe?.sombre || undefined}>
   <header class="header">
     <div class="container header-inner">
       <a href={homeHref} class="logo" aria-label="PokerAgile, accueil"><Logo /><span>PokerAgile</span></a>
       <div class="room-meta">
+        {#if equipe?.nom}<span class="badge-pill team-name" data-testid="team-name">{equipe.nom}</span>{/if}
         <span class="badge-pill">{T.salleLabel} <code>{roomId}</code></span>
         {#if room.roomState}
           <span class="badge-pill">{T.tourLabel} {room.roomState.round}</span>
@@ -538,6 +541,25 @@
 
 <style>
   .page { display: flex; flex-direction: column; min-height: 100dvh; }
+  /* A team colour, already brought to 4.5:1 against the text that sits on it. */
+  .page.equipe {
+    --color-primary: var(--eq-clair); --color-primary-hover: var(--eq-clair);
+    --color-card-border-selected: var(--eq-clair);
+    --color-card-selected: color-mix(in srgb, var(--eq-clair) 12%, white);
+  }
+  :global([data-theme="dark"]) .page.equipe {
+    --color-primary: var(--eq-sombre); --color-primary-hover: var(--eq-sombre);
+    --color-card-border-selected: var(--eq-sombre);
+    --color-card-selected: color-mix(in srgb, var(--eq-sombre) 18%, #0d1117);
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .page.equipe {
+      --color-primary: var(--eq-sombre); --color-primary-hover: var(--eq-sombre);
+      --color-card-border-selected: var(--eq-sombre);
+      --color-card-selected: color-mix(in srgb, var(--eq-sombre) 18%, #0d1117);
+    }
+  }
+  .badge-pill.team-name { font-weight: 700; color: var(--color-primary); border-color: var(--color-primary); }
 
   .header { padding: 0.75rem 0; border-bottom: 1px solid var(--color-border); }
   .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }

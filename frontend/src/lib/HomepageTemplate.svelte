@@ -1,5 +1,7 @@
 <script lang="ts">
   import Logo from '#lib/Logo.svelte';
+  import { FR, EN, ES, DE, PT } from '#lib/i18n.ts';
+  import { requeteEquipe } from '#lib/equipe.ts';
   import { PUBLIC_API_URL } from '$app/env/public';
   import { onMount } from 'svelte';
   import { goto, replaceState } from '$app/navigation';
@@ -131,6 +133,11 @@
   const fits = $derived(fitsServer(cards));
   const isValid = $derived(cards.length >= 2 && fits);
 
+  const TT = $derived({ fr: FR, en: EN, es: ES, de: DE, pt: PT }[locale]);
+  let teamName = $state('');
+  let teamColor = $state('#1a6b3c');
+  let teamOpen = $state(false);
+
   const CREATE_TIMEOUT_MS = 15000;
 
   async function createRoom() {
@@ -148,7 +155,9 @@
       if (!res.ok) throw new Error();
       const { id } = await res.json();
       lang.set(locale);
-      await goto(`/${id}`);
+      // The team and its deck travel in the address: a saved link reopens the
+      // same room dressed the same way, sprint after sprint.
+      await goto(`/${id}${teamOpen ? requeteEquipe(teamName, teamColor, cards) : requeteEquipe('', '', cards)}`);
     } catch {
       error = createError;
     } finally {
@@ -234,6 +243,16 @@
         </p>
       </div>
 
+      <details class="team-field" bind:open={teamOpen}>
+        <summary>{TT.team.summary}</summary>
+        <div class="team-inputs">
+          <label for="team-name">{TT.team.name}</label>
+          <input id="team-name" type="text" maxlength="30" autocomplete="off" bind:value={teamName} />
+          <label for="team-color">{TT.team.color}</label>
+          <input id="team-color" type="color" bind:value={teamColor} />
+        </div>
+      </details>
+
       {#if error}
         <p class="error" role="alert">{error}</p>
       {/if}
@@ -296,6 +315,11 @@
   }
   .cards-field input[type="text"]:focus { outline: none; border-color: var(--color-primary); }
 
+  .team-field { width: 100%; font-size: 0.9rem; }
+  .team-field summary { cursor: pointer; font-weight: 600; color: var(--color-text-muted); }
+  .team-inputs { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.5rem 0.75rem; margin-top: 0.625rem; }
+  .team-inputs input[type="text"] { width: 100%; padding: 0.5rem min(0.75rem, 12px); font: inherit; border: 2px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg); color: var(--color-text); }
+  .team-inputs input[type="color"] { width: 3rem; height: 2.25rem; padding: 0; border: 2px solid var(--color-border); border-radius: var(--radius); background: none; }
   .cards-preview { display: flex; flex-wrap: wrap; gap: 0.3rem; min-height: 1.75rem; }
   .card-chip { overflow-wrap: anywhere; font-size: 0.78rem; font-weight: 700; padding: 0.15rem 0.5rem; background: var(--color-card-selected); color: var(--color-primary); border-radius: 99px; border: 1px solid var(--color-card-border-selected); }
   .cards-error { font-size: 0.78rem; color: var(--color-danger); }
