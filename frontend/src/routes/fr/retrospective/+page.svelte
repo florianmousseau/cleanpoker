@@ -28,7 +28,7 @@
       {
         '@type': 'Question',
         name: 'Combien de temps dure une rétrospective de sprint ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Le Guide Scrum de 2020 fixe un maximum de trois heures pour un sprint d\'un mois et précise que l\'événement est en général plus court pour un sprint plus court. Une équipe en sprints de deux semaines réserve le plus souvent 60 à 90 minutes.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Le Guide Scrum de 2020 fixe un maximum de trois heures pour un sprint d\'un mois et précise que l\'événement est en général plus court pour un sprint plus court. À titre d\'exemple, une équipe en sprints de deux semaines peut réserver 60 à 90 minutes ; le guide ne donne pas de chiffre pour cette durée de sprint.' },
       },
       {
         '@type': 'Question',
@@ -57,7 +57,7 @@
     <h2>Les 11 formats de rétrospective en un tableau</h2>
     <div class="table-wrap">
     <table>
-      <thead><tr><th>Format</th><th>Quand l'utiliser</th><th>Durée</th></tr></thead>
+      <thead><tr><th>Format</th><th>Quand l'utiliser</th><th>Durée indicative</th></tr></thead>
       <tbody>
         <tr><td>ESVP</td><td>En ouverture, pour savoir qui a envie d'être là</td><td>10 min</td></tr>
         <tr><td>Start, Stop, Continue</td><td>Une première rétrospective, ou une équipe pressée</td><td>45 min</td></tr>
@@ -73,14 +73,14 @@
       </tbody>
     </table>
     </div>
-    <p>Les durées valent pour une équipe de 5 à 8 personnes. L'ESVP, le vote par gommettes et le ROTI sont des activités courtes&nbsp;: elles ouvrent, trient ou ferment une rétrospective construite sur l'un des huit autres formats.</p>
+    <p>Les durées sont des exemples pour une équipe de 5 à 8 personnes, pas des règles. L'ESVP, le vote par gommettes et le ROTI sont des activités courtes&nbsp;: elles ouvrent, trient ou ferment une rétrospective construite sur l'un des huit autres formats.</p>
 
     <h2>Qu'est-ce qu'une rétrospective de sprint&nbsp;?</h2>
     <p>Le <a href="https://scrumguides.org/scrum-guide.html" rel="noopener noreferrer">Guide Scrum de 2020</a> donne un seul but à la rétrospective de sprint&nbsp;: planifier des moyens d'améliorer la qualité et l'efficacité. C'est le dernier événement du sprint, après la revue de sprint.</p>
     <ul>
       <li><strong>Qui participe</strong>&nbsp;: l'équipe Scrum, c'est-à-dire les développeurs, le product owner et le scrum master.</li>
       <li><strong>Ce qu'on inspecte</strong>&nbsp;: les individus, les interactions, les processus, les outils et la Definition of Done.</li>
-      <li><strong>Combien de temps</strong>&nbsp;: trois heures au maximum pour un sprint d'un mois, et en général moins pour un sprint plus court. Une équipe en sprints de deux semaines réserve le plus souvent 60 à 90 minutes.</li>
+      <li><strong>Combien de temps</strong>&nbsp;: trois heures au maximum pour un sprint d'un mois, et en général moins pour un sprint plus court. À titre d'exemple, une équipe en sprints de deux semaines peut réserver 60 à 90 minutes&nbsp;; le guide ne donne pas de chiffre pour cette durée de sprint.</li>
       <li><strong>Ce qui en sort</strong>&nbsp;: les changements les plus utiles que l'équipe a trouvés. Le guide dit qu'ils sont traités dès que possible et qu'ils peuvent entrer dans le Sprint Backlog du sprint suivant.</li>
     </ul>
 
@@ -98,7 +98,7 @@
     <h2>Les 11 formats, étape par étape</h2>
 
     <h3>ESVP, pour ouvrir la séance</h3>
-    <p>À utiliser en ouverture, quand on ne sait pas si les participants ont envie d'être là. L'activité dure 10 minutes et vient du livre de Derby et Larsen.</p>
+    <p>À utiliser en ouverture, quand on ne sait pas si les participants ont envie d'être là. Prévoir environ 10 minutes. Derby et Larsen décrivent cette activité dans leur livre comme un sondage anonyme.</p>
     <ol>
       <li>Écrire les quatre rôles au tableau. L'Explorateur (Explorer) veut découvrir de nouvelles idées. Le Client (Shopper) sera content de repartir avec une idée utile. Le Vacancier (Vacationer) est content d'échapper au travail courant. Le Prisonnier (Prisoner) se sent obligé d'être là.</li>
       <li>Chacun écrit une lettre, E, S, V ou P, sur un papier plié, sans son nom.</li>
@@ -128,7 +128,7 @@
     </ol>
 
     <h3>Les 4L&nbsp;: Liked, Learned, Lacked, Longed for</h3>
-    <p>À utiliser à la fin d'une release ou d'un projet, quand l'équipe veut savoir ce qu'elle a appris autant que ce qui a mal tourné. Prévoir 60 minutes. Mary Gorman et Ellen Gottesdiener ont publié le format en 2010.</p>
+    <p>À utiliser à la fin d'une release ou d'un projet, quand l'équipe veut savoir ce qu'elle a appris autant que ce qui a mal tourné. Prévoir 60 minutes. Mary Gorman et Ellen Gottesdiener ont décrit le format en juin 2010.</p>
     <ol>
       <li>Tracer quatre zones&nbsp;: Liked (aimé), Learned (appris), Lacked (ce qui a manqué) et Longed for (ce qu'on aurait voulu avoir).</li>
       <li>Chacun écrit ses notes en silence pendant 10 minutes. Un environnement de test absent va dans Lacked. Une revue de conception avant de coder va dans Longed for.</li>
@@ -137,7 +137,7 @@
     </ol>
 
     <h3>Le voilier (Speedboat)</h3>
-    <p>À utiliser quand l'équipe a un objectif précis, par exemple une date de mise en production, et veut lister ce qui l'aide et ce qui le menace. Prévoir 60 minutes. Le voilier adapte le Speedboat, un jeu que Luke Hohmann a publié dans «&nbsp;Innovation Games&nbsp;» en 2006&nbsp;: des clients y écrivent sur des ancres ce qui freine un produit.</p>
+    <p>À utiliser quand l'équipe a un objectif précis, par exemple une date de mise en production, et veut lister ce qui l'aide et ce qui le menace. Prévoir 60 minutes. Le format porte aussi le nom de Speedboat, un jeu que Luke Hohmann a publié dans «&nbsp;Innovation Games&nbsp;» en 2006&nbsp;: des clients y désignent ce qui les gêne le plus dans un produit.</p>
     <ol>
       <li>Dessiner un bateau, une île, le vent, une ancre et des rochers.</li>
       <li>Écrire l'objectif sur l'île.</li>
@@ -148,7 +148,7 @@
     </ol>
 
     <h3>L'étoile de mer (Starfish)</h3>
-    <p>À utiliser quand le Start, Stop, Continue est devenu une routine&nbsp;: deux branches de plus permettent de demander plus ou moins d'une pratique sans la supprimer. Prévoir 60 minutes. Patrick Kua a publié l'étoile de mer en 2006.</p>
+    <p>À utiliser quand le Start, Stop, Continue est devenu une routine&nbsp;: deux branches de plus permettent de demander plus ou moins d'une pratique sans la supprimer. Prévoir 60 minutes. Patrick Kua a décrit l'étoile de mer sur son blog en mars 2006.</p>
     <ol>
       <li>Tracer cinq branches à partir d'un point&nbsp;: Keep doing (continuer), Less of (moins de), More of (plus de), Stop doing (arrêter), Start doing (commencer).</li>
       <li>Chacun écrit ses notes en silence pendant 10 minutes.</li>
@@ -169,7 +169,7 @@
     </ol>
 
     <h3>Les 5 pourquoi</h3>
-    <p>À utiliser sur un problème revenu dans plusieurs sprints. L'exercice dure 20 à 30 minutes, une fois les données collectées. Taiichi Ohno décrit la technique dans «&nbsp;Toyota Production System&nbsp;», traduit en anglais en 1988.</p>
+    <p>À utiliser sur un problème revenu dans plusieurs sprints. Prévoir 20 à 30 minutes, une fois les données collectées. Taiichi Ohno décrit la technique dans «&nbsp;Toyota Production System&nbsp;», traduit en anglais en 1988.</p>
     <ol>
       <li>Écrire le problème comme un fait&nbsp;: «&nbsp;La release est partie avec deux jours de retard.&nbsp;»</li>
       <li>Demander pourquoi et écrire la réponse&nbsp;: «&nbsp;Les tests de non-régression ont échoué jeudi.&nbsp;»</li>
@@ -184,27 +184,27 @@
       <li>Tracer trois colonnes&nbsp;: À discuter, En discussion, Discuté.</li>
       <li>Chacun écrit ses sujets pendant 5 minutes, un par note, et présente chacun en une phrase.</li>
       <li>Chaque personne dispose de deux votes. Classer la colonne À discuter par nombre de votes.</li>
-      <li>Passer le premier sujet dans En discussion et lancer un minuteur de 7 minutes.</li>
-      <li>Quand le minuteur sonne, chacun montre son pouce&nbsp;: vers le haut pour ajouter 3 minutes, vers le bas pour passer au sujet suivant.</li>
+      <li>Passer le premier sujet dans En discussion et lancer un minuteur, par exemple de 7 minutes.</li>
+      <li>Quand le minuteur sonne, chacun montre son pouce&nbsp;: vers le haut pour ajouter du temps, par exemple 3 minutes, vers le bas pour passer au sujet suivant.</li>
       <li>Noter l'action éventuelle avant de passer le sujet dans Discuté.</li>
       <li>S'arrêter 5 minutes avant la fin et relire les actions à voix haute.</li>
     </ol>
 
     <h3>Le vote par gommettes (dot voting)</h3>
-    <p>À utiliser quand le tableau porte plus de sujets que l'équipe ne peut en discuter. Le vote dure 5 minutes.</p>
+    <p>À utiliser quand le tableau porte plus de sujets que l'équipe ne peut en discuter. Prévoir environ 5 minutes.</p>
     <ol>
       <li>Donner à chaque personne le même nombre de gommettes, par exemple trois.</li>
       <li>Chacun colle ses gommettes sur les notes ou les groupes qu'il veut traiter. Deux gommettes sur la même note sont permises.</li>
       <li>Compter les gommettes et garder le premier ou les deux premiers sujets.</li>
     </ol>
-    <p>Sur un mur, les derniers votants voient les premières gommettes. Les tableaux blancs en ligne qui proposent un mode vote masquent les votes jusqu'au décompte.</p>
+    <p>Sur un mur, les derniers votants voient les premières gommettes. Certains tableaux blancs en ligne ont un mode vote qui masque les votes jusqu'au décompte.</p>
 
     <h3>ROTI, pour clore la séance</h3>
-    <p>ROTI signifie «&nbsp;return on time invested&nbsp;», le retour sur le temps investi. À utiliser dans les 5 dernières minutes pour noter la rétrospective elle-même. L'activité est décrite dans le livre de Derby et Larsen.</p>
+    <p>ROTI signifie «&nbsp;return on time invested&nbsp;», le retour sur le temps investi. À utiliser dans les 5 dernières minutes pour noter la rétrospective elle-même. Derby et Larsen décrivent l'activité dans leur livre, avec une échelle de 0 à 4.</p>
     <ol>
-      <li>Expliquer l'échelle&nbsp;: 1 doigt veut dire «&nbsp;j'ai perdu mon temps&nbsp;», 3 doigts «&nbsp;j'ai reçu autant que le temps passé&nbsp;», 5 doigts «&nbsp;j'ai reçu bien plus que le temps passé&nbsp;».</li>
-      <li>Tout le monde montre sa main au même moment.</li>
-      <li>Demander à ceux qui ont montré 1 ou 2 doigts ce qui en aurait fait un 4.</li>
+      <li>Expliquer l'échelle&nbsp;: 0 veut dire «&nbsp;aucun bénéfice pour le temps investi&nbsp;», 2 «&nbsp;un bénéfice égal au temps investi&nbsp;», 4 «&nbsp;un bénéfice supérieur au temps investi&nbsp;».</li>
+      <li>Chacun montre un nombre de doigts au même moment, du poing fermé pour 0 à quatre doigts.</li>
+      <li>Demander à ceux qui ont montré 0 ou 1 ce qu'ils attendaient et n'ont pas obtenu.</li>
       <li>Noter la moyenne à côté de la date et la comparer à celle des rétrospectives précédentes.</li>
     </ol>
 
@@ -215,15 +215,15 @@
       <li>Tenir la réunion en 60 minutes, et ajouter une pause de 5 minutes si elle dépasse 90.</li>
       <li>Nommer un animateur qui n'est pas la personne qui prend les notes.</li>
       <li>Pour une équipe répartie sur plusieurs fuseaux horaires, ouvrir le tableau 24 heures avant pour l'écriture et garder l'appel pour regrouper, voter et décider.</li>
-      <li>Remplacer les mains levées du ROTI par un chiffre tapé dans le chat et envoyé au signal.</li>
+      <li>Remplacer les doigts du ROTI par un chiffre tapé dans le chat et envoyé au signal.</li>
     </ul>
 
     <h2>Les erreurs fréquentes en rétrospective</h2>
     <ul>
       <li><strong>Repartir sans action.</strong> Une rétrospective qui se termine sur une liste de plaintes ne change rien au sprint suivant. Chaque action a un responsable et une date.</li>
-      <li><strong>Reprendre le même format à chaque sprint.</strong> Après cinq ou six sprints de Start, Stop, Continue, les mêmes notes reviennent. Un autre format pose d'autres questions à l'équipe.</li>
+      <li><strong>Reprendre le même format à chaque sprint.</strong> Quand les mêmes notes reviennent d'un sprint à l'autre, changer de format&nbsp;: un autre pose d'autres questions à l'équipe.</li>
       <li><strong>Inviter un manager dont la présence fait taire l'équipe.</strong> Le Guide Scrum cite l'équipe Scrum comme participants. Quand la personne qui mène les entretiens annuels est dans la salle, les problèmes ne se disent pas.</li>
-      <li><strong>Prendre trop d'actions.</strong> Une équipe qui repart avec huit actions n'en termine aucune. En garder une ou deux, et ouvrir la rétrospective suivante en les vérifiant.</li>
+      <li><strong>Prendre trop d'actions.</strong> Une équipe qui repart avec huit actions les termine rarement. En garder une ou deux, et ouvrir la rétrospective suivante en les vérifiant.</li>
     </ul>
     <p>Une action qui demande du développement passe au sprint planning suivant, où l'équipe peut l'estimer en <a href="/fr/planning-poker">poker planning</a>.</p>
 
@@ -231,7 +231,7 @@
     <h3>Quelles sont les 5 étapes d'une rétrospective&nbsp;?</h3>
     <p>Poser le cadre, collecter les données, faire émerger les causes, décider des actions, clore la rétrospective. Esther Derby et Diana Larsen ont décrit ces cinq phases dans «&nbsp;Agile Retrospectives: Making Good Teams Great&nbsp;», paru en 2006.</p>
     <h3>Combien de temps dure une rétrospective de sprint&nbsp;?</h3>
-    <p>Le Guide Scrum de 2020 fixe un maximum de trois heures pour un sprint d'un mois et précise que l'événement est en général plus court pour un sprint plus court. Une équipe en sprints de deux semaines réserve le plus souvent 60 à 90 minutes.</p>
+    <p>Le Guide Scrum de 2020 fixe un maximum de trois heures pour un sprint d'un mois et précise que l'événement est en général plus court pour un sprint plus court. À titre d'exemple, une équipe en sprints de deux semaines peut réserver 60 à 90 minutes&nbsp;; le guide ne donne pas de chiffre pour cette durée de sprint.</p>
     <h3>Qui participe à la rétrospective de sprint&nbsp;?</h3>
     <p>L'équipe Scrum&nbsp;: les développeurs, le product owner et le scrum master. Le Guide Scrum ne cite aucun autre participant. Un manager ou une partie prenante vient seulement si l'équipe l'invite.</p>
     <h3>Quelle est la différence entre la revue de sprint et la rétrospective&nbsp;?</h3>

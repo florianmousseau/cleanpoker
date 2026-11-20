@@ -28,7 +28,7 @@
       {
         '@type': 'Question',
         name: 'How long should a sprint retrospective last?',
-        acceptedAnswer: { '@type': 'Answer', text: 'The 2020 Scrum Guide sets a maximum of three hours for a one-month sprint and says the event is usually shorter for shorter sprints. Teams on two-week sprints commonly book 60 to 90 minutes.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'The 2020 Scrum Guide sets a maximum of three hours for a one-month sprint and says the event is usually shorter for shorter sprints. As an example, a team on two-week sprints can book 60 to 90 minutes; the guide gives no figure for that sprint length.' },
       },
       {
         '@type': 'Question',
@@ -57,7 +57,7 @@
     <h2>The 11 retrospective formats at a glance</h2>
     <div class="table-wrap">
     <table>
-      <thead><tr><th>Format</th><th>Best for</th><th>Duration</th></tr></thead>
+      <thead><tr><th>Format</th><th>Best for</th><th>Example duration</th></tr></thead>
       <tbody>
         <tr><td>ESVP check-in</td><td>Opening: finding out who wants to be in the room</td><td>10 min</td></tr>
         <tr><td>Start/Stop/Continue</td><td>A first retrospective, or a team short on time</td><td>45 min</td></tr>
@@ -73,14 +73,14 @@
       </tbody>
     </table>
     </div>
-    <p>The durations assume a team of 5 to 8 people. ESVP, dot voting and ROTI are short activities that open, narrow down or close a retrospective built on one of the other eight formats.</p>
+    <p>The durations are examples for a team of 5 to 8 people, not rules. ESVP, dot voting and ROTI are short activities that open, narrow down or close a retrospective built on one of the other eight formats.</p>
 
     <h2>What is a sprint retrospective?</h2>
     <p>The <a href="https://scrumguides.org/scrum-guide.html" rel="noopener noreferrer">2020 Scrum Guide</a> gives the sprint retrospective one purpose: to plan ways to increase quality and effectiveness. It is the last event of the sprint, after the sprint review.</p>
     <ul>
       <li><strong>Who attends</strong>: the Scrum Team, meaning the developers, the product owner and the scrum master.</li>
       <li><strong>What is inspected</strong>: individuals, interactions, processes, tools and the Definition of Done.</li>
-      <li><strong>How long</strong>: a maximum of three hours for a one-month sprint, and usually shorter for shorter sprints. Teams on two-week sprints commonly book 60 to 90 minutes.</li>
+      <li><strong>How long</strong>: a maximum of three hours for a one-month sprint, and usually shorter for shorter sprints. As an example, a team on two-week sprints can book 60 to 90 minutes; the guide gives no figure for that sprint length.</li>
       <li><strong>What comes out</strong>: the most helpful changes the team identified. The guide says they are addressed as soon as possible and may be added to the Sprint Backlog of the next sprint.</li>
     </ul>
 
@@ -98,7 +98,7 @@
     <h2>The 11 formats, step by step</h2>
 
     <h3>ESVP check-in</h3>
-    <p>Use it to open a retrospective when you do not know how willing people are to take part. It takes 10 minutes and comes from Derby and Larsen's book.</p>
+    <p>Use it to open a retrospective when you do not know how willing people are to take part. Allow about 10 minutes. Derby and Larsen describe it in their book as an anonymous poll.</p>
     <ol>
       <li>Write the four roles on a board. An Explorer wants to discover new ideas. A Shopper will be happy to leave with one useful idea. A Vacationer is glad to be away from daily work. A Prisoner feels forced to attend.</li>
       <li>Each person writes one letter, E, S, V or P, on a folded slip of paper, without a name.</li>
@@ -128,7 +128,7 @@
     </ol>
 
     <h3>4Ls: Liked, Learned, Lacked, Longed for</h3>
-    <p>Use it at the end of a release or a project, when the question is what the team learned as much as what went wrong. Plan 60 minutes. Mary Gorman and Ellen Gottesdiener published the format in 2010.</p>
+    <p>Use it at the end of a release or a project, when the question is what the team learned as much as what went wrong. Plan 60 minutes. Mary Gorman and Ellen Gottesdiener described the format in June 2010.</p>
     <ol>
       <li>Draw four areas: Liked, Learned, Lacked and Longed for.</li>
       <li>Everyone writes notes in silence for 10 minutes. "Lacked" is something that was missing, such as a test environment. "Longed for" is something the person wished for, such as a design review before coding.</li>
@@ -137,7 +137,7 @@
     </ol>
 
     <h3>Sailboat (Speedboat)</h3>
-    <p>Use it when the team has a clear goal, such as a release date, and wants to list what helps and what threatens it. Plan 60 minutes. The Sailboat is an adaptation of Speedboat, a game Luke Hohmann published in "Innovation Games" in 2006, in which customers write on anchors what slows a product down.</p>
+    <p>Use it when the team has a clear goal, such as a release date, and wants to list what helps and what threatens it. Plan 60 minutes. The format also goes by Speedboat, the name of a game Luke Hohmann published in "Innovation Games" in 2006, in which customers identify their biggest pain points with a product.</p>
     <ol>
       <li>Draw a boat, an island, the wind, an anchor and rocks.</li>
       <li>Write the goal on the island.</li>
@@ -148,7 +148,7 @@
     </ol>
 
     <h3>Starfish</h3>
-    <p>Use it when Start/Stop/Continue has become routine: two extra branches let people ask for more or less of a practice without dropping it. Plan 60 minutes. Patrick Kua published the Starfish in 2006.</p>
+    <p>Use it when Start/Stop/Continue has become routine: two extra branches let people ask for more or less of a practice without dropping it. Plan 60 minutes. Patrick Kua described the Starfish on his blog in March 2006.</p>
     <ol>
       <li>Draw five branches from one point: Keep doing, Less of, More of, Stop doing, Start doing.</li>
       <li>Everyone writes notes in silence for 10 minutes.</li>
@@ -163,13 +163,13 @@
       <li>Draw a horizontal line from the first day to the last day of the period.</li>
       <li>Everyone writes the events they remember, one per note: a deployment, an outage, a person joining, a change of scope.</li>
       <li>Place the notes on the line in order.</li>
-      <li>Each person adds a green dot on the events they lived well and a red dot on the ones they lived badly.</li>
+      <li>Each person adds a green dot on the events they that felt good to them and a red dot on the ones that felt bad.</li>
       <li>Read the line from left to right and stop where the red dots gather.</li>
       <li>Pick the actions from those points.</li>
     </ol>
 
     <h3>5 Whys</h3>
-    <p>Use it on one problem that came back in several sprints. It takes 20 to 30 minutes, after the team has gathered data. Taiichi Ohno describes the technique in "Toyota Production System", translated into English in 1988.</p>
+    <p>Use it on one problem that came back in several sprints. Allow 20 to 30 minutes, after the team has gathered data. Taiichi Ohno describes the technique in "Toyota Production System", translated into English in 1988.</p>
     <ol>
       <li>Write the problem as a fact: "The release shipped two days late."</li>
       <li>Ask why and write the answer: "The regression tests failed on Thursday."</li>
@@ -184,27 +184,27 @@
       <li>Draw three columns: To discuss, Discussing, Discussed.</li>
       <li>Everyone writes topics for 5 minutes, one per note, and presents each in one sentence.</li>
       <li>Each person gets two votes. Order the To discuss column by number of votes.</li>
-      <li>Move the first topic to Discussing and start a 7-minute timer.</li>
-      <li>When the timer rings, everyone shows a thumb: up to add 3 minutes, down to move to the next topic.</li>
+      <li>Move the first topic to Discussing and start a timer, for example 7 minutes.</li>
+      <li>When the timer rings, everyone shows a thumb: up to add time, for example 3 minutes, down to move to the next topic.</li>
       <li>Note any action before moving the topic to Discussed.</li>
       <li>Stop 5 minutes before the end and read the actions aloud.</li>
     </ol>
 
     <h3>Dot voting</h3>
-    <p>Use it when the board holds more topics than the team can discuss. It takes 5 minutes.</p>
+    <p>Use it when the board holds more topics than the team can discuss. Allow about 5 minutes.</p>
     <ol>
       <li>Give each person the same number of dots, for example three.</li>
       <li>Everyone places their dots on the notes or groups they want to act on. Putting two dots on the same note is allowed.</li>
       <li>Count the dots and keep the top one or two items.</li>
     </ol>
-    <p>On a wall, the last voters see the first dots. Online whiteboards that offer a voting mode hide the votes until the count.</p>
+    <p>On a wall, the last voters see the first dots. Some online whiteboards have a voting mode that hides the votes until the count.</p>
 
     <h3>ROTI closing</h3>
-    <p>ROTI stands for return on time invested. Use it in the last 5 minutes to score the retrospective itself. The activity is described in Derby and Larsen's book.</p>
+    <p>ROTI stands for return on time invested. Use it in the last 5 minutes to score the retrospective itself. Derby and Larsen describe the activity in their book, with a scale from 0 to 4.</p>
     <ol>
-      <li>Explain the scale: 1 finger means "I lost my time", 3 fingers mean "I got as much as the time I spent", 5 fingers mean "I got much more than the time I spent".</li>
-      <li>Everyone shows their hand at the same moment.</li>
-      <li>Ask the people who showed 1 or 2 fingers what would have made it a 4.</li>
+      <li>Explain the scale: 0 means "no benefit for the time invested", 2 means "a benefit equal to the time invested", 4 means "a benefit greater than the time invested".</li>
+      <li>Everyone shows a number of fingers at the same moment, from a closed fist for 0 to four fingers.</li>
+      <li>Ask the people who showed 0 or 1 what they wanted and did not get.</li>
       <li>Write the average next to the date and compare it with the previous retrospectives.</li>
     </ol>
 
@@ -215,15 +215,15 @@
       <li>Keep the meeting to 60 minutes, and add a 5-minute break if it goes past 90.</li>
       <li>Name a facilitator who is not the note-taker.</li>
       <li>For a team spread across time zones, open the board 24 hours ahead for writing and keep the call for grouping, voting and deciding.</li>
-      <li>Replace the ROTI show of hands with a number typed in the chat and sent on a countdown.</li>
+      <li>Replace the ROTI fingers with a number typed in the chat and sent on a countdown.</li>
     </ul>
 
     <h2>Common retrospective mistakes</h2>
     <ul>
       <li><strong>Leaving without an action.</strong> A retrospective that ends on a list of complaints changes nothing in the next sprint. Each action needs an owner and a date.</li>
-      <li><strong>Running the same format every time.</strong> After five or six sprints of Start/Stop/Continue, the same notes come back. Another format asks the team other questions.</li>
+      <li><strong>Running the same format every time.</strong> When the same notes come back sprint after sprint, change the format: another one asks the team other questions.</li>
       <li><strong>Inviting a manager whose presence silences people.</strong> The Scrum Guide lists the Scrum Team as the participants. If the person who writes performance reviews is in the room, problems go unsaid.</li>
-      <li><strong>Taking on too many actions.</strong> A team that leaves with eight actions finishes none. Keep one or two, and start the next retrospective by checking them.</li>
+      <li><strong>Taking on too many actions.</strong> A team that leaves with eight actions rarely finishes them. Keep one or two, and start the next retrospective by checking them.</li>
     </ul>
     <p>An action that needs development work goes into the next sprint planning, where the team can size it with <a href="/planning-poker">planning poker</a>.</p>
 
@@ -231,7 +231,7 @@
     <h3>What are the 5 stages of a retrospective?</h3>
     <p>Set the stage, gather data, generate insights, decide what to do, close the retrospective. Esther Derby and Diana Larsen described these five phases in "Agile Retrospectives: Making Good Teams Great", published in 2006.</p>
     <h3>How long should a sprint retrospective last?</h3>
-    <p>The 2020 Scrum Guide sets a maximum of three hours for a one-month sprint and says the event is usually shorter for shorter sprints. Teams on two-week sprints commonly book 60 to 90 minutes.</p>
+    <p>The 2020 Scrum Guide sets a maximum of three hours for a one-month sprint and says the event is usually shorter for shorter sprints. As an example, a team on two-week sprints can book 60 to 90 minutes; the guide gives no figure for that sprint length.</p>
     <h3>Who attends the sprint retrospective?</h3>
     <p>The Scrum Team: the developers, the product owner and the scrum master. The Scrum Guide names no other participant. A manager or a stakeholder comes only if the team invites them.</p>
     <h3>What is the difference between a sprint review and a sprint retrospective?</h3>
