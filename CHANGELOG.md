@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.61] - 2026-11-20
+
+- feat(room): reveal anytime, stable order, guest language, invite your AI (#421)
+- feat(seo): scrum poker pages in five languages and a T-shirt sizing guide (#422)
+
 ## [0.0.60] - 2026-11-20
 
 - feat(seo): retrospective formats guide in English and French (#418)
