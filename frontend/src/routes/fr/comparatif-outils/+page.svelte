@@ -25,7 +25,7 @@
       {
         '@type': 'Question',
         name: 'Que ne sait pas faire CleanPoker ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker n\'a pas d\'intégration Jira, Azure DevOps ou Linear, pas d\'import de backlog depuis un outil de tickets, pas d\'historique des sessions passées et pas d\'équipes permanentes. Les stories se collent dans la salle et leurs estimations repartent en CSV ou en tableau Markdown. Si l\'une de ces fonctions est indispensable, un outil intégré au gestionnaire de tickets est le bon choix.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker n\'a pas d\'intégration Jira, Azure DevOps ou Linear, pas d\'import de backlog depuis un outil de tickets, pas d\'historique des sessions passées et pas d\'équipes permanentes. Si l\'une de ces fonctions est indispensable, un outil intégré au gestionnaire de tickets est le bon choix. Les stories se collent dans la salle et leurs estimations repartent en CSV ou en tableau Markdown.' },
       },
       {
         '@type': 'Question',

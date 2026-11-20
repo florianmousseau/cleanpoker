@@ -25,7 +25,7 @@
       {
         '@type': 'Question',
         name: 'What can CleanPoker not do?',
-        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker has no Jira, Azure DevOps or Linear integration, no backlog import from a tracker, no history of past sessions and no permanent teams. Stories are pasted into the room and their estimates leave as CSV or a Markdown table. If any of those is essential, a tool built into the issue tracker is the right choice.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker has no Jira, Azure DevOps or Linear integration, no backlog import from a tracker, no history of past sessions and no permanent teams. If any of those is essential, a tool built into the issue tracker is the right choice. Stories are pasted into the room and their estimates leave as CSV or a Markdown table.' },
       },
       {
         '@type': 'Question',
