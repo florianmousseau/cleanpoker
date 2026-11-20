@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { contraste, equipeDe, requeteEquipe } from './equipe.ts';
+import { contraste, couleurSaisie, equipeDe, requeteEquipe, texteSur } from './equipe.ts';
 
 const hexRgb = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 
@@ -27,5 +27,30 @@ describe('requeteEquipe', () => {
   });
   it('is empty with nothing to carry', () => {
     expect(requeteEquipe(' ', 'nope', [])).toBe('');
+  });
+});
+
+describe('couleurSaisie', () => {
+  it('accepts a brand colour typed with or without its hash', () => {
+    expect(couleurSaisie('#D0453A')).toBe('#d0453a');
+    expect(couleurSaisie(' d0453a ')).toBe('#d0453a');
+  });
+  it('waits while the code is not six hex digits yet', () => {
+    expect(couleurSaisie('#d04')).toBeNull();
+    expect(couleurSaisie('rouge')).toBeNull();
+    expect(couleurSaisie('')).toBeNull();
+  });
+});
+
+describe('texteSur', () => {
+  it('picks the text that reads better on the colour', () => {
+    expect(texteSur('#000080')).toBe('#ffffff');
+    expect(texteSur('#ffe600')).toBe('#000000');
+  });
+  it('keeps at least 4.5:1 on a mid colour', () => {
+    const rgb = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+    for (const c of ['#1a6b3c', '#d0453a', '#777777', '#0000ff']) {
+      expect(contraste(rgb(c), rgb(texteSur(c)))).toBeGreaterThanOrEqual(4.5);
+    }
   });
 });
