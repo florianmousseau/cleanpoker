@@ -18,8 +18,7 @@ import (
 
 // Rooms is what the assistant needs from the store.
 type Rooms interface {
-	CanHold(id string) bool
-	GetOrCreate(id string, cards []string) (*room.Room, error)
+	Get(id string) (*room.Room, bool)
 	RecordJoin()
 }
 
@@ -34,7 +33,7 @@ var (
 	errRoom = errors.New("room must be a CleanPoker room address or its id, e.g. https://cleanpoker.dev/1a2b3c4d")
 	errSeat = errors.New("no seat matches this token in this room: join it first")
 	errName = errors.New("name must be 1 to 30 characters")
-	errFull = errors.New("the server holds too many rooms right now")
+	errGone = errors.New("no open room at this address: check it, or ask a person to open it in a browser first")
 )
 
 // RoomID reads a room address or a bare id.
@@ -91,12 +90,11 @@ func (s service) open(raw string) (*room.Room, error) {
 	if err != nil {
 		return nil, err
 	}
-	if !s.rooms.CanHold(id) {
-		return nil, errFull
-	}
-	rm, err := s.rooms.GetOrCreate(id, nil)
-	if err != nil {
-		return nil, errFull
+	// Never opened here: a mistyped address would seat the assistant alone in
+	// an empty room, and it would report success to its user.
+	rm, ok := s.rooms.Get(id)
+	if !ok {
+		return nil, errGone
 	}
 	return rm, nil
 }
@@ -155,8 +153,8 @@ func (s service) leave(_ context.Context, _ *mcp.CallToolRequest, in seatIn) (*m
 }
 
 const instructions = `CleanPoker is planning poker for agile teams. A person shares a room address;
-join it with join_room, read the story the team discusses, then vote one card
-of the room deck with vote. Votes stay hidden until a person reveals them, and
+join it with join_room, estimate the story your user gives you (the room does
+not hold it), then vote one card of the room deck with vote. Votes stay hidden until a person reveals them, and
 get_room shows the results after the reveal. Leave with leave_room when done.`
 
 // NewServer builds the MCP server over rooms.

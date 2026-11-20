@@ -64,6 +64,9 @@ func call(t *testing.T, cs *mcp.ClientSession, name string, args map[string]any,
 
 func TestJoinVoteLeave(t *testing.T) {
 	s := store.New()
+	if _, err := s.GetOrCreate("team42", nil); err != nil {
+		t.Fatal(err)
+	}
 	cs := connect(t, s)
 
 	var joined joinOut
@@ -97,8 +100,23 @@ func TestJoinVoteLeave(t *testing.T) {
 	}
 }
 
+func TestJoin_AnUnopenedRoomIsAnError(t *testing.T) {
+	s := store.New()
+	cs := connect(t, s)
+	if res := call(t, cs, "join_room", map[string]any{"room": "typo1234", "name": "Claude"}, nil); !res.IsError {
+		t.Fatal("expected an error for a room nobody opened")
+	}
+	if _, ok := s.Get("typo1234"); ok {
+		t.Fatal("joining opened the room")
+	}
+}
+
 func TestVote_UnknownSeatIsAnError(t *testing.T) {
-	cs := connect(t, store.New())
+	s := store.New()
+	if _, err := s.GetOrCreate("team42", nil); err != nil {
+		t.Fatal(err)
+	}
+	cs := connect(t, s)
 	res := call(t, cs, "vote", map[string]any{"room": "team42", "seat": "nope", "card": "5"}, nil)
 	if !res.IsError {
 		t.Fatal("expected an error for an unknown seat")
@@ -106,7 +124,11 @@ func TestVote_UnknownSeatIsAnError(t *testing.T) {
 }
 
 func TestJoin_RefusesABadNameOrRoom(t *testing.T) {
-	cs := connect(t, store.New())
+	s := store.New()
+	if _, err := s.GetOrCreate("team42", nil); err != nil {
+		t.Fatal(err)
+	}
+	cs := connect(t, s)
 	if res := call(t, cs, "join_room", map[string]any{"room": "team42", "name": " "}, nil); !res.IsError {
 		t.Fatal("expected an error for a blank name")
 	}
