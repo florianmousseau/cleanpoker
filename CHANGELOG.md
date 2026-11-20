@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.53] - 2026-11-20
+
+- fix(room): write the average with the reader's decimal comma, drop the slogan from the invitation
+- refactor: retire the in-site visitor counter (#384)
+- fix(store): count a room opened by its address as a created session
+
 ## [0.0.52] - 2026-11-14
 
 - fix(health): a failing or stubborn drill body is a 400, never a 500 (#379)

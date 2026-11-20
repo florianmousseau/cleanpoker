@@ -122,14 +122,16 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 			return
 		}
 		recordJoin := s.RecordJoin
+		open := s.GetOrCreate
 		if isProbe(r) {
 			recordJoin = func() {
 				// The probe's seat is not an arrival: nothing to count.
 			}
+			open = s.GetOrCreateUncounted
 		}
 		websocket.Handler(func(conn *websocket.Conn) {
 			conn.MaxPayloadBytes = maxFrameBytes
-			rm, err := s.GetOrCreate(roomID, nil)
+			rm, err := open(roomID, nil)
 			if err != nil {
 				_ = conn.Close() // full since the check above: nothing to hold
 				return
