@@ -1,6 +1,7 @@
 package room
 
 import (
+	"errors"
 	"strings"
 	"testing"
 )
@@ -150,5 +151,32 @@ func TestCastVoteWithReason_HiddenUntilTheRevealThenClearedByANewRound(t *testin
 	r.Show("p1")
 	if reasonOf() != "" {
 		t.Fatal("a new round kept the reason")
+	}
+}
+
+func TestAddStoryTitles_CountsWhatBecameOfEachTitle(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	got, err := r.AddStoryTitles("p1", []string{" a ", "  ", strings.Repeat("x", MaxStoryLength+1)})
+	if err != nil || got != (StoriesAdded{Added: 2, Cut: 1, Blank: 1}) {
+		t.Fatalf("got %+v, %v", got, err)
+	}
+}
+
+func TestAddStoryTitles_SaysWhyASeatMayNot(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.Join("p1", "Alice", false)
+	r.Join("p2", "Bob", false)
+	if _, err := r.AddStoryTitles("ghost", []string{"a"}); !errors.Is(err, ErrNoSeat) {
+		t.Fatalf("expected ErrNoSeat, got %v", err)
+	}
+	r.SetLocked("p1", true)
+	if _, err := r.AddStoryTitles("p2", []string{"a"}); !errors.Is(err, ErrLocked) {
+		t.Fatalf("expected ErrLocked, got %v", err)
+	}
+	if got, err := r.AddStoryTitles("p1", []string{"a"}); err != nil || got.Added != 1 {
+		t.Fatalf("the host of a locked room could not add: %+v, %v", got, err)
 	}
 }

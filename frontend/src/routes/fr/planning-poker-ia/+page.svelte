@@ -56,6 +56,9 @@
       <tbody>
         <tr><td>Choisir une carte en secret</td><td>oui</td><td>oui</td></tr>
         <tr><td>Voir les votes des autres avant la révélation</td><td>non</td><td>non</td></tr>
+        <tr><td>Ajouter des stories à la liste</td><td>oui (l'hôte seul si la salle est verrouillée)</td><td>oui, à la même règle</td></tr>
+        <tr><td>Lire les estimations retenues par l'équipe</td><td>oui</td><td>oui</td></tr>
+        <tr><td>Choisir la story en cours, retenir son estimation, vider la liste</td><td>oui (l'hôte seul si la salle est verrouillée)</td><td>non</td></tr>
         <tr><td>Révéler les votes, lancer un tour, retirer quelqu'un</td><td>oui (l'hôte seul si la salle est verrouillée)</td><td>non</td></tr>
         <tr><td>Verrouiller la salle</td><td>l'hôte</td><td>non</td></tr>
         <tr><td>Être hôte de la salle</td><td>oui</td><td>non</td></tr>
@@ -76,10 +79,24 @@
       <li><strong>Cursor</strong>&nbsp;: dans <code>~/.cursor/mcp.json</code>, ajouter <code>&#123;"mcpServers": &#123; "pokeragile": &#123; "url": "https://salles.pokeragile.com/mcp" &#125; &#125; &#125;</code>.</li>
       <li><strong>VS Code</strong>&nbsp;: avec Copilot en mode agent, dans <code>.vscode/mcp.json</code>, ajouter <code>&#123;"servers": &#123; "pokeragile": &#123; "type": "http", "url": "https://salles.pokeragile.com/mcp" &#125; &#125; &#125;</code>.</li>
     </ul>
-    <p>PokerAgile ne demande ni compte ni clé d'API, et il n'y a rien à installer&nbsp;: l'adresse est celle d'un serveur MCP distant, avec quatre outils, <code>join_room</code>, <code>get_room</code>, <code>vote</code> et <code>leave_room</code>. La salle doit déjà être ouverte par une personne dans son navigateur. Si l'équipe y a collé sa liste de stories, l'assistant lit celle en cours&nbsp;; sinon, donnez-lui la story dans votre message. Puis, dans la conversation&nbsp;:</p>
+    <p>PokerAgile ne demande ni compte ni clé d'API, et il n'y a rien à installer&nbsp;: l'adresse est celle d'un serveur MCP distant, avec six outils, <code>join_room</code>, <code>get_room</code>, <code>add_stories</code>, <code>vote</code>, <code>get_estimates</code> et <code>leave_room</code>. La salle doit déjà être ouverte par une personne dans son navigateur. Si l'équipe y a collé sa liste de stories, l'assistant lit celle en cours&nbsp;; sinon, donnez-lui la story dans votre message. Puis, dans la conversation&nbsp;:</p>
     <pre><code>Rejoins la salle https://pokeragile.com/ab12cd34 sous le nom Claude.
 Estime la story en cours en story points et vote en justifiant ta carte en une ou deux phrases, sans me la dire.
 Quitte la salle quand je te le dis.</code></pre>
+
+    <h2>Du tracker à la salle, et retour</h2>
+    <p>
+      Un assistant qui a déjà accès à Jira, Linear ou GitHub peut porter les stories dans les deux sens. Il lit le sprint dans le tracker, ajoute les titres à la salle avec <code>add_stories</code>, vote sur chaque story quand une personne la met en cours, et à la fin lit les estimations retenues par l'équipe avec <code>get_estimates</code> pour les écrire dans le tracker.
+    </p>
+    <pre><code>Prends les stories du sprint en cours dans Linear et ajoute-les à ma salle https://pokeragile.com/ab12cd34.
+Vote sur chacune quand elle est en cours, avec une raison en une ou deux phrases.
+Quand je dis que c'est fini, écris dans Linear les estimations retenues par l'équipe.</code></pre>
+    <ul>
+      <li><strong>PokerAgile ne se connecte à aucun tracker.</strong> Il ne détient aucun jeton Jira, Linear ou GitHub&nbsp;: l'assistant y lit et y écrit avec son propre accès, sous les droits de son utilisateur.</li>
+      <li><strong>La liste prend des titres</strong>&nbsp;: 100 stories au plus, 200 caractères chacune. Un titre plus long est coupé.</li>
+      <li><strong>Dans une salle verrouillée, seul l'hôte ajoute des stories.</strong> L'assistant reçoit une erreur qui le dit.</li>
+      <li><strong>Une personne retient chaque estimation</strong> après la révélation. L'assistant lit la carte retenue, il ne la choisit pas.</li>
+    </ul>
 
     <h2>Ce qu'une IA estime bien</h2>
     <ul>

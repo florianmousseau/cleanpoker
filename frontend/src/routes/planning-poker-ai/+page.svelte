@@ -56,6 +56,9 @@
       <tbody>
         <tr><td>Pick a card in secret</td><td>yes</td><td>yes</td></tr>
         <tr><td>See other votes before the reveal</td><td>no</td><td>no</td></tr>
+        <tr><td>Add stories to the list</td><td>yes (host only once the room is locked)</td><td>yes, under the same rule</td></tr>
+        <tr><td>Read the estimates the team kept</td><td>yes</td><td>yes</td></tr>
+        <tr><td>Choose the story on the table, keep its estimate, clear the list</td><td>yes (host only once the room is locked)</td><td>no</td></tr>
         <tr><td>Reveal the votes, start a round, remove someone</td><td>yes (host only once the room is locked)</td><td>no</td></tr>
         <tr><td>Lock the room</td><td>the host</td><td>no</td></tr>
         <tr><td>Be the room host</td><td>yes</td><td>no</td></tr>
@@ -76,10 +79,24 @@
       <li><strong>Cursor</strong>: in <code>~/.cursor/mcp.json</code>, add <code>&#123;"mcpServers": &#123; "pokeragile": &#123; "url": "https://salles.pokeragile.com/mcp" &#125; &#125; &#125;</code>.</li>
       <li><strong>VS Code</strong>: with Copilot in agent mode, in <code>.vscode/mcp.json</code>, add <code>&#123;"servers": &#123; "pokeragile": &#123; "type": "http", "url": "https://salles.pokeragile.com/mcp" &#125; &#125; &#125;</code>.</li>
     </ul>
-    <p>PokerAgile asks for no account and no API key, and there is nothing to install: the address is a remote MCP server with four tools, <code>join_room</code>, <code>get_room</code>, <code>vote</code> and <code>leave_room</code>. A person must already have the room open in a browser. If the team pasted its story list into the room, the assistant reads the one on the table; otherwise, give it the story in your message. Then, in the conversation:</p>
+    <p>PokerAgile asks for no account and no API key, and there is nothing to install: the address is a remote MCP server with six tools, <code>join_room</code>, <code>get_room</code>, <code>add_stories</code>, <code>vote</code>, <code>get_estimates</code> and <code>leave_room</code>. A person must already have the room open in a browser. If the team pasted its story list into the room, the assistant reads the one on the table; otherwise, give it the story in your message. Then, in the conversation:</p>
     <pre><code>Join the room https://pokeragile.com/ab12cd34 as Claude.
 Estimate the story on the table in story points and vote with a one or two sentence reason, without telling me your card.
 Leave the room when I say so.</code></pre>
+
+    <h2>From the tracker to the room and back</h2>
+    <p>
+      An assistant that already has access to Jira, Linear or GitHub can carry the stories both ways. It reads the sprint in the tracker, adds the titles to the room with <code>add_stories</code>, votes on each story when a person puts it on the table, and at the end reads the estimates the team kept with <code>get_estimates</code> to write them to the tracker.
+    </p>
+    <pre><code>Take the stories of the current sprint in Linear and add them to my room https://pokeragile.com/ab12cd34.
+Vote on each one when it is on the table, with a one or two sentence reason.
+When I say we are done, write the estimates the team kept back to Linear.</code></pre>
+    <ul>
+      <li><strong>PokerAgile connects to no tracker.</strong> It holds no Jira, Linear or GitHub token: the assistant reads and writes there with its own access, under its user's rights.</li>
+      <li><strong>The list takes titles</strong>: 100 stories at most, 200 characters each. A longer title is cut.</li>
+      <li><strong>In a locked room, only the host adds stories.</strong> The assistant gets an error that says so.</li>
+      <li><strong>A person keeps each estimate</strong> after the reveal. The assistant reads the kept card; it does not choose it.</li>
+    </ul>
 
     <h2>What AI estimates well</h2>
     <ul>

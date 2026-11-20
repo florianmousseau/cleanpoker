@@ -1,6 +1,7 @@
 package room
 
 import (
+	"errors"
 	"slices"
 	"strings"
 	"unicode/utf8"
@@ -18,24 +19,39 @@ const (
 	MaxStoryLength = 200
 )
 
+// StoriesAdded counts what one call did with the titles it was given: Added
+// joined the list, Cut of them were shortened to MaxStoryLength, Blank were
+// empty and Full found the list at MaxStories.
+type StoriesAdded struct {
+	Added int `json:"added"`
+	Cut   int `json:"cut"`
+	Blank int `json:"blank"`
+	Full  int `json:"full"`
+}
+
+// ErrLocked refuses a round command from anyone but the host of a locked room.
+var ErrLocked = errors.New("the host locked the room: ask the host to add the stories or unlock")
+
 // AddStories appends one story per non-blank line of text, up to MaxStories,
 // each cut to MaxStoryLength characters. The first story added to an empty
 // list goes on the table.
 func (r *Room) AddStories(initiatorID, text string) {
+	_, _ = r.AddStoryTitles(initiatorID, strings.Split(text, "\n"))
+}
+
+// AddStoryTitles is AddStories for titles already split, and says what became
+// of them or why the seat may not add any.
+func (r *Room) AddStoryTitles(initiatorID string, titles []string) (StoriesAdded, error) {
+	var out StoriesAdded
+	err := errRoomIsClosed
 	r.mutate(func() {
-		if !r.allowed(initiatorID) {
+		if err = r.mayAdd(initiatorID); err != nil {
 			return
 		}
-		added := 0
-		for _, line := range strings.Split(text, "\n") {
-			title := cut(strings.TrimSpace(line), MaxStoryLength)
-			if title == "" || len(r.stories) >= MaxStories {
-				continue
-			}
-			r.stories = append(r.stories, Story{Title: title})
-			added++
+		for _, title := range titles {
+			r.appendStory(title, &out)
 		}
-		if added == 0 {
+		if out.Added == 0 {
 			return
 		}
 		if r.currentStory < 0 {
@@ -43,6 +59,36 @@ func (r *Room) AddStories(initiatorID, text string) {
 		}
 		r.logActivity(r.nameOf(initiatorID), "stories_added")
 	})
+	return out, err
+}
+
+// mayAdd is allowed with its reason. Callers hold r.mu.
+func (r *Room) mayAdd(initiatorID string) error {
+	switch {
+	case !r.seated(initiatorID):
+		return ErrNoSeat
+	case !r.allowed(initiatorID):
+		return ErrLocked
+	}
+	return nil
+}
+
+// appendStory adds one title, or counts why it did not. Callers hold r.mu.
+func (r *Room) appendStory(raw string, out *StoriesAdded) {
+	trimmed := strings.TrimSpace(raw)
+	title := cut(trimmed, MaxStoryLength)
+	switch {
+	case title == "":
+		out.Blank++
+	case len(r.stories) >= MaxStories:
+		out.Full++
+	default:
+		r.stories = append(r.stories, Story{Title: title})
+		out.Added++
+		if title != trimmed {
+			out.Cut++
+		}
+	}
 }
 
 // ClearStories empties the list.
