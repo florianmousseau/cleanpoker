@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.59] - 2026-11-20
+
+- feat(seo): story points guide in French and English (#413)
+
 ## [0.0.58] - 2026-11-20
 
 - fix(i18n): invite colleagues rather than teammates in French
