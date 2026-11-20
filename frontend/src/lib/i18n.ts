@@ -11,12 +11,15 @@ export interface Translation {
   share: { ogTitle: string; ogDesc: string; inviteMessage: (url: string) => string };
   promo: { lead: string; cta: string; close: string };
   cards: { title: string; revealedSub: string; votingHint: string; selectedSuffix: (v: string) => string; voteLabel: (c: string) => string };
-  controls: { title: string; newRound: string; reveal: string; pending: (n: number) => string };
-  results: { title: string; avg: string; median: string; min: string; max: string; none: string };
+  controls: { title: string; newRound: string; reveal: string; pending: (n: number) => string; autoReveal: string };
+  results: { title: string; agreement: (n: number) => string; avg: string; median: string; min: string; max: string; none: string };
+  stories: { title: string; onTable: string; none: string; addLabel: string; addPlaceholder: string; addBtn: string; clear: string; clearConfirm: string; colStory: string; colEstimate: string; vote: (t: string) => string; keep: (v: string) => string; keepTitle: string; next: string; copyMd: string; downloadCsv: string; copied: string };
+  qr: { show: string; hide: string; alt: string; failed: string };
+  ia: { button: string; again: string; running: string; downloading: (n: number) => string; failed: string; private: string };
   host: { badge: string; ai: string; lock: string; unlock: string; lockedHint: string; timer: string; timerStop: string; timerLeft: (s: string) => string; timerOver: string; seconds: (n: number) => string };
   participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string; kickConfirm: (n: string) => string };
   observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
-  activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; locked: string; unlocked: string; timer_started: string; timer_stopped: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
+  activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; stories_added: string; stories_cleared: string; story_selected: (t: string) => string; estimated: (t: string) => string; locked: string; unlocked: string; timer_started: string; timer_stopped: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
   live: { newRound: (n: number) => string; revealed: string };
   footer: { source: string; license: string; legal: string; privacy: string; about: string; navAriaLabel: string };
   theme: { toDark: string; toLight: string };
@@ -77,10 +80,12 @@ export const FR: Translation = {
     newRound: 'Nouveau tour',
     reveal: 'Révéler',
     pending: (n: number) => `${n} participant(s) n'ont pas encore voté.`,
+    autoReveal: 'Révéler dès que tout le monde a voté',
   },
 
   results: {
     title: 'Résultats',
+    agreement: (n: number) => `Accord ${n}\u00A0%`,
     avg: 'Moyenne',
     median: 'Médiane',
     min: 'Min',
@@ -88,6 +93,39 @@ export const FR: Translation = {
     none: "Les résultats s'afficheront après la révélation.",
   },
 
+  stories: {
+    title: 'Stories',
+    onTable: 'Story en cours\u00A0:',
+    none: "Aucune story. Collez une liste pour les estimer l'une après l'autre.",
+    addLabel: 'Ajouter des stories, une par ligne',
+    addPlaceholder: 'Page de connexion\nExport CSV des factures',
+    addBtn: 'Ajouter',
+    clear: 'Vider la liste',
+    clearConfirm: 'Vider la liste des stories et leurs estimations\u00A0?',
+    colStory: 'Story',
+    colEstimate: 'Estimation',
+    vote: (t: string) => `Estimer «\u00A0${t}\u00A0»`,
+    keep: (v: string) => `Retenir ${v}`,
+    keepTitle: 'Estimation retenue',
+    next: 'Story suivante',
+    copyMd: 'Copier en Markdown',
+    downloadCsv: 'Télécharger en CSV',
+    copied: 'Copié',
+  },
+  qr: {
+    show: 'QR code',
+    hide: 'Masquer le QR code',
+    alt: "QR code de l'adresse de la salle",
+    failed: "Le QR code n'a pas pu être chargé.",
+  },
+  ia: {
+    button: "Analyser la story avec l'IA du navigateur",
+    again: "Relancer l'analyse",
+    running: 'Analyse en cours',
+    downloading: (n: number) => `Le navigateur télécharge son modèle, ${n}\u00A0%`,
+    failed: "L'analyse n'a pas abouti.",
+    private: "Visible par vous seul. L'analyse tourne dans le navigateur, sur cet ordinateur.",
+  },
   host: {
     badge: 'hôte',
     ai: 'IA',
@@ -138,6 +176,10 @@ export const FR: Translation = {
     unvoted: 'a retiré son vote.',
     revealed: 'a révélé les votes.',
     new_round: 'a démarré un nouveau tour.',
+    stories_added: 'a ajouté des stories.',
+    stories_cleared: 'a vidé la liste des stories.',
+    story_selected: (t: string) => `passe à «\u00A0${t}\u00A0».`,
+    estimated: (t: string) => `a retenu l'estimation de «\u00A0${t}\u00A0».`,
     locked: 'a verrouillé la salle.',
     unlocked: 'a ouvert la salle.',
     timer_started: 'a lancé le minuteur.',
@@ -218,10 +260,12 @@ export const EN: Translation = {
     newRound: 'New round',
     reveal: 'Reveal',
     pending: (n: number) => `${n} participant(s) haven't voted yet.`,
+    autoReveal: 'Reveal as soon as everyone has voted',
   },
 
   results: {
     title: 'Results',
+    agreement: (n: number) => `Agreement ${n}%`,
     avg: 'Average',
     median: 'Median',
     min: 'Min',
@@ -229,6 +273,39 @@ export const EN: Translation = {
     none: 'Results will appear after the reveal.',
   },
 
+  stories: {
+    title: 'Stories',
+    onTable: 'Story on the table:',
+    none: 'No story yet. Paste a list to estimate them one after the other.',
+    addLabel: 'Add stories, one per line',
+    addPlaceholder: 'Login page\nCSV export of invoices',
+    addBtn: 'Add',
+    clear: 'Clear the list',
+    clearConfirm: 'Clear the story list and its estimates?',
+    colStory: 'Story',
+    colEstimate: 'Estimate',
+    vote: (t: string) => `Estimate “${t}”`,
+    keep: (v: string) => `Keep ${v}`,
+    keepTitle: 'Estimate kept',
+    next: 'Next story',
+    copyMd: 'Copy as Markdown',
+    downloadCsv: 'Download as CSV',
+    copied: 'Copied',
+  },
+  qr: {
+    show: 'QR code',
+    hide: 'Hide QR code',
+    alt: 'QR code of the room address',
+    failed: 'The QR code could not be loaded.',
+  },
+  ia: {
+    button: "Analyze the story with the browser's AI",
+    again: 'Run the analysis again',
+    running: 'Analyzing',
+    downloading: (n: number) => `The browser is downloading its model, ${n}%`,
+    failed: 'The analysis did not complete.',
+    private: 'Only you see this. The analysis runs in the browser, on this computer.',
+  },
   host: {
     badge: 'host',
     ai: 'AI',
@@ -279,6 +356,10 @@ export const EN: Translation = {
     unvoted: 'removed their vote.',
     revealed: 'revealed the votes.',
     new_round: 'started a new round.',
+    stories_added: 'added stories.',
+    stories_cleared: 'cleared the story list.',
+    story_selected: (t: string) => `moved to “${t}”.`,
+    estimated: (t: string) => `kept the estimate of “${t}”.`,
     locked: 'locked the room.',
     unlocked: 'unlocked the room.',
     timer_started: 'started the timer.',
@@ -359,10 +440,12 @@ export const ES: Translation = {
     newRound: 'Nueva ronda',
     reveal: 'Revelar',
     pending: (n: number) => `${n} participante(s) aún no han votado.`,
+    autoReveal: 'Revelar en cuanto todos hayan votado',
   },
 
   results: {
     title: 'Resultados',
+    agreement: (n: number) => `Acuerdo ${n} %`,
     avg: 'Media',
     median: 'Mediana',
     min: 'Mín',
@@ -370,6 +453,39 @@ export const ES: Translation = {
     none: 'Los resultados aparecerán tras la revelación.',
   },
 
+  stories: {
+    title: 'Historias',
+    onTable: 'Historia en curso:',
+    none: 'Ninguna historia. Pega una lista para estimarlas una tras otra.',
+    addLabel: 'Añadir historias, una por línea',
+    addPlaceholder: 'Página de inicio de sesión\nExportación CSV de facturas',
+    addBtn: 'Añadir',
+    clear: 'Vaciar la lista',
+    clearConfirm: '¿Vaciar la lista de historias y sus estimaciones?',
+    colStory: 'Historia',
+    colEstimate: 'Estimación',
+    vote: (t: string) => `Estimar «${t}»`,
+    keep: (v: string) => `Quedarse con ${v}`,
+    keepTitle: 'Estimación elegida',
+    next: 'Siguiente historia',
+    copyMd: 'Copiar en Markdown',
+    downloadCsv: 'Descargar en CSV',
+    copied: 'Copiado',
+  },
+  qr: {
+    show: 'Código QR',
+    hide: 'Ocultar el código QR',
+    alt: 'Código QR de la dirección de la sala',
+    failed: 'No se pudo cargar el código QR.',
+  },
+  ia: {
+    button: 'Analizar la historia con la IA del navegador',
+    again: 'Repetir el análisis',
+    running: 'Analizando',
+    downloading: (n: number) => `El navegador descarga su modelo, ${n} %`,
+    failed: 'El análisis no se completó.',
+    private: 'Solo usted lo ve. El análisis se hace en el navegador, en este ordenador.',
+  },
   host: {
     badge: 'anfitrión',
     ai: 'IA',
@@ -420,6 +536,10 @@ export const ES: Translation = {
     unvoted: 'retiró su voto.',
     revealed: 'reveló los votos.',
     new_round: 'inició una nueva ronda.',
+    stories_added: 'añadió historias.',
+    stories_cleared: 'vació la lista de historias.',
+    story_selected: (t: string) => `pasa a «${t}».`,
+    estimated: (t: string) => `eligió la estimación de «${t}».`,
     locked: 'bloqueó la sala.',
     unlocked: 'abrió la sala.',
     timer_started: 'inició el temporizador.',
@@ -500,10 +620,12 @@ export const DE: Translation = {
     newRound: 'Neue Runde',
     reveal: 'Aufdecken',
     pending: (n: number) => `${n} Teilnehmer ${n === 1 ? 'hat' : 'haben'} noch nicht abgestimmt.`,
+    autoReveal: 'Aufdecken, sobald alle abgestimmt haben',
   },
 
   results: {
     title: 'Ergebnisse',
+    agreement: (n: number) => `Einigkeit ${n} %`,
     avg: 'Durchschn.',
     median: 'Median',
     min: 'Min',
@@ -511,6 +633,39 @@ export const DE: Translation = {
     none: 'Ergebnisse erscheinen nach der Aufdeckung.',
   },
 
+  stories: {
+    title: 'Storys',
+    onTable: 'Aktuelle Story:',
+    none: 'Noch keine Story. Füge eine Liste ein, um sie nacheinander zu schätzen.',
+    addLabel: 'Storys hinzufügen, eine pro Zeile',
+    addPlaceholder: 'Login-Seite\nCSV-Export der Rechnungen',
+    addBtn: 'Hinzufügen',
+    clear: 'Liste leeren',
+    clearConfirm: 'Story-Liste und Schätzungen leeren?',
+    colStory: 'Story',
+    colEstimate: 'Schätzung',
+    vote: (t: string) => `„${t}“ schätzen`,
+    keep: (v: string) => `${v} übernehmen`,
+    keepTitle: 'Übernommene Schätzung',
+    next: 'Nächste Story',
+    copyMd: 'Als Markdown kopieren',
+    downloadCsv: 'Als CSV herunterladen',
+    copied: 'Kopiert',
+  },
+  qr: {
+    show: 'QR-Code',
+    hide: 'QR-Code ausblenden',
+    alt: 'QR-Code der Raumadresse',
+    failed: 'Der QR-Code konnte nicht geladen werden.',
+  },
+  ia: {
+    button: 'Story mit der KI des Browsers analysieren',
+    again: 'Analyse wiederholen',
+    running: 'Analyse läuft',
+    downloading: (n: number) => `Der Browser lädt sein Modell, ${n} %`,
+    failed: 'Die Analyse wurde nicht abgeschlossen.',
+    private: 'Nur Sie sehen das. Die Analyse läuft im Browser, auf diesem Computer.',
+  },
   host: {
     badge: 'Host',
     ai: 'KI',
@@ -561,6 +716,10 @@ export const DE: Translation = {
     unvoted: 'hat die Stimme zurückgezogen.',
     revealed: 'hat die Stimmen aufgedeckt.',
     new_round: 'hat eine neue Runde gestartet.',
+    stories_added: 'hat Storys hinzugefügt.',
+    stories_cleared: 'hat die Story-Liste geleert.',
+    story_selected: (t: string) => `wechselt zu „${t}“.`,
+    estimated: (t: string) => `hat die Schätzung von „${t}“ übernommen.`,
     locked: 'hat den Raum gesperrt.',
     unlocked: 'hat den Raum geöffnet.',
     timer_started: 'hat den Timer gestartet.',
@@ -641,10 +800,12 @@ export const PT: Translation = {
     newRound: 'Nova rodada',
     reveal: 'Revelar',
     pending: (n: number) => `${n} participante(s) ainda não votaram.`,
+    autoReveal: 'Revelar assim que todos votarem',
   },
 
   results: {
     title: 'Resultados',
+    agreement: (n: number) => `Acordo ${n} %`,
     avg: 'Média',
     median: 'Mediana',
     min: 'Mín',
@@ -652,6 +813,39 @@ export const PT: Translation = {
     none: 'Os resultados aparecerão após a revelação.',
   },
 
+  stories: {
+    title: 'Histórias',
+    onTable: 'História em curso:',
+    none: 'Nenhuma história. Cole uma lista para estimá-las uma após a outra.',
+    addLabel: 'Adicionar histórias, uma por linha',
+    addPlaceholder: 'Página de login\nExportação CSV de faturas',
+    addBtn: 'Adicionar',
+    clear: 'Esvaziar a lista',
+    clearConfirm: 'Esvaziar a lista de histórias e suas estimativas?',
+    colStory: 'História',
+    colEstimate: 'Estimativa',
+    vote: (t: string) => `Estimar «${t}»`,
+    keep: (v: string) => `Ficar com ${v}`,
+    keepTitle: 'Estimativa escolhida',
+    next: 'Próxima história',
+    copyMd: 'Copiar em Markdown',
+    downloadCsv: 'Baixar em CSV',
+    copied: 'Copiado',
+  },
+  qr: {
+    show: 'QR code',
+    hide: 'Ocultar o QR code',
+    alt: 'QR code do endereço da sala',
+    failed: 'Não foi possível carregar o QR code.',
+  },
+  ia: {
+    button: 'Analisar a história com a IA do navegador',
+    again: 'Refazer a análise',
+    running: 'Analisando',
+    downloading: (n: number) => `O navegador está baixando o modelo, ${n} %`,
+    failed: 'A análise não terminou.',
+    private: 'Só você vê isto. A análise roda no navegador, neste computador.',
+  },
   host: {
     badge: 'anfitrião',
     ai: 'IA',
@@ -702,6 +896,10 @@ export const PT: Translation = {
     unvoted: 'retirou o voto.',
     revealed: 'revelou os votos.',
     new_round: 'iniciou uma nova rodada.',
+    stories_added: 'adicionou histórias.',
+    stories_cleared: 'esvaziou a lista de histórias.',
+    story_selected: (t: string) => `passa para «${t}».`,
+    estimated: (t: string) => `escolheu a estimativa de «${t}».`,
     locked: 'bloqueou a sala.',
     unlocked: 'abriu a sala.',
     timer_started: 'iniciou o temporizador.',
@@ -740,6 +938,10 @@ export function translateActivity(
     case 'unvoted':          return t.activity.unvoted;
     case 'revealed':         return t.activity.revealed;
     case 'new_round':        return t.activity.new_round;
+    case 'stories_added':    return t.activity.stories_added;
+    case 'stories_cleared':  return t.activity.stories_cleared;
+    case 'story_selected':   return t.activity.story_selected(target);
+    case 'estimated':        return t.activity.estimated(target);
     case 'locked':           return t.activity.locked;
     case 'unlocked':         return t.activity.unlocked;
     case 'timer_started':    return t.activity.timer_started;

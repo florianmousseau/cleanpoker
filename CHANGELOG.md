@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.56] - 2026-11-20
+
+- refactor: split vote acceptance from recording, use replaceAll in the export
+- fix(i18n): close the qr block after the merge
+- feat(room): QR code of the room address
+- fix(content): name the browser in the download message, and 'other' AI service
+- fix(content): the browser AI section says what is true of privacy, language and reach
+- feat(room): analyse the story on the table with Chrome's built-in AI
+- fix(content): keep the paste-and-export sentence after the tracker advice
+- fix(content): the AI guide says the assistant reads a title only, and what it receives
+- feat(mcp): the assistant reads the story on the table and gives a reason
+- feat(room): story list, export, agreement and auto-reveal
+
 ## [0.0.55] - 2026-11-20
 
 - fix(mcp): mark get_room as read-only for clients that gate write tools

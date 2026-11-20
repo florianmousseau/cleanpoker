@@ -20,6 +20,8 @@ Live at **[cleanpoker.dev](https://cleanpoker.dev)**, in English, French, Spanis
 - **Observers** can follow a room without voting. Anyone in the room can switch a participant to observer or remove them. Removing someone asks for confirmation first.
 - **Host and lock**: the first person in a room is its host and can lock it, so that only they reveal, start a new round or remove people. Off by default.
 - **Voting timer**: 30 s, 1, 2 or 5 minutes, shown to everyone.
+- **Story list**: paste stories one per line, estimate them in turn, keep the chosen card for each, export as CSV or a Markdown table.
+- **Agreement and auto-reveal**: the share of votes on the most chosen card, the lowest and highest votes marked, and an optional reveal on the last vote.
 - **AI participants**: an assistant joins a room over MCP and votes like anyone, marked as an AI. See below.
 - **Reconnection**: a dropped connection retries with exponential backoff. A reload within 30 seconds takes the same seat back, vote included.
 - **Ephemeral**: rooms live in the server's memory and are deleted after 24 hours without activity. There is no database.
@@ -38,11 +40,15 @@ Then ask the assistant to join the room the team shares and estimate the story. 
 | Tool | What it does |
 | --- | --- |
 | `join_room` | Takes a seat marked as an AI and returns a seat token. An AI never holds the host role. |
-| `get_room` | Reads the deck, the round, who voted, and the results once a person reveals them. |
-| `vote` | Votes one card of the deck, hidden until the reveal. |
+| `get_room` | Reads the deck, the round, the story list and the one on the table, who voted, and the results once a person reveals them. |
+| `vote` | Votes one card of the deck with a short reason, both hidden until the reveal. |
 | `leave_room` | Gives the seat up. |
 
-An assistant cannot reveal, start a round or remove anyone, and it sees nobody's vote before the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. CleanPoker sends nothing to any AI; the assistant reads the room because its user connected it.
+An assistant cannot reveal, start a round or remove anyone, and it sees nobody's vote before the reveal. Its reason shows under its name at the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. CleanPoker calls no AI service; the assistant reads the room because its user connected it.
+
+## The browser's built-in AI
+
+Where Chrome exposes its on-device model (the Prompt API, Chrome 148 and later on desktop), the room shows a button that analyzes the story on the table: what it leaves out, and a split if it looks too large. The model runs on the reader's computer; the analysis sends the story to no service and the answer is shown to that reader only. Elsewhere the button does not appear.
 
 ## Privacy
 
