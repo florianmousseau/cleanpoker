@@ -1,6 +1,7 @@
 import type { Translation } from "#lib/i18n.ts";
 
 export const FR: Translation = {
+  homeLabel: 'PokerAgile, accueil',
   salleLabel: 'Salle',
   tourLabel: 'Tour',
   copyLink: 'Copier le lien',

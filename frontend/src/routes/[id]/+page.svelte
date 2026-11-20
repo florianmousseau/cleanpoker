@@ -214,7 +214,7 @@
 <div class="page" class:equipe={equipe?.clair} style:--eq-clair={equipe?.clair || undefined} style:--eq-sombre={equipe?.sombre || undefined}>
   <header class="header">
     <div class="container header-inner">
-      <a href={homeHref} class="logo" aria-label="PokerAgile, accueil"><Logo /><span>PokerAgile</span></a>
+      <a href={homeHref} class="logo" aria-label={T.homeLabel}><Logo /><span>PokerAgile</span></a>
       <div class="room-meta">
         {#if equipe?.nom}<span class="badge-pill team-name" data-testid="team-name">{equipe.nom}</span>{/if}
         <span class="badge-pill">{T.salleLabel} <code>{roomId}</code></span>

@@ -16,6 +16,7 @@
   jsonLdDesc="Kollaboratives Planning-Poker-Tool. Keine Werbe-Cookies, kein verhaltensbasiertes Tracking. Unter 50 KB JavaScript, gehostet mit erneuerbarer Energie. WCAG 2.1 AA: Tastaturnavigation, NVDA und VoiceOver."
   accessibilitySummary="Vollständige Tastaturnavigation (Tab, Eingabe, Leertaste). Kompatibel mit NVDA und VoiceOver Screenreadern. aria-live-Bereiche für Echtzeit-Updates. Mindestkontrastrate 4,5:1. Skip-Link vorhanden. Keine ablenkenden Animationen. WCAG 2.1 AA konform."
   keywords="Planning Poker, Scrum, Agile, Sprint Planning, Ökodesign, Green IT, nachhaltig, kein verhaltensbasiertes Tracking, keine Werbe-Cookies, Datenschutz, DSGVO, barrierefrei, WCAG 2.1 AA, Screenreader, Tastaturnavigation, NVDA, VoiceOver, kein Konto, grünes Hosting, erneuerbare Energie, Open Source, MIT"
+  homeLabel="PokerAgile, Startseite"
   navAriaLabel="Sprache"
   h1Main="Planning Poker"
   h1Accent="online"

@@ -16,6 +16,7 @@
   jsonLdDesc="Collaborative planning poker tool. No advertising cookies or behavioural tracking. Under 50 KB of JavaScript, hosted on renewable energy. WCAG 2.1 AA: keyboard navigation, NVDA and VoiceOver."
   accessibilitySummary="Fully keyboard navigable (Tab, Enter, Space). Compatible with NVDA and VoiceOver screen readers. aria-live regions for real-time vote updates. Minimum 4.5:1 contrast ratio. Skip link provided. No distracting animations. WCAG 2.1 AA compliant."
   keywords="planning poker, scrum, agile, sprint planning, eco-design, green IT, sustainable, no behavioural tracking, no advertising cookies, privacy, GDPR, accessible, WCAG 2.1 AA, screen reader, keyboard navigation, NVDA, VoiceOver, no account, green hosting, renewable energy, open source, MIT, Lighthouse 100"
+  homeLabel="PokerAgile, home"
   navAriaLabel="Language"
   h1Main="Planning poker"
   h1Accent="online"

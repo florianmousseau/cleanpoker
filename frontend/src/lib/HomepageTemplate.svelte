@@ -40,6 +40,7 @@
     createBtnLabel: string;
     creatingLabel: string;
     createError: string;
+    homeLabel: string;
     teamSummary: string;
     teamNameLabel: string;
     teamColorLabel: string;
@@ -76,6 +77,7 @@
     createBtnLabel,
     creatingLabel,
     createError,
+    homeLabel,
     teamSummary,
     teamNameLabel,
     teamColorLabel,
@@ -205,7 +207,7 @@
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label="PokerAgile, accueil">
+      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label={homeLabel}>
         <Logo />
         <span class="logo-text">PokerAgile</span>
       </a>

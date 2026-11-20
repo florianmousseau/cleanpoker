@@ -1,4 +1,5 @@
 export interface Translation {
+  homeLabel: string;
   salleLabel: string;
   tourLabel: string;
   copyLink: string;

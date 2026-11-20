@@ -16,6 +16,7 @@
   jsonLdDesc="Outil de poker planning collaboratif. Aucun cookie publicitaire ni suivi comportemental. Moins de 50 Ko de JavaScript, hébergé sur énergie renouvelable. Accessible WCAG 2.1 AA&nbsp;: navigation clavier, lecteurs d'écran NVDA et VoiceOver."
   accessibilitySummary="Navigation clavier complète (Tab, Entrée, Espace). Compatible avec les lecteurs d'écran NVDA et VoiceOver. Zones aria-live pour les mises à jour en temps réel. Ratio de contraste minimum 4,5:1. Lien d'évitement. Pas d'animation de distraction. Conforme WCAG 2.1 AA."
   keywords="poker planning, poker planning en ligne, poker planning gratuit, planning poker, scrum, agile, sprint planning, sans inscription, éco-conception, green IT, numérique responsable, sans suivi comportemental, sans cookie publicitaire, vie privée, RGPD, accessible, WCAG 2.1 AA, lecteur d'écran, navigation clavier, NVDA, VoiceOver, sans compte, hébergement vert, énergie renouvelable, open source, MIT, Lighthouse 100"
+  homeLabel="PokerAgile, accueil"
   navAriaLabel="Langue"
   h1Main="Poker planning"
   h1Accent="en ligne"
