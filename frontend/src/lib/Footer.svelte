@@ -38,12 +38,12 @@
 
   const GUIDES: Record<string, { label: string; links: [string, string][] }> = {
     en: { label: 'Guides', links: [
-      ['/planning-poker', 'Planning poker guide'], ['/story-points', 'Story points'], ['/fibonacci', 'Fibonacci scale'],
+      ['/planning-poker', 'Planning poker guide'], ['/story-points', 'Story points'], ['/retrospective', 'Retrospective formats'], ['/fibonacci', 'Fibonacci scale'],
       ['/estimation-agile', 'Agile estimation'], ['/alternatives', 'Alternatives'], ['/planning-poker-tools', 'Tools compared'],
       ['/planning-poker-ai', 'Planning poker with AI'], ['/planning-poker-gdpr', 'GDPR'],
     ] },
     fr: { label: 'Guides', links: [
-      ['/fr/planning-poker', 'Guide du poker planning'], ['/fr/story-points', 'Story points'], ['/fr/fibonacci', 'Suite de Fibonacci'],
+      ['/fr/planning-poker', 'Guide du poker planning'], ['/fr/story-points', 'Story points'], ['/fr/retrospective', 'Formats de rétrospective'], ['/fr/fibonacci', 'Suite de Fibonacci'],
       ['/fr/estimation-agile', 'Estimation agile'], ['/fr/alternatives', 'Alternatives'], ['/fr/comparatif-outils', 'Comparatif des outils'],
       ['/fr/planning-poker-ia', 'Planning poker avec une IA'], ['/fr/poker-planning-rgpd', 'RGPD'],
     ] },

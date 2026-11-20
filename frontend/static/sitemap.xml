@@ -523,5 +523,21 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://pokeragile.com/retrospective</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/retrospective"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/retrospective"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/retrospective"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/fr/retrospective</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/retrospective"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/retrospective"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/retrospective"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
 </urlset>
