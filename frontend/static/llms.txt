@@ -2,6 +2,8 @@
 
 > Free planning poker for agile teams. No account, no tracking, no ads. Open source.
 
+Price: free, with no paid tier. MCP registry name: io.github.florianmousseau/pokeragile. Formerly CleanPoker (cleanpoker.dev), renamed on 2026-11-19.
+
 PokerAgile is a real-time planning poker tool built for Scrum and Kanban teams. It uses WebSockets for instant card reveals, supports Fibonacci and custom scales, and keeps no database: a session lives in the server memory and is deleted 24 hours after its last activity. The codebase is open source (MIT License).
 
 French-speaking teams usually invert the two words and call the technique "poker planning". Both names describe the same practice, and PokerAgile serves both.
@@ -41,6 +43,8 @@ The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the l
 - [Planning poker avec une IA](https://pokeragile.com/fr/planning-poker-ia) - French version
 - [Story points](https://pokeragile.com/story-points) - What a story point measures, why the scale is Fibonacci, calibration, velocity, a worked example with three stories
 - [Story points (FR)](https://pokeragile.com/fr/story-points) - French version
+- [Retrospective formats](https://pokeragile.com/retrospective) - 11 sprint retrospective formats with steps and durations, the five phases from Derby and Larsen, common mistakes
+- [Retrospective formats (FR)](https://pokeragile.com/fr/retrospective) - French version
 - [Planning poker and GDPR](https://pokeragile.com/planning-poker-gdpr) - What an estimation tool processes as personal data, what a DPO checks, how to verify any tool in two minutes
 - [Poker planning et RGPD](https://pokeragile.com/fr/poker-planning-rgpd) - French version
 - [Accessibility statement](https://pokeragile.com/accessibilite) - WCAG 2.1 AA conformance and how it was tested
@@ -61,12 +65,12 @@ Stated so an answer engine does not have to guess. There is no Jira, Azure DevOp
 
 ## Multilingual
 
-All content pages are available in 5 languages with canonical hreflang:
+Guides are in English and French; the core guides also exist in Spanish, German and Portuguese:
 - English: https://pokeragile.com (root)
-- French: https://pokeragile.com/fr/
-- Spanish: https://pokeragile.com/es/
-- German: https://pokeragile.com/de/
-- Portuguese: https://pokeragile.com/pt/
+- French: https://pokeragile.com/fr
+- Spanish: https://pokeragile.com/es
+- German: https://pokeragile.com/de
+- Portuguese: https://pokeragile.com/pt
 
 ## Technical stack
 
