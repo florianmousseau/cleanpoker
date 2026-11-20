@@ -23,7 +23,7 @@ func siteOrigin() string {
 	if o := os.Getenv("SITE_ORIGIN"); o != "" {
 		return o
 	}
-	return "https://cleanpoker.dev"
+	return "https://pokeragile.com"
 }
 
 func main() {
@@ -52,7 +52,7 @@ func main() {
 	mux.Handle("/", handler.New(roomStore, allowedOrigins, checker.Report))
 	mux.Handle("/mcp", assistant.Handler(roomStore, commit))
 
-	log.Printf("CleanPoker backend listening on :%s", port)
+	log.Printf("PokerAgile backend listening on :%s", port)
 	if err := handler.NewServer(":"+port, mux).ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}

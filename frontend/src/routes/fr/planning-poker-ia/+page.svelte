@@ -1,20 +1,20 @@
 <svelte:head>
-  <title>Planning poker IA&nbsp;: faire voter Claude ou ChatGPT | CleanPoker</title>
+  <title>Planning poker IA&nbsp;: faire voter Claude ou ChatGPT | PokerAgile</title>
   <meta name="description" content="Faites voter Claude, ChatGPT ou Cursor dans une salle de planning poker&nbsp;: une adresse MCP à coller, rien à installer. Ce que l'IA estime bien, et mal." />
-  <link rel="canonical" href="https://cleanpoker.dev/fr/planning-poker-ia" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker-ia" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-ai" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-ai" />
+  <link rel="canonical" href="https://pokeragile.com/fr/planning-poker-ia" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker-ia" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-ai" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-ai" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Planning poker avec une IA : faire voter Claude ou ChatGPT dans la salle',
-    url: 'https://cleanpoker.dev/fr/planning-poker-ia',
+    url: 'https://pokeragile.com/fr/planning-poker-ia',
     inLanguage: 'fr',
     datePublished: '2026-11-20',
     dateModified: '2026-11-20',
     author: { '@type': 'Person', name: 'Florian Mousseau', url: 'https://florianmousseau.com' },
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -23,7 +23,7 @@
       {
         '@type': 'Question',
         name: 'Peut-on faire voter une IA au planning poker ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Oui. Sur CleanPoker, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l\'adresse https://salles.cleanpoker.dev/mcp, lit la story en cours si l\'équipe a collé sa liste dans la salle, ou la reçoit dans sa conversation, puis choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Oui. Sur PokerAgile, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l\'adresse https://salles.cleanpoker.dev/mcp, lit la story en cours si l\'équipe a collé sa liste dans la salle, ou la reçoit dans sa conversation, puis choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.' },
       },
       {
         '@type': 'Question',
@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Le texte de la story est-il envoyé à une IA ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Oui, à l\'assistant qu\'une personne de l\'équipe a connecté, et à aucun autre service d\'IA : CleanPoker n\'en appelle aucun. L\'assistant reçoit l\'état de la salle : les titres des stories et leurs estimations si l\'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Oui, à l\'assistant qu\'une personne de l\'équipe a connecté, et à aucun autre service d\'IA : PokerAgile n\'en appelle aucun. L\'assistant reçoit l\'état de la salle : les titres des stories et leurs estimations si l\'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.' },
       },
     ],
   })}<\/script>`}
@@ -46,7 +46,7 @@
     <h1>Planning poker avec une IA&nbsp;: faire voter Claude ou ChatGPT dans la salle</h1>
 
     <p class="lead">
-      Depuis le 20 novembre 2026, un assistant IA peut rejoindre une salle de poker planning CleanPoker et voter comme un membre de l'équipe. Il choisit sa carte en secret, elle se révèle avec les autres, et il apparaît dans la liste avec la mention <strong>(IA)</strong>.
+      Depuis le 20 novembre 2026, un assistant IA peut rejoindre une salle de poker planning PokerAgile et voter comme un membre de l'équipe. Il choisit sa carte en secret, elle se révèle avec les autres, et il apparaît dans la liste avec la mention <strong>(IA)</strong>.
     </p>
 
     <h2>Ce que l'IA peut faire dans la salle</h2>
@@ -71,13 +71,13 @@
     <pre><code>https://salles.cleanpoker.dev/mcp</code></pre>
     <ul>
       <li><strong>Claude</strong>&nbsp;: Paramètres, Connecteurs, Ajouter un connecteur personnalisé, puis coller l'adresse. Dans une offre Team ou Enterprise, un propriétaire de l'espace l'ajoute d'abord.</li>
-      <li><strong>Claude Code</strong>&nbsp;: <code>claude mcp add --transport http cleanpoker https://salles.cleanpoker.dev/mcp</code></li>
+      <li><strong>Claude Code</strong>&nbsp;: <code>claude mcp add --transport http pokeragile https://salles.cleanpoker.dev/mcp</code></li>
       <li><strong>ChatGPT</strong>&nbsp;: Paramètres, Applications, Paramètres avancés, activer le mode développeur, puis Créer une application avec l'adresse. Le vote demande une offre Business, Enterprise ou Edu&nbsp;; sur Plus et Pro, le mode développeur n'accepte que les outils de lecture, et l'IA lit la salle sans voter.</li>
-      <li><strong>Cursor</strong>&nbsp;: dans <code>~/.cursor/mcp.json</code>, ajouter <code>&#123;"mcpServers": &#123; "cleanpoker": &#123; "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
-      <li><strong>VS Code</strong>&nbsp;: avec Copilot en mode agent, dans <code>.vscode/mcp.json</code>, ajouter <code>&#123;"servers": &#123; "cleanpoker": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
+      <li><strong>Cursor</strong>&nbsp;: dans <code>~/.cursor/mcp.json</code>, ajouter <code>&#123;"mcpServers": &#123; "pokeragile": &#123; "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
+      <li><strong>VS Code</strong>&nbsp;: avec Copilot en mode agent, dans <code>.vscode/mcp.json</code>, ajouter <code>&#123;"servers": &#123; "pokeragile": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
     </ul>
-    <p>CleanPoker ne demande ni compte ni clé d'API, et il n'y a rien à installer&nbsp;: l'adresse est celle d'un serveur MCP distant, avec quatre outils, <code>join_room</code>, <code>get_room</code>, <code>vote</code> et <code>leave_room</code>. La salle doit déjà être ouverte par une personne dans son navigateur. Si l'équipe y a collé sa liste de stories, l'assistant lit celle en cours&nbsp;; sinon, donnez-lui la story dans votre message. Puis, dans la conversation&nbsp;:</p>
-    <pre><code>Rejoins la salle https://cleanpoker.dev/ab12cd34 sous le nom Claude.
+    <p>PokerAgile ne demande ni compte ni clé d'API, et il n'y a rien à installer&nbsp;: l'adresse est celle d'un serveur MCP distant, avec quatre outils, <code>join_room</code>, <code>get_room</code>, <code>vote</code> et <code>leave_room</code>. La salle doit déjà être ouverte par une personne dans son navigateur. Si l'équipe y a collé sa liste de stories, l'assistant lit celle en cours&nbsp;; sinon, donnez-lui la story dans votre message. Puis, dans la conversation&nbsp;:</p>
+    <pre><code>Rejoins la salle https://pokeragile.com/ab12cd34 sous le nom Claude.
 Estime la story en cours en story points et vote en justifiant ta carte en une ou deux phrases, sans me la dire.
 Quitte la salle quand je te le dis.</code></pre>
 
@@ -105,7 +105,7 @@ Quitte la salle quand je te le dis.</code></pre>
 
     <h2>Ce que reçoit l'assistant</h2>
     <p>
-      CleanPoker n'appelle aucun service d'IA. L'assistant connecté par une personne de l'équipe reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, qui a voté, le journal d'activité, puis les votes une fois révélés. Il le reçoit sous l'abonnement de cette personne et les règles de son entreprise sur l'IA. La salle vit en mémoire sur le serveur de Gravelines et disparaît 24 heures après la dernière activité.
+      PokerAgile n'appelle aucun service d'IA. L'assistant connecté par une personne de l'équipe reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, qui a voté, le journal d'activité, puis les votes une fois révélés. Il le reçoit sous l'abonnement de cette personne et les règles de son entreprise sur l'IA. La salle vit en mémoire sur le serveur de Gravelines et disparaît 24 heures après la dernière activité.
     </p>
 
     <h2>Sans assistant connecté&nbsp;: l'IA intégrée au navigateur</h2>
@@ -123,11 +123,11 @@ Quitte la salle quand je te le dis.</code></pre>
 
     <h2>Questions fréquentes</h2>
     <h3>Peut-on faire voter une IA au planning poker&nbsp;?</h3>
-    <p>Oui. Sur CleanPoker, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l'adresse https://salles.cleanpoker.dev/mcp, lit la story en cours si l'équipe a collé sa liste dans la salle, ou la reçoit dans sa conversation, puis choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.</p>
+    <p>Oui. Sur PokerAgile, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l'adresse https://salles.cleanpoker.dev/mcp, lit la story en cours si l'équipe a collé sa liste dans la salle, ou la reçoit dans sa conversation, puis choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.</p>
     <h3>Une IA estime-t-elle mieux qu'une équipe&nbsp;?</h3>
     <p>Non. Elle ne connaît ni la vélocité de l'équipe, ni l'état réel du code, ni qui dépend de qui. Elle est utile pour repérer ce que la story oublie&nbsp;: tests, migration de données, cas limites. Son vote sert à ouvrir la discussion quand il s'écarte de celui de l'équipe.</p>
     <h3>Le texte de la story est-il envoyé à une IA&nbsp;?</h3>
-    <p>Oui, à l'assistant qu'une personne de l'équipe a connecté, et à aucun autre service d'IA&nbsp;: CleanPoker n'en appelle aucun. L'assistant reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.</p>
+    <p>Oui, à l'assistant qu'une personne de l'équipe a connecté, et à aucun autre service d'IA&nbsp;: PokerAgile n'en appelle aucun. L'assistant reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.</p>
 
     <div class="cta">
       <a href="/fr" class="btn">Créer une salle</a>

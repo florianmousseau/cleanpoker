@@ -1,13 +1,13 @@
 <svelte:head>
-  <title>Planning poker: reglas, Fibonacci y guía práctica | CleanPoker</title>
+  <title>Planning poker: reglas, Fibonacci y guía práctica | PokerAgile</title>
   <meta name="description" content="¿Qué es el planning poker? Reglas, suite de Fibonacci, T-shirt sizing, consejos para estimar historias de usuario en equipo ágil. Guía completa gratuita." />
-  <link rel="canonical" href="https://cleanpoker.dev/es/planning-poker" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker" />
+  <link rel="canonical" href="https://pokeragile.com/es/planning-poker" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/planning-poker" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/planning-poker" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/planning-poker" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -120,7 +120,7 @@
     <details>
       <summary>¿El planning poker funciona para equipos remotos?</summary>
       <p>
-        Sí, precisamente para eso existe CleanPoker. Crea una sesión, comparte la URL,
+        Sí, precisamente para eso existe PokerAgile. Crea una sesión, comparte la URL,
         cada participante vota desde su propio dispositivo. Los resultados se revelan en
         tiempo real via WebSocket, sin ninguna configuración ni cuenta que crear.
       </p>

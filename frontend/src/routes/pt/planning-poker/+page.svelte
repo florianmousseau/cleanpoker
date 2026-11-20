@@ -1,13 +1,13 @@
 <svelte:head>
-  <title>Planning poker: regras, Fibonacci e guia prático | CleanPoker</title>
+  <title>Planning poker: regras, Fibonacci e guia prático | PokerAgile</title>
   <meta name="description" content="O que é o planning poker? Regras, suite de Fibonacci, T-shirt sizing, dicas para estimar histórias de utilizador em equipa ágil. Guia completo gratuito." />
-  <link rel="canonical" href="https://cleanpoker.dev/pt/planning-poker" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker" />
+  <link rel="canonical" href="https://pokeragile.com/pt/planning-poker" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/planning-poker" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/planning-poker" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/planning-poker" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -118,7 +118,7 @@
     <details>
       <summary>O planning poker funciona para equipas remotas?</summary>
       <p>
-        Sim, é precisamente para isso que o CleanPoker existe. Crie uma sessão, partilhe o URL,
+        Sim, é precisamente para isso que o PokerAgile existe. Crie uma sessão, partilhe o URL,
         cada participante vota no seu próprio dispositivo. Os resultados são revelados em tempo
         real via WebSocket, sem configuração nem conta a criar.
       </p>

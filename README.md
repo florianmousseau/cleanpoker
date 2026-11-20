@@ -1,14 +1,14 @@
-# CleanPoker
+# PokerAgile
 
 Planning poker for agile teams, in the browser. Create a room, share its link, vote, reveal. No account, no install.
 
-Live at **[cleanpoker.dev](https://cleanpoker.dev)**, in English, French, Spanish, German and Portuguese.
+Live at **[pokeragile.com](https://pokeragile.com)**, in English, French, Spanish, German and Portuguese.
 
 [![Deploy](https://github.com/florianmousseau/cleanpoker/actions/workflows/deploy.yml/badge.svg?branch=develop)](https://github.com/florianmousseau/cleanpoker/actions/workflows/deploy.yml)
 [![CodeQL](https://github.com/florianmousseau/cleanpoker/actions/workflows/codeql.yml/badge.svg)](https://github.com/florianmousseau/cleanpoker/actions/workflows/codeql.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=florianmousseau_cleanpoker&metric=alert_status)](https://sonarcloud.io/project/overview?id=florianmousseau_cleanpoker)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Trackers](https://img.shields.io/badge/trackers-0-brightgreen)](https://cleanpoker.dev/green)
+[![Trackers](https://img.shields.io/badge/trackers-0-brightgreen)](https://pokeragile.com/green)
 
 ![A room after the reveal: four participants, their votes, the average, min, max and distribution](docs/screenshot.png)
 
@@ -25,7 +25,7 @@ Live at **[cleanpoker.dev](https://cleanpoker.dev)**, in English, French, Spanis
 - **AI participants**: an assistant joins a room over MCP and votes like anyone, marked as an AI. See below.
 - **Reconnection**: a dropped connection retries with exponential backoff. A reload within 30 seconds takes the same seat back, vote included.
 - **Ephemeral**: rooms live in the server's memory and are deleted after 24 hours without activity. There is no database.
-- **Accessibility**: semantic HTML, full keyboard use, and live regions that announce votes and results. The site respects `prefers-reduced-motion`. It targets WCAG 2.1 AA; the [accessibility statement](https://cleanpoker.dev/accessibilite) currently reads "partially conformant".
+- **Accessibility**: semantic HTML, full keyboard use, and live regions that announce votes and results. The site respects `prefers-reduced-motion`. It targets WCAG 2.1 AA; the [accessibility statement](https://pokeragile.com/accessibilite) currently reads "partially conformant".
 
 ## Let an AI assistant vote
 
@@ -44,7 +44,7 @@ Then ask the assistant to join the room the team shares and estimate the story. 
 | `vote` | Votes one card of the deck with a short reason, both hidden until the reveal. |
 | `leave_room` | Gives the seat up. |
 
-An assistant cannot reveal, start a round or remove anyone, and it sees nobody's vote before the reveal. Its reason shows under its name at the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. CleanPoker calls no AI service; the assistant reads the room because its user connected it.
+An assistant cannot reveal, start a round or remove anyone, and it sees nobody's vote before the reveal. Its reason shows under its name at the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. PokerAgile calls no AI service; the assistant reads the room because its user connected it.
 
 ## The browser's built-in AI
 

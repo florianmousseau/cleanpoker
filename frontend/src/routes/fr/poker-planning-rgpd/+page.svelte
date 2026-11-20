@@ -1,17 +1,17 @@
 <svelte:head>
-  <title>Poker planning et RGPD&nbsp;: où vont les données de vos sessions | CleanPoker</title>
-  <meta name="description" content="Un outil de poker planning traite-t-il des données personnelles&nbsp;? Ce qu'un DPO regarde, comment vérifier vous-même en deux minutes, et pourquoi CleanPoker n'a ni compte, ni cookie, ni base de données de sessions." />
-  <link rel="canonical" href="https://cleanpoker.dev/fr/poker-planning-rgpd" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/poker-planning-rgpd" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-gdpr" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-gdpr" />
+  <title>Poker planning et RGPD&nbsp;: où vont les données de vos sessions | PokerAgile</title>
+  <meta name="description" content="Un outil de poker planning traite-t-il des données personnelles&nbsp;? Ce qu'un DPO regarde, comment vérifier vous-même en deux minutes, et pourquoi PokerAgile n'a ni compte, ni cookie, ni base de données de sessions." />
+  <link rel="canonical" href="https://pokeragile.com/fr/poker-planning-rgpd" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/poker-planning-rgpd" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-gdpr" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-gdpr" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Poker planning et RGPD : où vont les données de vos sessions',
-    url: 'https://cleanpoker.dev/fr/poker-planning-rgpd',
-    description: 'Ce qu\'un outil de poker planning en ligne traite comme données personnelles, comment le vérifier soi-même, et la position de CleanPoker : aucun compte, aucun cookie, aucune session conservée.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    url: 'https://pokeragile.com/fr/poker-planning-rgpd',
+    description: 'Ce qu\'un outil de poker planning en ligne traite comme données personnelles, comment le vérifier soi-même, et la position de PokerAgile : aucun compte, aucun cookie, aucune session conservée.',
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -34,7 +34,7 @@
       },
       {
         '@type': 'Question',
-        name: 'Où sont hébergées les sessions CleanPoker ?',
+        name: 'Où sont hébergées les sessions PokerAgile ?',
         acceptedAnswer: { '@type': 'Answer', text: 'Le serveur temps réel tourne exclusivement à Gravelines, en France. Les sessions vivent en mémoire vive, ne sont jamais écrites sur disque, et sont supprimées 24 heures après la dernière activité. Il n\'y a ni compte, ni adresse e-mail collectée, ni cookie publicitaire, ni script tiers : les deux seuls cookies retiennent la langue et le thème choisis, et restent sur l\'appareil.' },
       },
     ],
@@ -122,7 +122,7 @@
       </li>
     </ol>
 
-    <h2>La position de CleanPoker</h2>
+    <h2>La position de PokerAgile</h2>
     <div class="table-wrap">
       <table>
         <thead>

@@ -1,6 +1,6 @@
 {
-  "name": "CleanPoker",
-  "short_name": "CleanPoker",
+  "name": "PokerAgile",
+  "short_name": "PokerAgile",
   "description": "Free planning poker. No account, no tracking.",
   "start_url": "/",
   "display": "standalone",

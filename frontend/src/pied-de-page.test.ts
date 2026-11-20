@@ -5,7 +5,7 @@
  * rien ne comparait une page a l autre. Mesure du 2026-09-08 sur la production,
  * avec `setup/scripts/motifs.ps1` du cockpit : l anglais servait « MIT License »
  * sur cinq pages et « MIT Licence » sur trois, l allemand « Uber uns » sur trois
- * et « Uber CleanPoker » sur quatre. Deux libelles pour un meme lien, c est le
+ * et « Uber PokerAgile » sur quatre. Deux libelles pour un meme lien, c est le
  * lecteur qui se demande si c est la meme page.
  *
  * La cle est l ADRESSE, pas la position : elle survit a un lien ajoute ou

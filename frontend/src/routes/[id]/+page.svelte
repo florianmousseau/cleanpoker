@@ -118,7 +118,7 @@
   const agreed = $derived(room.roomState?.results ? agreement(room.roomState.results.dist) : null);
 
   const isSolo = $derived(room.roomState !== null && room.roomState.players.length === 1);
-  // Most people meet CleanPoker as someone else's guest and never see the home
+  // Most people meet PokerAgile as someone else's guest and never see the home
   // page. The reveal is the one moment they are looking at the result rather
   // than at a card, so that is where they get told they can host their own.
   const showPromo = $derived(
@@ -136,16 +136,16 @@
 </script>
 
 <svelte:head>
-  <title>{T.salleLabel} {roomId} | CleanPoker</title>
+  <title>{T.salleLabel} {roomId} | PokerAgile</title>
   <meta name="robots" content="noindex" />
   <!-- This URL is the only one anyone ever shares, and it lands in a team chat.
-       The card is what the whole channel sees, so it says what CleanPoker is
+       The card is what the whole channel sees, so it says what PokerAgile is
        and never echoes the room id. noindex keeps it out of search all the same. -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="CleanPoker" />
+  <meta property="og:site_name" content="PokerAgile" />
   <meta property="og:title" content={T.share.ogTitle} />
   <meta property="og:description" content={T.share.ogDesc} />
-  <meta property="og:image" content="https://cleanpoker.dev/og-image.png" />
+  <meta property="og:image" content="https://pokeragile.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -158,7 +158,7 @@
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <a href={homeHref} class="logo" aria-label="CleanPoker, accueil"><Logo /><span>CleanPoker</span></a>
+      <a href={homeHref} class="logo" aria-label="PokerAgile, accueil"><Logo /><span>PokerAgile</span></a>
       <div class="room-meta">
         <span class="badge-pill">{T.salleLabel} <code>{roomId}</code></span>
         {#if room.roomState}
