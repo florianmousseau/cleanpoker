@@ -45,6 +45,10 @@
       <li><a href="/planning-poker-tools">Planning poker tools compared</a></li>
       <li><a href="/planning-poker-gdpr">Planning poker and GDPR</a></li>
     </ul>
+    <h2>Organising</h2>
+    <ul>
+      <li><a href="/raci-matrix">RACI matrix: definition and a template to fill in</a></li>
+    </ul>
     <h2>After the sprint</h2>
     <ul>
       <li><a href="/retrospective">Retrospective formats</a></li>
