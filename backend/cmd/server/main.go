@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/florianmousseau/cleanpoker/internal/assistant"
 	"log"
 	"net/http"
 	"os"
@@ -47,7 +48,9 @@ func main() {
 		Since:  roomStore.Usage().Since,
 		Now:    time.Now,
 	}
-	mux := handler.New(roomStore, allowedOrigins, checker.Report)
+	mux := http.NewServeMux()
+	mux.Handle("/", handler.New(roomStore, allowedOrigins, checker.Report))
+	mux.Handle("/mcp", assistant.Handler(roomStore, commit))
 
 	log.Printf("CleanPoker backend listening on :%s", port)
 	if err := handler.NewServer(":"+port, mux).ListenAndServe(); err != nil {

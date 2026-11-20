@@ -13,7 +13,7 @@ export interface Translation {
   cards: { title: string; revealedSub: string; votingHint: string; selectedSuffix: (v: string) => string; voteLabel: (c: string) => string };
   controls: { title: string; newRound: string; reveal: string; pending: (n: number) => string };
   results: { title: string; avg: string; median: string; min: string; max: string; none: string };
-  host: { badge: string; lock: string; unlock: string; lockedHint: string; timer: string; timerStop: string; timerLeft: (s: string) => string; timerOver: string; seconds: (n: number) => string };
+  host: { badge: string; ai: string; lock: string; unlock: string; lockedHint: string; timer: string; timerStop: string; timerLeft: (s: string) => string; timerOver: string; seconds: (n: number) => string };
   participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string; kickConfirm: (n: string) => string };
   observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
   activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; locked: string; unlocked: string; timer_started: string; timer_stopped: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
@@ -90,6 +90,7 @@ export const FR: Translation = {
 
   host: {
     badge: 'hôte',
+    ai: 'IA',
     lock: 'Verrouiller la salle',
     unlock: 'Ouvrir la salle',
     lockedHint: "Salle verrouillée, seul l'hôte mène le tour.",
@@ -230,6 +231,7 @@ export const EN: Translation = {
 
   host: {
     badge: 'host',
+    ai: 'AI',
     lock: 'Lock room',
     unlock: 'Unlock room',
     lockedHint: 'Room locked, only the host runs the round.',
@@ -370,6 +372,7 @@ export const ES: Translation = {
 
   host: {
     badge: 'anfitrión',
+    ai: 'IA',
     lock: 'Bloquear sala',
     unlock: 'Abrir sala',
     lockedHint: 'Sala bloqueada, solo el anfitrión dirige la ronda.',
@@ -510,6 +513,7 @@ export const DE: Translation = {
 
   host: {
     badge: 'Host',
+    ai: 'KI',
     lock: 'Raum sperren',
     unlock: 'Raum öffnen',
     lockedHint: 'Raum gesperrt, nur der Host leitet die Runde.',
@@ -650,6 +654,7 @@ export const PT: Translation = {
 
   host: {
     badge: 'anfitrião',
+    ai: 'IA',
     lock: 'Bloquear sala',
     unlock: 'Abrir sala',
     lockedHint: 'Sala bloqueada, só o anfitrião conduz a rodada.',

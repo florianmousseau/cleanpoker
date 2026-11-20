@@ -186,3 +186,24 @@ func TestComputeResults_Median(t *testing.T) {
 		t.Errorf("median of labels only: got %q", got)
 	}
 }
+
+func TestJoinSeat_AnAINeverHoldsTheHostRole(t *testing.T) {
+	r := newTestRoom(nil)
+	defer r.Stop()
+	r.JoinSeat(Player{ID: "bot", Name: "Claude", AI: true}, "")
+	if got := snap(r).Host; got != "" {
+		t.Fatalf("an AI became host: %q", got)
+	}
+	r.Join("p1", "Alice", false)
+	r.Join("p2", "Bob", false)
+	r.Leave("p1")
+	s := snap(r)
+	if s.Host != "p2" {
+		t.Fatalf("expected the role to skip the AI, got %q", s.Host)
+	}
+	for _, p := range s.Players {
+		if p.ID == "bot" && !p.AI {
+			t.Fatal("the AI seat lost its mark")
+		}
+	}
+}
