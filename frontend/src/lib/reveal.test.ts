@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { DE, EN, ES, FR, PT } from './i18n';
+import { DE, EN, ES, FR, PT } from './i18n/all';
 import { voteCount } from './reveal';
 
 const player = (id: string, vote: string, observer = false) => ({ id, name: id, vote, observer });

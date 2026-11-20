@@ -1,0 +1,128 @@
+import type { Translation } from "#lib/i18n.ts";
+
+export const DE: Translation = {
+  homeLabel: 'PokerAgile, Startseite',
+  salleLabel: 'Raum',
+  tourLabel: 'Runde',
+  copyLink: 'Link kopieren',
+  copied: 'Kopiert!',
+  copyFailed: 'Dein Browser hat das Kopieren abgelehnt. Kopiere die Adresse aus der Browserleiste.',
+
+  kicked: {
+    title: 'Du wurdest entfernt',
+    back: 'Zurück zur Startseite',
+  },
+
+  join: {
+    title: 'Dem Raum beitreten',
+    label: 'Dein Name oder Spitzname',
+    placeholder: 'z. B. Lena',
+    observer: 'Als Beobachter beitreten',
+    btn: 'Beitreten',
+  },
+
+  connection: {
+    connecting: 'Verbinde...',
+    reconnecting: 'Verbinde neu...',
+  },
+
+  solo: {
+    hint: 'Du bist allein in diesem Raum.',
+    invite: 'Team einladen',
+  },
+
+  share: {
+    ogTitle: 'Planning Poker, ohne Konto und ohne verhaltensbasiertes Tracking',
+    ogDesc: 'Tritt der Schätzrunde bei. Niemand braucht ein Konto.',
+    inviteMessage: (url: string) => `Planning-Poker-Schätzung, wir stimmen hier ab: ${url}\nKein Konto nötig.`,
+  },
+
+  promo: {
+    lead: 'Für deine nächste Schätzung öffne deinen eigenen Raum: Der Link reicht, um dein Team einzuladen.',
+    cta: 'Eigenen Raum erstellen',
+    close: 'Schließen',
+  },
+
+  cards: {
+    title: 'Karten',
+    revealedSub: 'Stimmen aufgedeckt. Neue Runde starten um fortzufahren.',
+    votingHint: 'Klicke auf eine Karte zum Abstimmen',
+    selectedSuffix: (v: string) => `, ${v} ausgewählt, erneut klicken zum Abwählen`,
+    voteLabel: (c: string) => `Für ${c} stimmen`,
+  },
+
+  controls: {
+    title: 'Aktuelle Runde',
+    newRound: 'Neue Runde',
+    reveal: 'Aufdecken',
+    voted: (n: number, total: number) => `${n} von ${total} ${n === 1 ? 'hat' : 'haben'} abgestimmt`,
+  },
+
+  results: {
+    title: 'Ergebnisse',
+    agreement: (n: number) => `Einigkeit ${n} %`,
+    avg: 'Durchschn.',
+    median: 'Median',
+    min: 'Min',
+    max: 'Max',
+    none: 'Ergebnisse erscheinen nach der Aufdeckung.',
+    copy: 'Ergebnis kopieren',
+    credit: 'Geschätzt mit PokerAgile: https://pokeragile.com',
+  },
+
+  stories: {
+    onTable: 'Aktuelle Story:',
+    colStory: 'Story',
+    colEstimate: 'Schätzung',
+    keep: (v: string) => `${v} übernehmen`,
+    keepTitle: 'Übernommene Schätzung',
+    next: 'Nächste Story',
+    copied: 'Kopiert',
+  },
+  options: 'Optionen',
+  host: {
+    badge: 'Host',
+    ai: 'KI',
+    lockedHint: 'Raum gesperrt, nur der Host leitet die Runde.',
+    timerLeft: (s: string) => `Verbleibend ${s}`,
+    timerOver: 'Zeit abgelaufen',
+  },
+
+  participants: {
+    title: 'Teilnehmer',
+    none: 'Keine Teilnehmer.',
+    colStatus: 'Abstimmstatus',
+    colName: 'Name',
+    colVote: 'Stimme',
+    colRole: 'Rolle',
+    colAction: 'Aktion',
+    me: '(ich)',
+    votedSr: ', hat abgestimmt',
+    votePending: 'abgestimmt',
+    toObserver: 'Zum Beobachter machen',
+    toObserverLabel: (n: string) => `${n} zum Beobachter machen`,
+    kick: 'Entfernen',
+    kickLabel: (n: string) => `${n} entfernen`,
+    kickConfirm: (n: string) => `${n} entfernen?`,
+  },
+
+  observers: {
+    title: 'Beobachter',
+    toParticipant: 'Zum Teilnehmer machen',
+    toParticipantLabel: (n: string) => `${n} zum Teilnehmer machen`,
+  },
+
+  live: {
+    newRound: (n: number) => `Runde ${n}. Neue Abstimmung.`,
+    revealed: 'Stimmen aufgedeckt.',
+  },
+
+  footer: {
+    source: 'Quellcode',
+    license: 'MIT-Lizenz',
+    legal: 'Impressum',
+    privacy: 'Datenschutz',
+    about: 'Über uns',
+    navAriaLabel: 'Sprache',
+  },
+};

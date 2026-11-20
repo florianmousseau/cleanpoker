@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { moyenneAffichee } from './moyenne';
-import { DE, EN, ES, FR, PT } from './i18n';
+import { DE, EN, ES, FR, PT } from './i18n/all';
 
 describe('moyenneAffichee', () => {
   it('writes a decimal comma in the four languages that use one', () => {

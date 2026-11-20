@@ -4,7 +4,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { DE, EN, ES, FR, PT } from '#lib/i18n.ts';
+import { DE, EN, ES, FR, PT } from '#lib/i18n/all.ts';
 
 const SOURCES = ['src/lib/HomepageTemplate.svelte', 'src/routes/[id]/+page.svelte'];
 

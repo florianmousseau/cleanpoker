@@ -44,7 +44,7 @@
           <tr><th>Metric</th><th>Value</th></tr>
         </thead>
         <tbody>
-          <tr><td>Shared JS bundle (brotli, CI-validated)</td><td><strong>&lt; 50 KB</strong></td></tr>
+          <tr><td>JavaScript on a first visit, home or room (brotli, CI-validated)</td><td><strong>&lt; 50 KB</strong></td></tr>
           <tr><td>Estimated CO₂ per visit</td><td><strong>&lt; 0.1 g</strong></td></tr>
           <tr><td>Lighthouse Performance</td><td><strong>100 / 100</strong></td></tr>
           <tr><td>Lighthouse Accessibility</td><td><strong>100 / 100</strong></td></tr>

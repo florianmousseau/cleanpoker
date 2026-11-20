@@ -1,6 +1,5 @@
 <script lang="ts">
   import Logo from '#lib/Logo.svelte';
-  import { FR, EN, ES, DE, PT } from '#lib/i18n.ts';
   import { requeteEquipe } from '#lib/equipe.ts';
   import { PUBLIC_API_URL } from '$app/env/public';
   import { onMount } from 'svelte';
@@ -41,6 +40,10 @@
     createBtnLabel: string;
     creatingLabel: string;
     createError: string;
+    homeLabel: string;
+    teamSummary: string;
+    teamNameLabel: string;
+    teamColorLabel: string;
     footerSource: string;
     footerLicense: string;
     footerAbout: string;
@@ -74,6 +77,10 @@
     createBtnLabel,
     creatingLabel,
     createError,
+    homeLabel,
+    teamSummary,
+    teamNameLabel,
+    teamColorLabel,
     footerSource,
     footerLicense,
     footerAbout,
@@ -139,7 +146,6 @@
   const fits = $derived(fitsServer(cards));
   const isValid = $derived(cards.length >= 2 && fits);
 
-  const TT = $derived({ fr: FR, en: EN, es: ES, de: DE, pt: PT }[locale]);
   let teamName = $state('');
   let teamColor = $state('#1a6b3c');
   let teamOpen = $state(false);
@@ -201,7 +207,7 @@
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label={TT.homeLabel}>
+      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label={homeLabel}>
         <Logo />
         <span class="logo-text">PokerAgile</span>
       </a>
@@ -250,11 +256,11 @@
       </div>
 
       <details class="team-field" bind:open={teamOpen}>
-        <summary>{TT.team.summary}</summary>
+        <summary>{teamSummary}</summary>
         <div class="team-inputs">
-          <label for="team-name">{TT.team.name}</label>
+          <label for="team-name">{teamNameLabel}</label>
           <input id="team-name" type="text" maxlength="30" autocomplete="off" bind:value={teamName} />
-          <label for="team-color">{TT.team.color}</label>
+          <label for="team-color">{teamColorLabel}</label>
           <input id="team-color" type="color" bind:value={teamColor} />
         </div>
       </details>

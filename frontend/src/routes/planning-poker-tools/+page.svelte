@@ -116,7 +116,7 @@
           <tr><td>Sessions after the meeting</td><td>In memory only, never written to disk, deleted 24 hours after the last activity.</td></tr>
           <tr><td>Third-party scripts</td><td>None. Two technical cookies: language and theme.</td></tr>
           <tr><td>Accessibility</td><td>WCAG 2.1 AA, full keyboard navigation, NVDA and VoiceOver, Lighthouse accessibility 100.</td></tr>
-          <tr><td>Weight</td><td>Under 50 KB of shared JavaScript, brotli compressed, measured on every CI run.</td></tr>
+          <tr><td>Weight</td><td>Under 50 KB of JavaScript on a first visit, home or room, brotli compressed, measured on every CI run.</td></tr>
           <tr><td>Dropped connection</td><td>Automatic WebSocket reconnect with exponential backoff.</td></tr>
           <tr><td>Source</td><td>Public, MIT License.</td></tr>
         </tbody>

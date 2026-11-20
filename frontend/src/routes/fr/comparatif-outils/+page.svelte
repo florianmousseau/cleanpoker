@@ -121,7 +121,7 @@
           <tr><td>Sessions après la réunion</td><td>En mémoire vive, jamais écrites sur disque, supprimées 24 h après la dernière activité.</td></tr>
           <tr><td>Scripts tiers</td><td>Aucun. Deux cookies techniques&nbsp;: langue et thème.</td></tr>
           <tr><td>Accessibilité</td><td>WCAG 2.1 AA, navigation clavier complète, NVDA et VoiceOver, Lighthouse accessibilité 100.</td></tr>
-          <tr><td>Poids</td><td>Moins de 50 Ko de JavaScript partagé, compression brotli, mesuré à chaque intégration continue.</td></tr>
+          <tr><td>Poids</td><td>Moins de 50 Ko de JavaScript à la première visite, accueil ou salle, compression brotli, mesuré à chaque intégration continue.</td></tr>
           <tr><td>Perte de connexion</td><td>Reconnexion automatique du WebSocket, avec temporisation exponentielle.</td></tr>
           <tr><td>Code</td><td>Public, licence MIT.</td></tr>
         </tbody>
