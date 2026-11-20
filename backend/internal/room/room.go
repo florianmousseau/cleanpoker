@@ -532,8 +532,7 @@ func (r *Room) dismiss(playerID string, msg Message) {
 func (r *Room) ToggleObserver(initiatorID, targetID string) {
 	r.mutate(func() {
 		target, ok := r.players[targetID]
-		// A player may always change their own role, even in a locked room.
-		if !ok || !(r.allowed(initiatorID) || (initiatorID == targetID && r.seated(initiatorID))) {
+		if !ok || !r.mayMove(initiatorID, targetID) {
 			return
 		}
 		target.Observer = !target.Observer
@@ -544,6 +543,13 @@ func (r *Room) ToggleObserver(initiatorID, targetID string) {
 			r.logActivity(r.nameOf(initiatorID), "to_participant", target.Name)
 		}
 	})
+}
+
+// mayMove reports whether a seat may switch the role of target: what
+// allowed permits, plus their own role, which a player keeps even in a locked
+// room. Callers hold r.mu.
+func (r *Room) mayMove(initiatorID, targetID string) bool {
+	return r.allowed(initiatorID) || (initiatorID == targetID && r.seated(initiatorID))
 }
 
 // SetLocked locks or opens the room. Only the host can.
