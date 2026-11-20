@@ -358,6 +358,7 @@
                       {player.name}
                       {#if player.id === room.myId}<span class="me-tag">{T.participants.me}</span>{/if}
                       {#if player.id === room.roomState.host}<span class="me-tag">({T.host.badge})</span>{/if}
+                      {#if player.ai}<span class="me-tag">({T.host.ai})</span>{/if}
                       {#if player.vote !== ''}<span class="sr-only">{T.participants.votedSr}</span>{/if}
                     </td>
                     <td class="vote-cell">
@@ -413,6 +414,7 @@
                       {player.name}
                       {#if player.id === room.myId}<span class="me-tag">{T.participants.me}</span>{/if}
                       {#if player.id === room.roomState.host}<span class="me-tag">({T.host.badge})</span>{/if}
+                      {#if player.ai}<span class="me-tag">({T.host.ai})</span>{/if}
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-switch"

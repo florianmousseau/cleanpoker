@@ -101,6 +101,7 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		roomID := r.PathValue("id")
 		playerName := strings.TrimSpace(r.URL.Query().Get("name"))
 		observer := r.URL.Query().Get("observer") == "true"
+		ai := r.URL.Query().Get("ai") == "true"
 		token := r.URL.Query().Get("token")
 		if playerName == "" {
 			http.Error(w, "name required", http.StatusBadRequest)
@@ -114,7 +115,10 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 		// plain GET used to allocate a room and its goroutine for a day.
 		// CORS does not cover a WebSocket: without this, any page could seat
 		// its visitors' browsers in a room whose address it knows.
-		if !allowed[r.Header.Get("Origin")] {
+		// An assistant connects from no page at all, so it sends no Origin;
+		// a browser always sends one. Such a seat is marked as an AI to all.
+		origin := r.Header.Get("Origin")
+		if !allowed[origin] && (origin != "" || !ai) {
 			http.Error(w, "origin not allowed", http.StatusForbidden)
 			return
 		}
@@ -130,18 +134,28 @@ func New(s *store.Store, allowedOrigins []string, probe func(ctx context.Context
 			}
 			open = s.GetOrCreateUncounted
 		}
-		websocket.Handler(func(conn *websocket.Conn) {
+		// The origin was judged above; the library's own check refuses a
+		// missing one, which is exactly the assistant this route admits.
+		websocket.Server{Handshake: originAlreadyChecked, Handler: func(conn *websocket.Conn) {
 			conn.MaxPayloadBytes = maxFrameBytes
 			rm, err := open(roomID, nil)
 			if err != nil {
 				_ = conn.Close() // full since the check above: nothing to hold
 				return
 			}
-			handleWS(conn, rm, recordJoin, arrival{name: playerName, observer: observer, token: token})
-		}).ServeHTTP(w, r)
+			handleWS(conn, rm, recordJoin, arrival{name: playerName, observer: observer, ai: origin == "" && ai, token: token})
+		}}.ServeHTTP(w, r)
 	})
 
 	return cors(allowed, mux)
+}
+
+// originAlreadyChecked reads the Origin into config without refusing a
+// missing one: the route has judged it before the upgrade.
+func originAlreadyChecked(config *websocket.Config, req *http.Request) error {
+	origin, err := websocket.Origin(config, req)
+	config.Origin = origin
+	return err
 }
 
 // MaxNameLength is the limit the join form announces with maxlength="30". A
@@ -213,6 +227,7 @@ func writeJSON(w http.ResponseWriter, v any) {
 type arrival struct {
 	name     string
 	observer bool
+	ai       bool
 	token    string
 }
 
@@ -255,7 +270,7 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 		// state that shows it in the room can read /stats and find itself
 		// counted. A seat taken back is not a new arrival.
 		recordJoin()
-		rm.JoinWithToken(seat.ID, token, a.name, a.observer)
+		rm.JoinSeat(room.Player{ID: seat.ID, Name: a.name, Observer: a.observer, AI: a.ai}, token)
 	}
 
 	go func() {
