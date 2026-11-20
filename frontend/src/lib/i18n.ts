@@ -14,6 +14,7 @@ export interface Translation {
   controls: { title: string; newRound: string; reveal: string; pending: (n: number) => string; autoReveal: string };
   results: { title: string; agreement: (n: number) => string; avg: string; median: string; min: string; max: string; none: string };
   stories: { title: string; onTable: string; none: string; addLabel: string; addPlaceholder: string; addBtn: string; clear: string; clearConfirm: string; colStory: string; colEstimate: string; vote: (t: string) => string; keep: (v: string) => string; keepTitle: string; next: string; copyMd: string; downloadCsv: string; copied: string };
+  qr: { show: string; hide: string; alt: string; failed: string };
   ia: { button: string; again: string; running: string; downloading: (n: number) => string; failed: string; private: string };
   host: { badge: string; ai: string; lock: string; unlock: string; lockedHint: string; timer: string; timerStop: string; timerLeft: (s: string) => string; timerOver: string; seconds: (n: number) => string };
   participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string; kickConfirm: (n: string) => string };
@@ -110,6 +111,12 @@ export const FR: Translation = {
     copyMd: 'Copier en Markdown',
     downloadCsv: 'Télécharger en CSV',
     copied: 'Copié',
+  },
+  qr: {
+    show: 'QR code',
+    hide: 'Masquer le QR code',
+    alt: "QR code de l'adresse de la salle",
+    failed: "Le QR code n'a pas pu être chargé.",
   },
   ia: {
     button: "Analyser la story avec l'IA du navigateur",
@@ -285,6 +292,12 @@ export const EN: Translation = {
     downloadCsv: 'Download as CSV',
     copied: 'Copied',
   },
+  qr: {
+    show: 'QR code',
+    hide: 'Hide QR code',
+    alt: 'QR code of the room address',
+    failed: 'The QR code could not be loaded.',
+  },
   ia: {
     button: "Analyze the story with the browser's AI",
     again: 'Run the analysis again',
@@ -458,6 +471,12 @@ export const ES: Translation = {
     copyMd: 'Copiar en Markdown',
     downloadCsv: 'Descargar en CSV',
     copied: 'Copiado',
+  },
+  qr: {
+    show: 'Código QR',
+    hide: 'Ocultar el código QR',
+    alt: 'Código QR de la dirección de la sala',
+    failed: 'No se pudo cargar el código QR.',
   },
   ia: {
     button: 'Analizar la historia con la IA del navegador',
@@ -633,6 +652,12 @@ export const DE: Translation = {
     downloadCsv: 'Als CSV herunterladen',
     copied: 'Kopiert',
   },
+  qr: {
+    show: 'QR-Code',
+    hide: 'QR-Code ausblenden',
+    alt: 'QR-Code der Raumadresse',
+    failed: 'Der QR-Code konnte nicht geladen werden.',
+  },
   ia: {
     button: 'Story mit der KI des Browsers analysieren',
     again: 'Analyse wiederholen',
@@ -806,6 +831,12 @@ export const PT: Translation = {
     copyMd: 'Copiar em Markdown',
     downloadCsv: 'Baixar em CSV',
     copied: 'Copiado',
+  },
+  qr: {
+    show: 'QR code',
+    hide: 'Ocultar o QR code',
+    alt: 'QR code do endereço da sala',
+    failed: 'Não foi possível carregar o QR code.',
   },
   ia: {
     button: 'Analisar a história com a IA do navegador',
