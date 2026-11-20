@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.0.55] - 2026-11-20
+
+- fix(mcp): mark get_room as read-only for clients that gate write tools
+- fix(content): state the ChatGPT plans that allow an AI vote
+- fix(content): answer the story question plainly, name who knows the code
+- fix(content): correct the AI guide after review
+- fix(mcp): refuse a room nobody opened instead of creating it
+- feat(brand): a drawn two-card mark replaces the spade glyph
+- feat(content): planning poker with AI guide, in English and French
+- feat(mcp): let AI assistants join a room and vote
+
 ## [0.0.54] - 2026-11-20
 
 - docs(seo): directory texts name Gravelines and the free timer

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Logo from '#lib/Logo.svelte';
   import { PUBLIC_API_URL } from '$app/env/public';
   import { onMount } from 'svelte';
   import { goto, replaceState } from '$app/navigation';
@@ -186,7 +187,7 @@
   <header class="header">
     <div class="container header-inner">
       <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label="CleanPoker, accueil">
-        <span class="logo" aria-hidden="true">♠</span>
+        <Logo />
         <span class="logo-text">CleanPoker</span>
       </a>
     </div>
@@ -260,7 +261,6 @@
   .header { padding: 1rem 0; border-bottom: 1px solid var(--color-border); }
   .header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; }
   .logo-group { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
-  .logo { font-size: 1.5rem; color: var(--color-primary); }
   .logo-text { font-size: 1.25rem; font-weight: 700; }
 
   .hero {

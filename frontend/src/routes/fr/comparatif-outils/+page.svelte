@@ -163,6 +163,7 @@
       À lire aussi&nbsp;:
       <a href="/fr/planning-poker">le guide du poker planning</a>,
       <a href="/fr/poker-planning-rgpd">poker planning et RGPD</a>,
+      <a href="/fr/planning-poker-ia">faire voter une IA</a>,
       <a href="/fr/alternatives">les alternatives à la technique elle-même</a>.
     </p>
   </main>

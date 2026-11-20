@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import { lang } from '#lib/lang.svelte.ts';
   import Footer from '#lib/Footer.svelte';
+  import Logo from '#lib/Logo.svelte';
   import { FR, EN, ES, DE, PT, translateActivity } from '#lib/i18n.ts';
   import { useRoom } from '#lib/useRoom.svelte.ts';
   import { copierTexte } from '#lib/presse-papiers.ts';
@@ -144,7 +145,7 @@
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <a href={homeHref} class="logo" aria-label="CleanPoker, accueil">♠ CleanPoker</a>
+      <a href={homeHref} class="logo" aria-label="CleanPoker, accueil"><Logo /><span>CleanPoker</span></a>
       <div class="room-meta">
         <span class="badge-pill">{T.salleLabel} <code>{roomId}</code></span>
         {#if room.roomState}
@@ -357,6 +358,7 @@
                       {player.name}
                       {#if player.id === room.myId}<span class="me-tag">{T.participants.me}</span>{/if}
                       {#if player.id === room.roomState.host}<span class="me-tag">({T.host.badge})</span>{/if}
+                      {#if player.ai}<span class="me-tag">({T.host.ai})</span>{/if}
                       {#if player.vote !== ''}<span class="sr-only">{T.participants.votedSr}</span>{/if}
                     </td>
                     <td class="vote-cell">
@@ -412,6 +414,7 @@
                       {player.name}
                       {#if player.id === room.myId}<span class="me-tag">{T.participants.me}</span>{/if}
                       {#if player.id === room.roomState.host}<span class="me-tag">({T.host.badge})</span>{/if}
+                      {#if player.ai}<span class="me-tag">({T.host.ai})</span>{/if}
                     </td>
                     <td class="col-action">
                       <button class="action-btn action-btn-switch"
@@ -490,7 +493,7 @@
 
   .header { padding: 0.75rem 0; border-bottom: 1px solid var(--color-border); }
   .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
-  .logo { font-size: 1.125rem; font-weight: 700; text-decoration: none; color: var(--color-text); }
+  .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.125rem; font-weight: 700; text-decoration: none; color: var(--color-text); }
   .room-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
 
   /* Sits next to the button that failed, because that is where the eye already
