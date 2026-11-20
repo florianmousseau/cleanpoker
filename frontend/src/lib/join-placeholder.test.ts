@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { DE, EN, ES, FR, PT } from './i18n';
+import { DE, EN, ES, FR, PT } from './i18n/all';
 
 describe('join form placeholder', () => {
   it('speaks the language of the page', () => {

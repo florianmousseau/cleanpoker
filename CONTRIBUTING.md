@@ -37,7 +37,7 @@ These come from real regressions. [AGENTS.md](AGENTS.md) has the full reasoning,
 - **Security headers live in two files**, `frontend/_headers` and `frontend/src/hooks.server.ts`, and must stay identical.
 - **Nothing may push a page past a 320 px screen**, including with the browser text size doubled. `npm run check:reflow` lists the CSS patterns it refuses. Wrap every `<table>` in a `<div class="table-wrap">`.
 - **French text uses a no-break space** before `:` `;` `?` `!` `%` and `»`. Write it `&nbsp;` in Svelte markup and ` ` in a JavaScript string, never as a literal character. `npm test` checks it.
-- **User-facing text ships in five languages** (EN, FR, ES, DE, PT). A new string goes into every dictionary of `frontend/src/lib/i18n.ts`.
+- **User-facing text ships in five languages** (EN, FR, ES, DE, PT). A new string goes into the `Translation` type of `frontend/src/lib/i18n.ts` and into each dictionary of `frontend/src/lib/i18n/`.
 - **The `/[id]` room route stays `noindex`.**
 
 ## License

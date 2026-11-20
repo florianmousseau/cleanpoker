@@ -93,7 +93,7 @@ rien.
 
 **Le perimetre est le francais et lui seul.** Le site sert cinq langues, et dans
 les quatre autres l'espace devant un deux-points n'existe pas. Sont lus
-`src/routes/fr`, le bloc `FR` de `src/lib/i18n.ts` et `src/routes/+error.svelte`,
+`src/routes/fr`, le dictionnaire `src/lib/i18n/fr.ts` et `src/routes/+error.svelte`,
 seul ecran francais qu'aucun dictionnaire ne traduit.
 
 **L'insecable ne s'ecrit jamais en clair dans une source** : posee litteralement,

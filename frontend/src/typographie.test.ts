@@ -9,7 +9,7 @@
  *
  * PERIMETRE : le francais et lui seul. Ce site sert cinq langues, et dans les
  * quatre autres l espace devant un deux-points n existe pas - la regle y serait
- * fausse. Sont donc lus `src/routes/fr` et le seul bloc `FR` de `i18n.ts`.
+ * fausse. Sont donc lus `src/routes/fr` et le dictionnaire `i18n/fr.ts`.
  *
  * L insecable ne s ecrit JAMAIS en clair : `&nbsp;` dans du balisage, `\u00A0`
  * dans une chaine. Posee litteralement elle est indiscernable d une espace
@@ -280,7 +280,7 @@ function regionsCode(source: string): string {
 }
 
 const RACINE = 'src/routes/fr';
-const DICTIONNAIRE = 'src/lib/i18n.ts';
+const DICTIONNAIRE = 'src/lib/i18n/fr.ts';
 /*
  * La page d erreur est ecrite en francais pour les cinq langues - elle porte
  * « Erreur 404 » et « Retour a l accueil » en dur - et elle vit hors de
