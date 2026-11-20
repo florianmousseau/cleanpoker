@@ -10,8 +10,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/florianmousseau/cleanpoker/internal/room"
-	"github.com/florianmousseau/cleanpoker/internal/store"
+	"github.com/florianmousseau/pokeragile/internal/room"
+	"github.com/florianmousseau/pokeragile/internal/store"
 	"github.com/google/uuid"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )

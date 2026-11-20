@@ -1,4 +1,4 @@
-module github.com/florianmousseau/cleanpoker
+module github.com/florianmousseau/pokeragile
 
 go 1.27.4
 

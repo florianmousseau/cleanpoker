@@ -23,7 +23,7 @@
       {
         '@type': 'Question',
         name: 'Can an AI vote in planning poker?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Yes. On PokerAgile, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.cleanpoker.dev/mcp, reads the story on the table if the team pasted its list into the room, or gets it in its own conversation, then picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes. On PokerAgile, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.pokeragile.com/mcp, reads the story on the table if the team pasted its list into the room, or gets it in its own conversation, then picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.' },
       },
       {
         '@type': 'Question',
@@ -68,13 +68,13 @@
 
     <h2>Connect your assistant over MCP</h2>
     <p>The address is the same everywhere:</p>
-    <pre><code>https://salles.cleanpoker.dev/mcp</code></pre>
+    <pre><code>https://salles.pokeragile.com/mcp</code></pre>
     <ul>
       <li><strong>Claude</strong>: Settings, Connectors, Add custom connector, then paste the address. On a Team or Enterprise plan, a workspace owner adds it first.</li>
-      <li><strong>Claude Code</strong>: <code>claude mcp add --transport http pokeragile https://salles.cleanpoker.dev/mcp</code></li>
+      <li><strong>Claude Code</strong>: <code>claude mcp add --transport http pokeragile https://salles.pokeragile.com/mcp</code></li>
       <li><strong>ChatGPT</strong>: Settings, Apps, Advanced settings, turn on developer mode, then Create app with the address. Voting needs a Business, Enterprise or Edu plan; on Plus and Pro, developer mode only accepts read-only tools, so the AI reads the room without voting.</li>
-      <li><strong>Cursor</strong>: in <code>~/.cursor/mcp.json</code>, add <code>&#123;"mcpServers": &#123; "pokeragile": &#123; "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
-      <li><strong>VS Code</strong>: with Copilot in agent mode, in <code>.vscode/mcp.json</code>, add <code>&#123;"servers": &#123; "pokeragile": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
+      <li><strong>Cursor</strong>: in <code>~/.cursor/mcp.json</code>, add <code>&#123;"mcpServers": &#123; "pokeragile": &#123; "url": "https://salles.pokeragile.com/mcp" &#125; &#125; &#125;</code>.</li>
+      <li><strong>VS Code</strong>: with Copilot in agent mode, in <code>.vscode/mcp.json</code>, add <code>&#123;"servers": &#123; "pokeragile": &#123; "type": "http", "url": "https://salles.pokeragile.com/mcp" &#125; &#125; &#125;</code>.</li>
     </ul>
     <p>PokerAgile asks for no account and no API key, and there is nothing to install: the address is a remote MCP server with four tools, <code>join_room</code>, <code>get_room</code>, <code>vote</code> and <code>leave_room</code>. A person must already have the room open in a browser. If the team pasted its story list into the room, the assistant reads the one on the table; otherwise, give it the story in your message. Then, in the conversation:</p>
     <pre><code>Join the room https://pokeragile.com/ab12cd34 as Claude.
@@ -123,7 +123,7 @@ Leave the room when I say so.</code></pre>
 
     <h2>FAQ</h2>
     <h3>Can an AI vote in planning poker?</h3>
-    <p>Yes. On PokerAgile, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.cleanpoker.dev/mcp, reads the story on the table if the team pasted its list into the room, or gets it in its own conversation, then picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.</p>
+    <p>Yes. On PokerAgile, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.pokeragile.com/mcp, reads the story on the table if the team pasted its list into the room, or gets it in its own conversation, then picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.</p>
     <h3>Does AI estimate better than a team?</h3>
     <p>No. It does not know the team's velocity, the real state of the code or who depends on whom. It is useful for spotting what the story leaves out: tests, data migration, edge cases. Its vote opens the discussion when it differs from the team's.</p>
     <h3>Is the story text sent to an AI?</h3>
@@ -143,8 +143,8 @@ Leave the room when I say so.</code></pre>
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Source code</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
       | <a href="/mentions-legales#confidentialite">Privacy</a>
