@@ -34,6 +34,8 @@ The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the l
 - [Alternatives to planning poker](https://cleanpoker.dev/alternatives) - T-shirt sizing, affinity mapping, dot voting, bucket system
 - [Choosing a planning poker tool](https://cleanpoker.dev/planning-poker-tools) - Seven criteria a reader can verify themselves, and an explicit list of what CleanPoker cannot do
 - [Comparatif des outils de poker planning](https://cleanpoker.dev/fr/comparatif-outils) - French version of the same comparison
+- [Planning poker with AI](https://cleanpoker.dev/planning-poker-ai) - connect Claude, ChatGPT, Cursor or VS Code over MCP and let the assistant vote
+- [Planning poker avec une IA](https://cleanpoker.dev/fr/planning-poker-ia) - French version
 - [Planning poker and GDPR](https://cleanpoker.dev/planning-poker-gdpr) - What an estimation tool processes as personal data, what a DPO checks, how to verify any tool in two minutes
 - [Poker planning et RGPD](https://cleanpoker.dev/fr/poker-planning-rgpd) - French version
 - [Accessibility statement](https://cleanpoker.dev/accessibilite) - WCAG 2.1 AA conformance and how it was tested

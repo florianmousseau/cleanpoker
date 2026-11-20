@@ -255,6 +255,7 @@
     <p class="related">
       À lire aussi&nbsp;:
       <a href="/fr/comparatif-outils">comment choisir un outil de poker planning</a>,
+      <a href="/fr/planning-poker-ia">faire voter une IA</a>,
       <a href="/fr/poker-planning-rgpd">poker planning et RGPD</a>,
       <a href="/fr/fibonacci">la suite de Fibonacci en détail</a>,
       <a href="/fr/alternatives">les alternatives à la technique</a>.
