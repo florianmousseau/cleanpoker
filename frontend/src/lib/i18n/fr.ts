@@ -66,6 +66,9 @@ export const FR: Translation = {
     min: 'Min',
     max: 'Max',
     none: "Les résultats s'afficheront après la révélation.",
+    copy: 'Copier le résultat',
+    credit: 'Estimé avec PokerAgile\u00A0: https://pokeragile.com',
+    creditOption: 'Ajouter la ligne PokerAgile aux résultats copiés',
   },
 
   stories: {

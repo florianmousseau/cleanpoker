@@ -20,6 +20,8 @@
   import { cadran, peutMener, secondesRestantes } from '#lib/minuteur.ts';
   import { agreement, extreme } from '#lib/consensus.ts';
   import { lazily } from '#lib/lazy.svelte.ts';
+  import { resultMarkdown, withCredit } from '#lib/export.ts';
+  import { credit } from '#lib/credit.svelte.ts';
   import { deviceStorage, loadName, saveName } from '#lib/seat.ts';
 
   const roomId = $derived(page.params.id ?? '');
@@ -39,6 +41,8 @@
   let copyError = $state('');
   let inviteFeedback = $state('');
   let inviteError = $state('');
+  let resultFeedback = $state('');
+  let resultError = $state('');
   let promoDismissed = $state(false);
 
   // QA-105: a reload, or the back button after a footer link, used to put the
@@ -98,6 +102,20 @@
     }
     inviteFeedback = '';
     inviteError = T.copyFailed;
+  }
+
+  // The round as Markdown, for the ticket or the team channel.
+  async function copyResult() {
+    if (!room.roomState) return;
+    const text = withCredit(resultMarkdown(room.roomState, T, lang.current), credit.line(T.results.credit));
+    if (await copierTexte(text)) {
+      resultError = '';
+      resultFeedback = T.stories.copied;
+      setTimeout(() => (resultFeedback = ''), 2000);
+      return;
+    }
+    resultFeedback = '';
+    resultError = T.copyFailed;
   }
 
   const participants = $derived(room.roomState?.players.filter(p => !p.observer) ?? []);
@@ -376,6 +394,12 @@
                 {/if}
               </div>
             {/if}
+            <div class="copy-result">
+              <button class="btn btn-secondary btn-sm" onclick={copyResult} data-testid="copy-result">{resultFeedback || T.results.copy}</button>
+              {#if resultError}
+                <span class="copy-error" role="alert">{resultError}</span>
+              {/if}
+            </div>
             </div>
           {:else}
             <p class="no-results">{T.results.none}</p>
@@ -668,6 +692,7 @@
   .reason { margin-top: 0.25rem; font-size: 0.8rem; font-weight: 400; color: var(--color-text-muted); overflow-wrap: break-word; }
   .on-table { font-size: 1rem; padding: 0.625rem min(1rem, 16px); background: var(--color-card-selected); border: 1px solid var(--color-card-border-selected); border-radius: var(--radius-lg); overflow-wrap: break-word; }
   .agreement { font-size: 0.85rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.5rem; }
+  .copy-result { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.875rem; }
   .keep { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.875rem; }
   .keep .kept { background: var(--color-card-selected); border-color: var(--color-card-border-selected); color: var(--color-primary); }
   .vote-revealed[data-extreme] { padding: 0.05rem 0.4rem; border-radius: 99px; outline: 2px solid var(--color-danger); }

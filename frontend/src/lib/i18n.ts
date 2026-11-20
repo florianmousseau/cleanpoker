@@ -12,7 +12,7 @@ export interface Translation {
   promo: { lead: string; cta: string; close: string };
   cards: { title: string; revealedSub: string; votingHint: string; selectedSuffix: (v: string) => string; voteLabel: (c: string) => string };
   controls: { title: string; newRound: string; reveal: string; voted: (n: number, total: number) => string; autoReveal: string };
-  results: { title: string; agreement: (n: number) => string; avg: string; median: string; min: string; max: string; none: string };
+  results: { title: string; agreement: (n: number) => string; avg: string; median: string; min: string; max: string; none: string; copy: string; credit: string; creditOption: string };
   stories: { title: string; onTable: string; none: string; addLabel: string; addPlaceholder: string; addBtn: string; clear: string; clearConfirm: string; colStory: string; colEstimate: string; vote: (t: string) => string; keep: (v: string) => string; keepTitle: string; next: string; copyMd: string; downloadCsv: string; copied: string };
   qr: { show: string; hide: string; alt: string; failed: string };
   ia: { button: string; again: string; running: string; downloading: (n: number) => string; failed: string; private: string; invite: string; inviteHelp: string; prompt: (room: string, mcp: string) => string };

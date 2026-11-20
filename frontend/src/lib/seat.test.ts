@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { forgetSeat, loadName, loadSeat, saveName, saveSeat } from './seat';
+import { forgetSeat, loadCredit, loadName, loadSeat, saveCredit, saveName, saveSeat } from './seat';
 
 function memoryStorage() {
   const items = new Map<string, string>();
@@ -83,5 +83,38 @@ describe('name', () => {
     };
     expect(loadName(broken)).toBe('');
     expect(() => saveName(broken, 'Alice')).not.toThrow();
+  });
+});
+
+describe('the PokerAgile line of copied results', () => {
+  it('is added until the person says otherwise', () => {
+    expect(loadCredit(memoryStorage())).toBe(true);
+    expect(loadCredit(null)).toBe(true);
+  });
+
+  it('remembers that it was turned off, then back on', () => {
+    const storage = memoryStorage();
+    saveCredit(storage, false);
+    expect(loadCredit(storage)).toBe(false);
+    saveCredit(storage, true);
+    expect(loadCredit(storage)).toBe(true);
+  });
+
+  it('sits beside the name, under its own key, and renames nothing', () => {
+    const storage = memoryStorage();
+    saveName(storage, 'Alice');
+    saveCredit(storage, false);
+    expect([...storage.items.keys()].sort()).toEqual(['cleanpoker:credit', 'cleanpoker:name']);
+    expect(loadName(storage)).toBe('Alice');
+  });
+
+  it('answers yes and stays quiet when the storage refuses', () => {
+    const refusing = {
+      getItem: () => { throw new Error('blocked'); },
+      setItem: () => { throw new Error('blocked'); },
+      removeItem: () => {},
+    };
+    expect(loadCredit(refusing)).toBe(true);
+    expect(() => saveCredit(refusing, false)).not.toThrow();
   });
 });

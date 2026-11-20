@@ -7,6 +7,7 @@
   import { copierTexte } from '#lib/presse-papiers.ts';
   import { logTime } from '#lib/log-time.ts';
   import { mcpUrl, roomUrl } from '#lib/invite-ai.ts';
+  import { credit } from '#lib/credit.svelte.ts';
 
   // Everything beyond voting. The room fetches this file when the options
   // are first opened, so nothing here weighs on someone who only votes.
@@ -50,7 +51,7 @@
     </div>
   {/if}
   {#if canRun}
-    <label class="auto-reveal">
+    <label class="option-check">
       <input type="checkbox" checked={roomState.autoReveal ?? false}
         onchange={(e) => room.setAutoReveal(e.currentTarget.checked)} data-testid="auto-reveal" />
       <span>{T.controls.autoReveal}</span>
@@ -70,6 +71,11 @@
     <span class="copy-error" role="alert">{aiError}</span>
   {/if}
   </div>
+  <label class="option-check">
+    <input type="checkbox" checked={credit.on}
+      onchange={(e) => credit.set(e.currentTarget.checked)} data-testid="credit-option" />
+    <span>{T.results.creditOption}</span>
+  </label>
   {#if stories.length === 0}
   <StoriesPanel {stories} {current} {T} {canRun}
   onAdd={(text) => room.addStories(text)}
@@ -115,8 +121,8 @@
   .timer-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; align-self: flex-start; }
   .timer-label { font-size: 0.8rem; color: var(--color-text-muted); margin-right: 0.25rem; }
   .lock-btn { align-self: flex-start; }
-  .auto-reveal { display: flex; align-items: center; gap: 0.5rem; align-self: flex-start; font-size: 0.85rem; cursor: pointer; }
-  .auto-reveal input { accent-color: var(--color-primary); }
+  .option-check { display: flex; align-items: center; gap: 0.5rem; align-self: flex-start; font-size: 0.85rem; cursor: pointer; }
+  .option-check input { accent-color: var(--color-primary); }
   .invite-ai { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.625rem; }
   .hint { font-size: 0.8rem; color: var(--color-text-muted); }
   .copy-error { flex-basis: 100%; font-size: 0.8125rem; color: var(--color-danger); }

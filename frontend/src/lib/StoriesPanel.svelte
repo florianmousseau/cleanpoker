@@ -1,7 +1,8 @@
 <script lang="ts">
   import type { Translation } from '#lib/i18n.ts';
   import type { Story } from '#lib/useRoom.svelte.ts';
-  import { storiesCsv, storiesMarkdown } from '#lib/export.ts';
+  import { storiesCsv, storiesMarkdown, withCredit } from '#lib/export.ts';
+  import { credit } from '#lib/credit.svelte.ts';
   import { copierTexte } from '#lib/presse-papiers.ts';
 
   let { stories, current, T, canRun, onAdd, onClear, onSelect }: {
@@ -30,7 +31,7 @@
   }
 
   async function copyMarkdown() {
-    if (await copierTexte(storiesMarkdown(stories, header))) {
+    if (await copierTexte(withCredit(storiesMarkdown(stories, header), credit.line(T.results.credit)))) {
       copied = true;
       setTimeout(() => (copied = false), 2000);
     }

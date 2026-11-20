@@ -73,3 +73,21 @@ describe('what the room fetches only when it is used', () => {
     }
   });
 });
+
+describe('copy the result', () => {
+  const page = readFileSync(ROOM, 'utf8');
+
+  it('is one button in the results, and the option waits in the options', () => {
+    const results = page.slice(page.indexOf('data-testid="results-data"'), page.indexOf('<p class="no-results">'));
+    expect(results.split('data-testid="copy-result"')).toHaveLength(2);
+    expect(page.split('data-testid="copy-result"')).toHaveLength(2);
+    expect(page).not.toContain('data-testid="credit-option"');
+    expect(readFileSync('src/lib/RoomOptions.svelte', 'utf8').split('data-testid="credit-option"')).toHaveLength(2);
+  });
+
+  it('leaves the CSV as it was: the line goes to the Markdown only', () => {
+    const panel = readFileSync('src/lib/StoriesPanel.svelte', 'utf8');
+    expect(panel).toContain('withCredit(storiesMarkdown(stories, header), credit.line(T.results.credit))');
+    expect(panel).toContain("storiesCsv(stories, header)], { type: 'text/csv;charset=utf-8' }");
+  });
+});
