@@ -611,4 +611,59 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://pokeragile.com/guides</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/guides"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/guides"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/guides"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/guides"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/guides"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/guides"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/fr/guides</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/guides"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/guides"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/guides"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/guides"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/guides"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/guides"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/es/guides</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/guides"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/guides"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/guides"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/guides"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/guides"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/guides"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/de/guides</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/guides"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/guides"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/guides"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/guides"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/guides"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/guides"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/pt/guides</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/guides"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/guides"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pokeragile.com/es/guides"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://pokeragile.com/de/guides"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/guides"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/guides"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

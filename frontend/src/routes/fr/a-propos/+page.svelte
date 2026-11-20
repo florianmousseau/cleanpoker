@@ -47,6 +47,10 @@
     <h2>En savoir plus</h2>
 
     <div class="cards-grid">
+      <a href="/fr/guides" class="card">
+        <h3>Tous les guides</h3>
+        <p>Chaque guide sur une page, rangé par thème.</p>
+      </a>
       <a href="/fr/planning-poker" class="card">
         <h3>Guide du planning poker</h3>
         <p>Règles, suite de Fibonacci, comparaison des séquences de cartes, conseils pratiques.</p>
