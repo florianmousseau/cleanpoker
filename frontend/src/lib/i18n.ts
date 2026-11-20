@@ -1,5 +1,6 @@
 export interface Translation {
   salleLabel: string;
+  homeLabel: string;
   tourLabel: string;
   copyLink: string;
   copied: string;
@@ -29,6 +30,7 @@ export interface Translation {
 
 export const FR: Translation = {
   salleLabel: 'Salle',
+  homeLabel: 'PokerAgile, accueil',
   tourLabel: 'Tour',
   copyLink: 'Copier le lien',
   copied: 'Copié\u00A0!',
@@ -218,6 +220,7 @@ export const FR: Translation = {
 
 export const EN: Translation = {
   salleLabel: 'Room',
+  homeLabel: 'PokerAgile, home',
   tourLabel: 'Round',
   copyLink: 'Copy link',
   copied: 'Copied!',
@@ -407,6 +410,7 @@ export const EN: Translation = {
 
 export const ES: Translation = {
   salleLabel: 'Sala',
+  homeLabel: 'PokerAgile, inicio',
   tourLabel: 'Ronda',
   copyLink: 'Copiar enlace',
   copied: '¡Copiado!',
@@ -596,6 +600,7 @@ export const ES: Translation = {
 
 export const DE: Translation = {
   salleLabel: 'Raum',
+  homeLabel: 'PokerAgile, Startseite',
   tourLabel: 'Runde',
   copyLink: 'Link kopieren',
   copied: 'Kopiert!',
@@ -785,6 +790,7 @@ export const DE: Translation = {
 
 export const PT: Translation = {
   salleLabel: 'Sala',
+  homeLabel: 'PokerAgile, início',
   tourLabel: 'Rodada',
   copyLink: 'Copiar link',
   copied: 'Copiado!',
