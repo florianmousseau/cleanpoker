@@ -44,6 +44,18 @@ const declared = new Set(
 	)
 );
 
+// An indexable route with a parameter (`fibonacci-numbers/[n]`) has no
+// single address: it is declared when at least one sitemap entry fits its
+// pattern. The exact set of entries is held by the unit test of that family.
+const PARAM = /\[[^\]]+\]/g;
+function isDeclared(url) {
+	if (!url.includes('[')) return declared.has(url);
+	const pattern = new RegExp(
+		'^' + url.split(PARAM).map((part) => part.replace(/[.*+?^${}()|\\]/g, '\\$&')).join('[^/]+') + '$'
+	);
+	return [...declared].some((loc) => pattern.test(loc));
+}
+
 function walk(dir) {
 	for (const entry of readdirSync(dir)) {
 		const full = join(dir, entry);
@@ -64,7 +76,7 @@ function check(file) {
 	if (rel.endsWith('+page.svelte')) {
 		const url = (ORIGIN + '/' + path).replace(/\/$/, '');
 		const indexable = !NOINDEX.test(src);
-		if (indexable && !declared.has(url)) failures.push(`${rel}: ${url} is missing from sitemap.xml`);
+		if (indexable && !isDeclared(url)) failures.push(`${rel}: ${url} is missing from sitemap.xml`);
 		if (!indexable && declared.has(url)) failures.push(`${rel}: ${url} is noindex but declared in sitemap.xml`);
 	}
 
@@ -72,9 +84,12 @@ function check(file) {
 		src.match(/rel="canonical" href="([^"]*)"/)?.[1] ?? src.match(/\n\s*canonical="([^"]*)"/)?.[1];
 	if (!canonical) return;
 
-	const expected = ORIGIN + '/' + rel.replace(/\/?\+(page|error)\.svelte$/, '');
+	// A dynamic segment is written `[n]` in the route and `{d.n}` in the
+	// page: both name the same slot.
+	const expected = ORIGIN + '/' + rel.replace(/\/?\+(page|error)\.svelte$/, '').replace(PARAM, '*');
 	// The homepage is declared with its trailing slash, inner pages without.
-	if (canonical !== expected && canonical !== expected.replace(/\/$/, '')) {
+	const written = canonical.replace(/\{[^}]*\}/g, '*');
+	if (written !== expected && written !== expected.replace(/\/$/, '')) {
 		failures.push(`${rel}: canonical points at ${canonical}, expected ${expected}`);
 	}
 }

@@ -31,7 +31,8 @@
       <li><a href="/fr/scrum-poker">Scrum poker</a></li>
       <li><a href="/fr/story-points">Story points</a></li>
       <li><a href="/fr/t-shirt-sizing">T-shirt sizing</a></li>
-      <li><a href="/fr/fibonacci">Suite de Fibonacci</a></li>
+      <li><a href="/fr/fibonacci">Fibonacci en estimation agile</a></li>
+      <li><a href="/fr/suite-de-fibonacci" data-sveltekit-reload>Suite de Fibonacci&nbsp;: les 100 premiers nombres</a></li>
       <li><a href="/fr/estimation-agile">Estimation agile</a></li>
       <li><a href="/fr/alternatives">Alternatives au poker planning</a></li>
     </ul>
