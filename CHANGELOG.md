@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.54] - 2026-11-20
+
+- docs(seo): directory texts name Gravelines and the free timer
+- refactor(room): name the role-switch permission
+- fix(content): name Gravelines, not Paris, as the real-time server location
+- feat(room): host lock, voting timer and median
+
 ## [0.0.53] - 2026-11-20
 
 - fix(room): write the average with the reader's decimal comma, drop the slogan from the invitation
