@@ -3,7 +3,7 @@
   "name": "io.github.florianmousseau/pokeragile",
   "title": "PokerAgile",
   "description": "Planning poker rooms an AI assistant can join and vote in, its card hidden until the team reveals.",
-  "version": "0.0.58",
+  "version": "0.0.59",
   "websiteUrl": "https://pokeragile.com/planning-poker-ai",
   "repository": {
     "url": "https://github.com/florianmousseau/pokeragile",
@@ -12,7 +12,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://salles.cleanpoker.dev/mcp"
+      "url": "https://salles.pokeragile.com/mcp"
     }
   ]
 }
