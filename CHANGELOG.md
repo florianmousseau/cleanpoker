@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.58] - 2026-11-20
+
+- fix(i18n): invite colleagues rather than teammates in French
+- feat(room): the room opens on the vote, everything else under Options
+- feat(room): team colours and name carried by the room address
+
 ## [0.0.57] - 2026-11-20
 
 - feat(brand): PokerAgile on pokeragile.com, cleanpoker.dev redirects page for page

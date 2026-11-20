@@ -49,7 +49,10 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
     if (!browser) return;
     myObserver = observer;
     const roomId = getRoomId();
-    const url = `${PUBLIC_WS_URL}/rooms/${roomId}/ws?name=${encodeURIComponent(name)}&observer=${observer}&token=${encodeURIComponent(token)}`;
+    // A team's saved link carries its deck: an expired room is opened again with it.
+    // Kept as the address encodes it, so it is passed on as is.
+    const deck = /[?&]cards=([^&]*)/.exec(globalThis.location?.search ?? '')?.[1];
+    const url = `${PUBLIC_WS_URL}/rooms/${roomId}/ws?name=${encodeURIComponent(name)}&observer=${observer}&token=${encodeURIComponent(token)}${deck ? `&cards=${deck}` : ''}`;
     const socket = new WebSocket(url);
 
     // A link cut without a TCP close looked connected for minutes: the server
