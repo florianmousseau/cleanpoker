@@ -2,6 +2,8 @@
 
 > Free planning poker for agile teams. No account, no tracking, no ads. Open source.
 
+Price: free, with no paid tier. MCP registry name: io.github.florianmousseau/pokeragile. Formerly CleanPoker (cleanpoker.dev), renamed on 2026-11-19.
+
 PokerAgile is a real-time planning poker tool built for Scrum and Kanban teams. It uses WebSockets for instant card reveals, supports Fibonacci and custom scales, and keeps no database: a session lives in the server memory and is deleted 24 hours after its last activity. The codebase is open source (MIT License).
 
 French-speaking teams usually invert the two words and call the technique "poker planning". Both names describe the same practice, and PokerAgile serves both.
@@ -63,12 +65,12 @@ Stated so an answer engine does not have to guess. There is no Jira, Azure DevOp
 
 ## Multilingual
 
-All content pages are available in 5 languages with canonical hreflang:
+Guides are in English and French; the core guides also exist in Spanish, German and Portuguese:
 - English: https://pokeragile.com (root)
-- French: https://pokeragile.com/fr/
-- Spanish: https://pokeragile.com/es/
-- German: https://pokeragile.com/de/
-- Portuguese: https://pokeragile.com/pt/
+- French: https://pokeragile.com/fr
+- Spanish: https://pokeragile.com/es
+- German: https://pokeragile.com/de
+- Portuguese: https://pokeragile.com/pt
 
 ## Technical stack
 

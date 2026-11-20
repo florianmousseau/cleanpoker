@@ -4,13 +4,13 @@
 
 <HomepageTemplate
   locale="es"
-  pageTitle="Planning poker en línea | PokerAgile"
-  metaDesc="Planning poker para equipos ágiles. Cada persona elige una carta en secreto y luego se muestran todas a la vez. Sin cookies publicitarias. Menos de 50 KB de JavaScript, WCAG 2.1 AA, alojado en Europa."
+  pageTitle="Planning poker online gratis para equipos Scrum | PokerAgile"
+  metaDesc="Planning poker gratis para equipos ágiles. Crea una sala, comparte el enlace, vota en secreto y revela a la vez. Ninguna cuenta, código abierto, salas en Francia."
   canonical="https://pokeragile.com/es"
   ogLocale="es_ES"
-  ogTitle="Planning poker en línea | PokerAgile"
+  ogTitle="Planning poker online gratis para equipos Scrum | PokerAgile"
   ogDesc="Crea una sesión y comparte el enlace. Menos de 50 KB de JavaScript, WCAG 2.1 AA, sin cookies publicitarias."
-  twitterTitle="Planning poker en línea | PokerAgile"
+  twitterTitle="Planning poker online gratis para equipos Scrum | PokerAgile"
   twitterDesc="Crea una sesión y comparte el enlace. Menos de 50 KB de JavaScript, WCAG 2.1 AA, sin cookies publicitarias."
   jsonLdUrl="https://pokeragile.com/es"
   jsonLdDesc="Herramienta de planning poker colaborativo. Sin cookies publicitarias ni seguimiento comportamental. Menos de 50 KB de JavaScript, alojada en energía renovable. WCAG 2.1 AA: navegación por teclado, NVDA y VoiceOver."
