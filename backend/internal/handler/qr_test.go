@@ -38,3 +38,14 @@ func TestQRHandler(t *testing.T) {
 		t.Fatalf("expected 400, got %d", rec.Code)
 	}
 }
+
+func TestLinkDeck(t *testing.T) {
+	if got := linkDeck("XS, S ,M"); len(got) != 3 || got[1] != "S" {
+		t.Fatalf("unexpected deck %v", got)
+	}
+	for _, raw := range []string{"", "5", "1,1", "1,,2"} {
+		if linkDeck(raw) != nil {
+			t.Errorf("%q gave a deck", raw)
+		}
+	}
+}
