@@ -1,9 +1,9 @@
 <script lang="ts">
   import { PUBLIC_API_URL } from '$app/env/public';
-  import type { Translation } from '#lib/i18n.ts';
+  import type { Extras } from '#lib/i18n.ts';
   import { cheminQr } from '#lib/qr.ts';
 
-  let { roomId, T }: { roomId: string; T: Translation } = $props();
+  let { roomId, X }: { roomId: string; X: Extras } = $props();
 
   let open = $state(false);
   let rows = $state<string[] | null>(null);
@@ -25,16 +25,16 @@
   }
 </script>
 
-<button class="btn btn-secondary btn-sm" onclick={toggle} aria-expanded={open} data-testid="qr-btn">{open ? T.qr.hide : T.qr.show}</button>
+<button class="btn btn-secondary btn-sm" onclick={toggle} aria-expanded={open} data-testid="qr-btn">{open ? X.qr.hide : X.qr.show}</button>
 {#if open}
   <div class="qr-box" data-testid="qr">
     {#if rows}
-      <svg viewBox="-4 -4 {rows.length + 8} {rows.length + 8}" width="200" height="200" role="img" aria-label={T.qr.alt}>
+      <svg viewBox="-4 -4 {rows.length + 8} {rows.length + 8}" width="200" height="200" role="img" aria-label={X.qr.alt}>
         <rect x="-4" y="-4" width={rows.length + 8} height={rows.length + 8} fill="#fff" />
         <path d={cheminQr(rows)} fill="#000" shape-rendering="crispEdges" />
       </svg>
     {:else if failed}
-      <p role="alert">{T.qr.failed}</p>
+      <p role="alert">{X.qr.failed}</p>
     {/if}
   </div>
 {/if}

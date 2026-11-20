@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.63] - 2026-11-20
+
+- feat(seo): Fibonacci numbers reference, one page per rank, in French and English (#431)
+- feat(home): type the team colour as a hex code, with a preview of the team badge (#432)
+- feat(room): copy the result, one language per visit, a size gate on what a visit downloads (#430)
+- fix(a11y): translate the home link label
+
 ## [0.0.62] - 2026-11-20
 
 - feat(mcp): add_stories and get_estimates, the tracker to the room and back (#425)

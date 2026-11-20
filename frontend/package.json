@@ -10,7 +10,7 @@
     "lint": "eslint src/",
     "check:seo": "node scripts/check-seo.mjs",
     "mesure": "node scripts/mesure.mjs",
-    "size": "size-limit",
+    "size": "size-limit && node scripts/check-first-visit.mjs",
     "gen-og": "node -e \"const {Resvg}=require('@resvg/resvg-js'),fs=require('fs');const r=new Resvg(fs.readFileSync('static/og-image.svg','utf-8'),{width:1200,height:630});fs.writeFileSync('static/og-image.png',r.render().asPng());console.log('done')\"",
     "test": "vitest run",
     "check:reflow": "node scripts/check-reflow.mjs"
@@ -22,16 +22,6 @@
       "brotli": true,
       "gzip": false,
       "limit": "15 KB"
-    },
-    {
-      "name": "Shared JS (always loaded)",
-      "path": [
-        ".svelte-kit/cloudflare/_app/immutable/entry/*.js",
-        ".svelte-kit/cloudflare/_app/immutable/chunks/*.js"
-      ],
-      "brotli": true,
-      "gzip": false,
-      "limit": "50 KB"
     }
   ],
   "devDependencies": {

@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { DE, EN, ES, FR, PT } from './i18n';
+import { DE, EN, ES, FR, PT } from './i18n/all';
 import { mcpUrl, roomUrl } from './invite-ai';
 
 const ROOM = 'https://pokeragile.com/1a2b3c4d';
@@ -35,9 +35,13 @@ describe('invite your AI', () => {
   });
 
   it('lives in the Options panel only', () => {
+    // The button sits in the options, and the options are mounted in one place.
     const page = readFileSync(new URL('../routes/[id]/+page.svelte', import.meta.url), 'utf8');
+    const body = readFileSync(new URL('./RoomOptions.svelte', import.meta.url), 'utf8');
     const options = page.slice(page.indexOf('<details class="panel options"'), page.indexOf('</details>'));
-    expect(options).toContain('data-testid="invite-ai"');
-    expect(page.split('data-testid="invite-ai"')).toHaveLength(2);
+    expect(options).toContain('<RoomOptions.current ');
+    expect(page.split('<RoomOptions.current ')).toHaveLength(2);
+    expect(page).not.toContain('data-testid="invite-ai"');
+    expect(body.split('data-testid="invite-ai"')).toHaveLength(2);
   });
 });

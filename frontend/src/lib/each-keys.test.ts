@@ -12,7 +12,7 @@ import { describe, expect, it } from 'vitest';
 const KEYED_BY_POSITION = [
   { file: 'src/lib/HomepageTemplate.svelte', each: 'cards as card, i (i)' },
   { file: 'src/routes/[id]/+page.svelte', each: 'room.roomState.cards as card, i (i)' },
-  { file: 'src/routes/[id]/+page.svelte', each: '[...room.roomState.activity].reverse() as entry, i (i)' },
+  { file: 'src/lib/RoomOptions.svelte', each: '[...roomState.activity].reverse() as entry, i (i)' },
 ];
 
 describe('lists built from repeatable values', () => {

@@ -36,6 +36,8 @@ The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the l
 
 - [Planning poker guide](https://pokeragile.com/planning-poker) - How to run a planning poker session, card meanings, best practices
 - [Fibonacci in planning poker](https://pokeragile.com/fibonacci) - Why Fibonacci, card selection, scale variants
+- [Fibonacci numbers](https://pokeragile.com/fibonacci-numbers) - The mathematical sequence: list of the first 100 Fibonacci numbers, a calculator up to F(1000), the recurrence, Binet's formula, the golden ratio, Python and JavaScript code; one page per rank from 1 to 100 at /fibonacci-numbers/20
+- [Suite de Fibonacci](https://pokeragile.com/fr/suite-de-fibonacci) - French version, one page per rank at /fr/suite-de-fibonacci/20
 - [Agile estimation guide](https://pokeragile.com/estimation-agile) - Story points vs hours, velocity, sprint planning, common mistakes
 - [Alternatives to planning poker](https://pokeragile.com/alternatives) - T-shirt sizing, affinity mapping, dot voting, bucket system
 - [Choosing a planning poker tool](https://pokeragile.com/planning-poker-tools) - Seven criteria a reader can verify themselves, and an explicit list of what PokerAgile cannot do
@@ -85,6 +87,6 @@ Guides are in English and French; the core guides also exist in Spanish, German 
 
 - Frontend: SvelteKit 5 (runes), TypeScript, vanilla CSS
 - Backend: Go, native WebSocket
-- Bundle: under 50 KB JS (brotli compressed)
+- JavaScript: under 50 KB on a first visit, home or room (brotli compressed, checked on every CI run)
 - No external dependencies at runtime
 - Source: https://github.com/florianmousseau/pokeragile

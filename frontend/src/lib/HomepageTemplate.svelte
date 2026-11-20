@@ -1,7 +1,6 @@
 <script lang="ts">
   import Logo from '#lib/Logo.svelte';
-  import { FR, EN, ES, DE, PT } from '#lib/i18n.ts';
-  import { requeteEquipe } from '#lib/equipe.ts';
+  import { couleurSaisie, requeteEquipe, texteSur } from '#lib/equipe.ts';
   import { PUBLIC_API_URL } from '$app/env/public';
   import { onMount } from 'svelte';
   import { goto, replaceState } from '$app/navigation';
@@ -41,6 +40,10 @@
     createBtnLabel: string;
     creatingLabel: string;
     createError: string;
+    homeLabel: string;
+    teamSummary: string;
+    teamNameLabel: string;
+    teamColorLabel: string;
     footerSource: string;
     footerLicense: string;
     footerAbout: string;
@@ -74,6 +77,10 @@
     createBtnLabel,
     creatingLabel,
     createError,
+    homeLabel,
+    teamSummary,
+    teamNameLabel,
+    teamColorLabel,
     footerSource,
     footerLicense,
     footerAbout,
@@ -139,7 +146,6 @@
   const fits = $derived(fitsServer(cards));
   const isValid = $derived(cards.length >= 2 && fits);
 
-  const TT = $derived({ fr: FR, en: EN, es: ES, de: DE, pt: PT }[locale]);
   let teamName = $state('');
   let teamColor = $state('#1a6b3c');
   let teamOpen = $state(false);
@@ -201,7 +207,7 @@
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label="PokerAgile, accueil">
+      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label={homeLabel}>
         <Logo />
         <span class="logo-text">PokerAgile</span>
       </a>
@@ -250,12 +256,27 @@
       </div>
 
       <details class="team-field" bind:open={teamOpen}>
-        <summary>{TT.team.summary}</summary>
+        <summary>{teamSummary}</summary>
         <div class="team-inputs">
-          <label for="team-name">{TT.team.name}</label>
+          <label for="team-name">{teamNameLabel}</label>
           <input id="team-name" type="text" maxlength="30" autocomplete="off" bind:value={teamName} />
-          <label for="team-color">{TT.team.color}</label>
-          <input id="team-color" type="color" bind:value={teamColor} />
+          <label for="team-color">{teamColorLabel}</label>
+          <div class="team-color-row">
+            <input id="team-color" type="color" bind:value={teamColor} />
+            <input
+              class="team-hex"
+              type="text"
+              inputmode="text"
+              maxlength="7"
+              spellcheck="false"
+              autocomplete="off"
+              placeholder="#1a6b3c"
+              aria-label="{teamColorLabel} (#RRGGBB)"
+              value={teamColor}
+              oninput={(e) => { const c = couleurSaisie(e.currentTarget.value); if (c) teamColor = c; }}
+            />
+            <span class="team-preview" style:background={teamColor} style:color={texteSur(teamColor)}>{teamName.trim() || teamColor}</span>
+          </div>
         </div>
       </details>
 
@@ -323,6 +344,9 @@
   .cards-field input[type="text"]:focus { outline: none; border-color: var(--color-primary); }
 
   .team-field { width: 100%; font-size: 0.9rem; }
+  .team-color-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; min-width: 0; }
+  .team-inputs input.team-hex { width: 7.5em; flex: 0 1 7.5em; max-width: 100%; padding: 0.5rem min(0.625rem, 10px); font: inherit; font-family: var(--font-mono); border: 2px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg); color: var(--color-text); }
+  .team-preview { padding: 0.2rem min(0.625rem, 10px); border-radius: 99px; font-size: 0.8rem; font-weight: 700; overflow-wrap: anywhere; }
   .team-field summary { cursor: pointer; font-weight: 600; color: var(--color-text-muted); }
   .team-inputs { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.5rem 0.75rem; margin-top: 0.625rem; }
   .team-inputs input[type="text"] { width: 100%; padding: 0.5rem min(0.75rem, 12px); font: inherit; border: 2px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg); color: var(--color-text); }

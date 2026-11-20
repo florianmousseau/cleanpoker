@@ -58,3 +58,17 @@ export function requeteEquipe(nom: string, couleur: string, cartes: string[]): s
   const q = p.toString();
   return q ? `?${q}` : '';
 }
+
+/** A colour typed by hand, as #rrggbb, or null while it is not one yet. */
+export function couleurSaisie(saisie: string): string | null {
+  const hex = saisie.trim().replace(/^#/, '');
+  return HEX.test(hex) ? `#${hex.toLowerCase()}` : null;
+}
+
+/** Black or white, whichever reads better on this colour. */
+export function texteSur(couleur: string): string {
+  const hex = couleur.replace('#', '');
+  if (!HEX.test(hex)) return '#000000';
+  const rgb = canaux(hex);
+  return contraste(rgb, BLANC) >= contraste(rgb, [0, 0, 0]) ? '#ffffff' : '#000000';
+}

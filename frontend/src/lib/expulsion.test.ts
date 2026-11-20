@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { expulserApresAccord } from './expulsion';
-import { FR, EN, ES, DE, PT } from './i18n';
+import { FR, EN, ES, DE, PT } from './i18n/all';
 
 describe('expulserApresAccord', () => {
   it('asks before removing anyone', () => {

@@ -23,7 +23,7 @@
 ## Philosophie du projet
 
 - Aucun traceur, aucun cookie publicitaire, aucun script tiers
-- Bundle JS < 50 Ko (brotli), mesuré par `npm run size` sur le JS partagé
+- JS < 50 Ko (brotli) à la première visite, mesuré par `npm run size` sur l'accueil (`/`, `/fr`) et sur une salle (`/[id]`)
 - Lighthouse Performance et Accessibilité : 100/100
 - WCAG 2.1 AA
 - Hébergement sur énergie renouvelable
@@ -59,6 +59,36 @@ Ce qui reste vrai et se vend toujours : aucun cookie publicitaire, aucun compte,
 aucun script tiers, moins de 50 Ko de JS, et le contenu des sessions qui vit en
 mémoire et ne quitte pas Gravelines.
 
+## Moins de 50 Ko de JavaScript : ce que le visiteur télécharge
+
+La promesse publique est « moins de 50 Ko de JavaScript ». Elle se mesure sur
+ce qu'une première visite télécharge, pas sur un dossier du build.
+
+`frontend/scripts/check-first-visit.mjs`, joué par `npm run size` après la
+garde `Entry JS` de size-limit, suit le manifeste du build : les fichiers
+d'entrée, le client qu'ils importent toujours, les layouts et la page de la
+route, et tout ce qu'ils importent statiquement. Pour une salle il ajoute LE
+dictionnaire que son `load` attend, le plus lourd des cinq. Trois visites sont
+tenues sous 50 000 octets brotli : `/`, `/fr` et `/[id]`. Ce qui se charge au
+clic (options, liste de stories, IA locale) n'est pas compté.
+
+L'ancienne garde sommait `chunks/` : elle passait pendant qu'une salle
+téléchargeait 55 Ko, parce que le fichier de la salle n'était pas dans ce
+dossier, et elle aurait rougi le jour où les cinq langues sont devenues cinq
+fichiers chargés un à un.
+
+Le contrôle refuse de passer sur du vide : manifeste absent, route inconnue,
+fermeture trop petite pour être une page, ou salle qui n'a plus cinq
+dictionnaires. Il prouve son parcours sur un échantillon avant de lire le
+build. Si une salle dépasse, on allège la salle, on ne touche pas à la limite.
+
+**Les dictionnaires ne s'importent jamais statiquement.** `src/lib/i18n/<langue>.ts`
+porte ce que la salle dit, `src/lib/i18n/extras/<langue>.ts` ce que seuls les
+options, le formulaire de stories, le QR code et l'IA locale disent ;
+`src/lib/dictionaries.ts` en charge une langue à la fois, et
+`src/routes/[id]/+page.ts` l'attend avant l'affichage. Un import statique
+remettrait les cinq langues dans chaque salle : `src/lib/slim.test.ts` le refuse.
+
 ## Invariants à ne pas casser
 
 - **La politique de sécurité est dans DEUX fichiers** : `frontend/_headers` pour
@@ -93,7 +123,7 @@ rien.
 
 **Le perimetre est le francais et lui seul.** Le site sert cinq langues, et dans
 les quatre autres l'espace devant un deux-points n'existe pas. Sont lus
-`src/routes/fr`, le bloc `FR` de `src/lib/i18n.ts` et `src/routes/+error.svelte`,
+`src/routes/fr`, les dictionnaires `src/lib/i18n/fr.ts` et `src/lib/i18n/extras/fr.ts`, et `src/routes/+error.svelte`,
 seul ecran francais qu'aucun dictionnaire ne traduit.
 
 **L'insecable ne s'ecrit jamais en clair dans une source** : posee litteralement,
@@ -188,3 +218,27 @@ ne peut donc pas rougir, ce que le detecteur prouve.
 Il refuse aussi **un signe qui OUVRE une ligne de source** : le retour a la ligne
 d'une source HTML est rendu comme une espace ordinaire, donc un signe pose seul
 en tete de ligne s'affiche colle a l'espace de la ligne d'avant.
+
+## Les pages de rang Fibonacci ne chargent rien cote client
+
+`/fr/suite-de-fibonacci/[n]` et `/fibonacci-numbers/[n]` servent les rangs 1 a
+100 depuis UNE route chacune. Trois choix y tiennent le JS partage sous 50 Ko,
+et chacun a ete mesure avec `npm run size` avant d'etre retenu (base 47,96 Ko) :
+
+- **aucune fonction `load`** : la premiere `load` serveur du site coute 0,96 Ko
+  de JS partage a toutes les pages, la premiere `load` universelle 0,80 Ko ;
+- **aucun matcher de parametre** (`src/params.ts`) : 0,46 Ko. Un rang inconnu
+  (`/fibonacci-numbers/101`, `/fr/suite-de-fibonacci/abc`) est renvoye en 404
+  par `hooks.server.ts`, sur la regle `rangInconnu` de `src/lib/fibonacci.ts` ;
+- **`csr = false`** dans `+page.server.ts` et un calcul garde par
+  `import.meta.env.SSR` dans la page : `src/lib/fibonacci-pages.ts` et la table
+  des facteurs premiers ne partent dans aucun fichier client.
+
+La consequence a connaitre : un lien vers une page de rang doit demander la page
+au serveur. Le tableau des deux pages de reference porte `data-sveltekit-reload`
+et `fibonacci.test.ts` le verifie. Les deux pages de reference, elles, calculent
+leurs 100 lignes avec six lignes recopiees dans leur propre fichier, et le meme
+test compare leur rendu au module.
+
+Les entrees du sitemap se regenerent avec `node scripts/gen-fibonacci-sitemap.mjs`,
+la table des facteurs avec `node scripts/gen-fibonacci-facteurs.mjs`.

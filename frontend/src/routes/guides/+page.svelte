@@ -32,6 +32,7 @@
       <li><a href="/story-points">Story points</a></li>
       <li><a href="/t-shirt-sizing">T-shirt sizing</a></li>
       <li><a href="/fibonacci">Fibonacci scale</a></li>
+      <li><a href="/fibonacci-numbers" data-sveltekit-reload>Fibonacci numbers: the first 100</a></li>
       <li><a href="/estimation-agile">Agile estimation</a></li>
       <li><a href="/alternatives">Alternatives to planning poker</a></li>
     </ul>
