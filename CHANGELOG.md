@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.64] - 2026-11-20
+
+- feat(seo): RACI matrix page with a generator to fill in, in French and English (#435)
+
 ## [0.0.63] - 2026-11-20
 
 - feat(seo): Fibonacci numbers reference, one page per rank, in French and English (#431)
