@@ -82,6 +82,9 @@
       devez prévoir des dates de release, il faudra mapper les tailles en story points ou
       passer au planning poker Fibonacci.
     </p>
+    <p>
+      Le guide complet&nbsp;: <a href="/fr/t-shirt-sizing">T-shirt sizing, avec le déroulé d'une séance et un exemple de conversion en story points</a>.
+    </p>
 
     <h2>Affinity mapping</h2>
     <p>

@@ -124,6 +124,8 @@
       </p>
     </details>
 
+    <p>A mesma técnica chama-se também scrum poker: <a href="/pt/scrum-poker">scrum poker online</a>.</p>
+
     <div class="cta">
       <a href="/pt" class="btn">Criar uma sessão gratuita</a>
     </div>
