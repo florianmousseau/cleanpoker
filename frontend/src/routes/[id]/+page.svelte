@@ -13,6 +13,8 @@
   import { allVoted as allVotedOf } from '#lib/reveal.ts';
   import { moyenneAffichee } from '#lib/moyenne.ts';
   import { cadran, peutMener, secondesRestantes } from '#lib/minuteur.ts';
+  import { agreement, extreme } from '#lib/consensus.ts';
+  import StoriesPanel from '#lib/StoriesPanel.svelte';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
@@ -103,6 +105,15 @@
     return () => clearInterval(tick);
   });
   const timerLeft = $derived(room.roomState?.timerEnd ? secondesRestantes(room.roomState.timerEnd, now) : null);
+
+  const stories = $derived(room.roomState?.stories ?? []);
+  const currentIndex = $derived(room.roomState?.current ?? -1);
+  const onTable = $derived(currentIndex >= 0 ? stories[currentIndex] : undefined);
+  // The cards the team voted, in deck order: the estimates it can keep.
+  const keepable = $derived(
+    room.roomState?.results ? room.roomState.cards.filter(c => (room.roomState?.results?.dist[c] ?? 0) > 0) : []
+  );
+  const agreed = $derived(room.roomState?.results ? agreement(room.roomState.results.dist) : null);
 
   const isSolo = $derived(room.roomState !== null && room.roomState.players.length === 1);
   // Most people meet CleanPoker as someone else's guest and never see the home
@@ -209,6 +220,10 @@
         </div>
       {/if}
 
+      {#if onTable}
+        <p class="on-table" data-testid="story-on-table">{T.stories.onTable} <strong>{onTable.title}</strong></p>
+      {/if}
+
       <!-- Cartes -->
       {#if !me?.observer}
         <section class="card-section" aria-labelledby="cards-title">
@@ -280,6 +295,13 @@
               {/if}
             </div>
           {/if}
+          {#if canRun}
+            <label class="auto-reveal">
+              <input type="checkbox" checked={room.roomState.autoReveal ?? false}
+                onchange={(e) => room.setAutoReveal(e.currentTarget.checked)} data-testid="auto-reveal" />
+              <span>{T.controls.autoReveal}</span>
+            </label>
+          {/if}
           {#if room.roomState.locked}
             <p class="hint" data-testid="locked-hint">{T.host.lockedHint}</p>
           {/if}
@@ -305,6 +327,9 @@
                 <div class="stat"><span class="stat-label">{T.results.max}</span><span class="stat-value">{room.roomState.results.max}</span></div>
               </div>
             {/if}
+            {#if agreed !== null}
+              <p class="agreement" data-testid="agreement">{T.results.agreement(agreed)}</p>
+            {/if}
             <div class="dist">
               {#each Object.entries(room.roomState.results.dist).sort((a,b) => b[1]-a[1]) as [val, count] (val)}
                 <div class="dist-row">
@@ -316,6 +341,17 @@
                 </div>
               {/each}
             </div>
+            {#if onTable && canRun}
+              <div class="keep" role="group" aria-label={T.stories.keepTitle}>
+                {#each keepable as card (card)}
+                  <button class="btn btn-secondary btn-sm" class:kept={onTable.estimate === card}
+                    aria-pressed={onTable.estimate === card} onclick={() => room.estimate(card)}>{T.stories.keep(card)}</button>
+                {/each}
+                {#if currentIndex < stories.length - 1}
+                  <button class="btn btn-primary btn-sm" onclick={() => room.selectStory(currentIndex + 1)} data-testid="next-story">{T.stories.next}</button>
+                {/if}
+              </div>
+            {/if}
             </div>
           {:else}
             <p class="no-results">{T.results.none}</p>
@@ -332,6 +368,11 @@
           </div>
         </aside>
       {/if}
+
+      <StoriesPanel {stories} current={currentIndex} {T} {canRun}
+        onAdd={(text) => room.addStories(text)}
+        onClear={() => room.clearStories()}
+        onSelect={(i) => room.selectStory(i)} />
 
       <!-- Participants -->
       <section class="panel" aria-labelledby="participants-title">
@@ -363,7 +404,7 @@
                     </td>
                     <td class="vote-cell">
                       {#if room.roomState.state === 'revealed'}
-                        <span class="vote-revealed">{player.vote || '-'}</span>
+                        <span class="vote-revealed" data-extreme={room.roomState.results ? extreme(player.vote, room.roomState.results.min, room.roomState.results.max) : null}>{player.vote || '-'}</span>
                       {:else if player.vote === 'hidden'}
                         <span class="vote-pending">{T.participants.votePending}</span>
                       {:else}
@@ -603,6 +644,13 @@
   .timer-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin-top: 0.5rem; }
   .timer-label { font-size: 0.8rem; color: var(--color-text-muted); margin-right: 0.25rem; }
   .lock-btn { margin-top: 0.625rem; }
+  .auto-reveal { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.625rem; font-size: 0.85rem; cursor: pointer; }
+  .auto-reveal input { accent-color: var(--color-primary); }
+  .on-table { font-size: 1rem; padding: 0.625rem min(1rem, 16px); background: var(--color-card-selected); border: 1px solid var(--color-card-border-selected); border-radius: var(--radius-lg); overflow-wrap: break-word; }
+  .agreement { font-size: 0.85rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 0.5rem; }
+  .keep { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.875rem; }
+  .keep .kept { background: var(--color-card-selected); border-color: var(--color-card-border-selected); color: var(--color-primary); }
+  .vote-revealed[data-extreme] { padding: 0.05rem 0.4rem; border-radius: 99px; outline: 2px solid var(--color-danger); }
   .action-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
   .stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.625rem; margin-bottom: 1rem; }

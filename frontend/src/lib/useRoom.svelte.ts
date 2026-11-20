@@ -3,9 +3,11 @@ import { PUBLIC_WS_URL } from '$app/env/public';
 import { onDestroy } from 'svelte';
 import type { Translation } from '#lib/i18n.ts';
 import { transitionOf } from '#lib/room-transition.ts';
+import { chunkLines } from '#lib/export.ts';
 import { forgetSeat, loadSeat, saveSeat, tabStorage } from '#lib/seat.ts';
 
 export type Player = { id: string; name: string; vote: string; observer: boolean; ai?: boolean };
+export type Story = { title: string; estimate: string };
 export type Results = { avg: string; median: string; min: string; max: string; dist: Record<string, number> };
 export type ActivityEntry = { timestamp: string; initiator: string; message: string; target?: string };
 export type RoomState = {
@@ -13,6 +15,7 @@ export type RoomState = {
   state: 'voting' | 'revealed'; round: number;
   results: Results | null; players: Player[]; activity: ActivityEntry[];
   host: string; locked: boolean; timerEnd: number;
+  stories?: Story[]; current?: number; autoReveal?: boolean;
 };
 
 const PING_MS = 25_000;
@@ -180,6 +183,12 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
   function toggleObserver(targetId: string) { send('toggleObserver', targetId); }
   function setLocked(locked: boolean) { send('lock', locked ? 'on' : 'off'); }
   function startTimer(seconds: number) { send('timer', String(seconds)); }
+  // A frame holds 4 KB: a long paste leaves in several, each of whole lines.
+  function addStories(text: string) { for (const part of chunkLines(text, 2500)) send('addStories', part); }
+  function clearStories() { send('clearStories'); }
+  function selectStory(index: number) { myVote = ''; send('selectStory', String(index)); }
+  function estimate(card: string) { send('estimate', card); }
+  function setAutoReveal(on: boolean) { send('autoReveal', on ? 'on' : 'off'); }
 
   onDestroy(() => {
     destroying = true;
@@ -197,5 +206,6 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
     get kicked() { return kicked; },
     get liveAnnouncement() { return liveAnnouncement; },
     join, resume, send, castVote, show, clear, kick, toggleObserver, setLocked, startTimer,
+    addStories, clearStories, selectStory, estimate, setAutoReveal,
   };
 }

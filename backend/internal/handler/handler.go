@@ -305,32 +305,45 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 			log.Printf("warn: command rate exceeded, closing connection")
 			return
 		}
-		switch action.Type {
-		case "ping":
+		if action.Type == "ping" {
 			if err := sendBounded(conn, room.Message{Type: "pong"}); err != nil {
 				return
 			}
-		case "vote":
-			rm.CastVote(seat.ID, action.Payload, action.Round)
-		case "show":
-			rm.Show(seat.ID)
-		case "clear":
-			rm.Clear(seat.ID, action.Round)
-		case "kick":
-			rm.Kick(seat.ID, action.Payload)
-		case "toggleObserver":
-			rm.ToggleObserver(seat.ID, action.Payload)
-		case "lock":
-			rm.SetLocked(seat.ID, action.Payload == "on")
-		case "timer":
-			seconds, err := strconv.Atoi(action.Payload)
-			if err == nil {
-				rm.StartTimer(seat.ID, seconds)
-			}
-		default:
-			log.Printf("unknown action: %s", action.Type)
+			continue
 		}
+		run, ok := commands[action.Type]
+		if !ok {
+			log.Printf("unknown action: %s", action.Type)
+			continue
+		}
+		run(rm, seat.ID, action.Payload, action.Round)
 	}
+}
+
+// command runs one client action on the room, for the seat that sent it.
+type command func(rm *room.Room, seatID, payload string, round int)
+
+var commands = map[string]command{
+	"vote":           func(rm *room.Room, id, p string, round int) { rm.CastVote(id, p, round) },
+	"show":           func(rm *room.Room, id, _ string, _ int) { rm.Show(id) },
+	"clear":          func(rm *room.Room, id, _ string, round int) { rm.Clear(id, round) },
+	"kick":           func(rm *room.Room, id, p string, _ int) { rm.Kick(id, p) },
+	"toggleObserver": func(rm *room.Room, id, p string, _ int) { rm.ToggleObserver(id, p) },
+	"lock":           func(rm *room.Room, id, p string, _ int) { rm.SetLocked(id, p == "on") },
+	"autoReveal":     func(rm *room.Room, id, p string, _ int) { rm.SetAutoReveal(id, p == "on") },
+	"addStories":     func(rm *room.Room, id, p string, _ int) { rm.AddStories(id, p) },
+	"clearStories":   func(rm *room.Room, id, _ string, _ int) { rm.ClearStories(id) },
+	"estimate":       func(rm *room.Room, id, p string, _ int) { rm.Estimate(id, p) },
+	"timer": func(rm *room.Room, id, p string, _ int) {
+		if seconds, err := strconv.Atoi(p); err == nil {
+			rm.StartTimer(id, seconds)
+		}
+	},
+	"selectStory": func(rm *room.Room, id, p string, _ int) {
+		if index, err := strconv.Atoi(p); err == nil {
+			rm.SelectStory(id, index)
+		}
+	},
 }
 
 func cors(allowed map[string]bool, next http.Handler) http.Handler {
