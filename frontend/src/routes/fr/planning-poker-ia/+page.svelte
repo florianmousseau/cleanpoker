@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Le texte de la story est-il envoyé à une IA ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Oui, à l\'assistant qu\'une personne de l\'équipe a connecté, et à aucun service d\'IA : CleanPoker n\'en appelle aucun. L\'assistant reçoit l\'état de la salle : les titres des stories et leurs estimations si l\'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Oui, à l\'assistant qu\'une personne de l\'équipe a connecté, et à aucun autre service d\'IA : CleanPoker n\'en appelle aucun. L\'assistant reçoit l\'état de la salle : les titres des stories et leurs estimations si l\'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.' },
       },
     ],
   })}<\/script>`}
@@ -127,7 +127,7 @@ Quitte la salle quand je te le dis.</code></pre>
     <h3>Une IA estime-t-elle mieux qu'une équipe&nbsp;?</h3>
     <p>Non. Elle ne connaît ni la vélocité de l'équipe, ni l'état réel du code, ni qui dépend de qui. Elle est utile pour repérer ce que la story oublie&nbsp;: tests, migration de données, cas limites. Son vote sert à ouvrir la discussion quand il s'écarte de celui de l'équipe.</p>
     <h3>Le texte de la story est-il envoyé à une IA&nbsp;?</h3>
-    <p>Oui, à l'assistant qu'une personne de l'équipe a connecté, et à aucun service d'IA&nbsp;: CleanPoker n'en appelle aucun. L'assistant reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.</p>
+    <p>Oui, à l'assistant qu'une personne de l'équipe a connecté, et à aucun autre service d'IA&nbsp;: CleanPoker n'en appelle aucun. L'assistant reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, puis les votes une fois révélés.</p>
 
     <div class="cta">
       <a href="/fr" class="btn">Créer une salle</a>

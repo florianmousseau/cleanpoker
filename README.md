@@ -48,7 +48,7 @@ An assistant cannot reveal, start a round or remove anyone, and it sees nobody's
 
 ## The browser's built-in AI
 
-Where Chrome exposes its on-device model (the Prompt API, Chrome 148 and later on desktop), the room shows a button that analyses the story on the table: what it leaves out, and a split if it looks too large. The model runs on the reader's computer; the analysis sends the story to no service and the answer is shown to that reader only. Elsewhere the button does not appear.
+Where Chrome exposes its on-device model (the Prompt API, Chrome 148 and later on desktop), the room shows a button that analyzes the story on the table: what it leaves out, and a split if it looks too large. The model runs on the reader's computer; the analysis sends the story to no service and the answer is shown to that reader only. Elsewhere the button does not appear.
 
 ## Privacy
 

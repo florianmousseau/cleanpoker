@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Is the story text sent to an AI?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Yes, to the assistant a team member connected, and to no AI service: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes, to the assistant a team member connected, and to no other AI service: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.' },
       },
     ],
   })}<\/script>`}
@@ -127,7 +127,7 @@ Leave the room when I say so.</code></pre>
     <h3>Does AI estimate better than a team?</h3>
     <p>No. It does not know the team's velocity, the real state of the code or who depends on whom. It is useful for spotting what the story leaves out: tests, data migration, edge cases. Its vote opens the discussion when it differs from the team's.</p>
     <h3>Is the story text sent to an AI?</h3>
-    <p>Yes, to the assistant a team member connected, and to no AI service: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.</p>
+    <p>Yes, to the assistant a team member connected, and to no other AI service: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.</p>
 
     <div class="cta">
       <a href="/" class="btn">Create a room</a>
