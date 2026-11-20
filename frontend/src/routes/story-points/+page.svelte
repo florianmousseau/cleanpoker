@@ -143,7 +143,8 @@
       <a href="/fibonacci">the Fibonacci sequence</a>,
       <a href="/estimation-agile">agile estimation</a>,
       <a href="/alternatives">alternatives to planning poker</a>,
-      <a href="/planning-poker-ai">planning poker with AI</a>.
+      <a href="/planning-poker-ai">planning poker with AI</a>,
+      <a href="/retrospective">retrospective formats</a>.
     </p>
   </main>
 
