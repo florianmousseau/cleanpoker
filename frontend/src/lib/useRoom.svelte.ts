@@ -6,12 +6,13 @@ import { transitionOf } from '#lib/room-transition.ts';
 import { forgetSeat, loadSeat, saveSeat, tabStorage } from '#lib/seat.ts';
 
 export type Player = { id: string; name: string; vote: string; observer: boolean };
-export type Results = { avg: string; min: string; max: string; dist: Record<string, number> };
+export type Results = { avg: string; median: string; min: string; max: string; dist: Record<string, number> };
 export type ActivityEntry = { timestamp: string; initiator: string; message: string; target?: string };
 export type RoomState = {
   id: string; cards: string[];
   state: 'voting' | 'revealed'; round: number;
   results: Results | null; players: Player[]; activity: ActivityEntry[];
+  host: string; locked: boolean; timerEnd: number;
 };
 
 const PING_MS = 25_000;
@@ -177,6 +178,8 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
   function clear() { myVote = ''; send('clear'); }
   function kick(targetId: string) { send('kick', targetId); }
   function toggleObserver(targetId: string) { send('toggleObserver', targetId); }
+  function setLocked(locked: boolean) { send('lock', locked ? 'on' : 'off'); }
+  function startTimer(seconds: number) { send('timer', String(seconds)); }
 
   onDestroy(() => {
     destroying = true;
@@ -193,6 +196,6 @@ export function useRoom(getRoomId: () => string, getT: () => Translation) {
     get isReconnecting() { return isReconnecting; },
     get kicked() { return kicked; },
     get liveAnnouncement() { return liveAnnouncement; },
-    join, resume, send, castVote, show, clear, kick, toggleObserver,
+    join, resume, send, castVote, show, clear, kick, toggleObserver, setLocked, startTimer,
   };
 }

@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -304,6 +305,13 @@ func handleWS(conn *websocket.Conn, rm *room.Room, recordJoin func(), a arrival)
 			rm.Kick(seat.ID, action.Payload)
 		case "toggleObserver":
 			rm.ToggleObserver(seat.ID, action.Payload)
+		case "lock":
+			rm.SetLocked(seat.ID, action.Payload == "on")
+		case "timer":
+			seconds, err := strconv.Atoi(action.Payload)
+			if err == nil {
+				rm.StartTimer(seat.ID, seconds)
+			}
 		default:
 			log.Printf("unknown action: %s", action.Type)
 		}
