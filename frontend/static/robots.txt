@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cleanpoker.dev/sitemap.xml
+Sitemap: https://pokeragile.com/sitemap.xml

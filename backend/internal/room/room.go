@@ -521,7 +521,7 @@ func (r *Room) CastVoteWithReason(playerID, vote, reason string, round int) {
 			r.logActivity(p.Name, "voted")
 		}
 		if r.autoReveal && r.everyoneVoted() {
-			r.reveal("CleanPoker")
+			r.reveal("PokerAgile")
 		}
 	})
 }

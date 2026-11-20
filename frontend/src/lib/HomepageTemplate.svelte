@@ -88,7 +88,7 @@
   const jsonLd = $derived({
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'CleanPoker',
+    name: 'PokerAgile',
     url: jsonLdUrl,
     description: jsonLdDesc,
     applicationCategory: 'BusinessApplication',
@@ -162,33 +162,33 @@
   <meta name="description" content={metaDesc} />
   <meta name="keywords" content={keywords} />
   <link rel="canonical" href={canonical} />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com" />
   <meta property="og:locale" content={ogLocale} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonical} />
   <meta property="og:title" content={ogTitle} />
   <meta property="og:description" content={ogDesc} />
-  <meta property="og:image" content="https://cleanpoker.dev/og-image.png" />
+  <meta property="og:image" content="https://pokeragile.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={twitterTitle} />
   <meta name="twitter:description" content={twitterDesc} />
-  <meta name="twitter:image" content="https://cleanpoker.dev/og-image.png" />
+  <meta name="twitter:image" content="https://pokeragile.com/og-image.png" />
   {@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}<\/script>`}
 </svelte:head>
 
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label="CleanPoker, accueil">
+      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label="PokerAgile, accueil">
         <Logo />
-        <span class="logo-text">CleanPoker</span>
+        <span class="logo-text">PokerAgile</span>
       </a>
     </div>
   </header>

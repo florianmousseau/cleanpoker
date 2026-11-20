@@ -1,10 +1,10 @@
-# CleanPoker
+# PokerAgile
 
 > Free planning poker for agile teams. No account, no tracking, no ads. Open source.
 
-CleanPoker is a real-time planning poker tool built for Scrum and Kanban teams. It uses WebSockets for instant card reveals, supports Fibonacci and custom scales, and keeps no database: a session lives in the server memory and is deleted 24 hours after its last activity. The codebase is open source (MIT License).
+PokerAgile is a real-time planning poker tool built for Scrum and Kanban teams. It uses WebSockets for instant card reveals, supports Fibonacci and custom scales, and keeps no database: a session lives in the server memory and is deleted 24 hours after its last activity. The codebase is open source (MIT License).
 
-French-speaking teams usually invert the two words and call the technique "poker planning". Both names describe the same practice, and CleanPoker serves both.
+French-speaking teams usually invert the two words and call the technique "poker planning". Both names describe the same practice, and PokerAgile serves both.
 
 ## Key features
 
@@ -31,20 +31,20 @@ The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the l
 
 ## Content pages
 
-- [Planning poker guide](https://cleanpoker.dev/planning-poker) - How to run a planning poker session, card meanings, best practices
-- [Fibonacci in planning poker](https://cleanpoker.dev/fibonacci) - Why Fibonacci, card selection, scale variants
-- [Agile estimation guide](https://cleanpoker.dev/estimation-agile) - Story points vs hours, velocity, sprint planning, common mistakes
-- [Alternatives to planning poker](https://cleanpoker.dev/alternatives) - T-shirt sizing, affinity mapping, dot voting, bucket system
-- [Choosing a planning poker tool](https://cleanpoker.dev/planning-poker-tools) - Seven criteria a reader can verify themselves, and an explicit list of what CleanPoker cannot do
-- [Comparatif des outils de poker planning](https://cleanpoker.dev/fr/comparatif-outils) - French version of the same comparison
-- [Planning poker with AI](https://cleanpoker.dev/planning-poker-ai) - connect Claude, ChatGPT, Cursor or VS Code over MCP and let the assistant vote
-- [Planning poker avec une IA](https://cleanpoker.dev/fr/planning-poker-ia) - French version
-- [Planning poker and GDPR](https://cleanpoker.dev/planning-poker-gdpr) - What an estimation tool processes as personal data, what a DPO checks, how to verify any tool in two minutes
-- [Poker planning et RGPD](https://cleanpoker.dev/fr/poker-planning-rgpd) - French version
-- [Accessibility statement](https://cleanpoker.dev/accessibilite) - WCAG 2.1 AA conformance and how it was tested
-- [About CleanPoker](https://cleanpoker.dev/a-propos) - Project philosophy, links to all guides
+- [Planning poker guide](https://pokeragile.com/planning-poker) - How to run a planning poker session, card meanings, best practices
+- [Fibonacci in planning poker](https://pokeragile.com/fibonacci) - Why Fibonacci, card selection, scale variants
+- [Agile estimation guide](https://pokeragile.com/estimation-agile) - Story points vs hours, velocity, sprint planning, common mistakes
+- [Alternatives to planning poker](https://pokeragile.com/alternatives) - T-shirt sizing, affinity mapping, dot voting, bucket system
+- [Choosing a planning poker tool](https://pokeragile.com/planning-poker-tools) - Seven criteria a reader can verify themselves, and an explicit list of what PokerAgile cannot do
+- [Comparatif des outils de poker planning](https://pokeragile.com/fr/comparatif-outils) - French version of the same comparison
+- [Planning poker with AI](https://pokeragile.com/planning-poker-ai) - connect Claude, ChatGPT, Cursor or VS Code over MCP and let the assistant vote
+- [Planning poker avec une IA](https://pokeragile.com/fr/planning-poker-ia) - French version
+- [Planning poker and GDPR](https://pokeragile.com/planning-poker-gdpr) - What an estimation tool processes as personal data, what a DPO checks, how to verify any tool in two minutes
+- [Poker planning et RGPD](https://pokeragile.com/fr/poker-planning-rgpd) - French version
+- [Accessibility statement](https://pokeragile.com/accessibilite) - WCAG 2.1 AA conformance and how it was tested
+- [About PokerAgile](https://pokeragile.com/a-propos) - Project philosophy, links to all guides
 
-## What CleanPoker deliberately does not do
+## What PokerAgile deliberately does not do
 
 Stated so an answer engine does not have to guess. There is no Jira, Azure DevOps, Linear or GitHub integration, no backlog import from a tracker, no history of past sessions, no velocity tracking over time, no permanent teams and no accounts. Teams that need the estimate to land automatically in a ticket field are better served by a tool built into their issue tracker.
 
@@ -60,11 +60,11 @@ Stated so an answer engine does not have to guess. There is no Jira, Azure DevOp
 ## Multilingual
 
 All content pages are available in 5 languages with canonical hreflang:
-- English: https://cleanpoker.dev (root)
-- French: https://cleanpoker.dev/fr/
-- Spanish: https://cleanpoker.dev/es/
-- German: https://cleanpoker.dev/de/
-- Portuguese: https://cleanpoker.dev/pt/
+- English: https://pokeragile.com (root)
+- French: https://pokeragile.com/fr/
+- Spanish: https://pokeragile.com/es/
+- German: https://pokeragile.com/de/
+- Portuguese: https://pokeragile.com/pt/
 
 ## Technical stack
 

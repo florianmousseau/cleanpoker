@@ -1,7 +1,7 @@
 /**
  * Four rules that no compiler enforces and that cost the site its indexing
  * once already. Measured on 2026-08-03: 20 of 45 submitted pages were indexed,
- * and Bing was still showing a bare "CleanPoker" as the title of several pages.
+ * and Bing was still showing a bare "PokerAgile" as the title of several pages.
  *
  *   1. app.html must not carry a <title>. It sits above %sveltekit.head%, so it
  *      wins over the one each route sets: every URL then ships two titles and
@@ -30,7 +30,7 @@ const SITEMAP = new URL('../static/sitemap.xml', import.meta.url).pathname.repla
 	/^\/([A-Za-z]:)/,
 	'$1'
 );
-const ORIGIN = 'https://cleanpoker.dev';
+const ORIGIN = 'https://pokeragile.com';
 
 const failures = [];
 

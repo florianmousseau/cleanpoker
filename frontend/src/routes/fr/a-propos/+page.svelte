@@ -1,23 +1,23 @@
 <svelte:head>
-  <title>À propos de CleanPoker, un poker planning éco-conçu</title>
-  <meta name="description" content="CleanPoker est un outil de planning poker gratuit, éco-conçu, sans suivi comportemental, accessible WCAG 2.1 AA. Découvrez notre démarche, nos engagements et notre guide du planning poker." />
-  <link rel="canonical" href="https://cleanpoker.dev/fr/a-propos" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/a-propos" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/a-propos" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/a-propos" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/a-propos" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/a-propos" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/a-propos" />
+  <title>À propos de PokerAgile, un poker planning éco-conçu</title>
+  <meta name="description" content="PokerAgile est un outil de planning poker gratuit, éco-conçu, sans suivi comportemental, accessible WCAG 2.1 AA. Découvrez notre démarche, nos engagements et notre guide du planning poker." />
+  <link rel="canonical" href="https://pokeragile.com/fr/a-propos" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/a-propos" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/a-propos" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/a-propos" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/a-propos" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/a-propos" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/a-propos" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'À propos de CleanPoker',
-    url: 'https://cleanpoker.dev/fr/a-propos',
-    description: 'CleanPoker est un outil de planning poker gratuit, éco-conçu, sans suivi comportemental, accessible WCAG 2.1 AA.',
+    name: 'À propos de PokerAgile',
+    url: 'https://pokeragile.com/fr/a-propos',
+    description: 'PokerAgile est un outil de planning poker gratuit, éco-conçu, sans suivi comportemental, accessible WCAG 2.1 AA.',
     isPartOf: {
       '@type': 'WebApplication',
-      name: 'CleanPoker',
-      url: 'https://cleanpoker.dev',
+      name: 'PokerAgile',
+      url: 'https://pokeragile.com',
       description: 'Planning poker gratuit, sans suivi comportemental, bundle JS < 50 Ko, hébergement sur énergie renouvelable, WCAG 2.1 AA.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
     },
@@ -28,10 +28,10 @@
   <main id="main">
     <a href="/fr" class="back-link">Retour à l'accueil</a>
 
-    <h1>À propos de CleanPoker</h1>
+    <h1>À propos de PokerAgile</h1>
 
     <p>
-      <strong>CleanPoker</strong> est un outil de <strong>planning poker</strong> collaboratif,
+      <strong>PokerAgile</strong> est un outil de <strong>planning poker</strong> collaboratif,
       gratuit et open source. Créez une session en un clic, partagez l'URL avec votre équipe,
       estimez en temps réel. Sans compte, sans inscription, sans suivi comportemental.
     </p>

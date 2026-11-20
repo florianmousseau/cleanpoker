@@ -1,20 +1,20 @@
 <svelte:head>
-  <title>Poker planning&nbsp;: règles, Fibonacci et guide pratique | CleanPoker</title>
+  <title>Poker planning&nbsp;: règles, Fibonacci et guide pratique | PokerAgile</title>
   <meta name="description" content="Qu'est-ce que le poker planning&nbsp;? Règles en 5 étapes, suite de Fibonacci, durée d'une session, à distance et en asynchrone, erreurs qui faussent les estimations. Guide complet et gratuit." />
-  <link rel="canonical" href="https://cleanpoker.dev/fr/planning-poker" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/planning-poker" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/planning-poker" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/planning-poker" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker" />
+  <link rel="canonical" href="https://pokeragile.com/fr/planning-poker" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/planning-poker" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/planning-poker" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/planning-poker" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Poker planning : règles, Fibonacci et guide pratique',
-    url: 'https://cleanpoker.dev/fr/planning-poker',
-    description: 'Guide complet du poker planning : définition, règles, pourquoi Fibonacci, durée d\'une session, à distance et en asynchrone, comment l\'utiliser avec CleanPoker.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    url: 'https://pokeragile.com/fr/planning-poker',
+    description: 'Guide complet du poker planning : définition, règles, pourquoi Fibonacci, durée d\'une session, à distance et en asynchrone, comment l\'utiliser avec PokerAgile.',
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -233,7 +233,7 @@
     <details>
       <summary>Le poker planning fonctionne-t-il pour les équipes distantes&nbsp;?</summary>
       <p>
-        Oui, c'est précisément pour ça que CleanPoker existe. Créez une session, partagez l'URL,
+        Oui, c'est précisément pour ça que PokerAgile existe. Créez une session, partagez l'URL,
         chaque participant vote sur son propre appareil. Les résultats se révèlent en temps réel
         via WebSocket, sans aucune configuration ni compte à créer.
       </p>
@@ -242,7 +242,7 @@
     <details>
       <summary>Combien de participants maximum&nbsp;?</summary>
       <p>
-        CleanPoker ne pose aucune limite technique. En pratique, au-delà de 10 participants,
+        PokerAgile ne pose aucune limite technique. En pratique, au-delà de 10 participants,
         les discussions deviennent difficiles à gérer. Pour les grandes équipes, préférez
         plusieurs sessions parallèles ou une estimation en sous-groupes.
       </p>

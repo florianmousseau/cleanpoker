@@ -1,13 +1,13 @@
 <svelte:head>
-  <title>Legal notice & Privacy policy | CleanPoker</title>
-  <meta name="description" content="Legal notice, privacy policy and hosting information for CleanPoker." />
-  <link rel="canonical" href="https://cleanpoker.dev/mentions-legales" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales" />
+  <title>Legal notice & Privacy policy | PokerAgile</title>
+  <meta name="description" content="Legal notice, privacy policy and hosting information for PokerAgile." />
+  <link rel="canonical" href="https://pokeragile.com/mentions-legales" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/mentions-legales" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/mentions-legales" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/mentions-legales" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/mentions-legales" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/mentions-legales" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/mentions-legales" />
   <meta name="robots" content="noindex" />
 </svelte:head>
 
@@ -51,7 +51,7 @@
 
     <h3>Data collected</h3>
     <p>
-      CleanPoker only collects the <strong>pseudonym</strong> you freely enter
+      PokerAgile only collects the <strong>pseudonym</strong> you freely enter
       to join a session. This pseudonym is displayed to other participants in the same session.
       No email address, phone number, or real identification data is requested or stored.
     </p>
@@ -90,7 +90,7 @@
     <!-- ── Cookies ── -->
     <h2>Cookies</h2>
     <p>
-      CleanPoker <strong>does not use any advertising cookie, and no tool that follows a visitor</strong>.
+      PokerAgile <strong>does not use any advertising cookie, and no tool that follows a visitor</strong>.
     </p>
     <p>
       <strong>No script here measures your visit</strong>: no analytics tool is loaded, no cookie
@@ -133,7 +133,7 @@
     <!-- ── Intellectual property ── -->
     <h2>Intellectual property</h2>
     <p>
-      The CleanPoker source code is published under the
+      The PokerAgile source code is published under the
       <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>.
       You are free to reuse, modify and distribute it under the terms of this licence.
     </p>
@@ -141,7 +141,7 @@
     <!-- ── Liability ── -->
     <h2>Limitation of liability</h2>
     <p>
-      CleanPoker is a free service provided without warranty. The publisher cannot be held
+      PokerAgile is a free service provided without warranty. The publisher cannot be held
       liable for direct or indirect damages resulting from the use or unavailability of the service.
     </p>
 

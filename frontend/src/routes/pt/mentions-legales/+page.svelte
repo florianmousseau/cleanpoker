@@ -1,13 +1,13 @@
 <svelte:head>
-  <title>Aviso legal & Política de privacidade | CleanPoker</title>
-  <meta name="description" content="Aviso legal, política de privacidade e informações de alojamento do CleanPoker." />
-  <link rel="canonical" href="https://cleanpoker.dev/pt/mentions-legales" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/mentions-legales" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/mentions-legales" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/mentions-legales" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/mentions-legales" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/mentions-legales" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/mentions-legales" />
+  <title>Aviso legal & Política de privacidade | PokerAgile</title>
+  <meta name="description" content="Aviso legal, política de privacidade e informações de alojamento do PokerAgile." />
+  <link rel="canonical" href="https://pokeragile.com/pt/mentions-legales" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/mentions-legales" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/mentions-legales" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/mentions-legales" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/mentions-legales" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/mentions-legales" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/mentions-legales" />
   <meta name="robots" content="noindex" />
 </svelte:head>
 
@@ -51,7 +51,7 @@
 
     <h3>Dados recolhidos</h3>
     <p>
-      O CleanPoker recolhe apenas o <strong>pseudónimo</strong> que introduz livremente
+      O PokerAgile recolhe apenas o <strong>pseudónimo</strong> que introduz livremente
       para entrar numa sessão. Este pseudónimo é apresentado aos outros participantes da mesma sessão.
       Não é solicitado nem armazenado qualquer endereço de e-mail, número de telefone
       ou dado de identificação real.
@@ -91,7 +91,7 @@
     <!-- ── Cookies ── -->
     <h2>Cookies</h2>
     <p>
-      O CleanPoker <strong>não utiliza cookies publicitários nem qualquer ferramenta que siga um visitante</strong>.
+      O PokerAgile <strong>não utiliza cookies publicitários nem qualquer ferramenta que siga um visitante</strong>.
     </p>
     <p>
       <strong>Nenhum script mede a sua visita</strong>: não é carregada qualquer ferramenta de
@@ -135,7 +135,7 @@
     <!-- ── Propriedade intelectual ── -->
     <h2>Propriedade intelectual</h2>
     <p>
-      O código fonte do CleanPoker está publicado sob
+      O código fonte do PokerAgile está publicado sob
       <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licença MIT</a>.
       É livre de o reutilizar, modificar e distribuir nas condições desta licença.
     </p>
@@ -143,7 +143,7 @@
     <!-- ── Responsabilidade ── -->
     <h2>Limitação de responsabilidade</h2>
     <p>
-      O CleanPoker é um serviço gratuito prestado sem garantia. O editor não pode ser considerado
+      O PokerAgile é um serviço gratuito prestado sem garantia. O editor não pode ser considerado
       responsável por danos diretos ou indiretos resultantes da utilização ou indisponibilidade do serviço.
     </p>
 

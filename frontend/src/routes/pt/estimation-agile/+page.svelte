@@ -1,20 +1,20 @@
 <svelte:head>
-  <title>Estimativa ágil: story points, velocidade e planejamento de sprint | CleanPoker</title>
+  <title>Estimativa ágil: story points, velocidade e planejamento de sprint | PokerAgile</title>
   <meta name="description" content="Guia completo de estimativa ágil: story points vs horas, como a velocidade funciona, planejamento de capacidade e erros comuns." />
-  <link rel="canonical" href="https://cleanpoker.dev/pt/estimation-agile" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/estimation-agile" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/estimation-agile" />
-  <link rel="alternate" hreflang="es" href="https://cleanpoker.dev/es/estimation-agile" />
-  <link rel="alternate" hreflang="de" href="https://cleanpoker.dev/de/estimation-agile" />
-  <link rel="alternate" hreflang="pt" href="https://cleanpoker.dev/pt/estimation-agile" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/estimation-agile" />
+  <link rel="canonical" href="https://pokeragile.com/pt/estimation-agile" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/estimation-agile" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/estimation-agile" />
+  <link rel="alternate" hreflang="es" href="https://pokeragile.com/es/estimation-agile" />
+  <link rel="alternate" hreflang="de" href="https://pokeragile.com/de/estimation-agile" />
+  <link rel="alternate" hreflang="pt" href="https://pokeragile.com/pt/estimation-agile" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/estimation-agile" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Estimativa ágil: story points, velocidade e planejamento de sprint',
-    url: 'https://cleanpoker.dev/pt/estimation-agile',
+    url: 'https://pokeragile.com/pt/estimation-agile',
     description: 'Guia completo de estimativa ágil: story points, velocidade, planejamento de capacidade e erros comuns.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -115,7 +115,7 @@
     </details>
 
     <div class="cta">
-      <a href="/pt" class="btn">Criar sessão com CleanPoker</a>
+      <a href="/pt" class="btn">Criar sessão com PokerAgile</a>
     </div>
   </main>
 

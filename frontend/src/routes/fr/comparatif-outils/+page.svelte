@@ -1,17 +1,17 @@
 <svelte:head>
-  <title>Comparatif des outils de poker planning&nbsp;: 7 critères qui comptent | CleanPoker</title>
-  <meta name="description" content="Comment choisir un outil de poker planning en ligne&nbsp;: les 7 critères à vérifier soi-même, ce que CleanPoker fait, ce qu'il ne fait pas, et quand un autre outil est le bon choix." />
-  <link rel="canonical" href="https://cleanpoker.dev/fr/comparatif-outils" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/comparatif-outils" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-tools" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-tools" />
+  <title>Comparatif des outils de poker planning&nbsp;: 7 critères qui comptent | PokerAgile</title>
+  <meta name="description" content="Comment choisir un outil de poker planning en ligne&nbsp;: les 7 critères à vérifier soi-même, ce que PokerAgile fait, ce qu'il ne fait pas, et quand un autre outil est le bon choix." />
+  <link rel="canonical" href="https://pokeragile.com/fr/comparatif-outils" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/comparatif-outils" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-tools" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-tools" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Comparatif des outils de poker planning : les 7 critères qui comptent',
-    url: 'https://cleanpoker.dev/fr/comparatif-outils',
-    description: 'Les sept critères pour choisir un outil de poker planning en ligne, vérifiables soi-même, et le périmètre exact de CleanPoker, y compris ce qu\'il ne sait pas faire.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    url: 'https://pokeragile.com/fr/comparatif-outils',
+    description: 'Les sept critères pour choisir un outil de poker planning en ligne, vérifiables soi-même, et le périmètre exact de PokerAgile, y compris ce qu\'il ne sait pas faire.',
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -24,8 +24,8 @@
       },
       {
         '@type': 'Question',
-        name: 'Que ne sait pas faire CleanPoker ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker n\'a pas d\'intégration Jira, Azure DevOps ou Linear, pas d\'import de backlog depuis un outil de tickets, pas d\'historique des sessions passées et pas d\'équipes permanentes. Si l\'une de ces fonctions est indispensable, un outil intégré au gestionnaire de tickets est le bon choix. Les stories se collent dans la salle et leurs estimations repartent en CSV ou en tableau Markdown.' },
+        name: 'Que ne sait pas faire PokerAgile ?',
+        acceptedAnswer: { '@type': 'Answer', text: 'PokerAgile n\'a pas d\'intégration Jira, Azure DevOps ou Linear, pas d\'import de backlog depuis un outil de tickets, pas d\'historique des sessions passées et pas d\'équipes permanentes. Si l\'une de ces fonctions est indispensable, un outil intégré au gestionnaire de tickets est le bon choix. Les stories se collent dans la salle et leurs estimations repartent en CSV ou en tableau Markdown.' },
       },
       {
         '@type': 'Question',
@@ -110,11 +110,11 @@
       commit.
     </p>
 
-    <h2>Le périmètre exact de CleanPoker</h2>
+    <h2>Le périmètre exact de PokerAgile</h2>
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>Critère</th><th>CleanPoker</th></tr>
+          <tr><th>Critère</th><th>PokerAgile</th></tr>
         </thead>
         <tbody>
           <tr><td>Mur de paiement</td><td>Aucun. Pas de version payante, pas de limite de participants, pas de quota de sessions.</td></tr>
@@ -128,7 +128,7 @@
       </table>
     </div>
 
-    <h2>Ce que CleanPoker ne sait pas faire</h2>
+    <h2>Ce que PokerAgile ne sait pas faire</h2>
     <p>
       La liste est courte et volontaire, mais elle est disqualifiante pour certaines équipes. Autant
       le savoir avant d'ouvrir l'outil qu'après&nbsp;:
@@ -141,7 +141,7 @@
     </ul>
     <p>
       Si l'estimation doit atterrir automatiquement dans le champ «&nbsp;story points&nbsp;» d'un ticket, un
-      outil intégré au gestionnaire de tickets fait le travail et CleanPoker non. Si la réunion a
+      outil intégré au gestionnaire de tickets fait le travail et PokerAgile non. Si la réunion a
       seulement besoin que les votes restent cachés jusqu'au dévoilement, l'intégration coûte plus
       cher qu'elle ne rapporte.
     </p>
@@ -156,7 +156,7 @@
     </p>
 
     <div class="cta">
-      <a href="/fr" class="btn">Essayer CleanPoker</a>
+      <a href="/fr" class="btn">Essayer PokerAgile</a>
     </div>
 
     <p class="related">

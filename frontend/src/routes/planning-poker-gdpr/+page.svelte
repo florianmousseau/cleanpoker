@@ -1,17 +1,17 @@
 <svelte:head>
-  <title>Planning poker and GDPR: where your session data goes | CleanPoker</title>
-  <meta name="description" content="Does a planning poker tool process personal data? What a DPO actually checks, how to verify it yourself in two minutes, and why CleanPoker has no account, no cookie and no stored sessions." />
-  <link rel="canonical" href="https://cleanpoker.dev/planning-poker-gdpr" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-gdpr" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/poker-planning-rgpd" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-gdpr" />
+  <title>Planning poker and GDPR: where your session data goes | PokerAgile</title>
+  <meta name="description" content="Does a planning poker tool process personal data? What a DPO actually checks, how to verify it yourself in two minutes, and why PokerAgile has no account, no cookie and no stored sessions." />
+  <link rel="canonical" href="https://pokeragile.com/planning-poker-gdpr" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-gdpr" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/poker-planning-rgpd" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-gdpr" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Planning poker and GDPR: where your session data goes',
-    url: 'https://cleanpoker.dev/planning-poker-gdpr',
-    description: 'What an online planning poker tool processes as personal data, how to verify it yourself, and where CleanPoker stands: no account, no tracking cookie, nothing written to disk.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    url: 'https://pokeragile.com/planning-poker-gdpr',
+    description: 'What an online planning poker tool processes as personal data, how to verify it yourself, and where PokerAgile stands: no account, no tracking cookie, nothing written to disk.',
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -34,7 +34,7 @@
       },
       {
         '@type': 'Question',
-        name: 'Where are CleanPoker sessions hosted?',
+        name: 'Where are PokerAgile sessions hosted?',
         acceptedAnswer: { '@type': 'Answer', text: 'The real-time server runs in Gravelines, France, and nowhere else. Sessions live in memory only, are never written to disk, and are deleted 24 hours after the last activity. There is no account, no email collected, no advertising cookie and no third-party script: the only two cookies remember the chosen language and theme, and stay on the device.' },
       },
     ],
@@ -121,7 +121,7 @@
       </li>
     </ol>
 
-    <h2>Where CleanPoker stands</h2>
+    <h2>Where PokerAgile stands</h2>
     <div class="table-wrap">
       <table>
         <thead>
