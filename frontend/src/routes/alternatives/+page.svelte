@@ -117,6 +117,9 @@
       to forecast release dates, you will eventually need to map sizes to story points or
       switch to Fibonacci planning poker.
     </p>
+    <p>
+      Full guide: <a href="/t-shirt-sizing">T-shirt sizing, with session steps and an example conversion to story points</a>.
+    </p>
 
     <h2>Affinity mapping</h2>
     <p>

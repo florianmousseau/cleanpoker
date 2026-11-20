@@ -38,25 +38,27 @@
 
   const GUIDES: Record<string, { label: string; links: [string, string][] }> = {
     en: { label: 'Guides', links: [
-      ['/planning-poker', 'Planning poker guide'], ['/story-points', 'Story points'], ['/fibonacci', 'Fibonacci scale'],
+      ['/planning-poker', 'Planning poker guide'], ['/scrum-poker', 'Scrum poker'], ['/story-points', 'Story points'],
+      ['/t-shirt-sizing', 'T-shirt sizing'], ['/fibonacci', 'Fibonacci scale'],
       ['/estimation-agile', 'Agile estimation'], ['/alternatives', 'Alternatives'], ['/planning-poker-tools', 'Tools compared'],
       ['/planning-poker-ai', 'Planning poker with AI'], ['/planning-poker-gdpr', 'GDPR'],
     ] },
     fr: { label: 'Guides', links: [
-      ['/fr/planning-poker', 'Guide du poker planning'], ['/fr/story-points', 'Story points'], ['/fr/fibonacci', 'Suite de Fibonacci'],
+      ['/fr/planning-poker', 'Guide du poker planning'], ['/fr/scrum-poker', 'Scrum poker'], ['/fr/story-points', 'Story points'],
+      ['/fr/t-shirt-sizing', 'T-shirt sizing'], ['/fr/fibonacci', 'Suite de Fibonacci'],
       ['/fr/estimation-agile', 'Estimation agile'], ['/fr/alternatives', 'Alternatives'], ['/fr/comparatif-outils', 'Comparatif des outils'],
       ['/fr/planning-poker-ia', 'Planning poker avec une IA'], ['/fr/poker-planning-rgpd', 'RGPD'],
     ] },
     es: { label: 'Guías', links: [
-      ['/es/planning-poker', 'Guía de planning poker'], ['/es/fibonacci', 'Fibonacci'],
+      ['/es/planning-poker', 'Guía de planning poker'], ['/es/scrum-poker', 'Scrum poker'], ['/es/fibonacci', 'Fibonacci'],
       ['/es/estimation-agile', 'Estimación ágil'], ['/es/alternatives', 'Alternativas'],
     ] },
     de: { label: 'Leitfäden', links: [
-      ['/de/planning-poker', 'Planning-Poker-Leitfaden'], ['/de/fibonacci', 'Fibonacci'],
+      ['/de/planning-poker', 'Planning-Poker-Leitfaden'], ['/de/scrum-poker', 'Scrum Poker'], ['/de/fibonacci', 'Fibonacci'],
       ['/de/estimation-agile', 'Agile Schätzung'], ['/de/alternatives', 'Alternativen'],
     ] },
     pt: { label: 'Guias', links: [
-      ['/pt/planning-poker', 'Guia de planning poker'], ['/pt/fibonacci', 'Fibonacci'],
+      ['/pt/planning-poker', 'Guia de planning poker'], ['/pt/scrum-poker', 'Scrum poker'], ['/pt/fibonacci', 'Fibonacci'],
       ['/pt/estimation-agile', 'Estimativa ágil'], ['/pt/alternatives', 'Alternativas'],
     ] },
   };
