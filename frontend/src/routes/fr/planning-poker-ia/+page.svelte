@@ -108,6 +108,17 @@ Quitte la salle quand je te le dis.</code></pre>
       CleanPoker n'appelle aucune IA. L'assistant connecté par une personne de l'équipe reçoit l'état de la salle&nbsp;: les titres des stories et leurs estimations si l'équipe en a collé une liste, les noms des participants, qui a voté, le journal d'activité, puis les votes une fois révélés. Il le reçoit sous l'abonnement de cette personne et les règles de son entreprise sur l'IA. La salle vit en mémoire sur le serveur de Gravelines et disparaît 24 heures après la dernière activité.
     </p>
 
+    <h2>Sans assistant connecté&nbsp;: l'IA intégrée à Chrome</h2>
+    <p>
+      Dans Chrome 148 ou plus récent, sur un ordinateur Windows, macOS, Linux ou un Chromebook Plus,
+      un bouton «&nbsp;Analyser la story avec l'IA de Chrome&nbsp;» apparaît sous la story en cours. Il
+      liste ce que la story oublie et propose un découpage si elle paraît trop grosse, sans donner
+      d'estimation. Le modèle, Gemini Nano, tourne sur l'ordinateur&nbsp;: la story n'en sort pas, et la
+      réponse n'est visible que par la personne qui a cliqué. Au premier usage, Chrome télécharge le
+      modèle, plusieurs gigaoctets. Le bouton n'apparaît pas dans les autres navigateurs, sur
+      téléphone, ni sur une machine que Chrome juge trop peu puissante.
+    </p>
+
     <h2>Questions fréquentes</h2>
     <h3>Peut-on faire voter une IA au planning poker&nbsp;?</h3>
     <p>Oui. Sur CleanPoker, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l'adresse https://salles.cleanpoker.dev/mcp, lit la story en cours si l'équipe a collé sa liste dans la salle, ou la reçoit dans sa conversation, puis choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.</p>

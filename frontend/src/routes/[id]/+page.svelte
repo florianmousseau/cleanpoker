@@ -15,6 +15,7 @@
   import { cadran, peutMener, secondesRestantes } from '#lib/minuteur.ts';
   import { agreement, extreme } from '#lib/consensus.ts';
   import StoriesPanel from '#lib/StoriesPanel.svelte';
+  import LocalAi from '#lib/LocalAi.svelte';
 
   const roomId = $derived(page.params.id ?? '');
   const T = $derived(
@@ -221,7 +222,10 @@
       {/if}
 
       {#if onTable}
-        <p class="on-table" data-testid="story-on-table">{T.stories.onTable} <strong>{onTable.title}</strong></p>
+        <div>
+          <p class="on-table" data-testid="story-on-table">{T.stories.onTable} <strong>{onTable.title}</strong></p>
+          <LocalAi story={onTable.title} lang={lang.current} {T} />
+        </div>
       {/if}
 
       <!-- Cartes -->

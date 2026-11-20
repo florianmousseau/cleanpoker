@@ -46,6 +46,10 @@ Then ask the assistant to join the room the team shares and estimate the story. 
 
 An assistant cannot reveal, start a round or remove anyone, and it sees nobody's vote before the reveal. Its reason shows under its name at the reveal. Nothing changes in a room nobody connects an assistant to. No account and no key: the endpoint is public, like the rooms. CleanPoker calls no AI; the assistant reads the room because its user connected it.
 
+## Chrome's built-in AI
+
+Where Chrome exposes its on-device model (the Prompt API, Chrome 148 and later on desktop), the room shows a button that analyses the story on the table: what it leaves out, and a split if it looks too large. The model runs on the reader's computer; the story does not leave it and the answer is shown to that reader only. Elsewhere the button does not appear.
+
 ## Privacy
 
 No analytics script, no advertising cookie, no visitor identifier, nothing loaded from a third party. Like any website, the host that serves the pages counts the requests it answers. The site also counts its own readers, server-side: a daily fingerprint derived from the IP address, which is never kept. Both counts are server-side and never touch the reader's device. `npm run mesure` checks that the pages keep saying both halves of this.

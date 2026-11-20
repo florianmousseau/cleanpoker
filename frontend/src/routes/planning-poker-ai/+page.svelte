@@ -108,6 +108,17 @@ Leave the room when I say so.</code></pre>
       CleanPoker calls no AI. The assistant a team member connected receives the room state: the story titles and their estimates if the team pasted a list, participant names, who has voted, the activity log, then the votes once revealed. It receives it under that person's subscription and their company's AI rules. The room lives in memory on the server in Gravelines, France, and disappears 24 hours after the last activity.
     </p>
 
+    <h2>Without a connected assistant: the AI built into Chrome</h2>
+    <p>
+      In Chrome 148 or later, on a Windows, macOS or Linux computer or a Chromebook Plus, an
+      "Analyse the story with Chrome's AI" button shows under the story on the table. It lists what
+      the story leaves out and proposes a split if it looks too large, without giving an estimate.
+      The model, Gemini Nano, runs on the computer: the story does not leave it, and only the person
+      who clicked sees the answer. On first use, Chrome downloads the model, several gigabytes. The
+      button does not show in other browsers, on phones, or on a machine Chrome finds not powerful
+      enough.
+    </p>
+
     <h2>FAQ</h2>
     <h3>Can an AI vote in planning poker?</h3>
     <p>Yes. On CleanPoker, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.cleanpoker.dev/mcp, reads the story on the table if the team pasted its list into the room, or gets it in its own conversation, then picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.</p>
