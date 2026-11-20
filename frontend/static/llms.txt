@@ -55,6 +55,7 @@ The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the l
 - [Retrospective formats (FR)](https://pokeragile.com/fr/retrospective) - French version
 - [Planning poker and GDPR](https://pokeragile.com/planning-poker-gdpr) - What an estimation tool processes as personal data, what a DPO checks, how to verify any tool in two minutes
 - [Poker planning et RGPD](https://pokeragile.com/fr/poker-planning-rgpd) - French version
+- [Guides](https://pokeragile.com/guides) - Every guide on one page, grouped by topic; also in French, Spanish, German and Portuguese
 - [Accessibility statement](https://pokeragile.com/accessibilite) - WCAG 2.1 AA conformance and how it was tested
 - [About PokerAgile](https://pokeragile.com/a-propos) - Project philosophy, links to all guides
 

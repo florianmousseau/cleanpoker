@@ -47,6 +47,10 @@
     <h2>Learn more</h2>
 
     <div class="cards-grid">
+      <a href="/guides" class="card">
+        <h3>All guides</h3>
+        <p>Every guide on one page, grouped by topic.</p>
+      </a>
       <a href="/planning-poker" class="card">
         <h3>Planning poker guide</h3>
         <p>Rules, Fibonacci sequence, card comparison, practical tips for agile teams.</p>
