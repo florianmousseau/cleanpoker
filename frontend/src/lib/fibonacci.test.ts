@@ -202,11 +202,35 @@ describe('donneesDuRang', () => {
 	});
 });
 
+/** The rendered HTML without its comments, cut by position, never by a pattern. */
+function sansCommentaires(html: string): string {
+	let reste = html;
+	let sortie = '';
+	for (let debut = reste.indexOf('<!--'); debut !== -1; debut = reste.indexOf('<!--')) {
+		const fin = reste.indexOf('-->', debut + 4);
+		sortie += reste.slice(0, debut);
+		reste = fin === -1 ? '' : reste.slice(fin + 3);
+	}
+	return sortie + reste;
+}
+
+/** What a reader sees: the text between the tags, with single spaces. */
+function texteDe(html: string): string {
+	let texte = '';
+	let dansBalise = false;
+	for (const c of sansCommentaires(html)) {
+		if (c === '<') dansBalise = true;
+		else if (c === '>') dansBalise = false;
+		else if (!dansBalise) texte += c;
+	}
+	return texte.split(/[ \n\t]+/).join(' ');
+}
+
 describe('the reference pages print what this module computes', () => {
 	/** Svelte adds hydration comments and a scoping class: neither is text. */
 	const rendre = (page: typeof ReferenceFr) => {
 		const { body, head } = render(page);
-		return { head, body: body.replace(/<!--.*?-->/g, '').replace(/ class="[^"]*"/g, '') };
+		return { head, body: sansCommentaires(body).replace(/ class="[^"]*"/g, '') };
 	};
 	const lignes = (corps: string) =>
 		[...corps.matchAll(/<td><a href="([^"]+)">F\((\d+)\)<\/a><\/td>\s*<td>([^<]+)<\/td>/g)].map((m) => m.slice(1));
@@ -257,7 +281,7 @@ describe('a rank page', () => {
 	it('prints the value, the sum, the factors and the terms that divide it', () => {
 		rangDemande.n = '20';
 		const { body, head } = render(RangFr);
-		const texte = body.replace(/<!--.*?-->/g, '').replace(/<[^>]+>/g, '').replace(/[ \n\t]+/g, ' ');
+		const texte = texteDe(body);
 		expect(head).toContain('<title>20e nombre de Fibonacci\u00A0: 6\u00A0765 | PokerAgile</title>');
 		expect(head).toContain('<link rel="canonical" href="https://pokeragile.com/fr/suite-de-fibonacci/20"/>');
 		expect(texte).toContain('F(20) = F(18) + F(19) = 2\u00A0584 + 4\u00A0181');
