@@ -17,7 +17,8 @@ French-speaking teams usually invert the two words and call the technique "poker
 - Story list pasted one per line, the chosen estimate kept for each, export as CSV or a Markdown table
 - Agreement on the most chosen card, lowest and highest votes marked, optional reveal on the last vote
 - In Chrome 148+ on desktop, a button analyzes the story on the table with Chrome's on-device model (Gemini Nano): the analysis sends the story to no service
-- AI assistants can join a room and vote through the MCP endpoint https://salles.pokeragile.com/mcp (tools: join_room, get_room, vote, leave_room), shown to the team as an AI participant
+- AI assistants can join a room and vote through the MCP endpoint https://salles.pokeragile.com/mcp (tools: join_room, get_room, add_stories, vote, get_estimates, leave_room), shown to the team as an AI participant
+- An assistant with its own access to Jira, Linear or GitHub can add the sprint's story titles to the room (add_stories) and read the estimates the team kept (get_estimates) to write them back itself; PokerAgile connects to no tracker
 - No account required, no advertising cookie, no third-party script
 - WCAG 2.1 AA accessible, Lighthouse 100/100 performance
 - Available in 5 languages: English, French, Spanish, German, Portuguese
@@ -54,6 +55,7 @@ The Fibonacci sequence (1, 2, 3, 5, 8, 13, 21) models growing uncertainty: the l
 - [Retrospective formats (FR)](https://pokeragile.com/fr/retrospective) - French version
 - [Planning poker and GDPR](https://pokeragile.com/planning-poker-gdpr) - What an estimation tool processes as personal data, what a DPO checks, how to verify any tool in two minutes
 - [Poker planning et RGPD](https://pokeragile.com/fr/poker-planning-rgpd) - French version
+- [Guides](https://pokeragile.com/guides) - Every guide on one page, grouped by topic; also in French, Spanish, German and Portuguese
 - [Accessibility statement](https://pokeragile.com/accessibilite) - WCAG 2.1 AA conformance and how it was tested
 - [About PokerAgile](https://pokeragile.com/a-propos) - Project philosophy, links to all guides
 

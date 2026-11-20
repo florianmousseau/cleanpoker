@@ -129,7 +129,7 @@ export const FR: Translation = {
     private: "Visible par vous seul. L'analyse tourne dans le navigateur, sur cet ordinateur.",
     invite: 'Inviter ton IA',
     inviteHelp: 'Copie une consigne à coller dans ton assistant IA.',
-    prompt: (room: string, mcp: string) => `Rejoins ma salle de planning poker ${room} par le serveur MCP ${mcp} (outils\u00A0: join_room, get_room, vote, leave_room). Lis la story sur la table, vote avec une carte du jeu et donne ta raison en une phrase. Ne révèle pas ta carte dans la conversation.`,
+    prompt: (room: string, mcp: string) => `Rejoins ma salle de planning poker ${room} par le serveur MCP ${mcp} (outils\u00A0: join_room, get_room, add_stories, vote, get_estimates, leave_room). Lis la story sur la table, vote avec une carte du jeu et donne ta raison en une phrase. Ne révèle pas ta carte dans la conversation.`,
   },
   options: 'Options',
   team: {
@@ -318,7 +318,7 @@ export const EN: Translation = {
     private: 'Only you see this. The analysis runs in the browser, on this computer.',
     invite: 'Invite your AI',
     inviteHelp: 'Copies a prompt to paste into your AI assistant.',
-    prompt: (room: string, mcp: string) => `Join my planning poker room ${room} through the MCP server ${mcp} (tools: join_room, get_room, vote, leave_room). Read the story on the table, vote with one card from the deck and give your reason in one sentence. Do not reveal your card in the chat.`,
+    prompt: (room: string, mcp: string) => `Join my planning poker room ${room} through the MCP server ${mcp} (tools: join_room, get_room, add_stories, vote, get_estimates, leave_room). Read the story on the table, vote with one card from the deck and give your reason in one sentence. Do not reveal your card in the chat.`,
   },
   options: 'Options',
   team: {
@@ -507,7 +507,7 @@ export const ES: Translation = {
     private: 'Solo usted lo ve. El análisis se hace en el navegador, en este ordenador.',
     invite: 'Invitar a tu IA',
     inviteHelp: 'Copia una instrucción para pegar en tu asistente de IA.',
-    prompt: (room: string, mcp: string) => `Únete a mi sala de planning poker ${room} mediante el servidor MCP ${mcp} (herramientas: join_room, get_room, vote, leave_room). Lee la historia que está sobre la mesa, vota con una carta de la baraja y da tu motivo en una frase. No reveles tu carta en el chat.`,
+    prompt: (room: string, mcp: string) => `Únete a mi sala de planning poker ${room} mediante el servidor MCP ${mcp} (herramientas: join_room, get_room, add_stories, vote, get_estimates, leave_room). Lee la historia que está sobre la mesa, vota con una carta de la baraja y da tu motivo en una frase. No reveles tu carta en el chat.`,
   },
   options: 'Opciones',
   team: {
@@ -696,7 +696,7 @@ export const DE: Translation = {
     private: 'Nur Sie sehen das. Die Analyse läuft im Browser, auf diesem Computer.',
     invite: 'Deine KI einladen',
     inviteHelp: 'Kopiert einen Prompt zum Einfügen in deinen KI-Assistenten.',
-    prompt: (room: string, mcp: string) => `Tritt meinem Planning-Poker-Raum ${room} über den MCP-Server ${mcp} bei (Tools: join_room, get_room, vote, leave_room). Lies die Story auf dem Tisch, stimme mit einer Karte aus dem Deck ab und begründe deine Wahl in einem Satz. Verrate deine Karte nicht im Chat.`,
+    prompt: (room: string, mcp: string) => `Tritt meinem Planning-Poker-Raum ${room} über den MCP-Server ${mcp} bei (Tools: join_room, get_room, add_stories, vote, get_estimates, leave_room). Lies die Story auf dem Tisch, stimme mit einer Karte aus dem Deck ab und begründe deine Wahl in einem Satz. Verrate deine Karte nicht im Chat.`,
   },
   options: 'Optionen',
   team: {
@@ -885,7 +885,7 @@ export const PT: Translation = {
     private: 'Só você vê isto. A análise roda no navegador, neste computador.',
     invite: 'Convidar sua IA',
     inviteHelp: 'Copia um prompt para colar no seu assistente de IA.',
-    prompt: (room: string, mcp: string) => `Entre na minha sala de planning poker ${room} pelo servidor MCP ${mcp} (ferramentas: join_room, get_room, vote, leave_room). Leia a história que está na mesa, vote com uma carta do baralho e dê o seu motivo em uma frase. Não revele a sua carta no chat.`,
+    prompt: (room: string, mcp: string) => `Entre na minha sala de planning poker ${room} pelo servidor MCP ${mcp} (ferramentas: join_room, get_room, add_stories, vote, get_estimates, leave_room). Leia a história que está na mesa, vote com uma carta do baralho e dê o seu motivo em uma frase. Não revele a sua carta no chat.`,
   },
   options: 'Opções',
   team: {
