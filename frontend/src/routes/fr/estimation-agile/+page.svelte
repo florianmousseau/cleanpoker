@@ -69,7 +69,7 @@
       l'autre n'a tort&nbsp;; ils mesurent simplement des choses différentes.
     </p>
     <p>
-      Les <strong>story points</strong> mesurent l'<em>effort relatif</em> dans
+      Les <strong><a href="/fr/story-points">story points</a></strong> mesurent l'<em>effort relatif</em> dans
       l'expérience partagée de l'équipe. L'effort combine trois choses&nbsp;: le volume de
       travail, l'incertitude et la complexité. La complexité seule n'y suffit pas - une
       tâche simple mais très volumineuse peut peser plus lourd qu'une petite tâche
@@ -155,8 +155,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Code source</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
       | <a href="/fr/a-propos">À propos</a>
       | <a href="/fr/mentions-legales">Mentions légales</a>
       | <a href="/fr/mentions-legales#confidentialite">Confidentialité</a>

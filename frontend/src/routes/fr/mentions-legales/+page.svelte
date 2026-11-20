@@ -23,7 +23,7 @@
       Ce site est édité à titre personnel par&nbsp;:<br />
       <strong>Florian Mousseau</strong>, particulier<br />
       France<br />
-      Contact&nbsp;: <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      Contact&nbsp;: <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
 
     <!-- ── Hébergement ── -->
@@ -46,7 +46,7 @@
     <h2 id="confidentialite">Données personnelles (RGPD)</h2>
     <p>
       <strong>Responsable du traitement&nbsp;:</strong> Florian Mousseau,
-      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
 
     <h3>Données collectées</h3>
@@ -81,7 +81,7 @@
     <p>
       Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et d'effacement
       de vos données. Pour exercer ces droits ou pour toute question&nbsp;:
-      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
     <p>
       Vous pouvez également introduire une réclamation auprès de la
@@ -138,7 +138,7 @@
     <h2>Propriété intellectuelle</h2>
     <p>
       Le code source de PokerAgile est publié sous
-      <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licence MIT</a>.
+      <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">licence MIT</a>.
       Vous êtes libre de le réutiliser, modifier et distribuer dans les conditions de cette licence.
     </p>
 
@@ -159,8 +159,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Code source</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
       | <a href="/fr/a-propos">À propos</a>
       | <a href="/fr/mentions-legales">Mentions légales</a>
       | <a href="/fr/mentions-legales#confidentialite">Confidentialité</a>

@@ -23,7 +23,7 @@
       Este site é publicado a título pessoal por:<br />
       <strong>Florian Mousseau</strong>, particular<br />
       França<br />
-      Contacto: <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      Contacto: <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
 
     <!-- ── Alojamento ── -->
@@ -46,7 +46,7 @@
     <h2 id="confidentialite">Dados pessoais (RGPD)</h2>
     <p>
       <strong>Responsável pelo tratamento:</strong> Florian Mousseau,
-      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
 
     <h3>Dados recolhidos</h3>
@@ -81,7 +81,7 @@
     <p>
       Em conformidade com o RGPD, dispõe do direito de acesso, retificação e apagamento
       dos seus dados. Para exercer estes direitos ou para qualquer questão:
-      <a href="mailto:contact@cleanpoker.dev">contact@cleanpoker.dev</a>
+      <a href="mailto:contact@pokeragile.com">contact@pokeragile.com</a>
     </p>
     <p>
       Pode também apresentar uma reclamação à
@@ -136,7 +136,7 @@
     <h2>Propriedade intelectual</h2>
     <p>
       O código fonte do PokerAgile está publicado sob
-      <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">licença MIT</a>.
+      <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">licença MIT</a>.
       É livre de o reutilizar, modificar e distribuir nas condições desta licença.
     </p>
 
@@ -156,8 +156,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Código fonte</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licença MIT</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Código fonte</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">Licença MIT</a>
       | <a href="/pt/a-propos">Sobre</a>
       | <a href="/pt/mentions-legales">Aviso legal</a>
       | <a href="/pt/mentions-legales#confidentialite">Privacidade</a>

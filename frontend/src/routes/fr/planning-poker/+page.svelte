@@ -256,6 +256,7 @@
       À lire aussi&nbsp;:
       <a href="/fr/comparatif-outils">comment choisir un outil de poker planning</a>,
       <a href="/fr/planning-poker-ia">faire voter une IA</a>,
+      <a href="/fr/story-points">les story points</a>,
       <a href="/fr/poker-planning-rgpd">poker planning et RGPD</a>,
       <a href="/fr/fibonacci">la suite de Fibonacci en détail</a>,
       <a href="/fr/alternatives">les alternatives à la technique</a>.
@@ -264,8 +265,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Code source</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
       | <a href="/fr/a-propos">À propos</a>
       | <a href="/fr/mentions-legales">Mentions légales</a>
       | <a href="/fr/mentions-legales#confidentialite">Confidentialité</a>

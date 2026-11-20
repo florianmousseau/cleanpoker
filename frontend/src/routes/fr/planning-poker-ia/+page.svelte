@@ -23,7 +23,7 @@
       {
         '@type': 'Question',
         name: 'Peut-on faire voter une IA au planning poker ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Oui. Sur PokerAgile, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l\'adresse https://salles.cleanpoker.dev/mcp, lit la story en cours si l\'équipe a collé sa liste dans la salle, ou la reçoit dans sa conversation, puis choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Oui. Sur PokerAgile, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l\'adresse https://salles.pokeragile.com/mcp, lit la story en cours si l\'équipe a collé sa liste dans la salle, ou la reçoit dans sa conversation, puis choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.' },
       },
       {
         '@type': 'Question',
@@ -68,13 +68,13 @@
 
     <h2>Connecter son assistant par MCP</h2>
     <p>L'adresse est la même partout&nbsp;:</p>
-    <pre><code>https://salles.cleanpoker.dev/mcp</code></pre>
+    <pre><code>https://salles.pokeragile.com/mcp</code></pre>
     <ul>
       <li><strong>Claude</strong>&nbsp;: Paramètres, Connecteurs, Ajouter un connecteur personnalisé, puis coller l'adresse. Dans une offre Team ou Enterprise, un propriétaire de l'espace l'ajoute d'abord.</li>
-      <li><strong>Claude Code</strong>&nbsp;: <code>claude mcp add --transport http pokeragile https://salles.cleanpoker.dev/mcp</code></li>
+      <li><strong>Claude Code</strong>&nbsp;: <code>claude mcp add --transport http pokeragile https://salles.pokeragile.com/mcp</code></li>
       <li><strong>ChatGPT</strong>&nbsp;: Paramètres, Applications, Paramètres avancés, activer le mode développeur, puis Créer une application avec l'adresse. Le vote demande une offre Business, Enterprise ou Edu&nbsp;; sur Plus et Pro, le mode développeur n'accepte que les outils de lecture, et l'IA lit la salle sans voter.</li>
-      <li><strong>Cursor</strong>&nbsp;: dans <code>~/.cursor/mcp.json</code>, ajouter <code>&#123;"mcpServers": &#123; "pokeragile": &#123; "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
-      <li><strong>VS Code</strong>&nbsp;: avec Copilot en mode agent, dans <code>.vscode/mcp.json</code>, ajouter <code>&#123;"servers": &#123; "pokeragile": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
+      <li><strong>Cursor</strong>&nbsp;: dans <code>~/.cursor/mcp.json</code>, ajouter <code>&#123;"mcpServers": &#123; "pokeragile": &#123; "url": "https://salles.pokeragile.com/mcp" &#125; &#125; &#125;</code>.</li>
+      <li><strong>VS Code</strong>&nbsp;: avec Copilot en mode agent, dans <code>.vscode/mcp.json</code>, ajouter <code>&#123;"servers": &#123; "pokeragile": &#123; "type": "http", "url": "https://salles.pokeragile.com/mcp" &#125; &#125; &#125;</code>.</li>
     </ul>
     <p>PokerAgile ne demande ni compte ni clé d'API, et il n'y a rien à installer&nbsp;: l'adresse est celle d'un serveur MCP distant, avec quatre outils, <code>join_room</code>, <code>get_room</code>, <code>vote</code> et <code>leave_room</code>. La salle doit déjà être ouverte par une personne dans son navigateur. Si l'équipe y a collé sa liste de stories, l'assistant lit celle en cours&nbsp;; sinon, donnez-lui la story dans votre message. Puis, dans la conversation&nbsp;:</p>
     <pre><code>Rejoins la salle https://pokeragile.com/ab12cd34 sous le nom Claude.
@@ -123,7 +123,7 @@ Quitte la salle quand je te le dis.</code></pre>
 
     <h2>Questions fréquentes</h2>
     <h3>Peut-on faire voter une IA au planning poker&nbsp;?</h3>
-    <p>Oui. Sur PokerAgile, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l'adresse https://salles.cleanpoker.dev/mcp, lit la story en cours si l'équipe a collé sa liste dans la salle, ou la reçoit dans sa conversation, puis choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.</p>
+    <p>Oui. Sur PokerAgile, un assistant compatible MCP (Claude, ChatGPT, Cursor, VS Code) rejoint la salle par l'adresse https://salles.pokeragile.com/mcp, lit la story en cours si l'équipe a collé sa liste dans la salle, ou la reçoit dans sa conversation, puis choisit une carte en secret, comme les autres participants. Il apparaît marqué IA et ne peut ni révéler les votes ni lancer un tour.</p>
     <h3>Une IA estime-t-elle mieux qu'une équipe&nbsp;?</h3>
     <p>Non. Elle ne connaît ni la vélocité de l'équipe, ni l'état réel du code, ni qui dépend de qui. Elle est utile pour repérer ce que la story oublie&nbsp;: tests, migration de données, cas limites. Son vote sert à ouvrir la discussion quand il s'écarte de celui de l'équipe.</p>
     <h3>Le texte de la story est-il envoyé à une IA&nbsp;?</h3>
@@ -143,8 +143,8 @@ Quitte la salle quand je te le dis.</code></pre>
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Code source</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
       | <a href="/fr/a-propos">À propos</a>
       | <a href="/fr/mentions-legales">Mentions légales</a>
       | <a href="/fr/mentions-legales#confidentialite">Confidentialité</a>

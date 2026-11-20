@@ -168,6 +168,8 @@
       </p>
     </details>
 
+    <p>À lire aussi&nbsp;: <a href="/fr/story-points">les story points</a>, avec un exemple chiffré et la vélocité.</p>
+
     <div class="cta">
       <a href="/fr" class="btn">Essayer avec PokerAgile</a>
     </div>
@@ -175,8 +177,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Code source</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Code source</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">Licence MIT</a>
       | <a href="/fr/a-propos">À propos</a>
       | <a href="/fr/mentions-legales">Mentions légales</a>
       | <a href="/fr/mentions-legales#confidentialite">Confidentialité</a>

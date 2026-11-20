@@ -87,7 +87,7 @@
       comparable metric across sprints.
     </p>
     <p>
-      The shift from hours to story points is the single most impactful change most teams
+      The shift from hours to <a href="/story-points">story points</a> is the single most impactful change most teams
       can make to improve planning accuracy.
     </p>
 
@@ -222,8 +222,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Source code</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
       | <a href="/mentions-legales#confidentialite">Privacy</a>

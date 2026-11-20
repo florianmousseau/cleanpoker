@@ -507,5 +507,21 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://pokeragile.com/story-points</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/story-points"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/story-points"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/story-points"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pokeragile.com/fr/story-points</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://pokeragile.com/story-points"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/story-points"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pokeragile.com/story-points"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
 </urlset>

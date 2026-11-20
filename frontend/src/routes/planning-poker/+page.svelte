@@ -240,6 +240,7 @@
       See also:
       <a href="/planning-poker-tools">how to choose a planning poker tool</a>,
       <a href="/planning-poker-ai">let an AI vote</a>,
+      <a href="/story-points">story points</a>,
       <a href="/planning-poker-gdpr">planning poker and GDPR</a>,
       <a href="/fibonacci">the Fibonacci sequence in detail</a>,
       <a href="/alternatives">alternatives to the technique</a>.
@@ -248,8 +249,8 @@
 
   <footer class="footer">
     <p>
-      <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">Source code</a>
-      | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
+      <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">Source code</a>
+      | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">MIT License</a>
       | <a href="/a-propos">About</a>
       | <a href="/mentions-legales">Legal notice</a>
       | <a href="/mentions-legales#confidentialite">Privacy</a>
