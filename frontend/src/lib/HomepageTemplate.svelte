@@ -201,7 +201,7 @@
 <div class="page">
   <header class="header">
     <div class="container header-inner">
-      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label="PokerAgile, accueil">
+      <a href={locale === 'en' ? '/' : `/${locale}`} class="logo-group" aria-label={TT.homeLabel}>
         <Logo />
         <span class="logo-text">PokerAgile</span>
       </a>
