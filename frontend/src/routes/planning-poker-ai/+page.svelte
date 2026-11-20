@@ -1,20 +1,20 @@
 <svelte:head>
-  <title>AI planning poker: let Claude or ChatGPT vote | CleanPoker</title>
+  <title>AI planning poker: let Claude or ChatGPT vote | PokerAgile</title>
   <meta name="description" content="Let Claude, ChatGPT or Cursor vote in a planning poker room: one MCP address to paste, nothing to install. What AI estimates well, and what it gets wrong." />
-  <link rel="canonical" href="https://cleanpoker.dev/planning-poker-ai" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/planning-poker-ia" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-ai" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-ai" />
+  <link rel="canonical" href="https://pokeragile.com/planning-poker-ai" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/planning-poker-ia" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-ai" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-ai" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Planning poker with AI: let Claude or ChatGPT vote in the room',
-    url: 'https://cleanpoker.dev/planning-poker-ai',
+    url: 'https://pokeragile.com/planning-poker-ai',
     inLanguage: 'en',
     datePublished: '2026-11-20',
     dateModified: '2026-11-20',
     author: { '@type': 'Person', name: 'Florian Mousseau', url: 'https://florianmousseau.com' },
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -23,7 +23,7 @@
       {
         '@type': 'Question',
         name: 'Can an AI vote in planning poker?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Yes. On CleanPoker, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.cleanpoker.dev/mcp, reads the story on the table if the team pasted its list into the room, or gets it in its own conversation, then picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes. On PokerAgile, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.cleanpoker.dev/mcp, reads the story on the table if the team pasted its list into the room, or gets it in its own conversation, then picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.' },
       },
       {
         '@type': 'Question',
@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Is the story text sent to an AI?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Yes, to the assistant a team member connected, and to no other AI service: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes, to the assistant a team member connected, and to no other AI service: PokerAgile calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.' },
       },
     ],
   })}<\/script>`}
@@ -46,7 +46,7 @@
     <h1>Planning poker with AI: let Claude or ChatGPT vote in the room</h1>
 
     <p class="lead">
-      Since November 20, 2026, an AI assistant can join a CleanPoker planning poker room and vote like a team member. It picks its card in secret, the card is revealed with the others, and it shows in the list marked <strong>(AI)</strong>.
+      Since November 20, 2026, an AI assistant can join a PokerAgile planning poker room and vote like a team member. It picks its card in secret, the card is revealed with the others, and it shows in the list marked <strong>(AI)</strong>.
     </p>
 
     <h2>What the AI can do in the room</h2>
@@ -71,13 +71,13 @@
     <pre><code>https://salles.cleanpoker.dev/mcp</code></pre>
     <ul>
       <li><strong>Claude</strong>: Settings, Connectors, Add custom connector, then paste the address. On a Team or Enterprise plan, a workspace owner adds it first.</li>
-      <li><strong>Claude Code</strong>: <code>claude mcp add --transport http cleanpoker https://salles.cleanpoker.dev/mcp</code></li>
+      <li><strong>Claude Code</strong>: <code>claude mcp add --transport http pokeragile https://salles.cleanpoker.dev/mcp</code></li>
       <li><strong>ChatGPT</strong>: Settings, Apps, Advanced settings, turn on developer mode, then Create app with the address. Voting needs a Business, Enterprise or Edu plan; on Plus and Pro, developer mode only accepts read-only tools, so the AI reads the room without voting.</li>
-      <li><strong>Cursor</strong>: in <code>~/.cursor/mcp.json</code>, add <code>&#123;"mcpServers": &#123; "cleanpoker": &#123; "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
-      <li><strong>VS Code</strong>: with Copilot in agent mode, in <code>.vscode/mcp.json</code>, add <code>&#123;"servers": &#123; "cleanpoker": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
+      <li><strong>Cursor</strong>: in <code>~/.cursor/mcp.json</code>, add <code>&#123;"mcpServers": &#123; "pokeragile": &#123; "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
+      <li><strong>VS Code</strong>: with Copilot in agent mode, in <code>.vscode/mcp.json</code>, add <code>&#123;"servers": &#123; "pokeragile": &#123; "type": "http", "url": "https://salles.cleanpoker.dev/mcp" &#125; &#125; &#125;</code>.</li>
     </ul>
-    <p>CleanPoker asks for no account and no API key, and there is nothing to install: the address is a remote MCP server with four tools, <code>join_room</code>, <code>get_room</code>, <code>vote</code> and <code>leave_room</code>. A person must already have the room open in a browser. If the team pasted its story list into the room, the assistant reads the one on the table; otherwise, give it the story in your message. Then, in the conversation:</p>
-    <pre><code>Join the room https://cleanpoker.dev/ab12cd34 as Claude.
+    <p>PokerAgile asks for no account and no API key, and there is nothing to install: the address is a remote MCP server with four tools, <code>join_room</code>, <code>get_room</code>, <code>vote</code> and <code>leave_room</code>. A person must already have the room open in a browser. If the team pasted its story list into the room, the assistant reads the one on the table; otherwise, give it the story in your message. Then, in the conversation:</p>
+    <pre><code>Join the room https://pokeragile.com/ab12cd34 as Claude.
 Estimate the story on the table in story points and vote with a one or two sentence reason, without telling me your card.
 Leave the room when I say so.</code></pre>
 
@@ -105,7 +105,7 @@ Leave the room when I say so.</code></pre>
 
     <h2>What the assistant receives</h2>
     <p>
-      CleanPoker calls no AI service. The assistant a team member connected receives the room state: the story titles and their estimates if the team pasted a list, participant names, who has voted, the activity log, then the votes once revealed. It receives it under that person's subscription and their company's AI rules. The room lives in memory on the server in Gravelines, France, and disappears 24 hours after the last activity.
+      PokerAgile calls no AI service. The assistant a team member connected receives the room state: the story titles and their estimates if the team pasted a list, participant names, who has voted, the activity log, then the votes once revealed. It receives it under that person's subscription and their company's AI rules. The room lives in memory on the server in Gravelines, France, and disappears 24 hours after the last activity.
     </p>
 
     <h2>Without a connected assistant: the AI built into the browser</h2>
@@ -123,11 +123,11 @@ Leave the room when I say so.</code></pre>
 
     <h2>FAQ</h2>
     <h3>Can an AI vote in planning poker?</h3>
-    <p>Yes. On CleanPoker, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.cleanpoker.dev/mcp, reads the story on the table if the team pasted its list into the room, or gets it in its own conversation, then picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.</p>
+    <p>Yes. On PokerAgile, an MCP-compatible assistant (Claude, ChatGPT, Cursor, VS Code) joins the room through https://salles.cleanpoker.dev/mcp, reads the story on the table if the team pasted its list into the room, or gets it in its own conversation, then picks one card in secret, like the other participants. It is marked as an AI and cannot reveal the votes or start a round.</p>
     <h3>Does AI estimate better than a team?</h3>
     <p>No. It does not know the team's velocity, the real state of the code or who depends on whom. It is useful for spotting what the story leaves out: tests, data migration, edge cases. Its vote opens the discussion when it differs from the team's.</p>
     <h3>Is the story text sent to an AI?</h3>
-    <p>Yes, to the assistant a team member connected, and to no other AI service: CleanPoker calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.</p>
+    <p>Yes, to the assistant a team member connected, and to no other AI service: PokerAgile calls none. The assistant receives the room state: the story titles and their estimates if the team pasted a list, participant names, then the votes once revealed.</p>
 
     <div class="cta">
       <a href="/" class="btn">Create a room</a>

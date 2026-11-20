@@ -30,7 +30,7 @@ const MaxNameLength = 30
 var roomID = regexp.MustCompile(`^[A-Za-z0-9_-]{1,64}$`)
 
 var (
-	errRoom = errors.New("room must be a CleanPoker room address or its id, e.g. https://cleanpoker.dev/1a2b3c4d")
+	errRoom = errors.New("room must be a PokerAgile room address or its id, e.g. https://pokeragile.com/1a2b3c4d")
 	errSeat = errors.New("no seat matches this token in this room: join it first")
 	errName = errors.New("name must be 1 to 30 characters")
 	errGone = errors.New("no open room at this address: check it, or ask a person to open it in a browser first")
@@ -153,7 +153,7 @@ func (s service) leave(_ context.Context, _ *mcp.CallToolRequest, in seatIn) (*m
 	return nil, stateOut{State: rm.Snapshot()}, nil
 }
 
-const instructions = `CleanPoker is planning poker for agile teams. A person shares a room address;
+const instructions = `PokerAgile is planning poker for agile teams. A person shares a room address;
 join it with join_room. When the room holds a list of stories, the one at index
 "current" of "stories" is on the table: estimate it. Otherwise your user gives
 you the story. Vote one card of the room deck with vote, with a one or two
@@ -162,7 +162,7 @@ and get_room shows the results after the reveal. Leave with leave_room when done
 
 // NewServer builds the MCP server over rooms.
 func NewServer(rooms Rooms, version string) *mcp.Server {
-	srv := mcp.NewServer(&mcp.Implementation{Name: "cleanpoker", Title: "CleanPoker", Version: version},
+	srv := mcp.NewServer(&mcp.Implementation{Name: "pokeragile", Title: "PokerAgile", Version: version},
 		&mcp.ServerOptions{Instructions: instructions})
 	s := service{rooms: rooms}
 	mcp.AddTool(srv, &mcp.Tool{Name: "join_room", Description: "Join a planning poker room as a participant marked as an AI. Returns the seat token and the room state."}, s.join)

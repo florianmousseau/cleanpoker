@@ -1,17 +1,17 @@
 <svelte:head>
-  <title>Planning poker tools compared: the 7 criteria that matter | CleanPoker</title>
-  <meta name="description" content="How to choose an online planning poker tool: seven criteria you can check yourself in minutes, what CleanPoker does, what it does not do, and when another tool is the right call." />
-  <link rel="canonical" href="https://cleanpoker.dev/planning-poker-tools" />
-  <link rel="alternate" hreflang="en" href="https://cleanpoker.dev/planning-poker-tools" />
-  <link rel="alternate" hreflang="fr" href="https://cleanpoker.dev/fr/comparatif-outils" />
-  <link rel="alternate" hreflang="x-default" href="https://cleanpoker.dev/planning-poker-tools" />
+  <title>Planning poker tools compared: the 7 criteria that matter | PokerAgile</title>
+  <meta name="description" content="How to choose an online planning poker tool: seven criteria you can check yourself in minutes, what PokerAgile does, what it does not do, and when another tool is the right call." />
+  <link rel="canonical" href="https://pokeragile.com/planning-poker-tools" />
+  <link rel="alternate" hreflang="en" href="https://pokeragile.com/planning-poker-tools" />
+  <link rel="alternate" hreflang="fr" href="https://pokeragile.com/fr/comparatif-outils" />
+  <link rel="alternate" hreflang="x-default" href="https://pokeragile.com/planning-poker-tools" />
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Planning poker tools compared: the 7 criteria that matter',
-    url: 'https://cleanpoker.dev/planning-poker-tools',
-    description: 'Seven criteria for choosing an online planning poker tool, all checkable yourself, and exactly what CleanPoker covers, including what it cannot do.',
-    isPartOf: { '@type': 'WebApplication', name: 'CleanPoker', url: 'https://cleanpoker.dev' },
+    url: 'https://pokeragile.com/planning-poker-tools',
+    description: 'Seven criteria for choosing an online planning poker tool, all checkable yourself, and exactly what PokerAgile covers, including what it cannot do.',
+    isPartOf: { '@type': 'WebApplication', name: 'PokerAgile', url: 'https://pokeragile.com' },
   })}<\/script>`}
   {@html `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -24,8 +24,8 @@
       },
       {
         '@type': 'Question',
-        name: 'What can CleanPoker not do?',
-        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker has no Jira, Azure DevOps or Linear integration, no backlog import from a tracker, no history of past sessions and no permanent teams. If any of those is essential, a tool built into the issue tracker is the right choice. Stories are pasted into the room and their estimates leave as CSV or a Markdown table.' },
+        name: 'What can PokerAgile not do?',
+        acceptedAnswer: { '@type': 'Answer', text: 'PokerAgile has no Jira, Azure DevOps or Linear integration, no backlog import from a tracker, no history of past sessions and no permanent teams. If any of those is essential, a tool built into the issue tracker is the right choice. Stories are pasted into the room and their estimates leave as CSV or a Markdown table.' },
       },
       {
         '@type': 'Question',
@@ -105,11 +105,11 @@
       <strong>How to check</strong>: look for a repository link, and at the date of the last commit.
     </p>
 
-    <h2>Exactly what CleanPoker covers</h2>
+    <h2>Exactly what PokerAgile covers</h2>
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>Criterion</th><th>CleanPoker</th></tr>
+          <tr><th>Criterion</th><th>PokerAgile</th></tr>
         </thead>
         <tbody>
           <tr><td>Paywall</td><td>None. No paid tier, no participant cap, no session quota.</td></tr>
@@ -123,7 +123,7 @@
       </table>
     </div>
 
-    <h2>What CleanPoker cannot do</h2>
+    <h2>What PokerAgile cannot do</h2>
     <p>
       The list is short and deliberate, but it rules the tool out for some teams. Better to know
       before opening it than after:
@@ -136,7 +136,7 @@
     </ul>
     <p>
       If the estimate has to land automatically in a ticket's story points field, a tool built into
-      the issue tracker does that job and CleanPoker does not. If the meeting only needs votes to
+      the issue tracker does that job and PokerAgile does not. If the meeting only needs votes to
       stay hidden until the reveal, the integration costs more than it returns.
     </p>
 
@@ -149,7 +149,7 @@
     </p>
 
     <div class="cta">
-      <a href="/" class="btn">Try CleanPoker</a>
+      <a href="/" class="btn">Try PokerAgile</a>
     </div>
 
     <p class="related">
