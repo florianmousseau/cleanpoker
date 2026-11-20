@@ -74,13 +74,13 @@ require_(
 );
 require_(
   hooks.includes(
-    `"connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev"`,
+    `"connect-src 'self' https://salles.pokeragile.com wss://salles.pokeragile.com"`,
   ),
   "hooks.server.ts lets the page reach the game server, and nothing else",
 );
 require_(
   headers.includes(
-    `connect-src 'self' https://salles.cleanpoker.dev wss://salles.cleanpoker.dev;`,
+    `connect-src 'self' https://salles.pokeragile.com wss://salles.pokeragile.com;`,
   ),
   "_headers lets the page reach the game server, and nothing else",
 );

@@ -115,7 +115,7 @@ async function jeton(revendications: Record<string, unknown>, kid = 'cle-1', alg
 const SAINES = {
 	iss: EMETTEUR,
 	aud: AUDIENCE,
-	repository: 'florianmousseau/cleanpoker',
+	repository: 'florianmousseau/pokeragile',
 	ref: 'refs/heads/main',
 	sha: MAIN,
 	exp: MAINTENANT / 1000 + 300

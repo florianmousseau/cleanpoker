@@ -74,8 +74,8 @@
     </button>
   </div>
   <p>
-    <a href="https://github.com/florianmousseau/cleanpoker" rel="noopener noreferrer">{source}</a>
-    | <a href="https://github.com/florianmousseau/cleanpoker/blob/main/LICENSE" rel="noopener noreferrer">{license}</a>
+    <a href="https://github.com/florianmousseau/pokeragile" rel="noopener noreferrer">{source}</a>
+    | <a href="https://github.com/florianmousseau/pokeragile/blob/main/LICENSE" rel="noopener noreferrer">{license}</a>
     | <a href="{prefix}/a-propos">{about}</a>
     | <a href="{prefix}/mentions-legales">{legal}</a>
     | <a href="{prefix}/mentions-legales#confidentialite">{privacy}</a>

@@ -18,7 +18,7 @@ const b64 = (o: unknown): string => Buffer.from(JSON.stringify(o)).toString('bas
 const SAINES = {
 	iss: EMETTEUR,
 	aud: AUDIENCE,
-	repository: 'florianmousseau/cleanpoker',
+	repository: 'florianmousseau/pokeragile',
 	ref: 'refs/heads/main',
 	sha: 'a'.repeat(40),
 	exp: MAINTENANT / 1000 + 300
