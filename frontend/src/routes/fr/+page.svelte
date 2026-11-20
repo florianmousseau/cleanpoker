@@ -4,13 +4,13 @@
 
 <HomepageTemplate
   locale="fr"
-  pageTitle="Poker planning en ligne | PokerAgile"
-  metaDesc="Poker planning pour équipes agiles. Chacun choisit sa carte en secret, puis toutes se révèlent ensemble. Aucun cookie publicitaire. Moins de 50 Ko de JavaScript, WCAG 2.1 AA, hébergé en Europe."
+  pageTitle="Poker planning en ligne gratuit (planning poker) | PokerAgile"
+  metaDesc="Poker planning gratuit pour équipes agiles. Créez une salle, envoyez le lien, votez en secret, révélez ensemble. Aucun compte, code libre, salles en France."
   canonical="https://pokeragile.com/fr"
   ogLocale="fr_FR"
-  ogTitle="Poker planning en ligne | PokerAgile"
+  ogTitle="Poker planning en ligne gratuit (planning poker) | PokerAgile"
   ogDesc="Créez une session et partagez le lien. Moins de 50 Ko de JavaScript, WCAG 2.1 AA, aucun cookie publicitaire."
-  twitterTitle="Poker planning en ligne | PokerAgile"
+  twitterTitle="Poker planning en ligne gratuit (planning poker) | PokerAgile"
   twitterDesc="Créez une session et partagez le lien. Moins de 50 Ko de JavaScript, WCAG 2.1 AA, aucun cookie publicitaire."
   jsonLdUrl="https://pokeragile.com/fr"
   jsonLdDesc="Outil de poker planning collaboratif. Aucun cookie publicitaire ni suivi comportemental. Moins de 50 Ko de JavaScript, hébergé sur énergie renouvelable. Accessible WCAG 2.1 AA&nbsp;: navigation clavier, lecteurs d'écran NVDA et VoiceOver."

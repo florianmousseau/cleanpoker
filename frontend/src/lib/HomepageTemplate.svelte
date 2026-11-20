@@ -96,6 +96,11 @@
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+    isAccessibleForFree: true,
+    license: 'https://opensource.org/licenses/MIT',
+    sameAs: ['https://github.com/florianmousseau/pokeragile'],
+    inLanguage: ['en', 'fr', 'es', 'de', 'pt'],
+    author: { '@type': 'Person', name: 'Florian Mousseau', url: 'https://florianmousseau.com' },
     accessibilityFeature: [
       'highContrastDisplay',
       'readingOrder',
@@ -203,7 +208,7 @@
   </header>
 
   <main id="main" class="hero container">
-    <h1>{h1Main}<br /><span class="accent">{h1Accent}</span></h1>
+    <h1>{h1Main} <br /><span class="accent">{h1Accent}</span></h1>
     <p class="lead">{lead}</p>
 
     <form class="create-form" onsubmit={(e) => { e.preventDefault(); createRoom(); }}>
@@ -271,6 +276,7 @@
     legal={footerLegal}
     privacy={footerPrivacy}
     {locale}
+    guides
   />
 </div>
 
