@@ -242,3 +242,22 @@ test compare leur rendu au module.
 
 Les entrees du sitemap se regenerent avec `node scripts/gen-fibonacci-sitemap.mjs`,
 la table des facteurs avec `node scripts/gen-fibonacci-facteurs.mjs`.
+
+## Le generateur RACI ne partage aucun module avec la salle
+
+`/fr/matrice-raci` et `/raci-matrix` portent le meme composant,
+`src/lib/RaciGenerator.svelte`, sa logique `src/lib/raci.ts` et ses mots
+`src/lib/raci-words.ts` (pas les dictionnaires de la salle). Mesure avec
+`npm run size` le 2026-11-20, base 42,29 / 42,53 / 49,14 Ko :
+
+- importer `cellCsv` et `cellMd` de `export.ts` en fait un fichier que chaque
+  salle telecharge : +0,09 Ko sur la salle. `presse-papiers.ts` : +0,06 Ko.
+  `raci.ts` garde donc ses deux ecrivains de cellule et le composant son appel
+  au presse-papiers ;
+- deux routes de plus coutent 0,13 Ko a l accueil et 0,18 Ko a la salle : le
+  manifeste du routeur, que toute page charge, nomme chaque route, son fichier
+  et ses dependances. Mesure finale : 42,42 / 42,66 / 49,32 Ko.
+
+La matrice vit dans le fragment de l adresse (`#m=`), que le navigateur n envoie
+pas au serveur. Un lien est du texte tape : `decodeMatrix` refuse tout ce qui
+n est pas exactement une matrice sous les plafonds, et ne repare rien.
