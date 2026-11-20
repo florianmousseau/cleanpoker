@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Is the story text sent to an AI?',
-        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker sends nothing to any AI and never receives the story text, which stays in the conversation of the person who connected the assistant. The assistant receives the room state: participant names, then the votes once revealed.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes, but not by CleanPoker: you type it yourself to the assistant you connected. CleanPoker calls no AI and never receives the story text. The assistant receives the room state: participant names, then the votes once revealed.' },
       },
     ],
   })}<\/script>`}
@@ -101,7 +101,7 @@ After the reveal I will ask for your reasoning. Leave the room when I say so.</c
     <ul>
       <li><strong>It votes before the discussion</strong>, together with everyone. If it tells you its card in your conversation before the reveal, vote first.</li>
       <li><strong>A gap gets discussed.</strong> The AI says 13 and the team says 3: ask it what it saw.</li>
-      <li><strong>The person who will do the work decides.</strong> They alone know the code they will have to touch.</li>
+      <li><strong>The person who will do the work decides.</strong> That person knows the code that has to change; the AI does not.</li>
     </ul>
 
     <h2>Where the story text goes</h2>
@@ -115,7 +115,7 @@ After the reveal I will ask for your reasoning. Leave the room when I say so.</c
     <h3>Does AI estimate better than a team?</h3>
     <p>No. It does not know the team's velocity, the real state of the code or who depends on whom. It is useful for spotting what the story leaves out: tests, data migration, edge cases. Its vote opens the discussion when it differs from the team's.</p>
     <h3>Is the story text sent to an AI?</h3>
-    <p>CleanPoker sends nothing to any AI and never receives the story text, which stays in the conversation of the person who connected the assistant. The assistant receives the room state: participant names, then the votes once revealed.</p>
+    <p>Yes, but not by CleanPoker: you type it yourself to the assistant you connected. CleanPoker calls no AI and never receives the story text. The assistant receives the room state: participant names, then the votes once revealed.</p>
 
     <div class="cta">
       <a href="/" class="btn">Create a room</a>

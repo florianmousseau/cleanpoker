@@ -33,7 +33,7 @@
       {
         '@type': 'Question',
         name: 'Le texte de la story est-il envoyé à une IA ?',
-        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker n\'envoie rien à aucune IA et ne reçoit pas le texte de la story, qui reste dans la conversation de la personne qui a connecté l\'assistant. L\'assistant reçoit l\'état de la salle : les noms des participants, puis les votes une fois révélés.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'Oui, mais pas par CleanPoker : vous l\'écrivez vous-même à l\'assistant que vous avez connecté. CleanPoker n\'appelle aucune IA et ne reçoit pas le texte de la story. L\'assistant reçoit l\'état de la salle : les noms des participants, puis les votes une fois révélés.' },
       },
     ],
   })}<\/script>`}
@@ -46,7 +46,7 @@
     <h1>Planning poker avec une IA&nbsp;: faire voter Claude ou ChatGPT dans la salle</h1>
 
     <p class="lead">
-      Depuis le 20 novembre 2026, un assistant IA peut rejoindre une salle CleanPoker de poker planning et voter comme un membre de l'équipe. Il choisit sa carte en secret, elle se révèle avec les autres, et il apparaît dans la liste avec la mention <strong>(IA)</strong>.
+      Depuis le 20 novembre 2026, un assistant IA peut rejoindre une salle de poker planning CleanPoker et voter comme un membre de l'équipe. Il choisit sa carte en secret, elle se révèle avec les autres, et il apparaît dans la liste avec la mention <strong>(IA)</strong>.
     </p>
 
     <h2>Ce que l'IA peut faire dans la salle</h2>
@@ -101,7 +101,7 @@ Après la révélation, je te demanderai ton raisonnement. Quitte la salle quand
     <ul>
       <li><strong>Elle vote avant la discussion</strong>, en même temps que tout le monde. Si elle annonce sa carte dans votre conversation avant la révélation, votez d'abord.</li>
       <li><strong>Un écart se discute.</strong> L'IA dit 13 et l'équipe dit 3&nbsp;: demandez-lui ce qu'elle a vu.</li>
-      <li><strong>La personne qui fera le travail tranche.</strong> Elle seule connaît le code qu'elle devra toucher.</li>
+      <li><strong>La personne qui fera le travail tranche.</strong> Cette personne connaît le code qu'il faudra toucher, l'IA non.</li>
     </ul>
 
     <h2>Où va le texte de la story</h2>
@@ -115,7 +115,7 @@ Après la révélation, je te demanderai ton raisonnement. Quitte la salle quand
     <h3>Une IA estime-t-elle mieux qu'une équipe&nbsp;?</h3>
     <p>Non. Elle ne connaît ni la vélocité de l'équipe, ni l'état réel du code, ni qui dépend de qui. Elle est utile pour repérer ce que la story oublie&nbsp;: tests, migration de données, cas limites. Son vote sert à ouvrir la discussion quand il s'écarte de celui de l'équipe.</p>
     <h3>Le texte de la story est-il envoyé à une IA&nbsp;?</h3>
-    <p>CleanPoker n'envoie rien à aucune IA et ne reçoit pas le texte de la story, qui reste dans la conversation de la personne qui a connecté l'assistant. L'assistant reçoit l'état de la salle&nbsp;: les noms des participants, puis les votes une fois révélés.</p>
+    <p>Oui, mais pas par CleanPoker&nbsp;: vous l'écrivez vous-même à l'assistant que vous avez connecté. CleanPoker n'appelle aucune IA et ne reçoit pas le texte de la story. L'assistant reçoit l'état de la salle&nbsp;: les noms des participants, puis les votes une fois révélés.</p>
 
     <div class="cta">
       <a href="/fr" class="btn">Créer une salle</a>
