@@ -804,3 +804,29 @@ func TestWS_RefusesAForeignOriginWithoutSeatingAnyone(t *testing.T) {
 		t.Fatalf("a foreign origin was seated: %d arrivals", joined)
 	}
 }
+
+func TestWebSocket_LockAndTimerReachTheRoom(t *testing.T) {
+	srv := newTestServer(t)
+	id := createRoom(t, srv)
+	conn := wsConnect(t, srv, id, "Alice")
+	recv(t, conn) // welcome
+	if snap := decodeSnap(t, recv(t, conn)); snap.Host == "" {
+		t.Fatal("expected the first seat to be host")
+	}
+
+	send(t, conn, "lock", "on")
+	if snap := decodeSnap(t, recv(t, conn)); !snap.Locked {
+		t.Fatal("expected the host to lock the room")
+	}
+
+	send(t, conn, "timer", "60")
+	if snap := decodeSnap(t, recv(t, conn)); snap.TimerEnd == 0 {
+		t.Fatal("expected a running timer")
+	}
+
+	send(t, conn, "timer", "soon")
+	send(t, conn, "lock", "off")
+	if snap := decodeSnap(t, recv(t, conn)); snap.Locked || snap.TimerEnd == 0 {
+		t.Fatalf("expected an open room with its timer, got locked=%v timer=%d", snap.Locked, snap.TimerEnd)
+	}
+}

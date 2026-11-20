@@ -25,7 +25,7 @@
       {
         '@type': 'Question',
         name: 'What can CleanPoker not do?',
-        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker has no Jira, Azure DevOps or Linear integration, no backlog import, no history of past sessions, no CSV export, no voting timer and no permanent teams. If any of those is essential, a tool built into the issue tracker is the right choice.' },
+        acceptedAnswer: { '@type': 'Answer', text: 'CleanPoker has no Jira, Azure DevOps or Linear integration, no backlog import, no history of past sessions, no CSV export and no permanent teams. If any of those is essential, a tool built into the issue tracker is the right choice.' },
       },
       {
         '@type': 'Question',
@@ -132,7 +132,7 @@
       <li><strong>No integrations</strong> with Jira, Azure DevOps, Linear or GitHub: stories are presented out loud.</li>
       <li><strong>No backlog import</strong>, and therefore no CSV export of results.</li>
       <li><strong>No history</strong> of past sessions, no velocity tracking over time. That is the direct price of criterion 2.</li>
-      <li><strong>No voting timer</strong>, no permanent teams, no accounts.</li>
+      <li><strong>No permanent teams</strong>, no accounts.</li>
     </ul>
     <p>
       If the estimate has to land automatically in a ticket's story points field, a tool built into

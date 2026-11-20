@@ -12,10 +12,11 @@ export interface Translation {
   promo: { lead: string; cta: string; close: string };
   cards: { title: string; revealedSub: string; votingHint: string; selectedSuffix: (v: string) => string; voteLabel: (c: string) => string };
   controls: { title: string; newRound: string; reveal: string; pending: (n: number) => string };
-  results: { title: string; avg: string; min: string; max: string; none: string };
+  results: { title: string; avg: string; median: string; min: string; max: string; none: string };
+  host: { badge: string; lock: string; unlock: string; lockedHint: string; timer: string; timerStop: string; timerLeft: (s: string) => string; timerOver: string; seconds: (n: number) => string };
   participants: { title: string; none: string; colStatus: string; colName: string; colVote: string; colRole: string; colAction: string; me: string; votedSr: string; votePending: string; toObserver: string; toObserverLabel: (n: string) => string; kick: string; kickLabel: (n: string) => string; kickConfirm: (n: string) => string };
   observers: { title: string; toParticipant: string; toParticipantLabel: (n: string) => string };
-  activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
+  activity: { title: string; none: string; colTime: string; colAuthor: string; colAction: string; joined: string; joined_observer: string; left: string; voted: string; unvoted: string; revealed: string; new_round: string; locked: string; unlocked: string; timer_started: string; timer_stopped: string; kicked: (t: string) => string; to_observer: (t: string) => string; to_participant: (t: string) => string };
   live: { newRound: (n: number) => string; revealed: string };
   footer: { source: string; license: string; legal: string; privacy: string; about: string; navAriaLabel: string };
   theme: { toDark: string; toLight: string };
@@ -81,9 +82,22 @@ export const FR: Translation = {
   results: {
     title: 'Résultats',
     avg: 'Moyenne',
+    median: 'Médiane',
     min: 'Min',
     max: 'Max',
     none: "Les résultats s'afficheront après la révélation.",
+  },
+
+  host: {
+    badge: 'hôte',
+    lock: 'Verrouiller la salle',
+    unlock: 'Ouvrir la salle',
+    lockedHint: "Salle verrouillée, seul l'hôte mène le tour.",
+    timer: 'Minuteur',
+    timerStop: 'Arrêter',
+    timerLeft: (s: string) => `Temps restant ${s}`,
+    timerOver: 'Temps écoulé',
+    seconds: (n: number) => (n < 60 ? `${n}\u00A0s` : `${n / 60}\u00A0min`),
   },
 
   participants: {
@@ -123,6 +137,10 @@ export const FR: Translation = {
     unvoted: 'a retiré son vote.',
     revealed: 'a révélé les votes.',
     new_round: 'a démarré un nouveau tour.',
+    locked: 'a verrouillé la salle.',
+    unlocked: 'a ouvert la salle.',
+    timer_started: 'a lancé le minuteur.',
+    timer_stopped: 'a arrêté le minuteur.',
     kicked: (t: string) => `a expulsé ${t}.`,
     to_observer: (t: string) => `a passé ${t} en observateur.`,
     to_participant: (t: string) => `a passé ${t} en participant.`,
@@ -204,9 +222,22 @@ export const EN: Translation = {
   results: {
     title: 'Results',
     avg: 'Average',
+    median: 'Median',
     min: 'Min',
     max: 'Max',
     none: 'Results will appear after the reveal.',
+  },
+
+  host: {
+    badge: 'host',
+    lock: 'Lock room',
+    unlock: 'Unlock room',
+    lockedHint: 'Room locked, only the host runs the round.',
+    timer: 'Timer',
+    timerStop: 'Stop',
+    timerLeft: (s: string) => `Time left ${s}`,
+    timerOver: "Time's up",
+    seconds: (n: number) => (n < 60 ? `${n}\u00A0s` : `${n / 60}\u00A0min`),
   },
 
   participants: {
@@ -246,6 +277,10 @@ export const EN: Translation = {
     unvoted: 'removed their vote.',
     revealed: 'revealed the votes.',
     new_round: 'started a new round.',
+    locked: 'locked the room.',
+    unlocked: 'unlocked the room.',
+    timer_started: 'started the timer.',
+    timer_stopped: 'stopped the timer.',
     kicked: (t: string) => `removed ${t}.`,
     to_observer: (t: string) => `switched ${t} to observer.`,
     to_participant: (t: string) => `switched ${t} to participant.`,
@@ -327,9 +362,22 @@ export const ES: Translation = {
   results: {
     title: 'Resultados',
     avg: 'Media',
+    median: 'Mediana',
     min: 'Mín',
     max: 'Máx',
     none: 'Los resultados aparecerán tras la revelación.',
+  },
+
+  host: {
+    badge: 'anfitrión',
+    lock: 'Bloquear sala',
+    unlock: 'Abrir sala',
+    lockedHint: 'Sala bloqueada, solo el anfitrión dirige la ronda.',
+    timer: 'Temporizador',
+    timerStop: 'Parar',
+    timerLeft: (s: string) => `Tiempo restante ${s}`,
+    timerOver: 'Tiempo agotado',
+    seconds: (n: number) => (n < 60 ? `${n}\u00A0s` : `${n / 60}\u00A0min`),
   },
 
   participants: {
@@ -369,6 +417,10 @@ export const ES: Translation = {
     unvoted: 'retiró su voto.',
     revealed: 'reveló los votos.',
     new_round: 'inició una nueva ronda.',
+    locked: 'bloqueó la sala.',
+    unlocked: 'abrió la sala.',
+    timer_started: 'inició el temporizador.',
+    timer_stopped: 'paró el temporizador.',
     kicked: (t: string) => `expulsó a ${t}.`,
     to_observer: (t: string) => `cambió a ${t} a observador.`,
     to_participant: (t: string) => `cambió a ${t} a participante.`,
@@ -450,9 +502,22 @@ export const DE: Translation = {
   results: {
     title: 'Ergebnisse',
     avg: 'Durchschn.',
+    median: 'Median',
     min: 'Min',
     max: 'Max',
     none: 'Ergebnisse erscheinen nach der Aufdeckung.',
+  },
+
+  host: {
+    badge: 'Host',
+    lock: 'Raum sperren',
+    unlock: 'Raum öffnen',
+    lockedHint: 'Raum gesperrt, nur der Host leitet die Runde.',
+    timer: 'Timer',
+    timerStop: 'Stoppen',
+    timerLeft: (s: string) => `Verbleibend ${s}`,
+    timerOver: 'Zeit abgelaufen',
+    seconds: (n: number) => (n < 60 ? `${n}\u00A0s` : `${n / 60}\u00A0min`),
   },
 
   participants: {
@@ -492,6 +557,10 @@ export const DE: Translation = {
     unvoted: 'hat die Stimme zurückgezogen.',
     revealed: 'hat die Stimmen aufgedeckt.',
     new_round: 'hat eine neue Runde gestartet.',
+    locked: 'hat den Raum gesperrt.',
+    unlocked: 'hat den Raum geöffnet.',
+    timer_started: 'hat den Timer gestartet.',
+    timer_stopped: 'hat den Timer gestoppt.',
     kicked: (t: string) => `hat ${t} entfernt.`,
     to_observer: (t: string) => `hat ${t} zum Beobachter gemacht.`,
     to_participant: (t: string) => `hat ${t} zum Teilnehmer gemacht.`,
@@ -573,9 +642,22 @@ export const PT: Translation = {
   results: {
     title: 'Resultados',
     avg: 'Média',
+    median: 'Mediana',
     min: 'Mín',
     max: 'Máx',
     none: 'Os resultados aparecerão após a revelação.',
+  },
+
+  host: {
+    badge: 'anfitrião',
+    lock: 'Bloquear sala',
+    unlock: 'Abrir sala',
+    lockedHint: 'Sala bloqueada, só o anfitrião conduz a rodada.',
+    timer: 'Temporizador',
+    timerStop: 'Parar',
+    timerLeft: (s: string) => `Tempo restante ${s}`,
+    timerOver: 'Tempo esgotado',
+    seconds: (n: number) => (n < 60 ? `${n}\u00A0s` : `${n / 60}\u00A0min`),
   },
 
   participants: {
@@ -615,6 +697,10 @@ export const PT: Translation = {
     unvoted: 'retirou o voto.',
     revealed: 'revelou os votos.',
     new_round: 'iniciou uma nova rodada.',
+    locked: 'bloqueou a sala.',
+    unlocked: 'abriu a sala.',
+    timer_started: 'iniciou o temporizador.',
+    timer_stopped: 'parou o temporizador.',
     kicked: (t: string) => `removeu ${t}.`,
     to_observer: (t: string) => `mudou ${t} para observador.`,
     to_participant: (t: string) => `mudou ${t} para participante.`,
@@ -649,6 +735,10 @@ export function translateActivity(
     case 'unvoted':          return t.activity.unvoted;
     case 'revealed':         return t.activity.revealed;
     case 'new_round':        return t.activity.new_round;
+    case 'locked':           return t.activity.locked;
+    case 'unlocked':         return t.activity.unlocked;
+    case 'timer_started':    return t.activity.timer_started;
+    case 'timer_stopped':    return t.activity.timer_stopped;
     case 'kicked':           return t.activity.kicked(target);
     case 'to_observer':      return t.activity.to_observer(target);
     case 'to_participant':   return t.activity.to_participant(target);
