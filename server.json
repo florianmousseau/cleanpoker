@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.florianmousseau/pokeragile",
   "title": "PokerAgile",
-  "description": "Planning poker rooms an AI assistant can join: it adds stories, votes with a hidden card, reads the kept estimates.",
+  "description": "Planning poker rooms an AI assistant joins: it adds stories, votes in secret, reads the estimates.",
   "version": "0.0.59",
   "websiteUrl": "https://pokeragile.com/planning-poker-ai",
   "repository": {
