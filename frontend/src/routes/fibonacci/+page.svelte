@@ -192,6 +192,8 @@
       </p>
     </details>
 
+    <p>See also: <a href="/story-points">story points</a>, with a worked example and velocity.</p>
+
     <div class="cta">
       <a href="/" class="btn">Try it with PokerAgile</a>
     </div>

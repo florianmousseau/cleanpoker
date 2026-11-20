@@ -87,7 +87,7 @@
       comparable metric across sprints.
     </p>
     <p>
-      The shift from hours to story points is the single most impactful change most teams
+      The shift from hours to <a href="/story-points">story points</a> is the single most impactful change most teams
       can make to improve planning accuracy.
     </p>
 
