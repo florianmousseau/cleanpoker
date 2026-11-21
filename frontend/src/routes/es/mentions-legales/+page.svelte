@@ -127,6 +127,9 @@
       consentimiento previo.
     </p>
     <p>
+      El navegador también guarda, en su almacenamiento local, el nombre escrito para unirse a una sala y la última apariencia de equipo (nombre, color, sitio). Estos datos no salen de su dispositivo; borrar los datos del sitio los elimina.
+    </p>
+    <p>
       Cloudflare puede depositar cookies técnicas de seguridad (<code>__cf_bm</code>) estrictamente
       necesarias para el buen funcionamiento del servicio (protección anti-DDoS). Estas cookies están exentas
       de consentimiento.

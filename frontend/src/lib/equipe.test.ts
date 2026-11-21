@@ -21,6 +21,19 @@ describe('equipeDe', () => {
   });
 });
 
+describe('the team logo', () => {
+  it('travels as a host name and comes back as one', () => {
+    expect(requeteEquipe('Alpha', '#d0453a', [], 'alpha.fr')).toBe('?equipe=Alpha&couleur=d0453a&logo=alpha.fr');
+    expect(equipeDe(new URLSearchParams('logo=Alpha.FR'))).toEqual({ nom: '', logo: 'alpha.fr', clair: '', sombre: '' });
+  });
+  it('refuses anything that is not a host name', () => {
+    for (const bad of ['https://alpha.fr', 'alpha', '../x', 'a.fr/x', 'javascript:1']) {
+      expect(equipeDe(new URLSearchParams({ logo: bad, equipe: 'A' }))?.logo, bad).toBe('');
+      expect(requeteEquipe('', '', [], bad)).toBe('');
+    }
+  });
+});
+
 describe('requeteEquipe', () => {
   it('carries name, colour and deck', () => {
     expect(requeteEquipe('Alpha', '#D0453A', ['1', '2', '3'])).toBe('?equipe=Alpha&couleur=d0453a&cards=1%2C2%2C3');
