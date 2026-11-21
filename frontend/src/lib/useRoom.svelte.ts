@@ -7,7 +7,10 @@ import { chunkLines } from '#lib/export.ts';
 import { forgetSeat, loadSeat, saveSeat, tabStorage } from '#lib/seat.ts';
 
 export type Player = { id: string; name: string; vote: string; observer: boolean; ai?: boolean; reason?: string };
-export type Story = { title: string; estimate: string };
+/** What a delivered story cost: numbers only. */
+export type Actual = { files: number; added: number; removed: number; tests: number; minutes: number };
+export type Reference = { card: string; title: string };
+export type Story = { title: string; estimate: string; actual?: Actual; looksLike?: string };
 export type Results = { avg: string; median: string; min: string; max: string; dist: Record<string, number> };
 // timestamp: Unix milliseconds; a server not yet updated sends its clock as text.
 export type ActivityEntry = { timestamp: number | string; initiator: string; message: string; target?: string };
@@ -16,7 +19,7 @@ export type RoomState = {
   state: 'voting' | 'revealed'; round: number;
   results: Results | null; players: Player[]; activity: ActivityEntry[];
   host: string; locked: boolean; timerEnd: number;
-  stories?: Story[]; current?: number; autoReveal?: boolean;
+  stories?: Story[]; current?: number; autoReveal?: boolean; references?: Reference[];
 };
 
 const PING_MS = 25_000;

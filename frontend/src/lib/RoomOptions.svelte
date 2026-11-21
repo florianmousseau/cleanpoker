@@ -78,7 +78,8 @@
     <span>{X.results.creditOption}</span>
   </label>
   {#if stories.length === 0}
-  <StoriesPanel {stories} {current} {T} {X} {canRun}
+  <StoriesPanel {stories} references={roomState.references} {current} {T} {X} {canRun}
+  onMeasure={(p) => room.send('measure', p)}
   onAdd={(text) => room.addStories(text)}
   onClear={() => room.clearStories()}
   onSelect={(i) => room.selectStory(i)} />

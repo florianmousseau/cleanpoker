@@ -1,8 +1,8 @@
 // Package assistant serves the rooms to AI assistants over the Model Context
 // Protocol: an assistant joins a room as a marked participant, reads it, and
-// votes like anyone. It may add stories where a participant may, and reads
-// the estimates the team kept. It never reveals, starts a round, keeps an
-// estimate or removes anybody.
+// votes like anyone. It may add stories where a participant may, reads the
+// estimates the team kept, and reports what a delivered story cost. It never
+// reveals, starts a round, keeps an estimate or removes anybody.
 package assistant
 
 import (
@@ -116,9 +116,22 @@ type addOut struct {
 }
 
 type estimate struct {
-	Title    string `json:"title"`
-	Estimate string `json:"estimate" jsonschema:"the card the team kept, empty when none yet"`
-	OnTable  bool   `json:"onTable" jsonschema:"true for the story being estimated now"`
+	Title     string       `json:"title"`
+	Estimate  string       `json:"estimate" jsonschema:"the card the team kept, empty when none yet"`
+	OnTable   bool         `json:"onTable" jsonschema:"true for the story being estimated now"`
+	Actual    *room.Actual `json:"actual,omitempty" jsonschema:"what the story cost once delivered, when someone reported it"`
+	LooksLike string       `json:"looksLike,omitempty" jsonschema:"the card this measure is closest to among the other measured stories, empty while there are too few"`
+}
+
+type reportIn struct {
+	Room    string `json:"room" jsonschema:"the room address or id"`
+	Seat    string `json:"seat" jsonschema:"the token join_room returned"`
+	Story   int    `json:"story" jsonschema:"the position of the story in get_estimates, from 1"`
+	Files   int    `json:"files" jsonschema:"files touched"`
+	Added   int    `json:"added" jsonschema:"lines added"`
+	Removed int    `json:"removed" jsonschema:"lines removed"`
+	Tests   int    `json:"tests,omitempty" jsonschema:"tests added"`
+	Minutes int    `json:"minutes,omitempty" jsonschema:"working time in minutes, when known"`
 }
 
 type estimatesOut struct {
@@ -220,7 +233,7 @@ func (s service) estimates(_ context.Context, _ *mcp.CallToolRequest, in roomIn)
 	snap := rm.Snapshot()
 	out := estimatesOut{Stories: make([]estimate, len(snap.Stories))}
 	for i, st := range snap.Stories {
-		out.Stories[i] = estimate{Title: st.Title, Estimate: st.Estimate, OnTable: i == snap.Current}
+		out.Stories[i] = estimate{Title: st.Title, Estimate: st.Estimate, OnTable: i == snap.Current, Actual: st.Actual, LooksLike: st.LooksLike}
 	}
 	out.Markdown = markdown(out.Stories)
 	return nil, out, nil
@@ -250,6 +263,18 @@ func (s service) vote(_ context.Context, _ *mcp.CallToolRequest, in voteIn) (*mc
 	return nil, stateOf(rm), nil
 }
 
+func (s service) report(_ context.Context, _ *mcp.CallToolRequest, in reportIn) (*mcp.CallToolResult, estimatesOut, error) {
+	rm, id, err := s.seat(in.Room, in.Seat)
+	if err != nil {
+		return nil, estimatesOut{}, err
+	}
+	actual := room.Actual{Files: in.Files, Added: in.Added, Removed: in.Removed, Tests: in.Tests, Minutes: in.Minutes}
+	if err := rm.ReportActual(id, in.Story-1, actual); err != nil {
+		return nil, estimatesOut{}, err
+	}
+	return s.estimates(context.Background(), nil, roomIn{Room: in.Room})
+}
+
 func (s service) leave(_ context.Context, _ *mcp.CallToolRequest, in seatIn) (*mcp.CallToolResult, stateOut, error) {
 	rm, id, err := s.seat(in.Room, in.Seat)
 	if err != nil {
@@ -263,13 +288,25 @@ const instructions = `PokerAgile is planning poker for agile teams. A person sha
 join it with join_room. If your user asks you to bring stories from their
 tracker, read them with your own access to it and add their titles with
 add_stories. When the room holds a list of stories, "story" in get_room is the
-one on the table: estimate it. Otherwise your user gives you the story. Vote
-one card of the room deck ("cards") with vote, with a one or two sentence
-reason: votes and reasons stay hidden until a person reveals them, and get_room
-shows the results after the reveal. People choose the story on the table,
-reveal, and keep the estimate of each story; get_estimates returns the kept
-estimates, for you to write back to the tracker yourself. PokerAgile connects
-to no tracker. Leave with leave_room when done.`
+one on the table: estimate it. Otherwise your user gives you the story.
+
+A point has no value of its own: it is the size of a story next to the stories
+this team already estimated. Before you vote, read get_estimates and place the
+story among the kept estimates; "references" in get_room, when present, names
+one delivered story of the team per card. With no kept estimate to compare
+with, vote "?" when the deck has it, or say in your reason what you took as
+one point. Vote one card of the room deck ("cards") with vote, with a one or
+two sentence reason: votes and reasons stay hidden until a person reveals
+them, and get_room shows the results after the reveal. People choose the story
+on the table, reveal, and keep the estimate of each story; get_estimates
+returns the kept estimates, for you to write back to the tracker yourself.
+PokerAgile connects to no tracker.
+
+Once you have delivered a story the team estimated here, report what it cost
+with report_actual: files touched, lines added and removed, tests added, and
+the working time when you know it. Numbers only, never code, a file name or a
+repository address. The room then shows the team which card the delivered
+story looks like. Leave with leave_room when done.`
 
 // NewServer builds the MCP server over rooms.
 func NewServer(rooms Rooms, version string) *mcp.Server {
@@ -279,8 +316,9 @@ func NewServer(rooms Rooms, version string) *mcp.Server {
 	mcp.AddTool(srv, &mcp.Tool{Name: "join_room", Description: "Join a planning poker room as a participant marked as an AI. Returns the seat token and the room state."}, s.join)
 	mcp.AddTool(srv, &mcp.Tool{Name: "get_room", Description: "Read a room: the deck (cards), the round, the title of the story on the table (story), the story list, who voted, and the results once a person has revealed the votes.", Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true}}, s.get)
 	mcp.AddTool(srv, &mcp.Tool{Name: "add_stories", Description: "Append story titles to the room's list, for instance the sprint's stories read from your user's tracker. Returns how many were added, how many were refused and why, and the room state; refused when the host locked the room."}, s.add)
-	mcp.AddTool(srv, &mcp.Tool{Name: "get_estimates", Description: "Read the story list with the estimate the team kept for each, as data and as a Markdown table. Call it when the session is over, to write the estimates back to the tracker.", Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true}}, s.estimates)
+	mcp.AddTool(srv, &mcp.Tool{Name: "get_estimates", Description: "Read the story list with the estimate the team kept for each, as data and as a Markdown table. Call it before you vote, to place the story among the estimates already kept, and when the session is over, to write the estimates back to the tracker.", Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true}}, s.estimates)
 	mcp.AddTool(srv, &mcp.Tool{Name: "vote", Description: "Vote one card of the room deck with a short reason, both hidden from the team until the reveal. An empty card withdraws the vote."}, s.vote)
+	mcp.AddTool(srv, &mcp.Tool{Name: "report_actual", Description: "Report what a story the team estimated cost once delivered: files touched, lines added and removed, tests added, working time. Numbers only. Returns the list with each measure and the card it looks like; refused for a story with no kept estimate, and when the host locked the room."}, s.report)
 	mcp.AddTool(srv, &mcp.Tool{Name: "leave_room", Description: "Leave the room and give up the seat."}, s.leave)
 	return srv
 }
