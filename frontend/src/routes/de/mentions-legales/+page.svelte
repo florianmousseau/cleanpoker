@@ -128,6 +128,9 @@
       Daten und erfordern keine vorherige Einwilligung.
     </p>
     <p>
+      Ihr Browser speichert außerdem lokal den Namen, mit dem Sie einem Raum beitreten, und das letzte Team-Design (Name, Farbe, Website). Diese Daten verlassen Ihr Gerät nicht; das Löschen der Website-Daten entfernt sie.
+    </p>
+    <p>
       Cloudflare kann technische Sicherheits-Cookies setzen (<code>__cf_bm</code>), die für das
       ordnungsgemäße Funktionieren des Dienstes unbedingt erforderlich sind (DDoS-Schutz). Diese Cookies sind
       von der Einwilligungspflicht befreit.

@@ -129,6 +129,9 @@
       directrices de la CNIL.
     </p>
     <p>
+      Le navigateur garde aussi, dans son stockage local, le nom saisi pour rejoindre une salle et le dernier habillage d'équipe (nom, couleur, site). Ces données ne quittent pas votre appareil&nbsp;; vider les données du site les efface.
+    </p>
+    <p>
       Cloudflare peut déposer des cookies techniques de sécurité (<code>__cf_bm</code>) strictement
       nécessaires au bon fonctionnement du service (protection anti-DDoS). Ces cookies sont exemptés
       de consentement.

@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.67] - 2026-11-21
+
+- feat(home): show the company logo in the room, read from its website (#446)
+- feat(home): remember the last team look in this browser (#445)
+
+## [0.0.66] - 2026-11-21
+
+- feat(home): take the team name and colour from the company website (#441)
+
 ## [0.0.65] - 2026-11-21
 
 - feat(room): the verified point, what a delivered story cost next to its estimate (#438)

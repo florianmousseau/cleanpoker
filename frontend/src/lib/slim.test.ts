@@ -70,7 +70,7 @@ describe('the home page', () => {
     expect(home).not.toMatch(/i18n/);
     for (const route of ['src/routes/+page.svelte', ...['fr', 'es', 'de', 'pt'].map((l) => `src/routes/${l}/+page.svelte`)]) {
       const page = readFileSync(route, 'utf8');
-      for (const prop of ['teamSummary', 'teamNameLabel', 'teamColorLabel']) {
+      for (const prop of ['teamSummary', 'teamNameLabel', 'teamColorLabel', 'teamSiteLabel', 'teamSiteButton', 'teamSiteError']) {
         expect(page, `${route} ${prop}`).toMatch(new RegExp(`\\b${prop}="[^"]+"`));
       }
     }
