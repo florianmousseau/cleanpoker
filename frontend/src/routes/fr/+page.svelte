@@ -34,6 +34,7 @@
   teamColorLabel="Couleur"
   teamSiteLabel="Site de l'équipe"
   teamSiteButton="Reprendre ses couleurs"
+  resetLabel="Réinitialiser les options"
   teamSiteError="Aucune couleur trouvée sur ce site. Choisis-la à la main."
   footerSource="Code source"
   footerLicense="Licence MIT"

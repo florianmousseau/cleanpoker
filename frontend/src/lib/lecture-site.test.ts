@@ -79,3 +79,21 @@ describe('the team logo', () => {
     }
   });
 });
+
+describe('a reset', () => {
+  it('reads again the address it forgot', async () => {
+    const lire = vi.fn().mockResolvedValue(true);
+    const lecteur = lecteurDeSite(lire);
+    await lecteur.lire('acme.com');
+    lecteur.oublier();
+    await lecteur.lire('acme.com');
+    expect(lire).toHaveBeenCalledTimes(2);
+  });
+  it('puts back the default deck and forgets the kept look', () => {
+    const accueil = readFileSync(new URL('./HomepageTemplate.svelte', import.meta.url), 'utf8');
+    const reset = accueil.slice(accueil.indexOf('function resetOptions'), accueil.indexOf('const CREATE_TIMEOUT_MS'));
+    for (const geste of ['cardsInput = DEFAULT_CARDS', 'teamColor = DEFAULT_COLOR', "teamSite = ''", "teamName = ''", 'lecteur.oublier()', 'oublierHabillage(deviceStorage())']) {
+      expect(reset).toContain(geste);
+    }
+  });
+});

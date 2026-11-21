@@ -24,5 +24,9 @@ export function lecteurDeSite(lire: (site: string) => Promise<boolean>) {
     deja(site: string) {
       lu = site.trim();
     },
+    /** Forgets the last address, so the same site can dress the room again. */
+    oublier() {
+      lu = '';
+    },
   };
 }
