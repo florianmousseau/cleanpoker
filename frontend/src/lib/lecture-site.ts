@@ -7,10 +7,13 @@ export function lecteurDeSite(lire: (site: string) => Promise<boolean>) {
   let lu = '';
   let enCours: Promise<void> = Promise.resolve();
   return {
-    /** Starts a read unless this address was already read with success. */
-    lire(site: string): Promise<void> {
+    /**
+     * Starts a read unless this address was already read with success. A
+     * visitor who asks again (the button, Enter) forces it.
+     */
+    lire(site: string, force = false): Promise<void> {
       const adresse = site.trim();
-      if (!adresse || adresse === lu) return enCours;
+      if (!adresse || (adresse === lu && !force)) return enCours;
       lu = adresse;
       enCours = lire(adresse).then((ok) => {
         if (!ok && lu === adresse) lu = '';

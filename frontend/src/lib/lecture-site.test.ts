@@ -44,12 +44,30 @@ describe('lecteurDeSite', () => {
   });
 });
 
+describe('a read the visitor asks for', () => {
+  it('reads again an address already read', async () => {
+    const lire = vi.fn().mockResolvedValue(true);
+    const lecteur = lecteurDeSite(lire);
+    await lecteur.lire('lcl.com');
+    await lecteur.lire('lcl.com', true);
+    expect(lire).toHaveBeenCalledTimes(2);
+  });
+});
+
 describe('the home form', () => {
   const accueil = readFileSync(new URL('./HomepageTemplate.svelte', import.meta.url), 'utf8');
 
   it('reads the site when the field is left, and before the room is created', () => {
-    expect(accueil).toMatch(/id="team-site"[\s\S]*?onchange=/);
+    expect(accueil).toMatch(/id="team-site"[\s\S]*?onchange=\{\(\) => lecteur\.lire\(teamSite\)\}/);
+    expect(accueil).toContain('const takeSiteColors = () => lecteur.lire(teamSite, true);');
     expect(accueil).toMatch(/async function createRoom\(\)[\s\S]*?await lecteur\.lire\(teamSite\)[\s\S]*?fetch\(/);
+  });
+});
+
+describe('a look kept before logos existed', () => {
+  it('reads its site again when it has no logo', () => {
+    const accueil = readFileSync(new URL('./HomepageTemplate.svelte', import.meta.url), 'utf8');
+    expect(accueil).toMatch(/if \(kept\.logo\) lecteur\.deja\(kept\.site\);\s*else lecteur\.lire\(kept\.site\);/);
   });
 });
 

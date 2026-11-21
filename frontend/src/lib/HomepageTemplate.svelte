@@ -153,8 +153,10 @@
       teamColor = kept.couleur;
       teamSite = kept.site;
       teamLogo = kept.logo;
-      lecteur.deja(kept.site);
       teamOpen = true;
+      // A look kept before logos existed has its site and no logo: read again.
+      if (kept.logo) lecteur.deja(kept.site);
+      else lecteur.lire(kept.site);
     }
   });
   let error = $state('');
@@ -200,7 +202,7 @@
   }
 
   const lecteur = lecteurDeSite(lireSite);
-  const takeSiteColors = () => lecteur.lire(teamSite);
+  const takeSiteColors = () => lecteur.lire(teamSite, true);
 
   function logoLoaded(img: HTMLImageElement) {
     if (!colourFromLogo) return;
@@ -338,7 +340,7 @@
               spellcheck="false"
               placeholder="acme.com"
               bind:value={teamSite}
-              onchange={takeSiteColors}
+              onchange={() => lecteur.lire(teamSite)}
               onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); takeSiteColors(); } }}
             />
             <button type="button" class="preset-btn" disabled={siteLoading || !teamSite.trim()} onclick={takeSiteColors} data-testid="team-site-btn">{teamSiteButton}</button>
