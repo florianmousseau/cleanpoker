@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.71] - 2026-11-21
+
+- feat(i18n): redirect the root to the visitor's language instead of a banner (#459)
+
 ## [0.0.70] - 2026-11-21
 
 - feat(home): add a button to reset the room options to defaults (#456)
