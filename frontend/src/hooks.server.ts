@@ -5,6 +5,7 @@ import { building, dev } from "$app/env";
 import { env, waitUntil } from "cloudflare:workers";
 import { SKIP_LINK } from "#lib/skip-link.ts";
 import { sansPrefixeEn } from "#lib/redirection-en.ts";
+import { accueilDeLaLangue } from "#lib/accueil-langue.ts";
 import { versNouveauDomaine } from "#lib/domaine.ts";
 import { rangInconnu } from "#lib/fibonacci.ts";
 
@@ -36,6 +37,8 @@ const SECURITY_HEADERS: Record<string, string> = {
   ].join("; "),
 };
 
+const VARIE_PAR_VISITEUR = "Accept-Language, Cookie";
+
 function routeLocale(pathname: string): Locale | "en" {
   const match = LOCALES.find(
     (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`),
@@ -60,6 +63,22 @@ const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
     return new Response(null, {
       status: 301,
       headers: { location: `${target}${event.url.search}` },
+    });
+  }
+
+  const accueil = accueilDeLaLangue(
+    event.url.pathname,
+    event.cookies.get("lang"),
+    event.request.headers.get("accept-language"),
+  );
+  if (accueil !== null) {
+    return new Response(null, {
+      status: 302,
+      headers: {
+        location: `${accueil}${event.url.search}`,
+        vary: VARIE_PAR_VISITEUR,
+        "cache-control": "private, no-store",
+      },
     });
   }
 
@@ -96,6 +115,8 @@ const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
   for (const [header, value] of Object.entries(SECURITY_HEADERS)) {
     response.headers.set(header, value);
   }
+  // The bare home answers per visitor: no cache may hand one language to another.
+  if (event.url.pathname === "/") response.headers.set("vary", VARIE_PAR_VISITEUR);
 
   return response;
 };
