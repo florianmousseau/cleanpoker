@@ -10,7 +10,7 @@ Live at **[pokeragile.com](https://pokeragile.com)**, in English, French, Spanis
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Trackers](https://img.shields.io/badge/trackers-0-brightgreen)](https://pokeragile.com/green)
 
-![A room after the reveal: four participants, their votes, the average, min, max and distribution](docs/screenshot.png)
+![A room after the reveal: four participants, their votes, the average, median, min, max, agreement and distribution](docs/screenshot.png)
 
 ## What it does
 
