@@ -11,6 +11,7 @@
   import { lang } from '#lib/lang.svelte.ts';
   import { cardsQuery, fitsServer, parseCards } from '#lib/cards.ts';
   import Footer from '#lib/Footer.svelte';
+  import { lecteurDeSite } from '#lib/lecture-site.ts';
   import LanguageSuggestion from '#lib/LanguageSuggestion.svelte';
   import { ACCUEILS } from '#lib/suggestion-langue.ts';
 
@@ -152,6 +153,7 @@
       teamColor = kept.couleur;
       teamSite = kept.site;
       teamLogo = kept.logo;
+      lecteur.deja(kept.site);
       teamOpen = true;
     }
   });
@@ -175,25 +177,30 @@
   let siteLoading = $state(false);
   let siteError = $state('');
 
-  // The company's own site names the team and gives its colour.
-  async function takeSiteColors() {
-    if (!teamSite.trim() || siteLoading) return;
+  // The company's own site names the team and gives its colour. True when
+  // something was taken from it, so a failed read can be tried again.
+  async function lireSite(site: string): Promise<boolean> {
     siteLoading = true;
     siteError = '';
     try {
-      const res = await fetch(`/api/marque?site=${encodeURIComponent(teamSite.trim())}`, { signal: AbortSignal.timeout(8000) });
+      const res = await fetch(`/api/marque?site=${encodeURIComponent(site)}`, { signal: AbortSignal.timeout(8000) });
       const marque: { nom?: string; couleur?: string | null; site?: string } = res.ok ? await res.json() : {};
       if (marque.nom) teamName = marque.nom;
       teamLogo = marque.site ?? '';
       if (marque.couleur) teamColor = marque.couleur;
       colourFromLogo = !marque.couleur && !!teamLogo;
       if (!marque.couleur && !teamLogo) siteError = teamSiteError;
+      return !siteError;
     } catch {
       siteError = teamSiteError;
+      return false;
     } finally {
       siteLoading = false;
     }
   }
+
+  const lecteur = lecteurDeSite(lireSite);
+  const takeSiteColors = () => lecteur.lire(teamSite);
 
   function logoLoaded(img: HTMLImageElement) {
     if (!colourFromLogo) return;
@@ -216,6 +223,8 @@
     creating = true;
     error = '';
     try {
+      // A site typed and never confirmed still dresses the room.
+      if (teamOpen) await lecteur.lire(teamSite);
       const res = await fetch(`${PUBLIC_API_URL}/rooms`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -329,6 +338,7 @@
               spellcheck="false"
               placeholder="acme.com"
               bind:value={teamSite}
+              onchange={takeSiteColors}
               onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); takeSiteColors(); } }}
             />
             <button type="button" class="preset-btn" disabled={siteLoading || !teamSite.trim()} onclick={takeSiteColors} data-testid="team-site-btn">{teamSiteButton}</button>
@@ -353,7 +363,7 @@
               value={teamColor}
               oninput={(e) => { const c = couleurSaisie(e.currentTarget.value); if (c) teamColor = c; }}
             />
-            <span class="team-preview" style:background={teamColor} style:color={texteSur(teamColor)}>{#if teamLogo}<img class="team-logo" src="/api/logo?site={teamLogo}" alt="" width="20" height="20" onload={(e) => logoLoaded(e.currentTarget as HTMLImageElement)} onerror={logoFailed} />{/if}{teamName.trim() || teamColor}</span>
+            <span class="team-preview" style:background={teamColor} style:color={texteSur(teamColor)}>{#if teamLogo}<img class="team-logo" src="/api/logo?site={teamLogo}" alt="" width="24" height="24" onload={(e) => logoLoaded(e.currentTarget as HTMLImageElement)} onerror={logoFailed} />{/if}{teamName.trim() || teamColor}</span>
           </div>
         </div>
       </details>
@@ -428,7 +438,7 @@
   .team-preview { padding: 0.2rem min(0.625rem, 10px); border-radius: 99px; font-size: 0.8rem; font-weight: 700; overflow-wrap: anywhere; }
   .team-inputs input.team-site { flex: 1 1 10em; min-width: 0; width: auto; }
   .team-preview { display: inline-flex; align-items: center; gap: 0.35rem; }
-  .team-logo { width: 1.25rem; height: 1.25rem; border-radius: 4px; background: #fff; object-fit: contain; }
+  .team-logo { width: 1.5rem; height: 1.5rem; border-radius: 4px; background: #fff; box-shadow: 0 0 0 2px #fff; object-fit: contain; }
   .team-site-error { grid-column: 1 / -1; margin: 0; }
   .team-field summary { cursor: pointer; font-weight: 600; color: var(--color-text-muted); }
   .team-inputs { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.5rem 0.75rem; margin-top: 0.625rem; }
