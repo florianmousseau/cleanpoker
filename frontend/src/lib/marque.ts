@@ -31,7 +31,7 @@ export function adresseSure(saisie: string): URL | null {
 
 function attributs(balise: string): Record<string, string> {
   const res: Record<string, string> = {};
-  for (const m of balise.matchAll(/([a-z:-]+)=(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/gi)) {
+  for (const m of balise.matchAll(/\s([a-z:-]+)=(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/gi)) {
     res[m[1].toLowerCase()] = m[2] ?? m[3] ?? m[4] ?? '';
   }
   return res;
