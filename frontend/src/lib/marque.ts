@@ -78,7 +78,7 @@ const sansAccent = (t: string) => t.normalize('NFD').replace(/[^a-z0-9]/gi, '').
 
 function etiquette(hote: string): string {
   const parties = hote.replace(/^www\./, '').split('.');
-  return parties.length > 1 ? parties[parties.length - 2] : parties[0];
+  return parties.length > 1 ? parties.at(-2) ?? parties[0] : parties[0];
 }
 
 // A tagline often fills og:site_name or the title ("Banque pour les
@@ -169,7 +169,7 @@ export function typeImage(o: Uint8Array): string | null {
   if (debut(0x89, 0x50, 0x4e, 0x47)) return 'image/png';
   if (debut(0xff, 0xd8, 0xff)) return 'image/jpeg';
   if (debut(0x47, 0x49, 0x46, 0x38)) return 'image/gif';
-  if (debut(0x52, 0x49, 0x46, 0x46) && String.fromCharCode(...o.slice(8, 12)) === 'WEBP') return 'image/webp';
+  if (debut(0x52, 0x49, 0x46, 0x46) && String.fromCodePoint(...o.slice(8, 12)) === 'WEBP') return 'image/webp';
   if (debut(0, 0, 1, 0)) return 'image/x-icon';
   return null;
 }
