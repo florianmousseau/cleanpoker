@@ -125,6 +125,9 @@
       not require prior consent.
     </p>
     <p>
+      Your browser also keeps, in its local storage, the name typed to join a room and the last team look (name, colour, website). This data never leaves your device; clearing the site data erases it.
+    </p>
+    <p>
       Cloudflare may set technical security cookies (<code>__cf_bm</code>) strictly
       necessary for the service to function (anti-DDoS protection). These cookies are exempt
       from consent.

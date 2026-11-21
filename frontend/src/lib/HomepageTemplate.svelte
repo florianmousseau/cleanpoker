@@ -1,6 +1,8 @@
 <script lang="ts">
   import Logo from '#lib/Logo.svelte';
   import { couleurSaisie, requeteEquipe, texteSur } from '#lib/equipe.ts';
+  import { chargerHabillage, garderHabillage } from '#lib/habillage.ts';
+  import { deviceStorage } from '#lib/seat.ts';
   import { PUBLIC_API_URL } from '$app/env/public';
   import { onMount } from 'svelte';
   import { goto, replaceState } from '$app/navigation';
@@ -141,6 +143,13 @@
   onMount(() => {
     ready = true;
     lang.visit(locale);
+    const kept = chargerHabillage(deviceStorage());
+    if (kept) {
+      teamName = kept.nom;
+      teamColor = kept.couleur;
+      teamSite = kept.site;
+      teamOpen = true;
+    }
   });
   let error = $state('');
 
@@ -194,6 +203,7 @@
       if (!res.ok) throw new Error();
       const { id } = await res.json();
       lang.set(locale);
+      if (teamOpen) garderHabillage(deviceStorage(), { nom: teamName, couleur: teamColor, site: teamSite });
       // The team and its deck travel in the address: a saved link reopens the
       // same room dressed the same way, sprint after sprint.
       await goto(`/${id}${teamOpen ? requeteEquipe(teamName, teamColor, cards) : requeteEquipe('', '', cards)}`);
