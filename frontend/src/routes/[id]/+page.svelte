@@ -216,7 +216,7 @@
     <div class="container header-inner">
       <a href={homeHref} class="logo" aria-label={T.homeLabel}><Logo /><span>PokerAgile</span></a>
       <div class="room-meta">
-        {#if equipe?.nom}<span class="badge-pill team-name" data-testid="team-name">{equipe.nom}</span>{/if}
+        {#if equipe?.nom || equipe?.logo}<span class="badge-pill team-name" data-testid="team-name">{#if equipe?.logo}<img class="team-logo" src="/api/logo?site={equipe.logo}" alt="" width="20" height="20" onerror={(e) => e.currentTarget.remove()} />{/if}{equipe?.nom}</span>{/if}
         <span class="badge-pill">{T.salleLabel} <code>{roomId}</code></span>
         {#if room.roomState}
           <span class="badge-pill">{T.tourLabel} {room.roomState.round}</span>
@@ -577,6 +577,8 @@
       --color-card-selected: color-mix(in srgb, var(--eq-sombre) 18%, #0d1117);
     }
   }
+  .badge-pill.team-name { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .team-logo { width: 1.25rem; height: 1.25rem; border-radius: 4px; background: #fff; object-fit: contain; }
   .badge-pill.team-name { font-weight: 700; color: var(--color-primary); border-color: var(--color-primary); }
 
   .header { padding: 0.75rem 0; border-bottom: 1px solid var(--color-border); }
