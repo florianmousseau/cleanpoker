@@ -44,6 +44,9 @@
     teamSummary: string;
     teamNameLabel: string;
     teamColorLabel: string;
+    teamSiteLabel: string;
+    teamSiteButton: string;
+    teamSiteError: string;
     footerSource: string;
     footerLicense: string;
     footerAbout: string;
@@ -81,6 +84,9 @@
     teamSummary,
     teamNameLabel,
     teamColorLabel,
+    teamSiteLabel,
+    teamSiteButton,
+    teamSiteError,
     footerSource,
     footerLicense,
     footerAbout,
@@ -149,6 +155,27 @@
   let teamName = $state('');
   let teamColor = $state('#1a6b3c');
   let teamOpen = $state(false);
+  let teamSite = $state('');
+  let siteLoading = $state(false);
+  let siteError = $state('');
+
+  // The company's own site names the team and gives its colour.
+  async function takeSiteColors() {
+    if (!teamSite.trim() || siteLoading) return;
+    siteLoading = true;
+    siteError = '';
+    try {
+      const res = await fetch(`/api/marque?site=${encodeURIComponent(teamSite.trim())}`, { signal: AbortSignal.timeout(8000) });
+      const marque: { nom?: string; couleur?: string | null } = res.ok ? await res.json() : {};
+      if (marque.nom && !teamName.trim()) teamName = marque.nom;
+      if (marque.couleur) teamColor = marque.couleur;
+      else siteError = teamSiteError;
+    } catch {
+      siteError = teamSiteError;
+    } finally {
+      siteLoading = false;
+    }
+  }
 
   const CREATE_TIMEOUT_MS = 15000;
 
@@ -258,6 +285,24 @@
       <details class="team-field" bind:open={teamOpen}>
         <summary>{teamSummary}</summary>
         <div class="team-inputs">
+          <label for="team-site">{teamSiteLabel}</label>
+          <div class="team-color-row">
+            <input
+              id="team-site"
+              class="team-site"
+              type="text"
+              inputmode="url"
+              autocomplete="url"
+              spellcheck="false"
+              placeholder="acme.com"
+              bind:value={teamSite}
+              onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); takeSiteColors(); } }}
+            />
+            <button type="button" class="preset-btn" disabled={siteLoading || !teamSite.trim()} onclick={takeSiteColors} data-testid="team-site-btn">{teamSiteButton}</button>
+          </div>
+          {#if siteError}
+            <p class="cards-error team-site-error" role="status">{siteError}</p>
+          {/if}
           <label for="team-name">{teamNameLabel}</label>
           <input id="team-name" type="text" maxlength="30" autocomplete="off" bind:value={teamName} />
           <label for="team-color">{teamColorLabel}</label>
@@ -347,6 +392,8 @@
   .team-color-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; min-width: 0; }
   .team-inputs input.team-hex { width: 7.5em; flex: 0 1 7.5em; max-width: 100%; padding: 0.5rem min(0.625rem, 10px); font: inherit; font-family: var(--font-mono); border: 2px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg); color: var(--color-text); }
   .team-preview { padding: 0.2rem min(0.625rem, 10px); border-radius: 99px; font-size: 0.8rem; font-weight: 700; overflow-wrap: anywhere; }
+  .team-inputs input.team-site { flex: 1 1 10em; min-width: 0; width: auto; }
+  .team-site-error { grid-column: 1 / -1; margin: 0; }
   .team-field summary { cursor: pointer; font-weight: 600; color: var(--color-text-muted); }
   .team-inputs { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.5rem 0.75rem; margin-top: 0.625rem; }
   .team-inputs input[type="text"] { width: 100%; padding: 0.5rem min(0.75rem, 12px); font: inherit; border: 2px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg); color: var(--color-text); }
