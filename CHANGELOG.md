@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.69] - 2026-11-21
+
+- fix(home): read again a kept team site that has no logo
+- fix(home): read the company site when the field is left, and show its logo
+
 ## [0.0.68] - 2026-11-21
 
 - feat(home): offer the visitor's language without redirecting
