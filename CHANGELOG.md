@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.70] - 2026-11-21
+
+- feat(home): add a button to reset the room options to defaults (#456)
+
 ## [0.0.69] - 2026-11-21
 
 - fix(home): read again a kept team site that has no logo
