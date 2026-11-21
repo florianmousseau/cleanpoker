@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.65] - 2026-11-21
+
+- feat(room): the verified point, what a delivered story cost next to its estimate (#438)
+
 ## [0.0.64] - 2026-11-20
 
 - feat(seo): RACI matrix page with a generator to fill in, in French and English (#435)
