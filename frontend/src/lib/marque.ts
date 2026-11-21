@@ -31,8 +31,8 @@ export function adresseSure(saisie: string): URL | null {
 
 function attributs(balise: string): Record<string, string> {
   const res: Record<string, string> = {};
-  for (const m of balise.matchAll(/([a-z:-]+)\s*=\s*("([^"]*)"|'([^']*)'|([^\s"'>]+))/gi)) {
-    res[m[1].toLowerCase()] = m[3] ?? m[4] ?? m[5] ?? '';
+  for (const m of balise.matchAll(/([a-z:-]+)=(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/gi)) {
+    res[m[1].toLowerCase()] = m[2] ?? m[3] ?? m[4] ?? '';
   }
   return res;
 }
@@ -51,7 +51,7 @@ const ENTITES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"',
 function decoder(texte: string): string {
   return texte
     .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(Number.parseInt(n, 16)))
     .replace(/&([a-z]+);/gi, (e, n) => ENTITES[n.toLowerCase()] ?? e);
 }
 
