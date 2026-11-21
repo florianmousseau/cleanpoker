@@ -1,11 +1,13 @@
 /*
- * A team's look, carried by the room address alone: ?equipe=Alpha&couleur=d0453a.
+ * A team's look, carried by the room address alone: ?equipe=Alpha&couleur=d0453a&logo=alpha.fr.
  * Nothing is stored; whoever opens the link sees the same room.
  */
 
-export type Equipe = { nom: string; clair: string; sombre: string } | null;
+export type Equipe = { nom: string; logo: string; clair: string; sombre: string } | null;
 
 const HEX = /^[0-9a-f]{6}$/i;
+// The site whose icon the room shows, through this origin's /api/logo.
+const HOTE = /^[a-z0-9-]{1,63}(\.[a-z0-9-]{1,63}){1,4}$/;
 
 function canaux(hex: string): number[] {
   return [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
@@ -44,16 +46,19 @@ const NUIT = [13, 17, 23];
 export function equipeDe(params: { get(name: string): string | null }): Equipe {
   const nom = (params.get('equipe') ?? '').trim().slice(0, 30);
   const couleur = params.get('couleur') ?? '';
-  if (!HEX.test(couleur)) return nom ? { nom, clair: '', sombre: '' } : null;
+  const site = (params.get('logo') ?? '').toLowerCase();
+  const logo = HOTE.test(site) ? site : '';
+  if (!HEX.test(couleur)) return nom || logo ? { nom, logo, clair: '', sombre: '' } : null;
   const rgb = canaux(couleur);
-  return { nom, clair: ajuster(rgb, BLANC, 0), sombre: ajuster(rgb, NUIT, 255) };
+  return { nom, logo, clair: ajuster(rgb, BLANC, 0), sombre: ajuster(rgb, NUIT, 255) };
 }
 
 /** The query a room address carries for a team, deck included. */
-export function requeteEquipe(nom: string, couleur: string, cartes: string[]): string {
+export function requeteEquipe(nom: string, couleur: string, cartes: string[], logo = ''): string {
   const p = new URLSearchParams();
   if (nom.trim()) p.set('equipe', nom.trim().slice(0, 30));
   if (HEX.test(couleur.replace('#', ''))) p.set('couleur', couleur.replace('#', '').toLowerCase());
+  if (HOTE.test(logo)) p.set('logo', logo);
   if (cartes.length) p.set('cards', cartes.join(','));
   const q = p.toString();
   return q ? `?${q}` : '';

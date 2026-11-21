@@ -4,7 +4,7 @@
  * nothing leaves the device.
  */
 
-export type Habillage = { nom: string; couleur: string; site: string };
+export type Habillage = { nom: string; couleur: string; site: string; logo: string };
 
 type Rangement = Pick<Storage, 'getItem' | 'setItem'>;
 
@@ -23,7 +23,7 @@ export function chargerHabillage(rangement: Rangement | null): Habillage | null 
     const o = brut as Record<string, unknown>;
     const couleur = texte(o.couleur, 7).toLowerCase();
     if (!HEX.test(couleur)) return null;
-    return { nom: texte(o.nom, 30), couleur, site: texte(o.site, 200) };
+    return { nom: texte(o.nom, 30), couleur, site: texte(o.site, 200), logo: texte(o.logo, 100) };
   } catch {
     return null;
   }
@@ -32,7 +32,7 @@ export function chargerHabillage(rangement: Rangement | null): Habillage | null 
 /** Keep the look for the next visit. A storage that refuses only costs the retyping. */
 export function garderHabillage(rangement: Rangement | null, h: Habillage): void {
   try {
-    rangement?.setItem(CLE, JSON.stringify({ nom: h.nom.trim(), couleur: h.couleur, site: h.site.trim() }));
+    rangement?.setItem(CLE, JSON.stringify({ nom: h.nom.trim(), couleur: h.couleur, site: h.site.trim(), logo: h.logo }));
   } catch {
     // Private mode or a full storage: the room is created all the same.
   }

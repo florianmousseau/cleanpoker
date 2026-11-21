@@ -2,6 +2,7 @@
   import Logo from '#lib/Logo.svelte';
   import { couleurSaisie, requeteEquipe, texteSur } from '#lib/equipe.ts';
   import { chargerHabillage, garderHabillage } from '#lib/habillage.ts';
+  import { couleurDuLogo } from '#lib/couleur-logo.ts';
   import { deviceStorage } from '#lib/seat.ts';
   import { PUBLIC_API_URL } from '$app/env/public';
   import { onMount } from 'svelte';
@@ -148,6 +149,7 @@
       teamName = kept.nom;
       teamColor = kept.couleur;
       teamSite = kept.site;
+      teamLogo = kept.logo;
       teamOpen = true;
     }
   });
@@ -165,6 +167,9 @@
   let teamColor = $state('#1a6b3c');
   let teamOpen = $state(false);
   let teamSite = $state('');
+  let teamLogo = $state('');
+  // Set when the site declares no colour: the logo, once loaded, gives one.
+  let colourFromLogo = $state(false);
   let siteLoading = $state(false);
   let siteError = $state('');
 
@@ -175,15 +180,31 @@
     siteError = '';
     try {
       const res = await fetch(`/api/marque?site=${encodeURIComponent(teamSite.trim())}`, { signal: AbortSignal.timeout(8000) });
-      const marque: { nom?: string; couleur?: string | null } = res.ok ? await res.json() : {};
-      if (marque.nom && !teamName.trim()) teamName = marque.nom;
+      const marque: { nom?: string; couleur?: string | null; site?: string } = res.ok ? await res.json() : {};
+      if (marque.nom) teamName = marque.nom;
+      teamLogo = marque.site ?? '';
       if (marque.couleur) teamColor = marque.couleur;
-      else siteError = teamSiteError;
+      colourFromLogo = !marque.couleur && !!teamLogo;
+      if (!marque.couleur && !teamLogo) siteError = teamSiteError;
     } catch {
       siteError = teamSiteError;
     } finally {
       siteLoading = false;
     }
+  }
+
+  function logoLoaded(img: HTMLImageElement) {
+    if (!colourFromLogo) return;
+    colourFromLogo = false;
+    const c = couleurDuLogo(img);
+    if (c) teamColor = c;
+    else siteError = teamSiteError;
+  }
+
+  function logoFailed() {
+    teamLogo = '';
+    if (colourFromLogo) siteError = teamSiteError;
+    colourFromLogo = false;
   }
 
   const CREATE_TIMEOUT_MS = 15000;
@@ -203,10 +224,10 @@
       if (!res.ok) throw new Error();
       const { id } = await res.json();
       lang.set(locale);
-      if (teamOpen) garderHabillage(deviceStorage(), { nom: teamName, couleur: teamColor, site: teamSite });
+      if (teamOpen) garderHabillage(deviceStorage(), { nom: teamName, couleur: teamColor, site: teamSite, logo: teamLogo });
       // The team and its deck travel in the address: a saved link reopens the
       // same room dressed the same way, sprint after sprint.
-      await goto(`/${id}${teamOpen ? requeteEquipe(teamName, teamColor, cards) : requeteEquipe('', '', cards)}`);
+      await goto(`/${id}${teamOpen ? requeteEquipe(teamName, teamColor, cards, teamLogo) : requeteEquipe('', '', cards)}`);
     } catch {
       error = createError;
     } finally {
@@ -330,7 +351,7 @@
               value={teamColor}
               oninput={(e) => { const c = couleurSaisie(e.currentTarget.value); if (c) teamColor = c; }}
             />
-            <span class="team-preview" style:background={teamColor} style:color={texteSur(teamColor)}>{teamName.trim() || teamColor}</span>
+            <span class="team-preview" style:background={teamColor} style:color={texteSur(teamColor)}>{#if teamLogo}<img class="team-logo" src="/api/logo?site={teamLogo}" alt="" width="20" height="20" onload={(e) => logoLoaded(e.currentTarget as HTMLImageElement)} onerror={logoFailed} />{/if}{teamName.trim() || teamColor}</span>
           </div>
         </div>
       </details>
@@ -403,6 +424,8 @@
   .team-inputs input.team-hex { width: 7.5em; flex: 0 1 7.5em; max-width: 100%; padding: 0.5rem min(0.625rem, 10px); font: inherit; font-family: var(--font-mono); border: 2px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg); color: var(--color-text); }
   .team-preview { padding: 0.2rem min(0.625rem, 10px); border-radius: 99px; font-size: 0.8rem; font-weight: 700; overflow-wrap: anywhere; }
   .team-inputs input.team-site { flex: 1 1 10em; min-width: 0; width: auto; }
+  .team-preview { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .team-logo { width: 1.25rem; height: 1.25rem; border-radius: 4px; background: #fff; object-fit: contain; }
   .team-site-error { grid-column: 1 / -1; margin: 0; }
   .team-field summary { cursor: pointer; font-weight: 600; color: var(--color-text-muted); }
   .team-inputs { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.5rem 0.75rem; margin-top: 0.625rem; }

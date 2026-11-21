@@ -9,8 +9,8 @@ function rangement() {
 describe('habillage', () => {
   it('gives back the look kept on the last visit', () => {
     const r = rangement();
-    garderHabillage(r, { nom: ' Zenika ', couleur: '#df2147', site: 'zenika.com' });
-    expect(chargerHabillage(r)).toEqual({ nom: 'Zenika', couleur: '#df2147', site: 'zenika.com' });
+    garderHabillage(r, { nom: ' Zenika ', couleur: '#df2147', site: 'zenika.com', logo: 'www.zenika.com' });
+    expect(chargerHabillage(r)).toEqual({ nom: 'Zenika', couleur: '#df2147', site: 'zenika.com', logo: 'www.zenika.com' });
   });
   it('has nothing to give on a first visit or without storage', () => {
     expect(chargerHabillage(rangement())).toBeNull();
@@ -25,6 +25,6 @@ describe('habillage', () => {
   });
   it('creates the room even when the storage refuses', () => {
     const plein = { getItem: () => null, setItem: () => { throw new Error('quota'); } };
-    expect(() => garderHabillage(plein, { nom: 'a', couleur: '#000000', site: '' })).not.toThrow();
+    expect(() => garderHabillage(plein, { nom: 'a', couleur: '#000000', site: '', logo: '' })).not.toThrow();
   });
 });
