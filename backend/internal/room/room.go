@@ -96,6 +96,9 @@ type Snapshot struct {
 	Stories    []Story `json:"stories"`
 	Current    int     `json:"current"`
 	AutoReveal bool    `json:"autoReveal"`
+	// References gives a card of the deck a measured story of the team to
+	// compare with; empty until the room holds enough of them.
+	References []Reference `json:"references,omitempty"`
 }
 
 // TimerDurations are the only countdowns a room accepts, in seconds.
@@ -234,9 +237,10 @@ func (r *Room) buildSnapshot(masked bool) Snapshot {
 		Locked:   r.locked,
 		TimerEnd: unixMilliOrZero(r.timerEnd),
 
-		Stories:    slices.Clone(r.stories),
+		Stories:    measuredStories(r.stories, r.cards),
 		Current:    r.currentStory,
 		AutoReveal: r.autoReveal,
+		References: references(r.stories, r.cards),
 	}
 }
 

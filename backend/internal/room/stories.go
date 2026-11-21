@@ -8,9 +8,13 @@ import (
 )
 
 // Story is one item the team estimates; Estimate is the card kept for it.
+// Actual is what it cost once delivered, and LooksLike the card its measure
+// is closest to among the other measured stories of the room.
 type Story struct {
-	Title    string `json:"title"`
-	Estimate string `json:"estimate"`
+	Title     string  `json:"title"`
+	Estimate  string  `json:"estimate"`
+	Actual    *Actual `json:"actual,omitempty"`
+	LooksLike string  `json:"looksLike,omitempty"`
 }
 
 // Bounds on the list a room holds in memory.
