@@ -87,13 +87,18 @@ function nomDuSite(liste: Record<string, string>[], html: string, hote: string):
   const titre = /<title[^>]*>([^<]*)<\/title>/i.exec(html)?.[1] ?? '';
   const candidats = [meta(liste, 'og:site_name'), meta(liste, 'application-name'), ...titre.split(/\s[|\-–—:]\s/)]
     .filter((c): c is string => !!c && !!c.trim())
-    .map((c) => decoder(c).replace(/\s+/g, ' ').trim());
-  const cle = sansAccent(etiquette(hote));
+    .map((c) => decoder(c).replace(/[\u200b-\u200f\u2060\ufeff]/g, '').replace(/\s+/g, ' ').trim())
+    .filter((c) => /\p{L}/u.test(c));
+  const mot = etiquette(hote);
+  const cle = sansAccent(mot);
   const qui = candidats.find((c) => {
     const n = sansAccent(c);
     return n.length >= 2 && (n.includes(cle) || cle.includes(n));
   });
-  return (qui ?? candidats[0] ?? etiquette(hote)).slice(0, 30);
+  // A long match is a sentence about the company, not its name.
+  if (qui && qui.length <= 24) return qui;
+  if (qui || !candidats[0] || candidats[0].length > 24) return mot.charAt(0).toUpperCase() + mot.slice(1);
+  return candidats[0];
 }
 
 function liens(html: string): Record<string, string>[] {
@@ -122,6 +127,41 @@ export function iconesDe(html: string, base: URL): string[] {
   });
   return [...new Set(urls)].slice(0, 5);
 }
+
+/** The web app manifest a home page links to, or null. */
+export function manifesteDe(html: string, base: URL): URL | null {
+  const lien = liens(html).find((a) => /(^|\s)manifest(\s|$)/i.test(a.rel ?? '') && a.href);
+  try {
+    return lien ? new URL(decoder(lien.href), base) : null;
+  } catch {
+    return null;
+  }
+}
+
+/** The colour and icons (largest first, no SVG) a manifest declares. */
+export function lireManifeste(texte: string, base: URL): { couleur: string | null; icones: string[] } {
+  try {
+    const m = JSON.parse(texte) as { theme_color?: unknown; icons?: unknown };
+    const brute = typeof m.theme_color === 'string' ? couleurCss(m.theme_color) : null;
+    const icones = (Array.isArray(m.icons) ? m.icons : [])
+      .filter((i): i is Record<string, string> => typeof i === 'object' && i !== null && typeof i.src === 'string')
+      .filter((i) => !vectoriel({ type: i.type, href: i.src }))
+      .sort((a, b) => taille(b) - taille(a))
+      .flatMap((i) => {
+        try {
+          return [new URL(i.src, base).href];
+        } catch {
+          return [];
+        }
+      });
+    return { couleur: brute && !NEUTRES.has(brute) ? brute : null, icones };
+  } catch {
+    return { couleur: null, icones: [] };
+  }
+}
+
+/** The last resort for an icon: a public favicon service, asked by the worker only. */
+export const iconeDeSecours = (hote: string) => `https://www.google.com/s2/favicons?domain=${encodeURIComponent(hote)}&sz=128`;
 
 /** The image type of these bytes, or null when they are not a raster image a browser shows. */
 export function typeImage(o: Uint8Array): string | null {

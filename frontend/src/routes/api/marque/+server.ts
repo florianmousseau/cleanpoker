@@ -4,7 +4,7 @@
  */
 import type { RequestHandler } from '@sveltejs/kit';
 import { adresseSure, marqueDe } from '#lib/marque.ts';
-import { pageDAccueil } from '#lib/marque-reseau.ts';
+import { manifeste, pageDAccueil } from '#lib/marque-reseau.ts';
 
 export const prerender = false;
 
@@ -26,8 +26,12 @@ export const GET: RequestHandler = async ({ url }) => {
   const cible = adresseSure(url.searchParams.get('site') ?? '');
   if (!cible) return json({ erreur: 'adresse' }, 400);
   try {
-    const page = await pageDAccueil(cible, AbortSignal.timeout(5000));
-    return page ? json(marqueDe(page.html, page.url.hostname), 200) : sansPage(cible);
+    const signal = AbortSignal.timeout(6000);
+    const page = await pageDAccueil(cible, signal);
+    if (!page) return sansPage(cible);
+    const marque = marqueDe(page.html, page.url.hostname);
+    if (!marque.couleur) marque.couleur = (await manifeste(page.html, page.url, signal).catch(() => null))?.couleur ?? null;
+    return json(marque, 200);
   } catch {
     return sansPage(cible);
   }

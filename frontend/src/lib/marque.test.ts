@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { adresseSure, couleurCss, iconesDe, marqueDe, typeImage } from './marque.ts';
+import { adresseSure, couleurCss, iconeDeSecours, iconesDe, lireManifeste, manifesteDe, marqueDe, typeImage } from './marque.ts';
 
 describe('adresseSure', () => {
   it('takes a bare domain and a full address', () => {
@@ -35,10 +35,10 @@ describe('marqueDe', () => {
     expect(marqueDe(html, 'zenith.io')).toEqual({ nom: 'Zenith', couleur: '#0055a4', site: 'zenith.io' });
   });
   it('ignores a white or black theme colour, and names the domain when nothing else does', () => {
-    expect(marqueDe('<meta name="theme-color" content="#fff">', 'www.globex.com')).toEqual({ nom: 'globex', couleur: null, site: 'www.globex.com' });
+    expect(marqueDe('<meta name="theme-color" content="#fff">', 'www.globex.com')).toEqual({ nom: 'Globex', couleur: null, site: 'www.globex.com' });
   });
   it('keeps the name within the room limit', () => {
-    expect(marqueDe(`<title>${'x'.repeat(80)}</title>`, 'a.com').nom).toHaveLength(30);
+    expect(marqueDe(`<title>${'x'.repeat(80)}</title>`, 'acme.com').nom).toBe('Acme');
   });
 });
 
@@ -46,6 +46,12 @@ describe('the company name', () => {
   it('takes the part that matches the domain over a tagline', () => {
     const html = `<meta property="og:site_name" content="Banque pour les particuliers"><title>Banque pour les particuliers | Crédit Agricole</title>`;
     expect(marqueDe(html, 'www.credit-agricole.fr').nom).toBe('Crédit Agricole');
+  });
+  it('takes the domain when the match is a whole sentence', () => {
+    expect(marqueDe('<title>Freebox, offres internet Très Haut Débit</title>', 'www.free.fr').nom).toBe('Free');
+  });
+  it('skips a title made of invisible characters', () => {
+    expect(marqueDe('<title>&#8205;</title>', 'www.orange.fr').nom).toBe('Orange');
   });
   it('keeps the declared name when nothing matches the domain', () => {
     expect(marqueDe('<meta property="og:site_name" content="Globex">', 'gx.io').nom).toBe('Globex');
@@ -76,5 +82,27 @@ describe('typeImage', () => {
   it('refuses SVG and HTML', () => {
     expect(typeImage(new TextEncoder().encode('<svg xmlns="http://www.w3.org/2000/svg">'))).toBeNull();
     expect(typeImage(new TextEncoder().encode('<!doctype html>'))).toBeNull();
+  });
+});
+
+describe('the manifest', () => {
+  const base = new URL('https://www.acme.fr/');
+  it('is found from the home page', () => {
+    expect(manifesteDe('<link rel="manifest" href="/site.webmanifest">', base)?.href).toBe('https://www.acme.fr/site.webmanifest');
+    expect(manifesteDe('<link rel="icon" href="/x.png">', base)).toBeNull();
+  });
+  it('gives its colour and its largest raster icons', () => {
+    const m = JSON.stringify({ theme_color: '#E30613', icons: [{ src: 'i192.png', sizes: '192x192' }, { src: 'i512.png', sizes: '512x512' }, { src: 'i.svg', sizes: 'any' }] });
+    expect(lireManifeste(m, new URL('https://www.acme.fr/m/'))).toEqual({ couleur: '#e30613', icones: ['https://www.acme.fr/m/i512.png', 'https://www.acme.fr/m/i192.png'] });
+  });
+  it('says nothing when it is not one', () => {
+    expect(lireManifeste('<html>', base)).toEqual({ couleur: null, icones: [] });
+    expect(lireManifeste('{"theme_color":"#fff"}', base).couleur).toBeNull();
+  });
+});
+
+describe('iconeDeSecours', () => {
+  it('asks for the host only', () => {
+    expect(iconeDeSecours('www.acme.fr')).toBe('https://www.google.com/s2/favicons?domain=www.acme.fr&sz=128');
   });
 });

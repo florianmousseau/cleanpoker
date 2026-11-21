@@ -4,8 +4,8 @@
  * Raster images only, checked on their bytes; SVG never, it could run a script.
  */
 import type { RequestHandler } from '@sveltejs/kit';
-import { adresseSure, iconesDe, typeImage } from '#lib/marque.ts';
-import { charger, lireDebut, pageDAccueil } from '#lib/marque-reseau.ts';
+import { adresseSure, iconeDeSecours, iconesDe, typeImage } from '#lib/marque.ts';
+import { charger, lireDebut, manifeste, pageDAccueil } from '#lib/marque-reseau.ts';
 
 export const prerender = false;
 
@@ -29,7 +29,10 @@ export const GET: RequestHandler = async ({ url }) => {
   try {
     const signal = AbortSignal.timeout(8000);
     const page = await pageDAccueil(cible, signal);
-    const image = await premiereImage(iconesDe(page?.html ?? '', page?.url ?? cible), signal);
+    const declares = page ? (await manifeste(page.html, page.url, signal).catch(() => null))?.icones ?? [] : [];
+    // The site's own icons first; the public service only when it serves none.
+    const urls = [...iconesDe(page?.html ?? '', page?.url ?? cible).slice(0, 3), ...declares.slice(0, 2), iconeDeSecours(cible.hostname)];
+    const image = await premiereImage(urls, signal);
     if (!image) return new Response(null, { status: 404, headers: { 'cache-control': 'public, max-age=3600' } });
     return new Response(new Blob([image.octets as Uint8Array<ArrayBuffer>]), {
       headers: {
