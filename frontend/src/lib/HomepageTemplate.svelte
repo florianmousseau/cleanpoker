@@ -1,7 +1,7 @@
 <script lang="ts">
   import Logo from '#lib/Logo.svelte';
   import { couleurSaisie, requeteEquipe, texteSur } from '#lib/equipe.ts';
-  import { chargerHabillage, garderHabillage } from '#lib/habillage.ts';
+  import { chargerHabillage, garderHabillage, oublierHabillage } from '#lib/habillage.ts';
   import { couleurDuLogo } from '#lib/couleur-logo.ts';
   import { deviceStorage } from '#lib/seat.ts';
   import { PUBLIC_API_URL } from '$app/env/public';
@@ -52,6 +52,7 @@
     teamColorLabel: string;
     teamSiteLabel: string;
     teamSiteButton: string;
+    resetLabel: string;
     teamSiteError: string;
     footerSource: string;
     footerLicense: string;
@@ -92,6 +93,7 @@
     teamColorLabel,
     teamSiteLabel,
     teamSiteButton,
+    resetLabel,
     teamSiteError,
     footerSource,
     footerLicense,
@@ -99,6 +101,9 @@
     footerLegal,
     footerPrivacy,
   }: Props = $props();
+
+  const DEFAULT_CARDS = '1,2,3,5,8,13,21,?';
+  const DEFAULT_COLOR = '#1a6b3c';
 
   const PRESETS = [
     { label: 'Fibonacci', cards: '1,2,3,5,8,13,21,?' },
@@ -136,8 +141,8 @@
 
   let cardsInput = $state(
     browser
-      ? (new URLSearchParams(window.location.search).get('cards') ?? '1,2,3,5,8,13,21,?')
-      : '1,2,3,5,8,13,21,?'
+      ? (new URLSearchParams(window.location.search).get('cards') ?? DEFAULT_CARDS)
+      : DEFAULT_CARDS
   );
   let creating = $state(false);
   // Before hydration the form has no handler, and a native submit reloads
@@ -170,7 +175,7 @@
   const isValid = $derived(cards.length >= 2 && fits);
 
   let teamName = $state('');
-  let teamColor = $state('#1a6b3c');
+  let teamColor = $state(DEFAULT_COLOR);
   let teamOpen = $state(false);
   let teamSite = $state('');
   let teamLogo = $state('');
@@ -216,6 +221,25 @@
     teamLogo = '';
     if (colourFromLogo) siteError = teamSiteError;
     colourFromLogo = false;
+  }
+
+  const isDefault = $derived(
+    cardsInput === DEFAULT_CARDS && !teamOpen && !teamName && !teamSite && teamColor === DEFAULT_COLOR
+  );
+
+  function resetOptions() {
+    cardsInput = DEFAULT_CARDS;
+    replaceState(cardsQuery(DEFAULT_CARDS), {});
+    teamName = '';
+    teamColor = DEFAULT_COLOR;
+    teamSite = '';
+    teamLogo = '';
+    teamOpen = false;
+    colourFromLogo = false;
+    siteError = '';
+    error = '';
+    lecteur.oublier();
+    oublierHabillage(deviceStorage());
   }
 
   const CREATE_TIMEOUT_MS = 15000;
@@ -370,6 +394,10 @@
         </div>
       </details>
 
+      {#if !isDefault}
+        <button type="button" class="reset-btn" onclick={resetOptions} data-testid="reset-btn">{resetLabel}</button>
+      {/if}
+
       {#if error}
         <p class="error" role="alert">{error}</p>
       {/if}
@@ -417,6 +445,19 @@
   .cards-field label { font-weight: 600; font-size: 0.9rem; }
   .label-hint { font-weight: 400; color: var(--color-text-muted); font-size: 0.8rem; }
 
+  .reset-btn {
+    align-self: center;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    min-height: 44px;
+    color: var(--color-text-muted);
+    font: inherit;
+    font-size: 0.875rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .reset-btn:hover { color: var(--color-primary); }
   .presets { display: flex; gap: 0.375rem; flex-wrap: wrap; }
   .preset-btn {
     padding: 0.3rem 0.875rem; font-size: 0.825rem; font-family: inherit; font-weight: 600;

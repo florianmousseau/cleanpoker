@@ -6,7 +6,7 @@
 
 export type Habillage = { nom: string; couleur: string; site: string; logo: string };
 
-type Rangement = Pick<Storage, 'getItem' | 'setItem'>;
+type Rangement = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
 
 const CLE = 'cleanpoker:habillage';
 const HEX = /^#[0-9a-f]{6}$/;
@@ -35,5 +35,14 @@ export function garderHabillage(rangement: Rangement | null, h: Habillage): void
     rangement?.setItem(CLE, JSON.stringify({ nom: h.nom.trim(), couleur: h.couleur, site: h.site.trim(), logo: h.logo }));
   } catch {
     // Private mode or a full storage: the room is created all the same.
+  }
+}
+
+/** Forget the kept look: the next visit starts undressed. */
+export function oublierHabillage(rangement: Rangement | null): void {
+  try {
+    rangement?.removeItem(CLE);
+  } catch {
+    // A storage that refuses keeps the look; the form is reset all the same.
   }
 }
