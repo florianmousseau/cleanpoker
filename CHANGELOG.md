@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.68] - 2026-11-21
+
+- feat(home): offer the visitor's language without redirecting
+
 ## [0.0.67] - 2026-11-21
 
 - feat(home): show the company logo in the room, read from its website (#446)
