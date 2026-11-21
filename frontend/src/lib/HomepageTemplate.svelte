@@ -8,6 +8,8 @@
   import { lang } from '#lib/lang.svelte.ts';
   import { cardsQuery, fitsServer, parseCards } from '#lib/cards.ts';
   import Footer from '#lib/Footer.svelte';
+  import LanguageSuggestion from '#lib/LanguageSuggestion.svelte';
+  import { ACCUEILS } from '#lib/suggestion-langue.ts';
 
   interface Props {
     locale: 'fr' | 'en' | 'es' | 'de' | 'pt';
@@ -300,6 +302,7 @@
     {locale}
     guides
   />
+  <LanguageSuggestion {locale} versions={ACCUEILS} />
 </div>
 
 <style>
