@@ -7,6 +7,7 @@ import { SKIP_LINK } from "#lib/skip-link.ts";
 import { sansPrefixeEn } from "#lib/redirection-en.ts";
 import { versNouveauDomaine } from "#lib/domaine.ts";
 import { rangInconnu } from "#lib/fibonacci.ts";
+import { accueilDuVisiteur, VARY_RACINE } from "#lib/redirection-langue.ts";
 
 const LOCALES = ["fr", "es", "de", "pt"] as const;
 type Locale = (typeof LOCALES)[number];
@@ -73,6 +74,22 @@ const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
     return event.fetch(`${event.url.pathname.replace(/\/$/, "")}/introuvable`);
   }
 
+  const accueil = accueilDuVisiteur(
+    event.url.pathname,
+    event.request.headers.get("cookie") ?? "",
+    event.request.headers.get("accept-language") ?? "",
+  );
+  if (accueil !== null) {
+    return new Response(null, {
+      status: 302,
+      headers: {
+        location: `${accueil}${event.url.search}`,
+        vary: VARY_RACINE,
+        "cache-control": "private, no-store",
+      },
+    });
+  }
+
   const locale = routeLocale(event.url.pathname);
 
   const themeCookie = event.cookies.get("theme");
@@ -96,6 +113,7 @@ const localeThemeAndHeaders: Handle = async ({ event, resolve }) => {
   for (const [header, value] of Object.entries(SECURITY_HEADERS)) {
     response.headers.set(header, value);
   }
+  if (event.url.pathname === "/") response.headers.set("vary", VARY_RACINE);
 
   return response;
 };
